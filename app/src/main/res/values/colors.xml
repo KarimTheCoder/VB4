@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="colorPrimary">#7264f6</color>
+    <color name="colorPrimaryDark">#76dfeb</color>
+    <color name="colorAccent">#7264f6</color>
+    <color name="grey">#E0E0E0</color>o
+    <color name="cardBackgroudDark">#34386C</color>
+    <color name="topColor">#131516</color>
+    <color name="middleColor">#373d3f</color>
+    <color name="bottomColor">#555f61</color>
+    <color name="lowColor">#8c979a</color>
+    <color name="green">#2ecc71</color>
+    <color name="yellow">#f1c40f</color>
+    <color name="yellowdark">#f39c12</color>
+
+    <color name="grey100">#F5F5F5</color>
+    <color name="deepGrey">#b3b4b4</color>
+
+    <color name="beginnerColor">#f05e2a</color>
+    <color name="intermediateColor">#83a9ba</color>
+    <color name="advanceColor">#f9b24e</color>
+    <color name="practiceColor">#673AB7</color>
+    <color name="beginnerP">#a181be</color>
+    <color name="beginnerS">#8e58bf</color>
+    <color name="intermedateP">#45afc2</color>
+    <color name="intermediateS">#3a93a3</color>
+    <color name="advanceP">#f75e95</color>
+    <color name="advanceS">#d05682</color>
+    <color name="red">#f44336</color>
+    <color name="fabColor">#EE6352</color>
+    <color name="fabColor2">#FF9770</color>
+
+
+
+    //--------------
+
+    <color name="theme_primary">#00BCD4</color>
+    <color name="theme_primary_dark">#0097A7</color>
+    <color name="theme_primary_dark2">#006064</color>
+    <color name="theme_accent">#FFEB3B</color>
+
+    <color name="background_card">#fff</color>
+    <color name="background_snackbar">#323232</color>
+
+    <color name="text_black_87">#de000000</color>
+    <color name="text_white_87">#deFFFFFF</color>
+    <array name="note_neutral_colors">
+        <item>#9E9E9E</item>
+        <item>#455A64</item>
+        <item>#607D8B</item>
+    </array>
+
+    <array name="note_accent_colors">
+        <item>#039BE5</item>
+        <item>#3D51B3</item>
+        <item>#689f38</item>
+        <item>#FD7044</item>
+    </array>
+
+
+
+
+</resources>

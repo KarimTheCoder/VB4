@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+
+    <string-array name="intermediate_hindi">
+        <item>"अपक्षयित हो जाना (apakshayit ho jaana)"</item>
+        <item>"विस्तार (vistaar)"</item>
+        <item>"बीच में ही रोक देना (beech mein hee rok dena)"</item>
+        <item>"पोषक तत्व (poshak tatv)"</item>
+        <item>"अधःतन होना (adhahtan hona)"</item>
+        <item>"झिरझिरा (jhirajhira)"</item>
+        <item>"बांझ (baanjh)"</item>
+        <item>"सूखा (sookha)"</item>
+        <item>"उत्सर्जन (utsarjan)"</item>
+        <item>"उपलब्ध करना (upalabdh karana)"</item>
+
+        <item>"गैर जिम्मेदाराना (gair jimmedaaraan)"</item>
+        <item>"रोज़ाना (rozaana)"</item>
+        <item>"सहना (sahana)"</item>
+        <item>"करतब (karatab)"</item>
+        <item>"इष्टतम (ishtatam)"</item>
+        <item>"प्रजातियां (prajati)"</item>
+        <item>"आवारा (aavaara)"</item>
+        <item>"विविध (vividh)"</item>
+        <item>"चरम (charam)"</item>
+        <item>"तंत्र (tantr)"</item>
+
+        <item>"घना नहीं (ghana nahin)"</item>
+        <item>"झुलसाना (jhulasaana)"</item>
+        <item>"विशिष्ट तत्व (vishisht tatv)"</item>
+        <item>"छोटे कुछ (chhote kuchh)"</item>
+        <item>"खारा (khaara)"</item>
+        <item>"सहन करना (sahan karana)"</item>
+        <item>"बेहोश (behosh)"</item>
+        <item>"दृष्टि (drshti)"</item>
+        <item>"अंतर (antar)"</item>
+        <item>"खंड (khand)"</item>
+
+        <item>"शामिल करना (shaamil karana)"</item>
+        <item>"अभिनव (abhinav)"</item>
+        <item>"मोटापा (motaapa)"</item>
+        <item>"शारीरिक (shaareerik)"</item>
+        <item>"पीछा करना (peechha karana)"</item>
+        <item>"प्रेरणा (prerana)"</item>
+        <item>"ब्रांड (braand)"</item>
+        <item>"विदेशी (videshee)"</item>
+        <item>"(चीज़ों को एक साथ संभालने की) बाज़ीगरी करना ((cheezon ko ek saath sambhaalane kee) baazeegaree karana)"</item>
+        <item>"कलाबाज़ी (kalaabaazee)"</item>
+
+        <item>"किसी नाटक या फ़िल्म का कलाकार समूह(kisee naatak ya film ka kalaakaar samooh)"</item>
+        <item>"प्रदर्शन करना (pradarshan karana)"</item>
+        <item>"उत्पन्न करना (utpann karana)"</item>
+        <item>"रेल का इंजन (rel ka injan)"</item>
+        <item>"छाप (chhaap)"</item>
+        <item>"प्रारंभिक (praarambhik)"</item>
+        <item>"आबादी (aabaadee)"</item>
+        <item>"आलिंगन (aalingan)"</item>
+        <item>"जन्मजात या सहज प्रवृत्ति (janmajaat ya sahaj pravrtti)"</item>
+        <item>"गुस्सा करना (gussa karana)"</item>
+
+        <item>"कार्य (kaary)"</item>
+        <item>"साक्षरता (saaksharata)"</item>
+        <item>"पटिया (patiya)"</item>
+        <item>"निशानी (nishaanee)"</item>
+        <item>"ज्ञानी (gyaanee)"</item>
+        <item>"उत्पन्न करना (utpann karana)"</item>
+        <item>"भविष्यवाणी (bhavishyavaanee)"</item>
+        <item>"अक्षर (akshar)"</item>
+        <item>"पुष्प-संबंधी (pushp-sambandhee)"</item>
+        <item>"फूलों का हार (phoolon ka haar)"</item>
+
+        <item>"शासन करना (shaasan karana)"</item>
+        <item>"प्रकट होना (prakat hona)"</item>
+        <item>"याद दिलाने वाला (yaad dilaane vaala)"</item>
+        <item>"नवीनीकरण (naveeneekaran)"</item>
+        <item>"विशेष रूप से (vishesh roop se)"</item>
+        <item>"अपंग (apang)"</item>
+        <item>"प्रलोभित करना (pralobhit karana)"</item>
+        <item>"बनाए रखें (banae rakhen)"</item>
+        <item>"छात्रावास (chhaatraavaas)"</item>
+        <item>"प्रतिस्पर्द्धा करना (pratisparddha karana)"</item>
+
+        <item>"किनारा (kinaara)"</item>
+        <item>"प्रेरणा (prerana)"</item>
+        <item>"उपयुक्त काम (upayukt kaam)"</item>
+        <item>"ध्वनि (dhvani)"</item>
+        <item>"सिरा (sira)"</item>
+        <item>"बंधन (bandhan)"</item>
+        <item>"विश्वास दिलाना (vishvaas dilaana)"</item>
+        <item>"जीतना (jeetana)"</item>
+        <item>"नाई (naee)"</item>
+        <item>"गंभीर (gambheer)"</item>
+
+        <item>"पेय पदार्थ (pey padaarth)"</item>
+        <item>"लोहार की भट्ठी (lohaar kee bhatthee)"</item>
+        <item>"ऊंची उड़ान भरना (oonchee udaan bharana)"</item>
+        <item>"सम्मिलित (sammilit)"</item>
+        <item>"मंदी (mandee)"</item>
+        <item>"प्रचलित (prachalit)"</item>
+        <item>"पकड़ो (pakado)"</item>
+        <item>"निश्चयकारी (nishchayakaaree)"</item>
+        <item>"किशोर (kishor)"</item>
+        <item>"जाहिरा तौर पर (jaahira taur par)"</item>
+
+        <item>"उन्मूलन करना (unmoolan karana)"</item>
+        <item>"प्रकट करना ((prakat karana)"</item>
+        <item>"सही साबित करना  (sahee saabit karana)"</item>
+        <item>"हासिल करना (haasil karana)"</item>
+        <item>"प्रचुर मात्रा में है (prachur maatra mein hai)"</item>
+        <item>"असमर्थ (asamarth)"</item>
+        <item>"फिसलन (phisalan)"</item>
+        <item>"एकस्व अधिकार (ekasv adhikaar)"</item>
+        <item>"भूमिका(bhoomika)"</item>
+        <item>"तुलना (tulana)"</item>
+
+        <item>"परिस्थिति (paristhiti)"</item>
+        <item>"प्रोत्साहन (protsaahan)"</item>
+        <item>"मिश्रित करना (mishrit karana)"</item>
+        <item>"पारंपरिक (paaramparik)"</item>
+        <item>"प्रमुख (pramukh)"</item>
+        <item>"सुनाना (sunaana)"</item>
+        <item>"अकेला (akela)"</item>
+        <item>"समृद्ध करना (samrddh karana)"</item>
+        <item>"समकक्ष व्यक्ति (samakaksh vyakti)"</item>
+        <item>"निर्धारित कार्य (nirdhaarit kaary)"</item>
+
+        <item>"मौखिक (maukhik)"</item>
+        <item>"लगी रहना (lagee rahana)"</item>
+        <item>"प्राप्त करना (praapt karana)"</item>
+        <item>"कोई शिकायत या आरोप दर्ज करना (koee shikaayat ya aarop darj karana)"</item>
+        <item>"प्रेरणा स्त्रोत (prerana strot)"</item>
+        <item>"निर्बल व्यक्ति (nirbal vyakti)"</item>
+        <item>"धन की विनियोग करनेवाला (dhan kee viniyog karanevaala)"</item>
+        <item>"शोधन (shodhan)"</item>
+        <item>"उधार (udhaar)"</item>
+        <item>"शून्य स्थान (shoony sthaan)"</item>
+
+        <item>"मुकदमा दायर करना (mukadama daayar karana)"</item>
+        <item>"सुर (sur)"</item>
+        <item>"लंबा करना (lamba karana)"</item>
+        <item>"नोदक (nodak)"</item>
+        <item>"झुकना (jhukana)"</item>
+        <item>"काटना (kaatana)"</item>
+        <item>"अप्रियजनक (apriyajanak)"</item>
+        <item>"पूछताछ (poochhataachh)"</item>
+        <item>"चटकाना (chatakaana)"</item>
+        <item>"गाड़ी से खींचकर ले जाना (gaadee se kheenchakar le jaana)"</item>
+
+
+
+    </string-array>
+
+
+
+
+
+</resources>

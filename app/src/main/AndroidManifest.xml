@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.fortitude.shamsulkarim.ieltsfordory">
+
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        tools:node="remove" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".SplashScreen"
+            >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name=".StartTrainingActivity" />
+        <activity android:name=".NoWordLeft" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Practice.Practice" />
+        <activity android:name=".NewTrain" />
+        <activity android:name=".TrainFinishedActivity" />
+        <activity android:name=".Practice.PracticeFinished" />
+        <activity android:name=".WordAdapters.NewSettingActivity" />
+        <activity android:name=".ChooseLanguageActivity" />
+
+        <!-- Register the Alarm Receiver -->
+        <receiver
+            android:name=".notification.AlarmReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="92bbc6255603d1a30b14cb34e5b1554e6a6adb76" />
+
+        <activity android:name=".ChooseVocabulary" />
+        <activity android:name=".AppLauncher">
+
+
+
+        </activity>
+    </application>
+
+</manifest>

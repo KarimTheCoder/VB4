@@ -1,0 +1,228 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+
+    </style>
+
+
+    <style name="CheckBoxTintTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/advanceColor</item>
+    </style>
+
+
+
+
+
+    <style name="DialogTheme">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorControlNormal">#ffffff</item>
+    </style>
+
+    <style name="MyToast">
+        <item name="android:textColor">#fff</item>
+        <!--<item name="android:textStyle">bold</item> only bold!-->
+        <item name="android:fontFamily">fonts/Comfortaa-Regular.ttf</item> For custom fonts just add the path -> fonts/myfont.ttf
+        <item name="android:colorBackground">@color/red</item>
+        <item name="android:radius">10dp</item>  radius for corners of the toast shape
+        <item name="android:alpha">255</item>   value between 0-255 where 255 is full solid
+        <item name="android:icon">@drawable/ic_mama_mia</item>  drawable id of the icon. R.drawable.xx
+    </style>
+
+    <style name="wrong">
+        <item name="android:textColor">#fff</item>
+        <!--<item name="android:textStyle">bold</item> only bold!-->
+        <item name="android:fontFamily">fonts/Comfortaa-Regular.ttf</item> For custom fonts just add the path -> fonts/myfont.ttf
+        <item name="android:colorBackground">@color/red</item>
+        <item name="android:radius">10dp</item>  radius for corners of the toast shape
+        <item name="android:alpha">255</item>   value between 0-255 where 255 is full solid
+        <item name="android:icon">@drawable/ic_wrong</item>  drawable id of the icon. R.drawable.xx
+    </style>
+
+    <style name="wrong_again">
+        <item name="android:textColor">#fff</item>
+        <!--<item name="android:textStyle">bold</item> only bold!-->
+        <item name="android:fontFamily">fonts/Comfortaa-Regular.ttf</item> For custom fonts just add the path -> fonts/myfont.ttf
+        <item name="android:colorBackground">@color/red</item>
+        <item name="android:radius">10dp</item>  radius for corners of the toast shape
+        <item name="android:alpha">255</item>   value between 0-255 where 255 is full solid
+        <item name="android:icon">@drawable/ic_wrong_again</item>  drawable id of the icon. R.drawable.xx
+    </style>
+
+    <style name="correct">
+        <item name="android:textColor">#fff</item>
+        <!--<item name="android:textStyle">bold</item> only bold!-->
+        <item name="android:fontFamily">fonts/Comfortaa-Regular.ttf</item> For custom fonts just add the path -> fonts/myfont.ttf
+        <item name="android:colorBackground">#00C853</item>
+        <item name="android:radius">10dp</item>  radius for corners of the toast shape
+        <item name="android:alpha">255</item>   value between 0-255 where 255 is full solid
+        <item name="android:icon">@drawable/ic_inteligente</item>  drawable id of the icon. R.drawable.xx
+    </style>
+
+    <style name="favorite">
+        <item name="android:textColor">#fff</item>
+        <!--<item name="android:textStyle">bold</item> only bold!-->
+        <item name="android:fontFamily">fonts/Comfortaa-Regular.ttf</item> For custom fonts just add the path -> fonts/myfont.ttf
+        <item name="android:colorBackground">@color/beginnerS</item>
+        <item name="android:radius">10dp</item>  radius for corners of the toast shape
+        <item name="android:alpha">255</item>   value between 0-255 where 255 is full solid
+
+    </style>
+
+    <style name="syncing">
+        <item name="android:textColor">#fff</item>
+        <!--<item name="android:textStyle">bold</item> only bold!-->
+        <item name="android:fontFamily">fonts/Comfortaa-Regular.ttf</item> For custom fonts just add the path -> fonts/myfont.ttf
+        <item name="android:colorBackground">@color/beginnerS</item>
+        <item name="android:radius">10dp</item>  radius for corners of the toast shape
+        <item name="android:alpha">255</item>   value between 0-255 where 255 is full solid
+        <item name="android:icon">@drawable/syncing</item>  drawable id of the icon. R.drawable.xx
+
+    </style>
+
+
+    <style name="Theme.MaterialSheetFab.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/theme_primary</item>
+        <item name="colorPrimaryDark">@color/theme_primary_dark</item>
+        <item name="colorAccent">@color/theme_accent</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="Theme.MaterialSheetFab" parent="Theme.MaterialSheetFab.Base" />
+
+    <style name="ThemeOverlay.MaterialSheetFab.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlHighlight">#8fff</item>
+        <item name="colorControlActivated">@color/theme_accent</item>
+    </style>
+
+    <style name="ThemeOverlay.MaterialSheetFab.ActionBar.Popup" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Widget.MaterialSheetFab.ToolBar" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:theme">@style/ThemeOverlay.MaterialSheetFab.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.MaterialSheetFab.ActionBar.Popup</item>
+        <item name="android:elevation" tools:ignore="NewApi">@dimen/toolbar_elevation</item>
+        <item name="layout_scrollFlags">scroll|enterAlways</item>
+    </style>
+
+    <style name="Widget.MaterialSheetFab.TabLayout" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:theme">@style/ThemeOverlay.MaterialSheetFab.ActionBar</item>
+        <item name="android:elevation" tools:ignore="NewApi">@dimen/toolbar_elevation</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabGravity">fill</item>
+    </style>
+
+    <style name="Widget.MaterialSheetFab.Fab" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/fab_spacing</item>
+        <item name="android:layout_marginBottom">@dimen/fab_spacing</item>
+        <item name="android:layout_marginLeft">@dimen/fab_spacing</item>
+        <item name="android:layout_marginRight">@dimen/fab_spacing</item>
+        <item name="android:elevation" tools:ignore="NewApi">@dimen/fab_elevation</item>
+        <item name="android:src">@drawable/favorite_card_view</item>
+        <item name="fabSize">normal</item>
+        <item name="borderWidth">0dp</item>
+    </style>
+
+    <style name="Widget.MaterialSheetFab.Sheet" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/sheet_spacing</item>
+        <item name="android:layout_marginBottom">@dimen/sheet_spacing</item>
+        <item name="android:layout_marginLeft">@dimen/sheet_spacing</item>
+        <item name="android:layout_marginRight">@dimen/sheet_spacing</item>
+        <item name="cardBackgroundColor">@color/background_card</item>
+        <item name="cardElevation">@dimen/fab_sheet_elevation</item>
+        <item name="cardMaxElevation">@dimen/fab_sheet_elevation</item>
+        <item name="contentPadding">-3dp</item>
+    </style>
+
+    <style name="TextAppearance.MaterialSheetFab.Sheet.Item" parent="">
+        <item name="android:layout_width">@dimen/sheet_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/sheet_item_spacing</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textSize">@dimen/sheet_item_textsize</item>
+        <item name="android:textColor">@color/text_black_87</item>
+        <item name="android:drawablePadding">@dimen/sheet_item_image_spacing</item>
+    </style>
+
+    <style name="Widget.MaterialSheetFab.Note.List" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingTop">@dimen/note_spacing</item>
+        <item name="android:paddingLeft">@dimen/note_spacing</item>
+        <item name="android:paddingRight">@dimen/note_spacing</item>
+        <item name="android:paddingBottom">@dimen/fab_list_spacing</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="Widget.MaterialSheetFab.Note" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/note_spacing</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="contentPadding">@dimen/note_content_spacing</item>
+        <item name="cardBackgroundColor">@color/background_card</item>
+        <item name="cardCornerRadius">@dimen/note_corner_radius</item>
+    </style>
+
+    <style name="TextAppearance.MaterialSheetFab.Note" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_white_87</item>
+        <item name="android:textSize">@dimen/note_textsize</item>
+    </style>
+
+    <style name="TextAppearance.MaterialSheetFab.Note.Title" parent="TextAppearance.MaterialSheetFab.Note">
+        <item name="android:textSize">@dimen/note_title_textsize</item>
+    </style>
+
+    <style name="Widget.MaterialSheetFab.Snackbar" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/snackbar_height</item>
+        <item name="android:paddingLeft">@dimen/snackbar_spacing</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@color/background_snackbar</item>
+    </style>
+
+    <style name="TextAppearance.MaterialSheetFab.Snackbar.Message" parent="">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/text_white_87</item>
+        <item name="android:textSize">@dimen/snackbar_textsize</item>
+    </style>
+
+    <style name="TextAppearance.MaterialSheetFab.Snackbar.Action" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingLeft">@dimen/snackbar_spacing</item>
+        <item name="android:paddingRight">@dimen/snackbar_spacing</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:textColor">@color/theme_accent</item>
+        <item name="android:textSize">@dimen/snackbar_textsize</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

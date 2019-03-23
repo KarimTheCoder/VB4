@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+
+    <string-array name="intermediate_spanish">
+
+        <item> "Opening, aperture, space, breach, chink, slit"  </item>
+        <item> "not found"  </item>
+        <item> "Cause, give rise to, lead to, result in, bring about, create"  </item>
+        <item> "Magnificent, impressive, grand, imposing, awe-inspiring, splendid"  </item>
+        <item> "Overused, overdone, overworked, worn out, timeworn, platitudinous"  </item>
+        <item> "Random, unplanned, unsystematic, unmethodical, disorganized, disorderly"  </item>
+        <item> "Grating, jarring, rasping, strident, raucous, brassy"  </item>
+        <item> "Quick, hurried, fast, swift, rapid, speedy"  </item>
+        <item> "Risky, dangerous, unsafe, perilous, precarious, fraught with danger"  </item>
+        <item> "Pause, delay, wait, shilly-shally, dither, stall"  </item>
+        <item> "Pecking order, order, ranking, chain of command, grading, gradation"  </item>
+        <item> "Impediment, obstacle, barrier, bar, obstruction, handicap"  </item>
+        <item> "Empty, void, unfilled, vacant"  </item>
+        <item> "Terror, fear, fright, alarm, panic; dread, trepidation"  </item>
+        <item> "Unfriendly, unkind, bitter, unsympathetic, malicious, vicious"  </item>
+        <item> "Theory, theorem, thesis, conjecture, supposition, postulation"  </item>
+        <item> "Indistinguishable, (exactly) the same, uniform, twin, duplicate, interchangeable"  </item>
+        <item> "Unable to read or write, unlettered"  </item>
+        <item> "Decorate, adorn, ornament, accompany, embellish; add pictures/drawings to"  </item>
+        <item> "Collision, crash, smash, bump, bang, knock"  </item>
+        <item> "Have a negative effect on, damage, harm, diminish, reduce, weaken"  </item>
+        <item> "Tool, utensil, instrument, device, apparatus, gadget"  </item>
+        <item> "Insinuate, suggest, hint (at), intimate, say indirectly, indicate"  </item>
+        <item> "Foist, force, inflict, press, urge; informalsaddle someone with"  </item>
+        <item> "Make poor, make penniless, reduce to penury, bankrupt, beggar, ruin, bring to ruin"  </item>
+        <item> "Inducement, motivation, motive, reason, stimulus, stimulant, spur"  </item>
+        <item> "Ceaseless, unceasing, constant, continual, unabating, interminable"  </item>
+        <item> "Less important, secondary, subsidiary; minor, peripheral"  </item>
+        <item> "Stir up, whip up, encourage, fan the flames of, stoke up, fuel"  </item>
+        <item> "Tendency, propensity, proclivity, leaning, predisposition, disposition"  </item>
+        <item> "Inept, unskillful, unskilled, inexpert, amateurish, unprofessional"  </item>
+        <item> "Erratic, changeable, unpredictable, variable, varying, changing"  </item>
+        <item> "Tireless, untiring, unflagging, unwearied; determined, tenacious"  </item>
+        <item> "Incontrovertible, incontestable, undeniable, irrefutable, beyond dispute, unassailable"  </item>
+        <item> "Unsuccessful, unproductive, fruitless, unprofitable, abortive, futile"  </item>
+        <item> "Unavoidable, inescapable, inexorable, ineluctable; assured, certain"  </item>
+        <item> "Deduce, conclude, conjecture, surmise, reason, interpret"  </item>
+        <item> "Blown-up, aerated, filled, puffed up/out, pumped up; distended"  </item>
+        <item> "Effect, impact; control, sway, hold, power"  </item>
+        <item> "Impede, hinder, hamper, hold back, discourage, interfere with"  </item>
+        <item> "Beginning, opening, commencing, starting, inceptive, embryonic"  </item>
+        <item> "Question, query"  </item>
+        <item> "Essential, fundamental, basic, intrinsic, inherent, constitutive"  </item>
+        <item> "Combine, amalgamate, merge, unite, fuse, blend"  </item>
+        <item> "Explain, elucidate, expound, explicate, clarify, illuminate"  </item>
+        <item> "Intercede, involve oneself, get involved, interpose oneself, step in; mediate"  </item>
+        <item> "Fearless, unafraid, undaunted, unflinching, unshrinking, bold"  </item>
+        <item> "Complex, complicated, convoluted, tangled, entangled, twisted"  </item>
+        <item> "Not found"  </item>
+        <item> "Inquire into, look into, go into, probe, explore, scrutinize"  </item>
+        <item> "Irritable, quick-tempered, short-tempered, hot-tempered, testy, touchy"  </item>
+        <item> "Sarcasm, causticity, cynicism, mockery, satire, sardonicism"  </item>
+        <item> "Indecisive, hesitant, vacillating, equivocating, dithering, wavering"  </item>
+        <item> "Specialized language, slang, cant, idiom, argot, patter"  </item>
+        <item> "Together, in partnership, in cooperation, cooperatively, in conjunction, in collaboration"  </item>
+        <item> "Gift, talent, flair, genius, instinct, faculty"  </item>
+        <item> "Work, hard work, toil, exertion, industry"  </item>
+        <item> "Fall behind, straggle, fall back, trail (behind), hang back, not keep pace"  </item>
+        <item> "Satirize, mock, ridicule, make fun of, caricature, burlesque"  </item>
+        <item> "Weaken, deteriorate, decline; wither, droop, wilt"  </item>
+        <item> "Speech, talk, address, discourse, disquisition, presentation"  </item>
+        <item> "Wary, cautious, careful, guarded, chary, suspicious, distrustful"  </item>
+        <item> "Valid, sound, well founded, justifiable, reasonable, sensible"  </item>
+        <item> "Merciful, clement, forgiving, forbearing, tolerant, charitable"  </item>
+        <item> "Probable, distinctly possible, to be expected, odds-on, possible, plausible"  </item>
+        <item> "Absurd, ridiculous, farcical, laughable, risible, preposterous"  </item>
+        <item> "Preserve, conserve, keep, retain, keep going, keep alive"  </item>
+        <item> "Crucial, vital, great, considerable, paramount, utmost"  </item>
+        <item> "Control, influence, use/turn to one's advantage, exploit, maneuver, engineer"  </item>
+        <item> "Not found"  </item>
+        <item> "Calculate, compute, count, meter, quantify, weigh"  </item>
+        <item> "Ordinary, average, middling, middle-of-the-road, uninspired, undistinguished"  </item>
+        <item> "Repair, fix, put back together, piece together, restore; sew (up)"  </item>
+        <item> "Procedure, technique, system, practice, routine, modus operandi"  </item>
+        <item> "Relocate, resettle, move (house); immigrate; emigrate, go abroad, go overseas"  </item>
+        <item> "Lowest level, lower limit, bottom level, rock bottom, nadir; least"  </item>
+        <item> "Deceptive, confusing, deceiving, equivocal, ambiguous, fallacious"  </item>
+        <item> "Alter, change, adjust, adapt, amend, revise"  </item>
+        <item> "Sullen, sulky, gloomy, bad-tempered, ill-tempered, dour"  </item>
+        <item> "Neglectful, remiss, careless, lax, irresponsible, inattentive"  </item>
+        <item> "Calm, composed, unconcerned, cool, ‘calm, cool"  </item>
+        <item> "Do what someone says, carry out someone's orders; submit to, defer to, bow to"  </item>
+        <item> "Get, acquire, come by, secure, procure, come into the possession of"  </item>
+        <item> "Clear, crystal clear, plain, plain to see, evident, apparent"  </item>
+        <item> "Rival, adversary, opposer, (the) opposition, fellow contestant, (fellow) competitor"  </item>
+        <item> "Persecute, abuse, maltreat, ill-treat, tyrannize, crush"  </item>
+        <item> "Beginning, start, commencement, origination, genesis, birth"  </item>
+        <item> "Model, pattern, example, exemplar, template, standard"  </item>
+        <item> "Cheap, miserly, mean, niggardly, close-fisted, close"  </item>
+        <item> "Consume, have, eat, drink, take, ingest"  </item>
+        <item> "Incomplete, limited, qualified, imperfect, fragmentary, unfinished"  </item>
+        <item> "Scarcity, sparseness, sparsity, dearth, shortage, poverty"  </item>
+        <item> "Summit, top, crest, pinnacle, apex, crown"  </item>
+        <item> "Outlying, outer, on the edge/outskirts, surrounding"  </item>
+        <item> "Pervade, spread through, fill, filter through, diffuse through, imbue"  </item>
+        <item> "Continue, hold, carry on, last, keep on, keep up"  </item>
+        <item> "Concern, relate to, be related to, be connected with, be relevant to, regard"  </item>
+        <item> "Stage, period, chapter, episode, part, step"  </item>
+        <item> "Vote, ballot, show of hands, referendum, plebiscite; election"  </item>
+        <item> "Powerful, strong, mighty, formidable, influential, dominant"  </item>
+        <item> "Practical, matter-of-fact, sensible, down-to-earth, commonsensical, businesslike"  </item>
+        <item> "Commend, express admiration for, applaud, pay tribute to, speak highly of, eulogize"  </item>
+        <item> "Go/come before, lead (up) to, pave/prepare the way for, herald, introduce"  </item>
+        <item> "Exact, accurate, correct, specific, detailed, explicit, unambiguous"  </item>
+        <item> "Reputable, distinguished, respected, esteemed, eminent, august"  </item>
+        <item> "Widespread, prevailing, frequent, usual, common, current"  </item>
+        <item> "Main, chief, key, prime, central, principal"  </item>
+        <item> "Earlier, previous, preceding, foregoing, antecedent, advance"  </item>
+        <item> "Go ahead, carry on, go on, continue, keep on, get on, get ahead"  </item>
+        <item> "Offspring, young, babies, children, sons and daughters, family"  </item>
+        <item> "Encourage, advocate, further, advance, assist, aid"  </item>
+        <item> "Flourish, thrive, do well, bloom, blossom, burgeon"  </item>
+        <item> "Closeness, nearness, propinquity; accessibility, handiness; archaicvicinity"  </item>
+        <item> "Argument, disagreement, squabble, fight, dispute, wrangle"  </item>
+        <item> "Span, scope, compass, sweep, extent, area"  </item>
+        <item> "Position, level, grade, echelon; class, status"  </item>
+        <item> "Reprimand, reproach, scold, admonish, reprove, chastise "  </item>
+        <item> "Class, status"  </item>
+        <item> "Summarize, sum up; restate, repeat, reiterate, go over"  </item>
+        <item> "Advocate, endorse, commend, suggest, put forward, propose"  </item>
+        <item> "Improve, better, make better, ameliorate, refine; alter"  </item>
+        <item> "Control, adjust, manage"  </item>
+        <item> "Augment, increase, add to, supplement, boost, top up"  </item>
+        <item> "Turn down, refuse, decline, say no to, spurn; informalgive the thumbs down to"  </item>
+        <item> "Free, set free, let go/out, allow to leave, liberate, set at liberty"  </item>
+        <item> "Depend on, count on, bank on, place reliance on, reckon on; be confident of"  </item>
+        <item> "Disgrace, discredit, source of shame, blemish, stain, blot"  </item>
+        <item> "Necessitate, demand, call for, involve, entail"  </item>
+        <item> "Begrudge, feel aggrieved at/about, feel bitter about, grudge, be annoyed at/about, be resentful of, dislike"  </item>
+        <item> "Reconcile oneself to, become resigned to, come to terms with, accept"  </item>
+        <item> "Withstand, be proof against, combat, weather, endure, be resistant to, keep out"  </item>
+        <item> "Settle, sort out, solve, find a solution to, fix, straighten out"  </item>
+        <item> "Limit, keep within bounds, regulate, control, moderate, cut down"  </item>
+        <item> "Keep, keep possession of, keep hold of, hold on to, hang on to"  </item>
+        <item> "Take back, withdraw, recant, disavow, disclaim, repudiate"  </item>
+        <item> "Get back, bring back, recover, regain (possession of), recoup, reclaim"  </item>
+        <item> "Stylistic, oratorical, linguistic, verbal"  </item>
+        <item> "Stiff, hard, firm, inflexible, unbending, unyielding, inelastic"  </item>
+        <item> "Revolve, go around, turn, turn around, spin, gyrate"  </item>
+        <item> "Protection, defense, guard, screen, buffer, preventive"  </item>
+        <item> "Examine, inspect, survey, study, look at, peruse"  </item>
+        <item> "Part, piece, bit, segment, component, division"  </item>
+        <item> "Choose, pick (out), single out, sort out, take; opt for"  </item>
+        <item> "Succession, order, course, series, chain, train"  </item>
+        <item> "Acute, very bad, serious, grave, critical, dreadful"  </item>
+        <item> "Superficial, facile, simplistic, oversimplified; flimsy, insubstantial"  </item>
+        <item> "Sanctuary, refuge, home, haven, safe house; harbor"  </item>
+        <item> "Get smaller, become/grow smaller, contract, diminish, lessen"  </item>
+        <item> "Notable, noteworthy, worthy of attention, remarkable, important, of importance, of consequence"  </item>
+        <item> "Origin, birthplace, spring, fountainhead, fount, starting point"  </item>
+        <item> "Scant, scanty, scattered, scarce, infrequent, few and far between"  </item>
+        <item> "State, name, identify, define, describe, set out"  </item>
+        <item> "Conjecture, theorize, hypothesize, guess, surmise; think, wonder"  </item>
+        <item> "Lonely, companionless, unaccompanied, by oneself, on one's own, alone"  </item>
+        <item> "Dark, drab, dull, dingy; restrained, subdued"  </item>
+        <item> "Calm (down), pacify, comfort, hush, quiet, subdue, settle (down)"  </item>
+        <item> "Dirty, filthy, grubby, grimy, mucky, slummy"  </item>
+        <item> "Firm, solid, steady, secure, fixed, fast"  </item>
+        <item> "Still, motionless, static, stationary, standing, dead"  </item>
+        <item> "Master plan, grand design, game plan, plan (of action), action plan, policy"  </item>
+        <item> "Following, ensuing, succeeding, later, future, coming"  </item>
+        <item> "Replacement, deputy, relief, proxy, reserve, surrogate"  </item>
+        <item> "Fine, fine-drawn, nice, hair-splitting"  </item>
+        <item> "Enough, plenty of, ample; adequate, satisfactory"  </item>
+        <item> "Sum up, abridge, condense, encapsulate, outline, give an outline of, put in a nutshell"  </item>
+        <item> "Oversee, superintend, be in charge of, preside over, direct, manage"  </item>
+        <item> "Replace, supersede, displace, take over from, substitute for, override"  </item>
+        <item> "Doubtful, unsure, dubious, wary, chary, skeptical, distrustful"  </item>
+        <item> "Comfort, help, assist, encourage, succor, support"  </item>
+        <item> "Figurative, representative, illustrative, emblematic, metaphorical, allegorical"  </item>
+        <item> "Specialist, specialized, scientific; complex, complicated, esoteric"  </item>
+        <item> "Final, last, concluding, closing, end"  </item>
+        <item> "Allow, permit, condone, accept, swallow, countenance"  </item>
+        <item> "Move, convey, take, bring, shift, remove"  </item>
+        <item> "Change, passage, move, transformation, conversion, metamorphosis"  </item>
+        <item> "Clear, crystal clear, see-through, translucent, pellucid, limpid"  </item>
+        <item> "Fees, charges, bill"  </item>
+        <item> "Inconspicuous, unnoticeable, low-key, discreet, circumspect, understated"  </item>
+        <item> "Unharmed, unhurt, uninjured, undamaged, in one piece, intact"  </item>
+        <item> "Optimistic, cheerful, cheery, positive, confident, hopeful"  </item>
+        <item> "Unfair, prejudiced, prejudicial, biased, inequitable, discriminatory"  </item>
+        <item> "Dither, waver, be indecisive, be undecided, be ambivalent, hesitate"  </item>
+        <item> "Well founded, sound, reasonable, rational, logical, justifiable"  </item>
+        <item> "Disappear, be lost to sight/view, become invisible, vanish into thin air, recede from view, dematerialize"  </item>
+        <item> "Differ, be different, be dissimilar, conflict"  </item>
+        <item> "Judgment, adjudication, decision, finding, ruling, decree"  </item>
+        <item> "Remnant, fragment, relic, echo, indication, sign"  </item>
+        <item> "Not found"  </item>
+        <item> "Disparage, denigrate, defame, run down, revile, abuse"  </item>
+        <item> "Capacious, roomy, spacious, ample, full, big"  </item>
+        <item> "Not found"  </item>
+        <item> "Completely, totally, absolutely, entirely, fully, thoroughly"  </item>
+        <item> "General, extensive, universal, common, global, worldwide"  </item>
+        <item> "Droop, sag, become limp, flop; wither, shrivel (up)"  </item>
+        <item> "Renounce, relinquish, reject, dispense with, forgo, forswear"  </item>
+        <item> "Repudiate, revoke, repeal, rescind, overturn, overrule"  </item>
+        <item> "Judge, adjudge, try, hear, examine, arbitrate"  </item>
+        <item> "Provide, supply, present, purvey, make available, offer, give"  </item>
+        <item> "Not found"  </item>
+        <item> "Feeble, weak, insipid, pallid, pale, wishy-washy"  </item>
+        <item> "Strange, peculiar, weird, queer, funny, bizarre"  </item>
+        <item> "Poise, self-assurance, assurance, self-possession, self-confidence, calmness"  </item>
+        <item> "Saying, maxim, axiom, proverb, aphorism"  </item>
+        <item> "Commend, express approval of, express admiration for, applaud, pay tribute to, speak highly of"  </item>
+        <item> "Relevant, to the point, apposite, appropriate, suitable, fitting"  </item>
+        <item> "Assume, take, take on, take over, secure, acquire, seize"  </item>
+        <item> "Trickery, deviousness, deceit, deception, dishonesty, cheating"  </item>
+        <item> "Harmlessness, innocuousness, lack of malice, inoffensiveness"  </item>
+        <item> "Harshness, sharpness, roughness, abrasiveness, severity, acerbity"  </item>
+        <item> "Perseverance, tenacity, determination, resolve, resolution, resoluteness"  </item>
+        <item> "Reoccur, occur again, happen again, recur, reappear"  </item>
+        <item> "Menacing, threatening, unfriendly, hostile, antagonistic, evil"  </item>
+        <item> "Degenerate, corrupt, corrupted, depraved, perverted, decadent"  </item>
+        <item> "Be sorry about, feel contrite about, feel apologetic about, feel remorse about/for, be remorseful about"  </item>
+        <item> "Correct, check, copy-edit; improve, revise, emend, polish, modify"  </item>
+        <item> "Get angry, become infuriated, be furious, be maddened, bridle, become indignant"  </item>
+        <item> "Criticism, censure, denunciation, harangue, rant, polemic"  </item>
+        <item> "Comment, say, observe, mention, reflect, state, declare"  </item>
+        <item> "Tolerate, allow, stand, bear, abide, stomach, swallow, put up with"  </item>
+        <item> "Bully, hector, intimidate, force, coerce, compel"  </item>
+        <item> "Immature, inexperienced, naive, green, as green as grass, born yesterday"  </item>
+        <item> "Deceptive, confusing, deceiving, equivocal, ambiguous, fallacious"  </item>
+        <item> "Surrender, concede, relinquish, yield, part with, give up"  </item>
+        <item> "Quickness, swiftness, speed, speediness, briskness, expeditiousness"  </item>
+        <item> "Impostor, fake, sham, pretender, hoodwinker, masquerader"  </item>
+        <item> "Illusion, fantasy, delusion, dream, fancy, figment of the imagination"  </item>
+        <item> "Willing, assenting, acquiescent, agreeable, amenable, cooperative"  </item>
+        <item> "Carry out, do, perform, perpetrate, engage in, enact"  </item>
+        <item> "Fire, blaze, flames, inferno, firestorm, holocaust"  </item>
+        <item> "Blend, mingle, combine, put together, stir, jumble"  </item>
+        <item> "Pamper, indulge, overindulge, mollycoddle, coddle, baby"  </item>
+        <item> "Identical, uniform, alike, like, the same, one and the same, equivalent"  </item>
+        <item> "Downhearted, downcast, despondent, disappointed, disconsolate, disheartened"  </item>
+        <item> "Become clear, become definite, take shape, emerge, form, materialize"  </item>
+        <item> "Suave, urbane, sophisticated, cultured, self-possessed, self-assured"  </item>
+        <item> "Denounce, condemn, criticize, censure, damn, attack"  </item>
+        <item> "Condescend, stoop, lower oneself, descend, think fit, see fit, deem it worthy of oneself"  </item>
+        <item> "Expressive, open, forthcoming, emotional, communicative, responsive"  </item>
+        <item> "Finale, final scene, final act, last act, epilogue, coda, end"  </item>
+        <item> "Dried, dried up, dry, dehydrated, powdered"  </item>
+        <item> "Requirement, prerequisite, need, indispensable thing, desired thing"  </item>
+        <item> "Tyrant, dictator, absolute ruler, totalitarian, authoritarian, autocrat"  </item>
+        <item> "Autocratic, dictatorial, totalitarian, authoritarian, absolute, absolutist"  </item>
+        <item> "Rambling, digressive, meandering, wandering, maundering, diffuse"  </item>
+        <item> "Dishonest, deceitful, underhand, underhanded, duplicitous, double-dealing"  </item>
+        <item> "Exemption, immunity, exception, exclusion, exoneration, freedom"  </item>
+        <item> "Dissimulate, pretend, deceive, feign, act, masquerade"  </item>
+        <item> "Squander, fritter (away), misspend, waste, throw away, make poor use of"  </item>
+        <item> "Cessation, conclusion, end, ending, finish, termination"  </item>
+        <item> "Mournful, woeful, sorrowful, sad, unhappy, depressed"  </item>
+        <item> "Anguish, suffering, pain, agony, ache, affliction"  </item>
+        <item> "Fearless, dauntless, determined, resolute, indomitable, intrepid"  </item>
+        <item> "Fit in, go together, be consistent, agree, accord, concur"  </item>
+        <item> "Deceitfulness, deceit, deception, deviousness, two-facedness, double-dealing"  </item>
+        <item> "Exuberant, buoyant, cheerful, joyful, cheery, merry"  </item>
+        <item> "Impudence, impertinence, cheek, insolence, cheekiness, audacity"  </item>
+        <item> "Mournful, melancholic, melancholy, plaintive, sorrowful, sad"  </item>
+        <item> "Rudimentary, undeveloped, unformed, immature, incomplete, incipient"  </item>
+        <item> "In love with, infatuated with, besotted with, smitten with, love-struck by, captivated by"  </item>
+        <item> "Hamper, hinder, obstruct, impede, check, cramp"  </item>
+        <item> "Urge, encourage, try to persuade, adjure, admonish, press"  </item>
+        <item> "Wickedness, evilness, vileness, baseness, blackness, depravity"  </item>
+        <item> "Captivate, charm, enchant, bewitch, fascinate, beguile"  </item>
+        <item> "Quip, witticism, gem, play on words, jest, pun"  </item>
+        <item> "Not fount"  </item>
+        <item> "Not fount"  </item>
+        <item> "Fair, just impartial, even-handed, fair-minded, unbiased"  </item>
+        <item> "Artificial, substitute, imitation, synthetic, fake, false"  </item>
+        <item> "Delicate, exquisite, dainty, elegant, graceful, beautiful"  </item>
+        <item> "Vanishing, fading, evaporating, melting away, disappearing, diminishing"  </item>
+        <item> "Epitome, perfect example, shining example, model, paragon"  </item>
+        <item> "Extortionate, excessively high, extremely high, excessive, sky-high, prohibitive"  </item>
+        <item> "Not fount"  </item>
+        <item> "Clever, bright, brilliant, sharp, quick, quick-witted"  </item>
+        <item> "Mischief-maker, rabble-rouser, agitator, ringleader, incendiary"  </item>
+        <item> "Frivolous, superficial, shallow, glib, thoughtless, carefree"  </item>
+        <item> "Baffle, bewilder, mystify, bemuse, perplex, puzzle"  </item>
+        <item> "Blunder, mistake, error, slip; indiscretion, impropriety"  </item>
+        <item> "Corruption, bribery, bribing, dishonesty, deceit, fraud"  </item>
+        <item> "Initiative, resourcefulness, enterprise, imagination, imaginativeness, ingenuity"  </item>
+        <item> "Complimentary, praising, favourable, commending, admiring, applauding"  </item>
+        <item> "Praise, applaud, cheer, commend, express approval of, approve"  </item>
+        <item> "Haughtiness, superciliousness, loftiness, arrogance, pride, conceit"  </item>
+        <item> "Deceive, trick, dupe, outwit, fool, delude"  </item>
+        <item> "Arrogance, conceit, conceitedness, haughtiness, pride, vanity"  </item>
+        <item> "Eminent, distinguished, acclaimed, noted, notable, noteworthy"  </item>
+        <item> "Confine, intern, shut up, lock up, incarcerate, imprison, jail"  </item>
+        <item> "Peremptory, high-handed, commanding, imperial, overbearing, overweening"  </item>
+        <item> "Impermeable, impenetrable, impregnable, waterproof, watertight, water-resistant"  </item>
+        <item> "Beg, beseech, entreat, implore, plead with, appeal to"  </item>
+        <item> "Call into question, challenge, question, dispute, query, take issue with"  </item>
+        <item> "Rubbish, balderdash, gibberish, claptrap, blarney, guff"  </item>
+        <item> "Childish, babyish, infantile, juvenile, puerile, jejune"  </item>
+        <item> "Indisputable, incontestable, undeniable, irrefutable, unassailable, beyond dispute"  </item>
+        <item> "Inexpressible, indescribable, beyond words, beyond description, beggaring description"  </item>
+        <item> "Front on to, look towards, be facing, have/afford/command a view of, look over/across"  </item>
+        <item> "Inescapable, inevitable, bound/sure to happen, unpreventable, inexorable, assured"  </item>
+        <item> "Unsuitable, unfitting, ill-suited, unseemly, unbecoming, unprofessional"  </item>
+        <item> "Unique, distinctive, individual, special, idiosyncratic, quirky"  </item>
+        <item> "Nonchalance, unconcern, lack of concern, indifference, heedlessness, relaxedness"  </item>
+        <item> "Deadly, bloody, violent, fierce, destructive, ruinous"  </item>
+        <item> "Announcement, statement, communication, notification, notice, report"  </item>
+        <item> "Harden, toughen, season, temper, condition; accustom"  </item>
+        <item> "Inalienable, absolute, untouchable, unalterable, unchallengeable, unbreakable"  </item>
+        <item> "Untouched, undamaged, unhurt, unharmed, unscathed, unmarred"  </item>
+        <item> "Indisputable, undeniable, unquestionable, incontrovertible, incontestable, unassailable"  </item>
+        <item> "Cut (open), gash, slash, tear, rip, rend"  </item>
+        <item> "Tearful, weeping, crying, teary, with tears in one's eyes, close to tears"  </item>
+        <item> "Not fount"  </item>
+        <item> "Reluctant, unwilling, disinclined, ill-disposed, not in the mood"  </item>
+        <item> "Mournful, gloomy, sad, unhappy, doleful, Eeyorish"  </item>
+        <item> "Conspiracy, intrigue, secret plan/scheme, stratagem"  </item>
+        <item> "Authoritative, masterful, lordly, judgelike"  </item>
+        <item> "Shirker, slacker, idler, layabout; informalskiver, lead-swinger; informalgold brick"  </item>
+        <item> "Beggar, beggarman, beggarwoman, tramp, vagrant, vagabond"  </item>
+        <item> "Rapid, lightning, swift, fast, quick, speedy"  </item>
+        <item> "Little bit, small amount, particle, degree, speck, fragment"  </item>
+        <item> "Caustic, trenchant, biting, cutting, acerbic, sardonic, sarcastic"  </item>
+        <item> "Dying, expiring, on one's deathbed, near death, near the end, at death's door"  </item>
+        <item> "Disagreeable, irksome, troublesome, annoying, irritating, vexatious"  </item>
+        <item> "Self-assured, assured, sure of oneself, self-confident, positive"  </item>
+        <item> "Slanting, slanted, sloping, at an angle, angled, diagonal, aslant"  </item>
+        <item> "Disorderly, rowdy, wild, unmanageable, uncontrollable, disobedient"  </item>
+        <item> "Get, acquire, come by, secure, procure, come into possession of, pick up"  </item>
+        <item> "Unintelligent, ignorant, dense, brainless, mindless, foolish"  </item>
+        <item> "Self-important, bumptious, self-assertive, overbearing, overzealous, dictatorial"  </item>
+        <item> "Turn into bone, become bony, harden, solidify, stiffen, rigidify"  </item>
+        <item> "Tasty, appetizing, pleasant-tasting; eatable, edible, drinkable"  </item>
+        <item> "Fuss, fuss and bother, bother, commotion, trouble, rigmarole"  </item>
+        <item> "Express approval of, express admiration for, applaud, pay tribute to"  </item>
+        <item> "Obvious, clear, plain, evident, apparent, manifest"  </item>
+        <item> "Financial, monetary, money, fiscal, economic, capital"  </item>
+        <item> "Easily understood, easily grasped, comprehensible, understandable, intelligible"  </item>
+        <item> "Astute, perceptive, shrewd, discerning, perspicacious, sharp"  </item>
+        <item> "Not fount"  </item>
+        <item> "Not fount"  </item>
+        <item> "Essence, essential part, main point, fundamental point, heart, substance"  </item>
+        <item> "Brave, courageous, bold, daring, fearless, intrepid"  </item>
+        <item> "Hold forth, expound, declaim, preach, lay down the law"  </item>
+        <item> "Premonition, foreboding, intuition, feeling, hunch, suspicion"  </item>
+        <item> "Greater importance, priority, precedence, pre-eminence, preference, superiority"  </item>
+        <item> "Integrity, honesty, uprightness, decency, morality, rectitude"  </item>
+        <item> "Prediction, forecast, prophecy, divination, prognosis, projection"  </item>
+        <item> "Not found"  </item>
+        <item> "Forbid, prohibit, ban, bar, disallow, rule out, embargo"  </item>
+        <item> "Evangelize, convert, seek/make converts, bring to God/Christ, bring into the fold"  </item>
+        <item> "Prudent, far-sighted, judicious, shrewd, circumspect, forearmed"  </item>
+        <item> "Childish, babyish, infantile, juvenile, puerile, jejune, callow, green"  </item>
+        <item> "Strong, muscular, muscly, sturdy, strapping, robust, mighty"  </item>
+        <item> "Meticulous, conscientious, careful, diligent, attentive, ultra-careful"  </item>
+        <item> "Not found"  </item>
+        <item> "Storyteller, teller of tales, spinner of yarns, narrator, relater, recounter"  </item>
+        <item> "Teasing, good-humoured mockery, chaff, banter, ragging, badinage, japing"  </item>
+        <item> "Not found"  </item>
+        <item> "Not found"  </item>
+        <item> "Synopsis, precis, résumé, abstract, abridgement, digest"  </item>
+        <item> "Accusation(s), mutual accusation(s), counter-accusation(s), countercharge(s)"  </item>
+        <item> "Reoccur, occur again, happen again, recur, reappear"  </item>
+        <item> "Formidable, awe-inspiring, fearsome, daunting, alarming, impressive"  </item>
+        <item> "Retaliation, counterattack, counterstroke, comeback; revenge, vengeance"  </item>
+        <item> "Bawdy, indecent, risqué, rude, racy, broad, earthy"  </item>
+        <item> "Wise, clever, intelligent, with/showing great knowledge, knowledgeable, sensible, sage"  </item>
+        <item> "Mocking, satirical; sarcastic, ironical, ironic, cynical"  </item>
+        <item> "Not found"  </item>
+        <item> "Easy job, soft option; informalcushy number, money for old rope, money for jam"  </item>
+        <item> "Faux pas, gaffe, breach of etiquette, impropriety, piece of indecorum, social indiscretion"  </item>
+        <item> "Concern, care, attentiveness, mindfulness, consideration, considerateness"  </item>
+        <item> "Bad-tempered, ill-tempered, ill-humoured, angry, wrathful, cross, peevish"  </item>
+        <item> "Hamper, impede, obstruct, thwart, frustrate, foil"  </item>
+        <item> "Trickery, intrigue, deviousness, evasion, deceit, deception"  </item>
+        <item> "Excess, surplus, abundance, oversupply, superabundance"  </item>
+        <item> "Secret, stealthy, clandestine, secretive, sneaky, sly"  </item>
+        <item> "Audacity, boldness, audaciousness, nerve, effrontery, impudence"  </item>
+        <item> "Turbulent, stormy, tumultuous, violent, wild, lively, heated"  </item>
+        <item> "Incisive, cutting, pointed, piercing, penetrating"  </item>
+        <item> "Not found"  </item>
+        <item> "Bombastic, pompous, overblown, overripe, inflated, high-flown"  </item>
+        <item> "Novice, starter, learner, student, pupil, trainee, apprentice"  </item>
+        <item> "Take offence, be offended, take exception, bridle, take something personally, be aggrieved"  </item>
+        <item> "Impregnable, invulnerable, impenetrable, inviolable, invincible"  </item>
+        <item> "Imperturbable, unexcitable, cool, calm, collected, cool, calm"  </item>
+        <item> "Unhelpful, awkward, disobliging, unaccommodating, unamenable, unreasonable"  </item>
+        <item> "Unattractive, ill-favoured, hideous, plain, plain-featured, plain-looking"  </item>
+        <item> "Not found"  </item>
+        <item> "Magnanimous, kind, kindly, benevolent, beneficent, altruistic, charitable"  </item>
+        <item> "Indefensible, undefendable, unarguable, insupportable, refutable"  </item>
+        <item> "Not found"  </item>
+        <item> "Failed, without success, abortive, misfired; vain, in vain"  </item>
+        <item> "Boast about, brag about, make much of, crow about, gloat over"  </item>
+        <item> "Not found"  </item>
+        <item> "Rue, accurate, correct, true to life, factual, in accordance with the facts"  </item>
+        <item> "Censure, reproval, condemnation, denunciation, disapproval, disparagement"  </item>
+        <item> "Acrimonious, rancorous, bitter, caustic, mordant, acerbic"  </item>
+        <item> "Very bad, dreadful, awful, terrible, frightful, atrocious, disgraceful"  </item>
+        <item> "Unselfishness, selflessness, self-sacrifice, self-denial"  </item>
+        <item> "Abundant, copious, ample, profuse, rich, lavish, liberal"  </item>
+        <item> "Comparable, parallel, similar, like, corresponding, related, kindred, matching"  </item>
+        <item> "Precede, predate, come/go before, be earlier than, anticipate"  </item>
+        <item> "Outdated, out of date, outmoded, behind the times, old-fashioned, archaic"  </item>
+        <item> "Saying, maxim, axiom, proverb, aphorism, saw, dictum"  </item>
+        <item> "Considerable, substantial, significant, sizeable, goodly, fair, reasonable, tidy"  </item>
+        <item> "Anxiety, angst, alarm, worry, uneasiness, unease"  </item>
+        <item> "Obsolete, obsolescent, out of date, anachronistic, old-fashioned"  </item>
+        <item> "Dominance, domination, supremacy, superiority, predominance, pre-eminence"  </item>
+        <item> "Attribute, assign, put down, set down, accredit, credit, give the credit for"  </item>
+        <item> "Criticize, censure, attack, condemn, castigate, chastise"  </item>
+        <item> "Relieve, ease, alleviate, soothe, mitigate, dampen"  </item>
+        <item> "Increase, make larger, make bigger, make greater, add to, supplement"  </item>
+        <item> "Alone, all alone, on one's own, in a solitary state, separately, singly"  </item>
+        <item> "Be incumbent on, be obligatory for, be required of, be appropriate for, be expected of"  </item>
+        <item> "Overwhelm, inundate, deluge, flood, swamp, snow under; bombard"  </item>
+        <item> "Sully, tarnish, blacken, drag through the mud/mire, stain, taint, smear, befoul"  </item>
+        <item> "Coarse, uncouth, rude, discourteous, impolite, ungentlemanly"  </item>
+        <item> "Not found"  </item>
+        <item> "Withstand, be proof against, hold out against, combat, counter"  </item>
+        <item> "Prop, support, abutment, shore, pier, reinforcement, stanchion"  </item>
+        <item> "Truthful, sincere, candid, frank, direct, open, forthright"  </item>
+        <item> "Censorious, condemnatory, condemning, castigatory, reproving,"  </item>
+        <item> "Offhand, indifferent, casual, dismissive, insouciant, uninterested"  </item>
+        <item> "Ntellectual/mental capacity, intellect, mind, brain, brains, brainpower, powers of reasoning"  </item>
+        <item> "Advocate, proponent, promoter, proposer, supporter, standard-bearer"  </item>
+        <item> "Gallant, gentlemanly, honourable, respectful, thoughtful, considerate"  </item>
+        <item> "Mercy, mercifulness, leniency, lenience, mildness, indulgence"  </item>
+        <item> "Unite, join together, combine, merge, fuse, mingle, meld, blend"  </item>
+        <item> "Unity, togetherness, solidarity, bond, sticking together, continuity"  </item>
+        <item> "Conspiracy, connivance, complicity, intrigue, plotting, secret understanding"  </item>
+        <item> "Huge, massive, enormous, gigantic, very big, very large"  </item>
+        <item> "Admirable, praiseworthy, laudable, estimable, meritorious, creditable"  </item>
+        <item> "Smug, self-satisfied, pleased with oneself, proud of oneself, self-approving"  </item>
+        <item> "Harmonizing, harmonious, complementing, supportive, supporting, reciprocal"  </item>
+        <item> "Amalgam, amalgamation, combination, composite, blend, mixture, mix"  </item>
+        <item> "Good for, helpful to, instrumental in, calculated to produce, productive of, useful for"  </item>
+        <item> "Deliberately ignore, overlook, not take into consideration, disregard, pass over"  </item>
+        <item> "Restriction, limitation, curb, check, restraint, control"  </item>
+        <item> "Scornful, disdainful, disrespectful, insulting, insolent, full of contempt"  </item>
+        <item> "Problem, difficult question, vexed question, difficulty, quandary, dilemma"  </item>
+        <item> "Friendly, genial, affable, amiable, congenial, agreeable"  </item>
+        <item> "Complicated, complex, involved, intricate, elaborate, impenetrable"  </item>
+        <item> "Plentiful, copious, ample, profuse, rich, lavish"  </item>
+        <item> "Worldly, worldly-wise, well travelled, knowing, aware, mature"  </item>
+        <item> "Acceptance, belief, faith, trust, confidence, reliance, traction"  </item>
+        <item> "Commendable, praiseworthy, laudable, admirable, honourable, estimable"  </item>
+        <item> "Unwieldy, unmanageable, awkward, clumsy, ungainly, inconvenient"  </item>
+        <item> "Lack, scarcity, scarceness, shortage, shortfall, want"  </item>
+        <item> "Degrade, devalue, demean, lower the status of, reduce the status of, cheapen"  </item>
+        <item> "Explode, deflate, puncture, quash, knock the bottom out of"  </item>
+        <item> "Demolish, knock down, pull down, tear down, level, raze (to the ground)"  </item>
+        <item> "Demean, debase, cheapen, devalue, prostitute, lower the status of"  </item>
+        <item> "Assign, entrust, give, pass on, hand on/over, turn over, consign, devolve"  </item>
+        <item> "Ridicule, mock, jeer at, scoff at, jibe at, make fun of, poke fun at, laugh at"  </item>
+        <item> "Mocking, ridiculing, jeering, scoffing, jibing, pillorying, teasing"  </item>
+        <item> "Not found"  </item>
+        <item> "Harmful, damaging, injurious, hurtful, inimical, deleterious"  </item>
+        <item> "Run down, tumbledown, ramshackle, broken-down, in disrepair, shabby"  </item>
+        <item> "Industrious, hard-working, assiduous, conscientious, particular"  </item>
+        <item> "Strife, conflict, friction, hostility; disagreement, lack of agreement"  </item>
+        <item> "Careful, circumspect, cautious, wary, chary, guarded"  </item>
+        <item> "Not found"  </item>
+        <item> "Discourage, dispirit, demoralize, depress, dismay, daunt"  </item>
+        <item> "Compliant, obedient, pliant, dutiful, willing, passive"  </item>
+        <item> "Unconventional, uncommon, abnormal, irregular, aberrant, anomalous"  </item>
+        <item> "Self-seeker, egocentric, egomaniac, self admirer, narcissist; boaster, brag"  </item>
+        <item> "Economize on, skimp on, be (more) economical with, make economies with"  </item>
+        <item> "Evade, avoid, get away from, dodge, flee, escape (from), run (away) from"  </item>
+        <item> "Difficult to catch/find, difficult to track down; evasive, slippery, shifty"  </item>
+        <item> "Decorate, adorn, ornament, dress, dress up, furnish"  </item>
+        <item> "Not found"  </item>
+        <item> "Imitate, copy, reproduce, mimic, mirror, echo, follow, model oneself on"  </item>
+        <item> "Not found"  </item>
+        <item> "Hostility, animosity, antagonism, friction, antipathy, animus"  </item>
+        <item> "Tempt, allure, lure, attract, dangle a carrot in front of"  </item>
+        <item> "Elation, happiness, joy, joyousness, delight, glee, excitement, exhilaration"  </item>
+        <item> "Fair, just, equitable, impartial, unbiased, unprejudiced, non-partisan"  </item>
+        <item> "Infuriate, incense, anger, annoy, irritate, madden"  </item>
+        <item> "Agonizing, extremely painful, severe, acute, intense, extreme"  </item>
+        <item> "Flippant, flip, glib, frivolous, tongue-in-cheek, waggish"  </item>
+        <item> "Be obsequious to, be sycophantic to, be servile to, curry favour with, pay court to"  </item>
+        <item> "Gala, gala day, garden party, bazaar, fair, feast, festiva"  </item>
+        <item> "Not found"  </item>
+        <item> "Emerging, emergent, arising, sunrise, dawning, beginning"  </item>
+        <item> "Struggle, thrash, thresh, flail, toss and turn, twist and turn, pitch"  </item>
+        <item> "Weakness, weak point, weak spot, failing, shortcoming, flaw, imperfection"  </item>
+        <item> "Reckless, rash, incautious, careless, heedless, unheeding"  </item>
+        <item> "Frank, direct, straightforward, honest, candid, open, sincere"  </item>
+        <item> "Fruitless, vain, pointless; useless, worthless, ineffectual"  </item>
+        <item> "Friendly, affable, cordial, congenial, amiable, warm"  </item>
+        <item> "Refined, respectable, polished, decorous, proper, polite"  </item>
+        <item> "Obtain, get, take, draw, derive, extract, cull, garner"  </item>
+        <item> "Slick, pat, neat, plausible, silky, smooth-talking, fast-talking"  </item>
+        <item> "Crawl, creep, cringe, crouch, prostrate oneself, kneel"  </item>
+        <item> "Basket, pannier, wickerwork basket; "  </item>
+        <item> "Box, container, holder"  </item>
+        <item> "Imminent, at hand, close, close at hand, near, nearing, approaching"  </item>
+        <item> "Watertight, waterproof, damp-proof, water-resistant, water-repellent, airtight, tight"  </item>
+        <item> "Incriminate, compromise; involve, connect, embroil, enmesh"  </item>
+        <item> "Invulnerable, impenetrable, unattackable, unassailable, inviolable, secure"  </item>
+        <item> "Unintentional, unintended, accidental, unpremeditated, unplanned"  </item>
+        <item> "Tongue-tied, lost for words, at a loss for words, unable to express oneself"  </item>
+        <item> "Ceaseless, unceasing, constant, continual, unabating, interminable"  </item>
+        <item> "Binding, obligatory, mandatory, necessary, compulsory, required"  </item>
+
+    </string-array>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

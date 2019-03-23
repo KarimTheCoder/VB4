@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="beginner_bengali">
+        <item>"প্রতিরক্ষা"</item>
+        <item>"প্রভাব"</item>
+        <item>"দূষণ"</item>
+        <item>"কঠোর"</item>
+        <item>"গ্রাস করা"</item>
+        <item>"অংশ"</item>
+        <item>"বিদেশে"</item>
+        <item>"রন্ধনপ্রণালী"</item>
+        <item>"উপাদান"</item>
+        <item>"চরিত্রগত"</item>
+
+        <item>"বিশেষ"</item>
+        <item>"খ্যাতি"</item>
+        <item>"খুঁত"</item>
+        <item>"দারিদ্র্য"</item>
+        <item>"দমন করা"</item>
+        <item>"পর্যাপ্ত"</item>
+        <item>"ক্ষতিপূরণ করা"</item>
+        <item>"অত্যন্ত গুরুত্বপূর্ণ"</item>
+        <item>"নিছক"</item>
+        <item>"সুস্পষ্ট"</item>
+
+        <item>"হ্রাস করা"</item>
+        <item>"জটিল"</item>
+        <item>"সুরক্ষিত নয় এমন"</item>
+        <item>"পরিবর্তন করা"</item>
+        <item>"সুবিধা"</item>
+        <item>"যত্নের সঙ্গে সম্পন্ন করা"</item>
+        <item>"প্রমাণ"</item>
+        <item>"অত্যাবশ্যক"</item>
+        <item>"স্থির রাখা"</item>
+        <item>"অবদান"</item>
+
+
+        <item>"মুগ্ধ করা"</item>
+        <item>"বাড়িয়ে বলা"</item>
+        <item>"অঙ্গভঙ্গি"</item>
+        <item>"রসাত্মক"</item>
+        <item>"সম্পূর্ণভাবে যুক্ত করা"</item>
+        <item>"বিশিষ্ট"</item>
+        <item>"দর্শক"</item>
+        <item>"ঘটনাস্থল"</item>
+        <item>"কুচকাত্তয়াজ"</item>
+        <item>"অসুবিধা"</item>
+
+        <item>"কার্যকর"</item>
+        <item>"সজ্জিত করা"</item>
+        <item>"মালবাহী"</item>
+        <item>"নবপ্রবর্তিত বস্তু"</item>
+        <item>"তীব্র"</item>
+        <item>"দ্রুততর করা"</item>
+        <item>"উত্সাহদায়ক"</item>
+        <item>"গুণ"</item>
+        <item>"স্রষ্টা"</item>
+        <item>"কাজ"</item>
+
+        <item>"পণ্ডিত"</item>
+        <item>"একমত হত্তয়া"</item>
+        <item>"সাশ্রয়ী মূল্যের"</item>
+        <item>"উৎসর্গ"</item>
+        <item>"শৃঙ্খলা"</item>
+        <item>"প্রতিভাধর"</item>
+        <item>"মাঝারি"</item>
+        <item>"গভীর"</item>
+        <item>"জটিল"</item>
+        <item>"উন্মোচন"</item>
+
+        <item>"কার্যকর"</item>
+        <item>"সমুদ্রভ্রমণ"</item>
+        <item>"কোলাহল"</item>
+        <item>"বিশ্বাসযোগ্য"</item>
+        <item>"বজায় রাখা"</item>
+        <item>"অন্তরণ"</item>
+        <item>"আত্মগর্ব"</item>
+        <item>"সাড়া"</item>
+        <item>"স্তূপাকার করা"</item>
+        <item>"খাপ খাওয়ানো"</item>
+
+        <item>"নির্ধারণ"</item>
+        <item>"বাষ্পে পরিণত করা"</item>
+        <item>"পাড়"</item>
+        <item>"প্রচুরপরিমাণে উত্পাদনশীল"</item>
+        <item>"উন্নতিলাভ করা"</item>
+        <item>"পরিচালনা"</item>
+        <item>"গ্রহণ করা"</item>
+        <item>"প্রতিযোগিতামূলক"</item>
+        <item>"স্বীকার করা"</item>
+        <item>"বিষণ্নতা"</item>
+
+        <item>"পরিশ্রমী"</item>
+        <item>"পুনর্নব হত্তয়া"</item>
+        <item>"অরণ্যবিনাশ"</item>
+        <item>"পরিবেশ"</item>
+        <item>"জন্তুর বা গাছ পালার স্বাভাবিক আবাস অথবা জন্মস্থান"</item>
+        <item>"খুচরা বিক্রয় করা"</item>
+        <item>"বিতর্ক"</item>
+        <item>"প্রবণতা"</item>
+        <item>"উৎসর্গ"</item>
+        <item>"সম্ভাব্য"</item>
+
+        <item>"তহবিল"</item>
+        <item>"পরামর্শদাতা"</item>
+        <item>"স্থায়ী অবস্থায় থাকা"</item>
+        <item>"ব্যাহত করা"</item>
+        <item>"নির্গত করা"</item>
+        <item>"পতন"</item>
+        <item>"মূল্যবিচার"</item>
+        <item>"প্রধান"</item>
+        <item>"মিতব্যয়ী"</item>
+        <item>"অনিবার্য"</item>
+
+        <item>"আবাসিক"</item>
+        <item>"পর্যবেক্ষন"</item>
+        <item>"অংশগ্রাহক"</item>
+        <item>"পছন্দ করা"</item>
+        <item>"দ্রুত বেড়ে ওঠা"</item>
+        <item>"বিজ্ঞাপিত করা"</item>
+        <item>"প্রকল্পর"</item>
+        <item>"তীব্র"</item>
+        <item>"প্রকাশ করা"</item>
+        <item>"ব্যাঘাত করা"</item>
+
+        <item>"গিঁট"</item>
+        <item>"মার্জিত"</item>
+        <item>"অনুষ্ঠান"</item>
+
+
+    </string-array>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

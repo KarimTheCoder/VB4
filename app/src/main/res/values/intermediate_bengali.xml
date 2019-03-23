@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+
+    <string-array name="intermediate_bengali">
+        <item>"ক্ষয় করা"</item>
+        <item>"প্রসারিত করা"</item>
+        <item>"পথিমধ্যে রোধ করা"</item>
+        <item>"পরিপোষক"</item>
+        <item>"অধ: পতিত হওয়া"</item>
+        <item>"ঝাঁজরা"</item>
+        <item>"উৎপাদনে অক্ষম"</item>
+        <item>"খরা"</item>
+        <item>"নির্গমন"</item>
+        <item>"সহজতর করা"</item>
+
+        <item>"অপূরণীয়"</item>
+        <item>"দিবাকালীন অথবা দৈনিক"</item>
+        <item>"সহ্য করা অথবা স্থায়ী"</item>
+        <item>"কৃতিত্ব"</item>
+        <item>"সন্তোষজনক"</item>
+        <item>"প্রজাতি"</item>
+        <item>"বিপথগামী বা পথভ্রষ্ট হওয়া"</item>
+        <item>"বিচিত্র, বিভিন্ন"</item>
+        <item>"চরম"</item>
+        <item>"পদ্ধতি"</item>
+
+        <item>"ঘন বা ঘনসন্নিবিষ্ট নয় এমন"</item>
+        <item>"আগুনে ঝলসে দেওয়া"</item>
+        <item>"নীতি"</item>
+        <item>"ছোট কিছু"</item>
+        <item>"লবণাক্ত"</item>
+        <item>"সহ্য করা"</item>
+        <item>"অচেতন"</item>
+        <item>"দৃষ্টি"</item>
+        <item>"তুলনা করা"</item>
+        <item>"খণ্ড"</item>
+
+        <item>"যুক্ত করা"</item>
+        <item>"উদ্ভাবনী"</item>
+        <item>"স্থূলতা"</item>
+        <item>"শারীরিক"</item>
+        <item>"পিছু পিছু ছোটা"</item>
+        <item>"উদ্দীপক বস্তু"</item>
+        <item>"পণ্যচিহ্ন"</item>
+        <item>"বহিরাগত"</item>
+        <item>"ভোজবাজির কৌশল"</item>
+        <item>"কৌশল"</item>
+
+        <item>"অভিনয়ের নট-নটী"</item>
+        <item>"প্রদর্শন"</item>
+        <item>"উত্পাদন করা"</item>
+        <item>"রেলগাড়ির এনজিন"</item>
+        <item>"ছাপ মারা"</item>
+        <item>"প্রাথমিক"</item>
+        <item>"জনসংখ্যা"</item>
+        <item>"আলিঙ্গন"</item>
+        <item>"স্বাভাবিক নৈপুণ্য"</item>
+        <item>"ক্রোধ"</item>
+
+        <item>"সম্পাদন"</item>
+        <item>"সাক্ষরতা"</item>
+        <item>"লেখার জন্য তক্তা"</item>
+        <item>"নিদর্শন"</item>
+        <item>"মহাজ্ঞানী ব্যক্তি"</item>
+        <item>"উত্পন্ন করা"</item>
+        <item>"ভবিষ্যদ্বাণী করা"</item>
+        <item>"পদাংশ"</item>
+        <item>"পুষ্পসংক্রান্ত"</item>
+        <item>"পুষ্পমালা"</item>
+
+        <item>"রাজত্ব"</item>
+        <item>"উত্থিত হত্তয়া"</item>
+        <item>"স্মরণকারী"</item>
+        <item>"পুনরারম্ভ করা"</item>
+        <item>"লক্ষণীয়ভাবে"</item>
+        <item>"খোঁড়া লোক"</item>
+        <item>"প্রলুব্ধ করা"</item>
+        <item>"ধরে রাখা"</item>
+        <item>"ছাত্রাবাস"</item>
+        <item>"প্রতিযোগিতা করা"</item>
+
+        <item>"প্রান্ত"</item>
+        <item>"প্রেরণা"</item>
+        <item>"উপযুক্ত"</item>
+        <item>"শব্দ"</item>
+        <item>"ডগা"</item>
+        <item>"বন্ধন"</item>
+        <item>"তর্কে পরাভূত করা"</item>
+        <item>"বিজয়লাভ করা"</item>
+        <item>"নাপিত"</item>
+        <item>"গুরুগম্ভীর"</item>
+
+        <item>"পানীয়"</item>
+        <item>"গঠন করা"</item>
+        <item>"উচ্চে ত্তড়া"</item>
+        <item>"সমবেতভাবে অনুষ্ঠিত"</item>
+        <item>"মন্দা"</item>
+        <item>"লক্ষণীয়ভাবে বিদ্যমান"</item>
+        <item>"নাগাল পাত্তয়া"</item>
+        <item>"বিচারক্ষমতাসম্পন্ন"</item>
+        <item>"কিশোর"</item>
+        <item>"স্পষ্টতই"</item>
+
+        <item>"ধ্বংস করা"</item>
+        <item>"উদ্ঘাটিত করা"</item>
+        <item>"সত্যতা সমর্থন করা"</item>
+        <item>"অর্জন করা"</item>
+        <item>"প্রচুর পরিমানে"</item>
+        <item>"অসমর্থ"</item>
+        <item>"পিচ্ছিল"</item>
+        <item>"পেটেণ্ট"</item>
+        <item>"নাটকে অভিনেতার পার্ট"</item>
+        <item>"তুলনা"</item>
+
+        <item>"পরিস্থিতি"</item>
+        <item>"অনুপ্রেরণা"</item>
+        <item>"একত্র মেশা"</item>
+        <item>"প্রচলিত"</item>
+        <item>"প্রভাবশালী"</item>
+        <item>"আবৃত্তি করা"</item>
+        <item>"একাকী"</item>
+        <item>"সমৃদ্ধ করা"</item>
+        <item>"সমকক্ষ ব্যক্তি"</item>
+        <item>"কাজ"</item>
+
+        <item>"মৌখিক"</item>
+        <item>"অধ্যবসায়"</item>
+        <item>"আহরণ করা"</item>
+        <item>"দায়ের করা"</item>
+        <item>"অনুপ্রেরণা"</item>
+        <item>"পঙ্গু"</item>
+        <item>"বিনিয়োগকারী"</item>
+        <item>"পরিশোধন"</item>
+        <item>"ধার"</item>
+        <item>"শূন্যস্থান"</item>
+
+        <item>"আদালতে অভিযুক্ত করা"</item>
+        <item>"স্বন"</item>
+        <item>"প্রসারিত করা"</item>
+        <item>"চালকযন্ত্র"</item>
+        <item>"কাত হত্তয়া"</item>
+        <item>"কাটিয়া ফেলা"</item>
+        <item>"সর্বনাশা"</item>
+        <item>"অনুসন্ধান"</item>
+        <item>"সহসা ভাঙ্গা"</item>
+        <item>"টানিয়া লইয়া যাত্তয়া"</item>
+
+
+
+    </string-array>
+
+
+
+</resources>

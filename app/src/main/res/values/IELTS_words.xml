@@ -1,0 +1,3371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="IELTS_words">
+
+        <item> "Defense"  </item>
+        <item> "Impact"  </item>
+        <item> "Pollution"  </item>
+        <item> "Harsh"  </item>
+        <item> "Consume"  </item>
+        <item> "Aspect"  </item>
+        <item> "Abroad"  </item>
+        <item> "Cuisine"  </item>
+        <item> "Ingredient"  </item>
+        <item> "Characteristic"  </item>
+        <item> "Particular"  </item>
+        <item> "Reputation"  </item>
+        <item> "Defect"  </item>
+        <item> "Poverty"  </item>
+        <item> "Inhibit"  </item>
+        <item> "Adequate"  </item>
+        <item> "Compensate"  </item>
+        <item> "Crucial"  </item>
+        <item> "Merely"  </item>
+        <item> "Obvious"  </item>
+        <item> "Epidemic"  </item>
+        <item> "Reduce"  </item>
+        <item> "Tricky"  </item>
+        <item> "Vulnerable"  </item>
+        <item> "Alter"  </item>
+        <item> "Benefit"  </item>
+        <item> "Elaborate"  </item>
+        <item> "Evidence"  </item>
+        <item> "Vital"  </item>
+        <item> "Stabilize"  </item>
+        <item> "Contribute"  </item>
+        <item> "Fascinate"  </item>
+        <item> "Exaggerate"  </item>
+        <item> "Gesture"  </item>
+        <item> "Humorous"  </item>
+        <item> "Merge"  </item>
+        <item> "Prominent"  </item>
+        <item> "Spectator"  </item>
+        <item> "Venue"  </item>
+        <item> "Parade"  </item>
+        <item> "Drawback"  </item>
+        <item> "Efficient"  </item>
+        <item> "Equip"  </item>
+        <item> "Freight"  </item>
+        <item> "Innovation"  </item>
+        <item> "Intense"  </item>
+        <item> "Accelerate"  </item>
+        <item> "Incentive"  </item>
+        <item> "Attribute"  </item>
+        <item> "Creator"  </item>
+        <item> "Deed"  </item>
+        <item> "Scholar"  </item>
+        <item> "Settle"  </item>
+        <item> "Affordable"  </item>
+        <item> "Dedicate"  </item>
+        <item> "Discipline"  </item>
+        <item> "Gifted"  </item>
+        <item> "Moderate"  </item>
+        <item> "Profound"  </item>
+        <item> "Sophisticated"  </item>
+        <item> "Unveil"  </item>
+        <item> "Viable"  </item>
+        <item> "Cruise"  </item>
+        <item> "Turbulence"  </item>
+        <item> "Reliable"  </item>
+        <item> "Sustained"  </item>
+        <item> "Insulation"  </item>
+        <item> "Vanity"  </item>
+        <item> "Respond"  </item>
+        <item> "Accumulate"  </item>
+        <item> "Adapt"  </item>
+        <item> "Determine"  </item>
+        <item> "Evaporation"  </item>
+        <item> "Fringe"  </item>
+        <item> "Prolific"  </item>
+        <item> "Thrive"  </item>
+        <item> "Conduct"  </item>
+        <item> "Tolerance"  </item>
+        <item> "Competitive"  </item>
+        <item> "Acknowledge"  </item>
+        <item> "Depression"  </item>
+        <item> "Industrious"  </item>
+        <item> "Rejuvenate"  </item>
+        <item> "Deforestation"  </item>
+        <item> "Environment"  </item>
+        <item> "Habitat"  </item>
+        <item> "Retail"  </item>
+        <item> "Controversy"  </item>
+        <item> "Trend"  </item>
+        <item> "Devote"  </item>
+        <item> "Potential"  </item>
+        <item> "Fund"  </item>
+        <item> "Mentor"  </item>
+        <item> "Persist"  </item>
+        <item> "Disrupt"  </item>
+        <item> "Emit"  </item>
+        <item> "Decline"  </item>
+        <item> "Estimate"  </item>
+        <item> "Primary"  </item>
+        <item> "Economical"  </item>
+        <item> "Inevitably"  </item>
+        <item> "Residential"  </item>
+        <item> "Supervision"  </item>
+        <item> "Participant"  </item>
+        <item> "Opt"  </item>
+        <item> "Burgeon"  </item>
+        <item> "Promote"  </item>
+        <item> "Project"  </item>
+        <item> "Acute"  </item>
+        <item> "Expose"  </item>
+        <item> "Hinder"  </item>
+        <item> "Knot"  </item>
+        <item> "Graceful"  </item>
+        <item> "Ritual"  </item>
+        <item> "Erode"  </item>
+        <item> "Extend"  </item>
+        <item> "Intercept"  </item>
+        <item> "Nutrient"  </item>
+        <item> "Degenerate"  </item>
+        <item> "Porous"  </item>
+        <item> "Infertile"  </item>
+        <item> "Drought"  </item>
+        <item> "Emission"  </item>
+        <item> "Facilitate"  </item>
+        <item> "Irreplaceable"  </item>
+        <item> "Diurnal"  </item>
+        <item> "Endure"  </item>
+        <item> "Feat"  </item>
+        <item> "Optimal"  </item>
+        <item> "Species"  </item>
+        <item> "Stray"  </item>
+        <item> "Diverse"  </item>
+        <item> "Extreme"  </item>
+        <item> "Mechanism"  </item>
+        <item> "Sparse"  </item>
+        <item> "Scorch"  </item>
+        <item> "Principle"  </item>
+        <item> "Wisp"  </item>
+        <item> "Saline"  </item>
+        <item> "Tolerate"  </item>
+        <item> "Unconsciously"  </item>
+        <item> "Vision"  </item>
+        <item> "Contrast"  </item>
+        <item> "Chunk"  </item>
+        <item> "Engage"  </item>
+        <item> "Innovative"  </item>
+        <item> "Obesity"  </item>
+        <item> "Physical"  </item>
+        <item> "Pursue"  </item>
+        <item> "Stimulus "  </item>
+        <item> "Brand"  </item>
+        <item> "Exotic"  </item>
+        <item> "Juggle"  </item>
+        <item> "Stunt"  </item>
+        <item> "Cast"  </item>
+        <item> "Display"  </item>
+        <item> "Generate"  </item>
+        <item> "Locomotive"  </item>
+        <item> "Imprint"  </item>
+        <item> "Initial"  </item>
+        <item> "Populace"  </item>
+        <item> "Embrace"  </item>
+        <item> "Flair"  </item>
+        <item> "Fume"  </item>
+        <item> "Function"  </item>
+        <item> "Literacy"  </item>
+        <item> "Tablet"  </item>
+        <item> "Token"  </item>
+        <item> "Sage"  </item>
+        <item> "Originate"  </item>
+        <item> "Predict"  </item>
+        <item> "Syllable"  </item>
+        <item> "Floral"  </item>
+        <item> "Garland"  </item>
+        <item> "Reign"  </item>
+        <item> "Emerge"  </item>
+        <item> "Reminiscent"  </item>
+        <item> "Renewed"  </item>
+        <item> "Notably"  </item>
+        <item> "Cripple"  </item>
+        <item> "Lure"  </item>
+        <item> "Retain"  </item>
+        <item> "Dormitory"  </item>
+        <item> "Compete"  </item>
+        <item> "Edge"  </item>
+        <item> "Motivation"  </item>
+        <item> "Niche"  </item>
+        <item> "Sound"  </item>
+        <item> "Tip"  </item>
+        <item> "Bond"  </item>
+        <item> "Convince"  </item>
+        <item> "Prevail"  </item>
+        <item> "Barber"  </item>
+        <item> "Serious"  </item>
+        <item> "Beverage"  </item>
+        <item> "Forge"  </item>
+        <item> "Soar"  </item>
+        <item> "Concerted"  </item>
+        <item> "Downturn"  </item>
+        <item> "Prevalent"  </item>
+        <item> "Catch-up"  </item>
+        <item> "Decisive"  </item>
+        <item> "Adolescent"  </item>
+        <item> "Apparently"  </item>
+        <item> "Eradicate"  </item>
+        <item> "Unfold"  </item>
+        <item> "Validate"  </item>
+        <item> "Attain"  </item>
+        <item> "Abound"  </item>
+        <item> "Incapable"  </item>
+        <item> "Slippery"  </item>
+        <item> "Patent"  </item>
+        <item> "Role"  </item>
+        <item> "Comparison"  </item>
+        <item> "Circumstance"  </item>
+        <item> "Encouragement"  </item>
+        <item> "Blend"  </item>
+        <item> "Conventional"  </item>
+        <item> "Dominant"  </item>
+        <item> "Recite"  </item>
+        <item> "Solitary"  </item>
+        <item> "Enrich"  </item>
+        <item> "Peer"  </item>
+        <item> "Assignment"  </item>
+        <item> "Verbal"  </item>
+        <item> "Perseverance"  </item>
+        <item> "Derive"  </item>
+        <item> "File"  </item>
+        <item> "Inspiration"  </item>
+        <item> "Invalid"  </item>
+        <item> "Investor"  </item>
+        <item> "Refinement"  </item>
+        <item> "Credit"  </item>
+        <item> "Vacuum"  </item>
+        <item> "Sue"  </item>
+        <item> "Pitch"  </item>
+        <item> "Prolong"  </item>
+        <item> "Propeller"  </item>
+        <item> "Tilt"  </item>
+        <item> "Chop"  </item>
+        <item> "Catastrophic"  </item>
+        <item> "Inquiry"  </item>
+        <item> "Snap"  </item>
+        <item> "Tow"  </item>
+        <item> "Aquatic"  </item>
+        <item> "Array"  </item>
+        <item> "Myriad"  </item>
+        <item> "Terrestrial"  </item>
+        <item> "Vegetation"  </item>
+        <item> "Amphibian"  </item>
+        <item> "Residue"  </item>
+        <item> "Obliterate"  </item>
+        <item> "Biodiversity"  </item>
+        <item> "Hemisphere"  </item>
+        <item> "Imperative"  </item>
+        <item> "Nocturnal"  </item>
+        <item> "Obscure"  </item>
+        <item> "Unerringly"  </item>
+        <item> "Exhibit"  </item>
+        <item> "Dilute"  </item>
+        <item> "Resilient"  </item>
+        <item> "Dune"  </item>
+        <item> "Photosynthesis"  </item>
+        <item> "Concentration"  </item>
+        <item> "Spiny"  </item>
+        <item> "Conserve"  </item>
+        <item> "Deliberately"  </item>
+        <item> "Intellectual"  </item>
+        <item> "Overwhelm"  </item>
+        <item> "Passive"  </item>
+        <item> "Pastime"  </item>
+        <item> "Reluctant"  </item>
+        <item> "Impulse"  </item>
+        <item> "Ancient"  </item>
+        <item> "Grandeur"  </item>
+        <item> "Remand"  </item>
+        <item> "Renovation"  </item>
+        <item> "Chariot"  </item>
+        <item> "Mime"  </item>
+        <item> "Rugged"  </item>
+        <item> "Stringent"  </item>
+        <item> "Carve"  </item>
+        <item> "Commuter"  </item>
+        <item> "Monetary"  </item>
+        <item> "Plod"  </item>
+        <item> "Sprawl"  </item>
+        <item> "Encompass"  </item>
+        <item> "Excavate"  </item>
+        <item> "Inscribe"  </item>
+        <item> "Mythology"  </item>
+        <item> "Livestock"  </item>
+        <item> "Reed"  </item>
+        <item> "Accompany"  </item>
+        <item> "Evoke"  </item>
+        <item> "Stereotype"  </item>
+        <item> "Culminate"  </item>
+        <item> "Frailty"  </item>
+        <item> "Illusion"  </item>
+        <item> "Portray"  </item>
+        <item> "Prop"  </item>
+        <item> "Slapstick"  </item>
+        <item> "Corporeal"  </item>
+        <item> "Administer"  </item>
+        <item> "Rampant"  </item>
+        <item> "Stem"  </item>
+        <item> "Vacancy"  </item>
+        <item> "Overburden"  </item>
+        <item> "Deteriorate"  </item>
+        <item> "Placebo"  </item>
+        <item> "Raft"  </item>
+        <item> "Breeze"  </item>
+        <item> "Endeavor"  </item>
+        <item> "Enroll"  </item>
+        <item> "Hone"  </item>
+        <item> "Resort"  </item>
+        <item> "Botany"  </item>
+        <item> "Afloat"  </item>
+        <item> "Personalized"  </item>
+        <item> "Conglomerate"  </item>
+        <item> "Consistently"  </item>
+        <item> "Endorsement"  </item>
+        <item> "Fleeting"  </item>
+        <item> "Outperform"  </item>
+        <item> "Staple"  </item>
+        <item> "Confer"  </item>
+        <item> "Boon"  </item>
+        <item> "Coincide"  </item>
+        <item> "Confront"  </item>
+        <item> "Impose"  </item>
+        <item> "Interact"  </item>
+        <item> "Statistic"  </item>
+        <item> "Susceptible"  </item>
+        <item> "Undergo"  </item>
+        <item> "Absence"  </item>
+        <item> "Dire"  </item>
+        <item> "Discrepancy"  </item>
+        <item> "Equality"  </item>
+        <item> "Inordinate"  </item>
+        <item> "Invaluable"  </item>
+        <item> "Necessitate"  </item>
+        <item> "Recreation"  </item>
+        <item> "Terrain"  </item>
+        <item> "Unwieldy"  </item>
+        <item> "Impassable"  </item>
+        <item> "Accessible"  </item>
+        <item> "Aisle"  </item>
+        <item> "Auditory"  </item>
+        <item> "Fidget"  </item>
+        <item> "Incorporate"  </item>
+        <item> "Manipulate"  </item>
+        <item> "Obstruction"  </item>
+        <item> "Inquisitive"  </item>
+        <item> "Remedial"  </item>
+        <item> "Curriculum"  </item>
+        <item> "Clamp"  </item>
+        <item> "Infringement"  </item>
+        <item> "Ransack"  </item>
+        <item> "Specifically"  </item>
+        <item> "Incandescent"  </item>
+        <item> "Filament"  </item>
+        <item> "Perspiration"  </item>
+        <item> "Adage"  </item>
+        <item> "Aviation"  </item>
+        <item> "Inflexibility"  </item>
+        <item> "Disparate"  </item>
+        <item> "Indispensable"  </item>
+        <item> "Inexplicable"  </item>
+        <item> "Culmination"  </item>
+
+
+    </string-array>
+
+    <string-array name="IELTS_translation">
+
+
+        <item> "Protection from harm"  </item>
+        <item> "A strong effect"  </item>
+        <item> "Harmful stuff contaminating an environment"  </item>
+        <item> "Unpleasantly rough, unkind"  </item>
+        <item> "Eat, drink, use up"  </item>
+        <item> "Part or feature of something"  </item>
+        <item> "A foreign country"  </item>
+        <item> "A style or method of cooking"  </item>
+        <item> "A part of a mixture"  </item>
+        <item> "A distinguishing trait, quality, or property"  </item>
+        <item> "Specific details or circumstances"  </item>
+        <item> "Overall quality or character as seen or judged by people in general"  </item>
+        <item> "Flaw, fault"  </item>
+        <item> "The state of being extremely poor"  </item>
+        <item> "Prevent an action or process"  </item>
+        <item> "Acceptable in quantity or quality, enough"  </item>
+        <item> "To pay someone something in exchange for something is lost or damaged"  </item>
+        <item> "Very important"  </item>
+        <item> "Just, only"  </item>
+        <item> "Easily perceived or understood"  </item>
+        <item> "A rapid spread or increase in the occurrence of something"  </item>
+        <item> "Make smaller or less in amount, degree, or size"  </item>
+        <item> "Having hidden difficulty"  </item>
+        <item> "Open to attack or damage"  </item>
+        <item> "Change or cause to change"  </item>
+        <item> "An advantage or profit gained from something"  </item>
+        <item> "Planned or carried out with great care"  </item>
+        <item> "Anything that can be used to prove something"  </item>
+        <item> "Absolutely necessary or important, essential"  </item>
+        <item> "To make or hold stable, firm, or steadfast"  </item>
+        <item> "To give something in order to achieve something together with other people"  </item>
+        <item> "Extremely interesting or charming"  </item>
+        <item> "Represent something as being better, or worse than it really is"  </item>
+        <item> "The use of such movements to express thought, emotion, etc."  </item>
+        <item> "Funny, or making you laugh"  </item>
+        <item> "Combine or cause to combine to form a single entity"  </item>
+        <item> "Important, famous"  </item>
+        <item> "A person who watches at a show, game, or other event"  </item>
+        <item> "The place where something happens"  </item>
+        <item> "A group of people marching in ceremony, celebration, or protest"  </item>
+        <item> "A disadvantage or problem"  </item>
+        <item> "Being effective without wasting time or effort or expense"  </item>
+        <item> "To provide (someone) with necessary materials or supplies"  </item>
+        <item> "Goods transported by truck, train, ship, or aircraft"  </item>
+        <item> "The act or process of introducing new ideas, devices, or methods"  </item>
+        <item> "Very great in degree : very strong"  </item>
+        <item> "To move faster : to gain speed"  </item>
+        <item> "Something that encourages a person to do something or to work harder"  </item>
+        <item> "A usually good quality or feature that someone or something has"  </item>
+        <item> "A person or thing that brings something into existence"  </item>
+        <item> "An act or action"  </item>
+        <item> "A person who has studied a subject for a long time and knows a lot about it"  </item>
+        <item> "To end (something, such as an argument) by reaching an agreement"  </item>
+        <item> "Have enough money to pay for"  </item>
+        <item> "Devote (time, effort, or oneself) to a particular task or purpose."  </item>
+        <item> "A way of behaving that shows a willingness to obey rules or orders"  </item>
+        <item> "Having exceptional talent or natural ability"  </item>
+        <item> "Average in size or amount : neither too much nor too little"  </item>
+        <item> "Very great or intense."  </item>
+        <item> "Highly developed and complex"  </item>
+        <item> "To show or reveal (something) to others for the first time"  </item>
+        <item> "Capable of being done or used, workable"  </item>
+        <item> "To travel on a boat or ship to a number of places as a vacation"  </item>
+        <item> "Sudden, violent movements of air or water, a state of confusion, violence, or disorder"  </item>
+        <item> "Consistently good in quality or performance; able to be trusted"  </item>
+        <item> "Continuing for an extended period or without interruption"  </item>
+        <item> "The process of keeping heat, sound, or electricity from spreading"  </item>
+        <item> "Excessive pride in or admiration of one's own appearance or achievements"  </item>
+        <item> "To say or write something as an answer to a question or request"  </item>
+        <item> "To gather or acquire (something) gradually as time passes"  </item>
+        <item> "Become adjusted to new conditions"  </item>
+        <item> "To officially decide (something) especially because of evidence or facts : to establish (something) exactly or with authority"  </item>
+        <item> "The process of turning from liquid into vapor"  </item>
+        <item> "An ornamental border of threads left loose or formed into tassels or twists"  </item>
+        <item> "Producing a large amount of something"  </item>
+        <item> "To grow or develop successfully"  </item>
+        <item> "To plan and do (something, such as an activity)"  </item>
+        <item> "Willingness to accept feelings, habits, or beliefs that are different from your own"  </item>
+        <item> "Of or relating to a situation in which people or groups are trying to win a contest or be more successful than others"  </item>
+        <item> "Accept or admit the existence or truth of"  </item>
+        <item> "A state of feeling sad"  </item>
+        <item> "Diligent and hard-working"  </item>
+        <item> "Make (someone or something) look or feel younger, fresher, or more lively"  </item>
+        <item> "The action of clearing a wide area of trees"  </item>
+        <item> "The surroundings or conditions in which a person, animal, or plant lives or operates"  </item>
+        <item> "The natural home or environment of an animal, plant, or other organism"  </item>
+        <item> "The sale of goods to the public in relatively small quantities"  </item>
+        <item> "Strong disagreement about something among a large group of people"  </item>
+        <item> "Something that is currently popular or fashionable"  </item>
+        <item> "Give all or a large part of one's time or resources to (a person, activity, or cause)"  </item>
+        <item> "Having or showing the capacity to become or develop into something in the future."  </item>
+        <item> "A sum of money saved or made available for a particular purpose"  </item>
+        <item> "An experienced and trusted adviser"  </item>
+        <item> "Continue to exist"  </item>
+        <item> "To interrupt the normal progress or activity of (something)"  </item>
+        <item> "Produce and discharge (something, especially gas or radiation)"  </item>
+        <item> "Become smaller, fewer, or less; decrease"  </item>
+        <item> "Roughly calculate or judge the value"  </item>
+        <item> "Most important"  </item>
+        <item> "Giving good value or service in relation to the amount of money, time, or effort spent"  </item>
+        <item> "Totally unavoidable"  </item>
+        <item> "Designed for people to live in"  </item>
+        <item> "The action of supervising someone or something"  </item>
+        <item> "A person who takes part in something"  </item>
+        <item> "Make a choice from a range of possibilities"  </item>
+        <item> "To grow or develop quickly"  </item>
+        <item> "To advertise"  </item>
+        <item> "A planned piece of work that has a specific purpose"  </item>
+        <item> "Very serious or dangerous"  </item>
+        <item> "Make (something) visible, typically by uncovering it"  </item>
+        <item> "To make (something, such as a task or action) slow or difficult"  </item>
+        <item> "A part that forms when you tie a piece of rope, string, fabric, etc., to itself or to something else"  </item>
+        <item> "Moving in a smooth and attractive way"  </item>
+        <item> "A formal ceremony or series of acts that is always performed in the same way"  </item>
+        <item> "Destroy by slow consumption"  </item>
+        <item> "To make longer or wider"  </item>
+        <item> " to stop something from reaching its intended destination"  </item>
+        <item> "Anything that nourishes a living being"  </item>
+        <item> "To become worse"  </item>
+        <item> "Something is full of tiny holes or openings or easily penetrated"  </item>
+        <item> "Referred to a person, animal, or plant unable to reproduce"  </item>
+        <item> "Lack of rain"  </item>
+        <item> "Act of releasing gas or radiation"  </item>
+        <item> "To make something easier"  </item>
+        <item> "No substitute or alternative"  </item>
+        <item> "Something that takes place in the daytime or has a daily cycle"  </item>
+        <item> "Suffer or something that remain in existence"  </item>
+        <item> "An achievement that requires great courage, skill, or strength."  </item>
+        <item> "Best or most favorable for a given situation"  </item>
+        <item> "A specific kind of animals or plants that can breed with each other"  </item>
+        <item> "To go in a direction that is away from the place where you should be"  </item>
+        <item> "Things that are very different from each other"  </item>
+        <item> "Very serious"  </item>
+        <item> "A process that has been set up to accomplish a particular goal"  </item>
+        <item> "Less than necessary or normal"  </item>
+        <item> "To burn something with flame or heat"  </item>
+        <item> "Basic truth, theory, rule, belief, or idea"  </item>
+        <item> "A small thin bit of something"  </item>
+        <item> "Containing salt"  </item>
+        <item> "To put up with or allow"  </item>
+        <item> "Without realizing or being aware of one's actions"  </item>
+        <item> "Ability to see clearly with your eyes"  </item>
+        <item> "To compare"  </item>
+        <item> "A piece of something"  </item>
+        <item> "To bind, catch, or involve"  </item>
+        <item> "Introducing or using new ideas or methods"  </item>
+        <item> "The condition of being grossly fat or overweight."  </item>
+        <item> "Relating to the body of a person instead of the mind"  </item>
+        <item> "To chase after someone or something"  </item>
+        <item> "Something that causes a change or a reaction"  </item>
+        <item> "A brand is a product name"  </item>
+        <item> "Very different, strange, or unusual because it comes from a distant country"  </item>
+        <item> "To keep several objects in motion in the air at the same time by repeatedly throwing and catching them"  </item>
+        <item> "A trick"  </item>
+        <item> "Group of actors"  </item>
+        <item> "To show"  </item>
+        <item> "To produce or create"  </item>
+        <item> "The vehicle that produces the power that pulls a train"  </item>
+        <item> "To mark or stamp something"  </item>
+        <item> "First or at the beginning"  </item>
+        <item> "Number of people in a geographic area"  </item>
+        <item> "Hold (someone) closely in one's arms, especially as a sign of affection."  </item>
+        <item> "A natural ability to do something "  </item>
+        <item> "To feel or express great anger"  </item>
+        <item> "Work or operate in a proper or particular way"  </item>
+        <item> "The ability to read and write"  </item>
+        <item> "A flat slab of stone, clay, or wood, used especially for an inscription"  </item>
+        <item> "Something that is a symbol of a feeling, event, etc."  </item>
+        <item> "A person who is very wise"  </item>
+        <item> "To begin to exist"  </item>
+        <item> "To say that (something) will or might happen in the future"  </item>
+        <item> "Any one of the parts into which a word is naturally divided when it is pronounced"  </item>
+        <item> "Of or relating to flowers"  </item>
+        <item> "A circular arrangement of flowers, worn or hung for decoration"  </item>
+        <item> "To rule as king or queen"  </item>
+        <item> "To become known or apparent"  </item>
+        <item> "Tending to remind one of something"  </item>
+        <item> "To make (something) new, fresh, or strong again"  </item>
+        <item> "In a way that attracts or deserves attention"  </item>
+        <item> "Cause (someone) to become unable to move or walk properly"  </item>
+        <item> "To entice or bait someone"  </item>
+        <item> "To hold on to or keep"  </item>
+        <item> "A building at a boarding school, college, or university where students live"  </item>
+        <item> "To try to get or win something (such as a prize or reward) that someone else is also trying to win"  </item>
+        <item> "The place where something begins or ends"  </item>
+        <item> "The act or process of giving someone a reason for doing something"  </item>
+        <item> "A job, activity, etc., that is very suitable for someone"  </item>
+        <item> "Something you can hear"  </item>
+        <item> "The pointed or tapered end of something"  </item>
+        <item> "A connection that fastens things together"  </item>
+        <item> "To cause (someone) to believe that something is true"  </item>
+        <item> "To win or to be common"  </item>
+        <item> "A person who cuts hair, especially men's"  </item>
+        <item> "Having an important or dangerous possible result"  </item>
+        <item> "A drink, especially one other than water"  </item>
+        <item> "To create or form something especially by heating and shaping metal"  </item>
+        <item> "Fly or rise high in the air"  </item>
+        <item> "Done in a planned and deliberate way usually by several or many people"  </item>
+        <item> "A decline in economic, business, or other activity"  </item>
+        <item> "Common in a particular place at a particular time"  </item>
+        <item> "To try to reach the same position, score, etc."  </item>
+        <item> "Able to make choices quickly and confidently"  </item>
+        <item> "Teenage person"  </item>
+        <item> "Evidently or obviously"  </item>
+        <item> "Destroy completely"  </item>
+        <item> "To open or reveal"  </item>
+        <item> "To show that something is real or correct"  </item>
+        <item> "To accomplish or achieve (something)"  </item>
+        <item> "To be present in large numbers or in great quantity"  </item>
+        <item> "Not able to do something"  </item>
+        <item> "Difficult to stand on, move on, or hold because of being smooth, wet, icy, etc."  </item>
+        <item> "A patent is a government document that proves that an invention is yours and yours alone"  </item>
+        <item> "An actor's part in a play, movie, etc."  </item>
+        <item> "The act of looking at things to see how they are similar or different"  </item>
+        <item> "A condition or fact that affects a situation"  </item>
+        <item> "The action of giving someone support, confidence, or hope"  </item>
+        <item> "To mix (things) thoroughly"  </item>
+        <item> "Used and accepted by most people or usual"  </item>
+        <item> "Most important, powerful, or influential"  </item>
+        <item> "To read (something) out loud"  </item>
+        <item> "Done or existing alone"  </item>
+        <item> "Improve or enhance the quality or value"  </item>
+        <item> "Someone at your own level"  </item>
+        <item> "A task or piece of work assigned to someone as part of a job or course of study"  </item>
+        <item> "Spoken rather than written"  </item>
+        <item> "Not giving up"  </item>
+        <item> "To take or get (something) from (something else)"  </item>
+        <item> "To submit a legal accusation, complaint, or request to some official authority"  </item>
+        <item> "The process of being mentally stimulated to do or feel something, especially to do something creative"  </item>
+        <item> "A person who is very sick or injured and needs frequent care"  </item>
+        <item> "A person or organization that puts money into financial schemes, property, etc. with the expectation of achieving a profit."  </item>
+        <item> "The act or process of improving something by removing unwanted substances"  </item>
+        <item> "Money that a bank or business will allow a person to use and then pay back in the future"  </item>
+        <item> "An empty space in which there is no air or other gas"  </item>
+        <item> "Accusing someone (in court) of doing something wrong or illegal and demanding that they pay for it"  </item>
+        <item> "The highness or lowness of a sound"  </item>
+        <item> "To make (something) last or continue for a longer time"  </item>
+        <item> " a device with two or more blades that turn quickly and cause a ship or aircraft to move"  </item>
+        <item> "To lift or move (something) so that one side is higher than another side"  </item>
+        <item> "To cut (something)"  </item>
+        <item> "Very harmful or disastrous"  </item>
+        <item> "An act of asking for information"  </item>
+        <item> "Break or cause to break suddenly and completely"  </item>
+        <item> "An act of towing a vehicle or boat"  </item>
+        <item> "Operating or living or growing in water"  </item>
+        <item> "An impressive display or an ordered series."  </item>
+        <item> "A countless or extremely great number."  </item>
+        <item> "Relating to the earth or its inhabitants"  </item>
+        <item> "All the plants or plant life of a place, taken as a whole"  </item>
+        <item> "Cold-blooded vertebrate typically living on land but breeding in water"  </item>
+        <item> "Something that remains after a part is removed"  </item>
+        <item> "To completely wiped out."  </item>
+        <item> "The variety of plants and animals in a particular  place"  </item>
+        <item> "A half of a sphere or a half of the earth"  </item>
+        <item> "Very important or essential"  </item>
+        <item> "Done, occurring, or active at night."  </item>
+        <item> "Unknown, keep from being seen"  </item>
+        <item> "Without making errors"  </item>
+        <item> "To display for the public"  </item>
+        <item> "To make weaker, thinner or lessen the strength"  </item>
+        <item> "Recovering quickly from damage"  </item>
+        <item> "A sandhill formed by the wind near the sea or in a desert"  </item>
+        <item> "The process by which a green plant turns water and carbon dioxide into food when the plant is exposed to light"  </item>
+        <item> "The act of giving your attention to a single object or activity"  </item>
+        <item> "Having or covered with many sharp, pointed parts"  </item>
+        <item> "To keep (something) safe or from being damaged or destroyed"  </item>
+        <item> "Slowly and carefully : in a way that is not hurried"  </item>
+        <item> "Of or relating to the ability to think in a logical way"  </item>
+        <item> "To affect (someone) very strongly"  </item>
+        <item> "Someone who does not take action but instead let things happen to them"  </item>
+        <item> "An activity that you enjoy doing during your free time"  </item>
+        <item> "Unwilling and hesitant"  </item>
+        <item> "A sudden strong desire to do something"  </item>
+        <item> "Belonging to the very distant past and no longer in existence"  </item>
+        <item> "A great and impressive quality"  </item>
+        <item> "To send (a case) back to another court of law to be tried or dealt with again"  </item>
+        <item> "To make changes and repairs to an old house"  </item>
+        <item> "A two-wheeled horse-drawn vehicle used in ancient warfare and racing."  </item>
+        <item> "A performance done without speaking"  </item>
+        <item> "Having a rough, uneven surface"  </item>
+        <item> "Very strict or severe"  </item>
+        <item> "To make (something, such as a sculpture or design) by cutting off pieces of the material it is made of"  </item>
+        <item> "A person who travels some distance to work on a regular basis."  </item>
+        <item> "Relating to money or currency"  </item>
+        <item> "Walk doggedly and slowly with heavy steps"  </item>
+        <item> "To lie or sit with your arms and legs spread wide apart"  </item>
+        <item> "To include (something) as a part"  </item>
+        <item> "Make (a hole or channel) by digging"  </item>
+        <item> "Write or carve (words or symbols) on something"  </item>
+        <item> "The myths of a particular group or culture"  </item>
+        <item> "Farm animals regarded as an asset"  </item>
+        <item> "A tall, thin grass that grows in wet areas"  </item>
+        <item> "To go somewhere with (someone) : to be a companion for (someone)"  </item>
+        <item> "To bring (a memory, feeling, image, etc.) into the mind"  </item>
+        <item> "An oversimplified  image or idea of a particular type of person or thing"  </item>
+        <item> "Reach a climax or point of highest development"  </item>
+        <item> "The condition of being weak and delicate"  </item>
+        <item> "Something that is false or not real but that seems to be true or real"  </item>
+        <item> "To describe (someone or something) in a particular way"  </item>
+        <item> "To support (something) by placing it against something else or by placing something under it"  </item>
+        <item> "Comedy that involves physical action (such as falling down or hitting people)"  </item>
+        <item> "Relating to a person's body, especially as opposed to their spirit"  </item>
+        <item> "Manage and be responsible for the running of (a business, organization, etc.)"  </item>
+        <item> "Very common or spreading quickly"  </item>
+        <item> "The main body or stalk of a plant or shrub"  </item>
+        <item> "An unoccupied position or job"  </item>
+        <item> "Load (someone) with too many things to carry"  </item>
+        <item> "Become progressively worse"  </item>
+        <item> "A pill or substance that is given to a patient like a drug but that has no physical effect on the patient"  </item>
+        <item> "A flat structure that is used for floating or sailing on water"  </item>
+        <item> "A gentle wind"  </item>
+        <item> "Try hard to do or achieve something"  </item>
+        <item> "Officially register as a member of an institution or a student on a course"  </item>
+        <item> "Sharpen (a blade)"  </item>
+        <item> "A place where people go for vacations"  </item>
+        <item> "A branch of science that deals with plant life"  </item>
+        <item> "Floating in water; not sinking"  </item>
+        <item> "Design or produce (something) to meet someone's individual requirements"  </item>
+        <item> "A large business that is made of different kinds of companies"  </item>
+        <item> "Always acting or behaving in the same way"  </item>
+        <item> "A public or official statement of support or approval"  </item>
+        <item> "Lasting for a very short time"  </item>
+        <item> "To do or perform better than (someone or something)"  </item>
+        <item> "A piece of bent metal or wire pushed through something or clipped over it as a fastening"  </item>
+        <item> "To discuss something important in order to make a decision"  </item>
+        <item> "A thing that is helpful or beneficial"  </item>
+        <item> "Occur at or during the same time"  </item>
+        <item> "Meet (someone) face to face with hostile or argumentative intent"  </item>
+        <item> "Force (something unwelcome or unfamiliar) to be accepted or put in place"  </item>
+        <item> "Communicate or work in relation to each other"  </item>
+        <item> "A fact or piece of data from a study of a large quantity of numerical data."  </item>
+        <item> "Easily affected, influenced, or harmed by something"  </item>
+        <item> "To experience or suffer (something)"  </item>
+        <item> "The state of being away from a place or person"  </item>
+        <item> "(of a situation or event) extremely serious or urgent"  </item>
+        <item> "A difference especially between things that should be the same"  </item>
+        <item> "The quality or state of being equal"  </item>
+        <item> "Going beyond what is usual, normal, or proper"  </item>
+        <item> "Extremely valuable or useful"  </item>
+        <item> "O make (something) necessary"  </item>
+        <item> "Something people do to relax or have fun"  </item>
+        <item> "Land of a particular kind"  </item>
+        <item> "Difficult to carry or move because of its size, shape, or weight"  </item>
+        <item> "Impossible to pass, cross, or travel over"  </item>
+        <item> "Able to be reached or approached"  </item>
+        <item> "A passage where people walk"  </item>
+        <item> "Relating to the sense of hearing"  </item>
+        <item> "Make small movements, especially of the hands and feet"  </item>
+        <item> "To include (something) as part of something else"  </item>
+        <item> "To move or control (something)"  </item>
+        <item> "Something that blocks a road or path"  </item>
+        <item> "Having a desire to know or learn more"  </item>
+        <item> "Done to correct or improve something"  </item>
+        <item> "The courses that are taught by a school, college, etc."  </item>
+        <item> "A device that holds two things firmly together"  </item>
+        <item> "To do something that does not obey or follow (a rule, law, etc.)"  </item>
+        <item> "Go hurriedly through (a place) stealing things and causing damage"  </item>
+        <item> "In a definite and exact way"  </item>
+        <item> "White or glowing because of great heat"  </item>
+        <item> "A thin thread or hair"  </item>
+        <item> "The process of sweating"  </item>
+        <item> "An old and well-known saying that expresses a general truth"  </item>
+        <item> "The flying or operating of aircraft"  </item>
+        <item> "Unwillingness to change or compromise"  </item>
+        <item> "Different from each other"  </item>
+        <item> "Extremely important and necessary"  </item>
+        <item> "Not able to be explained or understood"  </item>
+        <item> "The end or final result of something"  </item>
+
+
+    </string-array>
+
+    <string-array name="IELTS_grammar">
+
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adj."  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adverb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adj."  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Adj"  </item>
+        <item> "Adverb"  </item>
+        <item> "Adj"  </item>
+        <item> "Adj"  </item>
+        <item> "Verb"  </item>
+        <item> "Adj."  </item>
+        <item> "Adj"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adj"  </item>
+        <item> "Noun"  </item>
+        <item> "Adj"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Adj"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adj"  </item>
+        <item> "Verb"  </item>
+        <item> "Adj"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adverb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Adverb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adverb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adverb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Adverb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "adverb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adverb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Verb"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Verb"  </item>
+        <item> "Adverb"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Noun"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Adjective"  </item>
+        <item> "Noun"  </item>
+
+
+
+
+    </string-array>
+
+    <string-array name="IELTS_pronunciation">
+
+        <item> "De·fense"  </item>
+        <item> "Im·pact"  </item>
+        <item> "Pol·lu·tion"  </item>
+        <item> "Harsh"  </item>
+        <item> "Con·sume "  </item>
+        <item> "As·pect "  </item>
+        <item> "A·broad"  </item>
+        <item> "Cui·sine"  </item>
+        <item> "In·gre·di·ent"  </item>
+        <item> "Char·ac·ter·is·tic"  </item>
+        <item> "Par·tic·u·lar"  </item>
+        <item> "Rep·u·ta·tion"  </item>
+        <item> "De·fect"  </item>
+        <item> "Pov·er·ty"  </item>
+        <item> "In·hib·it"  </item>
+        <item> "Ad·e·quate"  </item>
+        <item> "Com·pen·sate"  </item>
+        <item> "Cru·cial"  </item>
+        <item> "Mere·ly"  </item>
+        <item> "Ob·vi·ous"  </item>
+        <item> "Ep·i·dem·ic"  </item>
+        <item> "Re·duce"  </item>
+        <item> "Trick·y"  </item>
+        <item> "Vul·ner·a·ble"  </item>
+        <item> "Al·ter"  </item>
+        <item> "Ben·e·fit"  </item>
+        <item> "E·lab·o·rate"  </item>
+        <item> "Ev·i·dence"  </item>
+        <item> "Vi·tal"  </item>
+        <item> "Sta·bi·lize"  </item>
+        <item> "Con·trib·ute"  </item>
+        <item> "Fas·ci·nat·ing"  </item>
+        <item> "Ex·ag·ger·ate"  </item>
+        <item> "Ges·ture"  </item>
+        <item> "Hu·mor·ous"  </item>
+        <item> "Merge"  </item>
+        <item> "Prom·i·nent"  </item>
+        <item> "Spec·ta·tor"  </item>
+        <item> "Ven·ue"  </item>
+        <item> "Pa·rade"  </item>
+        <item> "Draw·back"  </item>
+        <item> "Ef·fi·cient"  </item>
+        <item> "E·quip"  </item>
+        <item> "Freight"  </item>
+        <item> "In·no·va·tion"  </item>
+        <item> "In·tense"  </item>
+        <item> "Ac·cel·er·ate"  </item>
+        <item> "In·cen·tive"  </item>
+        <item> "At·trib·ute"  </item>
+        <item> "Cre·a·tor"  </item>
+        <item> "Deed"  </item>
+        <item> "Schol·ar"  </item>
+        <item> "Set·tle"  </item>
+        <item> "Af·ford·able"  </item>
+        <item> "Ded·i·cate"  </item>
+        <item> "Dis·ci·pline"  </item>
+        <item> "Gift·ed"  </item>
+        <item> "Mod·er·ate"  </item>
+        <item> "Pro·found"  </item>
+        <item> "So·phis·ti·cat·ed"  </item>
+        <item> "Un·veil"  </item>
+        <item> "Vi·a·ble"  </item>
+        <item> "Cruise"  </item>
+        <item> "Tur·bu·lence"  </item>
+        <item> "Re·li·a·ble"  </item>
+        <item> "Sus·tained"  </item>
+        <item> "In·su·la·tion"  </item>
+        <item> "Van·i·ty"  </item>
+        <item> "Re·spond"  </item>
+        <item> "Ac·cu·mu·late"  </item>
+        <item> "A·dapt"  </item>
+        <item> "De·ter·mine"  </item>
+        <item> "E·vap·o·ra·tion"  </item>
+        <item> "Fringe"  </item>
+        <item> "Pro·lif·ic"  </item>
+        <item> "Thrive"  </item>
+        <item> "Con·duct"  </item>
+        <item> "Tol·er·ance"  </item>
+        <item> "Com·pet·i·tive"  </item>
+        <item> "Ac·knowl·edge"  </item>
+        <item> "De·pres·sion"  </item>
+        <item> "In·dus·tri·ous"  </item>
+        <item> "Re·ju·ve·nate"  </item>
+        <item> "De·for·es·ta·tion"  </item>
+        <item> "En·vi·ron·ment"  </item>
+        <item> "Hab·i·tat"  </item>
+        <item> "Re·tail"  </item>
+        <item> "Con·tro·ver·sy"  </item>
+        <item> "Trend"  </item>
+        <item> "De·vote"  </item>
+        <item> "Po·ten·tial"  </item>
+        <item> "Fund"  </item>
+        <item> "Men·tor"  </item>
+        <item> "Per·sist"  </item>
+        <item> "Dis·rupt"  </item>
+        <item> "E·mit"  </item>
+        <item> "De·cline"  </item>
+        <item> "Es·ti·mate"  </item>
+        <item> "Pri·ma·ry"  </item>
+        <item> "Ec·o·nom·i·cal"  </item>
+        <item> "In·ev·i·ta·bly"  </item>
+        <item> "Res·i·den·tial"  </item>
+        <item> "Su·per·vi·sion"  </item>
+        <item> "Par·tic·i·pant"  </item>
+        <item> "Opt"  </item>
+        <item> "Bur·geon"  </item>
+        <item> "Pro·mote"  </item>
+        <item> "Proj·ect"  </item>
+        <item> "A·cute"  </item>
+        <item> "Ex·pose"  </item>
+        <item> "Hind·er"  </item>
+        <item> "Knot"  </item>
+        <item> "Grace·ful"  </item>
+        <item> "Rit·u·al"  </item>
+        <item> "E·rode"  </item>
+        <item> "Ex·tend"  </item>
+        <item> "In·ter·cept"  </item>
+        <item> "Nu·tri·ent"  </item>
+        <item> "De·gen·er·ate"  </item>
+        <item> "Po·rous"  </item>
+        <item> "In·fer·tile"  </item>
+        <item> "Drought"  </item>
+        <item> "E·mis·sion"  </item>
+        <item> "Fa·cil·i·tate"  </item>
+        <item> "Ir·re·place·a·ble"  </item>
+        <item> "Di·ur·nal"  </item>
+        <item> "En·dure"  </item>
+        <item> "Feat"  </item>
+        <item> "Op·ti·mal"  </item>
+        <item> "Spe·cies"  </item>
+        <item> "Stray"  </item>
+        <item> "Di·verse"  </item>
+        <item> "Ex·treme"  </item>
+        <item> "Mech·an·ism"  </item>
+        <item> "Sparse"  </item>
+        <item> "Scorch"  </item>
+        <item> "Prin·ci·ple"  </item>
+        <item> "Wisp"  </item>
+        <item> "Sa·line"  </item>
+        <item> "Tol·er·ate"  </item>
+        <item> "Un·con·scious"  </item>
+        <item> "Vi·sion"  </item>
+        <item> "Con·trast"  </item>
+        <item> "Chunk"  </item>
+        <item> "En·gage"  </item>
+        <item> "In·no·va·tive"  </item>
+        <item> "O·be·si·ty"  </item>
+        <item> "Phys·i·cal"  </item>
+        <item> "Pur·sue"  </item>
+        <item> "Stim·u·lus"  </item>
+        <item> "Brand"  </item>
+        <item> "Ex·ot·ic"  </item>
+        <item> "Jug·gle"  </item>
+        <item> "Stunt"  </item>
+        <item> "Cast"  </item>
+        <item> "Dis·play"  </item>
+        <item> "Gen·er·ate"  </item>
+        <item> "Lo·co·mo·tive"  </item>
+        <item> "Im·print"  </item>
+        <item> "In·i·tial"  </item>
+        <item> "Pop·u·la·tion"  </item>
+        <item> "Em·brace"  </item>
+        <item> "Flair"  </item>
+        <item> "Fume"  </item>
+        <item> "Func·tion"  </item>
+        <item> "Lit·er·a·cy"  </item>
+        <item> "Tab·let"  </item>
+        <item> "To·ken"  </item>
+        <item> "Sage"  </item>
+        <item> "O·rig·i·nate"  </item>
+        <item> "Pre·dict"  </item>
+        <item> "Syl·la·ble"  </item>
+        <item> "Flo·ral"  </item>
+        <item> "Gar·land"  </item>
+        <item> "Reign"  </item>
+        <item> "E·merge"  </item>
+        <item> "Rem·i·nis·cent"  </item>
+        <item> "Re·new"  </item>
+        <item> "No·ta·bly"  </item>
+        <item> "Crip·ple"  </item>
+        <item> "Lure"  </item>
+        <item> "Re·tain"  </item>
+        <item> "Dor·mi·to·ry"  </item>
+        <item> "Com·pete"  </item>
+        <item> "Edge"  </item>
+        <item> "Mo·ti·va·tion"  </item>
+        <item> "Niche"  </item>
+        <item> "Sound"  </item>
+        <item> "Tip"  </item>
+        <item> "Bond"  </item>
+        <item> "Con·vince"  </item>
+        <item> "Pre·vail"  </item>
+        <item> "Bar·ber"  </item>
+        <item> "Se·ri·ous"  </item>
+        <item> "Bev·er·age"  </item>
+        <item> "Forge"  </item>
+        <item> "Soar"  </item>
+        <item> "Con·cert·ed"  </item>
+        <item> "Down·turn"  </item>
+        <item> "Prev·a·lent"  </item>
+        <item> "Catch-up"  </item>
+        <item> "De·ci·sive"  </item>
+        <item> "Ad·o·les·cent"  </item>
+        <item> "Ap·par·ent·ly"  </item>
+        <item> "E·rad·i·cate"  </item>
+        <item> "Un·fold"  </item>
+        <item> "Val·i·date"  </item>
+        <item> "At·tain"  </item>
+        <item> "A·bound"  </item>
+        <item> "In·ca·pa·ble"  </item>
+        <item> "Slip·per·y"  </item>
+        <item> "Pat·ent"  </item>
+        <item> "Role"  </item>
+        <item> "Com·par·i·son"  </item>
+        <item> "Cir·cum·stance"  </item>
+        <item> "En·cour·age·ment"  </item>
+        <item> "Blend"  </item>
+        <item> "Con·ven·tion·al"  </item>
+        <item> "Dom·i·nant"  </item>
+        <item> "Re·cite"  </item>
+        <item> "Sol·i·tar·y"  </item>
+        <item> "En·rich"  </item>
+        <item> "Peer"  </item>
+        <item> "As·sign·ment"  </item>
+        <item> "Ver·bal"  </item>
+        <item> "Per·se·ver·ance"  </item>
+        <item> "De·rive"  </item>
+        <item> "File"  </item>
+        <item> "In·spi·ra·tion"  </item>
+        <item> "In·va·lid"  </item>
+        <item> "In·ves·tor"  </item>
+        <item> "Re·fine·ment"  </item>
+        <item> "Cred·it"  </item>
+        <item> "Vac·u·um"  </item>
+        <item> "Sue"  </item>
+        <item> "Pitch"  </item>
+        <item> "Pro·long"  </item>
+        <item> "Pro·pel·ler"  </item>
+        <item> "Tilt"  </item>
+        <item> "Chop"  </item>
+        <item> "Cat·a·stroph·ic"  </item>
+        <item> "In·quir·y"  </item>
+        <item> "Snap"  </item>
+        <item> "Tow"  </item>
+        <item> "A·quat·ic"  </item>
+        <item> "Ar·ray"  </item>
+        <item> "Myr·i·ad"  </item>
+        <item> "Ter·res·tri·al"  </item>
+        <item> "Veg·e·ta·tion"  </item>
+        <item> "Am·phib·i·an"  </item>
+        <item> "Res·i·due"  </item>
+        <item> "Ob·lit·er·ate"  </item>
+        <item> "Bi·o·di·ver·si·ty"  </item>
+        <item> "Hem·i·sphere"  </item>
+        <item> "Im·per·a·tive"  </item>
+        <item> "Noc·tur·nal"  </item>
+        <item> "Ob·scure"  </item>
+        <item> "Un·err·ing·ly"  </item>
+        <item> "Ex·hib·it"  </item>
+        <item> "Di·lute"  </item>
+        <item> "Re·sil·ient"  </item>
+        <item> "Dune"  </item>
+        <item> "Pho·to·syn·the·sis"  </item>
+        <item> "Con·cen·tra·tion"  </item>
+        <item> "Spin·y"  </item>
+        <item> "Con·serve"  </item>
+        <item> "De·lib·er·ate·ly"  </item>
+        <item> "In·tel·lec·tu·al"  </item>
+        <item> "O·ver·whelm"  </item>
+        <item> "Pas·sive"  </item>
+        <item> "Pas·time"  </item>
+        <item> "Re·luc·tant"  </item>
+        <item> "Im·pulse"  </item>
+        <item> "An·cient"  </item>
+        <item> "Gran·deur"  </item>
+        <item> "Re·mand"  </item>
+        <item> "Ren·o·va·tion"  </item>
+        <item> "Char·i·ot"  </item>
+        <item> "Mime"  </item>
+        <item> "Rug·ged"  </item>
+        <item> "Strin·gent"  </item>
+        <item> "Carve"  </item>
+        <item> "Com·mut·er"  </item>
+        <item> "Mon·e·tar·y"  </item>
+        <item> "Plod"  </item>
+        <item> "Sprawl"  </item>
+        <item> "En·com·pass"  </item>
+        <item> "Ex·ca·vate"  </item>
+        <item> "In·scribe"  </item>
+        <item> "My·thol·o·gy"  </item>
+        <item> "Live·stock"  </item>
+        <item> "Reed"  </item>
+        <item> "Ac·com·pa·ny"  </item>
+        <item> "E·voke"  </item>
+        <item> "Ster·e·o·type"  </item>
+        <item> "Cul·mi·nate"  </item>
+        <item> "Frail·ty"  </item>
+        <item> "Il·lu·sion"  </item>
+        <item> "Por·tray"  </item>
+        <item> "Prop"  </item>
+        <item> "Slap·stick"  </item>
+        <item> "Cor·po·re·al"  </item>
+        <item> "Ad·min·is·ter"  </item>
+        <item> "Ramp·ant"  </item>
+        <item> "Stem"  </item>
+        <item> "Va·can·cy"  </item>
+        <item> "O·ver·bur·den"  </item>
+        <item> "De·te·ri·o·rate"  </item>
+        <item> "Pla·ce·bo"  </item>
+        <item> "Raft"  </item>
+        <item> "Breeze"  </item>
+        <item> "En·deav·or"  </item>
+        <item> "En·roll"  </item>
+        <item> "Hone"  </item>
+        <item> "Re·sort"  </item>
+        <item> "Bot·a·ny"  </item>
+        <item> "A·float"  </item>
+        <item> "Per·son·al·ized"  </item>
+        <item> "Con·glom·er·ate"  </item>
+        <item> "Con·sis·tent·ly"  </item>
+        <item> "En·dorse·ment"  </item>
+        <item> "Fleet·ing"  </item>
+        <item> "Out·per·form"  </item>
+        <item> "Sta·ple"  </item>
+        <item> "Con·fer"  </item>
+        <item> "Boon"  </item>
+        <item> "Co·in·cide"  </item>
+        <item> "Con·front"  </item>
+        <item> "Im·pose"  </item>
+        <item> "In·ter·act"  </item>
+        <item> "Sta·tis·tic"  </item>
+        <item> "Sus·cep·ti·ble"  </item>
+        <item> "Un·der·go"  </item>
+        <item> "Ab·sence"  </item>
+        <item> "Dire"  </item>
+        <item> "Dis·crep·an·cy"  </item>
+        <item> "E·qual·i·ty"  </item>
+        <item> "In·or·di·nate"  </item>
+        <item> "In·val·u·a·ble"  </item>
+        <item> "Ne·ces·si·tate"  </item>
+        <item> "Rec·re·a·tion"  </item>
+        <item> "Ter·rain"  </item>
+        <item> "Un·wield·y"  </item>
+        <item> "Im·pass·a·ble"  </item>
+        <item> "Ac·ces·si·ble"  </item>
+        <item> "Aisle"  </item>
+        <item> "Au·di·to·ry"  </item>
+        <item> "Fidg·et"  </item>
+        <item> "In·cor·po·rate"  </item>
+        <item> "Ma·nip·u·late"  </item>
+        <item> "Ob·struc·tion"  </item>
+        <item> "In·quis·i·tive"  </item>
+        <item> "Re·me·di·al"  </item>
+        <item> "Cur·ric·u·lum"  </item>
+        <item> "Clamp"  </item>
+        <item> "In·fringe·ment"  </item>
+        <item> "Ran·sack"  </item>
+        <item> "Spe·cif·i·cal·ly"  </item>
+        <item> "In·can·des·cent"  </item>
+        <item> "Fil·a·ment"  </item>
+        <item> "Per·spi·ra·tion"  </item>
+        <item> "Ad·age"  </item>
+        <item> "A·vi·a·tion"  </item>
+        <item> "In·flex·i·bil·i·ty"  </item>
+        <item> "Dis·pa·rate"  </item>
+        <item> "In·dis·pen·sa·ble"  </item>
+        <item> "In·ex·pli·ca·ble"  </item>
+        <item> "Cul·mi·na·tion"  </item>
+
+    </string-array>
+
+    <string-array name="IELTS_example1">
+
+        <item> "They put up a good defense, but the city ultimately fell to the invaders."  </item>
+        <item> "Could the rise of robots have a negative impact on employment?"  </item>
+        <item> "There is a very high level of pollution in the rivers"  </item>
+        <item> "Despite the harsh conditions of his childhood, the support of his family made it a happy one."  </item>
+        <item> "The man consumed the entire bag of popcorn by himself."  </item>
+        <item> "My favorite aspect of living in the countryside is the atmosphere of calm."  </item>
+        <item> "If you're going to go on vacation abroad, you need a passport."  </item>
+        <item> "The hotel's restaurant serves international cuisine."  </item>
+        <item> "Working hard and loving what you do are key ingredients for success."  </item>
+        <item> "One of my brother's greatest characteristics is his fearlessness."  </item>
+        <item> "Performing such a challenging task requires very particular skills."  </item>
+        <item> "She has a reputation for being rather irresponsible."  </item>
+        <item> "The store replaced my TV because it had a defect."  </item>
+        <item> "The number of children living in poverty decreased last year."  </item>
+        <item> "Investment in this country is inhibited by the unstable political climate."  </item>
+        <item> "The national health service was far from adequate."  </item>
+        <item> "The price of the item has been reduced to compensate for a defect."  </item>
+        <item> "The country is going through a crucial moment in its development."  </item>
+        <item> "A job is not merely a means to earn a living."  </item>
+        <item> "It is obvious that you don't care at all about my feelings."  </item>
+        <item> "The spread of the disease reached epidemic dimensions this week."  </item>
+        <item> "We need to install speed bumps to reduce the speed of the cars on this street."  </item>
+        <item> "It's a very tricky problem, but I think there are a number of things you can do."  </item>
+        <item> "Old people are particularly vulnerable members of our society."  </item>
+        <item> "The government had to alter its foreign policy."  </item>
+        <item> "He was given the benefit of the doubt."  </item>
+        <item> "She made elaborate preparations for the party."  </item>
+        <item> "There is considerable evidence that global warming is real."  </item>
+        <item> "Her help is vital to the success of this plan."  </item>
+        <item> "The government's efforts to stabilize prices have not succeeded."  </item>
+        <item> "The state contributed €5 million to repair the damage caused by the earthquake."  </item>
+        <item> "Have you read Dan Brown's new book? It's fascinating."  </item>
+        <item> "It seems to me that she has a tendency to exaggerate."  </item>
+        <item> "We communicated with each other by a gesture."  </item>
+        <item> "She always sees the humorous side of a situation instead of getting depressed about things."  </item>
+        <item> "The two banks merged to form one large institution."  </item>
+        <item> "He quickly became prominent in the music industry."  </item>
+        <item> "About eighty thousand spectators packed into the stadium last night."  </item>
+        <item> "Can we go to a different venue?"  </item>
+        <item> "The team and its fans paraded down the street."  </item>
+        <item> "The only drawback to my apartment in New York was it had no bathtub."  </item>
+        <item> "Our company provides the most efficient Internet service in the city."  </item>
+        <item> "The teacher equipped the students with goggles and rubber gloves for the experiment."  </item>
+        <item> "Freight was piling up in the port due to the dockworkers' strike."  </item>
+        <item> "Technological innovation is the key to tackling the problem of climate change."  </item>
+        <item> "We've been suffering under an intense heat wave for days."  </item>
+        <item> "Removing more trees that are planted accelerates climate change."  </item>
+        <item> "The company offers its employees financial incentives to work in more isolated areas of the country."  </item>
+        <item> "I won't deny that physical attributes are important when choosing a potential partner."  </item>
+        <item> "The creators of the vaccine were praised for ages."  </item>
+        <item> "A person should be judged more by their deeds than their words."  </item>
+        <item> "Scholars believe that the ancient city of Troy is in modern-day Turkey."  </item>
+        <item> "They should settle their differences and be friends again."  </item>
+        <item> "I couldn't find any affordable meal at that fancy restaurant."  </item>
+        <item> "My neighbors decided to dedicate their time to cleaning up the neighborhood."  </item>
+        <item> "Miss Wilder, how do you maintain proper discipline in your classroom?"  </item>
+        <item> "Her chemistry professor saw that she was a truly gifted scientist."  </item>
+        <item> "Mediterranean countries are known for their moderate climate"  </item>
+        <item> "I didn't expect to touch on such profound ideas in a chemistry class."  </item>
+        <item> "We use a sophisticated technique of biological water purification"  </item>
+        <item> "In March, the government will unveil its new strategy for tackling climate change."  </item>
+        <item> "While offering free products can attract customers, it's not a viable business plan."  </item>
+        <item> "We cruised from Florida to California, passing through the Panama Canal."  </item>
+        <item> "Political and social turbulence is on the rise in anticipation of the national elections."  </item>
+        <item> "I need to sell my car and buy something newer and more reliable."  </item>
+        <item> "She resorts to games in order to sustain her students' interest when teaching math."  </item>
+        <item> "Our cottage doesn't have insulation because we're only here in the summer."  </item>
+        <item> "Stephanie's vanity wouldn't allow her to be seen in public while she was recovering from her accident."  </item>
+        <item> "Wait until I call your name before you respond to my question."  </item>
+        <item> "As a percussionist, Pedro was always accumulating all kinds of instruments."  </item>
+        <item> "We need to be willing to adapt our business strategy as times change."  </item>
+        <item> "The school board determined the best way to distribute the funds to all the programs the school offered."  </item>
+        <item> "The water flowing into the lake has been insufficient to replace what is lost to evaporation."  </item>
+        <item> "I really like the fringe on your sweater."  </item>
+        <item> "A prolific author [=an author who writes many books]"  </item>
+        <item> "Plants that thrive [=grow well] in the desert"  </item>
+        <item> "The police are conducting an investigation into last week's robbery."  </item>
+        <item> "Tolerance is essential in a diverse community."  </item>
+        <item> "It is a very competitive job market. [=a situation in which a lot of people are trying to get jobs]"  </item>
+        <item> "She acknowledged that her opponent had won, but she wouldn't acknowledge her loss."  </item>
+        <item> "She has been undergoing treatment for severe/deep depression."  </item>
+        <item> "I'm sure he'll go far in life because he's so industrious."  </item>
+        <item> "Each candidate claims to have a plan to rejuvenate the sagging economy."  </item>
+        <item> "The boom in the industry resulted in a severe deforestation of the area."  </item>
+        <item> "How do the plants survive in such a hostile environment?"  </item>
+        <item> "The jungles of Madagascar are the lemur's only natural habitat."  </item>
+        <item> "There is government support for merchants who work in retail and wholesale."  </item>
+        <item> "The comedian stirred up controversy with his comments about obese people."  </item>
+        <item> "He's always up on the latest fashion trends."  </item>
+        <item> "Montse devoted years to developing the vaccine in her laboratory."  </item>
+        <item> "Doctors are excited about the new drug's potential benefits."  </item>
+        <item> "Kevin administers a fund for children's cancer research."  </item>
+        <item> "He needed a mentor to teach him about the world of politics."  </item>
+        <item> "She had turned him down for a date before, but he persisted and asked her again."  </item>
+        <item> "We were going to have a picnic but the rain disrupted our plans."  </item>
+        <item> "Manny was shocked to learn that the moon does not emit light."  </item>
+        <item> "The sale of cigarettes has declined for the third consecutive quarter."  </item>
+        <item> "The finance department estimates that there will be a 10% loss this year."  </item>
+        <item> "The primary cause of the protests was corruption in the government."  </item>
+        <item> "The family ended up looking further outside the city for a more economical apartment."  </item>
+        <item> "Inevitably, you will have to pay off your credit card debt before trying to buy a house."  </item>
+        <item> "Dagoberto moved into an apartment in a residential area next to the university where he's studying."  </item>
+        <item> "The bridge was built under the supervision of a prominent engineer."  </item>
+        <item> "We have a great lineup of speakers and participants for our conference in London this summer."  </item>
+        <item> "He usually orders strawberry ice cream but opted for chocolate this time."  </item>
+        <item> "The city has burgeoned in recent years under the leadership of Mayor Grant."  </item>
+        <item> "The company is promoting their new product."  </item>
+        <item> "The health project will be implemented next year."  </item>
+        <item> "The priest suffered acute embarrassment when he was caught reading "Lolita" by Nabokov."  </item>
+        <item> "To avoid exposing yourself to computer threats, never click on links to files from strangers."  </item>
+        <item> "I can see you're busy, so I won't hinder you any longer."  </item>
+        <item> "Two of the most important knots to learn are the figure-eight and the bowline."  </item>
+        <item> "The graceful movements of a ballerina"  </item>
+        <item> "Scars marked his face from ritual cuttings done in his tribe."  </item>
+        <item> "Different types of rock will normally erode at vastly different rates."  </item>
+        <item> "His popularity extends from city to city"  </item>
+        <item> "Intelligence agencies intercepted a series of telephone calls"  </item>
+        <item> "Blood is the ﬂuid responsible for the circulation of nutrients."  </item>
+        <item> "The mad cow disease caused many unfortunate cows to degenerate, forcing many to avoid eating beef."  </item>
+        <item> "The police found a porous dead body in the middle of the city."  </item>
+        <item> "My wife and I tried very hard to have children, but apparently she's infertile."  </item>
+        <item> "Many peasants died during the drought. "  </item>
+        <item> "Many companies are trying to reduce the emission of greenhouse gases"  </item>
+        <item> "It was to facilitate my studies that I came here."  </item>
+        <item> "He is irreplaceable in her heart, she feels pampered, spoiled and loved."  </item>
+        <item> "Picas are diurnal, active throughout the year, and have a characteristic call, chickck-chickck."  </item>
+        <item> "I cannot endure that noise a moment longer."  </item>
+        <item> "Writing that whole report in one night was quite a feat."  </item>
+        <item> "If one really wants to go for optimal health the answer is the more the better."  </item>
+        <item> "All European domestic cattle belong to the same species."  </item>
+        <item> "Don't stray from the main point of the question."  </item>
+        <item> "The surface of Mars is remarkably diverse."  </item>
+        <item> "They are living in extreme poverty."  </item>
+        <item> "We have developed some new mechanisms for tracking our service to individual customers"  </item>
+        <item> "Helen wore a wig to hide her sparse hair."  </item>
+        <item> "Direct sunlight will scorch the plant's leaves."  </item>
+        <item> "The competition is based on the principle of fair play."  </item>
+        <item> "By the morning, there was just a wisp [=bit] of snow left on the ground."  </item>
+        <item> "I was dehydrated, so the doctor put a saline solution in my IV."  </item>
+        <item> "Racist or sexist behavior will not be tolerated."  </item>
+        <item> "Old habits will sometimes be resurrected unconsciously."  </item>
+        <item> "Say the word Australia and a vision of beaches and blue seas immediately springs to mind."  </item>
+        <item> "The contrast in weather between New York and Rio de Janeiro in January could not be starker."  </item>
+        <item> "Just as Guillermina stepped out of the building, a chunk of concrete fell right in front of her."  </item>
+        <item> "They have been accused of engaging in smuggling."  </item>
+        <item> "Thanks to its innovative design, the new car model combines style and speed."  </item>
+        <item> "Childhood obesity is an increasingly common problem in this country."  </item>
+        <item> "The program is designed to address both physical and emotional health."  </item>
+        <item> "The criminal is being pursued by police."  </item>
+        <item> "The pay raise was a stimulus for production."  </item>
+        <item> "The company claims that its product is better than the leading brand. [=the brand that sells the most]"  </item>
+        <item> "Her stories are peppered with exotic characters with extravagant names."  </item>
+        <item> "There was a man juggling in the square, trying to get money from tourists."  </item>
+        <item> "In one of his most famous stunts, Jackie Chan leaps across an alley and lands on a fire escape."  </item>
+        <item> "After the final performance, the director threw a party for the cast."  </item>
+        <item> "Family photographs were displayed on the wall."  </item>
+        <item> "Selling food will increase the club's ability to generate revenue/income."  </item>
+        <item> "Diesel locomotives began to supersede steam locomotive in the fifties"  </item>
+        <item> "That look of grief would be imprinted on her mind forever."  </item>
+        <item> "My initial surprise was soon replaced by delight."  </item>
+        <item> "A large group of the American populace attends church regularly."  </item>
+        <item> "She saw them embrace on the station platform."  </item>
+        <item> "To foster her flair for acting, my sister went to drama school."  </item>
+        <item> "I saw her a week after they'd had the argument and she was still fuming."  </item>
+        <item> "I couldn't get my brain to function or coordinate my muscles."  </item>
+        <item> "If you can read this sentence and write one of your own, you possess literacy."  </item>
+        <item> "They put up a marble tablet in memory of his father."  </item>
+        <item> "The government has only made a token gesture towards helping the unemployed."  </item>
+        <item> "Through all of his life experiences, he became a sage to others."  </item>
+        <item> "No one knows when or where the idea (first) originated"  </item>
+        <item> "All the local forecasters are predicting rain for this afternoon."  </item>
+        <item> "The word doctor has two syllables."  </item>
+        <item> "A floral display/design [=a display/design that has pictures of flowers]"  </item>
+        <item> "One flower makes no garland."  </item>
+        <item> "The king reigned in a time of peace and prosperity."  </item>
+        <item> "The facts emerged after a lengthy investigation."  </item>
+        <item> "His singing is reminiscent of the crooners of the '40s and '50s."  </item>
+        <item> "This discussion has renewed my hope of finding a solution to the problem."  </item>
+        <item> "The whole town was excited about the visit, notably the children."  </item>
+        <item> "Cripple is an old-fashioned word. People now usually use the less offensive term disabled person."  </item>
+        <item> "He attempted to lure her away from husband and family."  </item>
+        <item> "A landlord may retain part of your deposit if you break the lease."  </item>
+        <item> "He was reading a math textbook in the dormitory."  </item>
+        <item> "You will have to compete with others for this position."  </item>
+        <item> "He made us all nervous by standing so close to the edge of the cliff."  </item>
+        <item> "Some students need motivation to help them through school."  </item>
+        <item> "Simon Lane quickly found his niche as a busy freelance model maker."  </item>
+        <item> "Liza was so frightened she couldn't make a sound."  </item>
+        <item> "The sleeves covered his hands to the tips of his fingers."  </item>
+        <item> "The experience created a very special bond between us."  </item>
+        <item> "I managed to convince myself that I was doing the right thing."  </item>
+        <item> "The families of the victims may rest assured that justice will prevail."  </item>
+        <item> "The barber gave him the haircut for free after he accidentally shaved his sideburns."  </item>
+        <item> "It was a bad crash, but his condition is not serious."  </item>
+        <item> "I experience a sharp sensation in my teeth when sipping a hot beverage."  </item>
+        <item> "The Prime Minister is determined to forge a good relationship with America's new leader."  </item>
+        <item> "If you're lucky, a splendid golden eagle may soar into view."  </item>
+        <item> "Martin Parry, the author of the report, says it's time for concerted action by world leaders."  </item>
+        <item> "It was the last government's policies that caused the downturn the country is going through now."  </item>
+        <item> "Those teaching methods are still prevalent at some schools."  </item>
+        <item> "I stopped and waited for her to catch up."  </item>
+        <item> "I stood there wondering what to do, but my sister was more decisive and immediately went to the phone."  </item>
+        <item> "He spent his adolescent years playing guitar in the church band."  </item>
+        <item> "We were surprised when their apparently [=seemingly, ostensibly] happy marriage ended after only two years."  </item>
+        <item> "The disease has now been completely eradicated."  </item>
+        <item> "She never unfolded her secret to anyone and took it to her grave."  </item>
+        <item> "This discovery seems to validate the claims of popular astrology."  </item>
+        <item> "She refused to let the injury keep her from attaining her goal of being in the Olympics."  </item>
+        <item> "Talent and creativity abound in this environment, and everything is done to encourage them."  </item>
+        <item> "He seemed incapable of understanding the seriousness of the situation."  </item>
+        <item> "Motorists were warned to beware of slippery conditions."  </item>
+        <item> "P and G applied for a patent on its cookies."  </item>
+        <item> "She has just landed the lead role in The Young Vic's latest production."  </item>
+        <item> "Its recommendations are based on detailed comparisons between the public and private sectors"  </item>
+        <item> "I can't imagine a circumstance in/under which I would do that."  </item>
+        <item> "With support and encouragement from their parents, the students organized a fundraiser."  </item>
+        <item> "Put the soap and water in a pan and leave to stand until they have blended."  </item>
+        <item> "Astronomers discovered a star with an oxygen atmosphere, defying conventional theories."  </item>
+        <item> "She's been one of the most dominant players in women's tennis for years."  </item>
+        <item> "Kirsten closed her eyes and began to recite "The Road Not Taken," by Robert Frost."  </item>
+        <item> "Paul was a shy, pleasant, solitary man."  </item>
+        <item> "Their lives were enriched by the experience. = It was a life-enriching experience for them."  </item>
+        <item> "His academic peers [=people in the same grade or level of school]"  </item>
+        <item> "The assessment for the course involves written assignments and practical tests."  </item>
+        <item> "He scored well on the verbal section of the test."  </item>
+        <item> "His perseverance was rewarded: after many rejections, he finally found a job."  </item>
+        <item> "Most of the Romance languages are similar because they all derive from Latin."  </item>
+        <item> "I filed for divorce on the grounds of adultery a few months later."  </item>
+        <item> "Where does the inspiration for your art come from?"  </item>
+        <item> "Jeremy can't work because he has to look after his invalid father."  </item>
+        <item> "The main investor in the project is the French bank Credit National."  </item>
+        <item> "Through the refinement process, all transgenic material has been removed."  </item>
+        <item> "Your credit card is no longer valid."  </item>
+        <item> "A pump was used to create a vacuum inside the bottle."  </item>
+        <item> "Some people sue over the most minor things."  </item>
+        <item> "The piano and organ were tuned to the same pitch"  </item>
+        <item> "Additives are used to prolong the shelf life of packaged food."  </item>
+        <item> "Detectives confirmed some of his injuries were caused by a boat propeller."  </item>
+        <item> "She tilted the mirror and began to comb her hair."  </item>
+        <item> "She's in the kitchen chopping vegetables."  </item>
+        <item> "A tidal wave caused by the earthquake hit the coast causing catastrophic damage."  </item>
+        <item> "He made some inquiries and discovered she had gone to the Continent."  </item>
+        <item> "She gripped the pipe with both hands, trying to snap it in half."  </item>
+        <item> "I had to ask my brother to tow my car because my battery died when I was on the highway."  </item>
+        <item> "Fish are aquatic animals."  </item>
+        <item> "There is a vast array of literature on the topic."  </item>
+        <item> "They offered no solution for all our myriad problems."  </item>
+        <item> "Increased ultraviolet radiation may disrupt terrestrial ecosystems."  </item>
+        <item> "The local vegetation is flourishing as a result of the recent rains"  </item>
+        <item> "Amphibians live partly in water and partly on land."  </item>
+        <item> "The grill was covered in a greasy residue from the hamburgers."  </item>
+        <item> "The heavy rain obliterated all footprints."  </item>
+        <item> "A high level of biodiversity is desirable."  </item>
+        <item> "A half of the earth, usually as divided into northern and southern halves by the equator, or into western and eastern halves by an imaginary line passing through the poles."  </item>
+        <item> "It's imperative that I speak with Jeremiah immediately"  </item>
+        <item> "Most owls are nocturnal."  </item>
+        <item> "His origins and parentage are obscure."  </item>
+        <item> "A large, soft tomato, unerringly aimed, stuck the chairman in the face."  </item>
+        <item> "Tom asked Mary if she'd go to Goya's art exhibit."  </item>
+        <item> "The hiring of the new CEO diluted the power of the company's president."  </item>
+        <item> "If you're rough on your toys, the ones that don't break are resilient."  </item>
+        <item> "The dunes along the Oregon coast stretch for more than 40 miles."  </item>
+        <item> "Photosynthesis uses sunlight, carbon dioxide and water to produce oxygen, glucose and water."  </item>
+        <item> "All that noise is disturbing my concentration."  </item>
+        <item> "Large spines and some spiny catfish grow as large as a man are as effective as stilettos."  </item>
+        <item> "The organization works to conserve [=save] our national forests/wildlife."  </item>
+        <item> "The blaze was started deliberately."  </item>
+        <item> "No community living in full accordance with that code could fail to reach a high moral and intellectual level."  </item>
+        <item> "Grief overwhelmed her. = She was overwhelmed by grief. [=she felt grief so strongly that she was unable to think or act in a normal way]"  </item>
+        <item> "His passive acceptance of the decision surprised us."  </item>
+        <item> "Her favorite pastime [=hobby] is gardening."  </item>
+        <item> "He might agree but seems reluctant to admit it."  </item>
+        <item> "He has to learn to control his impulses."  </item>
+        <item> "The people in the village still observe the ancient customs/traditions of their ancestors."  </item>
+        <item> "His paintings capture the beauty and grandeur of the landscape."  </item>
+        <item> "If a person who is accused of a crime is remanded in custody, or if they are on remand, they are kept in prison until their trial. If they are remanded on bail, they are released and told to return to the court at a later date, when their trial will take place."  </item>
+        <item> "It's an old factory that has been renovated as office space."  </item>
+        <item> "The soldiers raced each other in chariots around the Coliseum."  </item>
+        <item> "A form of entertainment in which a performer plays a character or tells a story without words by using body movements and facial expressions"  </item>
+        <item> "You would not survive a day in this rugged terrain without proper footwear, said the guide."  </item>
+        <item> "Stringent safety rules have been adopted in connection with waste disposal."  </item>
+        <item> "He carved his name on/into the table."  </item>
+        <item> "The train is usually full of commuters at this time of day."  </item>
+        <item> "A crime committed for monetary gain"  </item>
+        <item> "We plodded through mud that came up past our ankles."  </item>
+        <item> "One punch sent him sprawling to the floor. [=caused him to fall to the floor in a violent and uncontrolled way]"  </item>
+        <item> "My interests encompass [=cover, include] a broad range of topics."  </item>
+        <item> "It had taken three months to excavate down to the bare rock."  </item>
+        <item> "She inscribed her own name on the textbook."  </item>
+        <item> "He studies Greek and Roman mythology."  </item>
+        <item> "We're fattening the livestock up for slaughter."  </item>
+        <item> "The reeds along the edge of a pond"  </item>
+        <item> "She will accompany me to the store."  </item>
+        <item> "His photographs evoke the isolation and solitude of the desert."  </item>
+        <item> "This reinforces the stereotype that blondes have no brains."  </item>
+        <item> "The investigation culminated with several arrests."  </item>
+        <item> "The frailty of my health has kept me from traveling as much in recent years."  </item>
+        <item> "Was that really magic or just an illusion?"  </item>
+        <item> "The lawyer portrayed his client as a victim of child abuse."  </item>
+        <item> "A worker put a prop against the wall of the tunnel to keep it from falling."  </item>
+        <item> "Except for very basic slapstick, humor travels uncertainly."  </item>
+        <item> "He is very religious; the corporeal world has little interest for him."  </item>
+        <item> "Now that her father is sick, Ruth administers his finances."  </item>
+        <item> "The mayor promised to put a stop to the rampant crime that plagued the city"  </item>
+        <item> "He cut the plant off at the base of the stem."  </item>
+        <item> "School administrators are trying to fill vacancies before the beginning of the school year."  </item>
+        <item> "Why overburden yourself when people are offering to help?"  </item>
+        <item> "The weather gradually deteriorated [=worsened] as the day went on."  </item>
+        <item> "She was only given a placebo, but she claimed she got better - that's the placebo effect."  </item>
+        <item> "Sailing across the Atlantic on a raft was an adventure."  </item>
+        <item> "There is a breath of spring in the gentle breeze."  </item>
+        <item> "The school endeavors to teach students to be good citizens."  </item>
+        <item> "She enrolled in a salsa class at the arts center."  </item>
+        <item> "She honed her language skills by reading and writing every day."  </item>
+        <item> "We decided to vacation on our own instead of going to a resort."  </item>
+        <item> "Tyrone learned about different types of leaves when he studied botany in college."  </item>
+        <item> "Our boat remained/stayed afloat through the storm."  </item>
+        <item> "The computer program can be personalized to fit your needs."  </item>
+        <item> "Our small company must compete with the big conglomerates."  </item>
+        <item> "The parliamentarian has consistently denied the accusations of corruption brought against him."  </item>
+        <item> "The committee gave its endorsement to the plan to remodel the community center."  </item>
+        <item> "Sandy's arrival made Ben smile for a fleeting moment."  </item>
+        <item> "The company's stock outperformed its competitors."  </item>
+        <item> "I pricked my finger when I tried removing the staples from my homework"  </item>
+        <item> "You cannot confer with your fellow contestants on this question."  </item>
+        <item> "The grant the organization got has been a boon for underprivileged children in the city."  </item>
+        <item> "The population increase coincided with rapid industrial growth."  </item>
+        <item> "At that point, we'll have to confront an important decision."  </item>
+        <item> "The judge imposed a life sentence on the defendant."  </item>
+        <item> "They're quiet children who don't interact much."  </item>
+        <item> "The statistics show that teenagers are involved in a high percentage of traffic accidents."  </item>
+        <item> "The operation had left her susceptible to infection."  </item>
+        <item> "You may have to undergo disappointment and failure before experiencing success."  </item>
+        <item> "I submitted the monthly financial reports in your absence."  </item>
+        <item> "Even the smallest mistake could have dire [=terrible, dreadful] consequences."  </item>
+        <item> "My accountant discovered a discrepancy in my banking records."  </item>
+        <item> "All people have the right to equality of opportunity."  </item>
+        <item> "They spend an inordinate amount of time talking."  </item>
+        <item> "I was able to gain invaluable experience over that year."  </item>
+        <item> "Reduction in government spending will necessitate further cuts in public services."  </item>
+        <item> "The country club offers a golf course and a lake for various forms of recreation."  </item>
+        <item> "He trekked across some of the most inhospitable terrains in the world."  </item>
+        <item> "This machine is too unwieldy to move."  </item>
+        <item> "The river's broad mudflats were thought completely impassable."  </item>
+        <item> "The museum is easily accessible by public transport."  </item>
+        <item> "The aisle was floored with ancient bricks."  </item>
+        <item> "The brain responds to auditory and visual stimuli."  </item>
+        <item> "The kids had started to fidget."  </item>
+        <item> "The party leaders voted to incorporate her into the planning committee."  </item>
+        <item> "As a politician, he knows how to manipulate public opinion."  </item>
+        <item> "He was arrested for obstruction of a police officer in the execution of his duty."  </item>
+        <item> "She could see inquisitive faces looking out from the windows next door."  </item>
+        <item> "He is already walking normally and doing remedial exercises."  </item>
+        <item> "Teachers feel that the present curriculum is too narrow."  </item>
+        <item> "The mechanic replaced the hose and secured it with a clamp."  </item>
+        <item> "Doing business with them was an infringement of our agreement."  </item>
+        <item> "Robbers ransacked the apartment looking for money."  </item>
+        <item> "We haven't specifically targeted school children."  </item>
+        <item> "An incandescent light bulb [=a light bulb whose light is produced by the glow of a wire heated by an electric current]"  </item>
+        <item> "The working part of a filament lamp is a metal coil which glows white hot."  </item>
+        <item> "Perspiration dampened her face and neck."  </item>
+        <item> "According to the old adage, a picture is worth a thousand words."  </item>
+        <item> "The civil aviation minister ordered all the planes to be grounded."  </item>
+        <item> "Joyce was irritated by the inflexibility of her colleagues."  </item>
+        <item> "The five experiments gave quite disparate results."  </item>
+        <item> "It is universally acknowledged that trees are indispensable to us."  </item>
+        <item> "This theory makes sense of an otherwise inexplicable phenomenon."  </item>
+        <item> "The show marked the culmination of months of hard work."  </item>
+
+    </string-array>
+
+    <string-array name="IELTS_example2">
+
+        <item> "Attack is the best form of defense."  </item>
+        <item> "Brace yourselves for impact."  </item>
+        <item> "Our cities create serious pollution problems."  </item>
+        <item> "I really spoke too harshly."  </item>
+        <item> "This engine consumes the most oil."  </item>
+        <item> "Education is one of the most essential aspects of life."  </item>
+        <item> "People often simply abandon their pets when they go abroad."  </item>
+        <item> "I like Korean cuisine. "  </item>
+        <item> "Mary mixed the ingredients to make a cake."  </item>
+        <item> "A green color is a characteristic of that type of apple."  </item>
+        <item> "Do you have anything particular in mind? "  </item>
+        <item> "She has a bad reputation."  </item>
+        <item> "The product is guaranteed to be free from defects."  </item>
+        <item> "The poverty of her childhood stands in total contrast to her life in Hollywood."  </item>
+        <item> "Don't allow your past failure to inhibit your attempt at winning this time."  </item>
+        <item> "The garden hasn't been getting adequate water."  </item>
+        <item> "She used her good looks to compensate her lack of intelligence."  </item>
+        <item> "The ability to separate out reusable elements from other waste is crucial."  </item>
+        <item> "There is no point in merely repeating what we've done before."  </item>
+        <item> "It's obvious Tom doesn't like Mary."  </item>
+        <item> "A flu epidemic is sweeping through Moscow."  </item>
+        <item> "Can you please reduce the volume of the music?"  </item>
+        <item> "It's a tricky word to learn"  </item>
+        <item> "The troops were in a vulnerable position."  </item>
+        <item> "The kids became ill and we had to alter our holiday plans."  </item>
+        <item> "We can all benefit from his experience."  </item>
+        <item> "This elaborate deception fooled his family for ages."  </item>
+        <item> "I was careful to not leave any evidence."  </item>
+        <item> "International trade is vital for healthy economies."  </item>
+        <item> "The pilots were able to stabilize the airplane and land safely."  </item>
+        <item> "He contributed fifty dollars to the project."  </item>
+        <item> "The book gives a fascinating insight into Mrs. Blair's character."  </item>
+        <item> "I've told you a million times not to exaggerate."  </item>
+        <item> "Sometimes gestures are more expressive than speech."  </item>
+        <item> "His behavior at the party was so humorous that I could not help laughing."  </item>
+        <item> "The day slowly merged into the night."  </item>
+        <item> "Kelley and her husband hired a prominent lawyer, Abbe Lowell."  </item>
+        <item> "A spectator threw the ball back to the players."  </item>
+        <item> "The hotel is an ideal venue for conferences and business meetings."  </item>
+        <item> "She had a constant parade of young men coming to visit her."  </item>
+        <item> "The drawback of driving to work is having to find a parking space."  </item>
+        <item> "We all need to use energy more efficiently."  </item>
+        <item> "It's going to cost $4 million to equip the hospital."  </item>
+        <item> "The freight truck caused a cloud of dust as it went down the dirt road."  </item>
+        <item> "We must encourage innovation if the company is to remain competitive."  </item>
+        <item> "The economic pressures on small businesses are intense."  </item>
+        <item> "The company's sales growth rate is accelerating this year."  </item>
+        <item> "Rewarding a child's progress will give them an incentive to learn."  </item>
+        <item> "Imagination is an attribute of human beings."  </item>
+        <item> "I recognize God as the Creator of man."  </item>
+        <item> "I'm not easily shocked, but his deed was too disgusting."  </item>
+        <item> "Fray Luis de Leon was a poet and scholar who preferred to live a solitary life."  </item>
+        <item> "The date for the wedding is finally settled."  </item>
+        <item> "The restaurant serves good food at affordable prices."  </item>
+        <item> "The nuns dedicated their lives to doing good for the community."  </item>
+        <item> "The soldiers showed perfect discipline under the fire of the enemy."  </item>
+        <item> "Her brother is a gifted artist, but he has some psychological problems."  </item>
+        <item> "The restaurant on the corner has fresh food for moderate prices."  </item>
+        <item> "There is a profound difference between having a plan and having a purpose."  </item>
+        <item> "I never enjoy reading sophisticated novels."  </item>
+        <item> "Our new logo is to be unveiled next week."  </item>
+        <item> "He could not suggest a viable alternative/option."  </item>
+        <item> "Judy enjoyed seeing polar bears while cruising through the Baffin Bay."  </item>
+        <item> "The era was characterized by political and cultural turbulence."  </item>
+        <item> "He's a reliable source of information in the organization."  </item>
+        <item> "The runner struggled hard to sustain the pace."  </item>
+        <item> "Insulation may reduce the danger of pipes bursting in winter."  </item>
+        <item> "She described her accomplishments without exaggeration or vanity."  </item>
+        <item> "I think she liked what I said, but she didn't like the way I responded."  </item>
+        <item> "As people accumulate more wealth, they tend to spend a greater proportion of their incomes."  </item>
+        <item> "If you aren't able to adapt, technology might not be the best field for you."  </item>
+        <item> "The CEO and all the company managers determined the changes they would make to the company's mission statement"  </item>
+        <item> "The Salton Sea would slowly evaporate and life would return to normal, for a while."  </item>
+        <item> "They pitched their tents at the fringe of the open fields."  </item>
+        <item> "She is a prolific writer of novels and short stories."  </item>
+        <item> "Business is thriving. [=booming]"  </item>
+        <item> "The dean tasked me to conduct experiments with new teaching methods."  </item>
+        <item> "Religious tolerance"  </item>
+        <item> "This gives the company a competitive advantage over its rivals."  </item>
+        <item> "I acknowledge (the fact) that I hurt you, and for that I am sorry."  </item>
+        <item> "I saw the news and now I'm in a terrible depression."  </item>
+        <item> "A good head and an industrious hand are worth gold in any land."  </item>
+        <item> "Her efforts to rejuvenate her career have so far been unsuccessful."  </item>
+        <item> "Continued deforestation of the rainforest has caused many animals to lose their natural habitat."  </item>
+        <item> "Protecting the environment is every man's responsibility."  </item>
+        <item> "Some animals are in danger because their native habitat is being destroyed."  </item>
+        <item> "We should be able to retail most of these products to overseas customers."  </item>
+        <item> "The band sparked controversy by mentioning the drugs they consumed in their songs."  </item>
+        <item> "Teachers are trying to reverse the general trend [=tendency] of lower test scores."  </item>
+        <item> "It can't be denied that we need to devote more resources to this problem."  </item>
+        <item> "The firm has identified 60 potential customers at home and abroad."  </item>
+        <item> "The hospital has set up a special fund to buy new equipment."  </item>
+        <item> "She was a friend and mentor to many young actors."  </item>
+        <item> "Strength shows, not only in the ability to persist but the ability to start over."  </item>
+        <item> "The barking dogs disrupted my sleep."  </item>
+        <item> "When minerals such as quartz are heated, they emit light."  </item>
+        <item> "Oil demand declined significantly in the US."  </item>
+        <item> "I estimate the value of the house is around two million dollars."  </item>
+        <item> "If the primary infection is not treated further outbreaks may occur."  </item>
+        <item> "There are unnecessary steps in the production line; we need to design a more economical process."  </item>
+        <item> "The team is so bad this year, they will inevitably lose their next game."  </item>
+        <item> "A law banning loudspeakers in residential neighborhoods at night"  </item>
+        <item> "She's responsible for the supervision of a large staff."  </item>
+        <item> "Each participant was to pay his own expenses."  </item>
+        <item> "People still opt for monogamy and marriage."  </item>
+        <item> "My confidence began to burgeon later in life."  </item>
+        <item> "The celebrity's visit did a lot to promote the restaurant."  </item>
+        <item> "Government support will be essential if the project is to succeed."  </item>
+        <item> "The report has caused acute embarrassment to the government."  </item>
+        <item> "Details of some of the company's corrupt practices have been exposed."  </item>
+        <item> "I wouldn't hinder your work, I'm going swimming right now."  </item>
+        <item> "Something is a knot when you reserve it, a scar when it's opened."  </item>
+        <item> "The tall graceful form of a woman appeared at the top of the stairs."  </item>
+        <item> "A tragic death interrupts their annual ritual"  </item>
+        <item> "Battery acid had eroded the engine."  </item>
+        <item> "Can you extend your visit a few days longer?"  </item>
+        <item> "The fighter plane was ordered to intercept an aircraft that had entered the country's airspace"  </item>
+        <item> "You need more nutrients in your diet."  </item>
+        <item> "Will too much freedom make children degenerate?"  </item>
+        <item> "Since the small nation had porous borders, it was an easy target for invasion."  </item>
+        <item> "The soil proved too infertile to sustain real pasture or arable crops."  </item>
+        <item> "During droughts, farmers are barely able to make out a living."  </item>
+        <item> "The emission of gases such as carbon dioxide should be stabilized at their present level."  </item>
+        <item> "Our trade and development program will facilitate our progress."  </item>
+        <item> "The government has an irreplaceable responsibility in enhancing the social justice."  </item>
+        <item> "I could only spare two or three hours, from my numerous diurnal occupations."  </item>
+        <item> "She wants to make sure her legacy will endure."  </item>
+        <item> "The Eiffel Tower is a remarkable feat of engineering."  </item>
+        <item> "To make the optimal decision, I visually scan as many as possible of the various alternatives."  </item>
+        <item> "The chimpanzee is an endangered species."  </item>
+        <item> "The kind lady's house was always open to strays."  </item>
+        <item> "Today's businesses are increasingly complex and diverse."  </item>
+        <item> "He has extreme opinions when it comes to politics."  </item>
+        <item> "Scientists are studying the body's mechanisms for controlling weight."  </item>
+        <item> "Low wages and a sparse population have kept housing prices very low."  </item>
+        <item> "Roast the peanuts while being careful not to scorch them."  </item>
+        <item> "In principle, I agree with the idea, but in practice, it's not always possible."  </item>
+        <item> "There was a wisp of a smile [=a very slight smile] on her lips."  </item>
+        <item> "I bought a saline solution to clean my eyes."  </item>
+        <item> "We don't tolerate smoking in the library."  </item>
+        <item> "Sometimes he hurts people's feelings unconsciously."  </item>
+        <item> "She suffered a temporary loss of vision after being struck on the head."  </item>
+        <item> "We compared and contrasted the two characters of the story."  </item>
+        <item> "Each blow of the hammer removed a great chunk of plaster."  </item>
+        <item> "Only 10% of American adults engage in regular exercise."  </item>
+        <item> "She was an imaginative and innovative manager."  </item>
+        <item> "Overeating is surely the main cause of obesity."  </item>
+        <item> "People experience differences in physical and mental capability depending on the time of day."  </item>
+        <item> "She decided to pursue her studies after obtaining her first degree."  </item>
+        <item> "The dog responded to the stimulus of the ringing bell."  </item>
+        <item> "What brand are those jeans you are wearing?"  </item>
+        <item> "The anthropologist's house was filled with artifacts and exotic plants."  </item>
+        <item> "It can be tough trying to juggle a career and a family."  </item>
+        <item> "Tom Cruise has performed his own stunts for Mission Impossible 2, defying warnings from professionals."  </item>
+        <item> "Part of the movie's success lies in the strength of the supporting cast (= the actors who were not playing the main parts)."  </item>
+        <item> "His trophies were proudly displayed in a backlit cabinet."  </item>
+        <item> "The new development will generate 1,500 new jobs."  </item>
+        <item> "A diesel locomotive"  </item>
+        <item> "My braces made an imprint on the inside of my lips."  </item>
+        <item> "Initial reports say that seven people have died, though this has not yet been confirmed."  </item>
+        <item> "He had the support of large sections of the local populace."  </item>
+        <item> "He leaned over to embrace the child."  </item>
+        <item> "She has a natural flair for languages."  </item>
+        <item> "She's still fuming about/over/at not being invited to the party."  </item>
+        <item> "I need money to be able to function as an artist."  </item>
+        <item> "The program is intended to promote adult literacy among people who have had very little schooling."  </item>
+        <item> "He also studied the ancient stone tablets from around the pyramids."  </item>
+        <item> "The hotel waived her lodging fees as a token of gratitude for helping to apprehend the thief"  </item>
+        <item> "The sage of the Indian tribe was able to heal the badly wounded man."  </item>
+        <item> "These stories originated during earlier times."  </item>
+        <item> "She claims that she can predict future events."  </item>
+        <item> "The first syllable of the word doctor is given stress."  </item>
+        <item> "I really like the floral pattern on these curtains. – I don't like them. I think they're hideous."  </item>
+        <item> "The bride was wearing a garland of flowers on her head."  </item>
+        <item> "She reigned over her kingdom for many decades."  </item>
+        <item> "She has emerged as a leading contender in the field."  </item>
+        <item> "The decor was reminiscent of a municipal arts-and-leisure center."  </item>
+        <item> "I need to renew my passport this year."  </item>
+        <item> "These changes will hit ordinary people and notably working women."  </item>
+        <item> "He returned from war a cripple."  </item>
+        <item> "The criminal was lured out of his hideout with a fake offer and detained."  </item>
+        <item> "The TV show has retained its popularity for many years."  </item>
+        <item> "We had a lot of parties in our dormitory in our freshman year."  </item>
+        <item> "She competed against students from around the country."  </item>
+        <item> "If you put the glass that close to the edge of the table, it will fall."  </item>
+        <item> "There seems to be a lack of motivation among the staff."  </item>
+        <item> "I found a niche for myself after high school."  </item>
+        <item> "There was a splintering sound as the railing gave way."  </item>
+        <item> "Hurricane Andrew has passed over the southern tip of Florida."  </item>
+        <item> "I felt a strong spiritual bond with him."  </item>
+        <item> "He convinced me that the story was true."  </item>
+        <item> "The general told his troops that they would prevail against the enemy."  </item>
+        <item> "He goes to the barber every Sunday to get his beard shaved."  </item>
+        <item> "Crime is an increasingly serious problem in a modern society."  </item>
+        <item> "Alcoholic beverages are served in the hotel lounge."  </item>
+        <item> "The blacksmith forged an axe using an ancient technique."  </item>
+        <item> "The two sheets of flame clashed, soaring hundreds of feet high."  </item>
+        <item> "They made a concerted effort to make her feel welcome."  </item>
+        <item> "In times of economic downturn, consumers tend to spend less."  </item>
+        <item> "Severe periodontitis is one of the most prevalent diseases among humans."  </item>
+        <item> "John began the season better than me but I have fought to catch up."  </item>
+        <item> "You must be decisive and persistent to succeed in this competitive field."  </item>
+        <item> "My new fantasy book is targeted at adolescents."  </item>
+        <item> "Apparently, the girls are not at all amused by the whole business."  </item>
+        <item> "They are already battling to eradicate illnesses such as malaria and tetanus."  </item>
+        <item> "The facts started to unfold before them."  </item>
+        <item> "Experiments that are designed to validate [=prove] a hypothesis"  </item>
+        <item> "Jim is halfway to attaining his pilot's license."  </item>
+        <item> "A business in which opportunities abound [=a business in which there are many opportunities]"  </item>
+        <item> "She seemed incapable of taking decisions."  </item>
+        <item> "The floor has been polished and it's slippery."  </item>
+        <item> "It sued Petrocorp for patent infringement."  </item>
+        <item> "Shakespearean women's roles were originally written to be played by men."  </item>
+        <item> "There are no previous statistics for comparison."  </item>
+        <item> "If our business is to survive, we must be able to adapt to changing circumstances."  </item>
+        <item> "Thanks for your advice and encouragement."  </item>
+        <item> "She blends psychology and crime in her new novel."  </item>
+        <item> "Katy was raised in a conventional family with a working father, a mother at home, and one brother."  </item>
+        <item> "The university has/plays a dominant [=major] role in the local economy."  </item>
+        <item> "He recited the poem/passage with great feeling."  </item>
+        <item> "Hey often have a lonely and solitary life to lead."  </item>
+        <item> "How can I enrich my vocabulary?"  </item>
+        <item> "His engaging personality made him popular with his peers."  </item>
+        <item> "The students were given a homework assignment."  </item>
+        <item> "She was a victim of verbal abuse. [=harsh and insulting language]"  </item>
+        <item> "Perseverance is required to perfect just about any skill."  </item>
+        <item> "All of his ideas regarding the new design derived from specific requests from users."  </item>
+        <item> "A number of them have filed formal complaints against the police."  </item>
+        <item> "Her early childhood provided (the) inspiration for her first novel."  </item>
+        <item> "She cares for her invalid husband at home."  </item>
+        <item> "We've been courting some large investors to fund this new project."  </item>
+        <item> "Oil refinement"  </item>
+        <item> "You can ask a dealer for a discount whether you pay cash or buy on credit."  </item>
+        <item> "A vacuum chamber"  </item>
+        <item> "People injured in accidents caused by the defective tire have threatened to sue."  </item>
+        <item> "Her voice has a high pitch."  </item>
+        <item> "Mr. Chester said foreign military aid was prolonging the war."  </item>
+        <item> "A 79-year-old Norwegian pilot who safely landed his light aircraft after its propeller dropped off has been praised for his coolness."  </item>
+        <item> "Leonard tilted his chair back on two legs and stretched his long body."  </item>
+        <item> "When we went camping, we chopped wood for the fire."  </item>
+        <item> "The minister warned that if war broke out, it would be catastrophic for the whole world."  </item>
+        <item> "After a brief inquiry about the Christmas holiday, he returned to the subject of music."  </item>
+        <item> "The woodsman snapped a few twigs and threw them on the fire."  </item>
+        <item> "The car was towed to the nearest garage after the accident."  </item>
+        <item> "If you prefer your volleyball net in a pool, it sounds like you're into aquatic sports."  </item>
+        <item> "An array of bathing suits on the beach."  </item>
+        <item> "There is a myriad of possibilities."  </item>
+        <item> "Terrestrial latitude is measured in degrees north or south from the equator."  </item>
+        <item> "The dense vegetation of the jungle"  </item>
+        <item> "The void lord is a large amphibian alien."  </item>
+        <item> "The divorce left a residue of pain in the family."  </item>
+        <item> "The memory was so painful that he obliterated it from his mind"  </item>
+        <item> "Biodiversity continues to decline each year. "  </item>
+        <item> "The United States is in the Northern Hemisphere."  </item>
+        <item> "Immediate action was imperative."  </item>
+        <item> "He bought a new telescope so he could pursue his favorite nocturnal hobby of astronomy."  </item>
+        <item> "His origins and parentage are obscure."  </item>
+        <item> "He has an unerring sense of good taste."  </item>
+        <item> "He hopes to exhibit his paintings in Japan. "  </item>
+        <item> "Diluting the quality of our products."  </item>
+        <item> "The local economy is remarkably resilient."  </item>
+        <item> "We lugged the beach stuff onto the beach, avoiding anything that resembled dune."  </item>
+        <item> "The structure of the leaf allows for carbon dioxide and oxygen to enter and leave the leaf, which is where photosynthesis actually takes place."  </item>
+        <item> "Driving with loud music can lead to a lack of concentration."  </item>
+        <item> "The primary natural resources are spiny lobster, conch, and other shellfish."  </item>
+        <item> "A scientist who is studying ways to conserve [=preserve] biological diversity"  </item>
+        <item> "A gray Toyota van cruised by less than five meters beyond him, its pace slow and deliberate."  </item>
+        <item> "But the intellectual and what is called the spiritual man in him were slumbering as in an infant."  </item>
+        <item> "Her neighbor's kindness overwhelmed her. [=moved her deeply]"  </item>
+        <item> "In her books, women are often portrayed in passive roles."  </item>
+        <item> "Baseball has been a national pastime for years."  </item>
+        <item> "We were reluctant to get involved."  </item>
+        <item> "On impulse, she opened the small crystal box where they'd placed the bone."  </item>
+        <item> "There are several opposing theories regarding the origins of ancient Filipinos."  </item>
+        <item> "They are restoring the hotel to its original/former grandeur."  </item>
+        <item> "The judge remanded the case for further consideration."  </item>
+        <item> "Before starting a kitchen renovation, it is important to make a detailed plan."  </item>
+        <item> "The emperor arrived in a chariot drawn by four white horses."  </item>
+        <item> "A performance was done in mime"  </item>
+        <item> "Randall came back from the Himalayas with lots of photos of the rugged mountains."  </item>
+        <item> "We need more stringent regulations in the financial sector to avoid corruption."  </item>
+        <item> "She carves figures from wood."  </item>
+        <item> "Busy commuters on their way to work"  </item>
+        <item> "I'm broke, so I can't give you any monetary compensation for the job right now."  </item>
+        <item> "I could hear my roommate plodding up the steps to our apartment."  </item>
+        <item> "She tripped and went sprawling into the table."  </item>
+        <item> "The district encompasses most of the downtown area."  </item>
+        <item> "Human remains were found during the excavation."  </item>
+        <item> "His name was inscribed on the trophy."  </item>
+        <item> "According to Greek mythology, the minotaur would only eat human flesh."  </item>
+        <item> "Villagers herded the livestock to high ground to keep them safe during the floods."  </item>
+        <item> "We didn't have fishing lines, so we tried using reeds to catch the fish in the lake."  </item>
+        <item> "Ten adults accompanied the class on their field trip."  </item>
+        <item> "The smell of pumpkin pie evokes memories of Thanksgivings past."  </item>
+        <item> "He doesn't conform to the usual stereotype of the businessman with a dark suit and briefcase."  </item>
+        <item> "Their efforts have culminated in the discovery of a new cancer treatment."  </item>
+        <item> "Hope showed virtually no signs of frailty until she was into her 90's."  </item>
+        <item> "He is under no illusions about the difficulty of the task that lies ahead."  </item>
+        <item> "The author portrays the main character in great detail."  </item>
+        <item> "The truth will stand without a prop."  </item>
+        <item> "And I don't think slapstick is funny."  </item>
+        <item> "There were no moral paradigms to deal with the extra corporeal embryo."  </item>
+        <item> "The UN personnel are there to help administer the territory."  </item>
+        <item> "There is evidence of rampant corruption in the local government."  </item>
+        <item> "The stem of this plant is thin and hollow."  </item>
+        <item> "Thank you for your letter. Unfortunately, the vacancy has already been filled."  </item>
+        <item> "It makes no sense, therefore, to overburden people with a whole lot of extraneous information."  </item>
+        <item> "Her health continues to deteriorate. [=decline]"  </item>
+        <item> "Placebo capsules contained liquid paraffin for adults and olive oil for children."  </item>
+        <item> "The survivors were adrift on a raft for six days."  </item>
+        <item> "The scent of the flowers was wafted to us by the breeze."  </item>
+        <item> "They endeavored to create a government that truly serves its people."  </item>
+        <item> "At 19, she enrolled in the university's law school."  </item>
+        <item> "I majored in philosophy so that I could hone my critical thinking skills."  </item>
+        <item> "In the beach resort, the apartments and villas have daily maid service."  </item>
+        <item> "He succeeded his father as Professor of Botany."  </item>
+        <item> "She spent seven days afloat on a raft."  </item>
+        <item> "The children have personalized towels with their names sewn in."  </item>
+        <item> "When the companies merged into a conglomerate, the share value increased more than 20%."  </item>
+        <item> "The quality of this product has been consistently high over the last few years"  </item>
+        <item> "The union has announced its endorsement to one of the candidates for president."  </item>
+        <item> "I made a fleeting visit back home to wish my sister a happy birthday."  </item>
+        <item> "Public school students outperformed their private-school counterparts on the standardized test."  </item>
+        <item> "Use paper clips instead of staples to keep the pages of your thesis together."  </item>
+        <item> "The jury left the courtroom to confer before bringing in their verdict."  </item>
+        <item> "The increased volatility in the stock market has been a boon for brokers."  </item>
+        <item> "I timed my holiday to coincide with the children's school holiday."  </item>
+        <item> "The soldiers were confronted by a group of rebels."  </item>
+        <item> "The court can impose a fine or a prison sentence."  </item>
+        <item> "He learned how to interact with powerful people when he worked for the government."  </item>
+        <item> "Her speech included some revealing statistics about unemployment rates in rural areas."  </item>
+        <item> "Older people are more susceptible to infections."  </item>
+        <item> "Nobody should have to undergo as much hardship as that poor young orphan has."  </item>
+        <item> "The absence of work in the area forced the whole family to move."  </item>
+        <item> "The circumstances are now direr than ever."  </item>
+        <item> "There has always been a / some discrepancy between his public and private image."  </item>
+        <item> "In some countries, black people do not have equality with white people."  </item>
+        <item> "Testing is taking up an inordinate amount of teachers' time."  </item>
+        <item> "His knowledge of the area made him invaluable."  </item>
+        <item> "New safety regulations necessitated adding a railing to the stairs."  </item>
+        <item> "Football is the boys' usual recreation after school."  </item>
+        <item> "The terrain changed quickly from arable land to desert."  </item>
+        <item> "They came panting up to his door with their unwieldy baggage."  </item>
+        <item> "The river formed an impassable barrier for migrating animals."  </item>
+        <item> "The remote desert area is accessible only by helicopter."  </item>
+        <item> "Would you like an aisle seat or would you prefer to be by the window?"  </item>
+        <item> "The patient has damage to the auditory nerve."  </item>
+        <item> "The restless child wouldn't stop fidgeting, so the teacher sent him to the principal's office."  </item>
+        <item> "We shall try to incorporate some of your ideas in our future plan."  </item>
+        <item> "They managed to manipulate us into agreeing to help."  </item>
+        <item> "She had to have surgery to remove an obstruction from her throat."  </item>
+        <item> "He's not by nature an inquisitive person."  </item>
+        <item> "The poorly designed bridge needs remedial work to make It safe."  </item>
+        <item> "Languages are an essential part of the school curriculum."  </item>
+        <item> "Clamp one end of the plank to the edge of the table."  </item>
+        <item> "The committee ruled that the US ban constituted an infringement of free trade."  </item>
+        <item> "They ransacked the whole classroom for their basketball."  </item>
+        <item> "In recent years, doctors have been trained specifically for general practice."  </item>
+        <item> "The meteorite was described as being incandescent after landing on the ground."  </item>
+        <item> "I can see clearly that the filament in the bulb is broken."  </item>
+        <item> "Perspiration cools the skin in hot weather."  </item>
+        <item> "Remember the old adage — buy cheap, buy twice!"  </item>
+        <item> "The major aviation companies need to cut prices if they are to compete with budget airlines."  </item>
+        <item> "It can sew sponge, thin leather with even, smooth inflexibility."  </item>
+        <item> "Scientists are trying to pull together disparate ideas in astronomy."  </item>
+        <item> "She's quite indispensable to the company."  </item>
+        <item> "For some inexplicable reason, he's decided to cancel the project."  </item>
+        <item> "The space race reached its culmination in the first moonwalk."  </item>
+
+    </string-array>
+
+    <string-array name="IELTS_example3">
+
+        <item> "Huge sums of money are spent on national defense."  </item>
+        <item> "Technology has had an irreversible impact on society."  </item>
+        <item> "There is a connection between pollution and the death of trees."  </item>
+        <item> "The weather grew harsh, chilly and unpredictable."  </item>
+        <item> "Many people are unaware of just how much food and drink they consume."  </item>
+        <item> "Dealing with people is the most important aspect of my work."  </item>
+        <item> "He just returned from abroad."  </item>
+        <item> "This village has its own traditional dress, cuisine, folklore, and handicrafts."  </item>
+        <item> "Coconut is a basic ingredient for many curries."  </item>
+        <item> "Bananas have their own characteristic smell."  </item>
+        <item> "What particular type of books do you love to read?"  </item>
+        <item> "Sweden has a reputation for advanced and stylish design."  </item>
+        <item> "The shop owner is selling defected clothes on wholesale."  </item>
+        <item> "The country's main social problem is poverty."  </item>
+        <item> "An unhappy family life may inhibit children's learning."  </item>
+        <item> "There is adequate food for everybody"  </item>
+        <item> "She was not compensated for the damage done to her car."  </item>
+        <item> "Vitamins are crucial for maintaining good health."  </item>
+        <item> "Your mother might seem overbearing, but she's merely being protective"  </item>
+        <item> "By the look of the clouds, it is obvious that it is going to rain soon."  </item>
+        <item> "The girl's giggles were epidemic, and soon the entire gathering was laughing"  </item>
+        <item> "Do nuclear weapons really reduce the risk of war?"  </item>
+        <item> "I'd advise leaving the car here till you go to the university; parking can be tricky in the town center."  </item>
+        <item> "Children are the most vulnerable members of society."  </item>
+        <item> "She went under many plastic surgeries to alter the way she looks."  </item>
+        <item> "There are many benefits of drinking eight glass of water every day."  </item>
+        <item> "Tom's explanation was very elaborate and helped the young students learn easily."  </item>
+        <item> "The clear sky shows no evidence about raining today."  </item>
+        <item> "It is vital that you workout every day."  </item>
+        <item> "The exercise allows you to move and stabilize muscles in the movement."  </item>
+        <item> "Everybody should contribute to the discussion."  </item>
+        <item> "The audience was fascinated by his speech."  </item>
+        <item> "I suspect his claims are not all they seem - he tends to exaggerate."  </item>
+        <item> "She opened her arms wide in an expansive gesture of welcome."  </item>
+        <item> "The film they are watching is delightfully humorous in the best traditions of romantic comedy."  </item>
+        <item> "We can merge our two small businesses into a larger one."  </item>
+        <item> "She was prominent in the fashion industry."  </item>
+        <item> "There were more spectators than I had expected."  </item>
+        <item> "The nightclub provided an intimate venue for her performance."  </item>
+        <item> "After the team won the championship, the city threw/had a parade for them."  </item>
+        <item> "The drawback of having an electric car is its limited range."  </item>
+        <item> "A good teacher can help students learn more efficiently and effectively."  </item>
+        <item> "Our instructor equipped us with scuba gear before we went underwater."  </item>
+        <item> "Cranes were loading the freight on the train to be transported."  </item>
+        <item> "Some of the latest innovations in robotics were showcased at the technology fair."  </item>
+        <item> "Victor put his sunglasses on to shield his eyes from the intense desert sunlight."  </item>
+        <item> "Exposure to the sun can accelerate the aging process."  </item>
+        <item> "As an added incentive, there's a bottle of champagne for the best team."  </item>
+        <item> "Patience is an essential attribute for a teacher."  </item>
+        <item> "He's the creator of a successful cartoon series."  </item>
+        <item> "He was awarded a medal for his brave deeds in the war."  </item>
+        <item> "He is a serious scholar, a genuinely learned man."  </item>
+        <item> "Sometimes siblings are unwilling to settle their differences."  </item>
+        <item> "Day by day electric cars are now being affordable."  </item>
+        <item> "Students dedicate lots of their time in studying."  </item>
+        <item> "Discipline at the military academy was extremely strict."  </item>
+        <item> "She was a gifted teacher who never talked down to her students."  </item>
+        <item> "Even moderate amounts of alcohol can be dangerous."  </item>
+        <item> "Her speech made a profound impact on everyone."  </item>
+        <item> "The scientists developed a sophisticated robot to gather samples from the surface of Mars"  </item>
+        <item> "There are reports that Toyota will unveil a fuel cell car later this year."  </item>
+        <item> "Solar power is now a viable alternative to coal-powered electricity."  </item>
+        <item> "The cruise was advertised as the 'journey of a lifetime."  </item>
+        <item> "The plane hit quite a bit of turbulence during our flight."  </item>
+        <item> "It's not reliable to judge a man only by his looks."  </item>
+        <item> "She was sustained by the unflagging support of his family."  </item>
+        <item> "A professional recording studio needs to have insulation."  </item>
+        <item> "The woman is always feeling after vanity."  </item>
+        <item> "You can rely on him to respond to a challenge."  </item>
+        <item> "The businessman had accumulated an enormous amount of wealth over his lifetime."  </item>
+        <item> "It is really hard for Jim to adapt to the new cold environment."  </item>
+        <item> "Investigators are still trying to determine the cause of the fire."  </item>
+        <item> "When the water is heated it starts to evaporate."  </item>
+        <item> "Annie is wearing a fringe skirt."  </item>
+        <item> "She's a prolific scorer. [=she scores many points/goals]"  </item>
+        <item> "This hardy mountain folk seems to thrive on the cold."  </item>
+        <item> "We conducted an experiment with magnesium in chemistry class."  </item>
+        <item> "They have a policy of zero tolerance for sexual harassment."  </item>
+        <item> "She's extremely competitive and always likes to win."  </item>
+        <item> "Gradually he began to acknowledge his feelings of love towards his mother."  </item>
+        <item> "He was in the depths of despair/depression about losing his job."  </item>
+        <item> "The immigrants in our community are very industrious, and a lot of them eventually establish businesses."  </item>
+        <item> "He tried to rejuvenate himself by performing physical exercises each day."  </item>
+        <item> "Deforestation is destroying large areas of tropical rainforest."  </item>
+        <item> "Pollution has an impact on the environment."  </item>
+        <item> "Paris is a major habitat of artists."  </item>
+        <item> "He works in retail and sells household products."  </item>
+        <item> "Controversy arose over the use of the chemicals on fruit and vegetables."  </item>
+        <item> "Lately, there has been a trend towards hiring younger, cheaper employees."  </item>
+        <item> "We're devoting all of our energy to rebuilding the school."  </item>
+        <item> "My cousin is a potential singer. I'm sure she'll be a star."  </item>
+        <item> "The fund was established to aid the poor."  </item>
+        <item> "My manager is more than a boss; he is a mentor."  </item>
+        <item> "Despite the danger, reporters persist in reporting what is happening in the Middle East."  </item>
+        <item> "A stroke can disrupt the supply of oxygen to the brain."  </item>
+        <item> "The flowers of this plant emit [=give off] a sweet smell."  </item>
+        <item> "The government has failed to reverse the economic decline."  </item>
+        <item> "The painter's estimate for painting the whole house was 1000 dollars."  </item>
+        <item> "The primary reason for moving here was the weather."  </item>
+        <item> "She is an economical housekeeper and feeds her family cheaply."  </item>
+        <item> "Without studying hard he will inevitably fail in the final exams."  </item>
+        <item> "In the same way that an “industrial area” is a place of industry where people work, a residential area is made up of houses and apartment buildings — places where people reside."  </item>
+        <item> "A toddler requires close supervision and firm control at all times."  </item>
+        <item> "All the participants in the cooking contest received a free cookbook."  </item>
+        <item> "I like these two dresses, but I think I'll opt for the pink one."  </item>
+        <item> "When spring comes, everything is renewed, and the plants begin to burgeon."  </item>
+        <item> "They hired a fitness trainer to promote their healthy new yogurt."  </item>
+        <item> "The teacher asked the students to do a science project"  </item>
+        <item> "John's toothache was causing him acute pain."  </item>
+        <item> "She was careful enough not to expose her skin to the sun."  </item>
+        <item> "Their journey was hindered [=impeded, slowed] by snow and high winds."  </item>
+        <item> "She tied the rope in a knot."  </item>
+        <item> "He has become a very graceful dancer."  </item>
+        <item> "Some religions employ ritual more than others."  </item>
+        <item> "Many beaches seem to get smaller and smaller, as the endless wash of the waves begins to erode the fine sand."  </item>
+        <item> "A giraffe extends its neck to get food. "  </item>
+        <item> "He intercepted the ball from reaching to his opponent player."  </item>
+        <item> "The nutrient in the soil acts as a stimulus to growth/to make the plants grow."  </item>
+        <item> "The meeting degenerated into a fighting match."  </item>
+        <item> "Some rocks are more porous than others."  </item>
+        <item> "Infertile soil can't sustain agricultural plant growth."  </item>
+        <item> "It has been the worst drought in the country's history."  </item>
+        <item> "At current emission levels, we will suffer Total Weather Apocalypse by 2050."  </item>
+        <item> "Mobile phones can be used to facilitate language learning."  </item>
+        <item> "Fathers have a unique and irreplaceable role to play in child development."  </item>
+        <item> "Kangaroos are diurnal animals."  </item>
+        <item> "It seemed impossible that anyone could endure such pain."  </item>
+        <item> "It was quite a feat to move that piano by yourself."  </item>
+        <item> "Under optimal conditions, these plants grow quite tall."  </item>
+        <item> "This species of bird now exists only in Brazil."  </item>
+        <item> "Tourists often get lost and stray into dangerous areas."  </item>
+        <item> "India is quite diverse, both politically and religiously."  </item>
+        <item> "The plant is sensitive to extreme heat and cold."  </item>
+        <item> "The bones and muscles are parts of the mechanism of the body."  </item>
+        <item> "Vegetation becomes sparse higher up the mountains."  </item>
+        <item> "My iron got too hot and I scorched my shirt."  </item>
+        <item> "He is an upright man that has never betrayed his principles."  </item>
+        <item> "A blue wisp of cigarette smoke curled in the air."  </item>
+        <item> "He is on a saline drip."  </item>
+        <item> "I will not tolerate any bad kind of behavior in my class."  </item>
+        <item> "He made some writing mistakes unconsciously."  </item>
+        <item> "My vision is not as good as when I was younger."  </item>
+        <item> "Can you contrast between these two fruits?"  </item>
+        <item> "She spends a good chunk of her day on the phone."  </item>
+        <item> "Many retired people engage in volunteer activities."  </item>
+        <item> "Japanese companies have been pumping out plenty of innovative products."  </item>
+        <item> "Sugar and fat can more easily lead to obesity than some other foods."  </item>
+        <item> "No physical contact with other players is allowed in the game."  </item>
+        <item> "He chose to pursue a college degree."  </item>
+        <item> "Books provide children with ideas and a stimulus for play."  </item>
+        <item> "The store sells a variety of shoe brands."  </item>
+        <item> "She travels to all kinds of exotic locations all over the world."  </item>
+        <item> "His father was a circus performer and taught him how to juggle."  </item>
+        <item> "His latest stunt is riding a motorcycle through a ring of flames."  </item>
+        <item> "Dwayne Johnson was one of the cast in The Fate of the Furious movie."  </item>
+        <item> "The display of fireworks on New Year's Eve is a fine spectacle."  </item>
+        <item> "Wind turbines generate electricity for the local community."  </item>
+        <item> "It was like the noise made by a steam locomotive pulling out from a station."  </item>
+        <item> "The spilled wine has left an imprint on the tablecloth."  </item>
+        <item> "Once the initial shock had worn off, I got to like my new hairstyle."  </item>
+        <item> "Many of the city's populace travel to work by train, subway or bus."  </item>
+        <item> "Closing her eyes, she melted into his embrace."  </item>
+        <item> "The kids love listening to Julieta's stories because she has a flair for storytelling."  </item>
+        <item> "All the passengers were fuming at the delay."  </item>
+        <item> "His legs have now stopped to function so he needs to use a wheelchair."  </item>
+        <item> "Literacy among women in the province is still low."  </item>
+        <item> "Ancient stone and clay tablets offer valuable historical records."  </item>
+        <item> "Please accept this gift as a small token of my appreciation."  </item>
+        <item> "He was grateful for his father's sage advice."  </item>
+        <item> "How did the tradition of wearing costumes on Halloween originate?"  </item>
+        <item> "It's impossible to predict the weather accurately."  </item>
+        <item> "Banana is stressed on the second syllable."  </item>
+        <item> "The dress combines stylish lines with an attractive floral print for a classically feminine look."  </item>
+        <item> "She placed a garland of flowers around her neck and head."  </item>
+        <item> "How long did Queen Victoria reign?"  </item>
+        <item> "The flowers emerge in the spring."  </item>
+        <item> "Her outfit is reminiscent of when her mother dressed as a bride."  </item>
+        <item> "When you sleep, your body has a chance to renew itself."  </item>
+        <item> "The house had many drawbacks, most notably its location and price."  </item>
+        <item> "He is cripple and unable to walk on his legs."  </item>
+        <item> "The smell of cookies lured her into the kitchen."  </item>
+        <item> "If you want to retain youthful vigor, you have to take regular exercise."  </item>
+        <item> "Sarah lived in the dormitory during her freshman year."  </item>
+        <item> "Thousands of applicants are competing for the same job."  </item>
+        <item> "If you get too close to a cliff’s edge, you might fall off it."  </item>
+        <item> "I don't have the motivation to exercise. I need to go to a class and do it in a group."  </item>
+        <item> "She finally found her niche as a teacher."  </item>
+        <item> "A doorbell, a fire alarm, a cat's meow, or your brother's snoring — they’re all sounds."  </item>
+        <item> "She showed me the tip of her tongue."  </item>
+        <item> "A daughter's bond with her mother"  </item>
+        <item> "She could not convince him to eat healthy."  </item>
+        <item> "Our football team prevailed [=won] despite the bad weather."  </item>
+        <item> "He is the best barber in this area."  </item>
+        <item> "Doctors said his condition was serious but stable."  </item>
+        <item> "You can order a beverage with your fast food in any of our outlets."  </item>
+        <item> "Forging hooks out of pieces of iron = forging pieces of iron into hooks"  </item>
+        <item> "The plane soared over the city, and houses and cars became smaller and smaller."  </item>
+        <item> "He's making a concerted effort to improve his appearance."  </item>
+        <item> "There's been a downturn in the housing market."  </item>
+        <item> "Smoking is becoming increasingly prevalent among younger women."  </item>
+        <item> "He could not catch-up with her because she was running fast."  </item>
+        <item> "A decisive person acts quickly and often succeeds."  </item>
+        <item> "It is important that an adolescent boy should have an adult in whom he can confide."  </item>
+        <item> "Apparently, it's going to rain today."  </item>
+        <item> "Being a single mother and a businesswoman completely eradicated her spare time."  </item>
+        <item> "If we unfold the table we can fit eight people around it."  </item>
+        <item> "Talking with people who think like you help validate your feelings."  </item>
+        <item> "The cheetah can attain speeds of up to 97 kph."  </item>
+        <item> "Apples abound here all the year round."  </item>
+        <item> "Some birds are physically incapable of flight."  </item>
+        <item> "The floor looks slippery."  </item>
+        <item> "He held a number of patents for his invention of the mobile phone."  </item>
+        <item> "He plays the role of the villain."  </item>
+        <item> "Two apples are basically the same but only different in their colors by comparison."  </item>
+        <item> "He could trust his best friend in any circumstance."  </item>
+        <item> "I  have friends who give me a great deal of encouragement for my marathon run."  </item>
+        <item> "Blend the butter with the sugar and beat until light and creamy."  </item>
+        <item> "He did fit the conventional image of a banker."  </item>
+        <item> "She was a dominant figure in the French film industry."  </item>
+        <item> "She was asked to recite in front of the whole class."  </item>
+        <item> "She took a solitary walk on the beach."  </item>
+        <item> "Enjoyment of sport can enrich every life."  </item>
+        <item> "Teenagers spending time with their peer groups"  </item>
+        <item> "Sometimes he finds it difficult to do the assignments that his school teacher gives him."  </item>
+        <item> "The job requires someone with strong verbal skills. "  </item>
+        <item> "Perseverance means you keep going and never give up."  </item>
+        <item> "They derive enjoyment from leafing through old picture albums."  </item>
+        <item> "He had to file [=submit] dozens of forms to get a loan."  </item>
+        <item> "What better way of finding inspiration for your own garden than by visiting others."  </item>
+        <item> "After having a stroke she became invalid and unable to walk."  </item>
+        <item> "The investor believes that his investment will pay off handsomely soon."  </item>
+        <item> "Older cars inevitably lack the latest safety refinements."  </item>
+        <item> "He bought the furniture on credit."  </item>
+        <item> "The vacuum of outer space"  </item>
+        <item> "If you sue someone, you're accusing them (in court) of doing something wrong or illegal and demanding that they pay for it. Almost every time someone sues, they're looking for money."  </item>
+        <item> "By using her high pitch voice she could break a wine glass."  </item>
+        <item> "He offered her a drink to try to prolong her visit."  </item>
+        <item> "A propeller is a rounded blade that rotates in a circle, helping to move a vehicle by pushing against water or air. A speed boat's propeller moves it forward by spinning against the water."  </item>
+        <item> "The picture on the wall was tilted. [=it was not straight or level]"  </item>
+        <item> "He is chopping wood for the fireplace."  </item>
+        <item> "The oil spill had a catastrophic effect on the environment."  </item>
+        <item> "He refused to answer inquiries from the media about his marriage."  </item>
+        <item> "The branch snapped and fell on the car."  </item>
+        <item> "The police towed my car because it was parked illegally."  </item>
+        <item> "A lifelong fascination with sharks and other fearsome aquatic creatures"  </item>
+        <item> "Several arrays of solar panels will help provide power."  </item>
+        <item> "In fact, tea-tree, with its myriad of uses, proved to be the most helpful."  </item>
+        <item> "He struggled with the problem of how to treat the gravitational pull of the earth on terrestrial objects."  </item>
+        <item> "The vegetation in your backyard might look very lush and green in the springtime."  </item>
+        <item> "Frog is an amphibian with sturdy life."  </item>
+        <item> "You should not eat the residue of the food left on the plate."  </item>
+        <item> "The entire village was obliterated by the tornado."  </item>
+        <item> "The Amazon rainforest is rich in biodiversity."  </item>
+        <item> "Zika virus is virtually everywhere in the Western Hemisphere."  </item>
+        <item> "Job creation has become an imperative for the government."  </item>
+        <item> "A nocturnal animal hunts its food at night."  </item>
+        <item> "The veil she was wearing obscured(v.) her features."  </item>
+        <item> "He unerringly fixed our broken sink"  </item>
+        <item> "The Metropolitan Museum is exhibiting Goya's works this month"  </item>
+        <item> "You can dilute the medicine with water."  </item>
+        <item> "Babies are generally far more resilient than new parents realize."  </item>
+        <item> "We wandered over the dunes."  </item>
+        <item> "There wasn't enough light for photosynthesis to take place."  </item>
+        <item> "When you're tired it's easy to lose your concentration."  </item>
+        <item> "Cactus is a spiny plant."  </item>
+        <item> "With so little rain, everyone had to conserve water."  </item>
+        <item> "She spoke clearly and deliberately to the audience."  </item>
+        <item> "A child's intellectual development/growth"  </item>
+        <item> "Now that she was the mother of three kids, responsibility overwhelmed her."  </item>
+        <item> "I don't know why he's so passive. He just does what everyone tells him to."  </item>
+        <item> "Her craftwork became more than a pastime when she found she could make her living out of it."  </item>
+        <item> "The reluctant child gave up and finally cleaned his room."  </item>
+        <item> "He had to resist the impulse [=urge] to shout."  </item>
+        <item> "There are some ruins from Ancient Rome in this town."  </item>
+        <item> "Nothing prepares you for the grandeur of the Iguazu Falls."  </item>
+        <item> "She has already spent a year in prison on remand."  </item>
+        <item> "We renovated our house three years ago."  </item>
+        <item> "His enemies were men of the early iron age and used the chariot in war."  </item>
+        <item> "He is an actor with a gift for mime."  </item>
+        <item> "The rugged surface of the moon"  </item>
+        <item> "The Act imposes more stringent regulations on atmospheric pollution."  </item>
+        <item> "Ben whiled away his leisure hours carving boats out of pieces of driftwood."  </item>
+        <item> "Commuter trains, office buildings, and coffee shops are today’s battlefields."  </item>
+        <item> "The value of a gift from someone special is more sentimental than monetary."  </item>
+        <item> "We plodded our way across the muddy field"  </item>
+        <item> "The kids sprawled on the floor to watch TV."  </item>
+        <item> "My position encompasses a wide range of responsibilities."  </item>
+        <item> "They plan to excavate a large hole."  </item>
+        <item> "The names of the dead were inscribed on the wall."  </item>
+        <item> "In Greek mythology, Zeus was the ruler of Gods and men."  </item>
+        <item> "Fodder crops are used to feed livestock."  </item>
+        <item> "Have you ever wondered how reeds bend with the wind without breaking?"  </item>
+        <item> "An adult should accompany a student at all times."  </item>
+        <item> "His photographs evoke the isolation and solitude of the desert."  </item>
+        <item> "The stand-up comedian used racial and cultural stereotypes for his jokes."  </item>
+        <item> "She had a long acting career that culminated in two Oscar nominations."  </item>
+        <item> "Alberto found it frustrating to be held back by the frailty of his health."  </item>
+        <item> "The video game is designed to give the illusion that you are in control of an airplane."  </item>
+        <item> "The President likes to portray himself as a friend of working people."  </item>
+        <item> "We had to prop up the roof with a wooden post."  </item>
+        <item> "The show contains some wonderful slapstick comedy."  </item>
+        <item> "Corporeal cravings such as hunger and thirst"  </item>
+        <item> "The CEO administers the company with the help of the other senior officers."  </item>
+        <item> "The city was not ready for the rampant population growth of the last 6 years."  </item>
+        <item> "Cut each stem of the plant at an angle with scissors."  </item>
+        <item> "We need to fill a vacancy in the accounting department."  </item>
+        <item> "She was overburdened with work."  </item>
+        <item> "If the weather deteriorates any more, I say we call off the game."  </item>
+        <item> "Fifty patients were given the experimental drug, and fifty others were given a placebo."  </item>
+        <item> "The children built a raft on vacation to row around in on the river."  </item>
+        <item> "A gentle breeze came from the island."  </item>
+        <item> "In spite of all my endeavors, I did manage to graduate this year."  </item>
+        <item> "They enrolled their children in a private school."  </item>
+        <item> "It's dangerous to cut with a dull blade. Hone it first."  </item>
+        <item> "A month of holidays in the summer resort will certainly bring you around."  </item>
+        <item> "A walk in the woods with his son became a lesson in botany."  </item>
+        <item> "The children set their new boat afloat on the lake."  </item>
+        <item> "You can receive personalized service at the salon."  </item>
+        <item> "Fiat is Italy's largest industrial conglomerate."  </item>
+        <item> "He consistently arrives to work late"  </item>
+        <item> "They got the endorsement of their parents to plan the Christmas party."  </item>
+        <item> "I caught a fleeting glimpse of my favorite actor, but as soon as I saw him, he was gone."  </item>
+        <item> "Yet today, universities in our city easily outperform other major city counterparts."  </item>
+        <item> "Please fasten the pages (together) with paper clips rather than staples."  </item>
+        <item> "He decided to confer with [=consult] his wife about buying a new house."  </item>
+        <item> "Her novel is so great that I'd go so far as to call it a boon for humanity."  </item>
+        <item> "The parade is scheduled to coincide with the city's 200th birthday."  </item>
+        <item> "She confronted him about his smoking."  </item>
+        <item> "I need to break free from the limits imposed by my own fear of failure."  </item>
+        <item> "She interacts with other children at nursery school."  </item>
+        <item> "The statistics show a decrease in child mortality rate over the last decade."  </item>
+        <item> "Young people are the most susceptible to advertisements."  </item>
+        <item> "The athletes underwent arduous training in order to complete the triathlon."  </item>
+        <item> "He excused his absence by saying that he was ill."  </item>
+        <item> "Overuse of smartphones is a dire problem affecting a great part of the world's population."  </item>
+        <item> "The discrepancy in their ages seemed not to matter for them to get married."  </item>
+        <item> "They are fighting for the equality of women."  </item>
+        <item> "Margot has always spent an inordinate amount of time on her appearance."  </item>
+        <item> "In his job, patience is an invaluable asset."  </item>
+        <item> "Bruce developed renal cancer, which necessitated the removal of one kidney."  </item>
+        <item> "His only form of recreation is playing cards."  </item>
+        <item> "A jeep is ideal for driving over rough terrain."  </item>
+        <item> "A piano is a very unwieldy item to move it here to there."  </item>
+        <item> "When the road became impassable, we had to ditch the car and walk."  </item>
+        <item> "Medicine should not be kept where it is accessible to children."  </item>
+        <item> "The bride and groom walked down the aisle together."  </item>
+        <item> "He needs auditory input from people who care, who love him."  </item>
+        <item> "Jenny fidgeted in her pencil as she tried to think of an answer to his question."  </item>
+        <item> "The new cars will incorporate a number of major improvements."  </item>
+        <item> "John quickly learned how to manipulate tools."  </item>
+        <item> "The lorry had been parked on the pavement, causing an obstruction."  </item>
+        <item> "Don't be so inquisitive; I'm not telling you what I've promised not to say."  </item>
+        <item> " The building needs urgent remedial work to make it safe."  </item>
+        <item> "IT is now on the curriculum in most schools."  </item>
+        <item> "Clamp the pieces of wood together while the glue sets."  </item>
+        <item> "Your actions constitute an infringement of company policy."  </item>
+        <item> " I've ransacked the house for those papers, but I can't find them."  </item>
+        <item> " The book was written specifically for children."  </item>
+        <item> "It was a rare incandescent, magical full moon, alfresco evening."  </item>
+        <item> "An electric light passes electricity through a material called a filament or wire."  </item>
+        <item> "Genius is one percent inspiration, ninety-nine percent perspiration."  </item>
+        <item> "Yet, as the old adage goes: Easier said than done."  </item>
+        <item> "Pilots of large aircraft are masters of aviation."  </item>
+        <item> "I consider the inflexibility of both wife and husband unacceptable."  </item>
+        <item> "They were otherwise a very disparate group of seven."  </item>
+        <item> "This book is indispensable to anyone interested in space exploration."  </item>
+        <item> "Some children have an inexplicable desire to eat ice cream all day"  </item>
+        <item> "Winning first prize was the culmination of years of practice and hard work."  </item>
+
+    </string-array>
+
+
+    <string-array name="IELTS_level">
+
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+        <item> "IELTS"  </item>
+
+    </string-array>
+
+    <integer-array name="IELTS_position">
+
+        <item> 1 </item>
+        <item> 2 </item>
+        <item> 3 </item>
+        <item> 4 </item>
+        <item> 5 </item>
+        <item> 6 </item>
+        <item> 7 </item>
+        <item> 8 </item>
+        <item> 9 </item>
+        <item> 10 </item>
+        <item> 11 </item>
+        <item> 12 </item>
+        <item> 13 </item>
+        <item> 14 </item>
+        <item> 15 </item>
+        <item> 16 </item>
+        <item> 17 </item>
+        <item> 18 </item>
+        <item> 19 </item>
+        <item> 20 </item>
+        <item> 21 </item>
+        <item> 22 </item>
+        <item> 23 </item>
+        <item> 24 </item>
+        <item> 25 </item>
+        <item> 26 </item>
+        <item> 27 </item>
+        <item> 28 </item>
+        <item> 29 </item>
+        <item> 30 </item>
+        <item> 31 </item>
+        <item> 32 </item>
+        <item> 33 </item>
+        <item> 34 </item>
+        <item> 35 </item>
+        <item> 36 </item>
+        <item> 37 </item>
+        <item> 38 </item>
+        <item> 39 </item>
+        <item> 40 </item>
+        <item> 41 </item>
+        <item> 42 </item>
+        <item> 43 </item>
+        <item> 44 </item>
+        <item> 45 </item>
+        <item> 46 </item>
+        <item> 47 </item>
+        <item> 48 </item>
+        <item> 49 </item>
+        <item> 50 </item>
+        <item> 51 </item>
+        <item> 52 </item>
+        <item> 53 </item>
+        <item> 54 </item>
+        <item> 55 </item>
+        <item> 56 </item>
+        <item> 57 </item>
+        <item> 58 </item>
+        <item> 59 </item>
+        <item> 60 </item>
+        <item> 61 </item>
+        <item> 62 </item>
+        <item> 63 </item>
+        <item> 64 </item>
+        <item> 65 </item>
+        <item> 66 </item>
+        <item> 67 </item>
+        <item> 68 </item>
+        <item> 69 </item>
+        <item> 70 </item>
+        <item> 71 </item>
+        <item> 72 </item>
+        <item> 73 </item>
+        <item> 74 </item>
+        <item> 75 </item>
+        <item> 76 </item>
+        <item> 77 </item>
+        <item> 78 </item>
+        <item> 79 </item>
+        <item> 80 </item>
+        <item> 81 </item>
+        <item> 82 </item>
+        <item> 83 </item>
+        <item> 84 </item>
+        <item> 85 </item>
+        <item> 86 </item>
+        <item> 87 </item>
+        <item> 88 </item>
+        <item> 89 </item>
+        <item> 90 </item>
+        <item> 91 </item>
+        <item> 92 </item>
+        <item> 93 </item>
+        <item> 94 </item>
+        <item> 95 </item>
+        <item> 96 </item>
+        <item> 97 </item>
+        <item> 98 </item>
+        <item> 99 </item>
+        <item> 100 </item>
+        <item> 101 </item>
+        <item> 102 </item>
+        <item> 103 </item>
+        <item> 104 </item>
+        <item> 105 </item>
+        <item> 106 </item>
+        <item> 107 </item>
+        <item> 108 </item>
+        <item> 109 </item>
+        <item> 110 </item>
+        <item> 111 </item>
+        <item> 112 </item>
+        <item> 113 </item>
+        <item> 114 </item>
+        <item> 115 </item>
+        <item> 116 </item>
+        <item> 117 </item>
+        <item> 118 </item>
+        <item> 119 </item>
+        <item> 120 </item>
+        <item> 121 </item>
+        <item> 122 </item>
+        <item> 123 </item>
+        <item> 124 </item>
+        <item> 125 </item>
+        <item> 126 </item>
+        <item> 127 </item>
+        <item> 128 </item>
+        <item> 129 </item>
+        <item> 130 </item>
+        <item> 131 </item>
+        <item> 132 </item>
+        <item> 133 </item>
+        <item> 134 </item>
+        <item> 135 </item>
+        <item> 136 </item>
+        <item> 137 </item>
+        <item> 138 </item>
+        <item> 139 </item>
+        <item> 140 </item>
+        <item> 141 </item>
+        <item> 142 </item>
+        <item> 143 </item>
+        <item> 144 </item>
+        <item> 145 </item>
+        <item> 146 </item>
+        <item> 147 </item>
+        <item> 148 </item>
+        <item> 149 </item>
+        <item> 150 </item>
+        <item> 151 </item>
+        <item> 152 </item>
+        <item> 153 </item>
+        <item> 154 </item>
+        <item> 155 </item>
+        <item> 156 </item>
+        <item> 157 </item>
+        <item> 158 </item>
+        <item> 159 </item>
+        <item> 160 </item>
+        <item> 161 </item>
+        <item> 162 </item>
+        <item> 163 </item>
+        <item> 164 </item>
+        <item> 165 </item>
+        <item> 166 </item>
+        <item> 167 </item>
+        <item> 168 </item>
+        <item> 169 </item>
+        <item> 170 </item>
+        <item> 171 </item>
+        <item> 172 </item>
+        <item> 173 </item>
+        <item> 174 </item>
+        <item> 175 </item>
+        <item> 176 </item>
+        <item> 177 </item>
+        <item> 178 </item>
+        <item> 179 </item>
+        <item> 180 </item>
+        <item> 181 </item>
+        <item> 182 </item>
+        <item> 183 </item>
+        <item> 184 </item>
+        <item> 185 </item>
+        <item> 186 </item>
+        <item> 187 </item>
+        <item> 188 </item>
+        <item> 189 </item>
+        <item> 190 </item>
+        <item> 191 </item>
+        <item> 192 </item>
+        <item> 193 </item>
+        <item> 194 </item>
+        <item> 195 </item>
+        <item> 196 </item>
+        <item> 197 </item>
+        <item> 198 </item>
+        <item> 199 </item>
+        <item> 200 </item>
+        <item> 201 </item>
+        <item> 202 </item>
+        <item> 203 </item>
+        <item> 204 </item>
+        <item> 205 </item>
+        <item> 206 </item>
+        <item> 207 </item>
+        <item> 208 </item>
+        <item> 209 </item>
+        <item> 210 </item>
+        <item> 211 </item>
+        <item> 212 </item>
+        <item> 213 </item>
+        <item> 214 </item>
+        <item> 215 </item>
+        <item> 216 </item>
+        <item> 217 </item>
+        <item> 218 </item>
+        <item> 219 </item>
+        <item> 220 </item>
+        <item> 221 </item>
+        <item> 222 </item>
+        <item> 223 </item>
+        <item> 224 </item>
+        <item> 225 </item>
+        <item> 226 </item>
+        <item> 227 </item>
+        <item> 228 </item>
+        <item> 229 </item>
+        <item> 230 </item>
+        <item> 231 </item>
+        <item> 232 </item>
+        <item> 233 </item>
+        <item> 234 </item>
+        <item> 235 </item>
+        <item> 236 </item>
+        <item> 237 </item>
+        <item> 238 </item>
+        <item> 239 </item>
+        <item> 240 </item>
+        <item> 241 </item>
+        <item> 242 </item>
+        <item> 243 </item>
+        <item> 244 </item>
+        <item> 245 </item>
+        <item> 246 </item>
+        <item> 247 </item>
+        <item> 248 </item>
+        <item> 249 </item>
+        <item> 250 </item>
+        <item> 251 </item>
+        <item> 252 </item>
+        <item> 253 </item>
+        <item> 254 </item>
+        <item> 255 </item>
+        <item> 256 </item>
+        <item> 257 </item>
+        <item> 258 </item>
+        <item> 259 </item>
+        <item> 260 </item>
+        <item> 261 </item>
+        <item> 262 </item>
+        <item> 263 </item>
+        <item> 264 </item>
+        <item> 265 </item>
+        <item> 266 </item>
+        <item> 267 </item>
+        <item> 268 </item>
+        <item> 269 </item>
+        <item> 270 </item>
+        <item> 271 </item>
+        <item> 272 </item>
+        <item> 273 </item>
+        <item> 274 </item>
+        <item> 275 </item>
+        <item> 276 </item>
+        <item> 277 </item>
+        <item> 278 </item>
+        <item> 279 </item>
+        <item> 280 </item>
+        <item> 281 </item>
+        <item> 282 </item>
+        <item> 283 </item>
+        <item> 284 </item>
+        <item> 285 </item>
+        <item> 286 </item>
+        <item> 287 </item>
+        <item> 288 </item>
+        <item> 289 </item>
+        <item> 290 </item>
+        <item> 291 </item>
+        <item> 292 </item>
+        <item> 293 </item>
+        <item> 294 </item>
+        <item> 295 </item>
+        <item> 296 </item>
+        <item> 297 </item>
+        <item> 298 </item>
+        <item> 299 </item>
+        <item> 300 </item>
+        <item> 301 </item>
+        <item> 302 </item>
+        <item> 303 </item>
+        <item> 304 </item>
+        <item> 305 </item>
+        <item> 306 </item>
+        <item> 307 </item>
+        <item> 308 </item>
+        <item> 309 </item>
+        <item> 310 </item>
+        <item> 311 </item>
+        <item> 312 </item>
+        <item> 313 </item>
+        <item> 314 </item>
+        <item> 315 </item>
+        <item> 316 </item>
+        <item> 317 </item>
+        <item> 318 </item>
+        <item> 319 </item>
+        <item> 320 </item>
+        <item> 321 </item>
+        <item> 322 </item>
+        <item> 323 </item>
+        <item> 324 </item>
+        <item> 325 </item>
+        <item> 326 </item>
+        <item> 327 </item>
+        <item> 328 </item>
+        <item> 329 </item>
+        <item> 330 </item>
+        <item> 331 </item>
+        <item> 332 </item>
+        <item> 333 </item>
+        <item> 334 </item>
+        <item> 335 </item>
+        <item> 336 </item>
+        <item> 337 </item>
+        <item> 338 </item>
+        <item> 339 </item>
+        <item> 340 </item>
+        <item> 341 </item>
+        <item> 342 </item>
+        <item> 343 </item>
+        <item> 344 </item>
+        <item> 345 </item>
+        <item> 346 </item>
+        <item> 347 </item>
+        <item> 348 </item>
+        <item> 349 </item>
+        <item> 350 </item>
+        <item> 351 </item>
+        <item> 352 </item>
+        <item> 353 </item>
+        <item> 354 </item>
+        <item> 355 </item>
+        <item> 356 </item>
+        <item> 357 </item>
+        <item> 358 </item>
+        <item> 359 </item>
+        <item> 360 </item>
+        <item> 361 </item>
+        <item> 362 </item>
+        <item> 363 </item>
+        <item> 364 </item>
+        <item> 365 </item>
+        <item> 366 </item>
+        <item> 367 </item>
+        <item> 368 </item>
+
+    </integer-array>
+
+
+
+</resources>

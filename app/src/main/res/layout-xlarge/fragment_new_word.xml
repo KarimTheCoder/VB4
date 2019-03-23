@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey100"
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.NewWordFragment">
+
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/word_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        >
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+
+
+
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/word_toolbar"
+        android:layout_above="@+id/bottom"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/new_recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+
+
+
+    <com.arlib.floatingsearchview.FloatingSearchView
+        android:id="@+id/mSearch"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="8dp"
+
+        app:floatingSearch_dimBackground="false"
+        app:floatingSearch_close_search_on_keyboard_dismiss="false"
+        app:floatingSearch_searchBarMarginTop="0dp"
+        app:floatingSearch_searchHint="Search..."
+        app:floatingSearch_showSearchKey="false"
+        app:floatingSearch_suggestionsListAnimDuration="250"
+
+
+        />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:entries="@array/spinner_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/word_spinner"
+        android:layout_marginRight="16dp"
+        android:layout_alignTop="@+id/mSearch"
+        android:layout_alignBottom="@+id/mSearch"
+        android:layout_alignRight="@id/mSearch"
+
+
+        >
+
+
+    </android.support.v7.widget.AppCompatSpinner>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/dropshadow"
+        android:layout_below="@id/word_toolbar"
+        android:id="@+id/view17"></View>
+
+    <View
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        ></View>
+
+
+</RelativeLayout>

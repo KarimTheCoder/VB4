@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <string-array name="advance_hindi">
+        <item>"जलीय (jaleey)"</item>
+        <item>"सरणी (saranee)"</item>
+        <item>"असंख्य (asankhy)"</item>
+        <item>"लौकिक (laukik)"</item>
+        <item>"वनस्पतियां (vanaspatiyaan)"</item>
+        <item>"उभयचर (ubhayachar)"</item>
+        <item>"अवशेष (avashesh)"</item>
+        <item>"नष्ट करना (nasht karana)"</item>
+        <item>"jaiv vividhata"</item>
+        <item>"golaarddh"</item>
+
+        <item>"aavashyak"</item>
+        <item>"raat ka"</item>
+        <item>"agyaat"</item>
+        <item>"galatee ke bina"</item>
+        <item>"pradarshit karna"</item>
+        <item>"kamajor karna"</item>
+        <item>"jaldee se theek hona"</item>
+        <item>"टीला "</item>
+        <item>"प्रकाश संश्लेषण (prakaash sanshleshan)"</item>
+        <item>"एकाग्रता (ekaagrata)"</item>
+
+        <item>"काँटेदार (kaantedaar)"</item>
+        <item>"संरक्षण (sanrakshan)"</item>
+        <item>"धीरे से (dheere se)"</item>
+        <item>"बौद्धिक (bauddhik)"</item>
+        <item>"भावविह्वल होना (bhaavavihval hona)"</item>
+        <item>"निष्क्रिय (nishkriy)"</item>
+        <item>"मनबहलाव (manabahalaav)"</item>
+        <item>"अनिच्छुक (anichchhuk)"</item>
+        <item>"आवेग (aaveg)"</item>
+        <item>"प्राचीन (praacheen)"</item>
+
+        <item>"प्रदर्शित करना (pradarshit karana)"</item>
+        <item>"शान (shaan)"</item>
+        <item>"जेल वापसी (jel vaapasee)"</item>
+        <item>"नवीकरण (naveekaran)"</item>
+        <item>"युद्ध रथ (yuddh rath)"</item>
+        <item>"भाव-भंगिमा द्वारा अभिव्यक्ति (bhaav-bhangima dvaara abhivyakti)"</item>
+        <item>"ऊबड़-खाबड़ (oobad-khaabad)"</item>
+        <item>"कड़ी से कड़ी (kadee se kadee)"</item>
+        <item>"तराशना (taraashana)"</item>
+        <item>"कम्यूटर (kamyootar)"</item>
+
+        <item>"मौद्रिक (maudrik)"</item>
+        <item>"थके कदमों से चलना (thake kadamon se chalana)"</item>
+        <item>"फैलकर बैठ या लेट जाना (phailakar baith ya let jaana)"</item>
+        <item>"सम्मिलित करना (sammilit karana)"</item>
+        <item>"खोदना (khodana)"</item>
+        <item>"अंकित करना (ankit karana)"</item>
+        <item>"पुराण (puraan)"</item>
+        <item>"पशुधन (pashudhan)"</item>
+        <item>"सरकंडा (sarakanda)"</item>
+        <item>"साथ देना या साथ जाना (saath dena ya saath jaana)"</item>
+
+        <item>"मन में जगाना (man mein jagaana)"</item>
+        <item>"टकसाली (takasaalee)"</item>
+        <item>"पराकाष्ठा पर पहुंचना (paraakaashtha par pahunchana)"</item>
+        <item>"भंगुरता (bhangurata)"</item>
+        <item>"मोह माया (moh maaya)"</item>
+        <item>"वर्णन करना (varnan karana)"</item>
+        <item>"टिकाना (tikaana)"</item>
+        <item>"तमाशा (tamaasha)"</item>
+        <item>"शारीरिक (shaareerik)"</item>
+        <item>"प्रशासित करना (prashaasit karana)"</item>
+
+        <item>"अनियंत्रित (aniyantrit)"</item>
+        <item>"तना (tana)"</item>
+        <item>"रिक्ति (rikti)"</item>
+        <item>"अधिभार (adhibhaar)"</item>
+        <item>"बिगड़ना (bigadana)"</item>
+        <item>"कई मरीज़ों को जब दवाई के रूप में चीनी की गोलियाँ दी गयीं, तो उन्हें काफी राहत मिली, सिर्फ इसलिए कि उन्हें लगा उनका इलाज किया जा रहा है (kaee mareezon ko jab davaee ke roop mein cheenee kee goliyaan dee gayeen, to unhen kaaphee raahat milee, sirph isalie ki unhen laga unaka ilaaj kiya ja raha hai)"</item>
+        <item>"बेड़ा (beda)"</item>
+        <item>"समीर (sameer)"</item>
+        <item>"प्रयास (prayaas)"</item>
+        <item>"पंजीकृत करना (panjeekrt karana)"</item>
+
+        <item>"सान (saan)"</item>
+        <item>"आश्रय (aashray)"</item>
+        <item>"वनस्पति विज्ञान (vanaspati vigyaan)"</item>
+        <item>"तैरती हुई (tairatee huee)"</item>
+        <item>"व्यक्तिगत (vyaktigat)"</item>
+        <item>"कई कंपनियों का सम्मिलित व्यवसाय (kaee kampaniyon ka sammilit vyavasaay)"</item>
+        <item>"लगातार (lagaataar)"</item>
+        <item>"समर्थन (samarthan)"</item>
+        <item>"अल्पकालिक (alpakaalik)"</item>
+        <item>"बेहतर परिणाम देना (behatar parinaam dena)"</item>
+
+        <item>"नत्थी करना (natthee karana)"</item>
+        <item>"परामर्श करना (paraamarsh karana)"</item>
+        <item>"वरदान (varadaan)"</item>
+        <item>"मेल खाना (mel khaana)"</item>
+        <item>"सामना करना (saamana karana)"</item>
+        <item>"आरोपित करना (aaropit karana)"</item>
+        <item>"एक दूसरे को प्रभावित करना (ek doosare ko prabhaavit karana)"</item>
+        <item>"सांख्यिकीय (saankhyikeey)"</item>
+        <item>"भावुक (bhaavuk)"</item>
+        <item>"भुगतना (bhugatana)"</item>
+
+        <item>"अनुपस्थिति (anupasthiti)"</item>
+        <item>"भीषण (bheeshan)"</item>
+        <item>"असंगति (asangati)"</item>
+        <item>"समानता (samaanata)"</item>
+        <item>"असामान्य (asaamaany)"</item>
+        <item>"अमूल्य (amooly)"</item>
+        <item>"आवश्यक बनाना (aavashyak banaana)"</item>
+        <item>"मनोरंजन (manoranjan)"</item>
+        <item>"इलाक़ा (ilaaqa)"</item>
+        <item>"बहुत भारी (bahut bhaaree)"</item>
+
+        <item>अगम्य (agamy)""</item>
+        <item>"सुलभ (sulabh)"</item>
+        <item>"गलियारा (galiyaara)"</item>
+        <item>"श्रवण (shravan)"</item>
+        <item>"बार-बार पहलू बदलना (baar-baar pahaloo badalana)"</item>
+        <item>"सम्मिलित (sammilit)"</item>
+        <item>"गलत ढंग से प्रभावित करना (galat dhang se prabhaavit karana)"</item>
+        <item>"बाधा (baadha)"</item>
+        <item>"जिज्ञासु (jigyaasu)"</item>
+        <item>"सुधारात्मक (sudhaaraatmak)"</item>
+
+        <item>"पाठ्यक्रम (paathyakram)"</item>
+        <item>"शिकंजा (shikanja)"</item>
+        <item>"उल्लंघन (ullanghan)"</item>
+        <item>"खंगाल डालना (khangaal daalana)"</item>
+        <item>"विशेष रूप से (vishesh roop se)"</item>
+        <item>"गरमागरम (garamaagaram)"</item>
+        <item>"रेशा (resha)"</item>
+        <item>"पसीना (paseena)"</item>
+        <item>"कहावत (kahaavat)"</item>
+        <item>"विमानन (vimaanan)"</item>
+
+        <item>"अनुकूलन योग्य (anukoolan yogy)"</item>
+        <item>"विषम (visham)"</item>
+        <item>"अनिवार्य (anivaary)"</item>
+        <item>"अकथनीय (akathaneey)"</item>
+        <item>"समाप्ति पर होना (samaapti par hona)"</item>
+
+    </string-array>
+
+
+
+</resources>

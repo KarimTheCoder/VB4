@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "576057269160",
+    "firebase_url": "https://fir-userauthentication-f751c.firebaseio.com",
+    "project_id": "fir-userauthentication-f751c",
+    "storage_bucket": "fir-userauthentication-f751c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576057269160:android:fb647e8be26bc074",
+        "android_client_info": {
+          "package_name": "com.example.shamsul.firebaseuserauthentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576057269160-7fuvcqcdidumlgtecrrcs4b0unklh85b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQ3NDHL-jhExGMJg9F6-hVrxsfDvCSwls"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576057269160:android:f3fb01a411cdebac",
+        "android_client_info": {
+          "package_name": "com.fortitude.apps.vocabularybuilder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576057269160-7fuvcqcdidumlgtecrrcs4b0unklh85b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQ3NDHL-jhExGMJg9F6-hVrxsfDvCSwls"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

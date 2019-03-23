@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="beginner_spanish">
+
+        <item> "Protection, shielding, safeguarding, guarding; security, fortification"  </item>
+        <item> "Collision, crash, smash, clash, bump, bang, knock, jolt"  </item>
+        <item> "Contamination, contaminating, adulteration, adulterating, tainting, impurity"  </item>
+        <item> "Grating, jarring, grinding, rasping, raspy, strident, raucous, brassy"  </item>
+        <item> "Eat, eat up, devour, ingest, swallow, gobble, gobble up, wolf down"  </item>
+        <item> "Feature, facet, side, characteristic, particular, detail, point"  </item>
+        <item> "Overseas, out of the country, to/in foreign parts, to/in a foreign country/land"  </item>
+        <item> "Cooking, cookery, fare, food; haute cuisine, cordon bleu"  </item>
+        <item> "Constituent, component, component part, element; part, piece"  </item>
+        <item> "Typical, usual, normal, predictable, habitual, in character; distinctive"  </item>
+        <item> "Specific, certain, distinct, separate, isolated; single"  </item>
+        <item> "Name, good name, character, repute, standing, stature, status"  </item>
+        <item> "Fault, flaw, imperfection, deficiency, weakness, weak spot/point, inadequacy"  </item>
+        <item> "Penury, destitution, indigence, pennilessness, privation, deprivation"  </item>
+        <item> "Impede, hinder, hamper, hold back, discourage, interfere with"  </item>
+        <item> "Sufficient, enough, ample, requisite, apposite, appropriate"  </item>
+        <item> "Recompense, repay, pay back, reimburse, remunerate, recoup"  </item>
+        <item> "Pivotal, critical, key, climacteric, decisive, deciding, determining"  </item>
+        <item> "Only, purely, solely, simply, entirely, just, but"  </item>
+        <item> "Clear, plain, plain to see, crystal clear, evident, apparent, manifest"  </item>
+        <item> "Outbreak, plague, scourge, infestation; widespread illness/disease; pandemic"  </item>
+        <item> "Lessen, make less, make smaller, lower, bring down, decrease, turn down"  </item>
+        <item> "Difficult, awkward, problematic, delicate, ticklish, sensitive, touchy"  </item>
+        <item> "In danger, in peril, in jeopardy, at risk, endangered, unsafe, unprotected"  </item>
+        <item> "Change, make changes to, make different, make alterations to, adjust"  </item>
+        <item> "Good, sake, interest, welfare, well-being, satisfaction, enjoyment"  </item>
+        <item> "Complicated, detailed, intricate, complex, involved, tortuous, convoluted"  </item>
+        <item> "Proof, confirmation, verification, substantiation, corroboration, affirmation"  </item>
+        <item> "Essential, indispensable, crucial, key, necessary, needed, required"  </item>
+        <item> "Firm, solid, steady, secure, fixed, strong, fast"  </item>
+        <item> "Give, donate, give/make a donation of, put up, come up with"  </item>
+        <item> "Engross, captivate, absorb, interest, enchant, beguile, bewitch"  </item>
+        <item> "Overstate, overemphasize, overstress, overestimate, overvalue"  </item>
+        <item> "Signal, signalling, sign, signing, motion, motioning, wave"  </item>
+        <item> "Amusing, funny, entertaining, comic, comical, chucklesome"  </item>
+        <item> "Join (together), join forces, amalgamate, consolidate, integrate, unite, unify"  </item>
+        <item> "Important, well known, leading, eminent, pre-eminent, distinguished"  </item>
+        <item> "Onlooker, watcher, looker-on, fly on the wall, viewer, observer"  </item>
+        <item> "Not found"  </item>
+        <item> "Procession, march, cavalcade, motorcade, carcade, cortège"  </item>
+        <item> "Disadvantage, snag, downside, stumbling block, catch, hitch, pitfall"  </item>
+        <item> "Well organized, methodical, systematic, structured, well planned, logical"  </item>
+        <item> "Provide, furnish, supply, issue, fit out, kit out, rig out"  </item>
+        <item> "Cargo, load, haul, consignment, delivery, shipment"  </item>
+        <item> "Change, alteration, revolution, upheaval, transformation, metamorphosis"  </item>
+        <item> "Great, acute, enormous, fierce, severe, extreme, high, exceptional, extraordinary"  </item>
+        <item> "Speed up, hurry up, get faster, move faster, go faster, drive faster, get a move on"  </item>
+        <item> "Inducement, motivation, motive, reason, stimulus, stimulant, spur"  </item>
+        <item> "Ascribe, assign, accredit, credit, impute, allot, allocate"  </item>
+        <item> "Writer, author, composer, designer, deviser, maker, inventor"  </item>
+        <item> "Act, action, activity; feat, exploit, performance, achievement"  </item>
+        <item> "Academic, intellectual, learned person, professor, man of letters, woman of letters"  </item>
+        <item> "Resolve, sort out, reach an agreement about, find a solution to, find an answer to"  </item>
+        <item> "Inexpensive; reasonably priced"  </item>
+        <item> "Devote, commit, pledge, bind, obligate, give, give over, surrender, set aside, allot"  </item>
+        <item> "Control, regulation, direction, order, authority, rule, strictness"  </item>
+        <item> "Talented, skilful, skilled, accomplished, expert, consummate, master(ly)"  </item>
+        <item> "Average, modest, medium, middling, ordinary, common, commonplace"  </item>
+        <item> "Heartfelt, intense, keen, great, very great, extreme, sincere, earnest"  </item>
+        <item> "Worldly, worldly-wise, experienced, enlightened, cosmopolitan, knowledgeable"  </item>
+        <item> "Reveal, present, disclose, divulge, make known, make public, air"  </item>
+        <item> "Workable, feasible, practicable, practical, applicable, usable, manageable"  </item>
+        <item> "Sail, steam, voyage, journey; travel by boat, take a cruise, take a boat trip"  </item>
+        <item> "Turmoil, instability, conflict, upheaval, tumult, troubles, unrest, ferment"  </item>
+        <item> "Dependable, good, well founded, well grounded, authentic, definitive"  </item>
+        <item> "Continue, carry on, keep up, keep going, keep alive, keep in existence"  </item>
+        <item> "Protection, defence, shelter, screen, cushion, shield, shielding, safe keeping"  </item>
+        <item> "Conceit, conceitedness, self-conceit, narcissism, self-love, self-admiration"  </item>
+        <item> "Answer, reply to, say something in response to; acknowledge, greet"  </item>
+        <item> "Gather, collect, assemble; amass, stockpile, pile up, heap up, rack up"  </item>
+        <item> "Modify, alter, make alterations to, change, adjust, make adjustments to, convert"  </item>
+        <item> "Resolve, decide, come to a decision, make a decision, reach a decision"  </item>
+        <item> "Not found"  </item>
+        <item> "Edging, edge, border, hem, trimming, frill, flounce, ruffle"  </item>
+        <item> "Productive, creative, inventive, fertile"  </item>
+        <item> "Flourish, prosper, grow vigorously, develop well, burgeon"  </item>
+        <item> "Behaviour, way of behaving, performance, comportment, demeanour"  </item>
+        <item> "Forbearance, toleration, sufferance, liberality, open-mindedness"  </item>
+        <item> "Ambitious, driven, vying, combative, contentious, aggressive;"  </item>
+        <item> "Admit, accept, grant, allow, concede, confess, own, appreciate, recognize"  </item>
+        <item> "Melancholy, misery, sadness, unhappiness, sorrow, woe, gloom"  </item>
+        <item> "Hard-working, diligent, assiduous, sedulous, conscientious, steady"  </item>
+        <item> "Revive, revitalize, renew, regenerate, restore, breathe new life into"  </item>
+        <item> "Not found"  </item>
+        <item> "Habitat, territory, domain, home, abode; surroundings, conditions"  </item>
+        <item> "Natural environment, natural element, natural territory, natural surroundings"  </item>
+        <item> "Not found"  </item>
+        <item> "Disagreement, dispute, argument, debate, dissension, contention, disputation"  </item>
+        <item> "Tendency, movement, drift, swing, shift, course, current"  </item>
+        <item> "Allocate, assign, allot, commit, give, give over, afford, apportion"  </item>
+        <item> "Possible, likely, prospective, future, probable, budding, in the making"  </item>
+        <item> "Collection, kitty, reserve, pool, purse; endowment, foundation, trust"  </item>
+        <item> "Adviser, guide, confidant, confidante, counsellor, consultant, therapist"  </item>
+        <item> "Persevere, continue, carry on, go on, keep at it, keep on, keep going, keep it up"  </item>
+        <item> "Throw into confusion, throw into disorder, throw into disarray"  </item>
+        <item> "Discharge, release, give out/off, pour out, send forth, throw out, void, effuse"  </item>
+        <item> "Decrease, reduce, get smaller, grow smaller, lessen, get less"  </item>
+        <item> "Roughly calculate, approximate, make an estimate of, guess, evaluate"  </item>
+        <item> "Main, chief, key, prime, central, principal, foremost, first, most important"  </item>
+        <item> "Cheap, inexpensive, low-cost, low-price, low-budget, budget, economy"  </item>
+        <item> "Naturally, automatically, as a matter of course, necessarily, of necessity"  </item>
+        <item> "Not found"  </item>
+        <item> "Administration, management, direction, control, charge; overseeing"  </item>
+        <item> "Participator, contributor, sharer, party, member, partaker; entrant"  </item>
+        <item> "Choose, select, pick, pick out, decide on, go for, settle on, plump for/on, single out"  </item>
+        <item> "Grow rapidly, increase rapidly/exponentially, expand, spring up, shoot up, swell"  </item>
+        <item> "Encourage, further, advance, assist, aid, help, contribute to, foster"  </item>
+        <item> "Assignment, piece of work, homework, piece of research, task"  </item>
+        <item> "Severe, critical, drastic, dire, dreadful, terrible, awful, grave, bad"  </item>
+        <item> "Reveal, uncover, lay bare, bare, leave unprotected"  </item>
+        <item> "Hamper, be a hindrance to, obstruct, impede, inhibit"  </item>
+        <item> "Tie, twist, loop, bow, splice, splicing, join, link, fastening"  </item>
+        <item> "Elegant, stylish, tasteful, refined, sophisticated, dignified, distinguished"  </item>
+        <item> "Ceremony, rite, ceremonial, observance; service, sacrament, liturgy"  </item>
+        <item> "Wear away/down, abrade, scrape away, grind down, crumble, dissolve, weather"  </item>
+        <item> "Expand, enlarge, increase, make larger, make bigger, make greater; lengthen"  </item>
+        <item> "Stop, head off, cut off; catch, seize, grab, snatch, expropriate, commandeer"  </item>
+        <item> "Not found"  </item>
+        <item> "Debased, degraded, corrupt, corrupted, vitiated, bastard, impure"  </item>
+        <item> "Permeable, penetrable, pervious; absorbent, sponge-like, spongy, sieve-like"  </item>
+        <item> "Sterile, barren; childless; infecund"  </item>
+        <item> "" dry spell, dry period, lack of rain, shortage of water; drouth"  </item>
+        <item> """  </item>
+        <item> "Discharge, release, outpouring, outflow, outrush, leak, excretion"  </item>
+        <item> "Make easy/easier, ease, make possible, make smooth/smoother, smooth"  </item>
+        <item> "Unique, unrepeatable, incomparable, unparalleled, priceless, invaluable"  </item>
+        <item> "Active during the day, non-nocturnal; daytime"  </item>
+        <item> "Undergo, go through, live through, experience, meet, encounter"  </item>
+        <item> "Achievement, accomplishment, attainment, coup, master stroke, triumph"  </item>
+        <item> "Not found"  </item>
+        <item> "Not found"  </item>
+        <item> "Wander off, go astray, drift, get separated; get lost, lose one's way"  </item>
+        <item> "Various, many and various, sundry, manifold, multiple; varied"  </item>
+        <item> "Utmost, uttermost, very great, greatest, greatest possible"  </item>
+        <item> "Apparatus, machine, appliance, tool, device, implement, utensil"  </item>
+        <item> "Scanty, scant, scattered, thinly distributed, scarce, infrequent, sporadic"  </item>
+        <item> "Burn, sear, singe, char, blacken, discolour; raretorrefy"  </item>
+        <item> "Truth, proposition, concept, idea, theory, postulate"  </item>
+        <item> "Strand, tendril, lock; piece, scrap, shred, thread"  </item>
+        <item> "Not found"  </item>
+        <item> "Allow, permit, authorize, sanction, condone, indulge, agree to, accede to"  </item>
+        <item> "Not found"  </item>
+        <item> "Eyesight, sight, power of sight, faculty of sight, ability to see, power of seeing"  </item>
+        <item> "Compare, set side by side, juxtapose; measure against; distinguish from"  </item>
+        <item> "Lump, hunk, wedge, block, slab, square, nugget, nub, brick, cube"  </item>
+        <item> "Capture, catch, arrest, grab, seize, draw, attract, gain, win, captivate"  </item>
+        <item> "Original, innovatory, innovational, new, novel, fresh, unconventional, unorthodox"  </item>
+        <item> "Fatness, plumpness, stoutness, heaviness, chubbiness, tubbiness"  </item>
+        <item> "Bodily, corporeal, corporal, fleshly, in the flesh; raresomatic"  </item>
+        <item> "Go after, run after, follow, chase, give chase to; hunt, stalk"  </item>
+        <item> "Spur, stimulant, encouragement, impetus, boost, prompt, prod, incentive"  </item>
+        <item> "Label, marque; type, kind, sort, variety; trade name"  </item>
+        <item> "Foreign, non-native, tropical; alien, imported, introduced"  </item>
+        <item> "Misrepresent, tamper with, falsify, misstate, distort, change round"  </item>
+        <item> "Feat, exploit, trick, antic, caper; coup, act, action, deed"  </item>
+        <item> "Not found"  </item>
+        <item> "Exhibit, show, put on show, put on view, expose to view, present"  </item>
+        <item> "Cause, give rise to, lead to, result in, bring about, bring into being"  </item>
+        <item> "Not found"  </item>
+        <item> "Stamp, punch, print, impress, mark, engrave, deboss"  </item>
+        <item> "Beginning, opening, commencing, starting, inceptive, embryonic"  </item>
+        <item> "Population, inhabitants, residents, natives, occupants, occupiers"  </item>
+        <item> "Hug, take/hold in one's arms, hold, cuddle, clasp to one's bosom"  </item>
+        <item> "Aptitude, talent, gift, knack, instinct, natural ability, ability"  </item>
+        <item> "Smoke, vapour, gas, exhalation, exhaust, effluvium, pollution"  </item>
+        <item> "Purpose, task, use, role; reason, basis, justification"  </item>
+        <item> "Ability to read and write, reading/writing ability, reading/writing proficiency"  </item>
+        <item> "Slab, panel, plaque, plate, sign; stone, gravestone, headstone"  </item>
+        <item> "Symbol, sign, emblem, badge, representation, indication, mark"  </item>
+        <item> "Wise man/woman, learned man/woman, man/woman of letters, philosopher"  </item>
+        <item> "Arise, have its origin, derive, begin, start, stem, spring, emerge, develop"  </item>
+        <item> "Forecast, foretell, foresee, prophesy, divine, prognosticate, anticipate"  </item>
+        <item> "Not found"  </item>
+        <item> "Flower-patterned, flower-pattern, flower-covered, flowery"  </item>
+        <item> "Festoon, lei, wreath, chain, loop, ring, circle, swathe, swag"  </item>
+        <item> "Be king/queen, be monarch, be sovereign, sit on the throne, occupy the throne, wear the crown"  </item>
+        <item> "Come out, appear, come into view, become visible, make an appearance"  </item>
+        <item> "Tending to make one think of; evocative of, suggestive of, redolent of"  </item>
+        <item> "Resume, return to, pick up again, take up again, come back to, reopen"  </item>
+        <item> "In particular, particularly, especially, specially, primarily, principally"  </item>
+        <item> "Disable, paralyse, immobilize, make lame, lame, incapacitate, debilitate"  </item>
+        <item> "Tempt, entice, attract, induce, coax, persuade, inveigle"  </item>
+        <item> "Keep, keep possession of, keep hold of, hold on to, hold fast to, keep back"  </item>
+        <item> "Not found"  </item>
+        <item> "Take part, play, be a contestant, be a competitor, participate, be involved, get involved"  </item>
+        <item> "Border, boundary, extremity, fringe; margin, side, lip, rim"  </item>
+        <item> "Motive, motivating force, incentive, stimulus, stimulation, inspiration"  </item>
+        <item> "Ideal position, calling, vocation, métier, place, function, job, slot"  </item>
+        <item> "Noise, note, din, racket, row, bang, report, hubbub, resonance, reverberation"  </item>
+        <item> "Point, end, extremity, head, sharp end, spike, prong, tine"  </item>
+        <item> "Join, connect, fasten, fix, affix, attach, secure, bind, stick, glue, gum"  </item>
+        <item> "Persuade, satisfy, prove to, cause to feel certain; assure, reassure"  </item>
+        <item> "Win, win out, win through, triumph, be victorious, be the victor, gain the victory"  </item>
+        <item> "Not found"  </item>
+        <item> "Important, significant, consequential, of consequence, momentous, of moment"  </item>
+        <item> ""drink; liquid refreshment; archaicpotation; rarelibation, potable"  </item>
+        <item> """  </item>
+        <item> "Hammer out, beat into shape, found, cast, mould, model; fashion, form, shape"  </item>
+        <item> "Fly up, wing, wing its way; take off, take flight, take to the air; ascend, climb"  </item>
+        <item> "Joint, united, jointly planned, coordinated, collaborative, collective, combined"  </item>
+        <item> "Not found"  </item>
+        <item> "Widespread, prevailing, frequent, usual, common, general, universal"  </item>
+        <item> "Draw level (with); get to, come to, reach; gain on, gain"  </item>
+        <item> "Deciding, conclusive, determining, final, settling, key; pivotal, critical"  </item>
+        <item> "Teenage, teenaged, pubescent, youthful, young, juvenile"  </item>
+        <item> "Seemingly, evidently, it seems (that), it would seem (that), it appears (that)"  </item>
+        <item> "Get rid of, eliminate, do away with, remove, suppress"  </item>
+        <item> "Open out, spread out, stretch out, flatten, straighten out, unfurl, unroll, unravel"  </item>
+        <item> "Prove, give proof of, show to be true, give substance to; uphold, support"  </item>
+        <item> "Achieve, accomplish, reach, arrive at, come by, obtain, gain, procure, secure, get"  </item>
+        <item> "Be plentiful, be abundant, be numerous, proliferate, superabound, thrive, flourish"  </item>
+        <item> "Unable to, not capable of, lacking the ability to, not equipped to, lacking the experience to"  </item>
+        <item> "Slithery, greasy, oily, icy, glassy, smooth, slick"  </item>
+        <item> "Copyright, licence, legal protection, right, performing right, permit, privilege"  </item>
+        <item> "Part, character; title role; bit part, walk-on part, non-speaking part"  </item>
+        <item> "Contrast, juxtaposition, collation, differentiation; weighing up, balancing"  </item>
+        <item> "Situation, conditions, set of conditions, state of affairs, things, position"  </item>
+        <item> "Heartening, cheering, cheering up, buoying up, pepping up, uplifting, inspiration"  </item>
+        <item> "Mix, mingle, combine, put together, stir, whisk, fold in, jumble, merge"  </item>
+        <item> "Normal, standard, regular, ordinary, usual, traditional, typical, common"  </item>
+        <item> "Presiding, ruling, governing, controlling, commanding, ascendant, supreme"  </item>
+        <item> "Repeat from memory, say aloud, read aloud, declaim, quote, speak, deliver, render"  </item>
+        <item> "Lonely, companionless, unaccompanied, by oneself/itself, on one's/its own, (all) alone"  </item>
+        <item> "Enhance, make richer, improve, add to, augment, supplement, complement"  </item>
+        <item> "Squint, look closely/earnestly, try to see, look through narrowed eyes, narrow one's eyes"  </item>
+        <item> "Task, piece of work, piece of business, job, duty, chore, charge, labour"  </item>
+        <item> "Oral, spoken, said, uttered, articulated, expressed, stated, verbalized"  </item>
+        <item> "Persistence, tenacity, determination, resolve, resolution, resoluteness, staying power"  </item>
+        <item> "Obtain, get, take, gain, acquire, procure, extract, attain, glean"  </item>
+        <item> "Apply, put in, register, sign up, ask"  </item>
+        <item> "Creativity, inventiveness, innovation, innovativeness, ingenuity, imagination"  </item>
+        <item> "Disable, incapacitate, indispose, hospitalize, put out of action, lay up"  </item>
+        <item> "Not found"  </item>
+        <item> "Purification, refining, clarifying, clarification, cleansing, straining, sifting, filtering"  </item>
+        <item> "Financial standing, financial status, solvency"  </item>
+        <item> "Empty space, emptiness, void, nothingness, vacuity, vacancy"  </item>
+        <item> "Take legal action against, take to court, bring an action against, bring a suit against"  </item>
+        <item> "Tone, timbre, sound, key, tonality, modulation, frequency"  </item>
+        <item> "Lengthen, make longer, extend, extend the duration of, draw out, drag out, protract"  </item>
+        <item> "Screw, airscrew, rotor, vane, propulsor"  </item>
+        <item> "Lean, tip, list, slope, camber, bank, slant, incline, pitch, dip, cant"  </item>
+        <item> "Cut up, cut into pieces, chop up; cube, dice, mince; hash"  </item>
+        <item> "Disastrous, calamitous, cataclysmic, ruinous, tragic, fatal, dire, awful, terrible"  </item>
+        <item> "Not found"  </item>
+        <item> "Break, break in/into two, fracture, splinter, separate, come apart, part"  </item>
+        <item> "Pull, draw, drag, haul, tug, trail, lug, heave, trawl, hoist, transport"  </item>
+        <item> "Water; sea, marine, maritime, saltwater, seawater, oceanic; freshwater, river"  </item>
+        <item> "Arrangement, assembling, assemblage, line-up, formation, ordering, disposition"  </item>
+        <item> "Multitude, a large/great number/quantity, a lot, scores, quantities, mass, crowd"  </item>
+        <item> "Earthly, worldly, mundane, earthbound"  </item>
+        <item> "Plants, plant life, flora; greenery, foliage"  </item>
+        <item> "Not found"  </item>
+        <item> "Remainder, remaining part, part leftover, rest, remnant, remnants; surplus, extra"  </item>
+        <item> "Destroy, wipe out, annihilate, exterminate, extirpate, demolish, eliminate, eradicate"  </item>
+        <item> "Not found"  </item>
+        <item> "Not found"  </item>
+        <item> "Vitally important, of vital importance, all-important, vital, crucial, critical, essential"  </item>
+        <item> "Not found"  </item>
+        <item> "Unclear, uncertain, unknown, in doubt, doubtful, dubious, mysterious, hazy"  </item>
+        <item> "Unfailing, infallible, unswerving, perfect, flawless, faultless"  </item>
+        <item> "Put on display, put on show, display, show, show to the public, put on public view"  </item>
+        <item> "Make weaker, weaken; thin out, thin, make thinner, water down"  </item>
+        <item> "Strong, tough, hardy; quick to recover, quick to bounce back, buoyant"  </item>
+        <item> "Bank, mound, hillock, hummock, rise, knoll, ridge, heap, drift"  </item>
+        <item> "Not found"  </item>
+        <item> "Not found"  </item>
+        <item> "Prickly, spiky, thorny, thistly, briary, brambly, bristly, bristled, spiked"  </item>
+        <item> "Preserve, protect, maintain, save, safeguard, keep, take care of"  </item>
+        <item> "Intentionally, on purpose, purposely, by design, knowingly, wittingly"  </item>
+        <item> "Mental, cerebral, cognitive; rational, psychological, abstract, conceptual"  </item>
+        <item> "Swamp, submerge, engulf, bury, deluge, flood, inundate"  </item>
+        <item> "Submissive, acquiescent, unresisting, yielding, unassertive, non-resistant"  </item>
+        <item> "Hobby, leisure activity/pursuit, sport, game, recreation, amusement"  </item>
+        <item> "Unwilling, disinclined, unenthusiastic, grudging, resistant, resisting"  </item>
+        <item> "Urge, instinct, drive, compulsion, need, itch; whim, caprice"  </item>
+        <item> "Of long ago, earliest, first, early, past, former, bygone; prehistoric"  </item>
+        <item> "Splendour, magnificence, impressiveness, glory, gloriousness, resplendence"  </item>
+        <item> "Not found"  </item>
+        <item> "Modernization, restoration, redecoration, refurbishment, revamping"  </item>
+        <item> "Not found"  </item>
+        <item> "Act out, pantomime, use gestures to indicate, gesture, simulate, represent"  </item>
+        <item> "Rough, uneven, bumpy, rocky, stony, irregular, pitted, broken up"  </item>
+        <item> "Strict, firm, rigid, rigorous, severe, harsh, tough, tight, exacting"  </item>
+        <item> "Sculpt, sculpture; cut, chisel, hew, whittle, chip, hack, slash; form"  </item>
+        <item> "Daily traveller, traveller, passenger; informalstraphanger, suburbanite"  </item>
+        <item> ""financial, fiscal, pecuniary, money, cash, economic, budgetary, capital"  </item>
+        <item> """  </item>
+        <item> "Trudge, walk heavily, clump, stomp, stump, tramp, drag oneself"  </item>
+        <item> "Stretch out, lounge, loll, lie, lie down, lie back, recline, drape oneself"  </item>
+        <item> "Cover, embrace, include, incorporate, take in, contain, comprise, involve"  </item>
+        <item> "Hole, hollow, cavity, pit, crater, cutting, trench, trough"  </item>
+        <item> "Carve, write, engrave, etch, cut, chisel, chase, score, incise"  </item>
+        <item> "Myth(s), legend(s), folklore, folk tales, folk stories, lore, tradition, stories"  </item>
+        <item> "Not found"  </item>
+        <item> "Not found"  </item>
+        <item> "Go with, go along with, travel with, keep someone company, tag along with"  </item>
+        <item> "Bring to mind, call to mind, put one in mind of, call up, conjure up, summon up"  </item>
+        <item> "Standard/conventional image, received idea, cliché, hackneyed idea, formula"  </item>
+        <item> "Climax, pinnacle, peak, high point, highest point, height, high water mark"  </item>
+        <item> "Infirmity, infirmness, weakness, weakliness, feebleness, enfeeblement, debility"  </item>
+        <item> "Mirage, hallucination, apparition, phantasm, phantom, vision, spectre, fantasy"  </item>
+        <item> "Paint, draw, paint/draw a picture of, picture, sketch, depict, represent, illustrate"  </item>
+        <item> "Pole, post, beam, support, upright, brace, buttress, stay, shaft, strut, stanchion"  </item>
+        <item> "Not found"  </item>
+        <item> "Bodily, fleshly, carnal, corporal, human, mortal, earthly"  </item>
+        <item> "Manage, direct, control, operate, regulate, conduct, handle, run"  </item>
+        <item> "Uncontrolled, unrestrained, unchecked, unbridled, widespread, pandemic"  </item>
+        <item> "Trunk, stalk, stock, cane; technicalpeduncle"  </item>
+        <item> "Opening, position, vacant position, situation, situation vacant, post, job"  </item>
+        <item> "Swamp, submerge, engulf, bury, deluge, flood, inundate"  </item>
+        <item> "Worsen, get worse, decline, be in decline, degenerate, decay"  </item>
+        <item> "Not found"  </item>
+        <item> "Not found"  </item>
+        <item> "Gentle wind, breath of wind, puff of air, current of air, flurry of air"  </item>
+        <item> "Try, attempt, venture, undertake, aspire, aim, seek, set out; strive, struggle"  </item>
+        <item> "Register, sign on, sign up, apply, volunteer, put one's name down"  </item>
+        <item> "Sharpen, make sharper, make sharp, whet, strop, grind, file, put an edge on"  </item>
+        <item> "Holiday destination, holiday centre, tourist centre, centre, spot, retreat, haunt"  </item>
+        <item> "Not found"  </item>
+        <item> "Buoyant, floating, buoyed up, non-submerged, suspended, drifting"  </item>
+        <item> "Customize, individualize, give a personal touch to, make distinctive"  </item>
+        <item> "Mixture, mix, combination, mingling, commingling, amalgamation, amalgam"  </item>
+        <item> "Steady, stable, constant, regular, even, uniform, orderly, unchanging"  </item>
+        <item> "Support, backing, approval, seal of approval, agreement, acceptance"  </item>
+        <item> "Brief, transient, short-lived, short, momentary, sudden, cursory, transitory"  </item>
+        <item> "Not found"  </item>
+        <item> "Not found"  </item>
+        <item> "Consult, have discussions, discuss things, exchange views, talk, have a talk"  </item>
+        <item> "Blessing, godsend, bonus, good thing, benefit, help, aid, advantage"  </item>
+        <item> "Occur simultaneously, happen together, happen at the same time"  </item>
+        <item> "Tackle, get to grips with, apply oneself to, address oneself to, address, face"  </item>
+        <item> "Foist, force, thrust, inflict, obtrude, press, urge"  </item>
+        <item> "Not found"  </item>
+        <item> "Not found"  </item>
+        <item> "Open to, receptive to, vulnerable to, defenceless against; an easy target for"  </item>
+        <item> "Go through, experience, engage in, undertake, live through, face, encounter"  </item>
+        <item> "Non-attendance, non-appearance, absenteeism; truancy, playing truant"  </item>
+        <item> "Terrible, dreadful, appalling, frightful, awful, horrible, atrocious, grim"  </item>
+        <item> "Inconsistency, difference, disparity, variance, variation, deviation"  </item>
+        <item> "Fairness, justness, equitability, impartiality, even-handedness, egalitarianism"  </item>
+        <item> "Excessive, undue, unreasonable, unjustifiable, unwarrantable, disproportionate"  </item>
+        <item> "Indispensable, crucial, critical, key, vital, irreplaceable, extremely useful"  </item>
+        <item> "Not found"  </item>
+        <item> "Pleasure, leisure, relaxation, fun, enjoyment, entertainment, amusement"  </item>
+        <item> "Land, ground, territory; topography, landscape, countryside"  </item>
+        <item> "Cumbersome, unmanageable, unhandy, unmanoeuvrable; awkward"  </item>
+        <item> "Blocked, closed, obstructed, impenetrable; pathless, trackless"  </item>
+        <item> "Reachable, attainable, approachable, within reach, available"  </item>
+        <item> "Passage, passageway, corridor, gangway, walkway, path, lane"  </item>
+        <item> "Not found"  </item>
+        <item> "Move restlessly, wriggle, squirm, twitch, jiggle, writhe, twist, shuffle"  </item>
+        <item> "Absorb, include, subsume, assimilate, integrate, take in, swallow up"  </item>
+        <item> "Operate, handle, work, control, use, employ, utilize"  </item>
+        <item> "Obstacle, barrier, stumbling block, hurdle, bar, block, impediment"  </item>
+        <item> "Curious, intrigued, interested, burning with curiosity, agog"  </item>
+        <item> "Not found"  </item>
+        <item> "Syllabus, course of study/studies, programme of study/studies, educational programme"  </item>
+        <item> "Brace, vice, press; clasp, fastener, bracket, holdfast; mute, capo"  </item>
+        <item> "Contravention, violation, transgression, breach, breaking, non-observance"  </item>
+        <item> "Plunder, pillage, steal from, raid, rob, loot, rifle, sack, strip, denude"  </item>
+        <item> "Not found"  </item>
+        <item> "White-hot, intensely hot, red-hot, burning, fiery, on fire, blazing, ablaze"  </item>
+        <item> "Fibre, thread, strand, tendril; string, wire, cable, cord"  </item>
+        <item> "Sweat, moisture, dampness, wetness; a lather; sweating"  </item>
+        <item> "Saying, maxim, axiom, proverb, aphorism, saw, dictum, precept, epigram"  </item>
+        <item> "Not found"  </item>
+        <item> "Not found"  </item>
+        <item> "Contrasting, different, differing, dissimilar, unlike, unalike, poles apart"  </item>
+        <item> "Essential, crucial, necessary, key, vital, needed, required, called for"  </item>
+        <item> "Unaccountable, unexplainable, incomprehensible, unfathomable, impenetrable"  </item>
+        <item> "Climax, pinnacle, peak, high point, highest point, height, high water mark"  </item>
+        <item> "Plentiful, copious, ample, profuse, rich, lavish"  </item>
+        <item> "Gather, collect, assemble; "  </item>
+        <item> "Correct, precise, exact, right, error-free, perfect"  </item>
+        <item> "Amass, stockpile, pile up"  </item>
+        <item> "Obtain, come by, get, receive, gain, earn"  </item>
+        <item> "Unshakable, immovable, inflexible, unwavering, unswerving, uncompromising"  </item>
+        <item> "Sufficient, enough, requisite"  </item>
+        <item> "Adjoining, neighboring, next-door, abutting, contiguous, proximate"  </item>
+        <item> "Modify, alter, regulate, tune, fine-tune, calibrate"  </item>
+        <item> "Upper hand, edge, lead, whip hand, trump card; "  </item>
+        <item> "Champion, upholder, supporter, backer, promoter, proponent"  </item>
+        <item> "Unfavorable, disadvantageous, inauspicious, unpropitious, unfortunate, unlucky"  </item>
+        <item> "Total, sum total, sum, grand total"  </item>
+        <item> "Hostile, belligerent, bellicose, antagonistic, truculent; pugnacious"  </item>
+        <item> "Allot, assign, distribute, apportion, share out, portion out"  </item>
+        <item> "Different, other, another, second, possible, substitute"  </item>
+        <item> "Nonprofessional, nonspecialist, layman, layperson; dilettante; informal"  </item>
+        <item> "Imprecise, vague, abstruse, doubtful, dubious, uncertain"  </item>
+        <item> "Aspiring, determined, forceful, pushy, enterprising, motivated"  </item>
+        <item> "Revise, alter, change, modify, qualify, adapt"  </item>
+        <item> "Enough, sufficient, adequate, plenty of, more than enough, enough and to spare"  </item>
+        <item> "Oddity, peculiarity, abnormality, irregularity, inconsistency, incongruity"  </item>
+        <item> "Yearly, once-a-year, every twelve months; year-end"  </item>
+        <item> "Arouse hostility in, alienate; anger, annoy, provoke, vex, irritate;"  </item>
+        <item> "View, viewpoint, outlook, perspective, stance, standpoint"  </item>
+        <item> "Quality, characteristic, trait, feature, element, aspect"  </item>
+        <item> "Autocratic, dictatorial, autarchic, undemocratic, despotic, tyrannical"  </item>
+        <item> "Onerous, taxing, difficult, hard, heavy, laborious"  </item>
+        <item> "Relieve, ease, alleviate, soothe, mitigate, allay"  </item>
+        <item> "Presume, suppose, take it (as given), take for granted, take as read, conjecture"  </item>
+        <item> "Increase, add to, supplement, build up, enlarge, expand"  </item>
+        <item> "Good, sake, welfare, well-being, advantage, comfort, ease"  </item>
+        <item> "Scold, rebuke, reprimand, reproach, reprove, admonish, chide"  </item>
+        <item> "Confer on, grant, accord, afford, endow someone with, vest in"  </item>
+        <item> "Brag, crow, swagger, swank, gloat, show off"  </item>
+        <item> "Improve, raise, uplift, increase, enhance, encourage"  </item>
+        <item> "Self-assertive, pushy, cocksure, cocky, self-confident, arrogant"  </item>
+        <item> "Short, flying, fleeting, hasty, hurried"  </item>
+        <item> "Curt, abrupt, blunt, short, sharp, terse"  </item>
+        <item> "Din, racket, noise, clamor, discord, dissonance"  </item>
+        <item> "Come to an end, come to a halt, end, halt, stop, conclude"  </item>
+        <item> "Condemnation, criticism, attack, abuse; reprimand, rebuke"  </item>
+        <item> "Sequential, consecutive, in sequence, in order (of time)"  </item>
+        <item> "Make clear, shed/throw light on, elucidate, illuminate; explain"  </item>
+        <item> "Merge, unite, join together, combine, fuse, mingle"  </item>
+        <item> "Pressure, pressurize, press, push, constrain; force"  </item>
+        <item> "Not found"  </item>
+        <item> "Unity, togetherness, solidarity, bond, coherence; connection"  </item>
+        <item> "Occur simultaneously, happen together, be concurrent, concur, coexist"  </item>
+        <item> "Cave in, fall in, subside, fall down, give (way), crumple"  </item>
+        <item> "Crash into, hit, strike, impact, run into, bump into"  </item>
+        <item> "Dedication, devotion, allegiance, loyalty, faithfulness, fidelity"  </item>
+        <item> "Group, body, set, circle, clique, faction"  </item>
+        <item> "Hide, screen, cover, obscure, block out, blot out"  </item>
+        <item> "Agree, be in agreement, go along, fall in, be in sympathy"  </item>
+        <item> "Dispute, quarrel, squabble, disagreement, dissension, clash"  </item>
+        <item> "Compel, force, drive, impel, oblige, coerce"  </item>
+        <item> "Look at, view, regard, examine, inspect, observe"  </item>
+        <item> "Unceasing, uninterrupted, unbroken, constant, ceaseless, incessant"  </item>
+        <item> "Deny, rebut, dispute, challenge, counter, controvert"  </item>
+        <item> "Give, donate, put up, subscribe, hand out, grant"  </item>
+        <item> "Transport, carry, bring, take, fetch, bear"  </item>
+        <item> "Abundant, superabundant, plentiful, ample, profuse, full"  </item>
+        <item> "Heart, heart of the matter, nucleus, nub, kernel, marrow"  </item>
+        <item> "Wear away, eat away (at), gnaw away (at), erode, abrade, consume"  </item>
+        <item> "Unwieldy, unmanageable, awkward, clumsy, inconvenient, incommodious"  </item>
+        <item> "Syllabus, course of study, program of study, subjects, modules"  </item>
+        <item> "Facts, figures, statistics, details, particulars, specifics; information, intelligence"  </item>
+        <item> "Decompose, rot, putrefy, go bad, go off, spoil"  </item>
+        <item> "Swindle, defraud, cheat, trick, hoodwink, hoax"  </item>
+        <item> "Decode, decrypt, break, work out, solve, interpret"  </item>
+        <item> "Announcement, statement, communication, pronouncement, proclamation, communiqué"  </item>
+        <item> "Decrease, reduce, lessen, diminish, dwindle, contract"  </item>
+        <item> "Demean, debase, cheapen, devalue; shame, humiliate"  </item>
+        <item> "Reveal, bespeak, indicate, signify, signal, denote"  </item>
+        <item> "Contradict, controvert, repudiate, challenge, counter, contest"  </item>
+        <item> "Exhaust, use up, consume, expend, drain, empty"  </item>
+        <item> "Down payment, advance payment, prepayment, installment, retainer, stake"  </item>
+        <item> "Advantageous, advisable, wise, sensible, recommendable; helpful"  </item>
+        <item> "Detest, hate, loathe, abhor, execrate, deplore"  </item>
+        <item> "Discover, uncover, find out, turn up, unearth, dig up"  </item>
+        <item> "Discourage, dissuade, put off, scare off; dishearten, demoralize"  </item>
+        <item> "Diverge from, digress from, drift from, stray from, veer from, swerve from"  </item>
+        <item> "Conceive, think up, dream up, work out, formulate, concoct"  </item>
+        <item> "Tirade, harangue, onslaught, attack, polemic, denunciation"  </item>
+        <item> "Deviate, go off on a tangent, get off the subject, get sidetracked, lose the thread, turn"  </item>
+        <item> "Quandary, predicament, Catch-22, vicious circle, plight, mess"  </item>
+        <item> "Decrease, lessen, decline, reduce, subside, die down"  </item>
+        <item> "Throw away/out, get rid of, discard, jettison, scrap, junk"  </item>
+        <item> "Not found"  </item>
+        <item> "Throw into confusion, throw into disorder, throw into disarray, cause confusion/turmoil in"  </item>
+        <item> "Twisted, warped, contorted, buckled, deformed, malformed, misshapen"  </item>
+        <item> "Give out, deal out, dole out, dish out, hand out/around; allocate"  </item>
+        <item> "Various, sundry, manifold, multiple; varied, varying"  </item>
+        <item> "Reroute, redirect, change the course of, deflect, channel"  </item>
+        <item> "Energetic, spirited, active, lively, zestful, vital"  </item>
+        <item> "Effortlessness, no trouble, simplicity; deftness, adroitness, proficiency"  </item>
+        <item> "Organized, methodical, systematic, logical, orderly, businesslike"  </item>
+        <item> "Remove, get rid of, put an end to, do away with, end, stop"  </item>
+        <item> "Best, pick, cream, crème de la crème, flower, nonpareil"  </item>
+        <item> "Fluent, articulate, expressive, silver-tongued; persuasive, strong"  </item>
+        <item> "Stress, underline, highlight, focus attention on, point up, lay stress on"  </item>
+        <item> "Undergo, go through, live through, experience, meet, encounter"  </item>
+        <item> "Increase, add to, intensify, heighten, magnify, amplify"  </item>
+        <item> "Personification, embodiment, incarnation, paragon; essence, quintessence"  </item>
+        <item> "Equal, identical, same; similar, comparable, corresponding"  </item>
+        <item> "Wrong, incorrect, mistaken, in error, inaccurate, untrue"  </item>
+        <item> "Calculate roughly, approximate, guess; evaluate, judge, gauge"  </item>
+        <item> "Elude, avoid, dodge, escape (from), steer clear of, keep at arm's length"  </item>
+        <item> "Assess, judge, gauge, rate, estimate, appraise"  </item>
+        <item> "Proof, confirmation, verification, substantiation, corroboration, affirmation"  </item>
+        <item> "Develop, progress, advance; mature, grow, expand"  </item>
+        <item> "Perfect, ideal, model, faultless, flawless, impeccable, irreproachable"  </item>
+        <item> "Keep out, deny access to, shut out, debar, disbar"  </item>
+        <item> "Incompatible, irreconcilable"  </item>
+        <item> "Increase in size, become larger, enlarge; swell, dilate, inflate"  </item>
+        <item> "Skill, skillfulness, expertness, prowess, proficiency, competence"  </item>
+        <item> "Utilize, harness, use, make use of, turn/put to good use, make the most of"  </item>
+        <item> "Exhaust, use up, consume, expend, drain, empty"  </item>
+        <item> "Addition, adjunct, annex, wing, supplementary building, ell"  </item>
+        <item> "Take out, draw out, pull out, remove, withdraw; free"  </item>
+        <item> "Food shortages, scarcity of food; starvation, malnutrition"  </item>
+        <item> "Practicable, practical, workable, achievable, attainable, realizable"  </item>
+        <item> "Limited, restricted, determinate, fixed"  </item>
+        <item> "Defect, blemish, fault, imperfection, deficiency, weakness"  </item>
+        <item> "Vary, change, differ, shift, alter, waver"  </item>
+        <item> "Center, focal point, central point, center of attention, hub, pivot"  </item>
+        <item> "Build defenses around, strengthen, secure, protect"  </item>
+        <item> "Frame, substructure, infrastructure, structure, skeleton, chassis"  </item>
+        <item> "Flippant, glib, facetious, joking, jokey, lighthearted"  </item>
+        <item> "Purpose, task, use, role"  </item>
+        <item> "Basic, underlying, core, foundational, rudimentary, elemental"  </item>
+
+    </string-array>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

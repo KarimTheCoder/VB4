@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+
+    <string-array name="beginner_hindi">
+        <item>"रक्षा (raksha)"</item>
+        <item>"प्रभाव (prabhaav)"</item>
+        <item>"प्रदूषण (pradooshan)"</item>
+        <item>"कठोर (kathor)"</item>
+        <item>"खाना या पीना(khaana ya peena),व्यय करना (vyay karana)"</item>
+        <item>"पहलू (pahaloo)"</item>
+        <item>"विदेश (videsh)"</item>
+        <item>"पाक शैली (paak shailee)"</item>
+        <item>"सामग्री (saamagree)"</item>
+        <item>"विशेषता (visheshata)"</item>
+
+        <item>"विशेषता (vishesh)"</item>
+        <item>"प्रतिष्ठा (pratishtha)"</item>
+        <item>"कमी (kamee)"</item>
+        <item>"गरीबी (gareebee)"</item>
+        <item>"बाधित करना (baadhit karana)"</item>
+        <item>"पर्याप्त (paryaapt)"</item>
+        <item>"क्षतिपूर्ति करना (kshatipoorti karana)"</item>
+        <item>"महत्वपूर्ण (mahatvapoorn)"</item>
+        <item>"सिर्फ़ (sirf)"</item>
+        <item>"स्पष्ट (spasht)"</item>
+
+        <item>"घटाना (ghataana)"</item>
+        <item>"जटिल (jatil)"</item>
+        <item>"असुरक्षित (asurakshit)"</item>
+        <item>"परिवर्तन करना (parivartan karana)"</item>
+        <item>"लाभ होना (laabh hona)"</item>
+        <item>"अलंकृत (alankrt)"</item>
+        <item>"प्रमाण (pramaan)"</item>
+        <item>"अति महत्वपूर्ण (ati mahatvapoorn)"</item>
+        <item>"स्थिर करना (sthir karana)"</item>
+
+
+        <item>"योगदान करना (yogadaan karana)"</item>
+        <item>"आकर्षित करना (aakarshit karana)"</item>
+        <item>"बढ़ा-चढ़ाकर प्रस्तुत करना (badha-chadhaakar prastut karana)"</item>
+        <item>"संकेत या इंगित करना/संकेत (sanket ya ingit karana)"</item>
+        <item>"विनोदपूर्ण (vinodapoorn)"</item>
+        <item>"संयुक्त कर दिया जाना (sanyukt kar diya jaana)"</item>
+        <item>"प्रमुख (pramukh)"</item>
+        <item>"दर्शक (darshak)"</item>
+        <item>"आयोजन स्थल (aayojan sthal)"</item>
+        <item>"परेड (parade)"</item>
+
+        <item>"कमी (kamee)"</item>
+        <item>"सक्षम (saksham)"</item>
+        <item>"सज्जित करना (sajjit karana)"</item>
+        <item>"माल (mal)"</item>
+        <item>"नवाचार (navaachaar)"</item>
+        <item>"तीव्र (tivr)"</item>
+        <item>"तेज करें (tej karen)"</item>
+        <item>"प्रेरणा (prerana)"</item>
+        <item>"विशेषता (visheshata)"</item>
+        <item>"बनाने वाला (banaane vaala)"</item>
+
+        <item>"काम (kaam)"</item>
+        <item>"विद्वान (vidvaan)"</item>
+        <item>"समाधान करना samaadhaan karana)"</item>
+        <item>"वहन कर सकने योग्य (vahan kar sakane yogy)"</item>
+        <item>"समर्पित करना (samarpit karana)"</item>
+        <item>"अनुशासन (anushaasan)"</item>
+        <item>"प्रतिभाशाली (pratibhaashaalee)"</item>
+        <item>"संतुलित (santulit)"</item>
+        <item>"गहरा (gahara)"</item>
+        <item>"जटिल (jatil)"</item>
+
+        <item>"उद्घाटन करना (udghaatan karana)"</item>
+        <item>"उपयुक्त (upayukt)"</item>
+        <item>"समुद्री पर्यटन (samudree paryatan)"</item>
+        <item>"अशांति (ashaanti)"</item>
+        <item>"भरोसेमंद (bharosemand)"</item>
+        <item>"कायम रखना (kaayam rakhana)"</item>
+        <item>"अलगाव (alagaav)"</item>
+        <item>"आत्मप्रदर्शन (aatmapradarshan)"</item>
+        <item>"प्रतिक्रिया देना (pratikriya dena)"</item>
+        <item>"चीजों को एकत्र करना (cheejon ko ekatr karana)"</item>
+
+        <item>"अनुकूलित हो जाना (anukoolit ho jaana)"</item>
+        <item>"निर्धारित करना (nirdhaarit karana)"</item>
+        <item>"वाष्पित करना (vaashpit karana)"</item>
+        <item>"किनारा (kinaara)"</item>
+        <item>"बहुत उत्पादक (bahut utpaadak)"</item>
+        <item>"उन्नति करना (unnati karana)"</item>
+        <item>"संचालित करना (sanchaalit karana)"</item>
+        <item>"दूसरे के विचारों और विश्वासों को स्वीकार करें (doosare ke vichaaron aur vishvaason ko sveekar karna)"</item>
+        <item>"प्रतिस्पर्द्धात्मक (Pratispard'dhātmaka)"</item>
+        <item>"स्वीकार करना (sveekaar karana)"</item>
+
+        <item>"अवसाद (avasaad)"</item>
+        <item>"मेहनती (mehanatee)"</item>
+        <item>"नई ऊर्जा से भर देना (naee oorja se bhar dena)"</item>
+        <item>"वनोन्मूलन (Vanōnmūlana)"</item>
+        <item>"वातावरण (vaataavaran)"</item>
+        <item>"वास (Vaas)"</item>
+        <item>"फुटकर बिक्री (phutakar bikree)"</item>
+        <item>"विवाद (vivaad)"</item>
+        <item>"प्रवृत्ति (pravrtti)"</item>
+        <item>"समर्पित करना (samarpit karana)"</item>
+
+        <item>"संभावना से भरे (sambhaavana se bhare)"</item>
+        <item>"कोष (kosh)"</item>
+        <item>"परामर्शदाता (paraamarshadaata)"</item>
+        <item>"जारी रहें (jaaree rahen)"</item>
+        <item>"बाधित (baadhit)"</item>
+        <item>"उत्सर्जित करना (utsarjit karana)"</item>
+        <item>"कमी होना (kamee hona)"</item>
+        <item>"अंदाजा लगाना (andaaja lagaana)"</item>
+        <item>"मुख्य (mukhy)"</item>
+        <item>"किफ़ायती (kifaayatee)"</item>
+
+        <item>"अनिवार्य (anivaary)"</item>
+        <item>"आवासीय (aavaaseey)"</item>
+        <item>"पर्यवेक्षण करना (paryavekshan karana)"</item>
+        <item>"प्रतिभागी (pratibhaagee)"</item>
+        <item>"कुछ चुनना (kuchh chunana)"</item>
+        <item>"प्रस्फुटित होना (prasphutit hona)"</item>
+        <item>"प्रचार करना (prachaar karana)"</item>
+        <item>"परियोजना (pariyojana)"</item>
+        <item>"तीव्र (teevr)"</item>
+        <item>"अनावृत करना (anaavrt karana)"</item>
+
+        <item>"बाधा (baadha)"</item>
+        <item>"गांठ बांधना (gaanth baandhana)"</item>
+        <item>"मोहक (mohak)"</item>
+        <item>"अनुष्ठान (anushthaan)"</item>
+
+
+    </string-array>
+
+</resources>
