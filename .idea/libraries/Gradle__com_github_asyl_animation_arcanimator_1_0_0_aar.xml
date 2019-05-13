@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.asyl.animation:arcanimator:1.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/arcanimator-1.0.0.aar/d155b3c6886eb2971beddb25f8f0197a/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/arcanimator-1.0.0.aar/d155b3c6886eb2971beddb25f8f0197a/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ba5ccd4b2e008d6d03eabea93684743b/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ba5ccd4b2e008d6d03eabea93684743b/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

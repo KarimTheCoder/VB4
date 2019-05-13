@@ -102,7 +102,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         //Toast.makeText(this,"SharedLearned "+sharedLearned+" level "+level+" fivewordsize "+fiveWordSize,Toast.LENGTH_SHORT).show();
 
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197xxx");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197");
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
 
 
@@ -286,7 +286,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
         gettingLearnedWords();
 
-        Toast.makeText(this, learnedWords.size()+"", Toast.LENGTH_SHORT).show();
+
         recyclerView = (RecyclerView)findViewById(R.id.train_finished_recycler_view);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

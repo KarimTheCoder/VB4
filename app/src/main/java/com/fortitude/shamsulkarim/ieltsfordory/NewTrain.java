@@ -68,7 +68,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private int lastMistake = 13;
     private int mistakes, wordsPerSession,FIVE_WORD_SIZE, showCycle, quizCycle, languageId, repeatPerSession, totalCycle, noshowads, progressCount, cb ;
     private SharedPreferences sp;
-    private ArrayList<Word> words, fiveWords,questionWords;
+    private ArrayList<Word> words, fiveWords,fiveWordsCopy,questionWords;
     private RoundCornerProgressBar progress1;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -82,8 +82,10 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private int totalMistakeCount, totalCorrects;
     private boolean soundState = true;
     boolean isAdShown1 = false;
+    boolean isWhichvocbularyToText = false;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
     private PublisherInterstitialAd mPublisherInterstitialAd;
+
 
     private List<String> IELTSFav, TOEFLFav, SATFav, GREFav;
 
@@ -135,7 +137,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         }
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197xxx");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197");
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
 
         tts = new TextToSpeech(this, this);
@@ -289,29 +291,37 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             // hide all the views after the learning stage
             //------------------------------
 
-            hideViews();
-            whichVocabularyToTest();
+            //hideViews();
+            if(!isWhichvocbularyToText){
+                whichVocabularyToTest(view);
+                isWhichvocbularyToText = true;
+            }else {
+
+            isAdShown1 = showInterstitialAd(isAdShown1);
+            answerCard1.setVisibility(View.VISIBLE);
+            answerCard2.setVisibility(View.VISIBLE);
+            answerCard3.setVisibility(View.VISIBLE);
+            answerCard4.setVisibility(View.VISIBLE);
+            speak.setVisibility(View.VISIBLE);
+
+                if(fiveWords.size()>0){
+
+                    wordView.setText(fiveWords.get(quizCycle).getWord());
+
+                }
+
+
+                quizWords(quizCycle, view);
+            }
+
 
             //------------------------------
 
 
 
-//            isAdShown1 = showInterstitialAd(isAdShown1);
-//
-//            answerCard1.setVisibility(View.VISIBLE);
-//            answerCard2.setVisibility(View.VISIBLE);
-//            answerCard3.setVisibility(View.VISIBLE);
-//            answerCard4.setVisibility(View.VISIBLE);
-//            speak.setVisibility(View.VISIBLE);
-
-            if(fiveWords.size()>0){
-
-                wordView.setText(fiveWords.get(quizCycle).getWord());
-
-            }
 
 
-            quizWords(quizCycle, view);
+
 
         }
 
@@ -397,6 +407,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private void quizWords(int quizCycle, View v){
 
 
+
         if(quizCycle == 0){
 
             answerCardAnimation();
@@ -405,11 +416,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
 
-            hideViews();
-//            answerCard1.setVisibility(View.VISIBLE);
-//            answerCard2.setVisibility(View.VISIBLE);
-//            answerCard3.setVisibility(View.VISIBLE);
-//            answerCard4.setVisibility(View.VISIBLE);
+            //hideViews();
+            answerCard1.setVisibility(View.VISIBLE);
+            answerCard2.setVisibility(View.VISIBLE);
+            answerCard3.setVisibility(View.VISIBLE);
+            answerCard4.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.INVISIBLE);
             fab.animate().scaleX(0f).scaleY(0f).setDuration(350L).setInterpolator(new AnticipateOvershootInterpolator());
 
@@ -483,6 +494,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
         fiveWords = new ArrayList<>();
+        fiveWordsCopy = new ArrayList<>();
         questionWords = new ArrayList<>();
 
         answerCard1.setAlpha(0f);
@@ -774,11 +786,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     lastMistake = quizCycle;
                     if(mistakes <= 3){
 
-                        StyleableToast.makeText(this, "Chicken brain", 10, R.style.wrong).show();
+                        StyleableToast.makeText(this, "Wrong answer", 10, R.style.wrong).show();
 
                     }
                     if(mistakes >= 4){
-                        StyleableToast.makeText(this, "Mama mia! wrong answer", 10, R.style.MyToast).show();
+                        StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
 
                     }
                 }
@@ -830,11 +842,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                      lastMistake = quizCycle;
                      if(mistakes <= 3){
 
-                         StyleableToast.makeText(this, "Chicken brain", 10, R.style.wrong).show();
+                         StyleableToast.makeText(this, "Wrong answer!", 10, R.style.wrong).show();
 
                      }
                      if(mistakes >= 4){
-                         StyleableToast.makeText(this, "Mama mia! wrong answer", 10, R.style.MyToast).show();
+                         StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
 
                      }
                  }
@@ -882,11 +894,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     lastMistake = quizCycle;
                     if(mistakes <= 3){
 
-                        StyleableToast.makeText(this, "Chicken brain", 10, R.style.wrong).show();
+                        StyleableToast.makeText(this, "Wrong answer!", 10, R.style.wrong).show();
 
                     }
                     if(mistakes >= 4){
-                        StyleableToast.makeText(this, "Mama mia! wrong answer", 10, R.style.MyToast).show();
+                        StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
 
                     }
                 }
@@ -938,11 +950,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     lastMistake = quizCycle;
                     if(mistakes <= 3){
 
-                        StyleableToast.makeText(this, "Chicken brain", 10, R.style.wrong).show();
+                        StyleableToast.makeText(this, "Wrong answer", 10, R.style.wrong).show();
 
                     }
                     if(mistakes >= 4){
-                        StyleableToast.makeText(this, "Mama mia! Wrong answer", 10, R.style.MyToast).show();
+                        StyleableToast.makeText(this, "Oh no! Wrong answer", 10, R.style.MyToast).show();
 
                     }
                 }
@@ -968,6 +980,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
             int pos = getMostMistakenWord(mistakeCollector);
+            fiveWords.clear();
+            fiveWords.addAll(fiveWordsCopy);
             updateLearnedDatabase();
             updateJustlearnedDatabase(pos);
 
@@ -1548,28 +1562,90 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         wordCard.setVisibility(View.INVISIBLE);
 
     }
+    private void unhideViews(){
+        topBackground.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+        answerCard1.setVisibility(View.VISIBLE);
+        answerCard2.setVisibility(View.VISIBLE);
+        answerCard3.setVisibility(View.VISIBLE);
+        answerCard4.setVisibility(View.VISIBLE);
+        progress1.setVisibility(View.VISIBLE);
+        wordCard.setVisibility(View.VISIBLE);
 
-    private void whichVocabularyToTest(){
+    }
 
-        String[] items = {};
+    private void whichVocabularyToTest(View v){
+
+        final View view = v;
+        final ArrayList<Word> userSelectedWords = new ArrayList<>();
+        fiveWordsCopy.addAll(fiveWords);
+
+        userSelectedWords.addAll(fiveWords);
+        String[] items = new String[fiveWords.size()];
+
+
+
 
         for(int i = 0; i < fiveWords.size(); i++){
+
             items[i] = fiveWords.get(i).getWord();
         }
 
+        fiveWords.clear();
+
         new LovelyChoiceDialog(this, R.style.CheckBoxTintTheme)
-                .setTopColorRes(R.color.advanceS)
-                .setTitle("Which vocabulary do you want to test?")
+                .setTopColorRes(R.color.colorPrimary)
+                .setTitle("Which vocabularies do you want to test?")
                 .setIcon(R.drawable.ic_stat_notification_icon)
                 .setItemsMultiChoice(items, new LovelyChoiceDialog.OnItemsSelectedListener<String>() {
                     @Override
                     public void onItemsSelected(List<Integer> positions, List<String> items) {
 
-                               Toast.makeText(NewTrain.this,"hello",Toast.LENGTH_LONG).show();
+                        for(int i = 0; i < items.size(); i++){
+
+                            for(int x = 0; x < userSelectedWords.size(); x++){
+
+                                if(items.get(i).equalsIgnoreCase(userSelectedWords.get(x).getWord())){
+                                    fiveWords.add(userSelectedWords.get(x));
+                                }
+                            }
+                        }
+
+                        if(fiveWords.size()>0){
+
+
+                            progress1.setMax(userSelectedWords.size()+(fiveWords.size()*repeatPerSession));
+                            wordView.setText(fiveWords.get(quizCycle).getWord());
+                            quizWords(quizCycle, view);
+                        }else{
+
+                            fiveWords.addAll(userSelectedWords);
+                            updateJustlearnedDatabase(-1);
+                            updateLearnedDatabase();
+
+                            Handler handler = new Handler();
+
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+                                    NewTrain.this.finish();
+                                }
+                            }, 200L);
+                        }
+
+
+                        FIVE_WORD_SIZE = fiveWords.size();
+
+
+
                     }
+
                 })
                 .setConfirmButtonText("Confirm")
                 .show();
+        unhideViews();
     }
 
 }

@@ -454,11 +454,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                         lastMistake = quizCycle;
                         if(mistakes <= 3){
 
-                            StyleableToast.makeText(this, "Chicken brain", 5, R.style.wrong).show();
+                            StyleableToast.makeText(this, "Wrong Answer", 5, R.style.wrong).show();
 
                         }
                         if(mistakes >= 4){
-                            StyleableToast.makeText(this, "Mama mia! wrong answer", 5, R.style.MyToast).show();
+                            StyleableToast.makeText(this, "Oh no! wrong answer", 5, R.style.MyToast).show();
 
                         }
                     }
@@ -509,11 +509,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                         lastMistake = quizCycle;
                         if(mistakes <= 3){
 
-                            StyleableToast.makeText(this, "Chicken brain", 5, R.style.wrong).show();
+                            StyleableToast.makeText(this, "Wrong answer", 5, R.style.wrong).show();
 
                         }
                         if(mistakes >= 4){
-                            StyleableToast.makeText(this, "Mama mia! wrong answer", 5, R.style.MyToast).show();
+                            StyleableToast.makeText(this, "Oh no! wrong answer", 5, R.style.MyToast).show();
 
                         }
                     }
@@ -558,11 +558,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                         lastMistake = quizCycle;
                         if(mistakes <= 3){
 
-                            StyleableToast.makeText(this, "Chicken brain", 5, R.style.wrong).show();
+                            StyleableToast.makeText(this, "Wrong answer", 5, R.style.wrong).show();
 
                         }
                         if(mistakes >= 4){
-                            StyleableToast.makeText(this, "Mama mia! wrong answer", 5, R.style.MyToast).show();
+                            StyleableToast.makeText(this, "Oh no! wrong answer", 5, R.style.MyToast).show();
 
                         }
                     }
@@ -612,11 +612,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                         lastMistake = quizCycle;
                         if(mistakes <= 3){
 
-                            StyleableToast.makeText(this, "Chicken brain", 5, R.style.wrong).show();
+                            StyleableToast.makeText(this, "Wrong answer", 5, R.style.wrong).show();
 
                         }
                         if(mistakes >= 4){
-                            StyleableToast.makeText(this, "Mama mia! Wrong answer", 5, R.style.MyToast).show();
+                            StyleableToast.makeText(this, "Oh no! Wrong answer", 5, R.style.MyToast).show();
 
                         }
                     }
