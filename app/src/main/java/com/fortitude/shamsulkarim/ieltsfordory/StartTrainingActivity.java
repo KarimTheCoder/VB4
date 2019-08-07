@@ -22,8 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.TransactionDetails;
+
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewSettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
@@ -35,7 +34,7 @@ import java.util.List;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class StartTrainingActivity extends AppCompatActivity implements View.OnClickListener, BillingProcessor.IBillingHandler {
+public class StartTrainingActivity extends AppCompatActivity implements View.OnClickListener{
 
     private String[] IELTSwordArray, IELTStranslationArray, IELTSgrammarArray, IELTSpronunArray, IELTSexample1array, IELTSexample2Array, IELTSexample3Array, IELTSvocabularyType;
     private String[] TOEFLwordArray, TOEFLtranslationArray, TOEFLgrammarArray, TOEFLpronunArray, TOEFLexample1array, TOEFLexample2Array, TOEFLexample3Array, TOEFLvocabularyType;
@@ -224,26 +223,26 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    @Override
-    public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
-        Toast.makeText(this, "Purchased", Toast.LENGTH_SHORT).show();
-        sp.edit().putInt("cb", 1).apply();
-    }
-
-    @Override
-    public void onPurchaseHistoryRestored() {
-
-    }
-
-    @Override
-    public void onBillingError(int errorCode, @Nullable Throwable error) {
-
-    }
-
-    @Override
-    public void onBillingInitialized() {
-
-    }
+//    @Override
+//    public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
+//        Toast.makeText(this, "Purchased", Toast.LENGTH_SHORT).show();
+//        sp.edit().putInt("cb", 1).apply();
+//    }
+//
+//    @Override
+//    public void onPurchaseHistoryRestored() {
+//
+//    }
+//
+//    @Override
+//    public void onBillingError(int errorCode, @Nullable Throwable error) {
+//
+//    }
+//
+//    @Override
+//    public void onBillingInitialized() {
+//
+//    }
 
 
     private void getWords() {

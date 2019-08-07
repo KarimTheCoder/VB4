@@ -67,7 +67,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginLeft="8dp"
-                    ></View>
+                    android:layout_marginStart="8dp" />
 
                 <TextView
                     android:id="@+id/card_grammar"
@@ -85,7 +85,23 @@
 
                     app:layout_constraintBottom_toBottomOf="@id/pos_background"
                     app:layout_constraintLeft_toRightOf="@id/favorite_card_word"
-                    app:layout_constraintTop_toTopOf="@id/pos_background" />
+                    app:layout_constraintTop_toTopOf="@id/pos_background"
+                    android:layout_marginStart="8dp" />
+
+                <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/spin_kit"
+                    style="@style/SpinKitView.Small.Wave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    app:SpinKit_Color="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/favorite_speaker"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <mehdi.sakout.fancybuttons.FancyButton
                     android:id="@+id/favorite"

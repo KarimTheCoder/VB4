@@ -99,6 +99,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             sp.edit().putString("level","advance").apply();
             v.getContext().startActivity(new Intent(v.getContext(), StartTrainingActivity.class));
 
+
         }
 
         if(v ==intermediateCard){
@@ -106,12 +107,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             sp.edit().putString("level","intermediate").apply();
             v.getContext().startActivity(new Intent(v.getContext(), StartTrainingActivity.class));
 
+
         }
 
         if(v == beginnerCard){
 
             sp.edit().putString("level","beginner").apply();
             v.getContext().startActivity(new Intent(v.getContext(), StartTrainingActivity.class));
+
 
         }
     }

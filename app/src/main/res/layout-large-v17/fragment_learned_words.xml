@@ -1,0 +1,201 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey100"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.LearnedWords">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.v7.widget.Toolbar
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/learned_toolbar" />
+
+    <com.arlib.floatingsearchview.FloatingSearchView
+        android:id="@+id/mSearch"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="8dp"
+
+        app:floatingSearch_close_search_on_keyboard_dismiss="false"
+        app:floatingSearch_searchBarMarginLeft="-2dp"
+        app:floatingSearch_searchBarMarginRight="-2dp"
+        app:floatingSearch_searchBarMarginTop="0dp"
+        app:floatingSearch_searchHint="Search..."
+        app:floatingSearch_showSearchKey="false"
+        app:floatingSearch_suggestionsListAnimDuration="250"
+        android:layout_alignTop="@+id/learned_toolbar"
+        android:layout_alignBottom="@+id/learned_toolbar"
+
+        />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:entries="@array/spinner_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/word_spinner"
+        android:layout_alignTop="@+id/learned_toolbar"
+        android:layout_alignBottom="@+id/learned_toolbar"
+        android:layout_alignEnd="@id/mSearch"
+        android:layout_marginEnd="16dp"
+
+
+        >
+
+
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <TextView
+
+        android:id="@+id/havenotlearned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/sanf_regular"
+
+        android:gravity="center"
+        android:text="Look at me! I have not learned any words"
+        android:textSize="18sp" />
+
+    <ImageView
+
+        android:layout_above="@+id/havenotlearned"
+        android:layout_marginTop="20dp"
+        android:id="@+id/no_learned_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/no_learned"
+        android:layout_centerHorizontal="true"
+        />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/nl_start_learning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/havenotlearned"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+
+
+        android:elevation="3dp"
+        android:textSize="18sp"
+        fancy:fb_borderColor="#A181BE"
+        fancy:fb_borderWidth="2dp"
+        fancy:fb_defaultColor="@color/beginnerS"
+        fancy:fb_focusColor="#D8C9E8"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="START LEARNING"
+        fancy:fb_textColor="#ffffff"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/learned_toolbar"
+        android:layout_above="@+id/dummy_bottom_navigation"
+        android:id="@+id/recycler_view_learned_words"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/dropshadow"
+        android:layout_below="@id/learned_toolbar"
+        ></View>
+
+
+    <com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.Fab
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dummy_bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_train"
+        android:background="@color/beginnerS"
+
+        />
+
+    <com.gordonwong.materialsheetfab.DimOverlayFrameLayout
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <io.codetail.widget.RevealLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="end|bottom"
+        android:orientation="vertical">
+
+        <!-- Sheet that contains your items -->
+        <android.support.v7.widget.CardView
+            android:layout_above="@+id/dummy_bottom_navigation"
+            android:id="@+id/fab_sheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Recording -->
+                <TextView
+                    android:id="@+id/advance_fab"
+                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                    android:drawableLeft="@drawable/ic_train_black"
+                    android:drawableStart="@drawable/ic_train_black"
+                    android:text="Advance" />
+
+                <!-- Reminder -->
+                <TextView
+                    android:id="@+id/intermediate_fab"
+                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                    android:drawableLeft="@drawable/ic_train_black"
+                    android:drawableStart="@drawable/ic_train_black"
+                    android:text="Intermediate" />
+
+                <!-- Photo -->
+                <TextView
+                    android:id="@+id/beginner_fab"
+                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                    android:drawableLeft="@drawable/ic_train_black"
+                    android:drawableStart="@drawable/ic_train_black"
+                    android:text="Beginner" />
+
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+    </io.codetail.widget.RevealLinearLayout>
+
+    <View
+        android:id="@+id/dummy_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+
+        ></View>
+
+
+</RelativeLayout>

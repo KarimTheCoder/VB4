@@ -14,7 +14,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+
+        >
 
         <activity
             android:name=".SplashScreen"
@@ -47,12 +49,16 @@
             </intent-filter>
         </receiver>
 
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="92bbc6255603d1a30b14cb34e5b1554e6a6adb76" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7815894766256601~5016349461"/>
 
         <activity android:name=".ChooseVocabulary" />
         <activity android:name=".AppLauncher">

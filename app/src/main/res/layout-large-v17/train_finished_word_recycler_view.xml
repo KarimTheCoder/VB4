@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/most_mistaken_card"
+        app:cardBackgroundColor="@color/grey100"
+        app:cardCornerRadius="20dp"
+        android:elevation="0dp"
+        app:cardElevation="0dp"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:padding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/train_finished_recycler_view_word"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Comprehensive"
+                android:textSize="18sp"
+                android:fontFamily="@font/productreg"
+                android:textColor="@color/bottomColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/train_finished_recycler_view_favorite"
+                android:layout_width="71dp"
+                android:layout_height="35dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:background="#00000000"
+                android:padding="7dp"
+                fancy:fb_borderWidth="2dp"
+                fancy:fb_defaultColor="#ffffff"
+                fancy:fb_focusColor="@color/colorPrimary"
+                fancy:fb_ghost="true"
+                fancy:fb_iconResource="@drawable/ic_favorite"
+                fancy:fb_radius="100000dp"
+                fancy:fb_text=""
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/train_finished_recycler_view_unlearn"
+                app:layout_constraintTop_toTopOf="parent"></mehdi.sakout.fancybuttons.FancyButton>
+
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/train_finished_recycler_view_unlearn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:elevation="3dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                fancy:fb_borderColor="#fff"
+                fancy:fb_borderWidth="2dp"
+                fancy:fb_defaultColor="#fff"
+                fancy:fb_focusColor="@color/colorPrimary"
+                fancy:fb_radius="30dp"
+                fancy:fb_text="Unlearn"
+                fancy:fb_textColor="@color/lowColor"
+                 />
+
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>

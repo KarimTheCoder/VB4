@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -16,12 +17,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,12 +38,22 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseInte
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import com.github.clans.fab.FloatingActionButton;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Wave;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -97,9 +110,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private JustLearnedDatabaseIntermediate justLearnedDatabaseIntermediate;
     private JustLearnedDatabaseAdvance justLearnedDatabaseAdvance;
 
-
-
-
+    private StorageReference gsReference;
+    private FirebaseStorage storage;
+    public File localFile = null;
+    public String audioPath= null;
+    ProgressBar progressBar;
 
 
 
@@ -166,6 +181,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 //                updateLearnedDatabase();
 //        NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
 //        NewTrain.this.finish();
+
 
 
     }
@@ -302,7 +318,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             answerCard2.setVisibility(View.VISIBLE);
             answerCard3.setVisibility(View.VISIBLE);
             answerCard4.setVisibility(View.VISIBLE);
-            speak.setVisibility(View.VISIBLE);
+            speak.setVisibility(View.INVISIBLE);
 
                 if(fiveWords.size()>0){
 
@@ -338,8 +354,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                 word = wordView.getText().toString();
 
-                tts.setLanguage(Locale.US);
-                tts.speak(word, TextToSpeech.QUEUE_ADD, null);
+//                tts.setLanguage(Locale.US);
+//                tts.speak(word, TextToSpeech.QUEUE_ADD, null);
+                downloadAudio(word);
 
                 if(showCycle == FIVE_WORD_SIZE){
                     showCycle++;
@@ -351,8 +368,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
             }
 
-            tts.setLanguage(Locale.US);
-            tts.speak(word, TextToSpeech.QUEUE_ADD, null);
+//            tts.setLanguage(Locale.US);
+//            tts.speak(word, TextToSpeech.QUEUE_ADD, null);
+            downloadAudio(word);
 
         }
 
@@ -376,7 +394,14 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
             if( showCycle < FIVE_WORD_SIZE){
 
-                wordView.setText(fiveWords.get(showCycle).getWord());
+                try{
+                    wordView.setText(fiveWords.get(showCycle).getWord());
+
+                }catch (NullPointerException i){
+                    Log.i("Error","Quiz Cycle: "+quizCycle+" ShowCycle: "+showCycle);
+ 
+                }
+
 //                wordViewMiddle.setText(fiveWords.get(showCycle).getWord());
 
 
@@ -454,6 +479,12 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         answerView4 = (TextView)findViewById(R.id.train_answer_text4);
         speak =       (FancyButton) findViewById(R.id.train_speaker_icon);
         speak.setVisibility(View.INVISIBLE);
+        storage = FirebaseStorage.getInstance();
+
+        progressBar = findViewById(R.id.spin_kit);
+        Sprite doubleBounce = new Wave();
+        progressBar.setIndeterminateDrawable(doubleBounce);
+        progressBar.setVisibility(View.INVISIBLE);
 
         isIeltsChecked = sp.getBoolean("isIELTSActive",true);
         isToeflChecked = sp.getBoolean("isTOEFLActive", true);
@@ -734,10 +765,10 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         if(this.quizCycle < (FIVE_WORD_SIZE*repeatPerSession)){
 
             if(languageId == 0){
-                answer = fiveWords.get(quizCycle).getTranslation().toString();
+                answer = fiveWords.get(quizCycle).getTranslation();
             }
             else {
-                answer = fiveWords.get(quizCycle).getExtra().toString();
+                answer = fiveWords.get(quizCycle).getExtra();
 
             }
 
@@ -1400,7 +1431,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
 
-                Toast.makeText(this, "IELTS learned: "+word.position, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(this, "IELTS learned: "+word.position, Toast.LENGTH_SHORT).show();
             }
 
             if( word.vocabularyType.equalsIgnoreCase("TOEFL")){
@@ -1408,7 +1439,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                 TOEFLdatabase.updateLearned(word.position+"", "true");
 
-                Toast.makeText(this, "TOEFL learned: "+word.position, Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(this, "TOEFL learned: "+word.position, Toast.LENGTH_SHORT).show();
             }
 
             if(word.vocabularyType.equalsIgnoreCase("SAT")){
@@ -1416,7 +1447,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                 SATdatabase.updateLearned(word.position+"", "true");
 
-                Toast.makeText(this, "SAT learned: "+word.position, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(this, "SAT learned: "+word.position, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -1425,7 +1456,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                 GREdatabase.updateLearned(word.position+"", "true");
 
-                Toast.makeText(this, "GRE learned: "+word.position, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(this, "GRE learned: "+word.position, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -1534,7 +1565,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
 
-            if( isAdShown == false){
+            if(!isAdShown){
 
                 //if( cb != 1){
 
@@ -1577,10 +1608,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private void whichVocabularyToTest(View v){
 
         final View view = v;
-        final ArrayList<Word> userSelectedWords = new ArrayList<>();
         fiveWordsCopy.addAll(fiveWords);
 
-        userSelectedWords.addAll(fiveWords);
+        final ArrayList<Word> userSelectedWords = new ArrayList<>(fiveWords);
         String[] items = new String[fiveWords.size()];
 
 
@@ -1591,7 +1621,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             items[i] = fiveWords.get(i).getWord();
         }
 
-        fiveWords.clear();
+
 
         new LovelyChoiceDialog(this, R.style.CheckBoxTintTheme)
                 .setTopColorRes(R.color.colorPrimary)
@@ -1600,6 +1630,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 .setItemsMultiChoice(items, new LovelyChoiceDialog.OnItemsSelectedListener<String>() {
                     @Override
                     public void onItemsSelected(List<Integer> positions, List<String> items) {
+
+                        fiveWords.clear();
 
                         for(int i = 0; i < items.size(); i++){
 
@@ -1646,6 +1678,60 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 .setConfirmButtonText("Confirm")
                 .show();
         unhideViews();
+    }
+
+    public void downloadAudio(String wordName){
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        wordName = wordName.toLowerCase();
+        gsReference = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com/audio/"+wordName+".mp3");
+
+        try{
+            localFile = File.createTempFile("Audio","mp3");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        gsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+
+
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+               // Toast.makeText(getApplicationContext() , localFile.getAbsolutePath(),Toast.LENGTH_SHORT).show();
+                audioPath = localFile.getAbsolutePath();
+
+                MediaPlayer mp = new MediaPlayer();
+               // Toast.makeText(getApplicationContext(),audioPath,Toast.LENGTH_LONG).show();
+                try{
+
+                    mp.setDataSource(audioPath);
+                    mp.prepare();
+                    mp.start();
+                    speak.setEnabled(false);
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            speak.setEnabled(true);
+                           // Toast.makeText(getApplicationContext(),"play finished", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+               // Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_LONG).show();
+                speak.setEnabled(true);
+                progressBar.setVisibility(View.INVISIBLE);;
+            }
+        });
+
     }
 
 }

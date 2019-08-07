@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.yarolegovich:lovely-dialog:1.0.7@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8d188ff054d870185443e0e6a529008a/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8d188ff054d870185443e0e6a529008a/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5fb8815b4c604f9349566feed64005d0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5fb8815b4c604f9349566feed64005d0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

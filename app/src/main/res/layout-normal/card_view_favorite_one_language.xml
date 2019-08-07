@@ -37,11 +37,11 @@
                 android:layout_height="60dp">
 
                 <View
+                    android:id="@+id/view6"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@drawable/dropshadow"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    ></View>
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
 
                 <TextView
@@ -56,7 +56,8 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="16dp" />
 
 
                 <View
@@ -66,7 +67,8 @@
                     android:layout_marginLeft="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/favorite_card_word"
-                    app:layout_constraintTop_toTopOf="parent"></View>
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="8dp" />
 
                 <TextView
                     android:id="@+id/favorite_card_grammar"
@@ -85,6 +87,22 @@
                     app:layout_constraintRight_toRightOf="@id/pos_background"
                     app:layout_constraintTop_toTopOf="@id/pos_background" />
 
+
+                <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/spin_kit"
+                    style="@style/SpinKitView.Small.Wave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    app:SpinKit_Color="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/favorite_speaker"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
                 <mehdi.sakout.fancybuttons.FancyButton
                     android:id="@+id/favorite_favorite"
                     android:layout_width="60dp"
@@ -98,9 +116,7 @@
                     fancy:fb_focusColor="@color/colorPrimary"
                     fancy:fb_iconResource="@drawable/ic_favorite"
                     fancy:fb_radius="100dp"
-                    fancy:fb_text="">
-
-                </mehdi.sakout.fancybuttons.FancyButton>
+                    fancy:fb_text="" />
 
                 <mehdi.sakout.fancybuttons.FancyButton
                     android:id="@+id/favorite_speaker"
@@ -121,6 +137,8 @@
                 </mehdi.sakout.fancybuttons.FancyButton>
 
 
+
+
             </android.support.constraint.ConstraintLayout>
 
 
@@ -136,7 +154,7 @@
                 android:fontFamily="@font/productreg"
                 android:text="This is an translationdfddddddddddddddddddddddddddddddddddddddddd"
                 android:textColor="@color/middleColor"
-                android:textSize="18sp"></TextView>
+                android:textSize="18sp" />
 
 
             <TextView

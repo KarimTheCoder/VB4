@@ -40,8 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@drawable/dropshadow"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    ></View>
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
 
                 <TextView
@@ -84,6 +83,22 @@
                     app:layout_constraintLeft_toLeftOf="@id/pos_background"
                     app:layout_constraintRight_toRightOf="@id/pos_background"
                     app:layout_constraintTop_toTopOf="@id/pos_background" />
+
+                <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/spin_kit"
+                    style="@style/SpinKitView.Small.Wave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    app:SpinKit_Color="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/favorite_speaker"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
 
                 <mehdi.sakout.fancybuttons.FancyButton
                     android:id="@+id/favorite_favorite"

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.scalified:uitools:1.1.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b2cea26bf0b9e4156260d25d322b93de/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b2cea26bf0b9e4156260d25d322b93de/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/314b9f80dddc374ef7a47c96e0a79724/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/314b9f80dddc374ef7a47c96e0a79724/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

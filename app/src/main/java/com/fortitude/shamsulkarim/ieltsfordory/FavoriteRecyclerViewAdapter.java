@@ -2,8 +2,11 @@ package com.fortitude.shamsulkarim.ieltsfordory;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +22,18 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Wave;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -31,7 +46,9 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRecyclerViewAdapter.WordViewHolder>  implements Filterable {
 
-
+    public String audioPath= null;
+    public File localFile = null;
+    StorageReference gsReference;
      List<Boolean> isFav = new ArrayList<>();
      List<Word> words,filterList;
      CustomFilterFavorite filter;
@@ -44,11 +61,11 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
      int languageId;
      int favoriteCount;
      String languageName[] = {"","spanish","hindi","bengali"};
-
+    private FirebaseStorage storage;
 
     public FavoriteRecyclerViewAdapter(Context context, List<Word> words) {
         this.context = context;
-
+        storage = FirebaseStorage.getInstance();
         this.words = words;
         this.filterList = words;
 
@@ -73,6 +90,9 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
         addFav();
     }
+
+
+
 
 
 
@@ -113,10 +133,12 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
 
     public void onBindViewHolder(WordViewHolder holder, int position) {
-
         int pos = position;
-
         Word word = words.get(pos);
+
+
+
+
 
         if(isFav.get(pos) == true){
 
@@ -171,6 +193,8 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
     }
 
 
+
+
     @Override
     public int getItemCount() {
         return words.size();
@@ -189,10 +213,15 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
     class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, TextToSpeech.OnInitListener{
 
+
         TextView wordView,translationView, grammarView, exampleView1,exampleView2,exampleView3,secondLanguageName,secondTranslation;
         FancyButton favorite, speaker;
         TextToSpeech tts;
         CardView cardView;
+        ProgressBar progressBar;
+        Boolean isVoicePronunciation = true;
+
+
 
 
         public WordViewHolder(View itemView) {
@@ -207,6 +236,10 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             wordView = (TextView)itemView.findViewById(R.id.favorite_card_word);
             translationView = (TextView)itemView.findViewById(R.id.favorite_card_translation);
             grammarView = (TextView)itemView.findViewById(R.id.favorite_card_grammar);
+            progressBar = itemView.findViewById(R.id.spin_kit);
+            Sprite doubleBounce = new Wave();
+            progressBar.setIndeterminateDrawable(doubleBounce);
+            progressBar.setVisibility(View.INVISIBLE);
 
             exampleView1 = (TextView)itemView.findViewById(R.id.favorite_card_example1);
             exampleView2 = (TextView)itemView.findViewById(R.id.favorite_card_example2);
@@ -214,6 +247,13 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             speaker = (FancyButton) itemView.findViewById(R.id.favorite_speaker);
             cardView = (CardView)itemView.findViewById(R.id.recycler_view_card);
             cardView.setPreventCornerOverlap(false);
+
+            isVoicePronunciation = sp.getBoolean("pronunState",true);
+            speaker.setDisableBackgroundColor(Color.parseColor("#cccccc"));
+            speaker.setDisableBorderColor(Color.parseColor("#ffffff"));
+
+
+            //speaker.setEnabled(false);
 
 //
 //            wordView.setTypeface(ABeeZee);
@@ -242,22 +282,89 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             favorite.setOnClickListener(this);
             speaker.setOnClickListener(this);
 
+
+
         }
 
+
+
+        public void downloadAudio(String wordName){
+
+            progressBar.setVisibility(View.VISIBLE);;
+
+            wordName = wordName.toLowerCase();
+            gsReference = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com/audio/"+wordName+".mp3");
+
+            try{
+                localFile = File.createTempFile("Audio","mp3");
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+            gsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+
+
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    //Toast.makeText(context , localFile.getAbsolutePath(),Toast.LENGTH_SHORT).show();
+                    audioPath = localFile.getAbsolutePath();
+
+                    MediaPlayer mp = new MediaPlayer();
+                   // Toast.makeText(context,audioPath,Toast.LENGTH_LONG).show();
+                    try{
+
+                        mp.setDataSource(audioPath);
+                        mp.prepare();
+                        mp.start();
+                        speaker.setEnabled(false);
+                        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                speaker.setEnabled(true);
+                               // Toast.makeText(context,"play finished", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+
+
+
+                }
+            }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+                   // Toast.makeText(context,"Completed",Toast.LENGTH_LONG).show();
+                    speaker.setEnabled(true);
+                    progressBar.setVisibility(View.INVISIBLE);;
+                }
+            });
+
+        }
         @Override
         public void onClick(View view) {
 
             Word word = words.get(getAdapterPosition());
 
-
-
-            //Toast.makeText(view.getContext(),"level: "+words.get(getAdapterPosition()).level+ "DatabasePosition: "+words.get(getAdapterPosition()).databasePosition,Toast.LENGTH_SHORT).show();
-
             if( view == speaker){
 
+                String wordName = words.get(getAdapterPosition()).getWord().toLowerCase();
 
-                tts.setLanguage(Locale.US);
-                tts.speak(word.getWord(), TextToSpeech.QUEUE_ADD, null);
+
+
+                if (ConnectivityHelper.isConnectedToNetwork(context) && isVoicePronunciation) {
+                    //Show the connected screen
+                    downloadAudio(wordName);
+                    //Toast.makeText(context,"Connectedssss",Toast.LENGTH_LONG).show();
+
+                } else {
+                    //Show disconnected screen
+                    //Toast.makeText(context,"Not connected",Toast.LENGTH_LONG).show();
+                    tts.setLanguage(Locale.US);
+                    tts.speak(wordName, TextToSpeech.QUEUE_ADD, null);
+                }
+
+
 
 
             }
@@ -347,6 +454,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
             }
         }
+
 
         @Override
         public void onInit(int status) {

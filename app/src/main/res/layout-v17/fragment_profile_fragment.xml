@@ -1,0 +1,600 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    xmlns:plainpie="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <android.support.v7.widget.Toolbar
+        android:alpha="0.5"
+        android:id="@+id/profile_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        app:title="Status"
+        app:titleTextColor="@color/lowColor"
+        />
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/profile_toolbar"
+        android:layout_marginBottom="56dp"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:paddingBottom="8dp"
+            >
+
+            <TextView
+                android:id="@+id/your_progress_so_far_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/productbold"
+                android:text="Your progress \nso far"
+                android:textColor="@color/topColor"
+                android:textSize="30sp"
+                app:layout_constraintStart_toEndOf="@+id/profile_pie_view"
+                app:layout_constraintTop_toTopOf="@+id/profile_pie_view" />
+
+            <TextView
+                android:id="@+id/profile_learned_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/your_progress_so_far_text"
+                android:textSize="18sp"
+                android:fontFamily="@font/productreg"
+                android:text="25 words left"
+                android:textColor="@color/lowColor"
+                />
+
+            <TextView
+                android:id="@+id/profile_left_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_learned_text"
+                android:textSize="18sp"
+                android:fontFamily="@font/productreg"
+                android:text="25 words left"
+                android:textColor="@color/lowColor"
+                />
+
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/status_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="10dp"
+                android:layout_alignParentTop="true"
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/profile_rate_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="10dp"
+                android:layout_below="@+id/profile_left_text"
+                >
+                <android.support.constraint.ConstraintLayout
+                    android:background="@drawable/gradient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/rate_love_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/productbold"
+                        android:text="Support Us"
+                        android:textSize="18sp"
+                        android:textColor="#fff"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginEnd="48dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/productreg"
+                        android:text="@string/rate_string"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+
+                </android.support.constraint.ConstraintLayout>
+
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                app:cardBackgroundColor="@color/green"
+                android:id="@+id/bug_report_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardElevation="0dp"
+
+                app:cardCornerRadius="0dp"
+                android:layout_below="@+id/profile_rate_card"
+                >
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <ImageView
+                        android:id="@+id/imageView101"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/get_support_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/textView242"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/productbold"
+                        android:textSize="18sp"
+                        android:text="Report a bug"
+
+                        android:textColor="#ffffff"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView262"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="64dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:textColor="#ffffff"
+                        android:fontFamily="@font/productreg"
+                        android:text="@string/bug_text"
+                        android:textSize="14sp"
+
+                        app:layout_constraintEnd_toStartOf="@+id/imageView101"
+                        app:layout_constraintStart_toEndOf="@+id/imageView101"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView242" />
+
+                    <TextView
+                        android:id="@+id/get_support_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/productbold"
+                        android:text="Get support"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        app:layout_constraintTop_toBottomOf="@id/textView262"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginEnd="64dp"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/productreg"
+                        android:text="@string/get_support"
+                        android:textColor="#ffffff"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView101"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/get_support_text" />
+
+
+                </android.support.constraint.ConstraintLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/wrprps_layout"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:layout_below="@id/bug_report_card"
+                >
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/profile_wps"
+                    android:layout_below="@+id/bug_report_card"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="0dp"
+                    app:cardBackgroundColor="@color/yellow"
+                    >
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:id="@+id/textView28"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/productreg"
+                            android:text="Words per session"
+                            android:textColor="#ffffff"
+                            android:textSize="14dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile_wps_spinner" />
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/profile_wps_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:entries="@array/words_per_session_array"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView10"></android.support.v7.widget.AppCompatSpinner>
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/productreg"
+                            android:text="Learn at your pace"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp"
+                            android:textAlignment="center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </android.support.constraint.ConstraintLayout>
+
+
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:id="@+id/profile_rps"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="0dp"
+                    app:cardBackgroundColor="@color/yellowdark"
+                    >
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:id="@+id/profile_rps_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/productreg"
+                            android:text="Repetition"
+                            android:textColor="#ffffff"
+                            android:textSize="14dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile_rps_spinner" />
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/profile_rps_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:entries="@array/words_per_session_array"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView11"></android.support.v7.widget.AppCompatSpinner>
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/productreg"
+                            android:text="Learn with your style"
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </android.support.constraint.ConstraintLayout>
+
+
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+
+
+
+
+
+            <ImageView
+                android:layout_below="@id/wrprps_layout"
+                android:id="@+id/alarm_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/notification_icon" />
+
+
+            <TextView
+                android:id="@+id/set_alarm_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/alarm_icon"
+                android:layout_alignTop="@+id/alarm_icon"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@+id/alarm_icon"
+                android:fontFamily="@font/productreg"
+                android:gravity="center"
+                android:text="Set a reminder to study"
+                android:textColor="@color/topColor" />
+
+            <TextView
+                android:id="@+id/alarm_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/set_alarm_text"
+                android:layout_below="@+id/set_alarm_text"
+                android:fontFamily="@font/productreg"
+
+                android:gravity="center"
+
+
+                android:text="8 : 00 PM"
+                android:textColor="@color/lowColor" />
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/set_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_centerInParent="true"
+
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/alarm_time"
+
+                android:layout_alignStart="@+id/bug_text"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                fancy:fb_borderColor="#ffffff"
+                fancy:fb_borderWidth="2dp"
+                fancy:fb_defaultColor="#ffffff"
+                fancy:fb_focusColor="@color/colorPrimary"
+                fancy:fb_radius="0dp"
+                fancy:fb_text="SET TIME"
+                fancy:fb_textColor="@color/colorPrimary"></mehdi.sakout.fancybuttons.FancyButton>
+
+            <com.kyleduo.switchbutton.SwitchButton
+                android:id="@+id/alarm_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignBottom="@id/alarm_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:layout_alignTop="@+id/alarm_icon"
+
+
+                />
+
+
+            <TextView
+                android:id="@+id/follow_us_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/set_alarm"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/productbold"
+                android:text="Follow us \non social media"
+                android:textColor="@color/topColor"
+                android:textSize="28sp"
+                />
+
+            <TextView
+                android:id="@+id/follow_us_subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/follow_us_text"
+                android:fontFamily="@font/productreg"
+                android:textColor="@color/lowColor"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="18sp"
+                android:text="Get daily dose of vocabulary \non your timeline"
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_below="@id/follow_us_subtext"
+                android:orientation="horizontal"
+
+                >
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/fb_card"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginEnd="4dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/grey100"
+                    app:cardCornerRadius="15dp"
+                    >
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="24dp"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="24dp"
+                            android:src="@drawable/fb_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/instagram_card"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="4dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/grey100"
+                    app:cardCornerRadius="15dp"
+                    >
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="24dp"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="24dp"
+                            android:src="@drawable/instagram_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

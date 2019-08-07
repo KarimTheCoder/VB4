@@ -484,7 +484,7 @@
                 fancy:fb_text="SET TIME"
                 fancy:fb_textColor="@color/colorPrimary"></mehdi.sakout.fancybuttons.FancyButton>
 
-            <android.support.v7.widget.SwitchCompat
+            <com.kyleduo.switchbutton.SwitchButton
                 android:id="@+id/alarm_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

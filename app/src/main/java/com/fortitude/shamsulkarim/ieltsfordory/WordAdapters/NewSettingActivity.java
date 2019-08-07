@@ -74,8 +74,9 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private RecyclerView.LayoutManager layoutManager;
     private int wordsPerSession,repeatationPerSession;
     private SharedPreferences sp;
-    private SwitchButton soundSwitch;
+    private SwitchButton soundSwitch, pronunciationSwitch;
     private boolean switchState = true;
+    private boolean pronunciationState = true;
     private ProgressDialog progressDialog;
     private CheckBox ieltsCheckbox, toeflCheckbox, satCheckbox, greCheckbox;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
@@ -267,10 +268,15 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
         soundSwitch = (SwitchButton) findViewById(R.id.sound_switch);
+        pronunciationSwitch = findViewById(R.id.pronun_switch);
+
+        pronunciationSwitch.setOnClickListener(this);
         soundSwitch.setOnClickListener(this);
 
         switchState = sp.getBoolean("soundState", true);
+        pronunciationState = sp.getBoolean("pronunState",true);
 
+        pronunciationSwitch.setChecked(pronunciationState);
         soundSwitch.setChecked(switchState);
 
         imageQualitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -1324,6 +1330,18 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 sp.edit().putBoolean("soundState",true).apply();
             }
 
+        }
+
+        if( v == pronunciationSwitch){
+
+            if(pronunciationState){
+                pronunciationState = false;
+                sp.edit().putBoolean("pronunState",false).apply();
+
+            }else {
+                pronunciationState = true;
+                sp.edit().putBoolean("pronunState",true).apply();
+            }
         }
 
         if( v == signIn){

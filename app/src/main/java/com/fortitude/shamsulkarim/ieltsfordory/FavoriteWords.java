@@ -1,6 +1,7 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.fortitude.shamsulkarim.ieltsfordory.Practice.Practice;
@@ -58,6 +58,7 @@ public class FavoriteWords extends Fragment  {
     TextView noFavorite;
     ImageView noFavoriteImage;
     private FloatingSearchView sv;
+
 
     @Nullable
     @Override
@@ -391,7 +392,6 @@ public class FavoriteWords extends Fragment  {
         toeflWordDatabase = new TOEFLWordDatabase(v.getContext());
         greWordDatabase = new GREWordDatabase(v.getContext());
     }
-
 
 
 

@@ -30,6 +30,7 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -39,6 +40,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.AlarmReceiver;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.LocalData;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.NotificationScheduler;
+import com.kyleduo.switchbutton.SwitchButton;
 
 
 import java.text.SimpleDateFormat;
@@ -75,7 +77,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
     /// notification
     private String TAG = "RemindMe";
     private LocalData localData;
-    private SwitchCompat reminderSwitch;
+    private SwitchButton reminderSwitch;
     private TextView tvTime;
     private int hour, min, totalWordCount;
 
@@ -132,6 +134,11 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         setReminder = v.findViewById(R.id.set_alarm);
         tvTime.setText(getFormatedTime(hour, min));
         reminderSwitch.setChecked(localData.getReminderStatus());
+
+
+        //Toast.makeText(v.getContext(),localData.getReminderStatus()+"",Toast.LENGTH_LONG).show();
+
+
         leftTextView = v.findViewById(R.id.profile_left_text);
         learnedTextView = v.findViewById(R.id.profile_learned_text);
 
@@ -301,18 +308,24 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         bugReport.setOnClickListener(this);
 
 
-        if (!localData.getReminderStatus())
+        if (!localData.getReminderStatus()){
             setReminder.setAlpha(0.4f);
+        }else {
+            setReminder.setAlpha(1f);
+        }
+
 
 
         //-------------SET DEFAULT alaarm
 
         if(!sp.contains("defaultAlarm")){
 
-            reminderSwitch.setChecked(true);
+            //reminderSwitch.setChecked(true);
+            localData.setReminderStatus(true);
             NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, 18, 0);
             tvTime.setText(getFormatedTime(hour, min));
             setReminder.setAlpha(1f);
+            sp.edit().putBoolean("defaultAlarm",true);
         }
 
 
@@ -324,6 +337,8 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
                     Log.d(TAG, "onCheckedChanged: true");
                     NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, localData.get_hour(), localData.get_min());
                     setReminder.setAlpha(1f);
+
+
                 } else {
                     Log.d(TAG, "onCheckedChanged: false");
                     NotificationScheduler.cancelReminder(getContext(), AlarmReceiver.class);
@@ -518,7 +533,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
         if(v == fbCard){
 
-            Uri appUrl = Uri.parse("https://www.facebook.com/FortitudeVocab/notifications/");
+            Uri appUrl = Uri.parse("https://www.facebook.com/FortitudeLearn/");
             Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
             this.startActivity(rateApp);
 
@@ -526,7 +541,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
         if( v == instagramCard){
 
-            Uri appUrl = Uri.parse("https://www.instagram.com/fortitudevocab/");
+            Uri appUrl = Uri.parse("https://www.instagram.com/fortitudelearn/");
             Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
             this.startActivity(rateApp);
         }

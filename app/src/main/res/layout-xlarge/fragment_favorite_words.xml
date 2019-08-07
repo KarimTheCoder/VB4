@@ -33,7 +33,7 @@
         android:layout_below="@+id/favoriteToolbar"
         android:layout_above="@+id/dummy_bottom_navigation"
         android:id="@+id/recycler_view_favorite_words"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.Toolbar

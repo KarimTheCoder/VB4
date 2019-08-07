@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    >
+
+
+    <ImageView
+        android:id="@+id/word_background_display_learned_words"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/colorPrimary"
+        />
+
+    <TextView
+        android:id="@+id/word_display_learned_words"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/word_background_display_learned_words"
+        android:layout_alignTop="@+id/word_background_display_learned_words"
+        android:gravity="center"
+        android:paddingStart="14dp"
+        android:text="sldfjslkdfjsklfjsdlfjslksjf"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/word_background_display_learned_words">
+
+        <TextView
+            android:id="@+id/translation_display_learned_words"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="5dp"
+            android:background="#ffffff"
+
+            android:text="lfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkklfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkflfkjsflksjflksjflsjfljsfsdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkfkkkkkf" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
