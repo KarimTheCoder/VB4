@@ -102,7 +102,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         //Toast.makeText(this,"SharedLearned "+sharedLearned+" level "+level+" fivewordsize "+fiveWordSize,Toast.LENGTH_SHORT).show();
 
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197xxx");
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
 
 

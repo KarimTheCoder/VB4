@@ -74,7 +74,6 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
             sp.edit().putInt("favoriteCountProfile",0).apply();
 
-
         }else {
 
             favoriteCount = sp.getInt("favoriteCountProfile",0);

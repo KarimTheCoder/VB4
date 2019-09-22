@@ -103,12 +103,12 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_setting);
 
-        recyclerView = (RecyclerView)findViewById(R.id.choose_language_setting);
-        adapter = new LanguageAdapter();
-        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+        //recyclerView = (RecyclerView)findViewById(R.id.choose_language_setting);
+        //adapter = new LanguageAdapter();
+        //layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,true);
+        //recyclerView.setLayoutManager(layoutManager);
+        //recyclerView.setHasFixedSize(true);
+        //recyclerView.setAdapter(adapter);
         privacyPolicy = findViewById(R.id.privacy_policy_card);
         privacyPolicy.setOnClickListener(this);
 

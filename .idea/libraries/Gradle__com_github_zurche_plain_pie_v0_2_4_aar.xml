@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.zurche:plain-pie:v0.2.4@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f6c5e3b193a864e654ba542837662f8/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f6c5e3b193a864e654ba542837662f8/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1b29012eb14388d38f78913b85d3a5f9/plain-pie-v0.2.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1b29012eb14388d38f78913b85d3a5f9/plain-pie-v0.2.4/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

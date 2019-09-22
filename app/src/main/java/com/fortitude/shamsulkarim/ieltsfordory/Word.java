@@ -8,7 +8,16 @@ public class Word {
 
 
     public int count;
-    public String word, translation,extra,pronun,grammar,example1,example2,example3,vocabularyType;
+
+    public String getWordSL() {
+        return wordSL;
+    }
+
+    public void setWordSL(String wordSL) {
+        this.wordSL = wordSL;
+    }
+
+    public String word,wordSL, translation,extra, translationSL,pronun,grammar,example1, example1SL,example2, example2SL,example3, example3SL,vocabularyType;
     public boolean seen;
     public boolean removable;
     public String level;
@@ -229,6 +238,35 @@ public class Word {
         this.extra = extra;
     }
 
+    public String getTranslationSL() {
+        return translationSL;
+    }
 
+    public void setTranslationSL(String translationSL) {
+        this.translationSL = translationSL;
+    }
 
+    public String getExample1SL() {
+        return example1SL;
+    }
+
+    public void setExample1SL(String example1SL) {
+        this.example1SL = example1SL;
+    }
+
+    public String getExample2SL() {
+        return example2SL;
+    }
+
+    public void setExample2SL(String example2SL) {
+        this.example2SL = example2SL;
+    }
+
+    public String getExample3SL() {
+        return example3SL;
+    }
+
+    public void setExample3SL(String example3SL) {
+        this.example3SL = example3SL;
+    }
 }

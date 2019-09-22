@@ -12,6 +12,10 @@ import android.net.NetworkInfo;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,7 +102,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         level = sp.getString("level","NOTHING");
         examples[0] = word.getExample1();
         examples[1] = word.getExample2();
-        examples[2] = word.getExample3();
+        examples[2] = word.getExample3()+"\n"+word.getExample3SL();
 
         ieltsWordDatabase = new IELTSWordDatabase(context);
         toeflWordDatabasee = new TOEFLWordDatabase(context);
@@ -188,6 +192,27 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
             case DEFINATION_VIEW:
 
+                SpannableStringBuilder spanEx1 = new SpannableStringBuilder(word.getExample1()+"\n"+word.getExample1SL());
+
+                // Span to set text color to some RGB value
+                final ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#373d3f"));
+                final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
+                spanEx1.setSpan(fcs,0,word.getExample1().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                SpannableStringBuilder spanEx2 = new SpannableStringBuilder(word.getExample2()+"\n"+word.getExample2SL());
+                spanEx2.setSpan(fcs,0,word.getExample2().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                SpannableStringBuilder spanDef = new SpannableStringBuilder(word.getTranslation()+"\n"+word.getTranslationSL());
+                spanDef.setSpan(lowColor,word.getTranslation().length(),1+word.getTranslation().length()+word.getTranslationSL().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                SpannableStringBuilder spanWord = new SpannableStringBuilder(word.getWord()+"\n"+word.getWordSL());
+                spanWord.setSpan(lowColor,word.getWord().length(),1+word.getWordSL().length()+word.getWord().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spanWord.setSpan(new RelativeSizeSpan(0.8f), word.getWord().length(),1+word.getWordSL().length()+word.getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
                 DefinationAdapter definationAdapter = (DefinationAdapter) holder;
 
                 if(word.getIsFavorite().equalsIgnoreCase("true")){
@@ -208,12 +233,12 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                     definationAdapter.grammar.setText(word.getGrammar());
                     definationAdapter.spanish.setText(word.getExtra());
                 }else {
-                    definationAdapter.example1.setText(word.getExample1());
-                    definationAdapter.example2.setText(word.getExample2());
+                    definationAdapter.example1.setText(spanEx1);
+                    definationAdapter.example2.setText(spanEx2);
                    // definationAdapter.example3.setText(word.getExample3());
                     definationAdapter.pronunciation.setText(word.getPronun());
                     definationAdapter.grammar.setText(word.getGrammar());
-                    definationAdapter.translation.setText(word.getTranslation());
+                    definationAdapter.translation.setText(spanDef);
                 }
 
 
@@ -245,6 +270,10 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                     imageViewHolder.imageStateText.setText(R.string.waitingForImage);
                     imageViewHolder.imageText.setText(" ");
 
+                    final ForegroundColorSpan fcss = new ForegroundColorSpan(Color.parseColor("#373d3f"));
+                    final SpannableStringBuilder spanEx3 = new SpannableStringBuilder(word.getExample3()+"\n"+word.getExample3SL());
+                    spanEx3.setSpan(fcss,0,word.getExample3().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                     storageRef.child(imageQualityString+"/"+wordName+".png").getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
 
 
@@ -256,7 +285,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                             imageViewHolder.image.setImageBitmap(bitmap);
 
                             imageViewHolder.imageState.setImageResource(0);
-                            imageViewHolder.imageText.setText(examples[2]);
+                            imageViewHolder.imageText.setText(spanEx3);
                             imageViewHolder.imageStateText.setText(" ");
 
 
@@ -370,10 +399,12 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
                 languageName.setText("Bangla");
             }
-            if( ConnectivityHelper.isConnectedToNetwork(itemView.getContext())){
+            if( ConnectivityHelper.isConnectedToNetwork(itemView.getContext()) && isVoicePronunciation){
                 speak.setEnabled(false);
                 downloadAudio();
             }else {
+                speak.setEnabled(true);
+                progressBar.setVisibility(View.INVISIBLE);
 
                 Toast.makeText(ctx,"Internet required for real human pronunciation.",Toast.LENGTH_SHORT).show();
             }

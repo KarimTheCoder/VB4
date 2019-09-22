@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
@@ -15,7 +16,11 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -65,7 +70,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NewTrain extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener{
 
-    private String[] IELTSwordArray, IELTStranslationArray, IELTSgrammarArray, IELTSpronunArray, IELTSexample1array, IELTSexample2Array, IELTSexample3Array, IELTSvocabularyType;
+    private String[] IELTSwordArray,IELTSwordsArraySL, IELTStranslationArray,IELTStranslationArraySL, IELTSgrammarArray,IELTSextra, IELTSpronunArray, IELTSexample1array,IELTSexample1arraySL, IELTSexample2Array,IELTSexample2ArraySL, IELTSexample3Array,IELTSexample3ArraySL, IELTSvocabularyType;
     private String[] TOEFLwordArray, TOEFLtranslationArray, TOEFLgrammarArray, TOEFLpronunArray, TOEFLexample1array, TOEFLexample2Array, TOEFLexample3Array, TOEFLvocabularyType;
     private String[] SATwordArray, SATtranslationArray, SATgrammarArray, SATpronunArray, SATexample1array, SATexample2Array, SATexample3Array, SATvocabularyType;
     private String[] GREwordArray, GREtranslationArray, GREgrammarArray, GREpronunArray, GREexample1array, GREexample2array, GREexample3Array, GREvocabularyType;
@@ -152,7 +157,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         }
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197xxx");
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
 
         tts = new TextToSpeech(this, this);
@@ -322,7 +327,15 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                 if(fiveWords.size()>0){
 
-                    wordView.setText(fiveWords.get(quizCycle).getWord());
+                    String combineBothLanguage = fiveWords.get(quizCycle).getWord()+"\n"+fiveWords.get(quizCycle).getWordSL();
+                    final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
+                    SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
+                    spanWord.setSpan(lowColor,fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spanWord.setSpan(new RelativeSizeSpan(0.4f), fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+
+                    wordView.setText(spanWord);
 
                 }
 
@@ -395,7 +408,17 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             if( showCycle < FIVE_WORD_SIZE){
 
                 try{
-                    wordView.setText(fiveWords.get(showCycle).getWord());
+
+                    String combineBothLanguage = fiveWords.get(showCycle).getWord()+"\n"+fiveWords.get(showCycle).getWordSL();
+                    final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
+                    SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
+                    spanWord.setSpan(lowColor,fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spanWord.setSpan(new RelativeSizeSpan(0.6f), fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+
+
+                    wordView.setText(spanWord);
 
                 }catch (NullPointerException i){
                     Log.i("Error","Quiz Cycle: "+quizCycle+" ShowCycle: "+showCycle);
@@ -564,6 +587,14 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             IELTSexample3Array = getResources().getStringArray(R.array.IELTS_example3);
             IELTSvocabularyType = getResources().getStringArray(R.array.IELTS_level);
             IELTSposition = getResources().getIntArray(R.array.IELTS_position);
+
+            ///IELTS Translations----
+
+               IELTSwordsArraySL = getResources().getStringArray(R.array.IELTS_words_sp);
+               IELTStranslationArraySL = getResources().getStringArray(R.array.IELTS_translation_sp);
+               IELTSexample1arraySL = getResources().getStringArray(R.array.IELTS_example1_sp);
+               IELTSexample2ArraySL = getResources().getStringArray(R.array.IELTS_example2_sp);
+               IELTSexample3ArraySL = getResources().getStringArray(R.array.IELTS_example3_sp);
 
 
             TOEFLwordArray = getResources().getStringArray(R.array.TOEFL_words);
@@ -1005,6 +1036,13 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
             quizCycle = 0;
         }
+//        String combineBothLanguage = fiveWords.get(quizCycle).getWord()+"\n"+fiveWords.get(quizCycle).getWord();
+//        final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
+//        SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
+//        spanWord.setSpan(lowColor,fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spanWord.setSpan(new RelativeSizeSpan(0.8f), fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
         wordView.setText(fiveWords.get(quizCycle).getWord());
 
         if (totalCycle == (FIVE_WORD_SIZE*repeatPerSession)){
@@ -1134,6 +1172,14 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         answerCard4.setVisibility(View.INVISIBLE);
         wordView.setVisibility(View.VISIBLE);
         speak.setVisibility(View.INVISIBLE);
+
+//        String combineBothLanguage = fiveWords.get(quizCycle).getWord()+"\n"+fiveWords.get(quizCycle).getWord();
+//        final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
+//        SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
+//        spanWord.setSpan(lowColor,fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spanWord.setSpan(new RelativeSizeSpan(0.8f), fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
 
 
         wordView.setText(fiveWords.get(quizCycle).getWord());
@@ -1288,12 +1334,23 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         if(isIeltsChecked){
             for(int i = (int) startPoint; i  < IELTSbeginnerNumber; i++){
 
-                questionWords.add(new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],IELTSvocabularyType[i],IELTSposition[i], IELTSlearnedDatabase.get(i), IELTSFav.get(i)));
+                Word word = new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],IELTSvocabularyType[i],IELTSposition[i], IELTSlearnedDatabase.get(i), IELTSFav.get(i));
+
+                questionWords.add(word);
 
 
                 if( IELTSlearnedDatabase.get(i).equalsIgnoreCase("false")){
 
-                    words.add(new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],IELTSvocabularyType[i],IELTSposition[i], IELTSlearnedDatabase.get(i), IELTSFav.get(i)));
+                    Word word1 = new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],IELTSvocabularyType[i],IELTSposition[i], IELTSlearnedDatabase.get(i), IELTSFav.get(i));
+
+                    word1.setWordSL(IELTSwordsArraySL[i]);
+                    word1.setTranslationSL(IELTStranslationArraySL[i]);
+                    word1.setExample1SL(IELTSexample1arraySL[i]);
+                    word1.setExample2SL(IELTSexample2ArraySL[i]);
+                    word1.setExample3SL(IELTSexample3ArraySL[i]);
+
+                    words.add(word1);
+
                 }
 
             }

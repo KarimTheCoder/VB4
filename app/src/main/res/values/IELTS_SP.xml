@@ -1,0 +1,1614 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="IELTS_words_sp">
+
+        <item> "Defensa"  </item>
+        <item> "Impacto"  </item>
+        <item> "Polución"  </item>
+        <item> "Duro"  </item>
+        <item> "Consumir"  </item>
+        <item> "Aspecto"  </item>
+        <item> "En el extranjero"  </item>
+        <item> "Gastronomía"  </item>
+        <item> "Ingrediente"  </item>
+        <item> "Característica"  </item>
+        <item> "Particular"  </item>
+        <item> "Reputación"  </item>
+        <item> "Defecto"  </item>
+        <item> "Pobreza"  </item>
+        <item> "Impedir"  </item>
+        <item> "Adecuado"  </item>
+        <item> "Compensar"  </item>
+        <item> "Crucial"  </item>
+        <item> "Solamente"  </item>
+        <item> "Obvio"  </item>
+        <item> "Epidemia"  </item>
+        <item> "Reducir"  </item>
+        <item> "Complicado"  </item>
+        <item> "Vulnerable"  </item>
+        <item> "Alterar"  </item>
+        <item> "Beneficio"  </item>
+        <item> "Elaborado"  </item>
+        <item> "Evidencia"  </item>
+        <item> "Imprescindible"  </item>
+        <item> "Estabilizar"  </item>
+        <item> "Contribuir"  </item>
+        <item> "Fascinar"  </item>
+        <item> "Exagerar"  </item>
+        <item> "Gesto"  </item>
+        <item> "Humorístico"  </item>
+        <item> "Fusionar"  </item>
+        <item> "Prominente"  </item>
+        <item> "Espectador"  </item>
+        <item> "Recinto"  </item>
+        <item> "Desfile"  </item>
+        <item> "Inconveniente"  </item>
+        <item> "Eficiente"  </item>
+        <item> "Equipar"  </item>
+        <item> "Carga"  </item>
+        <item> "Innovación"  </item>
+        <item> "Intenso"  </item>
+        <item> "Acelerar"  </item>
+        <item> "Incentivo"  </item>
+        <item> "Atributo"  </item>
+        <item> "Creador"  </item>
+        <item> "Acto"  </item>
+        <item> "Erudito"  </item>
+        <item> "Resolver"  </item>
+        <item> "Asequibles"  </item>
+        <item> "Consagrar"  </item>
+        <item> "Disciplina"  </item>
+        <item> "Superdotado"  </item>
+        <item> "Moderado"  </item>
+        <item> "Profundo"  </item>
+        <item> "Sofisticado"  </item>
+        <item> "Desvelar"  </item>
+        <item> "Factible"  </item>
+        <item> "Navegar"  </item>
+        <item> "Turbulencia"  </item>
+        <item> "Fiable"  </item>
+        <item> "Mantener"  </item>
+        <item> "Aislante"  </item>
+        <item> "Vanidad"  </item>
+        <item> "Responder"  </item>
+        <item> "Acumular"  </item>
+        <item> "Adaptar"  </item>
+        <item> "Determinar"  </item>
+        <item> "Evaporación"  </item>
+        <item> "Fleco/borde"  </item>
+        <item> "Prolífica"  </item>
+        <item> "Prosperar"  </item>
+        <item> "Conducir"  </item>
+        <item> "Tolerancia"  </item>
+        <item> "Competitivo"  </item>
+        <item> "Reconocer"  </item>
+        <item> "Depresión"  </item>
+        <item> "Aplicado"  </item>
+        <item> "Rejuvenecer"  </item>
+        <item> "Deforestación"  </item>
+        <item> "Ambiente"  </item>
+        <item> "Hábitat"  </item>
+        <item> "Venta al por menor"  </item>
+        <item> "Controversia"  </item>
+        <item> "Tendencia"  </item>
+        <item> "Dedicar"  </item>
+        <item> "Potencial"  </item>
+        <item> "Financiar"  </item>
+        <item> "Mentor"  </item>
+        <item> "Persistir"  </item>
+        <item> "Perturbar"  </item>
+        <item> "Emitir"  </item>
+        <item> "Decaer"  </item>
+        <item> "Estimar"  </item>
+        <item> "Primario"  </item>
+        <item> "Económico"  </item>
+        <item> "Inevitablemente"  </item>
+        <item> "Residencial"  </item>
+        <item> "Supervisión"  </item>
+        <item> "Participante"  </item>
+        <item> "Optar"  </item>
+        <item> "Florecer"  </item>
+        <item> "Promover"  </item>
+        <item> "Proyecto"  </item>
+        <item> "Agudo"  </item>
+        <item> "Exponer"  </item>
+        <item> "Obstaculizar"  </item>
+        <item> "Nudo"  </item>
+        <item> "Grácil"  </item>
+        <item> "Ritual"  </item>
+        <item> "Erosionar"  </item>
+        <item> "Extender"  </item>
+        <item> "Interceptar"  </item>
+        <item> "Nutriente"  </item>
+        <item> "Degenerar"  </item>
+        <item> "Poroso"  </item>
+        <item> "Infértil"  </item>
+        <item> "Sequía"  </item>
+        <item> "Emisión"  </item>
+        <item> "Facilitar"  </item>
+        <item> "Irremplazable"  </item>
+        <item> "Diurno"  </item>
+        <item> "Aguantar"  </item>
+        <item> "Hazaña"  </item>
+        <item> "Óptimo"  </item>
+        <item> "Especie"  </item>
+        <item> "Extraviarse"  </item>
+        <item> "Diverso"  </item>
+        <item> "Extremo"  </item>
+        <item> "Mecanismo"  </item>
+        <item> "Escaso"  </item>
+        <item> "Abrasar"  </item>
+        <item> "Principio"  </item>
+        <item> "Brizna"  </item>
+        <item> "Salino"  </item>
+        <item> "Tolerar"  </item>
+        <item> "Inconscientemente"  </item>
+        <item> "Visión"  </item>
+        <item> "Contrastar"  </item>
+        <item> "Pedazo"  </item>
+        <item> "Comprometerse"  </item>
+        <item> "Innovador"  </item>
+        <item> "Obesidad"  </item>
+        <item> "Físico"  </item>
+        <item> "Seguir"  </item>
+        <item> "Estímulo"  </item>
+        <item> "Marca"  </item>
+        <item> "Exótico"  </item>
+        <item> "Hacer malabares"  </item>
+        <item> "Treta"  </item>
+        <item> "Elenco"  </item>
+        <item> "Exhibir "  </item>
+        <item> "Generar"  </item>
+        <item> "Locomotora"  </item>
+        <item> "Grabar"  </item>
+        <item> "Inicial"  </item>
+        <item> "Población"  </item>
+        <item> "Abrazar"  </item>
+        <item> "Aptitud"  </item>
+        <item> "Enfurecer"  </item>
+        <item> "Funcionar"  </item>
+        <item> "Alfabetismo"  </item>
+        <item> "Lápida"  </item>
+        <item> "Símbolo"  </item>
+        <item> "Sabio"  </item>
+        <item> "Originar"  </item>
+        <item> "Pronosticar"  </item>
+        <item> "Sílaba"  </item>
+        <item> "Floral"  </item>
+        <item> "Guirnalda"  </item>
+        <item> "Reinar"  </item>
+        <item> "Manifestarse"  </item>
+        <item> "Evocador"  </item>
+        <item> "Renovado"  </item>
+        <item> "Notablemente"  </item>
+        <item> "Lisiar"  </item>
+        <item> "Seducir"  </item>
+        <item> "Retener"  </item>
+        <item> "Dormitorio"  </item>
+        <item> "Competir"  </item>
+        <item> "Borde"  </item>
+        <item> "Motivación"  </item>
+        <item> "Nicho"  </item>
+        <item> "Sonido"  </item>
+        <item> "Punta"  </item>
+        <item> "Vínculo"  </item>
+        <item> "Convencer"  </item>
+        <item> "Prevalecer"  </item>
+        <item> "Barbero"  </item>
+        <item> "Serio"  </item>
+        <item> "Bebida"  </item>
+        <item> "Forjar"  </item>
+        <item> "Volar"  </item>
+        <item> "Concertado"  </item>
+        <item> "Recesión"  </item>
+        <item> "Prevaleciente"  </item>
+        <item> "Ponerse al día"  </item>
+        <item> "Decidido"  </item>
+        <item> "Adolescente"  </item>
+        <item> "Aparentemente"  </item>
+        <item> "Erradicar"  </item>
+        <item> "Desplegar"  </item>
+        <item> "Validar"  </item>
+        <item> "Alcanzar"  </item>
+        <item> "Abundar"  </item>
+        <item> "Incapaz"  </item>
+        <item> "Resbaladizo"  </item>
+        <item> "Patente"  </item>
+        <item> "Rol"  </item>
+        <item> "Comparación"  </item>
+        <item> "Circunstancia"  </item>
+        <item> "Apoyo"  </item>
+        <item> "Mezclar"  </item>
+        <item> "Convencional"  </item>
+        <item> "Dominante"  </item>
+        <item> "Recitar"  </item>
+        <item> "Solitario"  </item>
+        <item> "Enriquecer"  </item>
+        <item> "Compañero"  </item>
+        <item> "Asignación"  </item>
+        <item> "Verbal"  </item>
+        <item> "Perseverancia"  </item>
+        <item> "Derivar"  </item>
+        <item> "Entablar/presentar"  </item>
+        <item> "Inspiración"  </item>
+        <item> "Inválido"  </item>
+        <item> "Inversor"  </item>
+        <item> "Refinamiento"  </item>
+        <item> "Crédito"  </item>
+        <item> "Vacío"  </item>
+        <item> "Demandar"  </item>
+        <item> "Tono"  </item>
+        <item> "Prolongar"  </item>
+        <item> "Hélice"  </item>
+        <item> "Inclinar"  </item>
+        <item> "Tajar"  </item>
+        <item> "Catastrófico"  </item>
+        <item> "Indagación"  </item>
+        <item> "Quebrar"  </item>
+        <item> "Remolcar"  </item>
+        <item> "Acuático"  </item>
+        <item> "Arreglo"  </item>
+        <item> "Sinnúmero"  </item>
+        <item> "Terrestre"  </item>
+        <item> "Vegetación"  </item>
+        <item> "Anfibio"  </item>
+        <item> "Residuo"  </item>
+        <item> "Obliterar"  </item>
+        <item> "Biodiversidad"  </item>
+        <item> "Hemisferio"  </item>
+        <item> "Imperativo"  </item>
+        <item> "Nocturno"  </item>
+        <item> "Oscuro"  </item>
+        <item> "Infaliblemente"  </item>
+        <item> "Exhibir"  </item>
+        <item> "Diluir"  </item>
+        <item> "Resiliente"  </item>
+        <item> "Duna"  </item>
+        <item> "Fotosíntesis"  </item>
+        <item> "Concentración"  </item>
+        <item> "Espinoso"  </item>
+        <item> "Preservar"  </item>
+        <item> "Deliberadamente"  </item>
+        <item> "Intelectual"  </item>
+        <item> "Abrumar"  </item>
+        <item> "Pasivo"  </item>
+        <item> "Pasatiempo"  </item>
+        <item> "Reacio"  </item>
+        <item> "Impulso"  </item>
+        <item> "Antiguo"  </item>
+        <item> "Majestuosidad"  </item>
+        <item> "Prisión preventiva"  </item>
+        <item> "Reforma"  </item>
+        <item> "Carroza"  </item>
+        <item> "Mímica"  </item>
+        <item> "Tosco"  </item>
+        <item> "Riguroso"  </item>
+        <item> "Tallar"  </item>
+        <item> "Viajero"  </item>
+        <item> "Monetario"  </item>
+        <item> "Andar con paso pesado"  </item>
+        <item> "Extenderse"  </item>
+        <item> "Abarcar"  </item>
+        <item> "Excavar"  </item>
+        <item> "Inscribir"  </item>
+        <item> "Mitología"  </item>
+        <item> "Ganado"  </item>
+        <item> "Junco"  </item>
+        <item> "Acompañar"  </item>
+        <item> "Evocar"  </item>
+        <item> "Estereotipo"  </item>
+        <item> "Culminar"  </item>
+        <item> "Fragilidad"  </item>
+        <item> "Ilusión"  </item>
+        <item> "Representar"  </item>
+        <item> "Puntal"  </item>
+        <item> "Payasadas"  </item>
+        <item> "Corpóreo"  </item>
+        <item> "Administrar"  </item>
+        <item> "Rampante"  </item>
+        <item> "Tronco"  </item>
+        <item> "Vacante"  </item>
+        <item> "Sobrecargado"  </item>
+        <item> "Deteriorarse"  </item>
+        <item> "Placebo"  </item>
+        <item> "Balsa"  </item>
+        <item> "Brisa"  </item>
+        <item> "Empeño"  </item>
+        <item> "Matricular"  </item>
+        <item> "Afilar"  </item>
+        <item> "Centro vacacional"  </item>
+        <item> "Botánica"  </item>
+        <item> "A flote"  </item>
+        <item> "Personalizado"  </item>
+        <item> "Conglomerado"  </item>
+        <item> "Consistentemente"  </item>
+        <item> "Aval"  </item>
+        <item> "Fugaz"  </item>
+        <item> "Superar"  </item>
+        <item> "Grapa"  </item>
+        <item> "Deliberar"  </item>
+        <item> "Beneficio"  </item>
+        <item> "Coincidir"  </item>
+        <item> "Enfrentar"  </item>
+        <item> "Imponer"  </item>
+        <item> "Interactuar"  </item>
+        <item> "Estadística"  </item>
+        <item> "Susceptible"  </item>
+        <item> "Someterse a"  </item>
+        <item> "Ausencia"  </item>
+        <item> "Nefasto"  </item>
+        <item> "Discrepancia"  </item>
+        <item> "Igualdad"  </item>
+        <item> "Desmesurado"  </item>
+        <item> "Invaluable"  </item>
+        <item> "Requerir"  </item>
+        <item> "Recreación"  </item>
+        <item> "Terreno"  </item>
+        <item> "Difícil de manejar"  </item>
+        <item> "Insalvable"  </item>
+        <item> "De fácil acceso"  </item>
+        <item> "Pasillo"  </item>
+        <item> "Auditivo"  </item>
+        <item> "Moverse nerviosamente"  </item>
+        <item> "Incorporar"  </item>
+        <item> "Manipular"  </item>
+        <item> "Obstrucción"  </item>
+        <item> "Inquisitivo"  </item>
+        <item> "De recuperación"  </item>
+        <item> "Plan de estudios"  </item>
+        <item> "Pinza"  </item>
+        <item> "Violación"  </item>
+        <item> "Saquear"  </item>
+        <item> "Específicamente"  </item>
+        <item> "Incandescente"  </item>
+        <item> "Filamento"  </item>
+        <item> "Transpiración"  </item>
+        <item> "Refrán"  </item>
+        <item> "Aviación"  </item>
+        <item> "Inflexibilidad"  </item>
+        <item> "Dispares"  </item>
+        <item> "Indispensable"  </item>
+        <item> "Inexplicable"  </item>
+        <item> "Culminación"  </item>
+    </string-array>
+    <string-array name="IELTS_translation_sp">
+
+        <item> "Protección contra daños"  </item>
+        <item> "Un efecto fuerte"  </item>
+        <item> "Material nocivo que contamina el medio ambiente"  </item>
+        <item> "Desagradablemente áspero, desagradable"  </item>
+        <item> "Comer, beber, usar"  </item>
+        <item> "Parte o característica de algo"  </item>
+        <item> "Un país extranjero"  </item>
+        <item> "Un estilo o método de cocinar"  </item>
+        <item> "Una parte de una mezcla"  </item>
+        <item> "Un rasgo distintivo, cualidad o propiedad"  </item>
+        <item> "Detalles o circunstancias específicas"  </item>
+        <item> "Cualidad o carácter general visto o juzgado por la gente en general"  </item>
+        <item> "Falla, falta"  </item>
+        <item> "El estado de ser extremadamente pobre"  </item>
+        <item> "Prevenir una acción o proceso"  </item>
+        <item> "Aceptable en cantidad o calidad, suficiente"  </item>
+        <item> "Pagarle a alguien algo a cambio de que algo se pierda o se dañe"  </item>
+        <item> "Muy importante"  </item>
+        <item> "Solo, simplemente"  </item>
+        <item> "Que se percibe o entiende fácilmente"  </item>
+        <item> "Una rápida propagación o aumento en la ocurrencia de algo"  </item>
+        <item> "Hacer más pequeño o menos en cantidad, grado o tamaño"  </item>
+        <item> "Que tiene dificultades ocultas"  </item>
+        <item> "Abierto a ataques o daños"  </item>
+        <item> "Cambio o causa del cambio"  </item>
+        <item> "Una ventaja o beneficio obtenido de algo"  </item>
+        <item> "Planificado o realizado con mucho cuidado"  </item>
+        <item> "Cualquier cosa que pueda ser usada para probar algo"  </item>
+        <item> "Absolutamente necesario o importante, esencial"  </item>
+        <item> "Hacer o mantener estable, firme o constante"  </item>
+        <item> "Dar algo para lograr algo junto con otras personas"  </item>
+        <item> "Ser extremadamente interesante o encantador"  </item>
+        <item> "Representar algo mejor o peor de lo que realmente es"  </item>
+        <item> "El uso de tales movimientos para expresar un pensamiento, emoción, etc."  </item>
+        <item> "Gracioso, o que hace reír"  </item>
+        <item> "Combinar o hacer que se combinen para formar una sola entidad"  </item>
+        <item> "Importante, famoso"  </item>
+        <item> "Una persona que ve en un programa, juego u otro evento"  </item>
+        <item> "El lugar donde algo sucede"  </item>
+        <item> "Un grupo de personas que marchan en una ceremonia, celebración o protesta"  </item>
+        <item> "Una desventaja o problema"  </item>
+        <item> "Ser efectivo sin perder tiempo, esfuerzo o gasto"  </item>
+        <item> "Proporcionar (a alguien) los materiales o suministros necesarios"  </item>
+        <item> "Mercancías transportadas por camión, tren, barco o avión"  </item>
+        <item> "El acto o proceso de introducir nuevas ideas, dispositivos o métodos"  </item>
+        <item> "Muy grande en grado : muy fuerte"  </item>
+        <item> "Moverse más rápido : para ganar velocidad"  </item>
+        <item> "Algo que anima a una persona a hacer algo o a trabajar más duro"  </item>
+        <item> "Una característica o cualidad normalmente buena que alguien o algo tiene"  </item>
+        <item> "Una persona o cosa que trae algo a la existencia"  </item>
+        <item> "Un acto o acción"  </item>
+        <item> "Una persona que ha estudiado un tema durante mucho tiempo y sabe mucho sobre él"  </item>
+        <item> "Terminar (algo, como un argumento) llegando a un acuerdo"  </item>
+        <item> "Se tiene suficiente dinero para pagar por ello"  </item>
+        <item> "Dedicar (tiempo, esfuerzo o uno mismo) a una tarea o propósito en particular."  </item>
+        <item> "Una manera de comportarse que muestre una voluntad de obedecer las reglas u órdenes"  </item>
+        <item> "Tener un talento excepcional o una habilidad natural"  </item>
+        <item> "Tamaño o cantidad promedio : ni demasiado ni demasiado poco"  </item>
+        <item> "Muy grande o intenso."  </item>
+        <item> "Altamente desarrollado y complejo"  </item>
+        <item> "Mostrar o revelar (algo) a otros por primera vez"  </item>
+        <item> "Que se puede hacer o usar, que es realizable"  </item>
+        <item> "Viajar en un bote o barco a varios lugares como vacaciones"  </item>
+        <item> "Movimientos repentinos y violentos de aire o agua, un estado de confusión, violencia o desorden"  </item>
+        <item> "Consistentemente bueno en calidad o rendimiento; capaz de ser confiado"  </item>
+        <item> "Continuar por un período prolongado o sin interrupción"  </item>
+        <item> "El proceso de evitar que el calor, el sonido o la electricidad se propaguen"  </item>
+        <item> "Orgullo excesivo o admiración por la apariencia o los logros de uno mismo"  </item>
+        <item> "Decir o escribir algo como respuesta a una pregunta o petición"  </item>
+        <item> "Recoger o adquirir (algo) gradualmente a medida que pasa el tiempo"  </item>
+        <item> "Ajustar a las nuevas condiciones"  </item>
+        <item> "Decidir oficialmente (algo) especialmente debido a pruebas o hechos : establecer (algo) exactamente o con autoridad"  </item>
+        <item> "El proceso de transformación de líquido en vapor"  </item>
+        <item> "Un borde ornamental de hilos dejados sueltos o formados en borlas o torceduras"  </item>
+        <item> "Que produce una gran cantidad de algo"  </item>
+        <item> "Crecer o desarrollarse con éxito"  </item>
+        <item> "Planear y hacer (algo, como una actividad)"  </item>
+        <item> "Disposición a aceptar sentimientos, hábitos o creencias que son diferentes a los suyos."  </item>
+        <item> "De o en relación con una situación en la que personas o grupos intentan ganar un concurso o tener más éxito que otros"  </item>
+        <item> "Aceptar o admitir la existencia o la verdad de"  </item>
+        <item> "Un estado de tristeza"  </item>
+        <item> "Diligente y trabajador"  </item>
+        <item> "Hacer que (alguien o algo) se vea o se sienta más joven, más fresco o más animado"  </item>
+        <item> "La acción de desbrozar una amplia zona de árboles"  </item>
+        <item> "El entorno o las condiciones en las que una persona, animal o planta vive u opera"  </item>
+        <item> "El hogar natural o el ambiente de un animal, planta u otro organismo"  </item>
+        <item> "La venta de bienes al público en cantidades relativamente pequeñas"  </item>
+        <item> "Fuerte desacuerdo sobre algo entre un gran grupo de personas"  </item>
+        <item> "Algo que es actualmente popular o de moda"  </item>
+        <item> "Dar todo o una gran parte de su tiempo o recursos a (una persona, actividad o causa)"  </item>
+        <item> "Tener o mostrar la capacidad de convertirse o desarrollarse en algo en el futuro."  </item>
+        <item> "Una suma de dinero ahorrada o puesta a disposición para un fin determinado"  </item>
+        <item> "Un asesor experimentado y de confianza"  </item>
+        <item> "Seguir existiendo"  </item>
+        <item> "Interrumpir el progreso o actividad normal de (algo)"  </item>
+        <item> "Producir y descargar (algo, especialmente gas o radiación)"  </item>
+        <item> "Volver más pequeño, menos o más poco; disminuir"  </item>
+        <item> "Calcular o juzgar aproximadamente el valor"  </item>
+        <item> "Lo más importante"  </item>
+        <item> "Dar un buen valor o servicio en relación con la cantidad de dinero, tiempo o esfuerzo invertido"  </item>
+        <item> "Totalmente inevitable"  </item>
+        <item> "Diseñado para que las personas vivan en"  </item>
+        <item> "La acción de supervisar a alguien o algo"  </item>
+        <item> "Una persona que participa en algo"  </item>
+        <item> "Elegir entre una amplia gama de posibilidades"  </item>
+        <item> "Crecer o desarrollarse rápidamente"  </item>
+        <item> "Anunciar"  </item>
+        <item> "Un trabajo planificado que tiene un propósito específico"  </item>
+        <item> "Muy grave o peligroso"  </item>
+        <item> "Hacer (algo) visible, típicamente descubriéndolo"  </item>
+        <item> "Hacer (algo, como una tarea o acción) lento o difícil"  </item>
+        <item> "Una parte que se forma cuando se ata un pedazo de cuerda, hilo, tela, etc., a sí mismo o a otra cosa."  </item>
+        <item> "Encantador y elegante"  </item>
+        <item> "Una ceremonia formal o una serie de actos que siempre se realizan de la misma manera"  </item>
+        <item> "Destruir por consumo lento"  </item>
+        <item> "Hacer más largo o más ancho"  </item>
+        <item> "Evitar que algo llegue a su destino previsto"  </item>
+        <item> "Todo lo que alimenta a un ser vivo"  </item>
+        <item> "Empeorar"  </item>
+        <item> "Algo que está lleno de pequeños agujeros o aberturas o es fácilmente penetrable"  </item>
+        <item> "Se refiere a una persona, animal o planta incapaz de reproducirse"  </item>
+        <item> "Falta de lluvia"  </item>
+        <item> "Acto de liberar gas o radiación"  </item>
+        <item> "Hacer algo más fácil"  </item>
+        <item> "No hay sustituto ni alternativa"  </item>
+        <item> "Algo que ocurre durante el día o que tiene un ciclo diario"  </item>
+        <item> "Sufrimiento o algo que permanece en la existencia"  </item>
+        <item> "Un logro que requiere gran valor, habilidad o fuerza."  </item>
+        <item> "Lo mejor o más favorable para una situación dada"  </item>
+        <item> "Un tipo específico de animales o plantas que pueden reproducirse entre sí"  </item>
+        <item> "Ir en una dirección que está lejos del lugar donde deberías estar"  </item>
+        <item> "Cosas que son muy diferentes entre sí"  </item>
+        <item> "Muy grave"  </item>
+        <item> "Un proceso que se ha establecido para lograr una meta en particular"  </item>
+        <item> "Menos de lo necesario o normal"  </item>
+        <item> "Quemar algo con llama o calor"  </item>
+        <item> "Verdad, teoría, regla, creencia o idea básica"  </item>
+        <item> "Un pequeño trozo de algo"  </item>
+        <item> "Que contiene sal"  </item>
+        <item> "Aguantar o permitir"  </item>
+        <item> "Sin darse cuenta o ser consciente de las propias acciones"  </item>
+        <item> "Capacidad de ver con claridad con los ojos"  </item>
+        <item> "Comparar"  </item>
+        <item> "Un trozo de algo"  </item>
+        <item> "Atar, atrapar o involucrar"  </item>
+        <item> "Introducir o utilizar nuevas ideas o métodos"  </item>
+        <item> "La condición de estar groseramente gordo o con sobrepeso."  </item>
+        <item> "Que se relaciona con el cuerpo de una persona en vez de con la mente"  </item>
+        <item> "Perseguir a alguien o algo"  </item>
+        <item> "Algo que causa un cambio o una reacción"  </item>
+        <item> "Una marca es el nombre de un producto"  </item>
+        <item> "Muy diferente, extraño o inusual porque viene de un país lejano"  </item>
+        <item> "Mantener varios objetos en movimiento en el aire al mismo tiempo lanzándolos y atrapándolos repetidamente"  </item>
+        <item> "Un truco"  </item>
+        <item> "Grupo de actores"  </item>
+        <item> "Mostrar"  </item>
+        <item> "Producir o crear"  </item>
+        <item> "El vehículo que produce la potencia que tira de un tren"  </item>
+        <item> "Marcar o sellar algo"  </item>
+        <item> "Primero o al principio"  </item>
+        <item> "Número de personas en un área geográfica"  </item>
+        <item> "Sostener a (alguien) en los brazos de uno, especialmente como una señal de afecto."  </item>
+        <item> "Una habilidad natural para hacer algo "  </item>
+        <item> "Sentir o expresar un gran enojo"  </item>
+        <item> "Trabajar u operar de manera adecuada o particular"  </item>
+        <item> "La capacidad de leer y escribir"  </item>
+        <item> "Una losa plana de piedra, arcilla o madera, utilizada especialmente para una inscripción"  </item>
+        <item> "Algo que es un símbolo de un sentimiento, evento, etc."  </item>
+        <item> "Una persona que tiene mucha sabiduría"  </item>
+        <item> "Empezar a existir"  </item>
+        <item> "Decir que (algo) sucederá o podría suceder en el futuro"  </item>
+        <item> "Cualquiera de las partes en que se divide naturalmente una palabra cuando se pronuncia"  </item>
+        <item> "De o en relación con las flores"  </item>
+        <item> "Un arreglo circular de flores, usado o colgado para decorar"  </item>
+        <item> "Gobernar como rey o reina"  </item>
+        <item> "Ser conocido o aparente"  </item>
+        <item> "Que tiende a recordarle a uno algo"  </item>
+        <item> "Hacer (algo) nuevo, fresco o fuerte de nuevo"  </item>
+        <item> "De manera que atraiga o merezca la atención"  </item>
+        <item> "Hacer que (alguien) se vuelva incapaz de moverse o caminar correctamente"  </item>
+        <item> "Atraer o provocar a alguien"  </item>
+        <item> "Aferrarse o mantener"  </item>
+        <item> "Un edificio en un internado, colegio o universidad donde viven los estudiantes"  </item>
+        <item> "Tratar de obtener o ganar algo (como un premio o recompensa) que otra persona también está tratando de ganar"  </item>
+        <item> "El lugar donde algo comienza o termina"  </item>
+        <item> "El acto o proceso de dar a alguien una razón para hacer algo"  </item>
+        <item> "Un trabajo, actividad, etc., que sea muy adecuado para alguien"  </item>
+        <item> "Algo que puedes oír"  </item>
+        <item> "El extremo puntiagudo o cónico de algo"  </item>
+        <item> "Una conexión que une las cosas"  </item>
+        <item> "Hacer que (alguien) crea que algo es verdad"  </item>
+        <item> "Ganar o ser común"  </item>
+        <item> "Una persona que corta el pelo, especialmente de los hombres"  </item>
+        <item> "Tener un posible resultado importante o peligroso"  </item>
+        <item> "Una bebida, especialmente una que no sea agua"  </item>
+        <item> "Crear o formar algo, especialmente calentando y dando forma al metal"  </item>
+        <item> "Volar o elevarse en el aire"  </item>
+        <item> "Se realiza de forma planificada y deliberada, generalmente por varias o muchas personas"  </item>
+        <item> "Una disminución de la actividad económica, empresarial o de otro tipo"  </item>
+        <item> "Común en un lugar particular en un momento particular"  </item>
+        <item> "Tratar de alcanzar la misma posición, puntuación, etc."  </item>
+        <item> "Capaz de tomar decisiones con rapidez y confianza"  </item>
+        <item> "Persona que está en la adolescencia"  </item>
+        <item> "Evidente u obviamente"  </item>
+        <item> "Destruir completamente"  </item>
+        <item> "Abrir o revelar"  </item>
+        <item> "Mostrar que algo es real o correcto"  </item>
+        <item> "Cumplir o lograr (algo)"  </item>
+        <item> "Estar presente en gran número o en gran cantidad"  </item>
+        <item> "Que no es capaz de hacer algo"  </item>
+        <item> "Difícil pararse, moverse o sostenerse sobre él debido a que está liso, mojado, helado, etc."  </item>
+        <item> "Una patente es un documento gubernamental que prueba que una invención es suya y sólo suya."  </item>
+        <item> "El papel de un actor en una obra de teatro, película, etc."  </item>
+        <item> "El acto de mirar las cosas para ver en qué son similares o diferentes"  </item>
+        <item> "Una condición o hecho que afecta una situación"  </item>
+        <item> "La acción de darle a alguien apoyo, confianza o esperanza"  </item>
+        <item> "Mezclar (las cosas) a fondo"  </item>
+        <item> "Usual o usado y aceptado por la mayoría de la gente"  </item>
+        <item> "Más importante, poderoso o influyente"  </item>
+        <item> "Leer (algo) en voz alta"  </item>
+        <item> "Hecho o existiendo solo"  </item>
+        <item> "Mejorar o aumentar la calidad o el valor"  </item>
+        <item> "Alguien a tu nivel"  </item>
+        <item> "Una tarea o pieza de trabajo asignada a alguien como parte de un trabajo o curso de estudio"  </item>
+        <item> "Hablado en lugar de escrito"  </item>
+        <item> "No darse por vencido"  </item>
+        <item> "Tomar u obtener (algo) de (algo más)"  </item>
+        <item> "Presentar una acusación legal, queja o solicitud a alguna autoridad oficial"  </item>
+        <item> "El proceso de ser estimulado mentalmente para hacer o sentir algo, especialmente para hacer algo creativo"  </item>
+        <item> "Una persona que está muy enferma o lesionada y necesita atención frecuente"  </item>
+        <item> "Una persona u organización que invierte dinero en planes financieros, propiedades, etc. con la expectativa de obtener una ganancia."  </item>
+        <item> "El acto o proceso de mejorar algo mediante la eliminación de sustancias no deseadas"  </item>
+        <item> "Dinero que un banco o negocio permitirá a una persona utilizar y luego devolverlo en el futuro."  </item>
+        <item> "Un espacio vacío en el que no hay aire u otro gas"  </item>
+        <item> "Acusar a alguien (en la corte) de hacer algo malo o ilegal y exigirle que pague por ello."  </item>
+        <item> "Indica que tan alto o tan bajo es un sonido"  </item>
+        <item> "Hacer que (algo) dure o continúe por más tiempo"  </item>
+        <item> "Un dispositivo con dos o más palas que giran rápidamente y hacen que un barco o una aeronave se mueva"  </item>
+        <item> "Levantar o mover (algo) para que un lado esté más alto que el otro."  </item>
+        <item> "Cortar (algo)"  </item>
+        <item> "Muy dañino o desastroso"  </item>
+        <item> "Un acto de pedir información"  </item>
+        <item> "Romperse o hacer que se rompa repentina y completamente"  </item>
+        <item> "Un acto de remolque de un vehículo o barco"  </item>
+        <item> "Que opera o vive o crece en el agua"  </item>
+        <item> "Una exhibición impresionante o una serie ordenada."  </item>
+        <item> "Un número incontable o extremadamente grande."  </item>
+        <item> "Relativo a la tierra o a sus habitantes"  </item>
+        <item> "Todas las plantas o vida vegetal de un lugar, consideradas en su conjunto"  </item>
+        <item> "Vertebrados de sangre fría que viven típicamente en la tierra pero que se reproducen en el agua"  </item>
+        <item> "Algo que permanece después de que se retira una pieza"  </item>
+        <item> "Aniquilar completamente"  </item>
+        <item> "La variedad de plantas y animales en un lugar determinado"  </item>
+        <item> "La mitad de una esfera o la mitad de la tierra"  </item>
+        <item> "Muy importante o esencial"  </item>
+        <item> "Que se hace, ocurre, o activa en la noche."  </item>
+        <item> "Desconocido, oculto de la vista"  </item>
+        <item> "Sin cometer errores"  </item>
+        <item> "Mostrar al público"  </item>
+        <item> "Debilitar, adelgazar o disminuir la fuerza"  </item>
+        <item> "Que se recupera rápidamente de los daños"  </item>
+        <item> "Una colina de arena formada por el viento cerca del mar o en un desierto"  </item>
+        <item> "El proceso por el cual una planta verde convierte el agua y el dióxido de carbono en alimento cuando la planta está expuesta a la luz"  </item>
+        <item> "El acto de prestar atención a un solo objeto o actividad"  </item>
+        <item> "Que tiene o está cubierto de muchas partes puntiagudas y afiladas"  </item>
+        <item> "Mantener (algo) seguro o a salvo de ser dañado o destruido"  </item>
+        <item> "Despacio y con cuidado : de manera que no se apresure"  </item>
+        <item> "De o en relación con la capacidad de pensar de una manera lógica"  </item>
+        <item> "Afectar (a alguien) muy fuertemente"  </item>
+        <item> "Alguien que no actúa, sino que deja que las cosas le sucedan"  </item>
+        <item> "Una actividad que te gusta hacer en tu tiempo libre"  </item>
+        <item> "Poco dispuesto y vacilante"  </item>
+        <item> "Un repentino y fuerte deseo de hacer algo"  </item>
+        <item> "Que pertenece a un pasado muy lejano y que ya no existe"  </item>
+        <item> "Una gran e impresionante cualidad"  </item>
+        <item> "Enviar (un caso) de vuelta a otro tribunal de justicia para ser juzgado o tratado de nuevo"  </item>
+        <item> "Hacer cambios y reparaciones en una casa antigua"  </item>
+        <item> "Un vehículo de dos ruedas tirado por caballos usado en guerras antiguas y carreras"  </item>
+        <item> "Una actuación hecha sin hablar"  </item>
+        <item> "Que tiene una superficie áspera y desigual"  </item>
+        <item> "Muy estricto o severo"  </item>
+        <item> "Hacer (algo, como una escultura o un diseño) cortando piezas del material del que está hecho"  </item>
+        <item> "Una persona que viaja una cierta distancia para trabajar de forma regular"  </item>
+        <item> "En relación con el dinero o la moneda"  </item>
+        <item> "Caminar obstinada y lentamente con pasos pesados"  </item>
+        <item> "Acostarse o sentarse con los brazos y las piernas bien separados"  </item>
+        <item> "Incluir (algo) como una parte"  </item>
+        <item> "Hacer (un agujero o canal) cavando"  </item>
+        <item> "Escribir o tallar (palabras o símbolos) en algo"  </item>
+        <item> "Los mitos de un grupo o cultura en particular"  </item>
+        <item> "Los animales de granja considerados como un activo"  </item>
+        <item> "Una hierba alta y delgada que crece en áreas húmedas"  </item>
+        <item> "Ir a algún lado con (alguien) : ser un compañero para (alguien)"  </item>
+        <item> "Traer (una memoria, sentimiento, imagen, etc.) a la mente"  </item>
+        <item> "Una imagen o idea demasiado simplificada de un tipo particular de persona o cosa"  </item>
+        <item> "Alcanzar un clímax o punto de mayor desarrollo"  </item>
+        <item> "La condición de ser débil y delicado"  </item>
+        <item> "Algo que es falso o irreal pero que parece ser verdadero o real"  </item>
+        <item> "Describir (alguien o algo) de una manera particular"  </item>
+        <item> "Apoyar (algo) colocándolo contra otra cosa o colocando algo debajo de ella"  </item>
+        <item> "Comedia que involucra acción física (como caerse o golpear a la gente)"  </item>
+        <item> "En relación con el cuerpo de una persona, especialmente en oposición a su espíritu"  </item>
+        <item> "Gestionar y ser responsable de la gestión de (una empresa, organización, etc.)"  </item>
+        <item> "Muy común o que se propaga rápidamente"  </item>
+        <item> "El cuerpo principal o el tallo de una planta o arbusto"  </item>
+        <item> "Un puesto o trabajo no ocupado"  </item>
+        <item> "Carga (alguien) con demasiadas cosas que llevar"  </item>
+        <item> "Empeorar progresivamente"  </item>
+        <item> "Una píldora o sustancia que se le da a un paciente como un medicamento pero que no tiene ningún efecto físico en el paciente."  </item>
+        <item> "Una estructura plana que se utiliza para flotar o navegar en el agua"  </item>
+        <item> "Un viento suave"  </item>
+        <item> "Esfuerzo por hacer o lograr algo"  </item>
+        <item> "Inscribirse oficialmente como miembro de una institución o como estudiante de un curso"  </item>
+        <item> "Afilar (una hoja)"  </item>
+        <item> "Un lugar donde la gente va de vacaciones"  </item>
+        <item> "Una rama de la ciencia que se ocupa de la vida vegetal"  </item>
+        <item> "Flotar en el agua; no hundirse"  </item>
+        <item> "Diseñar o producir (algo) para satisfacer las necesidades individuales de alguien"  </item>
+        <item> "Una gran empresa que se compone de diferentes tipos de empresas"  </item>
+        <item> "Siempre actuando o comportándose de la misma manera"  </item>
+        <item> "Una declaración pública u oficial de apoyo o aprobación"  </item>
+        <item> "Que dura por un tiempo muy corto"  </item>
+        <item> "Hacer o desempeñarse mejor que (alguien o algo)"  </item>
+        <item> "Un trozo de metal doblado o de alambre empujado a través de algo o cortado sobre él como cierre"  </item>
+        <item> "Discutir algo importante para tomar una decisión"  </item>
+        <item> "Una cosa que es útil o beneficiosa"  </item>
+        <item> "Que ocurre en o durante el mismo tiempo"  </item>
+        <item> "Encontrarse (a alguien) cara a cara con intención hostil o argumentativa"  </item>
+        <item> "Obligar (algo inoportuno o desconocido) a ser aceptado o puesto en práctica"  </item>
+        <item> "Comunicarse o trabajar en relación con los demás"  </item>
+        <item> "Un hecho o dato de un estudio de una gran cantidad de datos numéricos"  </item>
+        <item> "Que se ve fácilmente afectado, influenciado o dañado por algo"  </item>
+        <item> "Experimentar o sufrir (algo)"  </item>
+        <item> "El estado de estar lejos de un lugar o de una persona"  </item>
+        <item> "(de una situación o evento) extremadamente grave o urgente"  </item>
+        <item> "Una diferencia especialmente entre las cosas que deberían ser iguales"  </item>
+        <item> "La cualidad o el estado de ser igual"  </item>
+        <item> "Ir más allá de lo que es usual, normal o apropiado"  </item>
+        <item> "Extremadamente valioso o útil"  </item>
+        <item> "Hacer (algo) necesario"  </item>
+        <item> "Algo que la gente hace para relajarse o divertirse"  </item>
+        <item> "Tierras de un tipo particular"  </item>
+        <item> "Difícil de transportar o mover debido a su tamaño, forma o peso"  </item>
+        <item> "Imposible de pasar, cruzar o viajar por encima de"  </item>
+        <item> "Que se pueda alcanzar o acercar"  </item>
+        <item> "Un pasaje por donde la gente camina"  </item>
+        <item> "En relación con el sentido del oído"  </item>
+        <item> "Hacer pequeños movimientos, especialmente de las manos y los pies"  </item>
+        <item> "Incluir (algo) como parte de algo más"  </item>
+        <item> "Mover o controlar (algo)"  </item>
+        <item> "Algo que bloquea una carretera o un camino"  </item>
+        <item> "Tener el deseo de saber o aprender más"  </item>
+        <item> "Hecho para corregir o mejorar algo"  </item>
+        <item> "Los cursos que se imparten en una escuela, universidad, etc."  </item>
+        <item> "Un dispositivo que mantiene dos cosas firmemente unidas"  </item>
+        <item> "Hacer algo que no obedece o no sigue (una regla, ley, etc.)"  </item>
+        <item> "Ir apresuradamente a través de (un lugar) robando cosas y causando daño"  </item>
+        <item> " de una manera definida y exacta"  </item>
+        <item> "Blanco o resplandeciente debido a un gran calor"  </item>
+        <item> "Un hilo o cabello delgado"  </item>
+        <item> "El proceso de sudar"  </item>
+        <item> "Un viejo y conocido dicho que expresa una verdad general"  </item>
+        <item> "La acción de volar u operar aeronaves"  </item>
+        <item> "Falta de voluntad para cambiar o comprometerse"  </item>
+        <item> "Diferentes entre sí"  </item>
+        <item> "Extremadamente importante y necesario"  </item>
+        <item> "Que no es capaz de ser explicado o entendido"  </item>
+        <item> "El resultado final de algo"  </item>
+
+    </string-array>
+
+    <string-array name="IELTS_example1_sp">
+
+        <item> "Pusieron una buena defensa, pero la ciudad finalmente cayó ante los invasores."  </item>
+        <item> "¿Podría el aumento de los robots tener un impacto negativo en el empleo?"  </item>
+        <item> "Hay un nivel muy alto de polución en los ríos"  </item>
+        <item> "A pesar de las duras condiciones de su infancia, el apoyo de su familia lo hizo feliz."  </item>
+        <item> "El hombre consumió la bolsa entera de palomitas de maíz él solo."  </item>
+        <item> "Mi aspecto favorito de vivir en el campo es la atmósfera de calma."  </item>
+        <item> "Si vas a ir de vacaciones al extranjero, necesitas un pasaporte."  </item>
+        <item> "El restaurante del hotel sirve gastronomía internacional."  </item>
+        <item> "Trabajar duro y amar lo que se hace son ingredientes clave para el éxito."  </item>
+        <item> "Una de las características más grandes de mi hermano es su intrepidez."  </item>
+        <item> "Realizar una tarea tan desafiante requiere habilidades muy particulares."  </item>
+        <item> "Ella tiene reputación de ser bastante irresponsable."  </item>
+        <item> "La tienda reemplazó mi televisor porque tenía un defecto."  </item>
+        <item> "El número de niños que viven en la pobreza disminuyó el año pasado."  </item>
+        <item> "La inversión en este país se ve impedida por el clima político inestable."  </item>
+        <item> "El servicio nacional de salud dista mucho de ser adecuado."  </item>
+        <item> "El precio del artículo se ha reducido para compensar un defecto."  </item>
+        <item> "El país atraviesa un momento crucial en su desarrollo."  </item>
+        <item> "Un trabajo no es solamente un medio para ganarse la vida."  </item>
+        <item> "Es obvio que no te importan en absoluto mis sentimientos."  </item>
+        <item> "La propagación de la enfermedad alcanzó dimensiones epidémicas esta semana."  </item>
+        <item> "Necesitamos instalar topes de velocidad para reducir la velocidad de los coches en esta calle."  </item>
+        <item> "Es un problema muy complicado, pero creo que hay muchas cosas que puedes hacer."  </item>
+        <item> "Las personas mayores son miembros particularmente vulnerables de nuestra sociedad."  </item>
+        <item> "El gobierno tuvo que alterar su política exterior."  </item>
+        <item> "Se le dio el beneficio de la duda."  </item>
+        <item> "Hizo unos elaborados preparativos para la fiesta."  </item>
+        <item> "Hay evidencias considerables de que el calentamiento global es real."  </item>
+        <item> "Su ayuda es imprescindible para el éxito de este plan."  </item>
+        <item> "Los esfuerzos del gobierno para estabilizar los precios no han tenido éxito."  </item>
+        <item> "El Estado contribuyó con 5 millones de euros para reparar los daños causados por el terremoto."  </item>
+        <item> "¿Has leído el nuevo libro de Dan Brown? Es fascinante."  </item>
+        <item> "Me parece que tiene tendencia a exagerar."  </item>
+        <item> "Nos comunicamos entre nosotros por medio de un gesto."  </item>
+        <item> "Ella siempre ve el lado humorístico de una situación en lugar de deprimirse por las cosas."  </item>
+        <item> "Los dos bancos se fusionaron para formar una gran institución."  </item>
+        <item> "Rápidamente se hizo prominente en la industria de la música."  </item>
+        <item> "Unos ochenta mil espectadores se congregaron en el estadio anoche."  </item>
+        <item> "¿Podemos ir a otro recinto?"  </item>
+        <item> "El equipo y sus seguidores desfilaron por la calle."  </item>
+        <item> "El único inconveniente de mi apartamento en Nueva York era que no tenía bañera."  </item>
+        <item> "Nuestra empresa ofrece el servicio de Internet más eficiente de la ciudad."  </item>
+        <item> "La maestra equipó a los estudiantes con gafas y guantes de goma para el experimento."  </item>
+        <item> "La carga se amontonaba en el puerto debido a la huelga de los estibadores."  </item>
+        <item> "La innovación tecnológica es la clave para abordar el problema del cambio climático."  </item>
+        <item> "Hemos estado sufriendo bajo una intensa ola de calor durante días."  </item>
+        <item> "La eliminación de más árboles de los que son plantados acelera el cambio climático."  </item>
+        <item> "La empresa ofrece a sus empleados incentivos financieros para trabajar en zonas más aisladas del país."  </item>
+        <item> "No voy a negar que los atributos físicos son importantes a la hora de elegir una pareja potencial."  </item>
+        <item> "Los creadores de la vacuna fueron elogiados durante mucho tiempo."  </item>
+        <item> "Una persona debe ser juzgada más por sus actos que por sus palabras."  </item>
+        <item> "Los eruditos creen que la antigua ciudad de Troya se encuentra en la actual Turquía."  </item>
+        <item> "Deberían resolver sus diferencias y volver a ser amigos."  </item>
+        <item> "No pude encontrar ninguna comida asequible en ese restaurante elegante."  </item>
+        <item> "Mis vecinos decidieron consagrar su tiempo a la limpieza del barrio."  </item>
+        <item> "Srta. Wilder, ¿cómo mantiene una disciplina adecuada en su clase?"  </item>
+        <item> "Su profesor de química vio que era una científica realmente superdotada."  </item>
+        <item> "Los países mediterráneos son conocidos por su clima moderado"  </item>
+        <item> "No esperaba tocar ideas tan profundas en una clase de química."  </item>
+        <item> "Utilizamos una sofisticada técnica de purificación biológica del agua"  </item>
+        <item> "En marzo, el gobierno desvelará su nueva estrategia para hacer frente al cambio climático."  </item>
+        <item> "Aunque ofrecer productos gratuitos puede atraer a los clientes, no es un plan de negocios factible."  </item>
+        <item> "Navegamos de Florida a California, pasando por el Canal de Panamá."  </item>
+        <item> "La turbulencia política y social va en aumento en previsión de las elecciones nacionales."  </item>
+        <item> "Necesito vender mi auto y comprar algo nuevo y más fiable."  </item>
+        <item> "Ella recurre a los juegos para mantener el interés de sus estudiantes cuando les enseña matemáticas."  </item>
+        <item> "Nuestra cabaña no tiene aislante porque sólo estamos aquí en verano."  </item>
+        <item> "La vanidad de Stephanie no le permitía ser vista en público mientras se recuperaba de su accidente."  </item>
+        <item> "Espera a que diga tu nombre antes de responder a mi pregunta."  </item>
+        <item> "Como percusionista, Pedro siempre acumulaba todo tipo de instrumentos."  </item>
+        <item> "Tenemos que estar dispuestos a adaptar nuestra estrategia empresarial a medida que cambien los tiempos."  </item>
+        <item> "La junta escolar determinó la mejor manera de distribuir los fondos a todos los programas que ofrecía la escuela."  </item>
+        <item> "El agua que fluye hacia el lago ha sido insuficiente para reemplazar lo que se pierde por la evaporación."  </item>
+        <item> "Me gusta mucho el fleco de tu suéter."  </item>
+        <item> "Un autor prolífico[=un autor que escribe muchos libros]"  </item>
+        <item> "Plantas que prosperan [=crecen bien] en el desierto"  </item>
+        <item> "La policía está conduciendo una investigación sobre el robo de la semana pasada."  </item>
+        <item> "La tolerancia es esencial en una comunidad diversa."  </item>
+        <item> "Es un mercado laboral muy competitivo. [=una situación en la que mucha gente está tratando de conseguir trabajo]"  </item>
+        <item> "Reconoció que su oponente había ganado, pero no quiso reconocer su pérdida."  </item>
+        <item> "Ella ha estado recibiendo tratamiento para la depresión severa/profunda."  </item>
+        <item> "Estoy seguro de que llegará lejos en la vida porque es muy aplicado."  </item>
+        <item> "Cada candidato afirma tener un plan para rejuvenecer la economía en decadencia."  </item>
+        <item> "El auge de la industria provocó una grave deforestación de la zona."  </item>
+        <item> "¿Cómo sobreviven las plantas en un ambiente tan hostil?"  </item>
+        <item> "Las selvas de Madagascar son el único hábitat natural del lémur."  </item>
+        <item> "Hay apoyo gubernamental para los comerciantes que trabajan en el comercio al por menor y al por mayor."  </item>
+        <item> "El comediante suscitó controversia con sus comentarios sobre las personas obesas."  </item>
+        <item> "Siempre está al tanto de las últimas tendencias de la moda."  </item>
+        <item> "Montse dedicó años a desarrollar la vacuna en su laboratorio."  </item>
+        <item> "Los médicos están entusiasmados con los beneficios potenciales del nuevo medicamento."  </item>
+        <item> "Kevin administra un fondo para financiar para la investigación del cáncer infantil."  </item>
+        <item> "Necesitaba un mentor que le enseñara sobre el mundo de la política."  </item>
+        <item> "Ella lo había rechazado para una cita antes, pero él persisitió y le preguntó de nuevo."  </item>
+        <item> "Íbamos a hacer un picnic, pero la lluvia perturbó nuestros planes."  </item>
+        <item> "Manny se sorprendió al saber que la luna no emite luz."  </item>
+        <item> "La venta de cigarrillos ha decaido por tercer trimestre consecutivo."  </item>
+        <item> "El departamento de finanzas estima que habrá una pérdida del 10% este año."  </item>
+        <item> "La causa primaria de las protestas fue la corrupción en el gobierno."  </item>
+        <item> "La familia terminó buscando un apartamento más económico fuera de la ciudad."  </item>
+        <item> "Inevitablemente, usted tendrá que pagar la deuda de su tarjeta de crédito antes de tratar de comprar una casa."  </item>
+        <item> "Dagoberto se mudó a un apartamento en una zona residencial al lado de la universidad donde está estudiando."  </item>
+        <item> "El puente fue construido bajo la supervisión de un prominente ingeniero."  </item>
+        <item> "Tenemos una gran lista de oradores y participantes para nuestra conferencia en Londres este verano."  </item>
+        <item> "Normalmente pide helado de fresa, pero esta vez optó por el chocolate."  </item>
+        <item> "La ciudad ha florecido en los últimos años bajo el liderazgo del alcalde Grant."  </item>
+        <item> "La empresa está promoviendo su nuevo producto."  </item>
+        <item> "El proyecto de salud se implementará el próximo año."  </item>
+        <item> "El sacerdote sufrió una aguda vergüenza cuando fue sorprendido leyendo "Lolita" de Nabokov."  </item>
+        <item> "Para evitar exponerse a las amenazas informáticas, nunca haga clic en los enlaces a archivos de desconocidos."  </item>
+        <item> "Veo que estás ocupada, así que no te obstaculizaré más."  </item>
+        <item> "Dos de los nudos más importantes que hay que aprender son el ocho y la bolina."  </item>
+        <item> "Los gráciles movimientos de una bailarina"  </item>
+        <item> "Las cicatrices marcaron su cara por los cortes rituales realizados en su tribu."  </item>
+        <item> "El ácido de la batería había erosionado el motor."  </item>
+        <item> "¿Puede extender su visita unos días más?"  </item>
+        <item> "El avión de combate recibió la orden de interceptar un avión que había entrado en el espacio aéreo del país."  </item>
+        <item> "Necesitas más nutrientes en tu dieta."  </item>
+        <item> "¿Demasiada libertad hará que los niños se degeneren?"  </item>
+        <item> "Dado que la pequeña nación tenía fronteras porosas, era un blanco fácil para la invasión."  </item>
+        <item> "El suelo resultó ser demasiado infértil para sostener pastos o cultivos herbáceos reales."  </item>
+        <item> "Durante las sequías, los agricultores apenas pueden ganarse la vida."  </item>
+        <item> "La emisión de gases como el dióxido de carbono debería estabilizarse en su nivel actual."  </item>
+        <item> "Nuestro programa de comercio y desarrollo facilitará nuestro progreso."  </item>
+        <item> "El gobierno tiene una responsabilidad irremplazable en la mejora de la justicia social."  </item>
+        <item> "Sólo podía dedicar dos o tres horas de mis numerosas ocupaciones diurnas."  </item>
+        <item> "Quiere asegurarse de que su legado aguantará."  </item>
+        <item> "La Torre Eiffel es una notable hazaña de ingeniería."  </item>
+        <item> "Para tomar la decisión óptima, escaneo visualmente tantas como sea posible de las diferentes alternativas."  </item>
+        <item> "El chimpancé es una especie en peligro de extinción."  </item>
+        <item> "La casa de la amable dama siempre estuvo abierta a los extraviados."  </item>
+        <item> "Los negocios actuales son cada vez más complejos y diversos."  </item>
+        <item> "Tiene opiniones extremas cuando se trata de política."  </item>
+        <item> "Los científicos están estudiando los mecanismos del cuerpo para controlar el peso."  </item>
+        <item> "Los bajos salarios y la escasa población han mantenido los precios de la vivienda muy bajos."  </item>
+        <item> "Asar los cacahuetes con cuidado de no abrasarlos."  </item>
+        <item> "En principio, estoy de acuerdo con la idea, pero en la práctica, no siempre es posible."  </item>
+        <item> "Había una brisna de sonrisa[=una sonrisa muy leve] en sus labios."  </item>
+        <item> "Compré una solución salina para limpiarme los ojos."  </item>
+        <item> "No toleramos fumar en la biblioteca."  </item>
+        <item> "A veces hiere los sentimientos de la gente inconscientemente."  </item>
+        <item> "Ella sufrió una pérdida temporal de la visión después de ser golpeada en la cabeza."  </item>
+        <item> "Comparamos y contrastamos los dos personajes de la historia."  </item>
+        <item> "Cada golpe de martillo quitaba un gran pedazo de yeso."  </item>
+        <item> "Sólo el 10% de los adultos estadounidenses se comprometen a hacer ejercicio regularmente."  </item>
+        <item> "Era una gestora imaginativa e innovadora."  </item>
+        <item> "Comer en exceso es sin duda la causa principal de la obesidad."  </item>
+        <item> "Las personas experimentan diferencias en la capacidad física y mental dependiendo de la hora del día."  </item>
+        <item> "Ella decidió seguir sus estudios después de obtener su primer título."  </item>
+        <item> "El perro respondió al estímulo de la campana."  </item>
+        <item> "¿Qué marca son esos vaqueros que llevas puestos?"  </item>
+        <item> "La casa del antropólogo estaba llena de artefactos y plantas exóticas."  </item>
+        <item> "Puede ser difícil tratar de hacer malabares con una carrera y una familia."  </item>
+        <item> "Tom Cruise ha realizado sus propias tretas o trucos para Mission Impossible 2, desafiando las advertencias de los profesionales."  </item>
+        <item> "Parte del éxito de la película radica en la fuerza del elenco de apoyo (= los actores que no interpretaban los papeles principales)."  </item>
+        <item> "Sus trofeos fueron exhibidos con orgullo en un armario retroiluminado."  </item>
+        <item> "El nuevo desarrollo generará 1.500 nuevos puestos de trabajo."  </item>
+        <item> "Una locomotora diesel"  </item>
+        <item> "Mis frenillos grabaron una huella en el interior de mis labios."  </item>
+        <item> "Los informes iniciales indican que han muerto siete personas, aunque esto aún no se ha confirmado."  </item>
+        <item> "Contó con el apoyo de grandes sectores de la población local."  </item>
+        <item> "Se inclinó para abrazar al niño."  </item>
+        <item> "Tiene una aptitud natural para los idiomas."  </item>
+        <item> "Sigue enfurecida por no haber sido invitada a la fiesta."  </item>
+        <item> "Necesito dinero para poder funcionar como artista."  </item>
+        <item> "El programa tiene por objeto promover la alfabetización de adultos entre personas que han tenido muy poca escolaridad."  </item>
+        <item> "También estudió las antiguas lápidas de piedra de alrededor de las pirámides."  </item>
+        <item> "El hotel le exoneró de los gastos de alojamiento como símbolo de gratitud por ayudar a detener al ladrón."  </item>
+        <item> "El sabio de la tribu india pudo curar al hombre malherido."  </item>
+        <item> "Estas historias se originaron en épocas anteriores."  </item>
+        <item> "Ella afirma que puede pronosticar eventos futuros."  </item>
+        <item> "La segunda sílaba de la palabra doctor se pronuncia acentuadamente."  </item>
+        <item> "Me gusta mucho el estampado floral de estas cortinas. - No me gustan. Creo que son horribles."  </item>
+        <item> "La novia llevaba una guirnalda de flores en la cabeza."  </item>
+        <item> "Ella reinó sobre su reino durante muchas décadas."  </item>
+        <item> "Ella se ha manifestado como una de las principales contendientes en este campo."  </item>
+        <item> "La decoración evocaba a un centro municipal de arte y ocio."  </item>
+        <item> "Necesito renovar mi pasaporte este año."  </item>
+        <item> "Estos cambios afectarán a la gente común y, notablemente, a las mujeres trabajadoras."  </item>
+        <item> "Regresó lisiado de la guerra."  </item>
+        <item> "El criminal fue seducido fuera de su escondite con una oferta falsa y fue detenido."  </item>
+        <item> "El programa de televisión ha retenido su popularidad durante muchos años."  </item>
+        <item> "Tuvimos muchas fiestas en nuestro dormitorio en nuestro primer año."  </item>
+        <item> "Compitió contra estudiantes de todo el país."  </item>
+        <item> "Si pones el vaso tan cerca del borde de la mesa, se caerá."  </item>
+        <item> "Parece haber una falta de motivación entre el personal."  </item>
+        <item> "Encontré un nicho para mí después de la secundaria."  </item>
+        <item> "Hubo un sonido de astillamiento cuando la barandilla cedió."  </item>
+        <item> "El huracán Andrew ha pasado por la punta sur de Florida."  </item>
+        <item> "Sentí un fuerte vínculo espiritual con él."  </item>
+        <item> "Me convenció de que la historia era cierta."  </item>
+        <item> "El general le dijo a sus tropas que prevalecerían contra el enemigo."  </item>
+        <item> "Va al barbero todos los domingos para que le afeiten la barba."  </item>
+        <item> "La delincuencia es un problema cada vez más serio en una sociedad moderna."  </item>
+        <item> "Las bebidas alcohólicas se sirven en el salón del hotel."  </item>
+        <item> "El herrero forjó un hacha con una técnica antigua."  </item>
+        <item> "Las llamaradas chocaron, volando a cientos de metros de altura."  </item>
+        <item> "Hicieron un esfuerzo concertado para que se sintiera bienvenida."  </item>
+        <item> "En tiempos de recesión económica, los consumidores tienden a gastar menos."  </item>
+        <item> "La periodontitis grave es una de las enfermedades más prevalecientes entre los seres humanos."  </item>
+        <item> "John empezó la temporada mejor que yo, pero he luchado para ponerme al día."  </item>
+        <item> "Usted debe ser decidido y persistente para tener éxito en este campo competitivo."  </item>
+        <item> "Mi nuevo libro de fantasía está dirigido a los adolescentes."  </item>
+        <item> "Aparentemente, las chicas no se divierten en absoluto con todo el asunto."  </item>
+        <item> "Ya están luchando para erradicar enfermedades como la malaria y el tétanos."  </item>
+        <item> "Los hechos comenzaron a desplegarse ante ellos."  </item>
+        <item> "Experimentos diseñados para validar[=probar] una hipótesis"  </item>
+        <item> "Jim está a medio camino de alcanzar su licencia de piloto."  </item>
+        <item> "Un negocio en el que las oportunidades abundan[=un negocio en el que hay muchas oportunidades]"  </item>
+        <item> "Parecía incapaz de tomar decisiones."  </item>
+        <item> "El suelo ha sido pulido y es resbaladizo."  </item>
+        <item> "Demandó a Petrocorp por violación de patente."  </item>
+        <item> "Los roles femeninos de Shakespeare fueron escritos originalmente para ser interpretados por hombres."  </item>
+        <item> "No hay estadísticas previas para la comparación."  </item>
+        <item> "Para que nuestro negocio sobreviva, debemos ser capaces de adaptarnos a las circunstancias cambiantes."  </item>
+        <item> "Gracias por su consejo y apoyo."  </item>
+        <item> "Ella mezcla psicología y crimen en su nueva novela."  </item>
+        <item> "Katy creció en una familia convencional con un padre trabajador, una madre en casa y un hermano."  </item>
+        <item> "La universidad tiene/juega un papel dominante[=mayor] en la economía local."  </item>
+        <item> "Recitó el poema/pasaje con gran sentimiento."  </item>
+        <item> "A menudo tienen una vida íngrima y solitaria que llevar."  </item>
+        <item> "¿Cómo puedo enriquecer mi vocabulario?"  </item>
+        <item> "Su atractiva personalidad lo hizo popular entre sus compañeros."  </item>
+        <item> "A los estudiantes se les asignó una tarea."  </item>
+        <item> "Fue víctima de abuso verbal. [= lenguaje áspero e insultante]"  </item>
+        <item> "Se requiere perseverancia para perfeccionar casi cualquier habilidad."  </item>
+        <item> "Todas sus ideas sobre el nuevo diseño se derivan de las peticiones específicas de los usuarios."  </item>
+        <item> "Varios de ellos han entablado denuncias formales contra la policía."  </item>
+        <item> "Su primera infancia fue la inspiración para su primera novela."  </item>
+        <item> "Ella cuida de su marido inválido en casa."  </item>
+        <item> "Hemos estado cortejando a grandes inversores para financiar este nuevo proyecto."  </item>
+        <item> "Refinamiento de aceite"  </item>
+        <item> "Usted puede pedir un descuento a un distribuidor, ya sea que pague en efectivo o compre a crédito."  </item>
+        <item> "Una cámara de vacío"  </item>
+        <item> "Las personas lesionadas en accidentes causados por el neumático defectuoso han amenazado con demandar."  </item>
+        <item> "Su voz tiene un tono alto."  </item>
+        <item> "El Sr. Chester dijo que la ayuda militar extranjera prolongaba la guerra."  </item>
+        <item> "Un piloto noruego de 79 años que aterrizó con seguridad su avioneta después de que su hélice cayera ha sido elogiado por su frescura."  </item>
+        <item> "Leonard inclinó su silla sobre dos piernas y estiró su largo cuerpo."  </item>
+        <item> "Cuando fuimos a acampar, tajamos leña para el fuego."  </item>
+        <item> "El ministro advirtió que si estallaba la guerra, sería catastrófico para el mundo entero."  </item>
+        <item> "Después de una breve indagación sobre las vacaciones de Navidad, volvió a tratar el tema de la música."  </item>
+        <item> "El leñador quebró algunas ramitas y las tiró al fuego."  </item>
+        <item> "El coche fue remolcado al garaje más cercano después del accidente."  </item>
+        <item> "Si prefieres tu red de voleibol en una piscina, parece que te gustan los deportes acuáticos."  </item>
+        <item> "Un arreglo de trajes de baño en la playa."  </item>
+        <item> "Hay un sinnúmero de posibilidades."  </item>
+        <item> "La latitud terrestre se mide en grados al norte o al sur del ecuador."  </item>
+        <item> "La densa vegetación de la selva"  </item>
+        <item> "El señor del vacío es un gran anfibio alienígena."  </item>
+        <item> "El divorcio dejó un residuo de dolor en la familia."  </item>
+        <item> "La memoria era tan dolorosa que la obliteró de su mente"  </item>
+        <item> "La biodiversidad sigue disminuyendo cada año. "  </item>
+        <item> "Estados Unidos está en el hemisferio norte."  </item>
+        <item> "Era imperativa la adopción de medidas inmediatas."  </item>
+        <item> "Compró un telescopio nuevo para poder seguir con su pasatiempo nocturno favorito de la astronomía."  </item>
+        <item> "Sus orígenes y parentesco son oscuros."  </item>
+        <item> "Tiene un sentido infalible del buen gusto."  </item>
+        <item> "Espera poder exhibir sus pinturas en Japón. "  </item>
+        <item> "Diluyendo la calidad de nuestros productos."  </item>
+        <item> "La economía local es notablemente resiliente."  </item>
+        <item> "Llevamos las cosas de la playa a la playa, evitando cualquier cosa que se pareciera a una duna."  </item>
+        <item> "La estructura de la hoja permite que el dióxido de carbono y el oxígeno entren y salgan de la hoja, que es donde tiene lugar la fotosíntesis."  </item>
+        <item> "Conducir con música alta puede llevar a una falta de concentración."  </item>
+        <item> "Manténgase alejado de un cactus espinoso."  </item>
+        <item> "Un científico que está estudiando formas de conservar[=preservar] la diversidad biológica"  </item>
+        <item> "Una furgoneta gris de Toyota navegaba a menos de cinco metros más allá de él, su ritmo lento y deliberado."  </item>
+        <item> "Las escuelas de la Ivy League están consideradas como un lugar de encuentro para algunas de las personas más intelectuales del mundo."  </item>
+        <item> "La amabilidad de su vecino la abrumó. [=la conmovió profundamente]"  </item>
+        <item> "En sus libros, las mujeres son a menudo representadas en roles pasivos."  </item>
+        <item> "El béisbol ha sido un pasatiempo nacional durante años."  </item>
+        <item> "Éramos reacios a involucrarnos."  </item>
+        <item> "Por impulso, abrió la pequeña caja de cristal donde habían colocado el hueso."  </item>
+        <item> "Existen varias teorías opuestas sobre los orígenes de los antiguos filipinos."  </item>
+        <item> "Están restaurando el hotel a su majestuosidad original/anterior."  </item>
+        <item> "El juez devolvió el caso para que se siguiera examinando."  </item>
+        <item> "Antes de comenzar una reforma de la cocina, es importante hacer un plan detallado."  </item>
+        <item> "El emperador llegó en una carroza tirado por cuatro caballos blancos."  </item>
+        <item> "Una actuación se hizo en mímica"  </item>
+        <item> "Randall regresó de los Himalayas con muchas fotos de las toscas montañas."  </item>
+        <item> "Necesitamos regulaciones más rigurosas en el sector financiero para evitar la corrupción."  </item>
+        <item> "Ella talla figuras de madera."  </item>
+        <item> "Viajeros ocupados en su camino al trabajo"  </item>
+        <item> "Estoy quebrado, así que no puedo darte ninguna compensación monetaria por el trabajo ahora mismo."  </item>
+        <item> "Podía oír a mi compañera de cuarto subiendo con pasos pesados los escalones de nuestro apartamento."  </item>
+        <item> "Tropezó y se extendió arrastrando hacia la mesa."  </item>
+        <item> "El distrito abarca la mayor parte del centro de la ciudad."  </item>
+        <item> "Durante la excavación se encontraron restos humanos."  </item>
+        <item> "Su nombre estaba inscrito en el trofeo."  </item>
+        <item> "Según la mitología griega, el minotauro sólo comía carne humana."  </item>
+        <item> "Los aldeanos arrearon el ganado a tierras altas para mantenerlo a salvo durante las inundaciones."  </item>
+        <item> "No teníamos sedales, así que intentamos usar juncos para atrapar a los peces en el lago."  </item>
+        <item> "Diez adultos acompañaron a la clase en su excursión."  </item>
+        <item> "El olor de la tarta de calabaza evoca recuerdos del pasado de Acción de Gracias."  </item>
+        <item> "No se ajusta al estereotipo habitual del hombre de negocios con un traje oscuro y un maletín."  </item>
+        <item> "Sus esfuerzos han culminado en el descubrimiento de un nuevo tratamiento para el cáncer."  </item>
+        <item> "Hope no mostró prácticamente ningún signo de fragilidad hasta que cumplió los 90 años."  </item>
+        <item> "No se hace ilusiones sobre la dificultad de la tarea que le espera."  </item>
+        <item> "El autor representa al personaje principal con gran detalle."  </item>
+        <item> " La verdad permanecerá sin un puntal."  </item>
+        <item> "Y no creo que las payasadas sean graciosas."  </item>
+        <item> "No había paradigmas morales para tratar con el embrión extracorpóreo."  </item>
+        <item> "El personal de la ONU está allí para ayudar a administrar el territorio."  </item>
+        <item> "Hay evidencia de corrupción rampante en el gobierno local."  </item>
+        <item> "El tronco de esta planta es delgado y hueco."  </item>
+        <item> "Gracias por su carta. Lamentablemente, la vacante ya ha sido cubierta."  </item>
+        <item> "Por lo tanto, no tiene sentido sobrecargar a la gente con una gran cantidad de información extraña."  </item>
+        <item> "Su salud sigue deteriorándose. [= en declive]"  </item>
+        <item> "Las cápsulas de Placebo contenían parafina líquida para adultos y aceite de oliva para niños."  </item>
+        <item> "Los sobrevivientes estuvieron a la deriva en una balsa durante seis días."  </item>
+        <item> "El aroma de las flores nos fue transmitido por la brisa."  </item>
+        <item> "Se empeñaron en crear un gobierno que realmente sirva a su pueblo."  </item>
+        <item> "A los 19 años, se matriculó en la facultad de derecho de la universidad."  </item>
+        <item> "Me especialicé en filosofía para poder afilar mis habilidades de pensamiento crítico."  </item>
+        <item> "En el centro vacacional de la playa, los apartamentos y villas cuentan con servicio de mucama diario."  </item>
+        <item> "Sucedió a su padre como profesor de Botánica."  </item>
+        <item> "Pasó siete días a flote en una balsa."  </item>
+        <item> "Los niños tienen toallas personalizadas con sus nombres cosidos."  </item>
+        <item> "Cuando las empresas se fusionaron en un conglomerado, el valor de las acciones aumentó en más de un 20%."  </item>
+        <item> "La calidad de este producto ha sido consistentemente alta en los últimos años"  </item>
+        <item> "El sindicato ha anunciado su aval a uno de los candidatos a la presidencia."  </item>
+        <item> "Hice una visita fugaz a casa para desearle a mi hermana un feliz cumpleaños."  </item>
+        <item> "Los estudiantes de las escuelas públicas superaron a sus contrapartes de las escuelas privadas en el examen estandarizado."  </item>
+        <item> "Utilice clips en lugar de grapas para mantener juntas las páginas de su tesis."  </item>
+        <item> "El jurado salió de la sala para deliberar antes de emitir su veredicto."  </item>
+        <item> "El aumento de la volatilidad en el mercado de valores ha sido un gran beneficio para los corredores."  </item>
+        <item> "He programado mis vacaciones para que coincidan con las vacaciones escolares de los niños."  </item>
+        <item> "Los soldados se enfrentaron a un grupo de rebeldes."  </item>
+        <item> "El tribunal puede imponer una multa o una pena de prisión."  </item>
+        <item> "Aprendió a interactuar con gente poderosa cuando trabajaba para el gobierno."  </item>
+        <item> "Su discurso incluyó algunas estadísticas reveladoras sobre las tasas de desempleo en las zonas rurales."  </item>
+        <item> "Las personas mayores son más susceptibles a las infecciones."  </item>
+        <item> "Nadie debería tener que someterse a tantas dificultades como ese pobre huérfano."  </item>
+        <item> "La ausencia de trabajo en la zona obligó a toda la familia a mudarse."  </item>
+        <item> "Las circunstancias están más nefastas que nunca."  </item>
+        <item> "Siempre ha habido una / cierta discrepancia entre su imagen pública y privada."  </item>
+        <item> "En algunos países, los negros no tienen igualdad con los blancos."  </item>
+        <item> "Los exámenes ocupan una cantidad desmesurada de tiempo de los profesores."  </item>
+        <item> "Su conocimiento del área lo hizo invaluable."  </item>
+        <item> "Las nuevas normas de seguridad requerían que se añadiera una barandilla a las escaleras."  </item>
+        <item> "El fútbol es la recreación habitual de los niños después de la escuela."  </item>
+        <item> "El terreno cambió rápidamente de tierra cultivable a desierto."  </item>
+        <item> "Llegaron jadeando hasta su puerta con su equipaje difícil de manejar."  </item>
+        <item> "El río formó una barrera insalvable para los animales migratorios."  </item>
+        <item> "La remota zona desértica sólo es de fácil acceso en helicóptero."  </item>
+        <item> "¿Quiere sentarse en el pasillo o prefiere estar junto a la ventana?"  </item>
+        <item> "El paciente tiene daños en el nervio auditivo."  </item>
+        <item> "El niño inquieto no paraba de moverse nerviosamente, así que el maestro lo envió a la oficina del director."  </item>
+        <item> "Trataremos de incorporar algunas de sus ideas en nuestro plan futuro."  </item>
+        <item> "Consiguieron manipularnos para que accediéramos a ayudar."  </item>
+        <item> "Tuvo que someterse a una cirugía para eliminar una obstrucción de su garganta."  </item>
+        <item> " No es una persona inquisitiva por naturaleza."  </item>
+        <item> "El puente mal diseñado necesita trabajos de recuperación para que sea seguro."  </item>
+        <item> "Los idiomas son una parte esencial del plan de estudios escolar."  </item>
+        <item> "Sujete con una pinza un extremo de la tabla al borde de la mesa."  </item>
+        <item> "El comité dictaminó que la prohibición de los Estados Unidos constituía una violación del libre comercio."  </item>
+        <item> " Han saqueado toda la clase por su balón de baloncesto."  </item>
+        <item> "En los últimos años, los médicos han sido entrenados específicamente para la medicina general."  </item>
+        <item> "El meteorito fue descrito como incandescente después de aterrizar en el suelo."  </item>
+        <item> "Puedo ver claramente que el filamento de la bombilla está roto."  </item>
+        <item> "La transpiración enfría la piel en climas cálidos."  </item>
+        <item> "Recuerde el viejo refrán - compre barato, compre dos veces!"  </item>
+        <item> "Las grandes compañías de aviación necesitan recortar los precios si quieren competir con las compañías aéreas de bajo coste."  </item>
+        <item> "Puede coser esponja, cuero fino con una inflexibilidad uniforme y lisa."  </item>
+        <item> " Los científicos están tratando de reunir ideas dispares en astronomía."  </item>
+        <item> "Es indispensable para la compañía."  </item>
+        <item> "Por alguna razón inexplicable, ha decidido cancelar el proyecto."  </item>
+        <item> "La carrera espacial alcanzó su culminación en la primera caminata lunar."  </item>
+
+    </string-array>
+
+    <string-array name="IELTS_example2_sp">
+
+        <item> "El ataque es la mejor forma de defensa."  </item>
+        <item> "Prepárense para un impacto."  </item>
+        <item> "Nuestras ciudades crean graves problemas de polución."  </item>
+        <item> "Realmente hablé con demasiada dureza."  </item>
+        <item> "Este motor es el que más aceite consume."  </item>
+        <item> "La educación es uno de los aspectos más esenciales de la vida."  </item>
+        <item> "La gente a menudo simplemente abandona a sus mascotas cuando se van al extranjero."  </item>
+        <item> "Me gusta la gastronomía coreana. "  </item>
+        <item> "María mezcló los ingredientes para hacer un pastel."  </item>
+        <item> "El color verde es una característica de ese tipo de manzana."  </item>
+        <item> "¿Tienes algo en particular en mente? "  </item>
+        <item> "Ella tiene una mala reputación."  </item>
+        <item> "Se garantiza que el producto está libre de defectos."  </item>
+        <item> "La pobreza de su infancia contrasta totalmente con su vida en Hollywood."  </item>
+        <item> "No permita que su fracaso en el pasado impida su intento de ganar esta vez."  </item>
+        <item> "El jardín no ha estado recibiendo el agua adecuada."  </item>
+        <item> "Usó su buen aspecto para compensar su falta de inteligencia."  </item>
+        <item> "La capacidad de separar los elementos reutilizables de otros residuos es crucial."  </item>
+        <item> "No tiene sentido solamente repetir lo que hemos hecho antes."  </item>
+        <item> "Es obvio que a Tom no le gusta Mary."  </item>
+        <item> "Una epidemia de gripe está arrasando Moscú."  </item>
+        <item> "¿Podría por favor reducir el volumen de la música?"  </item>
+        <item> "Es una palabra ccomplicada de aprender"  </item>
+        <item> "Las tropas estaban en una posición vulnerable."  </item>
+        <item> "Los niños se enfermaron y tuvimos que alterar nuestros planes de vacaciones."  </item>
+        <item> "Todos podemos beneficiarnos de su experiencia."  </item>
+        <item> "Este elaborado engaño mantuvo a su familia engañada durante mucho tiempo."  </item>
+        <item> "Tuve cuidado de no dejar ninguna evidencia."  </item>
+        <item> "El comercio internacional es imprescindible para la salud de las economías."  </item>
+        <item> "Los pilotos pudieron estabilizar el avión y aterrizar de forma segura."  </item>
+        <item> "Contribuyó con cincuenta dólares al proyecto."  </item>
+        <item> "El libro ofrece una visión fascinante del carácter de la Sra. Blair."  </item>
+        <item> "Te he dicho un millón de veces que no exageres."  </item>
+        <item> "A veces los gestos son más expresivos que el habla."  </item>
+        <item> "Su comportamiento en la fiesta fue tan humorístico que no pude evitar reírme."  </item>
+        <item> "El día se fusionó lentamente con la noche."  </item>
+        <item> "Kelley y su esposo contrataron a un abogado prominente, Abbe Lowell."  </item>
+        <item> "Un espectador lanzó el balón de vuelta a los jugadores."  </item>
+        <item> "El hotel es un recinto ideal para conferencias y reuniones de negocios."  </item>
+        <item> "Tenía un desfile constante de jóvenes que venían a visitarla."  </item>
+        <item> "El inconveniente de conducir al trabajo es tener que encontrar un espacio de estacionamiento."  </item>
+        <item> "Todos necesitamos utilizar la energía de forma más eficiente."  </item>
+        <item> "Va a costar 4 millones de dólares equipar el hospital."  </item>
+        <item> "El camión de carga causó una nube de polvo cuando se fue por el camino de tierra."  </item>
+        <item> "Debemos fomentar la innovación si queremos que la empresa siga siendo competitiva."  </item>
+        <item> "Las presiones económicas sobre las pequeñas empresas son intensas."  </item>
+        <item> "La tasa de crecimiento de las ventas de la compañía se está acelerando este año."  </item>
+        <item> "Recompensar el progreso de un niño le dará un incentivo para aprender."  </item>
+        <item> "La imaginación es un atributo de los seres humanos."  </item>
+        <item> "Reconozco a Dios como el Creador del hombre."  </item>
+        <item> "No me sorprendo fácilmente, pero su acto fue demasiado asqueroso."  </item>
+        <item> "Fray Luis de León fue un poeta y erudito que prefirió vivir una vida solitaria."  </item>
+        <item> "La fecha de la boda se ha resuelto finalmente."  </item>
+        <item> "El restaurante sirve buena comida a precios asequibles."  </item>
+        <item> "Las monjas consagraron sus vidas a hacer el bien a la comunidad."  </item>
+        <item> "Los soldados mostraron una disciplina perfecta bajo el fuego del enemigo."  </item>
+        <item> "Su hermano es un artista superdotado, pero tiene algunos problemas psicológicos."  </item>
+        <item> "El restaurante de la esquina tiene comida fresca a precios moderados."  </item>
+        <item> "Hay una profunda diferencia entre tener un plan y tener un propósito."  </item>
+        <item> "Nunca disfruto leer novelas sofisticadas."  </item>
+        <item> "Nuestro nuevo logo será desvelado la próxima semana."  </item>
+        <item> "No podía sugerir una alternativa/opción factible."  </item>
+        <item> "Judy disfrutó de ver osos polares mientras navegaba por la Bahía Baffin."  </item>
+        <item> "La época se caracterizó por turbulencias políticas y culturales."  </item>
+        <item> "Es una fuente fiable de información en la organización."  </item>
+        <item> "El corredor luchó duro para mantener el ritmo."  </item>
+        <item> "El aislante puede reducir el peligro de que las tuberías se rompan en invierno."  </item>
+        <item> "Describió sus logros sin exageración ni vanidad."  </item>
+        <item> "Creo que le gustó lo que dije, pero no le gustó la forma en que respondí."  </item>
+        <item> "A medida que las personas acumulan más riqueza, tienden a gastar una mayor proporción de sus ingresos."  </item>
+        <item> "Si no eres capaz de adaptarte, la tecnología podría no ser el mejor campo para ti."  </item>
+        <item> "El CEO y todos los gerentes de la compañía determinaron los cambios que harían a la declaración de misión de la compañía."  </item>
+        <item> "El Mar Salton se evaporaría lentamente y la vida volvería a la normalidad, por un tiempo."  </item>
+        <item> "Levantaron sus tiendas al borde de los campos abiertos."  </item>
+        <item> "Es una prolífica escritora de novelas y cuentos."  </item>
+        <item> "El negocio está prosperando. [=booming]"  </item>
+        <item> "El decano me encargó de conducir experimentos con nuevos métodos de enseñanza."  </item>
+        <item> "Tolerancia religiosa"  </item>
+        <item> "Esto le da a la compañía una ventaja competitiva sobre sus rivales."  </item>
+        <item> "Reconozco (el hecho) de que te lastimé, y por eso lo siento."  </item>
+        <item> "Vi las noticias y ahora estoy en una terrible depresión."  </item>
+        <item> "Una buena cabeza y una mano aplicada valen oro en cualquier tierra."  </item>
+        <item> "Sus esfuerzos para rejuvenecer su carrera no han tenido éxito hasta ahora."  </item>
+        <item> "La continua deforestación de la selva tropical ha causado que muchos animales pierdan su hábitat natural."  </item>
+        <item> "La protección del medio ambiente es responsabilidad de todos los hombres."  </item>
+        <item> "Algunos animales están en peligro porque su hábitat nativo está siendo destruido."  </item>
+        <item> "Deberíamos poder vender la mayoría de estos productos al por menor a clientes extranjeros."  </item>
+        <item> "La banda generó controversia al mencionar las drogas que consumían en sus canciones."  </item>
+        <item> "Los maestros están tratando de revertir la tendencia general[=tendencia] de las puntuaciones más bajas en los exámenes."  </item>
+        <item> "No se puede negar que tenemos que dedicar más recursos a este problema."  </item>
+        <item> "La firma ha identificado 60 clientes potenciales en el país y en el extranjero."  </item>
+        <item> "El hospital ha creado un fondo especial para financiar la compra de nuevos equipos."  </item>
+        <item> "Fue amiga y mentora de muchos actores jóvenes."  </item>
+        <item> "La fuerza se manifiesta no sólo en la capacidad de persistir, sino también en la capacidad de empezar de nuevo."  </item>
+        <item> "Los perros ladrando me perturbaron el sueño."  </item>
+        <item> "Cuando los minerales como el cuarzo se calientan, emiten luz."  </item>
+        <item> "La demanda de petróleo decayó significativamente en los Estados Unidos."  </item>
+        <item> "Yo estimo que el valor de la casa es de unos dos millones de dólares."  </item>
+        <item> "Si la infección primaria no se trata, se pueden producir nuevos brotes."  </item>
+        <item> "Hay pasos innecesarios en la línea de producción; necesitamos diseñar un proceso más económico."  </item>
+        <item> "El equipo es tan malo este año, que inevitablemente perderá su próximo partido."  </item>
+        <item> "Una ley que prohíbe los altavoces en los barrios residenciales por la noche"  </item>
+        <item> "Es responsable de la supervisión de un gran equipo de trabajo."  </item>
+        <item> "Cada participante debía pagar sus propios gastos."  </item>
+        <item> "La gente sigue optando por la monogamia y el matrimonio."  </item>
+        <item> "Mi confianza comenzó a florecer más tarde en la vida."  </item>
+        <item> "La visita de la celebridad hizo mucho para promover el restaurante."  </item>
+        <item> "El apoyo del gobierno será esencial para que el proyecto tenga éxito."  </item>
+        <item> "El informe ha causado una aguda vergüenza al gobierno."  </item>
+        <item> "Se han expuesto detalles de algunas de las prácticas corruptas de la empresa."  </item>
+        <item> "Yo no obstaculizaría tu trabajo, voy a nadar ahora mismo."  </item>
+        <item> "Algo es un nudo cuando lo reservas, una cicatriz cuando se abre."  </item>
+        <item> "La alta y grácil forma de una mujer apareció en lo alto de las escaleras."  </item>
+        <item> "Una trágica muerte interrumpe su ritual anual"  </item>
+        <item> "Muchas playas parecen volverse cada vez más pequeñas, a medida que el interminable oleaje comienza a erosionar la arena fina."  </item>
+        <item> "Una jirafa extiende su cuello para conseguir comida. "  </item>
+        <item> "Interceptó el balón para que no llegara a su oponente."  </item>
+        <item> "El nutriente en el suelo actúa como un estímulo para el crecimiento / para hacer que las plantas crezcan."  </item>
+        <item> "La reunión degeneró en un combate."  </item>
+        <item> "Algunas rocas son más porosas que otras."  </item>
+        <item> "El suelo infértil no puede sostener el crecimiento de las plantas agrícolas."  </item>
+        <item> "Ha sido la peor sequía en la historia del país."  </item>
+        <item> "Con los niveles actuales de emisión, sufriremos el Apocalipsis Meteorológico Total para el año 2050."  </item>
+        <item> "Los teléfonos móviles pueden utilizarse para facilitar el aprendizaje de idiomas."  </item>
+        <item> "Los padres tienen un papel único e irremplazable que desempeñar en el desarrollo infantil."  </item>
+        <item> "Los canguros son animales diurnos."  </item>
+        <item> "Parecía imposible que alguien pudiera aguantar tal dolor."  </item>
+        <item> "Fue una gran hazaña mover ese piano tú solo."  </item>
+        <item> "En condiciones óptimas, estas plantas crecen bastante altas."  </item>
+        <item> "Esta especie de ave existe ahora sólo en Brasil."  </item>
+        <item> "Los turistas a menudo se extravían y se pierden en zonas peligrosas."  </item>
+        <item> "La India es muy diversa, tanto política como religiosamente."  </item>
+        <item> "La planta es sensible al calor y al frío extremos."  </item>
+        <item> "Los huesos y los músculos son partes del mecanismo del cuerpo."  </item>
+        <item> "La vegetación se vuelve escasa en la parte alta de las montañas."  </item>
+        <item> "Mi plancha se calentó demasiado y abrasó mi camisa."  </item>
+        <item> "Es un hombre recto que nunca ha traicionado sus principios."  </item>
+        <item> "Una brizna azul de humo de cigarrillo enroscada en el aire."  </item>
+        <item> "Está con un goteo de suero salino."  </item>
+        <item> "No toleraré ningún tipo de mala conducta en mi clase."  </item>
+        <item> "Cometió algunos errores de escritura inconscientemente."  </item>
+        <item> "Mi visión no es tan buena como cuando era más joven."  </item>
+        <item> "¿Puedes contrastar entre estos dos frutos?"  </item>
+        <item> "Pasa un buen pedazo del día al teléfono."  </item>
+        <item> "Muchas personas jubiladas se han comprometido en actividades de voluntariado."  </item>
+        <item> "Las empresas japonesas han estado bombeando una gran cantidad de productos innovadores."  </item>
+        <item> "El azúcar y la grasa pueden conducir más fácilmente a la obesidad que algunos otros alimentos."  </item>
+        <item> "No se permite el contacto físico con otros jugadores en el juego."  </item>
+        <item> "Él eligió seguir un título universitario."  </item>
+        <item> "Los libros proporcionan a los niños ideas y un estímulo para jugar."  </item>
+        <item> "La tienda vende una variedad de marcas de zapatos."  </item>
+        <item> "Viaja a todo tipo de lugares exóticos en todo el mundo."  </item>
+        <item> "Su padre era un artista de circo y le enseñó a hacer malabares."  </item>
+        <item> "Su última treta es conducir una motocicleta a través de un anillo de llamas."  </item>
+        <item> "Dwayne Johnson fue uno de los actores del elenco de Rápidos y furiosos 8"  </item>
+        <item> "La exhibición de fuegos artificiales en la víspera de Año Nuevo es un buen espectáculo."  </item>
+        <item> "Las turbinas eólicas generan electricidad para la comunidad local."  </item>
+        <item> "Era como el ruido de una locomotora de vapor que salía de una estación."  </item>
+        <item> "El vino derramado ha grabado una huella en el mantel."  </item>
+        <item> "Una vez que el shock inicial había pasado, me gustó mi nuevo peinado."  </item>
+        <item> "Muchos de los habitantes de la población de la ciudad viajan al trabajo en tren, metro o autobús."  </item>
+        <item> "Cerrando sus ojos, ella se fundió en su abrazo."  </item>
+        <item> "A los niños les encanta escuchar los cuentos de Julieta porque tiene una aptitud para contar cuentos."  </item>
+        <item> "Todos los pasajeros estaban enfurecidos por el retraso."  </item>
+        <item> "Sus piernas han dejado de funcionar, por lo que necesita usar una silla de ruedas."  </item>
+        <item> "La tasa de alfabetismo de las mujeres de la provincia sigue siendo baja."  </item>
+        <item> "Las antiguas lápidas de piedra y arcilla ofrecen valiosos registros históricos."  </item>
+        <item> "Por favor, acepte este regalo como un pequeño símbolo de mi aprecio."  </item>
+        <item> "Estaba agradecido por los sabios consejos de su padre."  </item>
+        <item> "¿Cómo se originó la tradición de usar disfraces en Halloween?"  </item>
+        <item> "Es imposible pronosticar el tiempo con exactitud."  </item>
+        <item> "Plátano se acentúa en la primera sílaba."  </item>
+        <item> "El vestido combina líneas elegantes con un atractivo estampado floral para un look clásico y femenino."  </item>
+        <item> "Colocó una guirnalda de flores alrededor de su cuello y cabeza."  </item>
+        <item> "¿Cuánto tiempo reinó la reina Victoria?"  </item>
+        <item> "Las flores se manifiestan en primavera."  </item>
+        <item> "Su atuendo evoca a su madre vestida de novia."  </item>
+        <item> "Cuando usted duerme, su cuerpo tiene la oportunidad de renovarse."  </item>
+        <item> "La casa tenía muchos inconvenientes, los más notables eran su ubicación y precio."  </item>
+        <item> "Está lisiado y no puede caminar con las piernas."  </item>
+        <item> "El olor a galletas la sedujo a la cocina."  </item>
+        <item> "Si desea retener el vigor de la juventud, debe hacer ejercicio regularmente."  </item>
+        <item> "Sarah vivió en el dormitorio durante su primer año."  </item>
+        <item> "Miles de solicitantes compiten por el mismo trabajo."  </item>
+        <item> "Si te acercas demasiado al borde de un acantilado, podrías caerte de él."  </item>
+        <item> "No tengo la motivación para hacer ejercicio. Necesito ir a una clase y hacerlo en grupo."  </item>
+        <item> "Finalmente encontró su nicho como profesora."  </item>
+        <item> "Un timbre, una alarma de incendio, el maullido de un gato, o los ronquidos de tu hermano - todos son sonidos."  </item>
+        <item> "Me mostró la punta de su lengua."  </item>
+        <item> "El vínculo de una hija con su madre"  </item>
+        <item> "No pudo convencerlo de que comiera sano."  </item>
+        <item> "Nuestro equipo de fútbol prevaleció [=ganó]a pesar del mal tiempo."  </item>
+        <item> "Es el mejor barbero de la zona."  </item>
+        <item> "Los médicos dijeron que su estado era serio pero estable."  </item>
+        <item> "Puedes pedir una bebida con tu comida rápida en cualquiera de nuestros puntos de venta."  </item>
+        <item> "Forjar ganchos a partir de piezas de hierro = forjar piezas de hierro en ganchos"  </item>
+        <item> "El avión voló sobre la ciudad, y las casas y los coches se hicieron cada vez más pequeños."  </item>
+        <item> "Está haciendo un esfuerzo concertado para mejorar su apariencia."  </item>
+        <item> "Ha habido un recesión en el mercado inmobiliario."  </item>
+        <item> "El tabaquismo es cada vez más prevalente entre las mujeres jóvenes."  </item>
+        <item> "No pudo alcanzarla porque corría rápido."  </item>
+        <item> "Una persona decidida actúa rápidamente y a menudo tiene éxito."  </item>
+        <item> "Es importante que un adolescente tenga un adulto en quien pueda confiar."  </item>
+        <item> "Aparentemente, hoy va a llover."  </item>
+        <item> "Ser madre soltera y empresaria erradicó por completo su tiempo libre."  </item>
+        <item> "Si desplegamos la mesa, caben ocho personas a su alrededor."  </item>
+        <item> "Hablar con personas que piensan como tú ayuda a validar tus sentimientos."  </item>
+        <item> "El guepardo puede alcanzar velocidades de hasta 97 km/h."  </item>
+        <item> "Las manzanas abundan aquí durante todo el año."  </item>
+        <item> "Algunas aves son físicamente incapaces de volar."  </item>
+        <item> "El suelo se ve resbaladizo."  </item>
+        <item> "Fue titular de varias patentes por la invención del teléfono móvil."  </item>
+        <item> "Él interprta el rol de villano."  </item>
+        <item> "Dos manzanas son básicamente iguales, pero sólo diferentes en sus colores en comparación."  </item>
+        <item> "Podía confiar en su mejor amigo en cualquier circunstancia."  </item>
+        <item> "Tengo amigos que me dan mucho apoyo para mi maratón."  </item>
+        <item> "Mezcle la mantequilla con el azúcar y bata hasta que esté suave y cremoso."  </item>
+        <item> "Encajaba en la imagen convencional de un banquero."  </item>
+        <item> "Ella era una figura dominante en la industria cinematográfica francesa."  </item>
+        <item> "Se le pidió que recitara delante de toda la clase."  </item>
+        <item> "Dio un paseo solitario por la playa."  </item>
+        <item> "El disfrute del deporte puede enriquecer cada vida."  </item>
+        <item> "Los adolescentes que pasan tiempo con sus grupos de compañeros"  </item>
+        <item> "A veces le resulta difícil hacer las asignaciones que le da su maestro de escuela."  </item>
+        <item> "El trabajo requiere alguien con fuertes habilidades verbales. "  </item>
+        <item> "La perseverancia significa que usted sigue adelante y nunca se rinde."  </item>
+        <item> "Hojear viejos álbumes de fotos derivó en disfrute."  </item>
+        <item> "Tuvo que presentar docenas de formularios para obtener un préstamo."  </item>
+        <item> "Qué mejor manera de encontrar inspiración para su propio jardín que visitando a otros."  </item>
+        <item> "Después de sufrir un derrame cerebral, quedó inválida y no pudo caminar."  </item>
+        <item> "El inversor cree que su inversión se amortizará muy pronto."  </item>
+        <item> "Los coches más antiguos carecen inevitablemente de los últimos refnamientos en materia de seguridad."  </item>
+        <item> "Compró los muebles a crédito."  </item>
+        <item> "El vacío del espacio exterior"  </item>
+        <item> "Si usted demanda a alguien, está acusándolo (en la corte) de hacer algo malo o ilegal y exigiéndole que pague por ello. Casi cada vez que alguien demanda, están buscando dinero."  </item>
+        <item> "Usando su voz de tono agudo podría romper una copa de vino."  </item>
+        <item> "Le ofreció un trago para tratar de prolongar su visita."  </item>
+        <item> "Una hélice es una pala redondeada que gira en círculo, ayudando a mover un vehículo empujando contra el agua o el aire. La hélice de un bote de velocidad lo mueve hacia adelante girando contra el agua."  </item>
+        <item> "El cuadro de la pared estaba inclinado. [=no estaba recto o nivelado]"  </item>
+        <item> "Está cortando leña para la chimenea."  </item>
+        <item> "El derrame de petróleo tuvo un efecto catastrófico en el medio ambiente."  </item>
+        <item> "Se negó a responder a las indagaciones de los medios de comunicación sobre su matrimonio."  </item>
+        <item> "La rama se quebró y cayó sobre el coche."  </item>
+        <item> "La policía remolcó mi auto porque estaba estacionado ilegalmente."  </item>
+        <item> "Una fascinación de toda la vida por los tiburones y otras temibles criaturas acuáticas"  </item>
+        <item> "Varios arreglos de paneles solares ayudarán a suministrar energía."  </item>
+        <item> "De hecho, el árbol del té, con su sinnúmero de usos, resultó ser el más útil."  </item>
+        <item> "Luchó contra el problema de cómo tratar la atracción gravitatoria de la tierra sobre los objetos terrestres."  </item>
+        <item> "La vegetación en su patio trasero puede verse muy exuberante y verde en la primavera."  </item>
+        <item> "La rana es un anfibio con una vida robusta."  </item>
+        <item> "No debe comer los residuos de los alimentos que quedan en el plato."  </item>
+        <item> "Toda la aldea fue obliterada por el tornado."  </item>
+        <item> "La selva amazónica es rica en biodiversidad."  </item>
+        <item> "El virus Zika está prácticamente en todas partes del hemisferio occidental."  </item>
+        <item> "La creación de empleo se ha convertido en un imperativo para el gobierno."  </item>
+        <item> "Un animal nocturno caza su alimento por la noche."  </item>
+        <item> "El velo que llevaba oscureció sus rasgos."  </item>
+        <item> "Arregló nuestro fregadero roto infaliblemente"  </item>
+        <item> "El Museo Metropolitano exhibe este mes las obras de Goya"  </item>
+        <item> "Puede diluir la medicina con agua."  </item>
+        <item> "Los bebés son generalmente mucho más resilientes de lo que los nuevos padres se dan cuenta."  </item>
+        <item> "Vagamos por las dunas."  </item>
+        <item> "No había suficiente luz para que tuviera lugar la fotosíntesis."  </item>
+        <item> "Cuando estás cansado es fácil perder la concentración."  </item>
+        <item> "El cactus es una planta espinosa."  </item>
+        <item> "Con tan poca lluvia, todo el mundo tenía que conservar el agua."  </item>
+        <item> "Ella habló clara y deliberadamente a la audiencia."  </item>
+        <item> "El desarrollo /crecimiento intelectual del niño"  </item>
+        <item> "Ahora que era madre de tres hijos, la responsabilidad la abrumaba."  </item>
+        <item> "No sé por qué es tan pasivo. Sólo hace lo que todos le dicen que haga."  </item>
+        <item> "Su trabajo artesanal se convirtió en algo más que un pasatiempo cuando descubrió que podía vivir de ello."  </item>
+        <item> "El niño reacio se rindió y finalmente limpió su habitación."  </item>
+        <item> "Tuvo que resistir el impulso [=urgencia] de gritar."  </item>
+        <item> "Hay algunas ruinas de la antigua Roma en esta ciudad."  </item>
+        <item> "Nada te prepara para la majestuosidad de las Cataratas del Iguazú."  </item>
+        <item> "Ya ha pasado un año en prisión preventiva."  </item>
+        <item> "Reformamos nuestra casa hace tres años."  </item>
+        <item> "Sus enemigos eran hombres de la temprana edad de hierro y usaban la carroza en la guerra."  </item>
+        <item> "Es un actor con un don para la mímica."  </item>
+        <item> "La superficie tosca de la luna"  </item>
+        <item> "La Ley impone normas más rigurosas sobre la contaminación atmosférica."  </item>
+        <item> "Ben desperdiciaba sus horas de ocio tallando barcos en pedazos de madera."  </item>
+        <item> "Los trenes para viajeros, los edificios de oficinas y las cafeterías son los campos de batalla de hoy en día."  </item>
+        <item> "El valor de un regalo de alguien especial es más sentimental que monetario."  </item>
+        <item> "Nos abrimos camino con pasos pesados a través del campo fangoso"  </item>
+        <item> "Los niños se estendieron en el suelo para ver la televisión."  </item>
+        <item> "Mi puesto abarca una amplia gama de responsabilidades."  </item>
+        <item> "Planean excavar un gran agujero."  </item>
+        <item> "Los nombres de los muertos estaban inscritos en la pared."  </item>
+        <item> "En la mitología griega, Zeus era el gobernante de los dioses y los hombres."  </item>
+        <item> "Los cultivos forrajeros se utilizan para alimentar al ganado."  </item>
+        <item> "¿Te has preguntado alguna vez cómo se doblan los juncos con el viento sin romperse?"  </item>
+        <item> "Un adulto debe acompañar al estudiante en todo momento."  </item>
+        <item> "Sus fotografías evocan el aislamiento y la soledad del desierto."  </item>
+        <item> "El comediante utilizó estereotipos raciales y culturales para sus bromas."  </item>
+        <item> "Tuvo una larga carrera como actriz que culminó en dos nominaciones a los Oscar."  </item>
+        <item> "A Alberto le resultaba frustrante ser retenido por la fragilidad de su salud."  </item>
+        <item> "El videojuego está diseñado para dar la ilusión de que usted tiene el control de un avión."  </item>
+        <item> "Al Presidente le gusta representarse como amigo de los trabajadores."  </item>
+        <item> "Tuvimos que apuntalar el techo con un poste de madera."  </item>
+        <item> "El espectáculo contiene una maravillosa comedia de payasadas."  </item>
+        <item> "Antojos corporales como el hambre y la sed"  </item>
+        <item> "El Director General administra la empresa con la ayuda de los demás funcionarios superiores."  </item>
+        <item> "La ciudad no estaba preparada para el crecimiento demográfico rampante de los últimos 6 años."  </item>
+        <item> "Corte cada tronco de la planta en ángulo con tijeras."  </item>
+        <item> "Necesitamos llenar una vacante en el departamento de contabilidad."  </item>
+        <item> "Estaba sobrecargada de trabajo."  </item>
+        <item> "Si el tiempo se deteriora más, yo digo que suspendamos el juego."  </item>
+        <item> "A 50 pacientes se les dio el medicamento experimental y a otros 50 se les dio un placebo."  </item>
+        <item> "Los niños construyeron una balsa durante las vacaciones para remar por el río."  </item>
+        <item> "Una suave brisa vino de la isla."  </item>
+        <item> "A pesar de todos mis empeños, logré graduarme este año."  </item>
+        <item> "Matricularon a sus hijos en una escuela privada."  </item>
+        <item> "Es peligroso cortar con una hoja desafilada. Afílala primero."  </item>
+        <item> "Un mes de vacaciones en el centro vacacional sin duda le hará cambiar de opinión."  </item>
+        <item> "Un paseo por el bosque con su hijo se convirtió en una lección de botánica."  </item>
+        <item> "Los niños pusieron su nuevo bote a flote en el lago."  </item>
+        <item> "Usted puede recibir un servicio personalizado en el salón."  </item>
+        <item> "Fiat es el mayor conglomerado industrial de Italia."  </item>
+        <item> "Llega consistentemente tarde a trabajar"  </item>
+        <item> "Consiguieron el aval de sus padres para planear la fiesta de Navidad."  </item>
+        <item> "Vi fugazmente a mi actor favorito, pero en cuanto lo vi, se había ido."  </item>
+        <item> "Sin embargo, hoy en día, las universidades de nuestra ciudad superan fácilmente a las de otras grandes ciudades."  </item>
+        <item> "Por favor, sujete las páginas (juntas) con clips en lugar de grapas."  </item>
+        <item> "Decidió deliberar  [=consultar] con su esposa sobre la compra de una nueva casa."  </item>
+        <item> "Su novela es tan grande que me atrevería a decir que es un beneficio para la humanidad."  </item>
+        <item> "El desfile está programado para que coincida con el aniversario 200 de la ciudad."  </item>
+        <item> "Se enfrentó a él por su hábito de fumar."  </item>
+        <item> "Necesito liberarme de los límites impuestos por mi propio miedo al fracaso."  </item>
+        <item> "Ella interactúa con otros niños en la guardería."  </item>
+        <item> "Las estadísticas muestran una disminución de la tasa de mortalidad infantil en la última década."  </item>
+        <item> "Los jóvenes son los más susceptibles a la publicidad."  </item>
+        <item> "Los atletas se sometieron a un arduo entrenamiento para completar el triatlón."  </item>
+        <item> "Excusó su ausencia diciendo que estaba enfermo."  </item>
+        <item> "El uso excesivo de los teléfonos inteligentes es un problema nefasto que afecta a gran parte de la población mundial."  </item>
+        <item> "La discrepancia en sus edades parecía no importarles para que se casaran."  </item>
+        <item> "Están luchando por la igualdad de las mujeres."  </item>
+        <item> "Margot siempre ha dedicado un tiempo desmesurado a su apariencia."  </item>
+        <item> "En su trabajo, la paciencia es una ventaja invaluable."  </item>
+        <item> "Bruce desarrolló cáncer renal, que requirió la extirpación de un riñón."  </item>
+        <item> "Su única forma de recreación es jugar a las cartas."  </item>
+        <item> "Un jeep es ideal para conducir por terrenos accidentados."  </item>
+        <item> "Un piano es un objeto muy difícil de manejar para moverlo de aquí para allá."  </item>
+        <item> "Cuando la carretera se volvió insalvable, tuvimos que deshacernos del coche y caminar."  </item>
+        <item> "Los medicamentos no deben guardarse en lugares de fácil acceso para los niños."  </item>
+        <item> "Los novios caminaron juntos por el pasillo."  </item>
+        <item> "Necesita la opinión auditiva de la gente que le importa, que le quiere."  </item>
+        <item> "Jenny movió nerviosamente su lápiz mientras intentaba pensar en una respuesta a su pregunta."  </item>
+        <item> "Los nuevos coches incorporarán una serie de mejoras importantes."  </item>
+        <item> "John aprendió rápidamente a manipular herramientas."  </item>
+        <item> "El camión había sido estacionado en la acera, causando una obstrucción."  </item>
+        <item> "No seas tan inquisitivo; no te diré lo que he prometido no decir."  </item>
+        <item> " El edificio necesita trabajos de recuperación urgentes para que sea seguro."  </item>
+        <item> "La informática está ahora en el plan de estudios de la mayoría de las escuelas."  </item>
+        <item> "Sujeta las piezas de madera con pinzas mientras se fija el pegamento."  </item>
+        <item> "Sus acciones constituyen una violación de la política de la empresa."  </item>
+        <item> " He saqueado la casa por esos papeles, pero no los encuentro."  </item>
+        <item> " El libro fue escrito específicamente para niños."  </item>
+        <item> "Era una noche rara con una luna llena mágica, incandescente."  </item>
+        <item> "Una luz eléctrica pasa electricidad a través de un material llamado filamento o alambre."  </item>
+        <item> "El genio es un uno por ciento de inspiración, noventa y nueve por ciento de transpiración."  </item>
+        <item> "Sin embargo, como dice el viejo refrán: Es más fácil decirlo que hacerlo."  </item>
+        <item> "Los pilotos de grandes aeronaves son maestros de la aviación."  </item>
+        <item> "Considero inaceptable la inflexibilidad de la esposa y del marido."  </item>
+        <item> "Por lo demás, eran un grupo muy dispar de siete personas."  </item>
+        <item> "Este libro es indispensable para cualquier persona interesada en la exploración espacial."  </item>
+        <item> "Algunos niños tienen un deseo inexplicable de comer helado todo el día."  </item>
+        <item> "Ganar el primer premio fue la culminación de años de práctica y trabajo duro."  </item>
+
+
+    </string-array>
+
+    <string-array name="IELTS_example3_sp">
+
+        <item> "Un abrigo grueso es una buena defensa contra el frío."  </item>
+        <item> "La tecnología ha tenido un impacto irreversible en la sociedad."  </item>
+        <item> "Existe una conexión entre la polución y la muerte de los árboles."  </item>
+        <item> "El tiempo se hizo duro, frío e impredecible."  </item>
+        <item> "Muchas personas no son conscientes de la cantidad de alimentos y bebidas que consumen."  </item>
+        <item> "El trato con la gente es el aspecto más importante de mi trabajo."  </item>
+        <item> "Acaba de regresar del extranjero."  </item>
+        <item> "Este pueblo tiene su propia vestimenta tradicional, gastronomía, folklore y artesanías."  </item>
+        <item> "El coco es un ingrediente básico para muchos curry."  </item>
+        <item> "Los plátanos tienen su propio olor característico."  </item>
+        <item> "¿qué tipo particular de libros le gusta leer?"  </item>
+        <item> "Suecia tiene una reputación de diseño avanzado y elegante."  </item>
+        <item> "El dueño de la tienda está vendiendo ropa defectuosa al por mayor."  </item>
+        <item> "El principal problema social del país es la pobreza."  </item>
+        <item> "Una vida familiar infeliz puede inhibir el aprendizaje de los niños."  </item>
+        <item> "Hay comida adecuada para todos"  </item>
+        <item> "No se le compensó por los daños causados a su coche."  </item>
+        <item> "Las vitaminas son cruciales para mantener una buena salud."  </item>
+        <item> "Tu madre puede parecer prepotente, pero solamente está siendo protectora."  </item>
+        <item> "Por el aspecto de las nubes, es obvio que va a llover pronto."  </item>
+        <item> "Las risitas de la niña eran epidémicas, y pronto toda la reunión se reía."  </item>
+        <item> "¿Realmente las armas nucleares reducen el riesgo de guerra?"  </item>
+        <item> "Te aconsejo que dejes el coche aquí hasta que vayas a la universidad; aparcar puede ser complicado en el centro de la ciudad."  </item>
+        <item> "Los niños son los miembros más vulnerables de la sociedad."  </item>
+        <item> "Se sometió a muchas cirugías plásticas para alterar su aspecto."  </item>
+        <item> "Hay muchos beneficios de beber ocho vasos de agua todos los días."  </item>
+        <item> "La explicación de Tom fue muy elaborada y ayudó a los jóvenes estudiantes a aprender fácilmente."  </item>
+        <item> "El cielo despejado no muestra evidencia de lluvia hoy."  </item>
+        <item> "Es imprescindible que entrenes todos los días."  </item>
+        <item> "El ejercicio le permite mover y estabilizar los músculos en el movimiento."  </item>
+        <item> "Todos deben contribuir a la discusión."  </item>
+        <item> "El público quedó fascinado con su discurso."  </item>
+        <item> "Sospecho que sus afirmaciones no son todo lo que parecen - tiende a exagerar."  </item>
+        <item> "Abrió los brazos de par en par en un amplio gesto de bienvenida."  </item>
+        <item> "La película que están viendo es deliciosamente humorística en las mejores tradiciones de la comedia romántica."  </item>
+        <item> "Podemos fusionar nuestras dos pequeñas empresas en una más grande."  </item>
+        <item> "Era prominente en la industria de la moda."  </item>
+        <item> "Había más espectadores de los que esperaba."  </item>
+        <item> "El club nocturno proporcionó un recinto íntimo para su actuación."  </item>
+        <item> "Después de que el equipo ganó el campeonato, la ciudad organizó un desfile para ellos."  </item>
+        <item> "El inconveniente de tener un coche eléctrico es su alcance limitado."  </item>
+        <item> "Un buen maestro puede ayudar a los estudiantes a aprender de manera más eficiente y efectiva."  </item>
+        <item> "Nuestro instructor nos equipó con equipo de buceo antes de sumergirnos."  </item>
+        <item> "Las grúas estaban cargando la carga en el tren para ser transportada."  </item>
+        <item> "Algunas de las últimas innovaciones en robótica se presentaron en la feria tecnológica."  </item>
+        <item> "Víctor se puso las gafas de sol para proteger sus ojos de la intensa luz del desierto."  </item>
+        <item> "La exposición al sol puede acelerar el proceso de envejecimiento."  </item>
+        <item> "Como incentivo adicional, hay una botella de champán para el mejor equipo."  </item>
+        <item> "La paciencia es un atributo esencial para un profesor."  </item>
+        <item> "Es el creador de una exitosa serie de dibujos animados."  </item>
+        <item> "Se le concedió una medalla por sus valientes actos en la guerra."  </item>
+        <item> "Es un erudito serio, un hombre genuinamente estudiado."  </item>
+        <item> "A veces los hermanos no están dispuestos a resolver sus diferencias."  </item>
+        <item> "Día tras día los coches eléctricos están siendo asequibles."  </item>
+        <item> "Los estudiantes consagran mucho de su tiempo a estudiar."  </item>
+        <item> "La disciplina en la academia militar era extremadamente estricta."  </item>
+        <item> "Era una maestra superdotada que nunca hablaba con sus alumnos."  </item>
+        <item> "Incluso cantidades moderadas de alcohol pueden ser peligrosas."  </item>
+        <item> "Su discurso tuvo un profundo impacto en todos."  </item>
+        <item> "Los científicos desarrollaron un sofisticado robot para recoger muestras de la superficie de Marte"  </item>
+        <item> "Hay reportes de que Toyota desvelará un auto con celda de combustible a finales de este año."  </item>
+        <item> "La energía solar es ahora una alternativa factible a la electricidad alimentada con carbón."  </item>
+        <item> "Navegar en el crucero fue anunciado como el "viaje de su vida"."  </item>
+        <item> "El avión fue golpeado con bastante turbulencia durante el vuelo."  </item>
+        <item> "No es fiable juzgar a un hombre sólo por su apariencia."  </item>
+        <item> "Ella fue mantenida por el apoyo inquebrantable de su familia."  </item>
+        <item> "Un estudio de grabación profesional necesita tener un aislante."  </item>
+        <item> "La mujer siempre es sentimiento después de la vanidad."  </item>
+        <item> "Puede confiar en que él responderá a un desafío."  </item>
+        <item> "El empresario había acumulado una enorme cantidad de riqueza a lo largo de su vida."  </item>
+        <item> "Es muy difícil para Jim adaptarse al nuevo ambiente frío."  </item>
+        <item> "Los investigadores aún están tratando de determinar la causa del incendio."  </item>
+        <item> "Cuando el agua se calienta, empieza a evaporarse."  </item>
+        <item> "Annie lleva una falda con flecos."  </item>
+        <item> "Es una prolífica anotadora. [=ella anota muchos puntos/goles]"  </item>
+        <item> "Esta resistente gente de montaña parece prosperar con el frío."  </item>
+        <item> "Se condujo un experimento con magnesio en la clase de química."  </item>
+        <item> "Tienen una política de tolerancia cero con respecto al acoso sexual."  </item>
+        <item> "Es muy competitiva y siempre le gusta ganar."  </item>
+        <item> "Poco a poco comenzó a reconocer sus sentimientos de amor hacia su madre."  </item>
+        <item> "Estaba en las profundidades de la depresión por perder su trabajo."  </item>
+        <item> "Los inmigrantes en nuestra comunidad son muy aplicados, y muchos de ellos eventualmente establecen negocios."  </item>
+        <item> "Trató de rejuvenecerse realizando ejercicios físicos todos los días."  </item>
+        <item> "La deforestación está destruyendo grandes áreas de selva tropical."  </item>
+        <item> "La contaminación tiene un impacto en el medio ambiente."  </item>
+        <item> "París es un importante hábitat de artistas."  </item>
+        <item> "Trabaja en el campo de ventas al por menor y vende productos para el hogar."  </item>
+        <item> "Surgió la controversia sobre el uso de los productos químicos en las frutas y hortalizas."  </item>
+        <item> "Últimamente, ha habido una tendencia a contratar empleados más jóvenes y baratos."  </item>
+        <item> "Estamos dedicando toda nuestra energía a la reconstrucción de la escuela."  </item>
+        <item> "Mi primo es un cantante potencial. Estoy seguro de que será una estrella."  </item>
+        <item> "El fondo se estableció para financiar a los pobres."  </item>
+        <item> "Mi manager es más que un jefe, es un mentor."  </item>
+        <item> "A pesar del peligro, los reporteros persisten en informar sobre lo que está sucediendo en Oriente Medio."  </item>
+        <item> "Un derrame cerebral puede interrumpir o perturbar el suministro de oxígeno al cerebro."  </item>
+        <item> "Las flores de esta planta emiten un olor dulce."  </item>
+        <item> "El gobierno no ha logrado revertir el decaimiento económico."  </item>
+        <item> "La estimación del pintor para pintar toda la casa era de 1000 dólares."  </item>
+        <item> "La razón primaria para mudarse aquí fue el clima."  </item>
+        <item> "Ella es una ama de llaves economizadora y alimenta a su familia de manera económica."  </item>
+        <item> "Sin estudiar mucho, inevitablemente fracasará en los exámenes finales."  </item>
+        <item> "De la misma manera que una "zona industrial" es un lugar de industria donde la gente trabaja, una zona residencial se compone de casas y edificios de apartamentos, lugares donde la gente reside."  </item>
+        <item> "Un niño pequeño requiere supervisión cercana y control firme en todo momento."  </item>
+        <item> "Todos los participantes en el concurso de cocina recibieron un libro de cocina gratuito."  </item>
+        <item> "Me gustan estos dos vestidos, pero creo que optaré por el rosa."  </item>
+        <item> "Cuando llega la primavera, todo se renueva y las plantas comienzan a florecer."  </item>
+        <item> "Contrataron a un entrenador físico para promover su nuevo y saludable yogur."  </item>
+        <item> "El profesor pidió a los estudiantes que hicieran un proyecto de ciencias"  </item>
+        <item> "El dolor de muelas de John le estaba causando un dolor agudo."  </item>
+        <item> "Fue lo suficientemente cuidadosa como para no exponer su piel al sol."  </item>
+        <item> "Su viaje se vio obstaculizado[=impedido, ralentizado] por la nieve y los fuertes vientos."  </item>
+        <item> "Ató la cuerda en un nudo."  </item>
+        <item> "Se ha convertido en un bailarín muy grácil."  </item>
+        <item> "Algunas religiones emplean el ritual más que otras."  </item>
+
+    </string-array>
+
+</resources>

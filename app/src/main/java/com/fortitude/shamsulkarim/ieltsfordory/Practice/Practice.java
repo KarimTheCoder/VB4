@@ -119,7 +119,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 //            this.startActivity(new Intent(this, PracticeFinished.class));
 //            this.finish();
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197xxx");
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
 
 
