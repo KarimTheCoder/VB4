@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -410,9 +410,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         words.add(new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],IELTSvocabularyType[i],IELTSposition[i], IELTSlearnedDatabase.get(i),""));
                     }
 
-                }catch (IndexOutOfBoundsException h){
-
-
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
             }
@@ -438,8 +437,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
                     }
 
-                }catch (IndexOutOfBoundsException h){
-
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
 
@@ -468,8 +467,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
                         }
 
-                    }catch (IndexOutOfBoundsException h){
-
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
 
@@ -477,14 +476,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
             }
 
-        }catch (ArrayIndexOutOfBoundsException e){
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-
-
-
-
 
 
     }
@@ -504,9 +498,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         words.add(new Word(GREwordArray[i], GREtranslationArray[i],"", GREpronunArray[i], GREgrammarArray[i], GREexample1array[i], GREexample2array[i], GREexample3Array[i],GREvocabularyType[i],GREposition[i], GRElearnedDatabase.get(i),""));
                     }
 
-                }catch (IndexOutOfBoundsException h){
-
-
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
 

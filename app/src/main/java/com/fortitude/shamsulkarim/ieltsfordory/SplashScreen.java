@@ -1,10 +1,12 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -63,17 +65,18 @@ public class SplashScreen extends AppCompatActivity {
 
         }
 
+        delayInitialization();
 
 
 
 
-        initializingSQLDatabase();
-        IELTStoDatabaseInitialization();
-        TOEFLDatabaseInitialization();
-        SATDatabaseInitialization();
-        GREDatabaseInitialization();
 
-        launchMainActivity();
+
+
+
+
+
+        //launchMainActivity();
 
         if(!sp.contains("wordsPerSession")){
 
@@ -117,7 +120,59 @@ public class SplashScreen extends AppCompatActivity {
 
                 finish();
             }
+        }, 1000L);
+
+    }
+
+    private void delayInitialization(){
+
+        ProgressDialog dialog = ProgressDialog.show(SplashScreen.this, "",
+                "Loading. Please wait...", true);
+
+
+
+
+        Handler handler =new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                initializingSQLDatabase();
+                IELTStoDatabaseInitialization();
+                TOEFLDatabaseInitialization();
+                SATDatabaseInitialization();
+                GREDatabaseInitialization();
+                launchMainActivity();
+
+
+                finish();
+            }
+        }, 200L);
+
+
+    }
+
+
+    private void delayMethod(){
+
+        Handler handler =new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+
+
+
+
+
+                finish();
+            }
         }, 600L);
+
+
 
     }
 

@@ -1,9 +1,8 @@
 package com.fortitude.shamsulkarim.ieltsfordory.WordAdapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.Language;
-import com.fortitude.shamsulkarim.ieltsfordory.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 

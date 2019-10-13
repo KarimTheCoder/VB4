@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     >
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/recycler_view_card"
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
@@ -31,7 +31,7 @@
 
             >
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/top"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -116,7 +116,7 @@
 
 
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
@@ -242,7 +242,7 @@
 
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 
 

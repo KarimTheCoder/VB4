@@ -10,7 +10,7 @@
     >
 
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:alpha="0.5"
         android:id="@+id/profile_toolbar"
         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
 
 
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/status_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -92,18 +92,18 @@
                 android:layout_alignParentTop="true"
                 >
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
 
 
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
 
                 android:id="@+id/profile_rate_card"
                 android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                 app:cardCornerRadius="10dp"
                 android:layout_below="@+id/profile_left_text"
                 >
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:background="@drawable/gradient"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -164,11 +164,11 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 app:cardBackgroundColor="@color/green"
                 android:id="@+id/bug_report_card"
                 android:layout_width="match_parent"
@@ -179,7 +179,7 @@
                 app:cardCornerRadius="0dp"
                 android:layout_below="@+id/profile_rate_card"
                 >
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -258,10 +258,10 @@
                         app:layout_constraintTop_toBottomOf="@+id/get_support_text" />
 
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/wrprps_layout"
@@ -272,7 +272,7 @@
                 >
 
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/profile_wps"
                     android:layout_below="@+id/bug_report_card"
                     android:layout_width="0dp"
@@ -281,7 +281,7 @@
                     app:cardCornerRadius="0dp"
                     app:cardBackgroundColor="@color/yellow"
                     >
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -301,7 +301,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/profile_wps_spinner" />
 
-                        <android.support.v7.widget.AppCompatSpinner
+                        <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/profile_wps_spinner"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -311,7 +311,7 @@
                             android:entries="@array/words_per_session_array"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView10"></android.support.v7.widget.AppCompatSpinner>
+                            app:layout_constraintTop_toBottomOf="@+id/textView10"></androidx.appcompat.widget.AppCompatSpinner>
 
                         <TextView
                             android:id="@+id/textView10"
@@ -330,11 +330,11 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
                     android:id="@+id/profile_rps"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -342,7 +342,7 @@
                     app:cardCornerRadius="0dp"
                     app:cardBackgroundColor="@color/yellowdark"
                     >
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -362,7 +362,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/profile_rps_spinner" />
 
-                        <android.support.v7.widget.AppCompatSpinner
+                        <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/profile_rps_spinner"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -372,7 +372,7 @@
                             android:entries="@array/words_per_session_array"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView11"></android.support.v7.widget.AppCompatSpinner>
+                            app:layout_constraintTop_toBottomOf="@+id/textView11"></androidx.appcompat.widget.AppCompatSpinner>
 
                         <TextView
                             android:id="@+id/textView11"
@@ -391,10 +391,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
 
@@ -517,7 +517,7 @@
 
                 >
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/fb_card"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
@@ -526,7 +526,7 @@
                     app:cardBackgroundColor="@color/grey100"
                     app:cardCornerRadius="15dp"
                     >
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -543,11 +543,11 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/instagram_card"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
@@ -557,7 +557,7 @@
                     app:cardCornerRadius="15dp"
                     >
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -574,9 +574,9 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 

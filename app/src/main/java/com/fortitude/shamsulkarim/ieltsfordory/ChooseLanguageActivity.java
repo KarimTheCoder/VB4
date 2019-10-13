@@ -1,20 +1,16 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.ChooseLanguageAdapter;
-import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.LanguageAdapter;
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -53,7 +49,7 @@ public class ChooseLanguageActivity extends AppCompatActivity implements View.On
 //
 //            sp.edit().putInt("language",0).apply();
 
-            startActivity(new Intent(this, ChooseVocabulary.class));
+            startActivity(new Intent(this, MainActivity.class));
 
 
 //        }

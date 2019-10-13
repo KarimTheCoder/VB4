@@ -32,21 +32,21 @@
         android:layout_centerInParent="true"
         />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@+id/favoriteToolbar"
         android:layout_above="@+id/dummy_bottom_navigation"
         android:id="@+id/recycler_view_favorite_words"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@+id/favoriteToolbar"
         android:layout_above="@+id/dummy_bottom_navigation"
         android:id="@+id/recycler_view_word_favorite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="66dp"

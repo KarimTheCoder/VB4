@@ -3,11 +3,13 @@ package com.fortitude.shamsulkarim.ieltsfordory;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
+
+import com.fortitude.apps.vocabularybuilder.ChooseLanguageActivity;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -25,7 +27,44 @@ public class ChooseVocabulary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_vocabulary);
 
+
+
+
+
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+        if(sp.contains("isIELTSActive")){
+
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+        }else{
+
+            initialization();
+            conTinue.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    startActivity(new Intent(ChooseVocabulary.this, ChooseLanguageActivity.class));
+
+
+                }
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+    private void initialization(){
 
         ieltsCheckbox = findViewById(R.id.ielts_checkbox);
         toeflCheckbox = findViewById(R.id.toefl_checkbox);
@@ -56,20 +95,20 @@ public class ChooseVocabulary extends AppCompatActivity {
 
         }
 
-            isIeltsChecked = sp.getBoolean("isIELTSActive",true);
-            isToeflChecked = sp.getBoolean("isTOEFLActive", true);
-            isSatChecked =   sp.getBoolean("isSATActive", true);
-            isGreChecked =   sp.getBoolean("isGREActive",true);
+        isIeltsChecked = sp.getBoolean("isIELTSActive",true);
+        isToeflChecked = sp.getBoolean("isTOEFLActive", true);
+        isSatChecked =   sp.getBoolean("isSATActive", true);
+        isGreChecked =   sp.getBoolean("isGREActive",true);
 
 
 
 
 
 
-            ieltsCheckbox.setChecked(isIeltsChecked);
-            toeflCheckbox.setChecked(isToeflChecked);
-            satCheckbox.setChecked(isSatChecked);
-            greCheckbox.setChecked(isGreChecked);
+        ieltsCheckbox.setChecked(isIeltsChecked);
+        toeflCheckbox.setChecked(isToeflChecked);
+        satCheckbox.setChecked(isSatChecked);
+        greCheckbox.setChecked(isGreChecked);
 
 
 
@@ -211,25 +250,6 @@ public class ChooseVocabulary extends AppCompatActivity {
 
             }
         });
-
-
-        conTinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(ChooseVocabulary.this, MainActivity.class));
-
-
-            }
-        });
-
-
-
-
-
-
-
-
 
     }
 

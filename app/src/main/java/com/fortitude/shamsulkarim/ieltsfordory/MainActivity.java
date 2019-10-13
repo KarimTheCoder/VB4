@@ -7,7 +7,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -134,11 +134,11 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         double screenInches = Math.sqrt(x+y);
 
 
-        homeButton = (FancyButton)findViewById(R.id.home_button);
-        wordButton = (FancyButton)findViewById(R.id.word_button);
-        learnedButton = (FancyButton)findViewById(R.id.learned_button);
-        favoriteButton = (FancyButton)findViewById(R.id.favorite_button);
-        profileButton = (FancyButton)findViewById(R.id.profile_button);
+        homeButton = findViewById(R.id.home_button);
+        wordButton = findViewById(R.id.word_button);
+        learnedButton = findViewById(R.id.learned_button);
+        favoriteButton = findViewById(R.id.favorite_button);
+        profileButton = findViewById(R.id.profile_button);
 
         homeBottomLine = findViewById(R.id.home_bottom_line);
         wordBottomLine = findViewById(R.id.words_bottom_line);

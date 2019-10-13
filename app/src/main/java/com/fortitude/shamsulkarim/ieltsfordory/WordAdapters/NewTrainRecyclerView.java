@@ -5,13 +5,12 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.speech.tts.TextToSpeech;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -20,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -220,7 +218,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                     definationAdapter.favorite.setIconResource(R.drawable.favorite_icon_active);
                 }
 
-                if(languageId >0){
+                if(!sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
 
 
 
@@ -231,7 +229,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                     definationAdapter.example2.setText(word.getExample2());
                    // definationAdapter.example3.setText(word.getExample3());
                     definationAdapter.grammar.setText(word.getGrammar());
-                    definationAdapter.spanish.setText(word.getExtra());
+                  //  definationAdapter.spanish.setText(word.getExtra());
                 }else {
                     definationAdapter.example1.setText(spanEx1);
                     definationAdapter.example2.setText(spanEx2);
@@ -285,7 +283,12 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                             imageViewHolder.image.setImageBitmap(bitmap);
 
                             imageViewHolder.imageState.setImageResource(0);
-                            imageViewHolder.imageText.setText(spanEx3);
+                            if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
+                                imageViewHolder.imageText.setText(spanEx3);
+                            }else {
+                                imageViewHolder.imageText.setText(word.getExample3());
+                            }
+
                             imageViewHolder.imageStateText.setText(" ");
 
 
@@ -308,7 +311,12 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             case EXAMPLE_VIEW:
                 ExampleAdapter exampleAdapter = (ExampleAdapter)holder;
 
-                exampleAdapter.example.setText(examples[position-1]);
+                if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
+                    exampleAdapter.example.setText(examples[position-1]);
+                }else {
+                    exampleAdapter.example.setText(word.getExample3());
+                }
+
         }
 
     }

@@ -1,6 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.viewpager;
 
-import android.support.v7.widget.CardView;
+import androidx.cardview.widget.CardView;
 
 /**
  * Created by shamsul on 2/18/18.

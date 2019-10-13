@@ -8,13 +8,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -67,7 +66,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private List<Integer> savedIeltsLearned, savedToeflLearned,savedSatLearned, savedGreLearned;
 
     private Toolbar  toolbar;
-    private FancyButton save;
+    private FancyButton save,spanish;
     private Spinner wps, rps,imageQualitySpinner;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -449,6 +448,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         toolbar = (Toolbar)findViewById(R.id.ns_toolbar);
         save = (FancyButton)findViewById(R.id.ns_save);
+        spanish = findViewById(R.id.language_spanish);
         wps = (Spinner)findViewById(R.id.wps_spinner);
         rps = (Spinner)findViewById(R.id.profile_wps_spinner);
         imageQualitySpinner = (Spinner)findViewById(R.id.image_quality_spinner);
@@ -508,7 +508,18 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
         save.setOnClickListener(this);
+        spanish.setOnClickListener(this);
         signIn.setOnClickListener(this);
+
+        if(sp.getString("secondlanguage","spanish").equalsIgnoreCase("spanish")){
+
+
+            spanish.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            spanish.setTextColor(getResources().getColor(R.color.text_white_87));
+        }else {
+            spanish.setTextColor(getResources().getColor(R.color.topColor));
+            spanish.setBackgroundColor(getResources().getColor(R.color.text_white_87));
+        }
 
 
     }
@@ -1360,6 +1371,21 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
             finish();
             startActivity(new Intent(this,MainActivity.class));
+        }
+
+        if( v== spanish){
+            if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
+
+                sp.edit().putString("secondlanguage","english").apply();
+                spanish.setBackgroundColor(getResources().getColor(R.color.text_white_87));
+                spanish.setTextColor(getResources().getColor(R.color.topColor));
+            }else {
+                sp.edit().putString("secondlanguage","spanish").apply();
+                spanish.setTextColor(getResources().getColor(R.color.text_white_87));
+                spanish.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            }
+
+
         }
 
         if( v == privacyPolicy){

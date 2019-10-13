@@ -60,7 +60,7 @@
         />
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="-10dp"
         android:layout_below="@+id/learned_toolbar"
         android:layout_above="@+id/dummy_bottom_navigation"
@@ -70,7 +70,7 @@
 
 
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="66dp"
@@ -97,7 +97,7 @@
 
         />
 
-    <android.support.v7.widget.AppCompatSpinner
+    <androidx.appcompat.widget.AppCompatSpinner
         android:entries="@array/spinner_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
         >
 
 
-    </android.support.v7.widget.AppCompatSpinner>
+    </androidx.appcompat.widget.AppCompatSpinner>
 
     <View
         android:layout_width="match_parent"
@@ -145,7 +145,7 @@
         android:orientation="vertical">
 
         <!-- Sheet that contains your items -->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/fab_sheet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
             </LinearLayout>
 
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
     </io.codetail.widget.RevealLinearLayout>
 
 
