@@ -166,7 +166,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         }
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197xxx");
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
 
         tts = new TextToSpeech(this, this);
@@ -1309,15 +1309,15 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         double SATwordSize =   SATwordArray.length;
         double GREwordSize = GREwordArray.length;
 
-        double IELTSbeginnerNumber = getPercentageNumber(30d, IELTSwordSize);
-        double TOEFLbeginnerNumber = getPercentageNumber(30d, TOEFLwordSize);
-        double SATbeginnerNumber =   getPercentageNumber(30d, SATwordSize);
-        double GREbeginnerNumber =   getPercentageNumber(30d, GREwordSize);
+        int IELTSbeginnerNumber = (int) getPercentageNumber(30d, IELTSwordSize);
+        int TOEFLbeginnerNumber = (int) getPercentageNumber(30d, TOEFLwordSize);
+        int SATbeginnerNumber = (int)  getPercentageNumber(30d, SATwordSize);
+        int GREbeginnerNumber =  (int) getPercentageNumber(30d, GREwordSize);
 
-        double IELTSintermediateNumber = getPercentageNumber(40d,IELTSwordSize);
-        double TOEFLintermediateNumber = getPercentageNumber(40d, TOEFLwordSize);
-        double SATintermediateNumber = getPercentageNumber(40d, SATwordSize);
-        double GREintermediateNumber = getPercentageNumber(40d, GREwordSize);
+        int IELTSintermediateNumber =(int) getPercentageNumber(40d,IELTSwordSize);
+        int TOEFLintermediateNumber = (int)getPercentageNumber(40d, TOEFLwordSize);
+        int SATintermediateNumber = (int)getPercentageNumber(40d, SATwordSize);
+        int GREintermediateNumber = (int)getPercentageNumber(40d, GREwordSize);
 
         if( level.equalsIgnoreCase("beginner")){
 

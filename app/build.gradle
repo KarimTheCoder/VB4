@@ -7,9 +7,9 @@ android {
         applicationId 'com.fortitude.apps.vocabularybuilder'
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 36
+        versionCode 38
         multiDexEnabled true
-        versionName "VB4-beta 3.9.3a"
+        versionName "VB4-beta 3.9.3 double"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -48,7 +48,7 @@ dependencies {
 
     implementation 'com.github.medyo:fancybuttons:1.9.1'
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'

@@ -458,40 +458,40 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
 
         words.clear();
 
-        double IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
-        double TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
-        double SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
-        double GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
+        int IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
+        int TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
+        int SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
+        int GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
 
-        double IELTSbeginnerNumber = 0;
-        double TOEFLbeginnerNumber = 0;
-        double SATbeginnerNumber = 0;
-        double GREbeginnerNumber = 0;
+        int IELTSbeginnerNumber = 0;
+        int TOEFLbeginnerNumber = 0;
+        int SATbeginnerNumber = 0;
+        int GREbeginnerNumber = 0;
 
 
 
 
         if(isIeltsChecked){
-            IELTSbeginnerNumber = getPercentageNumber(30d, IELTSwordSize);
+            IELTSbeginnerNumber = getPercentageNumber(30, IELTSwordSize);
 
         }
 
         if(isToeflChecked){
 
-            TOEFLbeginnerNumber = getPercentageNumber(30d, TOEFLwordSize);
+            TOEFLbeginnerNumber = getPercentageNumber(30, TOEFLwordSize);
 
         }
 
         if(isSatChecked){
 
-            SATbeginnerNumber = getPercentageNumber(30d, SATwordSize);
+            SATbeginnerNumber = getPercentageNumber(30, SATwordSize);
 
         }
 
         if(isGreChecked){
 
 
-            GREbeginnerNumber = getPercentageNumber(30d, GREwordSize);
+            GREbeginnerNumber = getPercentageNumber(30, GREwordSize);
 
         }
 
@@ -523,49 +523,49 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
 
         words.clear();
 
-        double IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
-        double TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
-        double SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
-        double GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
+        int IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
+        int TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
+        int SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
+        int GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
 
-        double IELTSintermediateNumber = 0;
-        double TOEFLintermediateNumber = 0;
-        double SATintermediateNumber = 0;
-        double GREintermediateNumber = 0;
+        int IELTSintermediateNumber = 0;
+        int TOEFLintermediateNumber = 0;
+        int SATintermediateNumber = 0;
+        int GREintermediateNumber = 0;
 
-        double IELTSbeginnerNumber = 0;
-        double TOEFLbeginnerNumber = 0;
-        double SATbeginnerNumber = 0;
-        double GREbeginnerNumber = 0;
+        int IELTSbeginnerNumber = 0;
+        int TOEFLbeginnerNumber = 0;
+        int SATbeginnerNumber = 0;
+        int GREbeginnerNumber = 0;
 
 
 
 
         if(isIeltsChecked){
-            IELTSintermediateNumber = getPercentageNumber(40d, IELTSwordSize);
-            IELTSbeginnerNumber = getPercentageNumber(30d, IELTSwordSize);
+            IELTSintermediateNumber = getPercentageNumber(40, IELTSwordSize);
+            IELTSbeginnerNumber = getPercentageNumber(30, IELTSwordSize);
 
         }
 
         if(isToeflChecked){
 
-            TOEFLintermediateNumber = getPercentageNumber(40d, TOEFLwordSize);
-            TOEFLbeginnerNumber = getPercentageNumber(30d, TOEFLwordSize);
+            TOEFLintermediateNumber = getPercentageNumber(40, TOEFLwordSize);
+            TOEFLbeginnerNumber = getPercentageNumber(30, TOEFLwordSize);
 
         }
 
         if(isSatChecked){
 
-            SATintermediateNumber = getPercentageNumber(40d, SATwordSize);
-            SATbeginnerNumber = getPercentageNumber(30d, SATwordSize);
+            SATintermediateNumber = getPercentageNumber(40, SATwordSize);
+            SATbeginnerNumber = getPercentageNumber(30, SATwordSize);
 
         }
 
         if(isGreChecked){
 
 
-            GREintermediateNumber = getPercentageNumber(40d, GREwordSize);
-            GREbeginnerNumber = getPercentageNumber(30d, GREwordSize);
+            GREintermediateNumber = getPercentageNumber(40, GREwordSize);
+            GREbeginnerNumber = getPercentageNumber(30, GREwordSize);
 
         }
 
@@ -596,49 +596,49 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
 
         words.clear();
 
-        double IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
-        double TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
-        double SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
-        double GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
+        int IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
+        int TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
+        int SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
+        int GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
 
-        double IELTSintermediateNumber = 0;
-        double TOEFLintermediateNumber = 0;
-        double SATintermediateNumber = 0;
-        double GREintermediateNumber = 0;
+        int IELTSintermediateNumber = 0;
+        int TOEFLintermediateNumber = 0;
+        int SATintermediateNumber = 0;
+        int GREintermediateNumber = 0;
 
-        double IELTSbeginnerNumber = 0;
-        double TOEFLbeginnerNumber = 0;
-        double SATbeginnerNumber = 0;
-        double GREbeginnerNumber = 0;
+        int IELTSbeginnerNumber = 0;
+        int TOEFLbeginnerNumber = 0;
+        int SATbeginnerNumber = 0;
+        int GREbeginnerNumber = 0;
 
 
 
 
         if(isIeltsChecked){
-            IELTSintermediateNumber = getPercentageNumber(40d, IELTSwordSize);
-            IELTSbeginnerNumber = getPercentageNumber(30d, IELTSwordSize);
+            IELTSintermediateNumber = getPercentageNumber(40, IELTSwordSize);
+            IELTSbeginnerNumber = getPercentageNumber(30, IELTSwordSize);
 
         }
 
         if(isToeflChecked){
 
-            TOEFLintermediateNumber = getPercentageNumber(40d, TOEFLwordSize);
-            TOEFLbeginnerNumber = getPercentageNumber(30d, TOEFLwordSize);
+            TOEFLintermediateNumber = getPercentageNumber(40, TOEFLwordSize);
+            TOEFLbeginnerNumber = getPercentageNumber(30, TOEFLwordSize);
 
         }
 
         if(isSatChecked){
 
-            SATintermediateNumber = getPercentageNumber(40d, SATwordSize);
-            SATbeginnerNumber = getPercentageNumber(30d, SATwordSize);
+            SATintermediateNumber = getPercentageNumber(40, SATwordSize);
+            SATbeginnerNumber = getPercentageNumber(30, SATwordSize);
 
         }
 
         if(isGreChecked){
 
 
-            GREintermediateNumber = getPercentageNumber(40d, GREwordSize);
-            GREbeginnerNumber = getPercentageNumber(30d, GREwordSize);
+            GREintermediateNumber = getPercentageNumber(40, GREwordSize);
+            GREbeginnerNumber = getPercentageNumber(30, GREwordSize);
 
         }
 
@@ -667,13 +667,13 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
     }
 
 
-    private double getPercentageNumber(double percentage, double number) {
+    private int getPercentageNumber(int percentage, int number) {
 
 
         double p = percentage / 100d;
         double beginnerNum = p * number;
 
-        return beginnerNum;
+        return (int) beginnerNum;
 
     }
 

@@ -54,7 +54,7 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
 
 
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197xxx");
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
 
 

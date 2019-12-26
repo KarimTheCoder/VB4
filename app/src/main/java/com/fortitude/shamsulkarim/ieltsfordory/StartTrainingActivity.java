@@ -246,19 +246,19 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
     private void getWords() {
 
-        double IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
-        double TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
-        double SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
-        double GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
+        int IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
+        int TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
+        int SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
+        int GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
 
-        double IELTSbeginnerNumber = 0;
-        double IELTSintermediateNumber = 0;
-        double TOEFLbeginnerNumber = 0;
-        double TOEFLintermediateNumber = 0;
-        double SATbeginnerNumber = 0;
-        double SATintermediateNumber = 0;
-        double GREbeginnerNumber = 0;
-        double GREintermediateNumber = 0;
+        int IELTSbeginnerNumber = 0;
+        int IELTSintermediateNumber = 0;
+        int TOEFLbeginnerNumber = 0;
+        int TOEFLintermediateNumber = 0;
+        int SATbeginnerNumber = 0;
+        int SATintermediateNumber = 0;
+        int GREbeginnerNumber = 0;
+        int GREintermediateNumber = 0;
 
         int extraIeltsNuBeginner = 0;
         int extraIeltsIntermediate = 0;
@@ -277,16 +277,17 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
             extraIeltsNuBeginner = 1;
             extraIeltsIntermediate = 2;
 
-            IELTSbeginnerNumber = getPercentageNumber(30d, IELTSwordSize);
-            IELTSintermediateNumber = getPercentageNumber(40d, IELTSwordSize);
+            IELTSbeginnerNumber = (int)getPercentageNumber(30, IELTSwordSize);
+            //Toast.makeText(this,"IElTS beginner number"+IELTSbeginnerNumber+"",Toast.LENGTH_LONG).show();
+            IELTSintermediateNumber = (int)getPercentageNumber(40, IELTSwordSize);
         }
 
         if(isToeflChecked){
             extraToeflBeginner= 1;
             extraToeflIntermediate = 2;
 
-            TOEFLbeginnerNumber = getPercentageNumber(30d, TOEFLwordSize);
-            TOEFLintermediateNumber = getPercentageNumber(40d, TOEFLwordSize);
+            TOEFLbeginnerNumber = (int)getPercentageNumber(30, TOEFLwordSize);
+            TOEFLintermediateNumber =(int) getPercentageNumber(40, TOEFLwordSize);
         }
 
         if(isSatChecked){
@@ -294,8 +295,8 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
             extraSatBeginner = 1;
             extraSatIntermediate = 2;
 
-            SATbeginnerNumber = getPercentageNumber(30d, SATwordSize);
-            SATintermediateNumber = getPercentageNumber(40d, SATwordSize);
+            SATbeginnerNumber = (int)getPercentageNumber(30, SATwordSize);
+            SATintermediateNumber = (int)getPercentageNumber(40, SATwordSize);
         }
 
         if(isGreChecked){
@@ -303,15 +304,15 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
             extraGreBeginner = 1;
             extraGreIntermediate = 1;
 
-            GREbeginnerNumber = getPercentageNumber(30d, GREwordSize);
-            GREintermediateNumber = getPercentageNumber(40d, GREwordSize);
+            GREbeginnerNumber = (int) getPercentageNumber(30, GREwordSize);
+            GREintermediateNumber = (int) getPercentageNumber(40, GREwordSize);
         }
         if( level.equalsIgnoreCase("beginner")){
 
-            addIELTSwords(0d,IELTSbeginnerNumber);
-            addTOEFLwords(0d,TOEFLbeginnerNumber);
-            addSATwords(0d,SATbeginnerNumber);
-            addGREwords(0d,GREbeginnerNumber);
+            addIELTSwords(0,IELTSbeginnerNumber);
+            addTOEFLwords(0,TOEFLbeginnerNumber);
+            addSATwords(0,SATbeginnerNumber);
+            addGREwords(0,GREbeginnerNumber);
 
             int i = extraSatBeginner+extraGreBeginner+extraToeflBeginner+extraIeltsNuBeginner+(int)IELTSbeginnerNumber+(int)TOEFLbeginnerNumber+(int)SATbeginnerNumber+(int)GREbeginnerNumber;
 
@@ -368,13 +369,13 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
     }
 
 
-    private double getPercentageNumber(double percentage, double number) {
+    private int getPercentageNumber(int percentage, int number) {
 
 
         double p = percentage / 100d;
         double beginnerNum = p * number;
 
-        return beginnerNum;
+        return (int)beginnerNum;
 
     }
 
@@ -417,7 +418,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private  void addIELTSwords(double startPoint,double IELTSbeginnerNumber){
+    private  void addIELTSwords(int startPoint,int IELTSbeginnerNumber){
 
 
 
@@ -437,7 +438,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private  void addTOEFLwords(double startPoint, double TOEFLbeginnerNumber){
+    private  void addTOEFLwords(int startPoint, int TOEFLbeginnerNumber){
 
 
         if(isToeflChecked){
@@ -458,7 +459,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void addSATwords (double startPoint ,double SATbeginnerNumber){
+    private void addSATwords (int startPoint ,int SATbeginnerNumber){
 
 
         if(isSatChecked){
@@ -482,7 +483,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void addGREwords (double startPoint ,double SATbeginnerNumber){
+    private void addGREwords (int startPoint ,int SATbeginnerNumber){
 
 
         if(isGreChecked){
