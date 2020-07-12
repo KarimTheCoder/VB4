@@ -23,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.Images;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.Word;
@@ -57,7 +58,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
     private String[] examples  = new String[3];
     private Word word;
-    Bitmap bitmap;
+    private Bitmap bitmap;
     private Context ctx;
     private String[] imageQualityArray = {"High","Medium","Low"};
     private String[] imageFolderName = {"High","Medium","Low"};
@@ -107,26 +108,25 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         satWordDatabase = new SATWordDatabase(context);
         greWordDatabase = new GREWordDatabase(context);
         connected = isOnline();
+        //Toast.makeText(ctx,"ONLINE: "+connected,Toast.LENGTH_LONG).show();
 
     }
-    protected boolean isOnline() {
+    private boolean isOnline() {
 
-        try{
+        return ConnectivityHelper.isConnectedToNetwork(ctx);
 
-            ConnectivityManager cm = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                return true;
-            } else {
-                return false;
-            }
+    }
 
-        }catch (NullPointerException e){
+    public void stop(){
 
-            Toast.makeText(ctx,"Network error "+e.toString(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ctx,"Distory",Toast.LENGTH_LONG).show();
+        if(tts != null){
+
+
+            tts.stop();
+            tts.shutdown();
         }
 
-        return false;
 
     }
 
@@ -227,13 +227,13 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                     definationAdapter.pronunciation.setText(word.getPronun());
                     definationAdapter.example1.setText(word.getExample1());
                     definationAdapter.example2.setText(word.getExample2());
-                   // definationAdapter.example3.setText(word.getExample3());
+//                    definationAdapter.example3.setText(word.getExample3());
                     definationAdapter.grammar.setText(word.getGrammar());
-                  //  definationAdapter.spanish.setText(word.getExtra());
+//                    definationAdapter.spanish.setText(word.getExtra());
                 }else {
                     definationAdapter.example1.setText(spanEx1);
                     definationAdapter.example2.setText(spanEx2);
-                   // definationAdapter.example3.setText(word.getExample3());
+                  //  definationAdapter.example3.setText(word.getExample3());
                     definationAdapter.pronunciation.setText(word.getPronun());
                     definationAdapter.grammar.setText(word.getGrammar());
                     definationAdapter.translation.setText(spanDef);
@@ -658,13 +658,15 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
                 try{
                     EmailIntentBuilder.from(ctx)
-                            .to("fortitudedevs@gmail.com")
-                            .subject("Mistake found!")
+                            .to("support@fortitudelearn.com")
+                            .subject("Mistake found! APP: VB4"+" FL: "+ BuildConfig.FLAVOR+" VC: "+BuildConfig.VERSION_CODE+" VN: "+BuildConfig.VERSION_NAME)
                             .body("Word: "+word.getWord()+"\nDefinition: "+word.getTranslation()
                                     +"\nExample 1: "+word.example1
                                     +"\nExample 2: "+word.example2
                                     +"\nExample 3: "+word.example3
                                     +"\nVocabulary type: "+word.vocabularyType
+                                    +"\nPOS: "+word.grammar
+                                    +"\nSyllable: "+word.pronun
                                     +"\nPosition: "+word.position
                                     +"\nPlease describe the mistake here: "
                             )

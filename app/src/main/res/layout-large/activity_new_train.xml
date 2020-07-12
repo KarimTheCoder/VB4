@@ -13,7 +13,10 @@
         android:id="@+id/top_background"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@drawable/gradient"></View>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/gradient" />
 
 
     <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
@@ -92,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:foregroundGravity="center"
-
+                    app:fab_label="Next"
                     android:onClick="next"
                     android:src="@drawable/next_icon"
 
@@ -112,6 +115,7 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
+                    android:visibility="invisible"
                     android:layout_marginTop="8dp"
                     android:background="#00000000"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -123,7 +127,7 @@
                     fancy:fb_ghost="true"
                     fancy:fb_iconResource="@drawable/speak"
                     fancy:fb_radius="100000dp"
-                    fancy:fb_text=""></mehdi.sakout.fancybuttons.FancyButton>
+                    fancy:fb_text="" />
 
                 <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/spin_kit"

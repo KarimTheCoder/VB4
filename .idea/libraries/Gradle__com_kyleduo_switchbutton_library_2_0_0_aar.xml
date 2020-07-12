@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.kyleduo.switchbutton:library:2.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b2ac70729299bf7b9fd1e4baf49bcb93/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b2ac70729299bf7b9fd1e4baf49bcb93/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/54f1b8f540eee292be90982008ceb2c7/jetified-library-2.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/54f1b8f540eee292be90982008ceb2c7/jetified-library-2.0.0/res" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kyleduo.switchbutton/library/2.0.0/9c3a83534785679eb9f58ac9b1150e3b31f6916d/library-2.0.0-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kyleduo.switchbutton/library/2.0.0/f6c0cce5e0c5dd42f80863ca20c1733698b184dd/library-2.0.0-sources.jar!/" />
     </SOURCES>

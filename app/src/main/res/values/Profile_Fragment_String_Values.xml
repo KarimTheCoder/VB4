@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="Your_progress_so_far">Your progress so far</string>
+    <string name="_words_left">25 words left</string>
+    <string name="support_us">Support Us</string>
+    <string name="bug_report_image_content_description">This image displays a representation of two person chatting</string>
+    <string name="support_us_description">If you are enjoying this app, please click here to give us a rating, it will help us a lot. Thank you.</string>
+    <string name="rate_heart_content_description">It is an image of a heart. You could click here to give us a review.</string>
+    <string name="report_bug">Report a Bug</string>
+    <string name="bug_text"> If you encounter any type of mistakes in the app please be sure to report them to us. We will fix the issues as soon as possible. </string>
+    <string name="get_support">Get Support</string>
+    <string name="Wps_title">Words Per Session</string>
+    <string name="rps_title">Repetition</string>
+    <string name="rps_moto">Learn with your style</string>
+    <string name="wrp_moto">Learn at your pace</string>
+    <string name="set_reminder_study">Set a Reminder to Study</string>
+    <string name="reminder_demo_time">08 : 00 PM</string>
+    <string name="reminder_icon_content_description">This icon displays a representation of a bell.</string>
+    <string name="get_support_description">Having trouble using the app or have any questions? Connect to our customer support. A group of dedicated people that are always here to help you out.</string>
+    <string name="follow_us_on_social_media_title">Follow Us \non Social Media</string>
+    <string name="follow_us_subtitle">Get a daily dose of vocabulary \non your timeline</string>
+    <string name="facebook_icon_content_description">This is a facebook icon</string>
+    <string name="instagram_icon_content_description">This is a Instagram icon</string>
+</resources>

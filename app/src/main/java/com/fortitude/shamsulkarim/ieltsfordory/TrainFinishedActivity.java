@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.TrainFinishedWordRecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
@@ -31,6 +32,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseBegi
 import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseIntermediate;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
@@ -43,6 +45,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.fabric.sdk.android.services.common.Crash;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class TrainFinishedActivity extends AppCompatActivity implements View.OnClickListener {
@@ -97,12 +100,20 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_train_finished);
 
+        // This code reports to Crashlytics of connection
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
+        Crashlytics.setBool("Connection Status",connected);
+
 
         //Toast.makeText(this,"SharedLearned "+sharedLearned+" level "+level+" fivewordsize "+fiveWordSize,Toast.LENGTH_SHORT).show();
 
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197");
-        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
+
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+        }
+
 
 
 
@@ -142,6 +153,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         stylize();
         setRecyclerView();
 
+        UpdateCrashlyticsLearnedWordCount();
 
 
     }
@@ -613,12 +625,14 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         advanceFavNumBuilder = new StringBuilder();
 
 
+
         while (beginner.moveToNext()){
 
             if(beginner.getString(2).equalsIgnoreCase("true")){
                 beginnerFavNumBuilder.append("+"+beginner.getString(1));
             }
         }
+        beginner.close();
 
         while (intermediate.moveToNext()){
 
@@ -626,6 +640,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
                 intermediateFavNumBuilder.append("+"+intermediate.getString(1));
             }
         }
+        beginner.close();
 
         while (advance.moveToNext()){
 
@@ -633,6 +648,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
                 advanceFavNumBuilder.append("+"+advance.getString(1));
             }
         }
+        beginner.close();
 
 
     }
@@ -706,9 +722,18 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
         if( v == rate){
 
-            Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
-            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-            this.startActivity(rateApp);
+            if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+
+                Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                this.startActivity(rateApp);
+            }else {
+
+                Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                this.startActivity(rateApp);
+            }
+
 
         }
 
@@ -723,12 +748,84 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         if( v == unlearnButton){
 
             setUnlearn();
+            UpdateCrashlyticsLearnedWordCount();
         }
 
 
 
 
     }
+
+
+    private void UpdateCrashlyticsLearnedWordCount(){
+
+        // This method takes learn word count from database and puts them on Crashlytics keys
+
+        Cursor IELTSCursor = ieltsWordDatabase.getData();
+        Cursor TOEFLCursor = toeflWordDatabase.getData();
+        Cursor SATCursor = satWordDatabase.getData();
+        Cursor GRECursor = greWordDatabase.getData();
+
+        String isIELTSLearned;
+        int IELTSLearnedCount = 0;
+        String isTOEFLLearned;
+        int TOEFLLeanedCount = 0;
+        String isSATLearned;
+        int SATLearnedCount = 0;
+        String isGRELearned;
+        int GRELearnedCount =0;
+
+        while (IELTSCursor.moveToNext()){
+
+            isIELTSLearned = IELTSCursor.getString(3);
+
+            if( isIELTSLearned.equalsIgnoreCase("true")){
+                IELTSLearnedCount++;
+
+            }
+        }
+        IELTSCursor.close();
+
+        while(TOEFLCursor.moveToNext()){
+
+            isTOEFLLearned = TOEFLCursor.getString(3);
+
+            if(isTOEFLLearned.equalsIgnoreCase("true")){
+                TOEFLLeanedCount++;
+            }
+        }
+
+        TOEFLCursor.close();
+        while(SATCursor.moveToNext()){
+
+            isSATLearned = SATCursor.getString(3);
+
+            if(isSATLearned.equalsIgnoreCase("true")){
+                SATLearnedCount++;
+            }
+        }
+        SATCursor.close();
+
+        while(GRECursor.moveToNext()){
+
+            isGRELearned = GRECursor.getString(3);
+
+            if(isGRELearned.equalsIgnoreCase("true")){
+                GRELearnedCount++;
+            }
+        }
+        GRECursor.close();
+
+
+        Crashlytics.setInt("IELTS Learned Count",IELTSLearnedCount);
+        Crashlytics.setInt("TOEFL Learned Count",TOEFLLeanedCount);
+        Crashlytics.setInt("SAT Learned Count",SATLearnedCount);
+        Crashlytics.setInt("GRE Learned Count",GRELearnedCount);
+
+
+    }
+
+
     @Override
     protected void onStop() {
         super.onStop();

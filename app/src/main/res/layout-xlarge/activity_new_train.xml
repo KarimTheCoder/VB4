@@ -96,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginRight="16dp"
-
+                        app:fab_label="Next"
                         android:layout_marginBottom="16dp"
                         android:foregroundGravity="center"
 
@@ -134,6 +134,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:background="#00000000"
+                        android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/train_word"
                         app:layout_constraintTop_toTopOf="parent"
@@ -143,7 +144,7 @@
                         fancy:fb_ghost="true"
                         fancy:fb_iconResource="@drawable/speak"
                         fancy:fb_radius="100000dp"
-                        fancy:fb_text=""></mehdi.sakout.fancybuttons.FancyButton>
+                        fancy:fb_text="" />
 
 
                     <!--<com.github.jorgecastilloprz.FABProgressCircle-->

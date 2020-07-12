@@ -5,7 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_practice_finished">PracticeFinishedActivity</string>
     <string name="noInternet">No internet connection. Cannot load the image</string>
-    <string name="waitingForImage">Waiting for the image to load...</string>
+    <string name="waitingForImage">Waiting for the image to load.</string>
     <string name="buyapptitle">GO PRO! \nACHIEVE MORE!</string>
     <string name="buyappfeatures">Instant photo load\nNo ads\nFull offline</string>
     <string name="removeAds">FUND THE APP\nBY REMOVING ADS</string>
@@ -14,8 +14,8 @@
     <string name="you_ordered">you_ordered</string>
     <string name="rate_string">If you are enjoying this app, please click here to give us a rating, it will help us a lot.</string>
 
-    <string name="bug_text"> If you encounter any type of mistakes in the app please be sure to report them to us. We will fix the issues as soon as possible. </string>
-    <string name="get_support">Having trouble using the app or have any questions? Connect to our customer support. A group of dedicated people that are always here to help you out.</string>
+
+
     <string name="sign_in_text">Sign-in to save your progress</string>
     <string name="wps_text">Words Per Session</string>
     <string name="rps_text">Repetition Per Session</string>

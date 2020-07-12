@@ -23,12 +23,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
+import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.Practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.Fab;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
 import java.util.ArrayList;
@@ -84,6 +86,9 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_learned_words,container,false);
 
+        // This code reports to Crashlytics of connection
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
+        Crashlytics.setBool("Connection Status",connected);
         initialization(v);
         gettingResources();
         getfavoriteDatabasePosition();
@@ -175,18 +180,21 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
                     sp.edit().putInt("prevLearnedSelection",0).apply();
                    // beginnerWordInitialization();
                    getBeginnerWordData();
+                    Crashlytics.setString("Learned Word Fragment: ","Beginner");
                 }
                 if (i == 1) {
 
 
                     sp.edit().putInt("prevLearnedSelection",1).apply();
                     getIntermediateWordData();
+                    Crashlytics.setString("Learned Word Fragment: ","Intermediate");
                 }
 
                 if (i == 2) {
 
                     sp.edit().putInt("prevLearnedSelection",2).apply();
                     getAdvanceWordData();
+                    Crashlytics.setString("Learned Word Fragment: ","Advance");
                 }
             }
 
@@ -362,6 +370,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
 
             if(words.size() >= 5){
                 getContext().startActivity(new Intent(getContext(), Practice.class));
+                Crashlytics.setString("Learned Practice","Advance");
 
 
             }else {
@@ -379,6 +388,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
 
             if(words.size() >= 5){
                 getContext().startActivity(new Intent(getContext(), Practice.class));
+                Crashlytics.setString("Learned Practice","Intermediate");
 
 
             }else {
@@ -410,7 +420,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
 
             if(words.size() >= 5){
                 getContext().startActivity(new Intent(getContext(), Practice.class));
-
+                Crashlytics.setString("Learned Practice","Beginner");
                 isShowingFabOption = false;
 
             }else {
@@ -427,21 +437,21 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
 
 
                 sp.edit().putString("level","beginner").apply();
-                view.getContext().startActivity(new Intent(view.getContext(), StartTrainingActivity.class));
+                view.getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
 
             }
 
             if(level.equalsIgnoreCase("intermediate")){
 
                 sp.edit().putString("level","intermediate").apply();
-                view.getContext().startActivity(new Intent(view.getContext(), StartTrainingActivity.class));
+                view.getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
 
             }
 
             if(level.equalsIgnoreCase("advance")){
 
                 sp.edit().putString("level","advance").apply();
-                view.getContext().startActivity(new Intent(view.getContext(), StartTrainingActivity.class));
+                view.getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
 
             }
 

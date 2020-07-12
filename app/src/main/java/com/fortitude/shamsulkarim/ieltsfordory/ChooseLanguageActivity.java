@@ -10,7 +10,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+
+import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.ChooseLanguageAdapter;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -28,31 +31,29 @@ public class ChooseLanguageActivity extends AppCompatActivity implements View.On
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_choose_language);
+
+        // This code reports to Crashlytics of connection
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
+        Crashlytics.setBool("Connection Status",connected);
+
         startActivity(new Intent(this, ChooseVocabulary.class));
         skip = findViewById(R.id.skip);
         skip.setOnClickListener(this);
 
-
-        recyclerView = findViewById(R.id.choose_language_setting);
-        adapter = new ChooseLanguageAdapter();
-        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+//
+//        recyclerView = findViewById(R.id.choose_language_setting);
+//        adapter = new ChooseLanguageAdapter();
+//        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,true);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setAdapter(adapter);
     }
+
 
     @Override
     public void onClick(View view) {
 
-//        if( view == skip){
-//            SharedPreferences sp = getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-//
-//            sp.edit().putInt("language",0).apply();
-
-            startActivity(new Intent(this, MainActivity.class));
-
-
-//        }
+            //startActivity(new Intent(this, MainActivity.class));
 
     }
 }

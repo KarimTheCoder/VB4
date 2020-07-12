@@ -16,7 +16,7 @@
         android:background="@drawable/gradient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></View>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
@@ -98,7 +98,7 @@
 
                     android:layout_marginEnd="16dp"
                     android:foregroundGravity="center"
-
+                    app:fab_label="Next"
                     android:onClick="next"
                     android:src="@drawable/next_icon"
                     app:fab_progress_backgroundColor="@color/grey"
@@ -116,6 +116,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:visibility="invisible"
                     android:background="#00000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/train_word"

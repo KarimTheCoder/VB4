@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -272,14 +274,18 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
         int extraGreBeginner = 0;
         int extraGreIntermediate = 0;
 
+        Toast.makeText(this,"Ielts fdffdsf",Toast.LENGTH_LONG).show();
+
         if(isIeltsChecked){
+            Toast.makeText(this,"Ielts checked",Toast.LENGTH_LONG).show();
 
             extraIeltsNuBeginner = 1;
             extraIeltsIntermediate = 2;
 
             IELTSbeginnerNumber = (int)getPercentageNumber(30, IELTSwordSize);
-            //Toast.makeText(this,"IElTS beginner number"+IELTSbeginnerNumber+"",Toast.LENGTH_LONG).show();
             IELTSintermediateNumber = (int)getPercentageNumber(40, IELTSwordSize);
+
+
         }
 
         if(isToeflChecked){
@@ -314,8 +320,8 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
             addSATwords(0,SATbeginnerNumber);
             addGREwords(0,GREbeginnerNumber);
 
-            int i = extraSatBeginner+extraGreBeginner+extraToeflBeginner+extraIeltsNuBeginner+(int)IELTSbeginnerNumber+(int)TOEFLbeginnerNumber+(int)SATbeginnerNumber+(int)GREbeginnerNumber;
 
+            int i = extraSatBeginner+extraGreBeginner+extraToeflBeginner+extraIeltsNuBeginner+(int)IELTSbeginnerNumber+(int)TOEFLbeginnerNumber+(int)SATbeginnerNumber+(int)GREbeginnerNumber;
 
 
 
@@ -326,10 +332,22 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
         }
 
+
+
+
         if( level.equalsIgnoreCase("intermediate")){
 
-            addIELTSwords(IELTSbeginnerNumber,IELTSintermediateNumber+IELTSbeginnerNumber);
+            addIELTSwords(IELTSbeginnerNumber, +IELTSbeginnerNumber);
+
+            int indermediateEndPoint= IELTSintermediateNumber+IELTSbeginnerNumber;
+            Toast.makeText(this,"Interm: startPoint: "+IELTSbeginnerNumber+
+                    "\nEndPoint: "+indermediateEndPoint,Toast.LENGTH_LONG).show();
+
             addTOEFLwords(TOEFLbeginnerNumber,TOEFLbeginnerNumber+TOEFLintermediateNumber);
+
+            int TOEFLindermediateEndPoint= TOEFLbeginnerNumber+TOEFLintermediateNumber;
+            Toast.makeText(this,"TOEFL Interm: startPoint: "+IELTSbeginnerNumber+
+                    "\nEndPoint: "+indermediateEndPoint,Toast.LENGTH_LONG).show();
             addSATwords(SATbeginnerNumber,SATbeginnerNumber+SATintermediateNumber);
             addGREwords(GREbeginnerNumber,GREbeginnerNumber+GREintermediateNumber);
 
@@ -350,6 +368,11 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
         if( level.equalsIgnoreCase("advance")){
 
             addIELTSwords(IELTSintermediateNumber+IELTSbeginnerNumber, IELTSwordSize);
+
+            int advanceStartPoint = IELTSintermediateNumber+IELTSbeginnerNumber;
+            Toast.makeText(this,"ADV: startPoint: "+advanceStartPoint+
+                    "\nEndPoint: "+IELTSwordSize,Toast.LENGTH_LONG).show();
+
             addTOEFLwords(TOEFLintermediateNumber+TOEFLbeginnerNumber, TOEFLwordSize);
             addSATwords(SATintermediateNumber+SATbeginnerNumber, SATwordSize);
             addGREwords(GREintermediateNumber+GREbeginnerNumber,GREwordSize);
@@ -379,7 +402,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void addingLearnedDatabase() {
+    private void addingLearnedDatabase()  {
 
         Cursor beginnerRes = IELTSdatabase.getData();
         Cursor TOEFLres = TOEFLdatabase.getData();
@@ -396,6 +419,9 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
             IELTSlearnedDatabase.add(beginnerRes.getString(3));
 
         }
+        //Closing databases
+        beginnerRes.close();
+        IELTSdatabase.close();
 
         while (TOEFLres.moveToNext()) {
 
@@ -403,37 +429,56 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
         }
 
+        TOEFLres.close();
+        TOEFLdatabase.close();
+
         while (SATres.moveToNext()) {
 
             SATlearnedDatabase.add(SATres.getString(3));
 
         }
+        SATres.close();
+        SATdatabase.close();
 
         while (GREres.moveToNext()) {
 
             GRElearnedDatabase.add(GREres.getString(3));
 
         }
+        GREres.close();
+        GREdatabase.close();
 
 
     }
 
     private  void addIELTSwords(int startPoint,int IELTSbeginnerNumber){
 
+        int IELTSLearnedDatabaseSize = IELTSlearnedDatabase.size();
+        Toast.makeText(this,"IELTSBeginnerNumber: "+IELTSbeginnerNumber+" Learned Database size: "
+        +IELTSLearnedDatabaseSize,Toast.LENGTH_LONG).show();
+
+        if( IELTSbeginnerNumber > IELTSLearnedDatabaseSize){
+
+            IELTSbeginnerNumber = IELTSLearnedDatabaseSize;
+        }
 
 
-        if(isIeltsChecked){
-            for(int i = (int) startPoint; i  < IELTSbeginnerNumber; i++){
+            if(isIeltsChecked){
+                for(int i = (int) startPoint; i  < IELTSbeginnerNumber; i++){
 
 
-                if( IELTSlearnedDatabase.get(i).equalsIgnoreCase("false")){
+                    if( IELTSlearnedDatabase.get(i).equalsIgnoreCase("false")){
 
-                    words.add(new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],IELTSvocabularyType[i],IELTSposition[i], IELTSlearnedDatabase.get(i),""));
+                        words.add(new Word(IELTSwordArray[i], IELTStranslationArray[i],"",
+                                IELTSpronunArray[i],IELTSgrammarArray[i], IELTSexample1array[i],
+                                IELTSexample2Array[i], IELTSexample3Array[i],IELTSvocabularyType[i],
+                                IELTSposition[i], IELTSlearnedDatabase.get(i),""));
+                    }
+
                 }
 
             }
 
-        }
 
 
     }

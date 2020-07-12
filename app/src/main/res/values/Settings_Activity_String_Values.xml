@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="TOEFL">TOEFL®</string>
+    <string name="IELTS">IELTS®</string>
+    <string name="SAT">SAT®</string>
+    <string name="GRE">GRE®</string>
+
+    <string name="Choose_preferred_vocabulary">Choose Preferred Vocabulary</string>
+    <string name="for_more_difficult_words">Uncheck IELTS and TOEFL to see more difficult words.</string>
+
+
+    <string name="tap_to_choose_translation">Tap to Choose a Translation Language</string>
+    <string name="tap_to_choose_description">Translated by native speakers. Please do not be upset if you do no see your language here. Lack of fund has been the main reason we are not able to add more translations. Please use the pro version of the app if you would like to help us. </string>
+
+    <string name="doggo">Doggo</string>
+    <string name="sign_in_description">Sign in to save your progress</string>
+
+    <string name="wps_description">Choose how many words you want to learn per seesion</string>
+    <string name="rps_description">Choose how many times you want a word to be repeated</string>
+
+    <string name="sound_of_quiz_session">Sound of quiz session</string>
+    <string name="sound_of_quiz_session_subtitle">Turn off or on sound of the quiz sessions here</string>
+
+    <string name="pronunciation_title">Pronunciation</string>
+    <string name="pronunciation_description">Turn on to use real human pronunciation(internet required) or turn off to use text-to-speech engine(no internet required)</string>
+
+    <string name="privacy_policy_title">Privacy Policy</string>
+
+    <string name="image_quality_title">Image Quality</string>
+    <string name="image_quality_description">Choose image quality that suits best for your device</string>
+</resources>

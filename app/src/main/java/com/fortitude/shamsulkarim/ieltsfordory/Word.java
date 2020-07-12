@@ -10,7 +10,13 @@ public class Word {
     public int count;
 
     public String getWordSL() {
-        return wordSL;
+
+        if(wordSL == null){
+            return  wordSL;
+        }else {
+            return wordSL;
+        }
+
     }
 
     public void setWordSL(String wordSL) {
@@ -223,11 +229,23 @@ public class Word {
     }
 
     public String getWord() {
-        return word;
+
+        if( word == null){
+            return "null";
+        }else {
+            return word;
+        }
+
     }
 
     public String getTranslation() {
-        return translation;
+
+        if(translation == null){
+            return "null";
+        }else {
+            return translation;
+        }
+
     }
 
     public String getExtra() {
@@ -239,7 +257,13 @@ public class Word {
     }
 
     public String getTranslationSL() {
-        return translationSL;
+
+        if(translationSL == null){
+            return "null";
+        }else {
+            return translationSL;
+        }
+
     }
 
     public void setTranslationSL(String translationSL) {

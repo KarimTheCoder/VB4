@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.Practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewTrainRecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
@@ -44,6 +45,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseBegi
 import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseIntermediate;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Wave;
@@ -95,7 +97,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private ArrayList<Word> words, fiveWords,fiveWordsCopy,questionWords;
     private RoundCornerProgressBar progress1;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+//    private RecyclerView.Adapter adapter;
+    private NewTrainRecyclerView adapter;
     private RecyclerView.LayoutManager layoutManager;
     private String level;
     private boolean IsWrongAnswer = true;
@@ -142,12 +145,15 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_new_train);
 
-
+        // This code reports to Crashlytics of connection
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
+        Crashlytics.setBool("Connection Status",connected);
 
 
 
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         level = sp.getString("level","NOTHING");
+        Crashlytics.setString("Train Level",level);
         languageId = sp.getInt("language",0);
         soundState = sp.getBoolean("soundState",true);
         noshowads = sp.getInt("noshowads",0);
@@ -166,8 +172,12 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         }
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197xxx");
-        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
+
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+        }
+
 
         tts = new TextToSpeech(this, this);
 
@@ -197,6 +207,22 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 //        NewTrain.this.finish();
 
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        adapter.stop();
+
+        if(tts != null){
+
+
+            tts.stop();
+            tts.shutdown();
+        }
+
+        super.onDestroy();
 
     }
 
@@ -473,6 +499,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
+
     private void quizWords(int quizCycle, View v){
 
 
@@ -503,6 +530,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     private void initialization(){
         //Typeface comfortaRegular = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Regular.ttf");
+
+
 
         topBackground = findViewById(R.id.top_background);
         wordCard = findViewById(R.id.wordCard);
@@ -1650,6 +1679,10 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private void updateJustlearnedDatabase(int pos){
 
         justLearnedDatabaseBeginner.removeAll();
+        justLearnedDatabaseIntermediate.removeAll();
+        justLearnedDatabaseAdvance.removeAll();
+
+
         int j = 1;
 
 

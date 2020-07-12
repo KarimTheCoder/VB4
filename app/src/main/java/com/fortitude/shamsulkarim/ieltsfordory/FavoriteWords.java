@@ -19,11 +19,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
+import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.Practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
@@ -63,6 +65,10 @@ public class FavoriteWords extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_favorite_words,container,false);
+
+        // This code reports to Crashlytics of connection
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
+        Crashlytics.setBool("Connection Status",connected);
 
         fab = (FloatingActionButton)v.findViewById(R.id.fab_favorite);
         fab.setColorNormal(getResources().getColor(R.color.colorPrimary));
@@ -207,13 +213,16 @@ public class FavoriteWords extends Fragment  {
         Cursor toeflRes = toeflWordDatabase.getData();
         Cursor greRes = greWordDatabase.getData();
 
+
         while (toeflRes.moveToNext()){
 
             toeflFavWords.add(toeflRes.getString(2));
             int pos = (Integer) toeflRes.getInt(0);
             toeflDatabasePosition.add(pos);
 
+
         }
+        toeflRes.close();
 
         while (ieltsRes.moveToNext()){
 
@@ -221,7 +230,10 @@ public class FavoriteWords extends Fragment  {
             int pos = (Integer) ieltsRes.getInt(0);
             ieltsDatabasePosition.add(pos);
 
+
         }
+
+        ieltsRes.close();
 
         while (satRes.moveToNext()){
 
@@ -229,15 +241,23 @@ public class FavoriteWords extends Fragment  {
             int pos = (Integer) satRes.getInt(0);
             satDatabasePosition.add(pos);
 
-        }
 
+        }
+        satRes.close();
         while (greRes.moveToNext()){
 
             greFavWords.add(greRes.getString(2));
             int pos = (Integer) greRes.getInt(0);
             greDatabasePosition.add(pos);
 
+
         }
+        greRes.close();
+
+
+
+
+
 
     }
 
@@ -318,15 +338,17 @@ public class FavoriteWords extends Fragment  {
         String[] greExample2 = getResources().getStringArray(R.array.GRE_example2);
         String[] greExample3 = getResources().getStringArray(R.array.GRE_example3);
 
+        int IELTSFavWordCount = 0;
+        int TOEFLFavWordCount = 0;
+        int SATFavWordCount = 0;
+        int GREFAvWordCount = 0;
+
+
         for(int i = 0; i < satWordSize; i++){
 
 
-
-
-
-
             if(satFavWords.get(i).equalsIgnoreCase("True")){
-
+                SATFavWordCount++;
                 Word word = new Word(advanceWordArray[i],advanceTranslationArray[i],"",advancePronunciationArray[i],advanceGrammarArray[i],advanceExampleArray1[i],advanceExampleArray2[i], advanceExampleArray3[i], "SAT",satDatabasePosition.get(i),"",satFavWords.get(i));
                 words.add(word);
 
@@ -337,6 +359,7 @@ public class FavoriteWords extends Fragment  {
         for(int i =0 ; i < ieltsWordSize; i++){
 
             if(ieltsFavWords.get(i).equalsIgnoreCase("True")){
+                IELTSFavWordCount++;
 
                 Word word = new Word(beginnerWordArray[i],beginnerTranslationArray[i],"",beginnerPronunciationArray[i],beginnerGrammarArray[i],beginnerExampleArray1[i],beginnerExampleArray2[i],beginnerExampleArray3[i], "IELTS",ieltsDatabasePosition.get(i),"",ieltsFavWords.get(i));
 
@@ -348,7 +371,7 @@ public class FavoriteWords extends Fragment  {
         for(int i =0 ; i < toeflWordSize; i++){
 
             if(toeflFavWords.get(i).equalsIgnoreCase("True")){
-
+                TOEFLFavWordCount++;
                 Word word = new Word(intermediateWordArray[i],intermediateTranslationArray[i],"",intermediatePronunciationArray[i],intermediateGrammarArray[i],intermediateExampleArray1[i],intermediateExampleArray2[i],intermediateExampleArray3[i], "TOEFL",toeflDatabasePosition.get(i),"",toeflFavWords.get(i));
                 words.add(word);
 
@@ -361,13 +384,17 @@ public class FavoriteWords extends Fragment  {
         for(int i =0 ; i < greWordSize; i++){
 
             if(greFavWords.get(i).equalsIgnoreCase("True")){
-
+                GREFAvWordCount++;
                Word word = new Word(greWordArray[i],greTranslationArray[i],"",grePronunciationArray[i],greGrammarArray[i],greExample1[i],greExample2[i],greExample3[i], "GRE",greDatabasePosition.get(i),"",greFavWords.get(i));
                 words.add(word);
 
             }
 
         }
+        Crashlytics.setInt("Favorite IELTS",IELTSFavWordCount);
+        Crashlytics.setInt("Favorite TOEFL",TOEFLFavWordCount);
+        Crashlytics.setInt("Favorite SAT",SATFavWordCount);
+        Crashlytics.setInt("Favorite GRE",GREFAvWordCount);
 
     }
 

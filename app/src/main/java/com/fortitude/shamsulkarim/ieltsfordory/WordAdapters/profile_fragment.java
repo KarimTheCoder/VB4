@@ -1,7 +1,4 @@
 package com.fortitude.shamsulkarim.ieltsfordory.WordAdapters;
-
-
-
 import android.annotation.TargetApi;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -31,11 +28,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.crashlytics.android.Crashlytics;
+import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.AlarmReceiver;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.LocalData;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.NotificationScheduler;
@@ -90,6 +90,9 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
 
 
+        // This code reports to Crashlytics of connection
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
+        Crashlytics.setBool("Connection Status",connected);
 
         //----------------------------
 
@@ -403,12 +406,26 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
             case R.id.menu_item_share:
 
-                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                String shareBodyText = "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder";
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
-                startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
+                if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    String shareBodyText = "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder";
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+                    startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
+                }else{
+
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    String shareBodyText = "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro";
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+                    startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
+
+                }
+
+
                 return true;
         }
 
@@ -509,12 +526,13 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         if(v == bugReport){
 
             try{
+
                 EmailIntentBuilder.from(getActivity().getBaseContext())
-                        .to("fortitudedevs@gmail.com")
-                        .subject("Fortitude Vocabulary Builder")
+                        .to("support@fortitudelearn.com")
+                        .subject("VB4 - FL: "+BuildConfig.FLAVOR+" VN: "+BuildConfig.VERSION_NAME+" VC: "+BuildConfig.VERSION_CODE)
                         .body("")
                         .start();
-            }catch (NullPointerException i){
+            }catch (NullPointerException ignored){
 
             }
 
@@ -524,9 +542,18 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
         if( v == rateCardView){
 
-            Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
-            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-            this.startActivity(rateApp);
+            if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+                Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                this.startActivity(rateApp);
+
+            }else {
+
+                Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                this.startActivity(rateApp);
+            }
+
         }
 
         if(v == fbCard){
@@ -538,6 +565,9 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         }
 
         if( v == instagramCard){
+
+
+
 
             Uri appUrl = Uri.parse("https://www.instagram.com/fortitudelearn/");
             Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);

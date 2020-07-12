@@ -16,8 +16,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 
+import com.crashlytics.android.Crashlytics;
+import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
@@ -52,10 +55,16 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_practice_finished);
 
+        // This code reports to Crashlytics of connection
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
+        Crashlytics.setBool("Connection Status",connected);
 
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197xxx");
-        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
+
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+        }
 
 
 
@@ -239,9 +248,17 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
 
         if( v == rateCard){
 
-            Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
-            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-            this.startActivity(rateApp);
+            if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+
+                Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                this.startActivity(rateApp);
+            }else {
+
+                Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                this.startActivity(rateApp);
+            }
 
         }
 

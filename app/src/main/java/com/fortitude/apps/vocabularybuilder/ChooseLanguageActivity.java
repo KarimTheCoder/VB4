@@ -37,12 +37,14 @@ public class ChooseLanguageActivity extends AppCompatActivity implements View.On
         if(v == yes){
 
                 sp.edit().putString("secondlanguage","spanish").apply();
-                startActivity(new Intent(this, SplashScreen.class));
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
             }
 
         if( v == no){
             sp.edit().putString("secondlanguage","english").apply();
-            startActivity(new Intent(this, SplashScreen.class));
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
 
         }
 

@@ -1,12 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    xmlns:plainpie="http://schemas.android.com/apk/res-auto"
     >
 
 
@@ -46,11 +44,11 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/productbold"
-                android:text="Your progress \nso far"
+                android:text="@string/Your_progress_so_far"
                 android:textColor="@color/topColor"
                 android:textSize="36sp"
-                app:layout_constraintStart_toEndOf="@+id/profile_pie_view"
-                app:layout_constraintTop_toTopOf="@+id/profile_pie_view" />
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp" />
 
             <TextView
                 android:id="@+id/profile_learned_text"
@@ -60,9 +58,11 @@
                 android:layout_below="@+id/your_progress_so_far_text"
                 android:layout_marginLeft="16dp"
                 android:fontFamily="@font/productreg"
-                android:text="25 words left"
+                android:text="@string/_words_left"
                 android:textColor="@color/lowColor"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp" />
 
             <TextView
                 android:id="@+id/profile_left_text"
@@ -72,9 +72,11 @@
                 android:layout_below="@+id/profile_learned_text"
                 android:layout_marginLeft="16dp"
                 android:fontFamily="@font/productreg"
-                android:text="25 words left"
+                android:text="@string/_words_left"
                 android:textColor="@color/lowColor"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp" />
 
 
             <androidx.cardview.widget.CardView
@@ -105,7 +107,8 @@
                         android:src="@drawable/rate_love_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/rate_heart_content_description" />
 
 
                     <TextView
@@ -115,11 +118,12 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/productbold"
-                        android:text="Support Us"
+                        android:text="@string/support_us"
                         android:textColor="#fff"
                         android:textSize="30sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="16dp" />
 
                     <TextView
                         android:id="@+id/textView26"
@@ -132,7 +136,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/productreg"
-                        android:text="@string/rate_string"
+                        android:text="@string/support_us_description"
                         android:textColor="#ffffff"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -172,7 +176,8 @@
                         android:src="@drawable/get_support_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/bug_report_image_content_description" />
 
 
                     <TextView
@@ -182,12 +187,13 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/productbold"
-                        android:text="Report a bug"
+                        android:text="@string/report_bug"
                         android:textColor="#ffffff"
 
                         android:textSize="24sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="16dp" />
 
                     <TextView
                         android:id="@+id/textView262"
@@ -215,11 +221,12 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/productbold"
-                        android:text="Get support"
+                        android:text="@string/get_support"
                         android:textColor="#ffffff"
                         android:textSize="24sp"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textView262" />
+                        app:layout_constraintTop_toBottomOf="@id/textView262"
+                        android:layout_marginStart="16dp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -232,7 +239,7 @@
                         android:layout_marginStart="16dp"
 
                         android:fontFamily="@font/productreg"
-                        android:text="@string/get_support"
+                        android:text="@string/get_support_description"
                         android:textColor="#ffffff"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -257,7 +264,6 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/profile_wps"
-                    android:layout_below="@+id/bug_report_card"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
@@ -279,9 +285,9 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/productreg"
-                            android:text="Words per session"
+                            android:text="@string/Wps_title"
                             android:textColor="#ffffff"
-                            android:textSize="14dp"
+                            android:textSize="14sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/profile_wps_spinner" />
@@ -298,7 +304,7 @@
                             android:entries="@array/words_per_session_array"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView10"></androidx.appcompat.widget.AppCompatSpinner>
+                            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
                         <TextView
                             android:id="@+id/textView10"
@@ -310,13 +316,14 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/productreg"
-                            android:text="Learn at your pace"
+                            android:text="@string/wrp_moto"
                             android:textColor="#ffffff"
                             android:textSize="18sp"
                             android:textAlignment="center"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:gravity="center_horizontal" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -346,9 +353,9 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/productreg"
-                            android:text="Repetition"
+                            android:text="@string/rps_title"
                             android:textColor="#ffffff"
-                            android:textSize="14dp"
+                            android:textSize="14sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/profile_rps_spinner" />
@@ -365,7 +372,7 @@
                             android:entries="@array/words_per_session_array"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView11"></androidx.appcompat.widget.AppCompatSpinner>
+                            app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
                         <TextView
                             android:id="@+id/textView11"
@@ -377,13 +384,14 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/productreg"
-                            android:text="Learn with your style"
+                            android:text="@string/rps_moto"
                             android:textAlignment="center"
                             android:textColor="#ffffff"
                             android:textSize="18sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:gravity="center_horizontal" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -402,10 +410,11 @@
                 android:id="@+id/alarm_icon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="24dp"
-                android:src="@drawable/notification_icon" />
+                android:src="@drawable/notification_icon"
+                android:contentDescription="@string/reminder_icon_content_description"
+                android:layout_marginStart="24dp" />
 
 
             <TextView
@@ -418,9 +427,11 @@
                 android:layout_toRightOf="@+id/alarm_icon"
                 android:fontFamily="@font/productreg"
                 android:gravity="center"
-                android:text="Set a reminder to study"
+                android:text="@string/set_reminder_study"
                 android:textColor="@color/topColor"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@+id/alarm_icon" />
 
             <TextView
                 android:id="@+id/alarm_time"
@@ -433,8 +444,9 @@
                 android:gravity="center"
 
 
-                android:text="8 : 00 PM"
-                android:textColor="@color/lowColor" />
+                android:text="@string/reminder_demo_time"
+                android:textColor="@color/lowColor"
+                android:layout_alignStart="@+id/set_alarm_text" />
 
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/set_alarm"
@@ -442,11 +454,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_centerInParent="true"
-
                 android:layout_marginTop="16dp"
                 android:layout_below="@+id/alarm_time"
-
-                android:layout_alignLeft="@+id/bug_text"
                 android:paddingBottom="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
@@ -457,20 +466,18 @@
                 fancy:fb_focusColor="@color/colorPrimary"
                 fancy:fb_radius="0dp"
                 fancy:fb_text="SET TIME"
-                fancy:fb_textColor="@color/colorPrimary"></mehdi.sakout.fancybuttons.FancyButton>
+                fancy:fb_textColor="@color/colorPrimary" />
 
             <com.kyleduo.switchbutton.SwitchButton
                 android:id="@+id/alarm_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_alignBottom="@id/alarm_icon"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="24dp"
                 android:layout_alignTop="@+id/alarm_icon"
-
-
-                />
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp" />
 
 
             <TextView
@@ -482,7 +489,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/productbold"
-                android:text="Follow us \non social media"
+                android:text="@string/follow_us_on_social_media_title"
                 android:textColor="@color/topColor"
                 android:textSize="36sp" />
 
@@ -494,7 +501,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:fontFamily="@font/productreg"
-                android:text="Get daily dose of vocabulary \non your timeline"
+                android:text="@string/follow_us_subtitle"
                 android:textColor="@color/lowColor"
                 android:textSize="24sp"
 
@@ -520,7 +527,7 @@
                     app:cardElevation="0dp"
                     app:cardBackgroundColor="@color/grey100"
                     app:cardCornerRadius="15dp"
-                    >
+                    android:layout_marginEnd="4dp">
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -539,7 +546,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:contentDescription="@string/facebook_icon_content_description" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -553,7 +561,7 @@
                     app:cardElevation="0dp"
                     app:cardBackgroundColor="@color/grey100"
                     app:cardCornerRadius="15dp"
-                    >
+                    android:layout_marginStart="4dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -572,7 +580,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:contentDescription="@string/instagram_icon_content_description" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

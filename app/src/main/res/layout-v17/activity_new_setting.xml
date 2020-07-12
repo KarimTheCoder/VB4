@@ -8,7 +8,6 @@
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewSettingActivity">
 
 
-
     <androidx.appcompat.widget.Toolbar
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -19,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="0dp"
-        android:id="@+id/ns_toolbar"></androidx.appcompat.widget.Toolbar>
+        android:id="@+id/ns_toolbar" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -114,7 +113,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="TOEFL"
+                        android:text="@string/TOEFL"
                         android:textColor="@color/bottomColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/toefl_checkbox"
@@ -131,7 +130,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="IELTS"
+                        android:text="@string/IELTS"
                         android:textColor="@color/bottomColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/ielts_checkbox"
@@ -147,7 +146,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="SAT"
+                        android:text="@string/SAT"
                         android:textColor="@color/bottomColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/sat_checkbox"
@@ -180,7 +179,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="GRE"
+                        android:text="@string/GRE"
                         android:textColor="@color/bottomColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/gre_checkbox"
@@ -452,11 +451,12 @@
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/wps_spinner"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="8dp"
+                        android:gravity="center"
                         android:entries="@array/words_per_session_array"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -536,11 +536,12 @@
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/profile_wps_spinner"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="8dp"
+                        android:gravity="center"
                         android:entries="@array/words_per_session_array"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -619,8 +620,8 @@
 
                     <com.kyleduo.switchbutton.SwitchButton
                         android:id="@+id/sound_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="80dp"
+                        android:layout_height="48dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
@@ -701,16 +702,16 @@
                         app:layout_constraintTop_toBottomOf="@+id/textPronun" />
 
                     <com.kyleduo.switchbutton.SwitchButton
-                        android:checked="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        app:layout_constraintRight_toRightOf="parent"
                         android:id="@+id/pronun_switch"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="80dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="16dp"
                         android:layout_marginBottom="8dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="8dp" />
+                        android:checked="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
 

@@ -500,7 +500,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                             @Override
                             public void onCompletion(MediaPlayer mp) {
                                 speaker.setEnabled(true);
-                                Toast.makeText(context,"play finished", Toast.LENGTH_LONG).show();
+                              //  Toast.makeText(context,"play finished", Toast.LENGTH_LONG).show();
                             }
                         });
                     }catch (IOException e){
@@ -513,7 +513,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
-                    Toast.makeText(context,"Completed",Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(context,"Completed",Toast.LENGTH_LONG).show();
                     speaker.setEnabled(true);
                     progressBar.setVisibility(View.INVISIBLE);;
                 }

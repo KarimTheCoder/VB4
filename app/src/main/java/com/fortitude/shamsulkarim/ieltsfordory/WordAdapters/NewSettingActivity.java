@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.Credentials;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
@@ -22,12 +23,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -52,6 +55,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import io.fabric.sdk.android.services.common.Crash;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NewSettingActivity extends AppCompatActivity implements View.OnClickListener {
@@ -61,6 +65,8 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private TOEFLWordDatabase toeflWordDatabase;
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
+
+
     private String ADVANCE_FAVORITE,ADVANCE_LEARNED, BEGINNER_FAVORITE, BEGINNER_LEARNED,INTERMEDIATE_FAVORITE,INTERMEDIATE_LEARNED, USER_NAME, GRE_FAVORITE, GRE_LEARNED;
     private List<Integer> savedBeginnerFav, savedAdvanceFav,savedIntermediateFav, savedGreFav;
     private List<Integer> savedIeltsLearned, savedToeflLearned,savedSatLearned, savedGreLearned;
@@ -68,9 +74,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private Toolbar  toolbar;
     private FancyButton save,spanish;
     private Spinner wps, rps,imageQualitySpinner;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     private int wordsPerSession,repeatationPerSession;
     private SharedPreferences sp;
     private SwitchButton soundSwitch, pronunciationSwitch;
@@ -78,7 +81,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private boolean pronunciationState = true;
     private ProgressDialog progressDialog;
     private CheckBox ieltsCheckbox, toeflCheckbox, satCheckbox, greCheckbox;
-    private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
+    private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked,isSignedIn;
     private CardView privacyPolicy;
 
     // google sign in
@@ -102,12 +105,10 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_setting);
 
-        //recyclerView = (RecyclerView)findViewById(R.id.choose_language_setting);
-        //adapter = new LanguageAdapter();
-        //layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,true);
-        //recyclerView.setLayoutManager(layoutManager);
-        //recyclerView.setHasFixedSize(true);
-        //recyclerView.setAdapter(adapter);
+        // This code reports to Crashlytics of connection
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
+        Crashlytics.setBool("Connection Status",connected);
+
         privacyPolicy = findViewById(R.id.privacy_policy_card);
         privacyPolicy.setOnClickListener(this);
 
@@ -141,6 +142,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                         sp.edit().putBoolean("isIELTSActive", false).apply();
+                        Crashlytics.setBool("isIELTSActive",false);
                         Toast.makeText(NewSettingActivity.this, "Ielts unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -154,6 +156,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                     sp.edit().putBoolean("isIELTSActive", true).apply();
+                    Crashlytics.setBool("isIELTSActive",true);
                     Toast.makeText(NewSettingActivity.this, "IELTS checked",Toast.LENGTH_SHORT).show();
 
                 }
@@ -174,11 +177,13 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                         sp.edit().putBoolean("isTOEFLActive", false).apply();
+                        Crashlytics.setBool("isTOEFLActive",false);
                         Toast.makeText(NewSettingActivity.this, "TOEFL unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
                         Toast.makeText(NewSettingActivity.this, "At least select one", Toast.LENGTH_SHORT).show();
                         toeflCheckbox.setChecked(true);
+
 
                     }
 
@@ -189,6 +194,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 }else {
 
                     sp.edit().putBoolean("isTOEFLActive", true).apply();
+                    Crashlytics.setBool("isTOEFLActive",true);
                     Toast.makeText(NewSettingActivity.this, "TOEFL checked",Toast.LENGTH_SHORT).show();
 
 
@@ -208,11 +214,13 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                         sp.edit().putBoolean("isSATActive", false).apply();
+                        Crashlytics.setBool("isSATActive",false);
                         Toast.makeText(NewSettingActivity.this, "SAT unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
                         Toast.makeText(NewSettingActivity.this, "At least select one", Toast.LENGTH_SHORT).show();
                         satCheckbox.setChecked(true);
+
 
                     }
 
@@ -223,6 +231,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                     sp.edit().putBoolean("isSATActive", true).apply();
+                    Crashlytics.setBool("isSATActive",true);
                     Toast.makeText(NewSettingActivity.this, "SAT checked",Toast.LENGTH_SHORT).show();
 
 
@@ -242,6 +251,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                         sp.edit().putBoolean("isGREActive", false).apply();
+                        Crashlytics.setBool("isGREActive",false);
                         Toast.makeText(NewSettingActivity.this, "GRE unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -255,6 +265,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 }else {
 
                     sp.edit().putBoolean("isGREActive", true).apply();
+                    Crashlytics.setBool("isGREActive",true);
                     Toast.makeText(NewSettingActivity.this, "GRE checked",Toast.LENGTH_SHORT).show();
 
 
@@ -324,7 +335,9 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                     wordsPerSession = 5;
+
                     sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+                    Crashlytics.setInt("Words Per Session",wordsPerSession);
 
 
                 }if( i == 1){
@@ -333,12 +346,14 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                     wordsPerSession = 4;
 
                     sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+                    Crashlytics.setInt("Words Per Session",wordsPerSession);
                 }
                 if(i == 2) {
 
 
                     wordsPerSession = 3;
                     sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+                    Crashlytics.setInt("Words Per Session",wordsPerSession);
                 }
             }
 
@@ -360,6 +375,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                     repeatationPerSession = 5;
                     sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+                    Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
 
 
                 }if( i == 1){
@@ -367,11 +383,13 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                     repeatationPerSession = 4;
                     sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+                    Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
                 }if( i == 2){
 
 
                     repeatationPerSession = 3;
                     sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+                    Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
                 }
             }
 
@@ -467,20 +485,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
         // Checking Network Connection
 
-        try{
-            ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-            if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-                //we are connected to a network
-                connected = true;
-            }
-            else{
-                connected = false;
-            }
-        }catch (NullPointerException n){
-            Toast.makeText(this,"Connection failure", Toast.LENGTH_SHORT).show();
-
-        }
+      connected = ConnectivityHelper.isConnectedToNetwork(this);
 
 
         signIn = (FancyButton)findViewById(R.id.ns_sign_in);
@@ -523,93 +528,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
     }
-
-    private void checkboxActions(){
-
-        ieltsCheckbox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(ieltsCheckbox.isChecked()){
-
-                    Toast.makeText(NewSettingActivity.this,"ielst checked", Toast.LENGTH_SHORT).show();
-                }else {
-
-
-                    Toast.makeText(NewSettingActivity.this,"ielst unchecked", Toast.LENGTH_SHORT).show();
-                }
-
-
-
-            }
-        });
-
-
-
-
-    }
-
-
-    private void signIn() {
-
-        if(connected){
-
-            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-            startActivityForResult(signInIntent, RC_SIGN_IN);
-        }else {
-
-            Toast.makeText(this,"Please connect to the internet",Toast.LENGTH_SHORT).show();
-        }
-
-    }
-    private void signOut() {
-        // Firebase sign out
-        mAuth.signOut();
-
-        // Google sign out
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        updateUI(null);
-                    }
-                });
-    }
-
-    private void updateUI(FirebaseUser user) {
-
-
-        if( user != null){
-
-            userName.setText(user.getDisplayName());
-            sp.edit().putString("userName",user.getDisplayName()).apply();
-            userDetail.setText(user.getEmail());
-            signIn.setText("Sign out");
-
-
-
-        }else {
-            userName.setText("");
-            userDetail.setText("Sign in to save your progress");
-            signIn.setText("Sing in");
-        }
-        //  hideProgressDialog();
-//        if (user != null) {
-//            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-//            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-//
-//            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-//            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-//        } else {
-//            mStatusTextView.setText(R.string.signed_out);
-//            mDetailTextView.setText(null);
-//
-//            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-//            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-//        }
-    }
-
-
     private void setSpinner(){
 
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
@@ -703,6 +621,102 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    private void checkboxActions(){
+
+        ieltsCheckbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(ieltsCheckbox.isChecked()){
+
+                    Toast.makeText(NewSettingActivity.this,"ielst checked", Toast.LENGTH_SHORT).show();
+                }else {
+
+
+                    Toast.makeText(NewSettingActivity.this,"ielst unchecked", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+        });
+
+
+
+
+    }
+
+    private void signIn() {
+
+        if(connected){
+
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            Toast.makeText(this,"Signing in initiated",Toast.LENGTH_SHORT).show();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        }else {
+
+            Toast.makeText(this,"Please connect to the internet",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void signOut() {
+        // Firebase sign out
+        mAuth.signOut();
+
+
+        // Google sign out
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        updateUI(null);
+                    }
+                });
+    }
+
+    private void updateUI(FirebaseUser user) {
+
+
+        if( user != null){
+
+            userName.setText(user.getDisplayName());
+            sp.edit().putString("userName",user.getDisplayName()).apply();
+            userDetail.setText(user.getEmail());
+            signIn.setText("Sign out");
+            isSignedIn = true;
+            Crashlytics.setBool("SignIn Status",true);
+            sp.edit().putBoolean("isSignedIn",isSignedIn).apply();
+            Toast.makeText(this,"Successfully signed in.",Toast.LENGTH_LONG).show();
+
+
+
+
+        }else {
+            userName.setText("Doggo");
+            userDetail.setText("Sign in to save your progress");
+            signIn.setText("Sign in");
+            isSignedIn = false;
+            Crashlytics.setBool("SignIn Status",false);
+            sp.edit().putBoolean("isSignedIn",isSignedIn).apply();
+            Toast.makeText(this,"Log in failed.",Toast.LENGTH_LONG).show();
+
+        }
+        //  hideProgressDialog();
+//        if (user != null) {
+//            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
+//            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+//
+//            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+//            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+//        } else {
+//            mStatusTextView.setText(R.string.signed_out);
+//            mDetailTextView.setText(null);
+//
+//            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+//            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+//        }
+    }
 
 
     @Override
@@ -1285,7 +1299,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     }
 
     // Google Sign in methods
-
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
@@ -1326,8 +1339,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 });
     }
 
-
-
     //    @Override
     public void onClick(View v) {
 //
@@ -1336,8 +1347,11 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             if(switchState){
                 switchState = false;
                 sp.edit().putBoolean("soundState",false).apply();
+                Crashlytics.setBool("Sound Status",false);
+
             }else {
                 switchState = true;
+                Crashlytics.setBool("Sound Status",true);
                 sp.edit().putBoolean("soundState",true).apply();
             }
 
@@ -1399,10 +1413,20 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onStart() {
         super.onStart();
+
+        if( mAuth.getCurrentUser() != null){
+            Crashlytics.setBool("SignIn Status",true);
+        }else{
+            Crashlytics.setBool("SignIn Status",false);
+        }
+        sp.edit().putBoolean("isSignedIn",isSignedIn).apply();
+
+       // Toast.makeText(this,"Is signed in: "+isSignedIn,Toast.LENGTH_LONG).show();
         // Check if user is signed in (non-null) and update UI accordingly.
         if (mAuth.getCurrentUser() !=null){
             FirebaseUser currentUser = mAuth.getCurrentUser();
             updateUI(currentUser);
+
         }
 
     }

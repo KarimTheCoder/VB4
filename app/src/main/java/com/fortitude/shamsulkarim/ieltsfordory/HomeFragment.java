@@ -11,12 +11,15 @@ import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +62,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         View v = inflater.inflate(R.layout.home_fragment,container,false);
         sp = v.getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
+        if(!sp.contains("home")){
+            sp.edit().putBoolean("home",true).apply();
+        }
+
+
+
+        // This code reports to Crashlytics of connection
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
+        Crashlytics.setBool("Connection Status",connected);
+
         initialization();
         addingLearnedDatabase();
 
@@ -97,7 +110,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         if(v == advanceCard){
 
             sp.edit().putString("level","advance").apply();
-            v.getContext().startActivity(new Intent(v.getContext(), StartTrainingActivity.class));
+            v.getContext().startActivity(new Intent(v.getContext(), PretrainActivity.class));
 
 
         }
@@ -105,7 +118,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         if(v ==intermediateCard){
 
             sp.edit().putString("level","intermediate").apply();
-            v.getContext().startActivity(new Intent(v.getContext(), StartTrainingActivity.class));
+            v.getContext().startActivity(new Intent(v.getContext(), PretrainActivity.class));
 
 
         }
@@ -113,7 +126,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         if(v == beginnerCard){
 
             sp.edit().putString("level","beginner").apply();
-            v.getContext().startActivity(new Intent(v.getContext(), StartTrainingActivity.class));
+            v.getContext().startActivity(new Intent(v.getContext(), PretrainActivity.class));
 
 
         }
@@ -318,9 +331,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             addGREwords(GREintermediateNumber+GREbeginnerNumber,GREwordSize);
 
             i = (int)IELTSbeginnerNumber+(int)TOEFLbeginnerNumber+(int)SATbeginnerNumber+(int)GREbeginnerNumber;
+
             learned = i-words.size();
             learnedCount =+ (int)learned;
             percentage = (learned*100)/i;
+
+
+         //   Toast.makeText(getContext(),"percentage: "+percentage+ " i: "+i,Toast.LENGTH_LONG).show();
 
             advancePie.setMaxPercentage(100);
             advancePie.setPercentage(percentage);

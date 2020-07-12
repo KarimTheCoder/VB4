@@ -32,6 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.crashlytics.android.Crashlytics;
+import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -40,6 +42,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewTrainRecyclerView;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Wave;
@@ -134,12 +137,20 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
             setContentView(R.layout.activity_new_train);
+
+        // This code reports to Crashlytics of connection
+        boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
+        Crashlytics.setBool("Connection Status",connected);
 //
 //            this.startActivity(new Intent(this, PracticeFinished.class));
 //            this.finish();
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/6656734197xxx");
-        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
+
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+        }
+
 
 
 
@@ -153,8 +164,22 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         addFavoriteWord();
 
         addingNewWords();
-        showWords(showCycle);
 
+//        if(true){
+//            answerCard1.setVisibility(View.VISIBLE);
+//            answerCard2.setVisibility(View.VISIBLE);
+//            answerCard3.setVisibility(View.VISIBLE);
+//            answerCard4.setVisibility(View.VISIBLE);
+//
+//            fab.setVisibility(View.INVISIBLE);
+//
+//            quizWords(quizCycle, fab);
+//
+//        }else {
+//            showWords(showCycle);
+//        }
+
+        showWords(showCycle);
 
         mistakeCollector = new int[fiveWords.size()];
         sp.edit().putInt("favoriteWordCount",fiveWords.size()).apply();
@@ -295,6 +320,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
     private void showWords(int showCycle){
 
+
         Handler handler = new Handler();
 
         if( showCycle < FIVE_WORD_SIZE){
@@ -305,8 +331,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                 String combineBothLanguage = fiveWords.get(showCycle).getWord()+"\n"+fiveWords.get(showCycle).getWordSL();
                 final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
                 SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
-                spanWord.setSpan(lowColor,fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                spanWord.setSpan(new RelativeSizeSpan(0.4f), fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+             //   Toast.makeText(this, "Word length: "+fiveWords.get(showCycle).getWordSL(), Toast.LENGTH_LONG).show();
+               spanWord.setSpan(lowColor,fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+               spanWord.setSpan(new RelativeSizeSpan(0.4f), fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 wordView.setText(spanWord);
 
             }else {
@@ -332,13 +361,20 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             recyclerView.setAdapter(adapter);
             this.showCycle++;
             progress1.setProgress(quizCycle+showCycle);
+        }else {
+
+            answerCard1.setVisibility(View.VISIBLE);
+            answerCard2.setVisibility(View.VISIBLE);
+            answerCard3.setVisibility(View.VISIBLE);
+            answerCard4.setVisibility(View.VISIBLE);
+            quizWords(quizCycle, fab);
         }
 
 
 
     }
 
-    //--------- Quizing
+    //--------- Quizzing
 
     private void quizWords(int quizCycle, View v){
 
@@ -356,7 +392,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             answerCard3.setVisibility(View.VISIBLE);
             answerCard4.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.INVISIBLE);
-            speak.setVisibility(View.VISIBLE);
+            speak.setVisibility(View.INVISIBLE);
             fab.animate().scaleX(0f).scaleY(0f).setDuration(350L).setInterpolator(new AnticipateOvershootInterpolator());
 
 
@@ -722,6 +758,10 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+
+        // if true this will set showCycle to maximum and skip definition session
+
+
         wordsPerSession = sp.getInt("wordsPerSession",5);
         repeatPerSession = sp.getInt("repeatationPerSession",5);
 
@@ -815,8 +855,16 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             for(int i = 0; i < fiveWords.size(); i++){
 
                 fiveWords.get(i).setSeen(false);
+
+
+            }
+
+            if(true){
+                showCycle = fiveWords.size();
             }
         }
+
+
 
         if(practice.equalsIgnoreCase("learned")){
             getLearnedWords();
@@ -898,8 +946,10 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         answerCard4.setVisibility(View.INVISIBLE);
         speak.setVisibility(View.INVISIBLE);
         wordView.setVisibility(View.VISIBLE);
+
         wordView.setText(fiveWords.get(quizCycle).getWord());
     //    wordViewMiddle.setText(fiveWords.get(quizCycle).getWord());
+
 
         DefExamAnimation();
         adapter = new NewTrainRecyclerView(this,fiveWords.get(quizCycle));
@@ -1091,6 +1141,14 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         String[] beginnerExampleArray2 = getResources().getStringArray(R.array.IELTS_example2);
         String[] beginnerExampleArray3 = getResources().getStringArray(R.array.IELTS_example3);
 
+//        Toast.makeText(this,"IELTS: "+beginnerWordArray.length
+//                +"\nIELTS trans:"+beginnerTranslationArray.length
+//                +"\nIELTS pron:"+beginnerPronunciationArray.length
+//                +"\nIELTS gram:"+beginnerGrammarArray.length
+//                +"\nIELTS ex1:"+beginnerExampleArray1.length
+//                +"\nIELTS ex2:"+beginnerExampleArray2.length
+//                +"\nIELTS ex3:"+beginnerExampleArray3.length,Toast.LENGTH_LONG).show();
+
         String[] intermediateWordArray = getResources().getStringArray(R.array.TOEFL_words);
         String[] intermediateTranslationArray = getResources().getStringArray(R.array.TOEFL_translation);
         String[] intermediatePronunciationArray = getResources().getStringArray(R.array.TOEFL_pronunciation);
@@ -1098,6 +1156,14 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         String[] intermediateExampleArray1 = getResources().getStringArray(R.array.TOEFL_example1);
         String[] intermediateExampleArray2 = getResources().getStringArray(R.array.TOEFL_example2);
         String[] intermediateExampleArray3 = getResources().getStringArray(R.array.TOEFL_example3);
+
+//        Toast.makeText(this,"TOEFL: "+intermediateWordArray.length
+//                +"\nTOEFL trans:"+intermediateTranslationArray.length
+//                +"\nTOEFL pron:"+intermediatePronunciationArray.length
+//                +"\nTOEFL gram:"+intermediateGrammarArray.length
+//                +"\nTOEFL ex1:"+intermediateExampleArray1.length
+//                +"\nTOEFL ex2:"+intermediateExampleArray2.length
+//                +"\nTOEFL ex3:"+intermediateExampleArray3.length,Toast.LENGTH_LONG).show();
 
         String[] advanceWordArray = getResources().getStringArray(R.array.SAT_words);
         String[] advanceTranslationArray = getResources().getStringArray(R.array.SAT_translation);
@@ -1107,6 +1173,14 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         String[] advanceExampleArray2 = getResources().getStringArray(R.array.SAT_example2);
         String[] advanceExampleArray3 = getResources().getStringArray(R.array.SAT_example3);
 
+//        Toast.makeText(this,"SAT: "+advanceWordArray.length
+//                +"\nSAT trans:"+advanceTranslationArray.length
+//                +"\nSAT pron:"+advancePronunciationArray.length
+//                +"\nSAT gram:"+advanceGrammarArray.length
+//                +"\nSAT ex1:"+advanceExampleArray1.length
+//                +"\nSAT ex2:"+advanceExampleArray2.length
+//                +"\nSAT ex3:"+advanceExampleArray3.length,Toast.LENGTH_LONG).show();
+
         String[] greWordArray = getResources().getStringArray(R.array.GRE_words);
         String[] greTranslationArray = getResources().getStringArray(R.array.GRE_translation);
         String[] grePronunciationArray = getResources().getStringArray(R.array.GRE_pronunciation);
@@ -1115,6 +1189,13 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         String[] greExampleArray2 = getResources().getStringArray(R.array.GRE_example2);
         String[] greExampleArray3 = getResources().getStringArray(R.array.GRE_example3);
 
+//        Toast.makeText(this,"GRE: "+greWordArray.length
+//                +"\nGRE trans:"+greTranslationArray.length
+//                +"\nGRE pron:"+grePronunciationArray.length
+//                +"\nGRE gram:"+greGrammarArray.length
+//                +"\nGRE ex1:"+greExampleArray1.length
+//                +"\nGRE ex2:"+greExampleArray2.length
+//                +"\nGRE ex3:"+greExampleArray3.length,Toast.LENGTH_LONG).show();
 
         for(int i = 0; i < aWordSize; i++){
 
@@ -1587,10 +1668,13 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     }
 
     private  void addIELTSwords(int startPoint,int IELTSbeginnerNumber){
-        Toast.makeText(this,"Practice",Toast.LENGTH_LONG).show();
-        Toast.makeText(this,IELTSexample1arraySL[0]+": "+secondLanguage,Toast.LENGTH_LONG).show();
+
+
+
+
 
         if(isIeltsChecked){
+
             for(int i = (int) startPoint; i < IELTSbeginnerNumber; i++){
 
 
@@ -1601,7 +1685,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
                     if(!secondLanguage.equalsIgnoreCase("english")){
-
+                //        Toast.makeText(this,"added to newWord",Toast.LENGTH_LONG).show();
 
                         newWord.setWordSL(IELTSwordsArraySL[i]);
                         newWord.setTranslationSL(IELTStranslationArraySL[i]);
@@ -1633,7 +1717,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
     private  void addTOEFLwords(int startPoint, int TOEFLbeginnerNumber){
 
-        Toast.makeText(this,IELTSexample1arraySL[0]+": "+secondLanguage,Toast.LENGTH_LONG).show();
+//        Toast.makeText(this,IELTSexample1arraySL[0]+": "+secondLanguage,Toast.LENGTH_LONG).show();
 
         if(isToeflChecked){
 
@@ -1644,9 +1728,30 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                 if( TOEFLlearnedDatabase.get(i).equalsIgnoreCase("true")) {
 
 
+                    Word newWord = new Word(TOEFLwordArray[i], TOEFLtranslationArray[i], "", TOEFLpronunArray[i], TOEFLgrammarArray[i], TOEFLexample1array[i], TOEFLexample2Array[i], TOEFLexample3Array[i], TOEFLvocabularyType[i], TOEFLposition[i], TOEFLlearnedDatabase.get(i),toeflFavPosition.get(i));
+
+                    if(!secondLanguage.equalsIgnoreCase("english")){
+
+                        newWord.setWordSL(TOEFLwordArraySL[i]);
+                        newWord.setTranslationSL(TOEFLtranslationArraySL[i]);
+                        newWord.setExample1SL(TOEFLexample1ArraySL[i]);
+                        newWord.setExample2SL(TOEFLexample2ArraySL[i]);
+                        newWord.setExample3SL(TOEFLexample3ArraySL[i]);
 
 
-                    fiveWords.add(new Word(TOEFLwordArray[i], TOEFLtranslationArray[i], "", TOEFLpronunArray[i], TOEFLgrammarArray[i], TOEFLexample1array[i], TOEFLexample2Array[i], TOEFLexample3Array[i], TOEFLvocabularyType[i], TOEFLposition[i], TOEFLlearnedDatabase.get(i),toeflFavPosition.get(i)));
+                    }else {
+
+                        newWord.setWordSL("");
+                        newWord.setTranslationSL("");
+                        newWord.setExample1SL("");
+                        newWord.setExample2SL("");
+                        newWord.setExample3SL("");
+
+                    }
+
+
+                    fiveWords.add(newWord);
+
 
 
                 }
@@ -1660,7 +1765,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private void addSATwords (int startPoint ,int SATbeginnerNumber){
 
 
-        Toast.makeText(this,IELTSexample1arraySL[0]+": "+secondLanguage,Toast.LENGTH_LONG).show();
+       // Toast.makeText(this,IELTSexample1arraySL[0]+": "+secondLanguage,Toast.LENGTH_LONG).show();
 
         if(isSatChecked){
 
@@ -1669,7 +1774,30 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
                 if( SATlearnedDatabase.get(i).equalsIgnoreCase("true")) {
 
-                    fiveWords.add(new Word(SATwordArray[i], SATtranslationArray[i], "", SATpronunArray[i], SATgrammarArray[i], SATexample1array[i], SATexample2Array[i], SATexample3Array[i], SATvocabularyType[i], SATposition[i], SATlearnedDatabase.get(i),satFavPosition.get(i)));
+                    Word newWord = new Word(SATwordArray[i], SATtranslationArray[i], "", SATpronunArray[i], SATgrammarArray[i], SATexample1array[i], SATexample2Array[i], SATexample3Array[i], SATvocabularyType[i], SATposition[i], SATlearnedDatabase.get(i),satFavPosition.get(i));
+
+
+                    if(!secondLanguage.equalsIgnoreCase("english")){
+
+                        newWord.setWordSL(SATwordArraySL[i]);
+                        newWord.setTranslationSL(SATtranslationArraySL[i]);
+                        newWord.setExample1SL(SATexample1ArraySL[i]);
+                        newWord.setExample2SL(SATexample2ArraySL[i]);
+                        newWord.setExample3SL(SATexample3ArraySL[i]);
+
+
+                    }else {
+
+                        newWord.setWordSL("");
+                        newWord.setTranslationSL("");
+                        newWord.setExample1SL("");
+                        newWord.setExample2SL("");
+                        newWord.setExample3SL("");
+
+                    }
+
+
+                    fiveWords.add(newWord);
 
                 }
 
@@ -1686,7 +1814,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private void addGREwords (int startPoint ,int SATbeginnerNumber){
 
 
-        Toast.makeText(this,IELTSexample1arraySL[0]+": "+secondLanguage,Toast.LENGTH_LONG).show();
+     //   Toast.makeText(this,IELTSexample1arraySL[0]+": "+secondLanguage,Toast.LENGTH_LONG).show();
         if(isGreChecked){
 
             for(int i = (int) startPoint; i < SATbeginnerNumber; i++){
@@ -1695,7 +1823,30 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
                 if( GRElearnedDatabase.get(i).equalsIgnoreCase("true")) {
 
-                    fiveWords.add(new Word(GREwordArray[i], GREtranslationArray[i],"", GREpronunArray[i], GREgrammarArray[i], GREexample1array[i], GREexample2array[i], GREexample3Array[i],GREvocabularyType[i],GREposition[i], GRElearnedDatabase.get(i),greFavPosition.get(i)));
+                    Word newWord = new Word(GREwordArray[i], GREtranslationArray[i],"", GREpronunArray[i], GREgrammarArray[i], GREexample1array[i], GREexample2array[i], GREexample3Array[i],GREvocabularyType[i],GREposition[i], GRElearnedDatabase.get(i),greFavPosition.get(i));
+
+                    if(!secondLanguage.equalsIgnoreCase("english")){
+
+                        newWord.setWordSL(GREwordArraySL[i]);
+                        newWord.setTranslationSL(GREtranslationArraySL[i]);
+                        newWord.setExample1SL(GREexample1ArraySL[i]);
+                        newWord.setExample2SL(GREexample2ArraySL[i]);
+                        newWord.setExample3SL(GREexample3ArraySL[i]);
+
+
+                    }else {
+
+                        newWord.setWordSL("");
+                        newWord.setTranslationSL("");
+                        newWord.setExample1SL("");
+                        newWord.setExample2SL("");
+                        newWord.setExample3SL("");
+
+                    }
+
+
+                    fiveWords.add(newWord);
+
                 }
 
             }
@@ -1760,6 +1911,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         if(!secondLanguage.equalsIgnoreCase("english")){
 
             //This method initializes Spanish translation resources.
+           // Toast.makeText(this,"Spanish translation init",Toast.LENGTH_LONG).show();
             addSpanishTranslation();
         }
 
@@ -1864,6 +2016,8 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         IELTSexample1arraySL = getResources().getStringArray(R.array.IELTS_example1_sp);
         IELTSexample2ArraySL = getResources().getStringArray(R.array.IELTS_example2_sp);
         IELTSexample3ArraySL = getResources().getStringArray(R.array.IELTS_example3_sp);
+
+
 
         //TOEFL Second Language Arrays
         TOEFLwordArraySL = getResources().getStringArray(R.array.TOEFL_words_sp);

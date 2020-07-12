@@ -17,10 +17,12 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
+import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,10 @@ public class NewWordFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_new_word,container,false);
+
+        // This code reports to Crashlytics of connection
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
+        Crashlytics.setBool("Connection Status",connected);
 
         sp = getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         gettingResources();
@@ -168,6 +174,7 @@ public class NewWordFragment extends Fragment {
                             recyclerView.setLayoutManager(layoutManager);
                             recyclerView.setHasFixedSize(true);
                             getBeginnerWordData();
+                            Crashlytics.setString("Word Fragment","Beginner");
 
                         }
                         if (i == 1) {
@@ -180,6 +187,7 @@ public class NewWordFragment extends Fragment {
                             recyclerView.setLayoutManager(layoutManager);
                             recyclerView.setHasFixedSize(true);
                             getIntermediateWordData();
+                            Crashlytics.setString("Word Fragment","Intermediate");
                         }
 
                         if (i == 2) {
@@ -191,6 +199,7 @@ public class NewWordFragment extends Fragment {
                             recyclerView.setLayoutManager(layoutManager);
                             recyclerView.setHasFixedSize(true);
                             getAdvanceWordData();
+                            Crashlytics.setString("Word Fragment","Advance");
                         }
                     }
 

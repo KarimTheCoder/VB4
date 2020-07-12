@@ -13,7 +13,10 @@
         android:id="@+id/top_background"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:background="@drawable/gradient"></View>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/gradient" />
 
 
     <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
@@ -92,7 +95,7 @@
                     android:layout_height="wrap_content"
                     app:fab_colorPressed="@color/colorPrimaryDark"
                     app:fab_colorNormal="@color/colorPrimary"
-
+                    app:fab_label="Next"
                     android:layout_marginEnd="16dp"
                     android:foregroundGravity="center"
 

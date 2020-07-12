@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: de.cketti.mailto:email-intent-builder:2.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e199adb2b6f5f8c78b17a20692228d95/jetified-email-intent-builder-2.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e199adb2b6f5f8c78b17a20692228d95/jetified-email-intent-builder-2.0.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.cketti.mailto/email-intent-builder/2.0.0/1d7dd384d4a78fafd8328d89a538f0cb6e453239/email-intent-builder-2.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.cketti.mailto/email-intent-builder/2.0.0/b6b0cc11b10984714703824d9c1aad8ad90c66d1/email-intent-builder-2.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

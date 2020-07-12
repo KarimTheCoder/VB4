@@ -16,6 +16,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
@@ -357,7 +358,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
                 } else {
                     //Show disconnected screen
-                    //Toast.makeText(context,"Not connected",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"not connected",Toast.LENGTH_LONG).show();
                     tts.setLanguage(Locale.US);
                     tts.speak(wordName, TextToSpeech.QUEUE_ADD, null);
                 }

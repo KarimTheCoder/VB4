@@ -34,7 +34,11 @@
                 app:titleTextColor="@color/lowColor"
                 app:title="Beginner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></androidx.appcompat.widget.Toolbar>
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
 
 
             <View
@@ -42,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@drawable/dropshadow"
-                app:layout_constraintTop_toBottomOf="@+id/start_training_toolbar"></View>
+                app:layout_constraintTop_toBottomOf="@+id/start_training_toolbar" />
 
 
             <androidx.cardview.widget.CardView

@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
-
+import com.crashlytics.android.Crashlytics;
 import com.fortitude.apps.vocabularybuilder.ChooseLanguageActivity;
-
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class ChooseVocabulary extends AppCompatActivity {
@@ -27,14 +27,17 @@ public class ChooseVocabulary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_vocabulary);
 
+        // This code reports to Crashlytics of connection
+        checkInternetConnection();
 
 
 
 
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-        if(sp.contains("isIELTSActive")){
+        if(sp.contains("home")){
 
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
 
         }else{
 
@@ -44,23 +47,11 @@ public class ChooseVocabulary extends AppCompatActivity {
                 public void onClick(View v) {
 
                     startActivity(new Intent(ChooseVocabulary.this, ChooseLanguageActivity.class));
-
+                    finish();
 
                 }
             });
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -84,7 +75,7 @@ public class ChooseVocabulary extends AppCompatActivity {
 
 
 
-        if(!sp.contains("isIELTSActive")){
+        if(!sp.contains("home")){
 
             sp.edit().putBoolean("isIELTSActive",true).apply();
             sp.edit().putBoolean("isTOEFLActive",true).apply();
@@ -99,6 +90,12 @@ public class ChooseVocabulary extends AppCompatActivity {
         isToeflChecked = sp.getBoolean("isTOEFLActive", true);
         isSatChecked =   sp.getBoolean("isSATActive", true);
         isGreChecked =   sp.getBoolean("isGREActive",true);
+
+
+        Crashlytics.setBool("isIELTSActive",true);
+        Crashlytics.setBool("isTOEFLActive",true);
+        Crashlytics.setBool("isSATActive",true);
+        Crashlytics.setBool("isGREActive",true);
 
 
 
@@ -128,11 +125,13 @@ public class ChooseVocabulary extends AppCompatActivity {
 
 
                         sp.edit().putBoolean("isIELTSActive", false).apply();
+                        Crashlytics.setBool("isIELTSActive",false);
                         Toast.makeText(ChooseVocabulary.this, "Ielts unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
                         Toast.makeText(ChooseVocabulary.this, "At least select one", Toast.LENGTH_SHORT).show();
                         ieltsCheckbox.setChecked(true);
+
 
                     }
 
@@ -141,6 +140,7 @@ public class ChooseVocabulary extends AppCompatActivity {
 
 
                     sp.edit().putBoolean("isIELTSActive", true).apply();
+                    Crashlytics.setBool("isIELTSActive",true);
                     Toast.makeText(ChooseVocabulary.this, "IELTS checked",Toast.LENGTH_SHORT).show();
 
                 }
@@ -161,6 +161,7 @@ public class ChooseVocabulary extends AppCompatActivity {
 
 
                         sp.edit().putBoolean("isTOEFLActive", false).apply();
+                        Crashlytics.setBool("isTOEFLActive",false);
                         Toast.makeText(ChooseVocabulary.this, "TOEFL unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -176,6 +177,7 @@ public class ChooseVocabulary extends AppCompatActivity {
                 }else {
 
                     sp.edit().putBoolean("isTOEFLActive", true).apply();
+                    Crashlytics.setBool("isTOEFLActive",true);
                     Toast.makeText(ChooseVocabulary.this, "TOEFL checked",Toast.LENGTH_SHORT).show();
 
 
@@ -195,6 +197,7 @@ public class ChooseVocabulary extends AppCompatActivity {
 
 
                         sp.edit().putBoolean("isSATActive", false).apply();
+                        Crashlytics.setBool("isSATActive",false);
                         Toast.makeText(ChooseVocabulary.this, "SAT unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -210,6 +213,7 @@ public class ChooseVocabulary extends AppCompatActivity {
 
 
                     sp.edit().putBoolean("isSATActive", true).apply();
+                    Crashlytics.setBool("isSATActive",true);
                     Toast.makeText(ChooseVocabulary.this, "SAT checked",Toast.LENGTH_SHORT).show();
 
 
@@ -229,6 +233,7 @@ public class ChooseVocabulary extends AppCompatActivity {
 
 
                         sp.edit().putBoolean("isGREActive", false).apply();
+                        Crashlytics.setBool("isGREActive",false);
                         Toast.makeText(ChooseVocabulary.this, "GRE unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -242,6 +247,7 @@ public class ChooseVocabulary extends AppCompatActivity {
                 }else {
 
                     sp.edit().putBoolean("isGREActive", true).apply();
+                    Crashlytics.setBool("isGREActive",true);
                     Toast.makeText(ChooseVocabulary.this, "GRE checked",Toast.LENGTH_SHORT).show();
 
 
@@ -253,6 +259,16 @@ public class ChooseVocabulary extends AppCompatActivity {
 
     }
 
+
+
+
+
+
+    // This method Checks internet connection and reports to Crashlytics
+    private void checkInternetConnection(){
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
+        Crashlytics.setBool("Connection Status",connected);
+    }
 
 
 }

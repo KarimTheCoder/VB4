@@ -3,16 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.fortitude.shamsulkarim.ieltsfordory">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        tools:node="remove" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.fortitude.apps.vocabularybuilder.ChooseLanguageActivity">
+        <activity android:name=".PretrainActivity" />
+        <activity android:name="com.fortitude.apps.vocabularybuilder.ChooseLanguageActivity" />
+        <activity android:name=".SplashScreen">
 
         </activity>
-        <activity android:name=".SplashScreen"></activity>
         <activity android:name=".StartTrainingActivity" />
         <activity android:name=".NoWordLeft" />
         <activity android:name=".MainActivity" />
@@ -22,27 +29,25 @@
         <activity android:name=".Practice.PracticeFinished" />
         <activity android:name=".WordAdapters.NewSettingActivity" />
         <activity android:name=".ChooseLanguageActivity" /> <!-- Register the Alarm Receiver -->
-        <activity android:name=".ChooseVocabulary">
-
+        <activity android:name=".ChooseVocabulary" />
+        <activity android:name=".AppLauncher" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
-
-        <activity android:name=".AppLauncher"></activity>
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="92bbc6255603d1a30b14cb34e5b1554e6a6adb76" />
-
+            android:resource="@array/preloaded_fonts" /> <!-- <meta-data -->
+        <!-- android:name="io.fabric.ApiKey" -->
+        <!-- android:value="92bbc6255603d1a30b14cb34e5b1554e6a6adb76" /> -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7815894766256601~5016349461" />
+
         <receiver
             android:name=".notification.AlarmReceiver"
             android:enabled="false">
@@ -51,11 +56,5 @@
             </intent-filter>
         </receiver>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-    <uses-permission
-        android:name="android.permission.READ_PHONE_STATE"
-        tools:node="remove" />
 
 </manifest>

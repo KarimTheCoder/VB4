@@ -8,7 +8,6 @@
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewSettingActivity">
 
 
-
     <androidx.appcompat.widget.Toolbar
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -19,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="0dp"
-        android:id="@+id/ns_toolbar"></androidx.appcompat.widget.Toolbar>
+        android:id="@+id/ns_toolbar" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -37,7 +36,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/ns_save"
             android:layout_marginRight="0dp"
@@ -59,7 +58,7 @@
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+                >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -114,7 +113,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="TOEFL"
+                        android:text="@string/TOEFL"
                         android:textColor="@color/bottomColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/toefl_checkbox"
@@ -131,7 +130,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="IELTS"
+                        android:text="@string/IELTS"
                         android:textColor="@color/bottomColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/ielts_checkbox"
@@ -147,7 +146,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="SAT"
+                        android:text="@string/SAT"
                         android:textColor="@color/bottomColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/sat_checkbox"
@@ -163,7 +162,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/productreg"
-                        android:text="Choose preferred vocabulary"
+                        android:text="@string/Choose_preferred_vocabulary"
                         android:textColor="@color/topColor"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +179,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="GRE"
+                        android:text="@string/GRE"
                         android:textColor="@color/bottomColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/gre_checkbox"
@@ -195,7 +194,7 @@
                         android:layout_marginLeft="2dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
-                        android:text="Uncheck IELTS and TOEFL to see more difficult words."
+                        android:text="@string/for_more_difficult_words"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView5"
                         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -234,7 +233,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
-                        android:text="Tap to choose a translation language"
+                        android:text="@string/tap_to_choose_translation"
                         android:textColor="@color/topColor"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -250,7 +249,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
-                        android:text="Translated by native speakers. Please don't be upset if you don't see your language here. Lack of fund has been the main reason we aren't not able to add more translations. Please use the pro version of the app if you would like to help us. "
+                        android:text="@string/tap_to_choose_description"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/choose_language_header" />
@@ -280,7 +279,6 @@
                             android:layout_marginRight="16dp"
                             android:layout_marginBottom="8dp"
                             android:elevation="2dp"
-
                             android:paddingStart="20dp"
                             android:paddingTop="10dp"
                             android:paddingEnd="20dp"
@@ -294,7 +292,8 @@
                             fancy:fb_focusColor="@color/colorPrimary"
                             fancy:fb_radius="30dp"
                             fancy:fb_text="Spanish"
-                            fancy:fb_textColor="#ffffff"></mehdi.sakout.fancybuttons.FancyButton>
+                            fancy:fb_textColor="#ffffff"
+                            tools:targetApi="lollipop" />
 
 
                     </ScrollView>
@@ -331,7 +330,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/productreg"
-                        android:text="Doggo"
+                        android:text="@string/doggo"
                         android:textColor="@color/topColor"
                         android:textSize="18sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -346,7 +345,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/productreg"
-                        android:text="Sign in to save your progress"
+                        android:text="@string/sign_in_description"
                         android:textColor="@color/lowColor"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -355,15 +354,12 @@
                     <mehdi.sakout.fancybuttons.FancyButton
                         android:id="@+id/ns_sign_in"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:layout_marginTop="8dp"
-
-
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="8dp"
                         android:elevation="2dp"
-
                         android:paddingStart="20dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="20dp"
@@ -377,7 +373,8 @@
                         fancy:fb_focusColor="@color/colorPrimary"
                         fancy:fb_radius="30dp"
                         fancy:fb_text="Sign in"
-                        fancy:fb_textColor="@color/colorPrimary"></mehdi.sakout.fancybuttons.FancyButton>
+                        fancy:fb_textColor="@color/colorPrimary"
+                        tools:targetApi="lollipop" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -415,7 +412,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"></View>
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
@@ -425,38 +422,42 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="Words per session"
+                        android:text="@string/Wps_title"
                         android:textColor="@color/topColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@+id/view10"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="16dp" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="1dp"
                         android:fontFamily="@font/productreg"
-                        android:text="Choose how many words you want to learn per seesion"
+                        android:text="@string/wps_description"
 
                         android:textColor="@color/lowColor"
                         android:textSize="12sp"
                         app:layout_constraintLeft_toLeftOf="@+id/textView4"
                         app:layout_constraintRight_toLeftOf="@+id/wps_spinner"
-                        app:layout_constraintTop_toBottomOf="@+id/view10" />
+                        app:layout_constraintTop_toBottomOf="@+id/view10"
+                        android:layout_marginEnd="1dp" />
 
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/wps_spinner"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="8dp"
+                        android:gravity="center"
                         android:entries="@array/words_per_session_array"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.AppCompatSpinner>
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="16dp" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -489,12 +490,13 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="Repeat per session"
+                        android:text="@string/rps_title"
                         android:textColor="@color/topColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@+id/view1"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="16dp" />
 
 
                     <TextView
@@ -504,12 +506,13 @@
                         android:layout_marginRight="1dp"
 
                         android:fontFamily="@font/productreg"
-                        android:text="Choose how many times you want a word to be repeated"
+                        android:text="@string/rps_description"
                         android:textColor="@color/lowColor"
                         android:textSize="12sp"
                         app:layout_constraintLeft_toLeftOf="@+id/wps"
                         app:layout_constraintRight_toLeftOf="@+id/profile_wps_spinner"
-                        app:layout_constraintTop_toBottomOf="@+id/view1" />
+                        app:layout_constraintTop_toBottomOf="@+id/view1"
+                        android:layout_marginEnd="1dp" />
 
                     <View
                         android:id="@+id/view1"
@@ -522,21 +525,23 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"></View>
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/profile_wps_spinner"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="8dp"
+                        android:gravity="center"
                         android:entries="@array/words_per_session_array"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.45"></androidx.appcompat.widget.AppCompatSpinner>
+                        app:layout_constraintVertical_bias="0.45"
+                        android:layout_marginEnd="16dp" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -575,7 +580,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"></View>
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
@@ -585,38 +590,40 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="Sound of quiz session"
+                        android:text="@string/sound_of_quiz_session"
                         android:textColor="@color/topColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@+id/view4"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="16dp" />
 
                     <TextView
                         android:id="@+id/wps_explain4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
-
                         android:fontFamily="@font/productreg"
-                        android:text="Turn off or on sound of the quiz sessions here"
+                        android:text="@string/sound_of_quiz_session_subtitle"
                         android:textColor="@color/lowColor"
                         android:textSize="12sp"
                         app:layout_constraintLeft_toLeftOf="@+id/wpsd"
                         app:layout_constraintRight_toLeftOf="@+id/sound_switch"
-                        app:layout_constraintTop_toBottomOf="@+id/view4" />
+                        app:layout_constraintTop_toBottomOf="@+id/view4"
+                        android:layout_marginEnd="8dp" />
 
                     <com.kyleduo.switchbutton.SwitchButton
                         android:id="@+id/sound_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="80dp"
+                        android:layout_height="48dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="8dp"
                         android:checked="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="16dp" />
 
 
 
@@ -666,11 +673,12 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="Pronunciation"
+                        android:text="@string/pronunciation_title"
                         android:textColor="@color/topColor"
                         android:textSize="24sp"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="16dp" />
 
                     <TextView
                         android:id="@+id/pronun_explain4"
@@ -680,26 +688,27 @@
                         android:fontFamily="@font/productreg"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
-
-                        android:text="Turn on to use real human pronunciation(internet required) or turn off to use text-to-speech engine(no internet required)"
+                        android:text="@string/pronunciation_description"
                         android:textColor="@color/lowColor"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="@+id/textPronun"
                         app:layout_constraintRight_toLeftOf="@+id/pronun_switch"
-                        app:layout_constraintTop_toBottomOf="@+id/textPronun" />
+                        app:layout_constraintTop_toBottomOf="@+id/textPronun"
+                        android:layout_marginEnd="8dp" />
 
                     <com.kyleduo.switchbutton.SwitchButton
                         android:id="@+id/pronun_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="80dp"
+                        android:layout_height="48dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="8dp"
                         android:checked="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="16dp" />
 
 
 
@@ -736,7 +745,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/productreg"
-                        android:text="Privacy policy"
+                        android:text="@string/privacy_policy_title"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -773,7 +782,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"></View>
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
@@ -783,12 +792,13 @@
                         android:layout_marginBottom="0dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="Image quality"
+                        android:text="@string/image_quality_title"
                         android:textColor="#000"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@+id/viewi"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="8dp" />
 
                     <TextView
                         android:id="@+id/image_quality_subtitle"
@@ -798,11 +808,13 @@
                         android:layout_marginRight="1dp"
 
                         android:layout_marginTop="0dp"
-                        android:text="Choose image quality that suits best for your device"
+                        android:text="@string/image_quality_description"
                         android:textSize="12sp"
                         app:layout_constraintLeft_toLeftOf="@+id/image_quality_title"
                         app:layout_constraintRight_toLeftOf="@+id/image_quality_spinner"
-                        app:layout_constraintTop_toBottomOf="@+id/viewi" />
+                        app:layout_constraintTop_toBottomOf="@+id/viewi"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="1dp" />
 
 
                     <androidx.appcompat.widget.AppCompatSpinner
@@ -816,7 +828,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.45"></androidx.appcompat.widget.AppCompatSpinner>
+                        app:layout_constraintVertical_bias="0.45"
+                        android:layout_marginEnd="8dp" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -835,11 +848,6 @@
     </ScrollView>
 
 
-
-
-
-
-
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/ns_save"
         android:layout_width="0dp"
@@ -848,8 +856,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:elevation="2dp"
-
-
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -863,7 +869,8 @@
         fancy:fb_focusColor="@color/colorPrimary"
         fancy:fb_radius="30dp"
         fancy:fb_text="SAVE"
-        fancy:fb_textColor="#fff"></mehdi.sakout.fancybuttons.FancyButton>
+        fancy:fb_textColor="#fff"
+        tools:targetApi="lollipop" />
 
 
     <View
@@ -877,7 +884,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         android:layout_marginTop="0dp"
         app:layout_constraintTop_toBottomOf="@+id/ns_toolbar"
-        android:id="@+id/view16"></View>
+        android:id="@+id/view16" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

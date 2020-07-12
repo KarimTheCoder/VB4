@@ -85,7 +85,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/productbold"
-                android:text="IELTS"
+                android:text="@string/IELTS"
                 android:textColor="@color/middleColor"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/ielts_checkbox"
@@ -130,7 +130,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/productbold"
                 android:textColor="@color/middleColor"
-                android:text="TOEFL"
+                android:text="@string/TOEFL"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/toefl_checkbox"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -172,7 +172,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/productbold"
                 android:textColor="@color/middleColor"
-                android:text="SAT"
+                android:text="@string/SAT"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/sat_checkbox"
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
@@ -200,7 +200,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/productbold"
                 android:textColor="@color/middleColor"
-                android:text="GRE"
+                android:text="@string/GRE"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/gre_checkbox"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
