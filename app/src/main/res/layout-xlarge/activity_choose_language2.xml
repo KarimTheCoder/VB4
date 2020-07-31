@@ -22,15 +22,13 @@
                 android:id="@+id/textView32"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:fontFamily="@font/productreg"
-                android:text="Do you speak Spanish?"
-                android:textColor="@color/topColor"
-                android:textSize="36sp"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginLeft="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginRight="@dimen/keyline_4"
+                android:text="@string/speak_spanish"
+                style="@style/primary_text_style"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,23 +37,22 @@
                 android:id="@+id/textView33"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:textSize="24sp"
-                android:fontFamily="@font/productreg"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginLeft="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_2"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginRight="@dimen/keyline_4"
                 android:text="@string/translation_intro"
+                style="@style/third_text_style"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView32"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
 
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/yes"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
 
@@ -77,8 +74,8 @@
 
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/no"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
@@ -96,7 +93,7 @@
                 fancy:fb_focusColor="@color/colorPrimary"
                 fancy:fb_radius="2dp"
                 fancy:fb_text="No"
-                fancy:fb_textColor="#000000"></mehdi.sakout.fancybuttons.FancyButton>
+                fancy:fb_textColor="#000000" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,105 +1,113 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey100"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary_background_color"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.FavoriteWords">
+
 
     <TextView
 
         android:id="@+id/havenotlearned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/sanf_regular"
         android:gravity="center"
-        android:text="You don't have any favorite words"
-        android:textSize="18sp" />
+        android:text="@string/you_dont_have_favorite"
+        style="@style/secondary_text_style_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_above="@id/havenotlearned"
         android:id="@+id/no_favorite_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/keyline_4"
         android:src="@drawable/no_favorite"
-        android:layout_centerInParent="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/havenotlearned"
         />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/favoriteToolbar"
-        android:layout_above="@+id/dummy_bottom_navigation"
         android:id="@+id/recycler_view_favorite_words"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/dummy_bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favoriteToolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_word_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/dummy_bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favoriteToolbar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.Toolbar
-        android:layout_alignParentTop="true"
+        android:id="@+id/favoriteToolbar"
         android:layout_width="match_parent"
-        android:layout_height="76dp"
+        android:layout_height="66dp"
         android:background="@color/colorPrimary"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/favoriteToolbar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.arlib.floatingsearchview.FloatingSearchView
         android:id="@+id/mSearch"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_margin="8dp"
-
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_2"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginBottom="@dimen/keyline_2"
         app:floatingSearch_close_search_on_keyboard_dismiss="false"
         app:floatingSearch_searchBarMarginLeft="-2dp"
         app:floatingSearch_searchBarMarginRight="-2dp"
         app:floatingSearch_searchBarMarginTop="0dp"
         app:floatingSearch_searchHint="Search..."
+        app:floatingSearch_backgroundColor="@color/primary_background_color"
         app:floatingSearch_showSearchKey="false"
         app:floatingSearch_suggestionsListAnimDuration="250"
-        android:layout_alignTop="@+id/favoriteToolbar"
-        android:layout_alignBottom="@+id/favoriteToolbar"
-
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/favoriteToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/favoriteToolbar" />
 
 
     <View
+        android:id="@+id/view7"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@drawable/dropshadow"
-        android:layout_below="@id/favoriteToolbar" />
-
-
-
-
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favoriteToolbar" />
 
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fab_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginBottom="@dimen/keyline_4"
         android:src="@drawable/ic_train"
-
         app:fab_colorNormal="@color/colorPrimary"
         app:fab_colorPressed="@color/colorPrimaryDark"
-        android:layout_above="@id/dummy_bottom_navigation"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="20dp"
-        />
+
+        app:layout_constraintBottom_toTopOf="@id/dummy_bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <View
         android:id="@+id/dummy_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
 
-        ></View>
-
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,18 +4,17 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/primary_background_color"
     >
 
 
     <androidx.appcompat.widget.Toolbar
-        android:alpha="0.5"
         android:id="@+id/profile_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="@color/toolbar_background_color"
         app:title="Status"
-        app:titleTextColor="@color/lowColor"
+        app:titleTextColor="@color/primary_text_color"
         />
 
 
@@ -39,44 +38,40 @@
                 android:id="@+id/your_progress_so_far_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/productbold"
-                android:text="@string/Your_progress_so_far"
-                android:textColor="@color/topColor"
-                android:textSize="30sp"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="16dp" />
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:text="@string/Your_progress_so_far"
+                style="@style/primary_text_style"
+
+                />
 
             <TextView
                 android:id="@+id/profile_learned_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/keyline_1"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/your_progress_so_far_text"
-                android:textSize="18sp"
-                android:fontFamily="@font/productreg"
+                style="@style/secondary_text_style_light"
                 android:text="@string/_words_left"
-                android:textColor="@color/lowColor"
-                android:layout_marginStart="16dp"
-                android:layout_alignParentStart="true" />
+
+                />
 
             <TextView
                 android:id="@+id/profile_left_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_alignParentLeft="true"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_1"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_learned_text"
-                android:textSize="18sp"
-                android:fontFamily="@font/productreg"
                 android:text="@string/_words_left"
-                android:textColor="@color/lowColor"
-                android:layout_marginStart="16dp"
-                android:layout_alignParentStart="true" />
+                style="@style/secondary_text_style_light"
+
+                />
 
 
 
@@ -84,8 +79,8 @@
                 android:id="@+id/status_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 app:cardCornerRadius="10dp"
                 android:layout_alignParentTop="true"
@@ -107,10 +102,10 @@
                 android:id="@+id/profile_rate_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                app:cardCornerRadius="10dp"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                style="@style/rate_card_style"
                 android:layout_below="@+id/profile_left_text"
                 >
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -123,10 +118,9 @@
                         android:id="@+id/imageView10"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
                         android:src="@drawable/rate_love_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -138,15 +132,12 @@
                         android:id="@+id/textView24"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/productbold"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
                         android:text="@string/support_us"
-                        android:textSize="18sp"
-                        android:textColor="#fff"
+                        style="@style/primary_text_style_white"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginStart="16dp" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/textView26"
@@ -154,14 +145,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:layout_marginEnd="48dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="48dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
-                        android:fontFamily="@font/productreg"
-                        android:text="@string/rate_string"
-                        android:textColor="#ffffff"
-                        android:textSize="14sp"
+                        android:text="@string/support_us_description"
+                        style="@style/third_text_style_white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView10"
                         app:layout_constraintStart_toStartOf="parent"
@@ -177,9 +164,8 @@
                 android:id="@+id/bug_report_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/keyline_2"
                 app:cardElevation="0dp"
-
                 app:cardCornerRadius="0dp"
                 android:layout_below="@+id/profile_rate_card"
                 >
@@ -194,7 +180,6 @@
                         android:layout_height="64dp"
                         android:layout_marginBottom="8dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/get_support_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -207,33 +192,26 @@
                         android:id="@+id/textView242"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
                         android:fontFamily="@font/productbold"
-                        android:textSize="18sp"
                         android:text="@string/report_bug"
-
-                        android:textColor="#ffffff"
+                        style="@style/primary_text_style_white"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginStart="16dp" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/textView262"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="64dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="64dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="#ffffff"
-                        android:fontFamily="@font/productreg"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_1"
                         android:text="@string/bug_text"
-                        android:textSize="14sp"
+                        style="@style/third_text_style_white"
 
                         app:layout_constraintEnd_toStartOf="@+id/imageView101"
-                        app:layout_constraintLeft_toRightOf="@+id/imageView101"
+                        app:layout_constraintStart_toEndOf="@+id/imageView101"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView242" />
 
@@ -241,30 +219,24 @@
                         android:id="@+id/get_support_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/productbold"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
                         android:text="@string/get_support"
-                        android:textColor="#ffffff"
-                        android:textSize="18sp"
+                        style="@style/primary_text_style_white"
                         app:layout_constraintTop_toBottomOf="@id/textView262"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_marginStart="16dp" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="@dimen/keyline_4"
                         android:layout_marginEnd="64dp"
-
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="64dp"
-                        android:layout_marginStart="16dp"
-
-                        android:fontFamily="@font/productreg"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_1"
                         android:text="@string/get_support_description"
-                        android:textColor="#ffffff"
+                        style="@style/third_text_style_white"
+                        app:layout_goneMarginBottom="@dimen/keyline_4"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView101"
                         app:layout_constraintStart_toStartOf="parent"
@@ -276,152 +248,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:id="@+id/wrprps_layout"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:orientation="horizontal"
-                android:layout_below="@id/bug_report_card"
-                >
 
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/profile_wps"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="0dp"
-                    app:cardBackgroundColor="@color/yellow"
-                    >
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-
-                            android:id="@+id/textView28"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="8dp"
-                            android:fontFamily="@font/productreg"
-                            android:text="@string/Wps_title"
-                            android:textColor="#ffffff"
-                            android:textSize="14sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/profile_wps_spinner" />
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/profile_wps_spinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:entries="@array/words_per_session_array"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-                        <TextView
-                            android:id="@+id/textView10"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            android:fontFamily="@font/productreg"
-                            android:text="@string/wrp_moto"
-                            android:textColor="#ffffff"
-                            android:textSize="18sp"
-                            android:textAlignment="center"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:gravity="center_horizontal" />
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/profile_rps"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="0dp"
-                    app:cardBackgroundColor="@color/yellowdark"
-                    >
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-
-                            android:id="@+id/profile_rps_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="8dp"
-                            android:fontFamily="@font/productreg"
-                            android:text="@string/rps_title"
-                            android:textColor="#ffffff"
-                            android:textSize="14sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/profile_rps_spinner" />
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/profile_rps_spinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:entries="@array/words_per_session_array"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-                        <TextView
-                            android:id="@+id/textView11"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            android:fontFamily="@font/productreg"
-                            android:text="@string/rps_moto"
-                            android:textAlignment="center"
-                            android:textColor="#ffffff"
-                            android:textSize="18sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:gravity="center_horizontal" />
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
 
 
 
@@ -429,16 +256,15 @@
 
 
             <ImageView
-                android:layout_below="@id/wrprps_layout"
+                android:layout_below="@id/bug_report_card"
                 android:id="@+id/alarm_icon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
 
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
                 android:src="@drawable/notification_icon"
-                android:contentDescription="@string/reminder_icon_content_description"
-                android:layout_marginStart="24dp" />
+                android:contentDescription="@string/reminder_icon_content_description" />
 
 
             <TextView
@@ -447,29 +273,23 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/alarm_icon"
                 android:layout_alignTop="@+id/alarm_icon"
-                android:layout_marginLeft="16dp"
-                android:layout_toRightOf="@+id/alarm_icon"
-                android:fontFamily="@font/productreg"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_toEndOf="@+id/alarm_icon"
                 android:gravity="center"
                 android:text="@string/set_reminder_study"
-                android:textColor="@color/topColor"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@+id/alarm_icon" />
+                style="@style/secondary_text_style"
+
+                />
 
             <TextView
                 android:id="@+id/alarm_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/set_alarm_text"
+                android:layout_alignStart="@+id/set_alarm_text"
                 android:layout_below="@+id/set_alarm_text"
-                android:fontFamily="@font/productreg"
-
                 android:gravity="center"
-
-
                 android:text="@string/reminder_demo_time"
-                android:textColor="@color/lowColor"
-                android:layout_alignStart="@+id/set_alarm_text" />
+                style="@style/third_text_style" />
 
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/set_alarm"
@@ -480,12 +300,12 @@
                 android:layout_marginTop="16dp"
                 android:layout_below="@+id/alarm_time"
                 android:paddingBottom="10dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 android:paddingTop="10dp"
-                fancy:fb_borderColor="#ffffff"
+                fancy:fb_borderColor="@color/card_background_color"
                 fancy:fb_borderWidth="2dp"
-                fancy:fb_defaultColor="#ffffff"
+                fancy:fb_defaultColor="@color/card_background_color"
                 fancy:fb_focusColor="@color/colorPrimary"
                 fancy:fb_radius="0dp"
                 fancy:fb_text="SET TIME"
@@ -495,15 +315,11 @@
                 android:id="@+id/alarm_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_alignBottom="@id/alarm_icon"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="24dp"
-                android:layout_alignTop="@+id/alarm_icon"
-
-
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="24dp" />
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_alignTop="@+id/alarm_icon"
+                />
 
 
             <TextView
@@ -511,13 +327,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/set_alarm"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/productbold"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
                 android:text="@string/follow_us_on_social_media_title"
-                android:textColor="@color/topColor"
-                android:textSize="28sp"
+                style="@style/primary_text_style"
                 />
 
             <TextView
@@ -525,21 +339,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/follow_us_text"
-                android:fontFamily="@font/productreg"
-                android:textColor="@color/lowColor"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:textSize="18sp"
+                android:layout_marginTop="@dimen/keyline_1"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
                 android:text="@string/follow_us_subtitle"
-
+                style="@style/secondary_text_style_light"
                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_below="@id/follow_us_subtext"
                 android:orientation="horizontal"
@@ -550,11 +362,11 @@
                     android:id="@+id/fb_card"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
                     app:cardElevation="0dp"
-                    app:cardBackgroundColor="@color/grey100"
+                    app:cardBackgroundColor="@color/secondary_background_color"
                     app:cardCornerRadius="15dp"
-                    android:layout_marginEnd="4dp">
+                    >
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -563,13 +375,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="24dp"
-
                             android:layout_marginEnd="24dp"
-                            android:layout_marginLeft="24dp"
-                            android:layout_marginRight="24dp"
                             android:layout_marginStart="24dp"
                             android:layout_marginTop="24dp"
                             android:src="@drawable/fb_icon"
+                            android:background="@color/secondary_background_color"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -584,11 +394,11 @@
                     android:id="@+id/instagram_card"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     app:cardElevation="0dp"
-                    app:cardBackgroundColor="@color/grey100"
+                    app:cardBackgroundColor="@color/secondary_background_color"
                     app:cardCornerRadius="15dp"
-                    android:layout_marginStart="4dp">
+                    >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -598,12 +408,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="24dp"
-
                             android:layout_marginEnd="24dp"
-                            android:layout_marginLeft="24dp"
-                            android:layout_marginRight="24dp"
                             android:layout_marginStart="24dp"
                             android:layout_marginTop="24dp"
+                            android:background="@color/secondary_background_color"
                             android:src="@drawable/instagram_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"

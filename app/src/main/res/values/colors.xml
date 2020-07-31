@@ -4,6 +4,7 @@
 
     <color name="colorPrimary">#7264f6</color>
     <color name="colorPrimaryDark">#76dfeb</color>
+    <color name="secondaryGradiantColor">#76dfeb</color>
     <color name="colorAccent">#7264f6</color>
     <color name="grey">#E0E0E0</color>o
     <color name="cardBackgroudDark">#34386C</color>
@@ -60,6 +61,24 @@
     </array>
 
 
+    // New Day Colors
 
+    // Text Colors
+    <color name="primary_text_color">#000000</color>
+    <color name="primary_text_color_white">#ffffff</color>
+    <color name="secondary_text_color">#212121</color>
+    <color name="secondary_text_color_light">#8c979a</color>
+    <color name="third_text_color">#8c979a</color>
+    <color name="sentence_text_color">#5f696c</color>
+
+    // Layout background colors
+    <color name="primary_background_color">#ffffff</color>
+    <color name="secondary_background_color">#e0e0e0</color>
+
+    //Card Background Color
+    <color name="card_background_color">#ffffff</color>
+
+    // Toolbar background color
+    <color name="toolbar_background_color">#ffffff</color>
 
 </resources>

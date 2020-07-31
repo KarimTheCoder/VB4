@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -432,18 +434,26 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                     //Show the connected screen
                     try{
 
-                        mp.setDataSource(audioPath);
-                        mp.prepare();
-                        mp.start();
+                        if(audioPath != null){
+                            mp.setDataSource(audioPath);
+                            mp.prepare();
+                            mp.start();
+                        }else {
+                            Log.i("Audio","Audio Path: "+audioPath);
+                        }
+
+
                         speak.setEnabled(false);
+
                         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             @Override
                             public void onCompletion(MediaPlayer mp) {
                                 speak.setEnabled(true);
                                // Toast.makeText(ctx,"play finished", Toast.LENGTH_LONG).show();
+                                Log.i("Audio","Audio Path: "+audioPath);
                             }
                         });
-                    }catch (IOException e){
+                    }catch (NullPointerException | IOException e){
                         e.printStackTrace();
                     }
 

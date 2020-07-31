@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/secondary_background_color"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.NewTrain">
 
 
@@ -14,21 +14,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gradient"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        >
 
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
 
         <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
             android:id="@+id/progress_1"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginStart="@dimen/keyline_4"
+            android:layout_marginEnd="@dimen/keyline_4"
+            android:layout_marginTop="@dimen/keyline_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:rcBackgroundPadding="5dp" />
 
@@ -37,15 +36,15 @@
             android:id="@+id/wordCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="@dimen/keyline_4"
+            android:layout_marginEnd="@dimen/keyline_4"
+            android:layout_marginTop="@dimen/keyline_4"
+            android:layout_marginBottom="@dimen/keyline_4"
             app:cardCornerRadius="20dp"
             app:cardElevation="6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/top_background"
             app:layout_constraintTop_toBottomOf="@+id/progress_1">
 
 
@@ -59,58 +58,76 @@
                     android:layout_centerVertical="true">
 
 
+                    <View
+                        android:id="@+id/view3"
+                        android:layout_width="1dp"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
 
                         android:id="@+id/train_word"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:fontFamily="@font/productreg"
-
-                        android:text="Comprehensive \ncon"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        style="@style/primary_text_style"
+                        android:text="Comprehensive"
                         android:textColor="@color/topColor"
-                        android:textSize="48sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <View
-                        android:id="@+id/view3"
-                        android:layout_width="1dp"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"></View>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.github.clans.fab.FloatingActionButton
                         android:id="@+id/train_fab"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginRight="16dp"
-                        app:fab_label="Next"
-                        android:layout_marginBottom="16dp"
+                        app:fab_colorPressed="@color/colorPrimaryDark"
+                        app:fab_colorNormal="@color/colorPrimary"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
                         android:foregroundGravity="center"
-
+                        app:fab_label="Next"
                         android:onClick="next"
                         android:src="@drawable/next_icon"
-                        app:fab_colorNormal="@color/colorPrimary"
-                        app:fab_colorPressed="@color/colorPrimaryDark"
                         app:fab_progress_backgroundColor="@color/grey"
                         app:fab_progress_color="@color/colorPrimaryDark"
-
                         app:fab_showShadow="false"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
+
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <mehdi.sakout.fancybuttons.FancyButton
+                        android:id="@+id/train_speaker_icon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:visibility="invisible"
+                        android:background="#00000000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/train_word"
+                        app:layout_constraintTop_toTopOf="parent"
+                        fancy:fb_borderWidth="2dp"
+                        fancy:fb_defaultColor="#ffffff"
+                        fancy:fb_focusColor="@color/colorPrimary"
+                        fancy:fb_ghost="true"
+                        fancy:fb_iconResource="@drawable/speak"
+                        fancy:fb_radius="100000dp"
+                        fancy:fb_text="" />
 
                     <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/spin_kit"
@@ -126,25 +143,7 @@
                         app:layout_constraintStart_toEndOf="@+id/train_speaker_icon"
                         app:layout_constraintTop_toTopOf="@+id/train_speaker_icon" />
 
-                    <mehdi.sakout.fancybuttons.FancyButton
-                        android:id="@+id/train_speaker_icon"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="#00000000"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/train_word"
-                        app:layout_constraintTop_toTopOf="parent"
-                        fancy:fb_borderWidth="2dp"
-                        fancy:fb_defaultColor="#ffffff"
-                        fancy:fb_focusColor="@color/colorPrimary"
-                        fancy:fb_ghost="true"
-                        fancy:fb_iconResource="@drawable/speak"
-                        fancy:fb_radius="100000dp"
-                        fancy:fb_text="" />
+
 
 
                     <!--<com.github.jorgecastilloprz.FABProgressCircle-->
@@ -179,55 +178,54 @@
 
 
         </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/answer_card1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_4"
+        style="@style/home_card_style"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_background">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_background"
+
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
+            <View
+                android:id="@+id/train_circle1"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:background="@drawable/bottom_bar_dot" />
+
             <TextView
                 android:id="@+id/train_answer_text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
                 android:layout_toEndOf="@+id/train_circle1"
-                android:fontFamily="@font/productreg"
+                style="@style/secondary_text_style"
                 android:text="difficult to stand on, move on, or hold because of being smooth, wet, icy, etc "
-                android:textColor="@color/bottomColor"
-                android:textSize="22sp" />
-
-            <View
-                android:id="@+id/train_circle1"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/bottom_bar_dot"></View>
+                />
 
         </RelativeLayout>
 
@@ -237,15 +235,12 @@
         android:id="@+id/answer_card2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_4"
+        style="@style/home_card_style"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_card1">
 
         <RelativeLayout
@@ -253,30 +248,29 @@
             android:layout_height="wrap_content">
 
 
+            <View
+                android:id="@+id/train_circle2"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:background="@drawable/bottom_bar_dot" />
+
             <TextView
                 android:id="@+id/train_answer_text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
                 android:layout_toEndOf="@+id/train_circle2"
-                android:fontFamily="@font/productreg"
+                style="@style/secondary_text_style"
                 android:text="difficult to stand on, move on, or hold because of being smooth, wet, icy, etc "
-                android:textColor="@color/bottomColor"
-                android:textSize="22sp" />
-
-            <View
-                android:id="@+id/train_circle2"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/bottom_bar_dot"></View>
+                />
 
         </RelativeLayout>
 
@@ -286,15 +280,12 @@
         android:id="@+id/answer_card3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_4"
+        style="@style/home_card_style"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_card2">
 
         <RelativeLayout
@@ -302,30 +293,29 @@
             android:layout_height="wrap_content">
 
 
+            <View
+                android:id="@+id/train_circle3"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:background="@drawable/bottom_bar_dot" />
+
             <TextView
                 android:id="@+id/train_answer_text3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
                 android:layout_toEndOf="@+id/train_circle3"
-                android:fontFamily="@font/productreg"
+                style="@style/secondary_text_style"
                 android:text="difficult to stand on, move on, or hold because of being smooth, wet, icy, etc "
-                android:textColor="@color/bottomColor"
-                android:textSize="22sp" />
-
-            <View
-                android:id="@+id/train_circle3"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/bottom_bar_dot"></View>
+                />
 
         </RelativeLayout>
 
@@ -335,15 +325,12 @@
         android:id="@+id/answer_card4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_4"
+        style="@style/home_card_style"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_card3">
 
         <RelativeLayout
@@ -351,30 +338,29 @@
             android:layout_height="wrap_content">
 
 
+            <View
+                android:id="@+id/train_circle4"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:background="@drawable/bottom_bar_dot" />
+
             <TextView
                 android:id="@+id/train_answer_text4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
                 android:layout_toEndOf="@+id/train_circle4"
-                android:fontFamily="@font/productreg"
+                style="@style/secondary_text_style"
                 android:text="difficult to stand on, move on, or hold because of being smooth, wet, icy, etc "
-                android:textColor="@color/bottomColor"
-                android:textSize="22sp" />
-
-            <View
-                android:id="@+id/train_circle4"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/bottom_bar_dot"></View>
+                />
 
         </RelativeLayout>
 

@@ -172,9 +172,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         }
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135xxx");
 
-        if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
             mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
         }
 
@@ -202,9 +202,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         sp.edit().putInt("noshowads",noshowads).apply();
 
-//                updateLearnedDatabase();
-//        NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-//        NewTrain.this.finish();
+        updateLearnedDatabase();
+        NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+        NewTrain.this.finish();
 
 
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -9,14 +11,16 @@
         android:id="@+id/cardView6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_2"
+        app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relativeLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -25,71 +29,91 @@
                 android:id="@+id/server_image_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:src="@drawable/no_internet" />
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/keyline_6"
+
+
+                android:layout_marginBottom="@dimen/keyline_6"
+                android:src="@drawable/no_internet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+
                 android:id="@+id/state_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/server_image"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_6"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginBottom="@dimen/keyline_4"
                 android:fontFamily="@font/productreg"
                 android:text="@string/noInternet"
                 android:textColor="@color/lowColor"
-                android:textSize="16dp" />
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/server_image_state" />
 
             <TextView
                 android:id="@+id/image_text"
+                style="@style/third_word_text_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/server_image"
-                android:layout_marginBottom="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/productreg"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginBottom="@dimen/keyline_4"
                 android:text="a comprehensive list of sources"
-                android:textColor="@color/lowColor"
-                android:textSize="18sp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/server_image" />
+
 
             <ImageView
                 android:id="@+id/server_image"
                 android:layout_width="match_parent"
-                android:layout_height="380dp"
-                android:layout_alignParentTop="true"
+                android:layout_height="240dp"
                 android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                />
 
             <ImageView
                 android:id="@+id/image_quality"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_setting" />
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginLeft="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginRight="@dimen/keyline_4"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:src="@drawable/ic_setting"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/image_quality_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/image_quality"
-                android:layout_alignTop="@id/image_quality"
-                android:layout_toStartOf="@+id/image_quality"
+                android:layout_marginEnd="@dimen/keyline_4"
                 android:fontFamily="@font/productreg"
                 android:gravity="center"
-                android:text="medium" />
+                android:text="medium"
+                app:layout_constraintBottom_toBottomOf="@id/image_quality"
+                app:layout_constraintEnd_toStartOf="@+id/image_quality"
+                app:layout_constraintTop_toTopOf="@id/image_quality" />
 
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>
-
 
     <TextView
         android:id="@+id/train_reportmistake"
@@ -107,6 +131,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView6" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

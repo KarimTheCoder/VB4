@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Credentials;
 import android.net.NetworkInfo;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
+import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -82,7 +84,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private ProgressDialog progressDialog;
     private CheckBox ieltsCheckbox, toeflCheckbox, satCheckbox, greCheckbox;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked,isSignedIn;
-    private CardView privacyPolicy;
+    private CardView privacyPolicy, signInCardView;
 
     // google sign in
     private static final String TAG = "GoogleActivity";
@@ -110,7 +112,12 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         Crashlytics.setBool("Connection Status",connected);
 
         privacyPolicy = findViewById(R.id.privacy_policy_card);
+        signInCardView = findViewById(R.id.user_status);
         privacyPolicy.setOnClickListener(this);
+
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+            signInCardView.setVisibility(View.GONE);
+        }
 
 
 
@@ -489,6 +496,9 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
         signIn = (FancyButton)findViewById(R.id.ns_sign_in);
+        signIn.setBackgroundColor(getResources().getColor(R.color.card_background_color));
+        signIn.setTextColor(getResources().getColor(R.color.primary_text_color));
+
         userName = (TextView)findViewById(R.id.ns_username);
         userDetail = (TextView)findViewById(R.id.user_detail);
 
@@ -522,8 +532,8 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             spanish.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             spanish.setTextColor(getResources().getColor(R.color.text_white_87));
         }else {
-            spanish.setTextColor(getResources().getColor(R.color.topColor));
-            spanish.setBackgroundColor(getResources().getColor(R.color.text_white_87));
+            spanish.setTextColor(getResources().getColor(R.color.primary_text_color));
+            spanish.setBackgroundColor(getResources().getColor(R.color.card_background_color));
         }
 
 
@@ -1391,8 +1401,8 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
 
                 sp.edit().putString("secondlanguage","english").apply();
-                spanish.setBackgroundColor(getResources().getColor(R.color.text_white_87));
-                spanish.setTextColor(getResources().getColor(R.color.topColor));
+                spanish.setBackgroundColor(getResources().getColor(R.color.card_background_color));
+                spanish.setTextColor(getResources().getColor(R.color.primary_text_color));
             }else {
                 sp.edit().putString("secondlanguage","spanish").apply();
                 spanish.setTextColor(getResources().getColor(R.color.text_white_87));

@@ -12,13 +12,12 @@
         android:id="@+id/cardView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:cardBackgroundColor="#fff"
-        app:cardCornerRadius="15dp"
+        android:layout_marginBottom="@dimen/keyline_2"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_4"
+        style="@style/home_card_style"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,127 +27,117 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <View
-                android:id="@+id/card_top_background"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
 
-                ></View>
-
-            <View
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/dropshadow"
-                app:layout_constraintTop_toBottomOf="@id/card_top_background"></View>
-
-            <TextView
+                app:layout_constraintTop_toBottomOf="@id/card_top_background">
 
 
-                android:id="@+id/pronunciation_train"
-                android:layout_width="wrap_content"
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_top_background"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:fontFamily="@font/productreg"
-                android:text="adjective"
-                android:textColor="@color/lowColor"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@id/card_top_background"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/grammar_train"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/productreg"
-                android:paddingBottom="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="5dp"
-                android:text="adjective"
-                android:textColor="@color/lowColor"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@id/card_top_background"
-                app:layout_constraintLeft_toRightOf="@+id/pronunciation_train"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/spin_kit"
-                style="@style/SpinKitView.Small.Wave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:SpinKit_Color="@color/colorAccent"
-                app:layout_constraintBottom_toBottomOf="@+id/train_speaker_icon"
-                app:layout_constraintStart_toEndOf="@+id/train_speaker_icon"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/train_speaker_icon"
-                android:layout_width="71dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="#00000000"
-                android:padding="7dp"
-                app:layout_constraintBottom_toBottomOf="@+id/grammar_train"
-
-                app:layout_constraintStart_toEndOf="@+id/train_favorite_icon"
-                app:layout_constraintTop_toTopOf="@+id/grammar_train"
-                fancy:fb_borderWidth="2dp"
-                fancy:fb_defaultColor="#ffffff"
-                fancy:fb_focusColor="@color/colorPrimary"
-                fancy:fb_iconResource="@drawable/speak"
-                fancy:fb_radius="100000dp"
-                fancy:fb_text="" />
-
-            <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/train_favorite_icon"
-                android:layout_width="71dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="#00000000"
-                android:padding="7dp"
-                app:layout_constraintBottom_toBottomOf="@+id/card_top_background"
-                app:layout_constraintStart_toEndOf="@+id/grammar_train"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                fancy:fb_borderWidth="2dp"
-                fancy:fb_defaultColor="#ffffff"
-                fancy:fb_focusColor="@color/colorPrimary"
-                fancy:fb_ghost="true"
-                fancy:fb_iconResource="@drawable/ic_favorite"
-                fancy:fb_radius="100000dp"
-                fancy:fb_text="" />
+
+                >
+                <TextView
+
+
+                    android:id="@+id/pronunciation_train"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/keyline_4"
+                    android:layout_marginTop="@dimen/keyline_4"
+                    android:layout_marginBottom="@dimen/keyline_4"
+                    android:text="adjective"
+                    style="@style/forth_word_text_style"
+                    app:layout_constraintBottom_toBottomOf="@id/card_top_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginLeft="@dimen/keyline_4" />
+
+                <TextView
+                    android:id="@+id/grammar_train"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/keyline_4"
+                    android:layout_marginTop="@dimen/keyline_4"
+                    android:layout_marginBottom="@dimen/keyline_4"
+                    android:text="adjective"
+                    style="@style/forth_word_text_style"
+                    app:layout_constraintBottom_toBottomOf="@id/card_top_background"
+                    app:layout_constraintStart_toEndOf="@+id/pronunciation_train"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginLeft="@dimen/keyline_4" />
+
+                <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/spin_kit"
+                    style="@style/SpinKitView.Small.Wave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/train_speaker_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/train_speaker_icon"
+                    android:layout_width="71dp"
+                    android:layout_height="35dp"
+                    android:background="#00000000"
+                    android:padding="7dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/grammar_train"
+                    app:layout_constraintStart_toEndOf="@+id/train_favorite_icon"
+                    app:layout_constraintTop_toTopOf="@+id/grammar_train"
+                    fancy:fb_borderWidth="2dp"
+                    fancy:fb_defaultColor="#ffffff"
+                    fancy:fb_focusColor="@color/colorPrimary"
+                    fancy:fb_iconResource="@drawable/speak"
+                    fancy:fb_radius="100000dp"
+                    fancy:fb_text="" />
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/train_favorite_icon"
+                    android:layout_width="71dp"
+                    android:layout_height="35dp"
+                    android:background="#00000000"
+                    android:padding="7dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/card_top_background"
+                    app:layout_constraintStart_toEndOf="@+id/grammar_train"
+                    app:layout_constraintTop_toTopOf="parent"
+                    fancy:fb_borderWidth="2dp"
+                    fancy:fb_defaultColor="#ffffff"
+                    fancy:fb_focusColor="@color/colorPrimary"
+                    fancy:fb_ghost="true"
+                    fancy:fb_iconResource="@drawable/ic_favorite"
+                    fancy:fb_radius="100000dp"
+                    fancy:fb_text="" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
             <TextView
                 android:id="@+id/translation_train"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/pronunciation_train"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_toRightOf="@+id/english"
-                android:fontFamily="@font/productreg"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
                 android:text="complete; including all or nearly all elements or aspects of something"
-                android:textColor="@color/topColor"
-                android:textSize="28sp"
+                style="@style/second_word_text_style"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_top_background" />
@@ -158,15 +147,13 @@
                 android:id="@+id/example1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/productreg"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
                 android:text="complete; including all or nearly all elements or aspects of something"
-                android:textColor="@color/lowColor"
-                android:textSize="24sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                style="@style/third_word_text_style"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
 
 
                 app:layout_constraintTop_toBottomOf="@+id/translation_train" />
@@ -175,19 +162,15 @@
                 android:id="@+id/example2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/productreg"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_2"
                 android:text="complete; including all or nearly all elements or aspects of something"
-                android:textColor="@color/lowColor"
-                android:textSize="24sp"
+                style="@style/third_word_text_style"
                 app:layout_constraintBottom_toBottomOf="parent"
-
-
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/example1" />
 
 
@@ -195,6 +178,8 @@
 
 
     </androidx.cardview.widget.CardView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

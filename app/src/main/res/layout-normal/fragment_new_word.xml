@@ -1,12 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/grey100"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.NewWordFragment">
-
-
 
 
     <androidx.appcompat.widget.Toolbar
@@ -14,79 +13,74 @@
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:background="@color/colorPrimary"
-        android:layout_alignParentTop="true"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </androidx.appcompat.widget.Toolbar>
 
 
-
-
-
-
-
-
-
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/word_toolbar"
-        android:layout_above="@+id/bottom"
-        android:layout_marginBottom="5dp"
         android:id="@+id/new_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </androidx.recyclerview.widget.RecyclerView>
-
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/word_toolbar" />
 
 
     <com.arlib.floatingsearchview.FloatingSearchView
         android:id="@+id/mSearch"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_margin="8dp"
 
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginLeft="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_2"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginRight="@dimen/keyline_4"
+        android:layout_marginBottom="@dimen/keyline_2"
         app:floatingSearch_close_search_on_keyboard_dismiss="false"
+
         app:floatingSearch_searchBarMarginLeft="-2dp"
         app:floatingSearch_searchBarMarginRight="-2dp"
         app:floatingSearch_searchBarMarginTop="0dp"
         app:floatingSearch_searchHint="Search..."
         app:floatingSearch_showSearchKey="false"
         app:floatingSearch_suggestionsListAnimDuration="250"
-        android:layout_alignTop="@+id/word_toolbar"
-        android:layout_alignBottom="@+id/word_toolbar"
-
-      />
+        app:layout_constraintBottom_toBottomOf="@+id/word_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/word_toolbar" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:entries="@array/spinner_options"
+        android:id="@+id/word_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/word_spinner"
-        android:layout_marginRight="8dp"
-        android:layout_alignTop="@+id/word_toolbar"
-        android:layout_alignBottom="@+id/word_toolbar"
-        android:layout_alignRight="@id/mSearch"
-
-
-        >
+        android:layout_marginRight="@dimen/keyline_4"
+        android:entries="@array/spinner_options"
+        app:layout_constraintBottom_toBottomOf="@+id/word_toolbar"
+        app:layout_constraintRight_toRightOf="@id/mSearch"
+        app:layout_constraintTop_toTopOf="@+id/word_toolbar"
+        android:layout_marginEnd="@dimen/keyline_4">
 
 
     </androidx.appcompat.widget.AppCompatSpinner>
 
 
-
     <View
+        android:id="@+id/view17"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@drawable/dropshadow"
-        android:layout_below="@id/word_toolbar"
-        android:id="@+id/view17"></View>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/word_toolbar" />
 
     <View
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:layout_alignParentBottom="true"
-        ></View>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="app_name">PRO Vocabulary Builder</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_practice_finished">PracticeFinishedActivity</string>
+    <string name="noInternet">No internet connection. Cannot load the image</string>
+    <string name="waitingForImage">Waiting for the image to load.</string>
+    <string name="buyapptitle">GO PRO! \nACHIEVE MORE!</string>
+    <string name="buyappfeatures">Instant photo load\nNo ads\nFull offline</string>
+    <string name="removeAds">FUND THE APP\nBY REMOVING ADS</string>
+    <string name="whyremove">We need your help for further development of the app</string>
+    <string name="weakWord">WEAK\nWORD</string>
+    <string name="you_ordered">you_ordered</string>
+    <string name="rate_string">If you are enjoying this app, please click here to give us a rating, it will help us a lot.</string>
+
+
+
+    <string name="sign_in_text">Sign-in to save your progress</string>
+    <string name="wps_text">Words Per Session</string>
+    <string name="rps_text">Repetition Per Session</string>
+    <string name="completed_text">Completed!</string>
+    <string name="rate_title">Support Us</string>
+    <string name="report_a_bug_text">Report a Bug</string>
+    <string name="setReminder_text">Set a reminder to study</string>
+    <string name="choose_vocabulary_text">Choose preferred vocabulary</string>
+    <string name="wps_text_details">Choose how many words you want to learn per session</string>
+    <string name="rps_text_details">Choose how many times a word should repeat</string>
+    <string name="sound_text">Sound</string>
+    <string name="sound_text_detail">Turn off or on sound of the quiz sessions</string>
+    <string name="privacypolicy">https://banglish1.wixsite.com/fortitude</string>
+    <string name="translation_intro">Learn English vocabulary faster with your native language. Every word, definition, and sentence is translated into your language by a set of professional native speakers. Spanish is the first language to be part of this feature, and many more languages are on the way.</string>
+
+    <string-array name="spinner_options">
+
+
+        <item> "Beginner"</item>
+        <item> "Intermediate"</item>
+        <item>"Advance"</item>
+    </string-array>
+
+    <string-array name="words_per_session_array">
+
+
+        <item> "5"</item>
+        <item> "4"</item>
+        <item> "3"</item>
+    </string-array>
+
+    <string-array name="image_quality_String_array">
+
+
+        <item> "High"</item>
+        <item> "Medium"</item>
+        <item> "Low"</item>
+    </string-array>
+</resources>

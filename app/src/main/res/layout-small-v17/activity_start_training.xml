@@ -5,7 +5,7 @@
     android:id="@+id/activity_start_training"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/primary_background_color"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.StartTrainingActivity"
     >
@@ -24,17 +24,20 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             >
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/start_training_toolbar"
-                android:background="#fff"
-                app:titleTextColor="@color/lowColor"
+                android:background="@color/toolbar_background_color"
+                app:titleTextColor="@color/primary_text_color"
                 app:title="Beginner"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></androidx.appcompat.widget.Toolbar>
+                android:layout_height="wrap_content" />
 
 
             <View
@@ -42,19 +45,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@drawable/dropshadow"
-                app:layout_constraintTop_toBottomOf="@+id/start_training_toolbar"></View>
+                app:layout_constraintTop_toBottomOf="@+id/start_training_toolbar" />
 
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/status_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/profile_toolbar"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                app:cardBackgroundColor="#fff"
-                app:cardCornerRadius="5dp"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                style="@style/home_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/start_training_toolbar">
@@ -68,13 +70,11 @@
                         android:id="@+id/textView27"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:fontFamily="@font/productbold"
-                        android:text="Progress in this section"
-                        android:textColor="@color/topColor"
-                        android:textSize="28sp"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:text="@string/your_progress_in_this_section"
+                        style="@style/primary_text_style"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -84,10 +84,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
-                        android:fontFamily="@font/productreg"
                         android:text="50 words learned"
-                        android:textColor="@color/lowColor"
-                        android:textSize="18sp"
+                        style="@style/secondary_text_style_light"
                         app:layout_constraintStart_toStartOf="@+id/textView27"
                         app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
@@ -96,10 +94,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
-                        android:fontFamily="@font/productreg"
+                        android:layout_marginTop="@dimen/keyline_1"
                         android:text="50 words learned"
-                        android:textColor="@color/lowColor"
-                        android:textSize="18sp"
+                        style="@style/secondary_text_style_light"
                         app:layout_constraintStart_toStartOf="@+id/start_training_learned_word_text"
                         app:layout_constraintTop_toBottomOf="@+id/start_training_learned_word_text" />
 
@@ -108,10 +105,10 @@
                         android:id="@+id/start_training_progress"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -126,13 +123,12 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/getPro"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginBottom="@dimen/keyline_4"
+                style="@style/home_card_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -148,13 +144,11 @@
                         android:id="@+id/textView25"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/productbold"
-                        android:text="Your favorite Vocabulary Builder is now ad free"
-                        android:textColor="#fff"
-                        android:textSize="16sp"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:text="@string/pro_ad_text"
+                        style="@style/secondary_text_style_white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -163,14 +157,11 @@
                         android:id="@+id/download_pro"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
                         android:elevation="3dp"
-
-
                         android:paddingStart="20dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="20dp"
@@ -201,20 +192,17 @@
     </ScrollView>
 
 
-
-
-
     <View
         android:id="@+id/view12"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="64dp"
         android:layout_marginBottom="0dp"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="#fff"
+        android:background="@color/toolbar_background_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"></View>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/no_word_home"
@@ -224,7 +212,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
-        android:elevation="3dp"
         android:onClick="onStartTraining"
         android:paddingBottom="10dp"
         android:paddingStart="20dp"
@@ -242,7 +229,7 @@
         fancy:fb_focusColor="#D8C9E8"
         fancy:fb_radius="30dp"
         fancy:fb_text="START LEARNING"
-        fancy:fb_textColor="#ffffff" />
+        fancy:fb_textColor="@color/primary_text_color_white" />
 
 
 

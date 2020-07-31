@@ -13,8 +13,25 @@
     <string name="weakWord">WEAK\nWORD</string>
     <string name="you_ordered">you_ordered</string>
     <string name="rate_string">If you are enjoying this app, please click here to give us a rating, it will help us a lot.</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="proud">So proud of you!</string>
+    <string name="speak_spanish">Do you speak Spanish?</string>
+    <string name="learned_all_word">You\'ve learned all the words of this section</string>
+    <string name="your_progress_in_this_section">Your progress in this section</string>
 
+    <string name="pro_ad_text">Your favorite Vocabulary Builder is now ad free</string>
+    <string name="session_completed">Session \nCompleted!</string>
 
+    <string name="you_dont_have_favorite">You don\'t have any favorite words</string>
+    <string name="brand_name">Fortitude Learn</string>
+    <string name="ielts_descrition">The International English Language Testing System</string>
+    <string name="toefl_description">Test of English as a Foreign Language</string>
+    <string name="gre_description">The Graduate Record Examinations</string>
+    <string name="change_settings_later">You can also change your preference \nin the settings later</string>
+    <string name="select_vocabulary">Select vocabulary</string>
+    <string name="advance_title">ADVANCE</string>
+    <string name="intermediate_title">INTERMEDIATE</string>
+    <string name="beginner_title">BEGINNER</string>
 
     <string name="sign_in_text">Sign-in to save your progress</string>
     <string name="wps_text">Words Per Session</string>
@@ -48,7 +65,6 @@
     </string-array>
 
     <string-array name="image_quality_String_array">
-
 
         <item> "High"</item>
         <item> "Medium"</item>

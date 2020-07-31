@@ -13,41 +13,38 @@
         android:id="@+id/congratulation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="24dp"
-        android:text="Congratulations Dory!!"
-        android:textSize="24sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_4"
+        android:text="@string/congratulations"
+        style="@style/primary_text_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/completed_section"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="8dp"
-        android:text="You've learned all the words of this section"
+        android:layout_marginTop="@dimen/keyline_2"
+        android:layout_marginLeft="@dimen/keyline_4"
+        android:layout_marginRight="@dimen/keyline_4"
+        android:text="@string/learned_all_word"
         android:textAlignment="center"
-        android:textSize="18sp"
+        style="@style/secondary_text_style_light"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/congratulation"
-        app:layout_constraintRight_toRightOf="@+id/congratulation"
-        app:layout_constraintTop_toBottomOf="@+id/congratulation" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/congratulation"
+        android:gravity="center_horizontal" />
 
     <ImageView
         android:id="@+id/no_word_image"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/beginner_no_words" />
 
@@ -58,26 +55,26 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:onClick="home_nomorewords"
         android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:paddingTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        fancy:fb_borderColor="#A181BE"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        fancy:fb_borderColor="@color/colorPrimary"
         fancy:fb_borderWidth="2dp"
         fancy:fb_defaultColor="#ffffff"
-        fancy:fb_focusColor="#D8C9E8"
+        fancy:fb_focusColor="@color/colorPrimary"
         fancy:fb_radius="30dp"
 
 
         fancy:fb_text="Home"
-        fancy:fb_textColor="#A181BE">
+        fancy:fb_textColor="@color/colorPrimary">
 
 
     </mehdi.sakout.fancybuttons.FancyButton>
@@ -87,25 +84,25 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
 
         android:onClick="reset"
         android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:paddingTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/no_word_home"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintRight_toRightOf="parent"
-        fancy:fb_borderColor="#A181BE"
+        app:layout_constraintEnd_toEndOf="parent"
+        fancy:fb_borderColor="@color/colorPrimary"
         fancy:fb_borderWidth="2dp"
         fancy:fb_defaultColor="#ffffff"
-        fancy:fb_focusColor="#D8C9E8"
+        fancy:fb_focusColor="@color/colorPrimary"
         fancy:fb_radius="30dp"
         fancy:fb_text="Reset"
-        fancy:fb_textColor="#A181BE">
+        fancy:fb_textColor="@color/colorPrimary">
 
 
     </mehdi.sakout.fancybuttons.FancyButton>
@@ -114,13 +111,13 @@
         android:id="@+id/so_proud"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="so proud of you"
-        app:layout_constraintBottom_toTopOf="@+id/reset"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="@dimen/keyline_4"
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_4"
+        android:text="@string/proud"
+        style="@style/third_text_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/no_word_image" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.asyl.animation:arcanimator:1.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ea3de04d613ad98187db50ac6c43138/jetified-arcanimator-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ea3de04d613ad98187db50ac6c43138/jetified-arcanimator-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/64bc09f68d895e98949e656e0bfac3e8/jetified-arcanimator-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/64bc09f68d895e98949e656e0bfac3e8/jetified-arcanimator-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/64bc09f68d895e98949e656e0bfac3e8/jetified-arcanimator-1.0.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.asyl.animation/arcanimator/1.0.0/dd3e57f093206c7a356c52569df7e05304ed785/arcanimator-1.0.0-javadoc.jar!/" />

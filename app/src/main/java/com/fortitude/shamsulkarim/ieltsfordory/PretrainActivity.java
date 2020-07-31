@@ -117,8 +117,8 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
         goProCardView = findViewById(R.id.getPro);
 
-        if(BuildConfig.FLAVOR.equalsIgnoreCase("pro")){
-            goProCardView.setVisibility(View.GONE);
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("pro") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+            goProCardView.setVisibility(View.INVISIBLE);
         }
 
         getProButton = findViewById(R.id.download_pro);

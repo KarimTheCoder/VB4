@@ -108,9 +108,9 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         //Toast.makeText(this,"SharedLearned "+sharedLearned+" level "+level+" fivewordsize "+fiveWordSize,Toast.LENGTH_SHORT).show();
 
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135xxx");
 
-        if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
             mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
         }
 
@@ -727,7 +727,16 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
                 Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
                 Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
                 this.startActivity(rateApp);
-            }else {
+            }
+            else if(BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+
+                Uri appUrl = Uri.parse("https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                this.startActivity(rateApp);
+            }
+
+
+            else {
 
                 Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
                 Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);

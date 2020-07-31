@@ -145,9 +145,9 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 //            this.startActivity(new Intent(this, PracticeFinished.class));
 //            this.finish();
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712xxx");
 
-        if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
             mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
         }
 
@@ -709,23 +709,23 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         if (totalCycle == (FIVE_WORD_SIZE*repeatPerSession)){
 
-            int pos = getMostMistakenWord(mistakeCollector);
-
-            if(pos != -1){
-
-                String word = fiveWords.get(pos).getPronun();
-                String def = fiveWords.get(pos).getTranslation();
-                String spanish = fiveWords.get(pos).getExtra();
-                String example = fiveWords.get(pos).getExample2();
-
-                StringBuilder mostMistakenWord = new StringBuilder("shit"+"+"+word+"+"+def+"+"+spanish+"+"+example);
-                sp.edit().putString("MostMistakenWord",mostMistakenWord.toString()).apply();
-
-
-            }else {
-                sp.edit().putString("MostMistakenWord","no").apply();
-
-            }
+//            int pos = getMostMistakenWord(mistakeCollector);
+//
+//            if(pos != -1){
+//
+//                String word = fiveWords.get(pos).getPronun();
+//                String def = fiveWords.get(pos).getTranslation();
+//                String spanish = fiveWords.get(pos).getExtra();
+//                String example = fiveWords.get(pos).getExample2();
+//
+//                StringBuilder mostMistakenWord = new StringBuilder("shit"+"+"+word+"+"+def+"+"+spanish+"+"+example);
+//                sp.edit().putString("MostMistakenWord",mostMistakenWord.toString()).apply();
+//
+//
+//            }else {
+//                sp.edit().putString("MostMistakenWord","no").apply();
+//
+//            }
 
 
 

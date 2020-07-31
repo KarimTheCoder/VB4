@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/relativeLayout6"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recycler_view_card"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        style="@style/home_card_style"
+        app:cardBackgroundColor="@color/card_background_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_2"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginBottom="@dimen/keyline_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
 
 
-
-
-
-
-        <RelativeLayout
-            android:background="#ffffff"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,56 +34,47 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/top"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="60dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <View
+                    android:id="@+id/view8"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@drawable/dropshadow"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    ></View>
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
 
                 <TextView
                     android:id="@+id/favorite_card_word"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/productbold"
+                    android:layout_marginStart="@dimen/keyline_4"
                     android:text="Word"
-                    android:textColor="@color/topColor"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    style="@style/primary_text_style"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <View
-                    android:id="@+id/pos_background"
-                    android:layout_width="50dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/favorite_card_word"
-                    app:layout_constraintTop_toTopOf="parent"></View>
+
 
                 <TextView
                     android:id="@+id/favorite_card_grammar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-
-
-                    android:fontFamily="@font/productreg"
+                    android:layout_marginStart="@dimen/keyline_4"
+                    android:layout_marginTop="@dimen/keyline_4"
+                    android:layout_marginBottom="@dimen/keyline_4"
                     android:text="Adjective"
-                    android:textColor="@color/lowColor"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/pos_background"
+                    style="@style/third_text_style"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/favorite_card_word"
 
-                    app:layout_constraintStart_toStartOf="@id/pos_background"
-                    app:layout_constraintEnd_toEndOf="@id/pos_background"
-                    app:layout_constraintTop_toTopOf="@id/pos_background" />
+                    />
 
                 <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/spin_kit"
@@ -109,7 +100,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     fancy:fb_borderWidth="1dp"
-                    fancy:fb_defaultColor="#fff"
+                    fancy:fb_defaultColor="@color/card_background_color"
                     fancy:fb_focusColor="@color/colorPrimary"
                     fancy:fb_iconResource="@drawable/ic_favorite"
                     fancy:fb_radius="100dp"
@@ -125,9 +116,9 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/favorite_favorite"
                     app:layout_constraintTop_toTopOf="parent"
-                    fancy:fb_borderColor="#fff"
+                    fancy:fb_borderColor="@color/card_background_color"
                     fancy:fb_borderWidth="1dp"
-                    fancy:fb_defaultColor="#fff"
+                    fancy:fb_defaultColor="@color/card_background_color"
                     fancy:fb_focusColor="@color/colorPrimary"
                     fancy:fb_iconResource="@drawable/speak"
                     fancy:fb_radius="100dp"
@@ -142,33 +133,29 @@
             <TextView
 
                 android:id="@+id/favorite_card_translation"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/top"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="18dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/productreg"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
                 android:text="This is an translationdfddddddddddddddddddddddddddddddddddddddddd"
-                android:textColor="@color/middleColor"
-                android:textSize="18sp"></TextView>
+                style="@style/secondary_text_style"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/top" />
 
 
             <TextView
 
                 android:id="@+id/favorite_card_example1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/favorite_card_translation"
-                android:layout_marginBottom="8dp"
-
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="18dp"
-                android:layout_marginTop="18dp"
-                android:fontFamily="@font/productreg"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_5"
+                android:layout_marginEnd="@dimen/keyline_4"
                 android:text="This is an tradddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddnslation"
-                android:textColor="@color/lowColor"
-                android:textSize="14sp" />
+                style="@style/third_text_style"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/favorite_card_translation" />
 
 
             <TextView
@@ -176,37 +163,32 @@
                 android:id="@+id/favorite_card_example2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/favorite_card_example1"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="18dp"
-                android:fontFamily="@font/productreg"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_2"
+                android:layout_marginEnd="@dimen/keyline_4"
                 android:text="Yet this young man's frank appraisal was none of those.Yet this young man's frank appraisal was none of those."
-                android:textColor="@color/lowColor"
-                android:textSize="14sp" />
+                style="@style/third_text_style"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/favorite_card_example1" />
 
             <TextView
-
                 android:id="@+id/favorite_card_example3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/favorite_card_example2"
-                android:layout_marginBottom="18dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="18dp"
-                android:fontFamily="@font/productreg"
-
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_2"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginBottom="@dimen/keyline_4"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:text="Yet this young man's frank appraisal was none of those.Yet this young man's frank appraisal was none of those."
-                android:textColor="@color/lowColor"
-                android:textSize="14sp" />
+                style="@style/third_text_style"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/favorite_card_example2" />
 
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
 
-
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

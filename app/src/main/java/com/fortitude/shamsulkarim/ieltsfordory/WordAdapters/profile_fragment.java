@@ -62,8 +62,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
 
-    //Spinner
-    private Spinner wps, rps,imageQualitySpinner;
+
     private int wordsPerSession,repeatationPerSession;
 
     private CardView rateCardView, bugReport, fbCard,instagramCard;
@@ -150,10 +149,6 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         fbCard.setOnClickListener(this);
         instagramCard.setOnClickListener(this);
 
-
-        wps = (Spinner)v.findViewById(R.id.profile_wps_spinner);
-        rps = (Spinner)v.findViewById(R.id.profile_rps_spinner);
-
         if(!sp.contains("wordsPerSession")){
 
             sp.edit().putInt("wordsPerSession",5).apply();
@@ -175,105 +170,11 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
 
 
-        if(repeatationPerSession == 5){
-
-
-            rps.setSelection(0);
-        }
-        else if(repeatationPerSession == 4){
-
-
-            rps.setSelection(1);
-        }else {
-
-            rps.setSelection(2);
-
-        }
-
-        if(wordsPerSession == 5){
-
-
-            wps.setSelection(0);
-        }
-        else if(wordsPerSession == 4){
-
-
-            wps.setSelection(1);
-        }else {
-
-            wps.setSelection(2);
-
-        }
-
-
-
-        wps.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
 
 
 
-                if(i == 0){
 
-
-                    wordsPerSession = 5;
-                    sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-
-
-                }if( i == 1){
-
-
-                    wordsPerSession = 4;
-
-                    sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-                }
-                if(i == 2) {
-
-
-                    wordsPerSession = 3;
-                    sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        rps.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-
-
-                if(i == 0){
-
-
-                    repeatationPerSession = 5;
-                    sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-
-
-                }if( i == 1){
-
-
-                    repeatationPerSession = 4;
-                    sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-                }if( i == 2){
-
-
-                    repeatationPerSession = 3;
-                    sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         if(isIeltsChecked){
             totalWordCount = getResources().getStringArray(R.array.IELTS_words).length;
@@ -414,7 +315,19 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
                     sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
                     sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
                     startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
-                }else{
+                }
+                else if(BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    String shareBodyText = "https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895";
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+                    startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
+
+
+                }
+                else{
 
                     Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                     sharingIntent.setType("text/plain");
@@ -547,7 +460,15 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
                 Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
                 this.startActivity(rateApp);
 
-            }else {
+            }
+            else if(BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+
+                Uri appUrl = Uri.parse("https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                this.startActivity(rateApp);
+            }
+
+            else {
 
                 Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
                 Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);

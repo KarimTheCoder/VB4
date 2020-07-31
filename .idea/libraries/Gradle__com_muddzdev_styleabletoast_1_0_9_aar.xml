@@ -1,8 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.muddzdev:styleabletoast:1.0.9@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0b41300030e55d74b18560619c33a8b0/jetified-styleabletoast-1.0.9/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0b41300030e55d74b18560619c33a8b0/jetified-styleabletoast-1.0.9/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5f6b4bbbd1c588295be1aaa06b18a8d7/jetified-styleabletoast-1.0.9/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5f6b4bbbd1c588295be1aaa06b18a8d7/jetified-styleabletoast-1.0.9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5f6b4bbbd1c588295be1aaa06b18a8d7/jetified-styleabletoast-1.0.9/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.muddzdev/styleabletoast/1.0.9/943605696f04a86c55a30061c0f50677db9beb78/styleabletoast-1.0.9-javadoc.jar!/" />

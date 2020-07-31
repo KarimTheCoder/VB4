@@ -4,7 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5E5E5"
+    android:background="@color/primary_background_color"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.MainActivity">
 
@@ -15,30 +15,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="-15dp"
-       >
+        >
 
 
     </FrameLayout>
 
-    <View
-        android:layout_above="@+id/bottom_background"
-        android:background="@drawable/bottom_shadow"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginEnd="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="0dp"
-       ></View>
+
     <LinearLayout
         android:id="@+id/bottom_background"
-        android:background="#fff"
+        android:background="@color/card_background_color"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+
         android:orientation="horizontal">
 
 
@@ -48,9 +37,9 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:padding="15dp"
-            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_borderColor="@color/card_background_color"
             fancy:fb_borderWidth="1dp"
-            fancy:fb_defaultColor="#fff"
+            fancy:fb_defaultColor="@color/card_background_color"
             fancy:fb_focusColor="@color/colorPrimary"
             fancy:fb_iconResource="@drawable/ic_home"
             fancy:fb_radius="100dp"
@@ -67,9 +56,9 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:padding="15dp"
-            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_borderColor="@color/card_background_color"
             fancy:fb_borderWidth="1dp"
-            fancy:fb_defaultColor="#fff"
+            fancy:fb_defaultColor="@color/card_background_color"
             fancy:fb_focusColor="@color/colorPrimary"
             fancy:fb_iconResource="@drawable/ic_words"
             fancy:fb_radius="100dp"
@@ -83,9 +72,9 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:padding="15dp"
-            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_borderColor="@color/card_background_color"
             fancy:fb_borderWidth="1dp"
-            fancy:fb_defaultColor="#fff"
+            fancy:fb_defaultColor="@color/card_background_color"
             fancy:fb_focusColor="@color/colorPrimary"
             fancy:fb_iconResource="@drawable/ic_learned"
             fancy:fb_radius="100dp"
@@ -99,9 +88,9 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:padding="15dp"
-            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_borderColor="@color/card_background_color"
             fancy:fb_borderWidth="1dp"
-            fancy:fb_defaultColor="#fff"
+            fancy:fb_defaultColor="@color/card_background_color"
             fancy:fb_focusColor="@color/colorPrimary"
             fancy:fb_iconResource="@drawable/ic_favorite"
             fancy:fb_radius="100dp"
@@ -115,9 +104,9 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:padding="15dp"
-            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_borderColor="@color/card_background_color"
             fancy:fb_borderWidth="1dp"
-            fancy:fb_defaultColor="#fff"
+            fancy:fb_defaultColor="@color/card_background_color"
             fancy:fb_focusColor="@color/colorPrimary"
             fancy:fb_iconResource="@drawable/ic_person"
             fancy:fb_radius="100dp"
@@ -128,14 +117,12 @@
 
     </LinearLayout>
 
-
     <LinearLayout
+        android:layout_marginBottom="2dp"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:layout_marginBottom="3dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
+        >
 
 
         <RelativeLayout
@@ -148,7 +135,7 @@
                 android:layout_width="5dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:background="@drawable/bottom_bar_dot"></View>
+                android:background="@drawable/bottom_bar_dot" />
         </RelativeLayout>
 
 
@@ -221,6 +208,16 @@
     </LinearLayout>
 
 
+    <View
+        android:layout_above="@+id/bottom_background"
+        android:background="@drawable/bottom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginEnd="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="0dp" />
 
     <View
 
@@ -231,8 +228,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="0dp"
-       ></View>
+        android:layout_marginBottom="0dp" />
 
 
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //Text Colors
+    <color name="primary_text_color">#DBDBDC</color>
+    <color name="primary_text_color_white">#000000</color>
+    <color name="secondary_text_color">#BDBEC3</color>
+    <color name="third_text_color">#7C7D82</color>
+
+
+    // Layout Background Color
+    <color name="primary_background_color">#000000</color>
+    <color name="secondary_background_color">#121212</color>
+    // Toolbar Background Color
+    <color name="toolbar_background_color">#121212</color>
+
+    //Card Background Color
+    <color name="card_background_color">#121212</color>
+
+
+    // Other Colors
+    <color name="colorPrimaryDark">#121212</color>
+</resources>

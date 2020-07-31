@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/primary_background_color"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.Practice.PracticeFinished">
 
@@ -25,14 +25,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
                 app:cardBackgroundColor="@color/grey100"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
@@ -49,13 +48,11 @@
                         android:id="@+id/textView21"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/productbold"
-                        android:text="Session \nCompleted!"
-                        android:textColor="@color/topColor"
-                        android:textSize="64sp"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:text="@string/session_completed"
+                        style="@style/primary_text_style"
                         app:layout_constraintEnd_toStartOf="@+id/imageView8"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -64,23 +61,23 @@
                         android:id="@+id/practice_finished_word_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginStart="32dp"
-                        android:fontFamily="@font/productreg"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_1"
                         android:text="5 new words learned"
-                        android:textColor="@color/lowColor"
-                        android:textSize="32sp"
+                        style="@style/secondary_text_style_light"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
                     <ImageView
                         android:id="@+id/imageView8"
-                        android:layout_width="128dp"
-                        android:layout_height="128dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -90,15 +87,14 @@
 
 
             </androidx.cardview.widget.CardView>
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/rate_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
                 android:elevation="10dp"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -113,11 +109,11 @@
 
                     <ImageView
                         android:id="@+id/rate_icon"
-                        android:layout_width="128dp"
-                        android:layout_height="128dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
                         android:src="@drawable/rate_love_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -128,27 +124,22 @@
                         android:id="@+id/pf_rate_us_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/productbold"
-
-                        android:text="Rate us"
-                        android:textColor="#ffffff"
-                        android:textSize="48sp"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:text="@string/rate_title"
+                        style="@style/primary_text_style_white"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                     <TextView
                         android:id="@+id/textView22"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="32dp"
-                        android:fontFamily="@font/productreg"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_1"
                         android:text="@string/rate_string"
-                        android:textColor="#ffffff"
-                        android:textSize="32sp"
+                        style="@style/third_text_style_white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/rate_icon"
                         app:layout_constraintStart_toStartOf="parent"
@@ -159,9 +150,6 @@
 
 
             </androidx.cardview.widget.CardView>
-
-
-            //-------------------------------------------
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -193,9 +181,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="@dimen/keyline_4"
         android:src="@drawable/ic_home"
         app:fab_colorNormal="@color/grey100"
         app:fab_colorPressed="@color/colorPrimaryDark"
@@ -206,10 +192,10 @@
         android:id="@+id/tf_train_again"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="@dimen/keyline_2"
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_2"
         android:elevation="2dp"
 
         android:paddingBottom="10dp"
