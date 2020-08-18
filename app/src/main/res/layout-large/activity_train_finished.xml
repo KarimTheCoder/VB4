@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#ffffff"
+    android:background="@color/primary_background_color"
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.Practice.PracticeFinished">
@@ -76,8 +76,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    fancy:srcCompat="@drawable/session_complete_tick_mark"
-                    android:layout_marginRight="@dimen/keyline_4" />
+                    fancy:srcCompat="@drawable/session_complete_tick_mark" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -123,7 +122,7 @@
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_1"
                         android:text="@string/rate_string"
-                        style="@style/secondary_text_style_white"
+                        style="@style/third_text_style_white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/rate_icon"
                         app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +174,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/most_mistaken_card"
-                app:cardBackgroundColor="@color/grey100"
+                style="@style/train_finished_card_style"
                 app:cardElevation="0dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -226,7 +225,7 @@
                         fancy:fb_defaultColor="#ffffff"
                         fancy:fb_focusColor="@color/colorPrimary"
                         fancy:fb_ghost="true"
-                        fancy:fb_iconResource="@drawable/ic_favorite"
+                        fancy:fb_iconResource="@drawable/ic_favorite_icon"
                         fancy:fb_radius="100000dp"
                         fancy:fb_text="" />
 
@@ -306,7 +305,7 @@
         android:id="@+id/tf_button_background"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:background="#fff"
+        android:background="@color/card_background_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -329,16 +328,15 @@
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
         android:layout_marginBottom="@dimen/keyline_4"
-        android:elevation="0dp"
         android:src="@drawable/ic_home"
-        app:fab_colorNormal="@color/grey100"
-        app:fab_colorPressed="@color/colorPrimaryDark"
+        app:fab_colorNormal="@color/primary_text_color_white"
+        app:fab_colorPressed="@color/colorPrimary"
         app:fab_showShadow="false"
         app:layout_constraintTop_toTopOf="@id/tf_button_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="@dimen/keyline_4" />
+        android:layout_marginLeft="@dimen/keyline_4"
+        android:layout_alignParentRight="true" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/tf_train_again"
@@ -364,7 +362,7 @@
         fancy:fb_focusColor="@color/colorPrimary"
         fancy:fb_radius="30dp"
         fancy:fb_text="STUDY MORE"
-        fancy:fb_textColor="#fff"
+        fancy:fb_textColor="@color/primary_text_color"
         app:layout_constraintStart_toEndOf="@+id/tf_home">
 
 

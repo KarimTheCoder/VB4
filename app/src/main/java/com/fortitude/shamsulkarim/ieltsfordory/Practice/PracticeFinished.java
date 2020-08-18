@@ -130,7 +130,7 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
         rateCard.setOnClickListener(this);
 
         home = (FloatingActionButton) findViewById(R.id.tf_home);
-        home.setColorNormal(getResources().getColor(R.color.grey100));
+        home.setColorNormal(getResources().getColor(R.color.primary_text_color_white));
         practiceAgain = (FancyButton)findViewById(R.id.tf_train_again);
         practiceAgain.setText("PRACTICE AGAIN");
 

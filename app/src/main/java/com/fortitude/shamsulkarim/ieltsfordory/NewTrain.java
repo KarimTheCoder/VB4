@@ -203,6 +203,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         sp.edit().putInt("noshowads",noshowads).apply();
 
         updateLearnedDatabase();
+
+
         NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
         NewTrain.this.finish();
 
@@ -364,7 +366,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                     if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
                         String combineBothLanguage = fiveWords.get(quizCycle).getWord()+"\n"+fiveWords.get(quizCycle).getWordSL();
-                        final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
+                        final ForegroundColorSpan lowColor = new ForegroundColorSpan(getResources().getColor(R.color.secondary_text_color));
                         SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
                         spanWord.setSpan(lowColor,fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         spanWord.setSpan(new RelativeSizeSpan(0.4f), fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -452,7 +454,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
 
                         String combineBothLanguage = fiveWords.get(showCycle).getWord()+"\n"+fiveWords.get(showCycle).getWordSL();
-                        final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
+                        final ForegroundColorSpan lowColor = new ForegroundColorSpan(getResources().getColor(R.color.secondary_text_color));
                         SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
                         spanWord.setSpan(lowColor,fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         spanWord.setSpan(new RelativeSizeSpan(0.6f), fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -570,7 +572,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         progress1 = (RoundCornerProgressBar) findViewById(R.id.progress_1);
         progress1.setSecondaryProgressColor(getResources().getColor(R.color.colorPrimaryDark));
         progress1.setProgressColor(getResources().getColor(R.color.colorPrimary));
-        progress1.setProgressBackgroundColor(getResources().getColor(R.color.grey));
+        progress1.setProgressBackgroundColor(getResources().getColor(R.color.primary_text_color_white));
 
         IELTSdatabase = new IELTSWordDatabase(this);
         TOEFLdatabase = new TOEFLWordDatabase(this);
@@ -1833,8 +1835,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.AlertDialogStyle);
         builder.setTitle("Which vocabularies do you want to test?");
+
 
         //this will checked the items when user open the dialog
         builder.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {

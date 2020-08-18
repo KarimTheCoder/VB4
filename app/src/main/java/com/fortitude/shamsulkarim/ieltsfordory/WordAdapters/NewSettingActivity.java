@@ -13,12 +13,15 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -60,7 +63,7 @@ import java.util.List;
 import io.fabric.sdk.android.services.common.Crash;
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class NewSettingActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewSettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
 
     private IELTSWordDatabase ieltsWordDatabase;
@@ -75,7 +78,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
     private Toolbar  toolbar;
     private FancyButton save,spanish;
-    private Spinner wps, rps,imageQualitySpinner;
+    private Spinner wps, rps,imageQualitySpinner, themeSpinner;
     private int wordsPerSession,repeatationPerSession;
     private SharedPreferences sp;
     private SwitchButton soundSwitch, pronunciationSwitch;
@@ -331,80 +334,78 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-        wps.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-
-
-                if(i == 0){
-
-
-                    wordsPerSession = 5;
-
-                    sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-                    Crashlytics.setInt("Words Per Session",wordsPerSession);
-
-
-                }if( i == 1){
-
-
-                    wordsPerSession = 4;
-
-                    sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-                    Crashlytics.setInt("Words Per Session",wordsPerSession);
-                }
-                if(i == 2) {
-
-
-                    wordsPerSession = 3;
-                    sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-                    Crashlytics.setInt("Words Per Session",wordsPerSession);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        rps.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-
-
-                if(i == 0){
-
-
-                    repeatationPerSession = 5;
-                    sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-                    Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
-
-
-                }if( i == 1){
-
-
-                    repeatationPerSession = 4;
-                    sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-                    Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
-                }if( i == 2){
-
-
-                    repeatationPerSession = 3;
-                    sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-                    Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+//        wps.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//
+//                if(i == 0){
+//
+//
+//                    wordsPerSession = 5;
+//
+//                    sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+//                    Crashlytics.setInt("Words Per Session",wordsPerSession);
+//
+//
+//                }if( i == 1){
+//
+//
+//                    wordsPerSession = 4;
+//
+//                    sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+//                    Crashlytics.setInt("Words Per Session",wordsPerSession);
+//                }
+//                if(i == 2) {
+//
+//
+//                    wordsPerSession = 3;
+//                    sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+//                    Crashlytics.setInt("Words Per Session",wordsPerSession);
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+//
+//        rps.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//
+//
+//
+//                if(i == 0){
+//
+//
+//                    repeatationPerSession = 5;
+//                    sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+//                    Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
+//
+//
+//                }if( i == 1){
+//
+//
+//                    repeatationPerSession = 4;
+//                    sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+//                    Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
+//                }if( i == 2){
+//
+//
+//                    repeatationPerSession = 3;
+//                    sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+//                    Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
         if(mAuth.getCurrentUser() != null && connected){
 
@@ -471,17 +472,25 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private void initialization(){
 
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-        toolbar = (Toolbar)findViewById(R.id.ns_toolbar);
-        save = (FancyButton)findViewById(R.id.ns_save);
+        toolbar = findViewById(R.id.ns_toolbar);
+        save = findViewById(R.id.ns_save);
         spanish = findViewById(R.id.language_spanish);
-        wps = (Spinner)findViewById(R.id.wps_spinner);
-        rps = (Spinner)findViewById(R.id.profile_wps_spinner);
-        imageQualitySpinner = (Spinner)findViewById(R.id.image_quality_spinner);
+        imageQualitySpinner = findViewById(R.id.image_quality_spinner);
         toolbar.setTitle("Settings");
         ieltsCheckbox = findViewById(R.id.ielts_checkbox);
         toeflCheckbox = findViewById(R.id.toefl_checkbox);
         satCheckbox = findViewById(R.id.sat_checkbox);
         greCheckbox = findViewById(R.id.gre_checkbox);
+
+        wps = findViewById(R.id.wps_spinner);
+        rps = findViewById(R.id.profile_wps_spinner);
+        themeSpinner = findViewById(R.id.theme_spinner);
+
+        themeSpinner.setOnItemSelectedListener(this);
+        wps.setOnItemSelectedListener(this);
+        rps.setOnItemSelectedListener(this);
+        setUpSpinnerAdapter();
+
 
 
 
@@ -538,6 +547,30 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
     }
+
+    private void setUpSpinnerAdapter(){
+
+        // Words per second spinner adapter
+        ArrayAdapter<CharSequence> wpsAdapter = ArrayAdapter.createFromResource(this,
+                R.array.words_per_session_array, R.layout.settings_spinner);
+        wpsAdapter.setDropDownViewResource(R.layout.settings_spinner_dropdown);
+        wps.setAdapter(wpsAdapter);
+
+        // Repetition per second spinner adapter
+        ArrayAdapter<CharSequence> rpsAdapter = ArrayAdapter.createFromResource(this,
+                R.array.words_per_session_array, R.layout.settings_spinner);
+        rpsAdapter.setDropDownViewResource(R.layout.settings_spinner_dropdown);
+        rps.setAdapter(rpsAdapter);
+
+
+        // theme spinner adapter
+        ArrayAdapter<CharSequence> themeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.theme_options, R.layout.settings_spinner);
+        themeAdapter.setDropDownViewResource(R.layout.settings_spinner_dropdown);
+        themeSpinner.setAdapter(themeAdapter);
+
+
+    }
     private void setSpinner(){
 
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
@@ -551,6 +584,8 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
         imageQualitySpinner.setSelection(imageQualityInt);
 
+        int darkMode = sp.getInt("DarkMode",0);
+        themeSpinner.setSelection(darkMode);
 
 
         if(!sp.contains("wordsPerSession")){
@@ -1438,6 +1473,88 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             updateUI(currentUser);
 
         }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+        if( adapterView.getId() == wps.getId()){
+
+            if(i == 0){
+
+
+                wordsPerSession = 5;
+
+                sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+                Crashlytics.setInt("Words Per Session",wordsPerSession);
+
+
+            }if( i == 1){
+
+
+                wordsPerSession = 4;
+
+                sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+                Crashlytics.setInt("Words Per Session",wordsPerSession);
+            }
+            if(i == 2) {
+
+
+                wordsPerSession = 3;
+                sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+                Crashlytics.setInt("Words Per Session",wordsPerSession);
+            }
+        }
+
+        if(adapterView.getId() == rps.getId()){
+
+            if(i == 0){
+
+
+                repeatationPerSession = 5;
+                sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+                Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
+
+
+            }if( i == 1){
+
+
+                repeatationPerSession = 4;
+                sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+                Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
+            }if( i == 2){
+
+
+                repeatationPerSession = 3;
+                sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+                Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
+            }
+
+        }
+
+        if(adapterView.getId() == themeSpinner.getId()){
+
+            if(i == 0){
+
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                sp.edit().putInt("DarkMode",0).apply();
+            }else if(i == 1){
+
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                sp.edit().putInt("DarkMode",1).apply();
+            }else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                sp.edit().putInt("DarkMode",2).apply();
+            }
+
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 }

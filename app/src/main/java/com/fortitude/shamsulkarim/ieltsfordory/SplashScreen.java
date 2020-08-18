@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,6 +22,10 @@ import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.Connectivit
 
 
 public class SplashScreen extends AppCompatActivity {
+
+
+
+
 
     // SQL Database Initialization
     //----------------------------
@@ -101,6 +107,8 @@ public class SplashScreen extends AppCompatActivity {
             Crashlytics.setInt("Repetition Per Session",3);
 
         }
+        // Default Dark themes
+        setupAppTheme();
 
 
 
@@ -124,6 +132,9 @@ public class SplashScreen extends AppCompatActivity {
 
 
         }
+
+        setupDefaultVocabulary();
+        setupDefaultLanguage();
         //--------------------------------------------------------------
 
 
@@ -131,6 +142,65 @@ public class SplashScreen extends AppCompatActivity {
 
 
     }
+
+    private void setupAppTheme(){
+
+        if(!sp.contains("DarkMode")){
+
+            sp.edit().putInt("DarkMode",0).apply();
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }else {
+
+            int darkMode = sp.getInt("DarkMode",0);
+
+            switch(darkMode) {
+
+                case 1:
+
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    break;
+                case 2:
+
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                    break;
+                default:
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+
+
+        }
+    }
+
+    private void setupDefaultVocabulary(){
+
+        if(!sp.contains("home")){
+
+            sp.edit().putBoolean("isIELTSActive",true).apply();
+            sp.edit().putBoolean("isTOEFLActive",true).apply();
+            sp.edit().putBoolean("isSATActive",true).apply();
+            sp.edit().putBoolean("isGREActive",true).apply();
+
+
+
+        }
+        Crashlytics.setBool("isIELTSActive",true);
+        Crashlytics.setBool("isTOEFLActive",true);
+        Crashlytics.setBool("isSATActive",true);
+        Crashlytics.setBool("isGREActive",true);
+
+    }
+
+    private void setupDefaultLanguage(){
+
+        if(!sp.contains("home")){
+
+
+            sp.edit().putString("secondlanguage","english").apply();
+        }
+
+    }
+
+
 
     private void delayInitialization(){
 
@@ -411,17 +481,17 @@ public class SplashScreen extends AppCompatActivity {
                 public void run() {
 
 
-                    if(!sp.contains("home")){
-
-
-                        startActivity(new Intent(getApplicationContext(), ChooseVocabulary.class));
-                        finish();
-
-                    }
-                    else {
+//                    if(!sp.contains("home")){
+//
+//
+//                        startActivity(new Intent(getApplicationContext(), ChooseVocabulary.class));
+//                        finish();
+//
+//                    }
+//                    else {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
-                    }
+//                    }
 
 
 

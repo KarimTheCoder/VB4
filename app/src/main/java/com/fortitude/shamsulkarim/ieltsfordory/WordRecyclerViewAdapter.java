@@ -156,11 +156,11 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                 if(((Word) words.get(position)).isFavorite.equalsIgnoreCase("true")){
 
-                    wordViewHolder.favorite.setIconResource(R.drawable.favorite_icon_active);
+                    wordViewHolder.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
 
                 }else {
 
-                    wordViewHolder.favorite.setIconResource(R.drawable.favorite_icon);
+                    wordViewHolder.favorite.setIconResource(R.drawable.ic_favorite_icon);
 
                 }
 //                //------------------------------------------------------------
@@ -356,7 +356,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
             favorite = itemView.findViewById(R.id.favorite);
-            favorite.setIconResource(R.drawable.favorite_icon);
+            favorite.setIconResource(R.drawable.ic_favorite_icon);
             favorite.setTag(null);
 
             favorite.setOnClickListener(this);
@@ -421,8 +421,8 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                         greWordDatabase.updateFav(wordPos+"","True");
                     }
 
-                    favorite.setIconResource(R.drawable.favorite_icon_active);
-                    favorite.setTag(R.drawable.favorite_icon_active);
+                    favorite.setIconResource(R.drawable.ic_favorite_icon_active);
+                    favorite.setTag(R.drawable.ic_favorite_icon_active);
 
                 }
                 else {
@@ -452,7 +452,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                     }
 
 
-                    favorite.setIconResource(R.drawable.favorite_icon);
+                    favorite.setIconResource(R.drawable.ic_favorite_icon);
                     favorite.setTag(null);
 
 

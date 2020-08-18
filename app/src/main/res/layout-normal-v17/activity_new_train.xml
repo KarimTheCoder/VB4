@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/secondary_background_color"
+    android:background="@color/primary_background_color"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.NewTrain">
 
 
@@ -42,6 +42,7 @@
             android:layout_marginBottom="@dimen/keyline_4"
             app:cardCornerRadius="20dp"
             app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/card_background_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/top_background"
@@ -82,8 +83,6 @@
                         android:layout_marginEnd="@dimen/keyline_4"
                         style="@style/primary_text_style"
                         android:text="Comprehensive"
-                        android:textColor="@color/topColor"
-
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -93,7 +92,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:fab_colorPressed="@color/colorPrimaryDark"
-                        app:fab_colorNormal="@color/colorPrimary"
+                        app:fab_colorNormal="@color/progress_fab_color_primary"
                         android:layout_marginTop="@dimen/keyline_4"
                         android:layout_marginBottom="@dimen/keyline_4"
                         android:layout_marginEnd="@dimen/keyline_4"
@@ -101,8 +100,8 @@
                         app:fab_label="Next"
                         android:onClick="next"
                         android:src="@drawable/next_icon"
-                        app:fab_progress_backgroundColor="@color/grey"
-                        app:fab_progress_color="@color/colorPrimaryDark"
+                        app:fab_progress_backgroundColor="@color/progress_fab_color_background"
+                        app:fab_progress_color="@color/progress_fab_color_secondary"
                         app:fab_showShadow="false"
                         app:layout_constraintBottom_toBottomOf="parent"
 
@@ -192,6 +191,7 @@
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
         style="@style/home_card_style"
+        app:cardBackgroundColor="@color/card_background_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_background"
@@ -239,6 +239,7 @@
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
         style="@style/home_card_style"
+        app:cardBackgroundColor="@color/card_background_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_card1">
@@ -284,6 +285,7 @@
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
         style="@style/home_card_style"
+        app:cardBackgroundColor="@color/card_background_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_card2">
@@ -329,6 +331,7 @@
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
         style="@style/home_card_style"
+        app:cardBackgroundColor="@color/card_background_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_card3">

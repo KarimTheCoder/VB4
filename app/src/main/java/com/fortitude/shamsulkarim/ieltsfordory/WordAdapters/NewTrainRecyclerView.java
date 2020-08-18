@@ -195,8 +195,8 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                 SpannableStringBuilder spanEx1 = new SpannableStringBuilder(word.getExample1()+"\n"+word.getExample1SL());
 
                 // Span to set text color to some RGB value
-                final ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#373d3f"));
-                final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
+                final ForegroundColorSpan fcs = new ForegroundColorSpan(ctx.getResources().getColor(R.color.primary_text_color));
+                final ForegroundColorSpan lowColor = new ForegroundColorSpan(ctx.getResources().getColor(R.color.third_text_color));
                 spanEx1.setSpan(fcs,0,word.getExample1().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
@@ -217,7 +217,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
                 if(word.getIsFavorite().equalsIgnoreCase("true")){
 
-                    definationAdapter.favorite.setIconResource(R.drawable.favorite_icon_active);
+                    definationAdapter.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                 }
 
                 if(!sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
@@ -270,7 +270,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                     imageViewHolder.imageStateText.setText(R.string.waitingForImage);
                     imageViewHolder.imageText.setText(" ");
 
-                    final ForegroundColorSpan fcss = new ForegroundColorSpan(Color.parseColor("#373d3f"));
+                    final ForegroundColorSpan fcss = new ForegroundColorSpan(ctx.getResources().getColor(R.color.primary_text_color));
                     final SpannableStringBuilder spanEx3 = new SpannableStringBuilder(word.getExample3()+"\n"+word.getExample3SL());
                     spanEx3.setSpan(fcss,0,word.getExample3().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -385,8 +385,8 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             isVoicePronunciation = sp.getBoolean("pronunState",true);
             favorite.setOnClickListener(this);
             speak.setOnClickListener(this);
-            speak.setDisableBackgroundColor(Color.parseColor("#cccccc"));
-            speak.setDisableBorderColor(Color.parseColor("#ffffff"));
+            speak.setDisableBackgroundColor(ctx.getResources().getColor(R.color.primary_background_color));
+            speak.setDisableBorderColor(ctx.getResources().getColor(R.color.primary_background_color));
 
 
 
@@ -476,13 +476,13 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
 
                         ieltsWordDatabase.updateFav(word.position+"","true");
-                        favorite.setIconResource(R.drawable.favorite_icon_active);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                         word.setIsFavorite("true");
 
                     }else {
 
                         ieltsWordDatabase.updateFav(word.position+"","false");
-                        favorite.setIconResource(R.drawable.favorite_icon);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon);
                         word.setIsFavorite("false");
                     }
                 }
@@ -497,12 +497,12 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
 
                         toeflWordDatabasee.updateFav(word.position+"","true");
-                        favorite.setIconResource(R.drawable.favorite_icon_active);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                         word.setIsFavorite("true");
                     }else {
 
                         toeflWordDatabasee.updateFav(word.position+"","false");
-                        favorite.setIconResource(R.drawable.favorite_icon);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon);
                         word.setIsFavorite("false");
                     }
                 }
@@ -515,12 +515,12 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
 
                         satWordDatabase.updateFav(word.position+"","true");
-                        favorite.setIconResource(R.drawable.favorite_icon_active);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                         word.setIsFavorite("true");
                     }else {
 
                         satWordDatabase.updateFav(word.position+"","false");
-                        favorite.setIconResource(R.drawable.favorite_icon);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon);
                         word.setIsFavorite("false");
                     }
                 }
@@ -533,13 +533,13 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
 
                         greWordDatabase.updateFav(word.position+"","true");
-                        favorite.setIconResource(R.drawable.favorite_icon_active);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                         word.setIsFavorite("true");
 
                     }else {
 
                         greWordDatabase.updateFav(word.position+"","false");
-                        favorite.setIconResource(R.drawable.favorite_icon);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon);
                         word.setIsFavorite("false");
                     }
                 }

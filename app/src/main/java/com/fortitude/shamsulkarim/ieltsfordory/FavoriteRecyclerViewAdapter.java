@@ -9,6 +9,8 @@ import android.speech.tts.TextToSpeech;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -142,9 +144,9 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         if(isFav.get(pos) == true){
 
 
-            holder.favorite.setIconResource(R.drawable.favorite_icon_active);
+            holder.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
         }else {
-         holder.favorite.setIconResource(R.drawable.favorite_icon);
+         holder.favorite.setIconResource(R.drawable.ic_favorite_icon);
 
 
         }
@@ -278,6 +280,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 //            }
 
             favorite = (FancyButton) itemView.findViewById(R.id.favorite_favorite);
+
             favorite.setOnClickListener(this);
             speaker.setOnClickListener(this);
 
@@ -373,8 +376,8 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
                 if(word.isFavorite.equalsIgnoreCase("True")){
 
-                    favorite.setIconResource(R.drawable.ic_favorite);
-                    favorite.setTag(R.drawable.ic_favorite);
+                    favorite.setIconResource(R.drawable.ic_favorite_icon);
+                    favorite.setTag(R.drawable.ic_favorite_icon);
                     isFav.set(getAdapterPosition(),false);
 
 
@@ -420,7 +423,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
 
                     isFav.set(getAdapterPosition(),true);
-                    favorite.setIconResource(R.drawable.favorite_card_view);
+                    favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                     favorite.setTag(null);
 
                     if(words.get(getAdapterPosition()).level.equalsIgnoreCase("IELTS")){

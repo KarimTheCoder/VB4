@@ -95,14 +95,14 @@
                     android:id="@+id/favorite_favorite"
                     android:layout_width="60dp"
                     android:layout_height="50dp"
-                    android:padding="8dp"
+                    android:padding="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     fancy:fb_borderWidth="1dp"
                     fancy:fb_defaultColor="@color/card_background_color"
                     fancy:fb_focusColor="@color/colorPrimary"
-                    fancy:fb_iconResource="@drawable/ic_favorite"
+                    fancy:fb_iconResource="@drawable/ic_favorite_icon"
                     fancy:fb_radius="100dp"
                     fancy:fb_text="">
 

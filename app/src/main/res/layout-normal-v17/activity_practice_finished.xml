@@ -32,7 +32,7 @@
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
-                app:cardBackgroundColor="@color/grey100"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -162,7 +162,7 @@
         android:id="@+id/tf_button_background"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:background="#fff"
+        android:background="@color/card_background_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -183,7 +183,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="@dimen/keyline_4"
         android:src="@drawable/ic_home"
-        app:fab_colorNormal="@color/grey100"
+        app:fab_colorNormal="@color/primary_text_color_white"
         app:fab_colorPressed="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

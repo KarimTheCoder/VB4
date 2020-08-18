@@ -14,7 +14,8 @@
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_2"
-        app:cardCornerRadius="15dp"
+        style="@style/home_card_style"
+        app:cardBackgroundColor="@color/card_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -85,15 +86,15 @@
 
             <ImageView
                 android:id="@+id/image_quality"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginLeft="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginRight="@dimen/keyline_4"
                 android:layout_marginBottom="@dimen/keyline_4"
-                android:src="@drawable/ic_setting"
+                android:src="@drawable/ic_adjust"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary_background_color"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewSettingActivity">
 
 
@@ -18,7 +19,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="0dp"
-        android:id="@+id/ns_toolbar" />
+        app:titleTextColor="@color/primary_text_color"
+        android:id="@+id/ns_toolbar"
+        android:background="@color/toolbar_background_color"
+        />
 
     <ScrollView
         android:layout_width="0dp"
@@ -29,7 +33,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/ns_save"
-
+        android:layout_marginTop="0dp"
         app:layout_constraintTop_toBottomOf="@+id/view16"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintVertical_bias="0.0">
@@ -55,6 +59,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,8 +73,7 @@
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView31"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
                     <CheckBox
                         android:id="@+id/toefl_checkbox"
@@ -78,8 +82,7 @@
                         android:layout_marginStart="@dimen/keyline_6"
                         app:layout_constraintBottom_toBottomOf="@+id/ielts_checkbox"
                         app:layout_constraintStart_toEndOf="@+id/textView29"
-                        app:layout_constraintTop_toTopOf="@+id/ielts_checkbox"
-                        android:layout_marginLeft="@dimen/keyline_6" />
+                        app:layout_constraintTop_toTopOf="@+id/ielts_checkbox" />
 
                     <CheckBox
                         android:id="@+id/sat_checkbox"
@@ -90,8 +93,7 @@
                         android:layout_marginBottom="@dimen/keyline_4"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ielts_checkbox"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toBottomOf="@+id/ielts_checkbox" />
 
 
                     <CheckBox
@@ -112,8 +114,7 @@
                         style="@style/secondary_text_style"
                         app:layout_constraintBottom_toBottomOf="@+id/toefl_checkbox"
                         app:layout_constraintStart_toEndOf="@+id/toefl_checkbox"
-                        app:layout_constraintTop_toTopOf="@+id/toefl_checkbox"
-                        android:layout_marginLeft="@dimen/keyline_2" />
+                        app:layout_constraintTop_toTopOf="@+id/toefl_checkbox" />
 
 
                     <TextView
@@ -127,8 +128,7 @@
                         style="@style/secondary_text_style"
                         app:layout_constraintBottom_toBottomOf="@+id/ielts_checkbox"
                         app:layout_constraintStart_toEndOf="@+id/ielts_checkbox"
-                        app:layout_constraintTop_toTopOf="@+id/ielts_checkbox"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="@+id/ielts_checkbox" />
 
                     <TextView
                         android:id="@+id/textView30"
@@ -141,8 +141,7 @@
                         style="@style/secondary_text_style"
                         app:layout_constraintBottom_toBottomOf="@+id/sat_checkbox"
                         app:layout_constraintStart_toEndOf="@+id/sat_checkbox"
-                        app:layout_constraintTop_toTopOf="@+id/sat_checkbox"
-                        android:layout_marginLeft="16dp" />
+                        app:layout_constraintTop_toTopOf="@+id/sat_checkbox" />
 
 
                     <TextView
@@ -169,8 +168,7 @@
                         style="@style/secondary_text_style"
                         app:layout_constraintBottom_toBottomOf="@+id/gre_checkbox"
                         app:layout_constraintStart_toEndOf="@+id/gre_checkbox"
-                        app:layout_constraintTop_toTopOf="@+id/gre_checkbox"
-                        android:layout_marginLeft="8dp" />
+                        app:layout_constraintTop_toTopOf="@+id/gre_checkbox" />
 
                     <TextView
                         android:id="@+id/textView31"
@@ -183,9 +181,7 @@
                         android:text="@string/for_more_difficult_words"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView5"
-                        app:layout_constraintTop_toBottomOf="@+id/textView5"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="16dp" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -198,6 +194,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/choose_vocabulary_card">
@@ -274,8 +271,7 @@
                             fancy:fb_focusColor="@color/colorPrimary"
                             fancy:fb_radius="30dp"
                             fancy:fb_text="Spanish"
-                            fancy:fb_textColor="#ffffff"
-                            android:layout_marginRight="16dp" />
+                            fancy:fb_textColor="#ffffff" />
 
 
                     </ScrollView>
@@ -292,7 +288,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/language_cardView"
                 android:id="@+id/user_status"
-                style="@style/primary_card_style">
+                style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
+                >
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -308,8 +306,7 @@
                         android:text="@string/doggo"
                         style="@style/primary_text_style"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
@@ -323,8 +320,7 @@
                         android:text="@string/sign_in_text"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ns_username"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toBottomOf="@+id/ns_username" />
 
                     <mehdi.sakout.fancybuttons.FancyButton
                         android:id="@+id/ns_sign_in"
@@ -347,8 +343,55 @@
                         fancy:fb_focusColor="@color/colorPrimary"
                         fancy:fb_radius="30dp"
                         fancy:fb_text="Sign in"
-                        fancy:fb_textColor="@color/colorPrimary"
-                        android:layout_marginRight="@dimen/keyline_4" />
+                        fancy:fb_textColor="@color/colorPrimary" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/theme_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_status">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+
+
+                    <TextView
+                        android:id="@+id/theme_card_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:text="@string/theme_title"
+                        style="@style/primary_text_style"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/theme_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        style="@style/spinnerItemStyle"
+                        android:entries="@array/theme_options"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -361,9 +404,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/user_status">
+                app:layout_constraintTop_toBottomOf="@+id/theme_card">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -394,8 +438,7 @@
                         style="@style/primary_text_style"
                         app:layout_constraintBottom_toTopOf="@+id/view10"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -412,19 +455,18 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
-                    <androidx.appcompat.widget.AppCompatSpinner
+                    <Spinner
                         android:id="@+id/wps_spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/keyline_4"
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginBottom="@dimen/keyline_4"
-                        android:gravity="center"
+                        style="@style/spinnerItemStyle"
                         android:entries="@array/words_per_session_array"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginRight="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -436,6 +478,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView2"
@@ -456,8 +499,7 @@
                         style="@style/primary_text_style"
                         app:layout_constraintBottom_toTopOf="@+id/view1"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
@@ -489,7 +531,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <androidx.appcompat.widget.AppCompatSpinner
+                    <Spinner
                         android:id="@+id/profile_wps_spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -497,11 +539,12 @@
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginBottom="@dimen/keyline_4"
                         android:gravity="center"
+                        style="@style/spinnerItemStyle"
                         android:entries="@array/words_per_session_array"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginRight="@dimen/keyline_4" />
+                        />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -512,6 +555,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView3"
@@ -549,8 +593,7 @@
                         style="@style/primary_text_style"
                         app:layout_constraintBottom_toTopOf="@+id/view4"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/wps_explain4"
@@ -577,8 +620,7 @@
                         android:checked="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginRight="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
 
@@ -590,6 +632,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView4"
@@ -626,8 +669,7 @@
                         android:text="@string/pronunciation_title"
                         style="@style/primary_text_style"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/pronun_explain4"
@@ -654,8 +696,7 @@
                         android:checked="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginRight="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
 
@@ -668,6 +709,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -688,8 +730,7 @@
                         style="@style/third_text_style"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -698,6 +739,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -733,8 +775,7 @@
                         style="@style/primary_text_style"
                         app:layout_constraintBottom_toTopOf="@+id/viewi"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="8dp" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/image_quality_subtitle"
@@ -747,9 +788,7 @@
                         style="@style/third_text_style"
                         app:layout_constraintLeft_toLeftOf="@+id/image_quality_title"
                         app:layout_constraintRight_toLeftOf="@+id/image_quality_spinner"
-                        app:layout_constraintTop_toBottomOf="@+id/viewi"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginRight="1dp" />
+                        app:layout_constraintTop_toBottomOf="@+id/viewi" />
 
 
                     <androidx.appcompat.widget.AppCompatSpinner
@@ -763,8 +802,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.45"
-                        android:layout_marginRight="8dp" />
+                        app:layout_constraintVertical_bias="0.45" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

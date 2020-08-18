@@ -9,13 +9,14 @@
         android:title="Share"
 
 
+
          />
 
     <item
         android:id="@+id/profile_menu_settings"
         android:title="Settings"
 
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_setting"
         app:showAsAction="always" />
 
 </menu>

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
@@ -26,12 +27,13 @@ import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.Connectivit
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewWordFragment extends Fragment {
+public class NewWordFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private String[] IELTSwordArray, IELTStranslationArray, IELTSgrammarArray, IELTSpronunArray, IELTSexample1array, IELTSexample2Array, IELTSexample3Array, IELTSvocabularyType;
     private String[] TOEFLwordArray, TOEFLtranslationArray, TOEFLgrammarArray, TOEFLpronunArray, TOEFLexample1array, TOEFLexample2Array, TOEFLexample3Array, TOEFLvocabularyType;
@@ -48,16 +50,16 @@ public class NewWordFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Object> words = new ArrayList<>();
     private List<String> beginnerFav;
-    Toolbar toolbar;
-    IELTSWordDatabase IELTSdatabase;
-    TOEFLWordDatabase TOEFLdatabase;
-    SATWordDatabase SATdatabase;
-    GREWordDatabase GREdatabase;
-    SharedPreferences sp;
-    boolean connected = false;
-    int languageId;
-    Spinner spinner;
-    int beginnerPos;
+    private Toolbar toolbar;
+    private IELTSWordDatabase IELTSdatabase;
+    private TOEFLWordDatabase TOEFLdatabase;
+    private SATWordDatabase SATdatabase;
+    private GREWordDatabase GREdatabase;
+    private SharedPreferences sp;
+    private boolean connected = false;
+    private int languageId;
+    private Spinner spinner;
+    private int beginnerPos;
     private FloatingSearchView sv;
 
     public NewWordFragment() {
@@ -84,14 +86,18 @@ public class NewWordFragment extends Fragment {
         toolbar.setTitleTextColor(getResources().getColor(R.color.beginnerS));
         setHasOptionsMenu(true);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
+        if (activity != null) {
+            activity.setSupportActionBar(toolbar);
+        }
         sv= (FloatingSearchView) v.findViewById(R.id.mSearch);
 
 
 
                 languageId = sp.getInt("language",0);
                 beginnerFav = new ArrayList<>();
-                spinner = (Spinner)v.findViewById(R.id.word_spinner);
+                spinner = v.findViewById(R.id.word_spinner);
+                spinner.setOnItemSelectedListener(this);
+                setSpinnerAdapter();
                 int selection = 0;
 
                 if (!sp.contains("prevWordSelection")) {
@@ -156,58 +162,58 @@ public class NewWordFragment extends Fragment {
                 spinner.setSelection(selection);
 
 
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-
-
-                        if (i == 0) {
-
-
-                            sp.edit().putInt("prevWordSelection", 0).apply();
-
-                            recyclerView = (RecyclerView) getView().findViewById(R.id.new_recycler_view);
-
-                            layoutManager = new LinearLayoutManager(getContext());
-                            recyclerView.setLayoutManager(layoutManager);
-                            recyclerView.setHasFixedSize(true);
-                            getBeginnerWordData();
-                            Crashlytics.setString("Word Fragment","Beginner");
-
-                        }
-                        if (i == 1) {
-
-
-                            sp.edit().putInt("prevWordSelection", 1).apply();
-
-                            recyclerView = (RecyclerView) getView().findViewById(R.id.new_recycler_view);
-                            layoutManager = new LinearLayoutManager(getContext());
-                            recyclerView.setLayoutManager(layoutManager);
-                            recyclerView.setHasFixedSize(true);
-                            getIntermediateWordData();
-                            Crashlytics.setString("Word Fragment","Intermediate");
-                        }
-
-                        if (i == 2) {
-
-                            sp.edit().putInt("prevWordSelection", 2).apply();
-
-                            recyclerView = (RecyclerView) getView().findViewById(R.id.new_recycler_view);
-                            layoutManager = new LinearLayoutManager(getContext());
-                            recyclerView.setLayoutManager(layoutManager);
-                            recyclerView.setHasFixedSize(true);
-                            getAdvanceWordData();
-                            Crashlytics.setString("Word Fragment","Advance");
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
+//                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                    @Override
+//                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//
+//
+//
+//                        if (i == 0) {
+//
+//
+//                            sp.edit().putInt("prevWordSelection", 0).apply();
+//
+//                            recyclerView = (RecyclerView) getView().findViewById(R.id.new_recycler_view);
+//
+//                            layoutManager = new LinearLayoutManager(getContext());
+//                            recyclerView.setLayoutManager(layoutManager);
+//                            recyclerView.setHasFixedSize(true);
+//                            getBeginnerWordData();
+//                            Crashlytics.setString("Word Fragment","Beginner");
+//
+//                        }
+//                        if (i == 1) {
+//
+//
+//                            sp.edit().putInt("prevWordSelection", 1).apply();
+//
+//                            recyclerView = (RecyclerView) getView().findViewById(R.id.new_recycler_view);
+//                            layoutManager = new LinearLayoutManager(getContext());
+//                            recyclerView.setLayoutManager(layoutManager);
+//                            recyclerView.setHasFixedSize(true);
+//                            getIntermediateWordData();
+//                            Crashlytics.setString("Word Fragment","Intermediate");
+//                        }
+//
+//                        if (i == 2) {
+//
+//                            sp.edit().putInt("prevWordSelection", 2).apply();
+//
+//                            recyclerView = (RecyclerView) getView().findViewById(R.id.new_recycler_view);
+//                            layoutManager = new LinearLayoutManager(getContext());
+//                            recyclerView.setLayoutManager(layoutManager);
+//                            recyclerView.setHasFixedSize(true);
+//                            getAdvanceWordData();
+//                            Crashlytics.setString("Word Fragment","Advance");
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                    }
+//                });
 
 
 
@@ -642,14 +648,66 @@ public class NewWordFragment extends Fragment {
 
             greFavPosition.add(greRes.getString(2));
         }
+    }
 
 
+    private void setSpinnerAdapter(){
 
-
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()),
+                R.array.spinner_options, R.layout.settings_spinner);
+        spinnerAdapter.setDropDownViewResource(R.layout.settings_spinner_dropdown);
+        spinner.setAdapter(spinnerAdapter);
 
 
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+
+        if (i == 0) {
+
+
+            sp.edit().putInt("prevWordSelection", 0).apply();
+
+            recyclerView = (RecyclerView) Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
+
+            layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setHasFixedSize(true);
+            getBeginnerWordData();
+            Crashlytics.setString("Word Fragment","Beginner");
+
+        }
+        if (i == 1) {
+
+
+            sp.edit().putInt("prevWordSelection", 1).apply();
+
+            recyclerView = (RecyclerView) Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
+            layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setHasFixedSize(true);
+            getIntermediateWordData();
+            Crashlytics.setString("Word Fragment","Intermediate");
+        }
+
+        if (i == 2) {
+
+            sp.edit().putInt("prevWordSelection", 2).apply();
+
+            recyclerView = (RecyclerView) Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
+            layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setHasFixedSize(true);
+            getAdvanceWordData();
+            Crashlytics.setString("Word Fragment","Advance");
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

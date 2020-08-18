@@ -52,19 +52,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/word_toolbar" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/word_spinner"
+    <androidx.cardview.widget.CardView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/keyline_4"
-        android:entries="@array/spinner_options"
+        android:layout_marginEnd="@dimen/keyline_4"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/word_toolbar"
-        app:layout_constraintRight_toRightOf="@id/mSearch"
-        app:layout_constraintTop_toTopOf="@+id/word_toolbar"
-        android:layout_marginEnd="@dimen/keyline_4">
+        app:layout_constraintEnd_toEndOf="@+id/mSearch"
 
+        app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.appcompat.widget.AppCompatSpinner>
+        <Spinner
+            android:id="@+id/word_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            style="@style/spinnerItemStyle"
+            android:entries="@array/words_per_session_array"
+            android:spinnerMode="dropdown" />
+
+    </androidx.cardview.widget.CardView>
+
 
 
     <View

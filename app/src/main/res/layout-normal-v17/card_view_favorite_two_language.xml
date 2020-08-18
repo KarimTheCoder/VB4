@@ -67,7 +67,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/favorite_card_word"
 
-                    app:layout_constraintEnd_toEndOf="@id/pos_background"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <mehdi.sakout.fancybuttons.FancyButton
@@ -81,7 +80,7 @@
                     fancy:fb_borderWidth="1dp"
                     fancy:fb_defaultColor="@color/grey"
                     fancy:fb_focusColor="@color/colorPrimary"
-                    fancy:fb_iconResource="@drawable/ic_favorite"
+                    fancy:fb_iconResource="@drawable/ic_favorite_icon"
                     fancy:fb_radius="100dp"
                     fancy:fb_text="">
 

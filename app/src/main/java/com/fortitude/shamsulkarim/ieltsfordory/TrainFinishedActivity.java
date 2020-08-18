@@ -276,11 +276,11 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
     private void stylize(){
 
 
-        home.setColorPressed(getResources().getColor(R.color.colorPrimary));
-        home.setColorNormal(getResources().getColor(R.color.grey100));
-        trainAgain.setFocusBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-        trainAgain.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        trainAgain.setTextColor(getResources().getColor(R.color.grey100));
+//        home.setColorPressed(getResources().getColor(R.color.colorPrimary));
+//        home.setColorNormal(getResources().getColor(R.color.grey100));
+//        trainAgain.setFocusBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+//        trainAgain.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        trainAgain.setTextColor(getResources().getColor(R.color.grey100));
 
     }
 
@@ -338,7 +338,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
                     if(mostMistakenWord.isFavorite.equalsIgnoreCase("True")){
 
-                        favoriteButton.setIconResource(R.drawable.favorite_icon_active);
+                        favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
 
                     }
 
@@ -381,7 +381,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
                     if(mostMistakenWord.isFavorite.equalsIgnoreCase("True")){
 
-                        favoriteButton.setIconResource(R.drawable.favorite_icon_active);
+                        favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
 
                     }
                 }
@@ -417,7 +417,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
                     if(mostMistakenWord.isFavorite.equalsIgnoreCase("True")){
 
-                        favoriteButton.setIconResource(R.drawable.favorite_icon_active);
+                        favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
 
                     }
 
@@ -443,12 +443,12 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
                 mostMistakenWord.setIsFavorite("false");
                 ieltsWordDatabase.updateFav(mostMistakenWord.position+"","false");
-                favoriteButton.setIconResource(R.drawable.favorite_icon);
+                favoriteButton.setIconResource(R.drawable.ic_favorite_icon);
 
             }else {
 
                 mostMistakenWord.setIsFavorite("true");
-                favoriteButton.setIconResource(R.drawable.favorite_icon_active);
+                favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
                 ieltsWordDatabase.updateFav(mostMistakenWord.position+"","true");
             }
 
@@ -460,12 +460,12 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
             if(mostMistakenWord.isFavorite.equalsIgnoreCase("true")){
 
                 mostMistakenWord.setIsFavorite("false");
-                favoriteButton.setIconResource(R.drawable.favorite_icon);
+                favoriteButton.setIconResource(R.drawable.ic_favorite_icon);
                 toeflWordDatabase.updateFav(mostMistakenWord.position+"","false");
 
             }else {
                 mostMistakenWord.setIsFavorite("true");
-                favoriteButton.setIconResource(R.drawable.favorite_icon_active);
+                favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
 
                 toeflWordDatabase.updateFav(mostMistakenWord.position+"","true");
             }
@@ -479,12 +479,12 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
                 mostMistakenWord.setIsFavorite("false");
                 satWordDatabase.updateFav(mostMistakenWord.position+"","false");
-                favoriteButton.setIconResource(R.drawable.favorite_icon);
+                favoriteButton.setIconResource(R.drawable.ic_favorite_icon);
 
             }else {
                 mostMistakenWord.setIsFavorite("true");
 
-                favoriteButton.setIconResource(R.drawable.favorite_icon_active);
+                favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
                 satWordDatabase.updateFav(mostMistakenWord.position+"","true");
             }
 
@@ -496,13 +496,13 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
             if(mostMistakenWord.isFavorite.equalsIgnoreCase("true")){
 
                 mostMistakenWord.setIsFavorite("false");
-                favoriteButton.setIconResource(R.drawable.favorite_icon);
+                favoriteButton.setIconResource(R.drawable.ic_favorite_icon);
                 greWordDatabase.updateFav(mostMistakenWord.position+"","false");
 
             }else {
 
                 mostMistakenWord.setIsFavorite("true");
-                favoriteButton.setIconResource(R.drawable.favorite_icon_active);
+                favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
                 greWordDatabase.updateFav(mostMistakenWord.position+"","true");
             }
 

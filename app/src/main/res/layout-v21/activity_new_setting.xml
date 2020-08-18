@@ -352,7 +352,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+                android:id="@+id/theme_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
@@ -360,6 +360,54 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_status">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+
+
+                    <TextView
+                        android:id="@+id/theme_card_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:text="@string/theme_title"
+                        style="@style/primary_text_style"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/theme_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        style="@style/spinnerItemStyle"
+                        android:entries="@array/theme_options"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/theme_card">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -407,15 +455,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
-                    <androidx.appcompat.widget.AppCompatSpinner
+                    <Spinner
                         android:id="@+id/wps_spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/keyline_4"
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginBottom="@dimen/keyline_4"
-                        android:gravity="center"
-
+                        style="@style/spinnerItemStyle"
                         android:entries="@array/words_per_session_array"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -484,7 +531,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <androidx.appcompat.widget.AppCompatSpinner
+                    <Spinner
                         android:id="@+id/profile_wps_spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -492,6 +539,7 @@
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginBottom="@dimen/keyline_4"
                         android:gravity="center"
+                        style="@style/spinnerItemStyle"
                         android:entries="@array/words_per_session_array"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"

@@ -2,6 +2,7 @@
 <resources>
 
 
+    <color name="spinnerColor">@color/secondary_text_color</color>
     <color name="colorPrimary">#7264f6</color>
     <color name="colorPrimaryDark">#76dfeb</color>
     <color name="secondaryGradiantColor">#76dfeb</color>
@@ -80,5 +81,11 @@
 
     // Toolbar background color
     <color name="toolbar_background_color">#ffffff</color>
+
+    // New Train Progress fab colors
+    <color name="progress_fab_color_primary">@color/colorPrimary</color>
+    <color name="progress_fab_color_secondary">@color/colorPrimaryDark</color>
+    <color name="progress_fab_color_background">@color/grey100</color>
+
 
 </resources>

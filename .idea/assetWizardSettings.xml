@@ -333,8 +333,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_videogame_asset_24" />
-                            <entry key="sourceFile" value="E:\1. Work Files\App Files\Apps\Vocabulary Builder Apps\Vocabulary Builder VB4\Close Development\VB4 AsyncTask" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_instagram_icon" />
+                            <entry key="sourceFile" value="C:\Users\Shams\Desktop\VB4 Selected Icons\instagram_icon.svg" />
                           </map>
                         </option>
                       </PersistentState>

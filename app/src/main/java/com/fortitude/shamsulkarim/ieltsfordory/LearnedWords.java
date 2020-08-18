@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -42,7 +44,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LearnedWords extends Fragment implements View.OnClickListener{
+public class LearnedWords extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
 
     private String[] IELTSwordArray, IELTStranslationArray, IELTSgrammarArray, IELTSpronunArray, IELTSexample1array, IELTSexample2Array, IELTSexample3Array, IELTSvocabularyType;
@@ -169,40 +171,19 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
 
 
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-                if (i == 0) {
-
-
-                    sp.edit().putInt("prevLearnedSelection",0).apply();
-                   // beginnerWordInitialization();
-                   getBeginnerWordData();
-                    Crashlytics.setString("Learned Word Fragment: ","Beginner");
-                }
-                if (i == 1) {
-
-
-                    sp.edit().putInt("prevLearnedSelection",1).apply();
-                    getIntermediateWordData();
-                    Crashlytics.setString("Learned Word Fragment: ","Intermediate");
-                }
-
-                if (i == 2) {
-
-                    sp.edit().putInt("prevLearnedSelection",2).apply();
-                    getAdvanceWordData();
-                    Crashlytics.setString("Learned Word Fragment: ","Advance");
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
         //SEARCH
         settingUpSearch();
@@ -229,7 +210,8 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
         havenotlearned.setVisibility(View.INVISIBLE);
         noLearnedImage = (ImageView)v.findViewById(R.id.no_learned_image);
         noLearnedImage.setVisibility(View.INVISIBLE);
-        spinner = (Spinner)v.findViewById(R.id.word_spinner);
+        setSpinner(v);
+
         startLearning = (FancyButton)v.findViewById(R.id.nl_start_learning);
         startLearning.setOnClickListener(this);
         startLearning.setBackgroundResource(R.drawable.gradient);
@@ -905,13 +887,51 @@ public class LearnedWords extends Fragment implements View.OnClickListener{
 
             greFavPosition.add(greRes.getString(2));
         }
-
-
-
-
-
-
     }
 
 
+
+    private void setSpinner(View v){
+
+        spinner = v.findViewById(R.id.word_spinner);
+        spinner.setOnItemSelectedListener(this);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()),
+                R.array.spinner_options, R.layout.settings_spinner);
+        adapter.setDropDownViewResource(R.layout.settings_spinner_dropdown);
+        spinner.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+        if (i == 0) {
+
+
+            sp.edit().putInt("prevLearnedSelection",0).apply();
+            // beginnerWordInitialization();
+            getBeginnerWordData();
+            Crashlytics.setString("Learned Word Fragment: ","Beginner");
+        }
+        if (i == 1) {
+
+
+            sp.edit().putInt("prevLearnedSelection",1).apply();
+            getIntermediateWordData();
+            Crashlytics.setString("Learned Word Fragment: ","Intermediate");
+        }
+
+        if (i == 2) {
+
+            sp.edit().putInt("prevLearnedSelection",2).apply();
+            getAdvanceWordData();
+            Crashlytics.setString("Learned Word Fragment: ","Advance");
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

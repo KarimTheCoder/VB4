@@ -80,7 +80,7 @@
                     fancy:fb_borderWidth="1dp"
                     fancy:fb_defaultColor="@color/grey"
                     fancy:fb_focusColor="@color/colorPrimary"
-                    fancy:fb_iconResource="@drawable/ic_favorite"
+                    fancy:fb_iconResource="@drawable/ic_favorite_icon"
                     fancy:fb_radius="100dp"
                     fancy:fb_text="">
 

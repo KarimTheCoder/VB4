@@ -79,7 +79,7 @@
                 fancy:fb_focusColor="@color/colorPrimary"
                 fancy:fb_ghost="true"
 
-                fancy:fb_iconResource="@drawable/ic_av_volume_down2"
+                fancy:fb_iconResource="@drawable/speak"
                 fancy:fb_radius="100000dp"
                 fancy:fb_text=""
                 ></mehdi.sakout.fancybuttons.FancyButton>

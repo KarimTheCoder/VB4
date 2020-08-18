@@ -61,7 +61,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
         holder.word.setText(words.get(position).getWord());
 
         if(words.get(position).getIsFavorite().equalsIgnoreCase("true")){
-            holder.favorite.setIconResource(R.drawable.favorite_icon_active);
+            holder.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
         }
 
     }
@@ -201,7 +201,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
 
                     if(vocabularyType.equalsIgnoreCase("IELTS")){
 
-                        favorite.setIconResource(R.drawable.favorite_icon);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon);
                         words.get(getAdapterPosition()).setIsFavorite("false");
                         ieltsWordDatabase.updateFav(""+databasePosition,"false");
 
@@ -210,7 +210,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
 
                     if( vocabularyType.equalsIgnoreCase("TOEFL")){
 
-                        favorite.setIconResource(R.drawable.favorite_icon);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon);
                         words.get(getAdapterPosition()).setIsFavorite("false");
                         toeflWordDatabase.updateFav(""+databasePosition,"false");
 
@@ -218,7 +218,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
 
                     if( vocabularyType.equalsIgnoreCase("SAT")){
 
-                        favorite.setIconResource(R.drawable.favorite_icon);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon);
                         words.get(getAdapterPosition()).setIsFavorite("false");
                         satWordDatabase.updateFav(""+databasePosition,"false");
 
@@ -226,7 +226,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
 
                     if( vocabularyType.equalsIgnoreCase("GRE")){
 
-                        favorite.setIconResource(R.drawable.favorite_icon);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon);
                         words.get(getAdapterPosition()).setIsFavorite("false");
                         greWordDatabase.updateFav(""+databasePosition,"false");
 
@@ -237,7 +237,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
 
                     if(vocabularyType.equalsIgnoreCase("IELTS")){
 
-                        favorite.setIconResource(R.drawable.favorite_icon_active);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                         words.get(getAdapterPosition()).setIsFavorite("true");
                         ieltsWordDatabase.updateFav(""+databasePosition,"true");
 
@@ -246,7 +246,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
 
                     if( vocabularyType.equalsIgnoreCase("TOEFL")){
 
-                        favorite.setIconResource(R.drawable.favorite_icon_active);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                         words.get(getAdapterPosition()).setIsFavorite("true");
                         toeflWordDatabase.updateFav(""+databasePosition,"true");
 
@@ -254,7 +254,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
 
                     if( vocabularyType.equalsIgnoreCase("SAT")){
 
-                        favorite.setIconResource(R.drawable.favorite_icon_active);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                         words.get(getAdapterPosition()).setIsFavorite("true");
                         satWordDatabase.updateFav(""+databasePosition,"true");
 
@@ -262,7 +262,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
 
                     if( vocabularyType.equalsIgnoreCase("GRE")){
 
-                        favorite.setIconResource(R.drawable.favorite_icon_active);
+                        favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                         words.get(getAdapterPosition()).setIsFavorite("true");
                         greWordDatabase.updateFav(""+databasePosition,"true");
 

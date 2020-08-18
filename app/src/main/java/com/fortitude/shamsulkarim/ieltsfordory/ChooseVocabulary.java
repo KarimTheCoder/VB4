@@ -85,17 +85,17 @@ public class ChooseVocabulary extends AppCompatActivity {
 
 
         }
-
-        isIeltsChecked = sp.getBoolean("isIELTSActive",true);
-        isToeflChecked = sp.getBoolean("isTOEFLActive", true);
-        isSatChecked =   sp.getBoolean("isSATActive", true);
-        isGreChecked =   sp.getBoolean("isGREActive",true);
-
-
         Crashlytics.setBool("isIELTSActive",true);
         Crashlytics.setBool("isTOEFLActive",true);
         Crashlytics.setBool("isSATActive",true);
         Crashlytics.setBool("isGREActive",true);
+//        isIeltsChecked = sp.getBoolean("isIELTSActive",true);
+//        isToeflChecked = sp.getBoolean("isTOEFLActive", true);
+//        isSatChecked =   sp.getBoolean("isSATActive", true);
+//        isGreChecked =   sp.getBoolean("isGREActive",true);
+
+
+
 
 
 

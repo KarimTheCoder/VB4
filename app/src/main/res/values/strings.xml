@@ -47,6 +47,16 @@
     <string name="sound_text_detail">Turn off or on sound of the quiz sessions</string>
     <string name="privacypolicy">https://banglish1.wixsite.com/fortitude</string>
     <string name="translation_intro">Learn English vocabulary faster with your native language. Every word, definition, and sentence is translated into your language by a set of professional native speakers. Spanish is the first language to be part of this feature, and many more languages are on the way.</string>
+    <string name="theme_title">Theme</string>
+    <string name="theme_description"></string>
+
+    <string-array name="theme_options">
+
+        <item> "Day"</item>
+        <item> "Night"</item>
+        <item>"Follow System"</item>
+    </string-array>
+
 
     <string-array name="spinner_options">
 

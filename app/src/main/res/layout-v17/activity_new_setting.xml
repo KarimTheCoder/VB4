@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary_background_color"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewSettingActivity">
 
 
@@ -18,7 +19,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="0dp"
-        android:id="@+id/ns_toolbar" />
+        app:titleTextColor="@color/primary_text_color"
+        android:id="@+id/ns_toolbar"
+        android:background="@color/toolbar_background_color"
+        />
 
     <ScrollView
         android:layout_width="0dp"
@@ -55,6 +59,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -189,6 +194,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/choose_vocabulary_card">
@@ -282,7 +288,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/language_cardView"
                 android:id="@+id/user_status"
-                style="@style/primary_card_style">
+                style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
+                >
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -344,13 +352,62 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/theme_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_status">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+
+
+                    <TextView
+                        android:id="@+id/theme_card_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:text="@string/theme_title"
+                        style="@style/primary_text_style"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/theme_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        style="@style/spinnerItemStyle"
+                        android:entries="@array/theme_options"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/user_status">
+                app:layout_constraintTop_toBottomOf="@+id/theme_card">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -398,14 +455,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
-                    <androidx.appcompat.widget.AppCompatSpinner
+                    <Spinner
                         android:id="@+id/wps_spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/keyline_4"
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginBottom="@dimen/keyline_4"
-                        android:gravity="center"
+                        style="@style/spinnerItemStyle"
                         android:entries="@array/words_per_session_array"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -421,6 +478,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView2"
@@ -473,7 +531,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <androidx.appcompat.widget.AppCompatSpinner
+                    <Spinner
                         android:id="@+id/profile_wps_spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -481,6 +539,7 @@
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginBottom="@dimen/keyline_4"
                         android:gravity="center"
+                        style="@style/spinnerItemStyle"
                         android:entries="@array/words_per_session_array"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -496,6 +555,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView3"
@@ -572,6 +632,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView4"
@@ -648,6 +709,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -677,6 +739,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

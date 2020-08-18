@@ -142,8 +142,8 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
         Crashlytics.setBool("Connection Status",connected);
 //
-//            this.startActivity(new Intent(this, PracticeFinished.class));
-//            this.finish();
+        this.startActivity(new Intent(this, PracticeFinished.class));
+        this.finish();
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
         mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712xxx");
 

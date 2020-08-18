@@ -159,11 +159,11 @@ public class advanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                 if(word.getFavNum() == 1){
 
-                    wordViewHolder.favorite.setIconResource(R.drawable.favorite_card_view);
+                    wordViewHolder.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
 
                 }else {
 
-                    wordViewHolder.favorite.setIconResource(R.drawable.ic_favorite);
+                    wordViewHolder.favorite.setIconResource(R.drawable.ic_favorite_icon);
 
                 }
 
@@ -309,8 +309,8 @@ public class advanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                     isFav.set(listPos,"True");
                     db.updateFav(wordPos+"","True");
-                    favorite.setIconResource(R.drawable.favorite_card_view);
-                    favorite.setTag(R.drawable.favorite_card_view);
+                    favorite.setIconResource(R.drawable.ic_favorite_icon_active);
+                    favorite.setTag(R.drawable.ic_favorite_icon_active);
 
 
                     favoriteCount++;
@@ -329,7 +329,7 @@ public class advanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     isFav.set(listPos,"False");
 
                     db.updateFav(wordPos+"","False");
-                    favorite.setIconResource(R.drawable.ic_favorite);
+                    favorite.setIconResource(R.drawable.ic_favorite_icon);
                     favorite.setTag(null);
 
 
