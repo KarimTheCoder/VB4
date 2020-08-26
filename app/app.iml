@@ -44,8 +44,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/freeDebug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/freeDebug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/freeDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/renderscript_source_output_dir/freeDebugAndroidTest/out" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/ap_generated_sources/freeDebugAndroidTest/out" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/renderscript_source_output_dir/freeDebugAndroidTest/out" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/aidl_source_output_dir/freeDebugAndroidTest/out" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/free/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/free/debug" type="java-test-resource" generated="true" />

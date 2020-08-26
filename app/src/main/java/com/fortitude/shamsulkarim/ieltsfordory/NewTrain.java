@@ -205,8 +205,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         updateLearnedDatabase();
 
 
-        NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-        NewTrain.this.finish();
+//        NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+//        NewTrain.this.finish();
 
 
 
@@ -215,10 +215,14 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     @Override
     protected void onDestroy() {
 
-        adapter.stop();
+        if(adapter != null){
+
+            adapter.stop();
+        }
+
+
 
         if(tts != null){
-
 
             tts.stop();
             tts.shutdown();
