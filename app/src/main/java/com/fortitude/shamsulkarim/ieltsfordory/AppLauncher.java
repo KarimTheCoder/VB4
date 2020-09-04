@@ -6,6 +6,7 @@ public class AppLauncher extends AppCompatActivity {
 
 
 
+    //in-app-purchase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
