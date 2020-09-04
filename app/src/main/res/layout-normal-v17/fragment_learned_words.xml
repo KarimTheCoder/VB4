@@ -13,7 +13,7 @@
 
         android:id="@+id/recycler_view_learned_words"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         fancy:layout_constraintBottom_toTopOf="@+id/dummy_bottom_navigation"
         fancy:layout_constraintStart_toStartOf="parent"
         fancy:layout_constraintTop_toBottomOf="@+id/learned_toolbar" />

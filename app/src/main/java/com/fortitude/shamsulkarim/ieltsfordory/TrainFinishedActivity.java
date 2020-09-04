@@ -108,7 +108,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         //Toast.makeText(this,"SharedLearned "+sharedLearned+" level "+level+" fivewordsize "+fiveWordSize,Toast.LENGTH_SHORT).show();
 
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135xxx");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
 
         if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
             mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());

@@ -43,7 +43,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/keyline_4"
-                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginStart="@dimen/keyline_6"
                         android:layout_marginTop="@dimen/keyline_4"
                         android:text="@string/session_completed"
                         style="@style/primary_text_style"
@@ -56,7 +56,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
 
-                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginStart="@dimen/keyline_6"
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_1"
                         android:text="5 new words learned"
