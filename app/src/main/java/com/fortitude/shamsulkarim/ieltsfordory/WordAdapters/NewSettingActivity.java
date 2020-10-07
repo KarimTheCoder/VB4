@@ -1,22 +1,16 @@
 package com.fortitude.shamsulkarim.ieltsfordory.WordAdapters;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.Credentials;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -27,8 +21,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
+import com.fortitude.shamsulkarim.ieltsfordory.SplashScreen;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -56,14 +55,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
-import io.fabric.sdk.android.services.common.Crash;
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class NewSettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class NewSettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, PurchasesUpdatedListener {
 
 
     private IELTSWordDatabase ieltsWordDatabase;
@@ -87,7 +90,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private ProgressDialog progressDialog;
     private CheckBox ieltsCheckbox, toeflCheckbox, satCheckbox, greCheckbox;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked,isSignedIn;
-    private CardView privacyPolicy, signInCardView;
+    private CardView privacyPolicy, signInCardView, restorePurchaseCard;
 
     // google sign in
     private static final String TAG = "GoogleActivity";
@@ -103,6 +106,8 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private int isPrevUser = 0;
     private boolean connected;
 
+    // Billing
+    private BillingClient billingClient;
 
 
     @Override
@@ -112,11 +117,14 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
-        Crashlytics.setBool("Connection Status",connected);
+
 
         privacyPolicy = findViewById(R.id.privacy_policy_card);
         signInCardView = findViewById(R.id.user_status);
+        restorePurchaseCard = findViewById(R.id.restore_card);
+
         privacyPolicy.setOnClickListener(this);
+        restorePurchaseCard.setOnClickListener(this);
 
         if(BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
             signInCardView.setVisibility(View.GONE);
@@ -152,7 +160,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                         sp.edit().putBoolean("isIELTSActive", false).apply();
-                        Crashlytics.setBool("isIELTSActive",false);
+
                         Toast.makeText(NewSettingActivity.this, "Ielts unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -166,7 +174,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                     sp.edit().putBoolean("isIELTSActive", true).apply();
-                    Crashlytics.setBool("isIELTSActive",true);
+
                     Toast.makeText(NewSettingActivity.this, "IELTS checked",Toast.LENGTH_SHORT).show();
 
                 }
@@ -187,7 +195,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                         sp.edit().putBoolean("isTOEFLActive", false).apply();
-                        Crashlytics.setBool("isTOEFLActive",false);
+
                         Toast.makeText(NewSettingActivity.this, "TOEFL unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -204,7 +212,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 }else {
 
                     sp.edit().putBoolean("isTOEFLActive", true).apply();
-                    Crashlytics.setBool("isTOEFLActive",true);
+
                     Toast.makeText(NewSettingActivity.this, "TOEFL checked",Toast.LENGTH_SHORT).show();
 
 
@@ -224,7 +232,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                         sp.edit().putBoolean("isSATActive", false).apply();
-                        Crashlytics.setBool("isSATActive",false);
+
                         Toast.makeText(NewSettingActivity.this, "SAT unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -241,7 +249,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                     sp.edit().putBoolean("isSATActive", true).apply();
-                    Crashlytics.setBool("isSATActive",true);
+
                     Toast.makeText(NewSettingActivity.this, "SAT checked",Toast.LENGTH_SHORT).show();
 
 
@@ -261,7 +269,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                         sp.edit().putBoolean("isGREActive", false).apply();
-                        Crashlytics.setBool("isGREActive",false);
+
                         Toast.makeText(NewSettingActivity.this, "GRE unchecked", Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -275,7 +283,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 }else {
 
                     sp.edit().putBoolean("isGREActive", true).apply();
-                    Crashlytics.setBool("isGREActive",true);
+
                     Toast.makeText(NewSettingActivity.this, "GRE checked",Toast.LENGTH_SHORT).show();
 
 
@@ -730,7 +738,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             userDetail.setText(user.getEmail());
             signIn.setText("Sign out");
             isSignedIn = true;
-            Crashlytics.setBool("SignIn Status",true);
+
             sp.edit().putBoolean("isSignedIn",isSignedIn).apply();
             Toast.makeText(this,"Successfully signed in.",Toast.LENGTH_LONG).show();
 
@@ -742,7 +750,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             userDetail.setText("Sign in to save your progress");
             signIn.setText("Sign in");
             isSignedIn = false;
-            Crashlytics.setBool("SignIn Status",false);
+
             sp.edit().putBoolean("isSignedIn",isSignedIn).apply();
             Toast.makeText(this,"Log in failed.",Toast.LENGTH_LONG).show();
 
@@ -1392,11 +1400,10 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             if(switchState){
                 switchState = false;
                 sp.edit().putBoolean("soundState",false).apply();
-                Crashlytics.setBool("Sound Status",false);
+
 
             }else {
                 switchState = true;
-                Crashlytics.setBool("Sound Status",true);
                 sp.edit().putBoolean("soundState",true).apply();
             }
 
@@ -1424,7 +1431,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             }
 
         }
-
 
         if( v == save){
 
@@ -1454,15 +1460,21 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
             this.startActivity(rateApp);
         }
+
+        if( v == restorePurchaseCard){
+            getPreviousPurchases();
+
+            Toast.makeText(this,"Restore process started...",Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     public void onStart() {
         super.onStart();
 
         if( mAuth.getCurrentUser() != null){
-            Crashlytics.setBool("SignIn Status",true);
+
         }else{
-            Crashlytics.setBool("SignIn Status",false);
+
         }
         sp.edit().putBoolean("isSignedIn",isSignedIn).apply();
 
@@ -1488,7 +1500,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 wordsPerSession = 5;
 
                 sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-                Crashlytics.setInt("Words Per Session",wordsPerSession);
+
 
 
             }if( i == 1){
@@ -1497,14 +1509,14 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 wordsPerSession = 4;
 
                 sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-                Crashlytics.setInt("Words Per Session",wordsPerSession);
+
             }
             if(i == 2) {
 
 
                 wordsPerSession = 3;
                 sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-                Crashlytics.setInt("Words Per Session",wordsPerSession);
+
             }
         }
 
@@ -1515,7 +1527,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                 repeatationPerSession = 5;
                 sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-                Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
+
 
 
             }if( i == 1){
@@ -1523,38 +1535,164 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                 repeatationPerSession = 4;
                 sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-                Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
+
             }if( i == 2){
 
 
                 repeatationPerSession = 3;
                 sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-                Crashlytics.setInt("Repetition Per Session",repeatationPerSession);
+
             }
 
         }
 
         if(adapterView.getId() == themeSpinner.getId()){
 
-            if(i == 0){
+            String trialStatus = checkTrialStatus();
 
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                sp.edit().putInt("DarkMode",0).apply();
-            }else if(i == 1){
+            if(!sp.contains("purchase")){
 
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                sp.edit().putInt("DarkMode",1).apply();
+                if(trialStatus.equalsIgnoreCase("ended")){
+
+                    Toast.makeText(this,"Please upgrade to enjoy this feature",Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    if(i == 0){
+
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        sp.edit().putInt("DarkMode",0).apply();
+                    }else if(i == 1){
+
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        sp.edit().putInt("DarkMode",1).apply();
+                    }else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                        sp.edit().putInt("DarkMode",2).apply();
+                    }
+
+                }
             }else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                sp.edit().putInt("DarkMode",2).apply();
+
+
+                if(i == 0){
+
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    sp.edit().putInt("DarkMode",0).apply();
+                }else if(i == 1){
+
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    sp.edit().putInt("DarkMode",1).apply();
+                }else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                    sp.edit().putInt("DarkMode",2).apply();
+                }
+
             }
+
+
+
+
 
         }
 
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
+    public void onNothingSelected(AdapterView<?> adapterView) { }
+
+    private String checkTrialStatus(){
+
+        String trialStatus = "ended";
+
+        if(sp.contains("trial_end_date")){
+
+            Date today = Calendar.getInstance().getTime();
+
+            long endMillies = sp.getLong("trial_end_date",0) ;
+            long todayMillies = today.getTime();
+            long leftMillies = endMillies - todayMillies;
+
+            if(leftMillies >=0){
+
+                trialStatus = "active";
+
+            }
+            else {
+
+                trialStatus = "ended";
+
+            }
+
+        }
+
+
+        return trialStatus;
+
+
+    }
+
+    // Billing
+
+    private void getPreviousPurchases(){
+
+
+        billingClient = BillingClient.newBuilder(this)
+                .enablePendingPurchases()
+                .setListener(this)
+                .build();
+
+
+        billingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(@NotNull BillingResult billingResult) {
+                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
+                    // The BillingClient is ready. You can query purchases here.
+
+                    Purchase.PurchasesResult results = billingClient.queryPurchases(BillingClient.SkuType.INAPP);
+
+                    for (Purchase purchase : Objects.requireNonNull(results.getPurchasesList())) {
+
+                        if(purchase.getSku().equalsIgnoreCase("test_product")){
+
+                            if(!sp.contains("purchase")){
+
+                                sp.edit().putBoolean("purchase",true).apply();
+                                Toast.makeText(getApplicationContext(),"Product: "+purchase.getSku()+" restored",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
+                else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE){
+
+                    Toast.makeText(getApplicationContext(),"Please sign in to Google Play Store",Toast.LENGTH_SHORT).show();
+
+                }else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_DISCONNECTED){
+
+                    Toast.makeText(getApplicationContext(),"Play Store service is not connected now",Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"BILLING | startConnection | RESULT: $billingResponseCode"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onBillingServiceDisconnected() {
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+                Toast.makeText(getApplicationContext(),"BILLING | onBillingServiceDisconnected | DISCONNECTED",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+    }
+
+    @Override
+    public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> list) {
 
     }
 }
+
+

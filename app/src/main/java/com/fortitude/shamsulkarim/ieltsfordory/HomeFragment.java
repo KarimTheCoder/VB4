@@ -6,23 +6,25 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
-
+import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import az.plainpie.PieView;
 
@@ -33,10 +35,12 @@ import az.plainpie.PieView;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
 
+    // UI
+    private TextView trialStatusTextView;
     private CardView advanceCard,intermediateCard,beginnerCard;
     private PieView advancePie, intermediatePie, beginnerPie;
     private SharedPreferences sp;
-    private RoundCornerProgressBar homeProgress;
+    //private RoundCornerProgressBar homeProgress;
 
     private String[] IELTSwordArray, IELTStranslationArray, IELTSgrammarArray, IELTSpronunArray, IELTSexample1array, IELTSexample2Array, IELTSexample3Array, IELTSvocabularyType;
     private String[] TOEFLwordArray, TOEFLtranslationArray, TOEFLgrammarArray, TOEFLpronunArray, TOEFLexample1array, TOEFLexample2Array, TOEFLexample3Array, TOEFLvocabularyType;
@@ -70,7 +74,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
-        Crashlytics.setBool("Connection Status",connected);
+
 
         initialization();
         addingLearnedDatabase();
@@ -81,11 +85,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         advanceCard.setPreventCornerOverlap(false);
         intermediateCard.setPreventCornerOverlap(false);
         beginnerCard.setPreventCornerOverlap(false);
-
+        trialStatusTextView =v.findViewById(R.id.trial_status);
         advancePie = v.findViewById(R.id.advance_pie);
         intermediatePie = v.findViewById(R.id.intermediate_pie);
         beginnerPie = v.findViewById(R.id.profile_pie_view);
-        homeProgress = v.findViewById(R.id.home_progress);
+     //   homeProgress = v.findViewById(R.id.home_progress);
 
 
 
@@ -98,7 +102,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
 
 
-
+        checkTrialStatus();
         return v;
     }
 
@@ -155,10 +159,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         beginnerPie.setMaxPercentage(100);
         beginnerPie.setPercentage(beginnerPercentage);
 
-        homeProgress.setProgressBackgroundColor(getResources().getColor(R.color.deepGrey));
-        homeProgress.setProgressColor(getResources().getColor(R.color.colorPrimary));
-        homeProgress.setMax(advaceWordSize+intermediateWordSize+beginnerWordSize);
-        homeProgress.setProgress(advanceWordLearnedSize+intermediateLearnedSize+beginnerLearnedSize);
+//        homeProgress.setProgressBackgroundColor(getResources().getColor(R.color.deepGrey));
+//        homeProgress.setProgressColor(getResources().getColor(R.color.colorPrimary));
+//        homeProgress.setMax(advaceWordSize+intermediateWordSize+beginnerWordSize);
+//        homeProgress.setProgress(advanceWordLearnedSize+intermediateLearnedSize+beginnerLearnedSize);
 
 
 
@@ -344,10 +348,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             words.clear();
 
 
-        homeProgress.setProgressBackgroundColor(getResources().getColor(R.color.deepGrey));
-        homeProgress.setProgressColor(getResources().getColor(R.color.colorPrimary));
-        homeProgress.setMax(totalWordCount);
-        homeProgress.setProgress(totalLearned);
+//        homeProgress.setProgressBackgroundColor(getResources().getColor(R.color.deepGrey));
+//        homeProgress.setProgressColor(getResources().getColor(R.color.colorPrimary));
+//        homeProgress.setMax(totalWordCount);
+//        homeProgress.setProgress(totalLearned);
 
 
 
@@ -523,10 +527,90 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             }
 
         }
+    }
+
+
+
+    // Check Trial State
+    private void checkTrialStatus(){
+
+        String trialStatus;
+
+        if(sp.contains("trial_end_date")){
+
+            Date today = Calendar.getInstance().getTime();
+
+            long endMillies = sp.getLong("trial_end_date",0) ;
+            long todayMillies = today.getTime();
+            long leftMillies = endMillies - todayMillies;
+
+            Toast.makeText(getContext(),"Days Left: "+ TimeUnit.DAYS.convert(leftMillies,TimeUnit.MILLISECONDS),Toast.LENGTH_SHORT).show();
+
+            if(!sp.contains("purchase")){
+                if(leftMillies >=0){
+
+                    trialStatus = "active";
+                    trialStatusTextView.setText("Trial Mode: "+trialStatus);
+
+                }
+                else {
+
+                    showTrialFinished();
+
+                    trialStatus = "ended";
+                    trialStatusTextView.setText("Trial Mode: "+trialStatus);
+                }
+            }else {
+
+                trialStatus = "PREMIUM+";
+                trialStatusTextView.setText(trialStatus);
+                trialStatusTextView.setTextColor(getResources().getColor(R.color.green));
+            }
+
+
+        }
 
 
 
 
+
+    }
+
+
+    private void showTrialFinished(){
+
+        if(!sp.contains("home_fragment_trail_end")){
+
+            new LovelyStandardDialog(getContext(), LovelyStandardDialog.ButtonLayout.VERTICAL)
+                    .setTopColorRes(R.color.red)
+                    .setButtonsColorRes(R.color.secondary_text_color)
+                    .setIcon(R.drawable.ic_information)
+                    .setIconTintColor(getResources().getColor(R.color.primary_text_color_white))
+                    .setNegativeButton("Continue with basic", new View.OnClickListener(){
+
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(getContext(), "Continue with Basic", Toast.LENGTH_SHORT).show();
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            sp.edit().putInt("DarkMode",0).apply();
+                        }
+                    })
+                    .setTitle(R.string.trial_ended)
+                    .setMessage(R.string.trial_ended_description)
+                    .setNeutralButtonColor(getResources().getColor(R.color.green))
+                    .setNeutralButton("Upgrade", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(getContext(), "positive clicked", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+
+
+                    .show();
+
+            sp.edit().putBoolean("home_fragment_trail_end",true).apply();
+
+        }
 
     }
 }

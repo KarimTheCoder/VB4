@@ -1,5 +1,4 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
-
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
@@ -32,11 +30,7 @@ import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.crashlytics.android.Crashlytics;
-import com.fortitude.shamsulkarim.ieltsfordory.Practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewTrainRecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
@@ -64,7 +58,9 @@ import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -147,13 +143,13 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
-        Crashlytics.setBool("Connection Status",connected);
+
 
 
 
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         level = sp.getString("level","NOTHING");
-        Crashlytics.setString("Train Level",level);
+
         languageId = sp.getInt("language",0);
         soundState = sp.getBoolean("soundState",true);
         noshowads = sp.getInt("noshowads",0);
@@ -171,12 +167,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
         }
-        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
 
-        if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-        }
+        initializeAds();
 
 
         tts = new TextToSpeech(this, this);
@@ -205,8 +197,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         updateLearnedDatabase();
 
 
-//        NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-//        NewTrain.this.finish();
+        NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+        NewTrain.this.finish();
 
 
 
@@ -2056,6 +2048,61 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
+
+    private String checkTrialStatus(){
+
+        String trialStatus = "ended";
+
+        if(sp.contains("trial_end_date")){
+
+            Date today = Calendar.getInstance().getTime();
+
+            long endMillies = sp.getLong("trial_end_date",0) ;
+            long todayMillies = today.getTime();
+            long leftMillies = endMillies - todayMillies;
+
+            if(leftMillies >=0){
+
+                trialStatus = "active";
+
+            }
+            else {
+
+                trialStatus = "ended";
+
+            }
+
+        }
+        return trialStatus;
+
+
+    }
+
+
+    private void initializeAds(){
+
+        String trialStatus = checkTrialStatus();
+
+
+        if(!sp.contains("purchase")){
+
+            if(trialStatus.equalsIgnoreCase("ended")){
+
+                mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+                mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+                if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+                    mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+                }
+
+            }
+        }
+
+
+
+
+
+    }
 }
 
 

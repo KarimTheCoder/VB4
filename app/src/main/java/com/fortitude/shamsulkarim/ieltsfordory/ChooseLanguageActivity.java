@@ -11,7 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
-import com.crashlytics.android.Crashlytics;
+
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.ChooseLanguageAdapter;
 import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 
@@ -34,7 +34,6 @@ public class ChooseLanguageActivity extends AppCompatActivity implements View.On
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
-        Crashlytics.setBool("Connection Status",connected);
 
         startActivity(new Intent(this, ChooseVocabulary.class));
         skip = findViewById(R.id.skip);

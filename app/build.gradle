@@ -7,7 +7,7 @@ android {
         applicationId 'com.fortitude.apps.vocabularybuilder'
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 47
+        versionCode 147
         multiDexEnabled true
         versionName "VB4-Round A.I.P.T."
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -63,7 +63,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    def billing_version = "3.0.0"
+    def billing_version = "3.0.1"
     implementation "com.android.billingclient:billing:$billing_version"
     implementation 'com.github.medyo:fancybuttons:1.9.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -75,9 +75,9 @@ dependencies {
     implementation 'com.yarolegovich:lovely-dialog:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
-    implementation 'com.google.firebase:firebase-ads:19.3.0'
-    implementation 'com.google.firebase:firebase-auth:19.3.2'
-    implementation 'com.google.firebase:firebase-database:19.4.0'
+    implementation 'com.google.firebase:firebase-ads:19.4.0'
+    implementation 'com.google.firebase:firebase-auth:19.4.0'
+    implementation 'com.google.firebase:firebase-database:19.5.0'
     implementation 'com.google.firebase:firebase-core:17.5.0'
     implementation 'com.google.firebase:firebase-crash:16.2.1'
     implementation 'com.google.firebase:firebase-storage:19.2.0'
@@ -91,8 +91,8 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.2.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
+    implementation 'com.google.firebase:firebase-crashlytics:17.2.2'
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
      testImplementation 'junit:junit:4.13'
 }
 apply plugin: 'com.google.gms.google-services'

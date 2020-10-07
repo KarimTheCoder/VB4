@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
-import com.crashlytics.android.Crashlytics;
+
 import com.fortitude.shamsulkarim.ieltsfordory.Practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.Fab;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
@@ -90,7 +90,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
-        Crashlytics.setBool("Connection Status",connected);
+
         initialization(v);
         gettingResources();
         getfavoriteDatabasePosition();
@@ -352,7 +352,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
             if(words.size() >= 5){
                 getContext().startActivity(new Intent(getContext(), Practice.class));
-                Crashlytics.setString("Learned Practice","Advance");
+
 
 
             }else {
@@ -370,7 +370,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
             if(words.size() >= 5){
                 getContext().startActivity(new Intent(getContext(), Practice.class));
-                Crashlytics.setString("Learned Practice","Intermediate");
+
 
 
             }else {
@@ -402,7 +402,6 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
             if(words.size() >= 5){
                 getContext().startActivity(new Intent(getContext(), Practice.class));
-                Crashlytics.setString("Learned Practice","Beginner");
                 isShowingFabOption = false;
 
             }else {
@@ -912,21 +911,21 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
             sp.edit().putInt("prevLearnedSelection",0).apply();
             // beginnerWordInitialization();
             getBeginnerWordData();
-            Crashlytics.setString("Learned Word Fragment: ","Beginner");
+
         }
         if (i == 1) {
 
 
             sp.edit().putInt("prevLearnedSelection",1).apply();
             getIntermediateWordData();
-            Crashlytics.setString("Learned Word Fragment: ","Intermediate");
+
         }
 
         if (i == 2) {
 
             sp.edit().putInt("prevLearnedSelection",2).apply();
             getAdvanceWordData();
-            Crashlytics.setString("Learned Word Fragment: ","Advance");
+
         }
     }
 

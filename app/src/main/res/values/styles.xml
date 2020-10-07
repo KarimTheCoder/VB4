@@ -288,7 +288,7 @@
 
     <style name="home_card_style" parent="CardView">
 
-    <item name="cardCornerRadius">15dp</item>
+    <item name="cardCornerRadius">30dp</item>
     <item name="android:layout_marginRight">@dimen/keyline_2</item>
     <item name="android:layout_marginLeft">@dimen/keyline_2</item>
     <item name="android:layout_marginTop">@dimen/keyline_2</item>
@@ -370,4 +370,15 @@
         <item name="textColorAlertDialogListItem">@color/secondary_text_color</item>
         <item name="android:textColorPrimary">@color/colorAccent</item>
     </style>
+
+    // Switch Style
+
+    <style name="primary_switchStyle">
+        <item name="sb_checked_color">@color/colorPrimary</item>
+        <item name="sb_uncheckcircle_color">@color/colorPrimary</item>
+        <item name="sb_uncheck_color">@color/colorPrimary</item>
+
+
+    </style>
+
 </resources>

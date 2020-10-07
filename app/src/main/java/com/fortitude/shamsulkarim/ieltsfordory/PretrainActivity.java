@@ -1,9 +1,12 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,36 +14,70 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.android.billingclient.api.AcknowledgePurchaseParams;
+import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewSettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.purchase.in_app_purchase;
+import com.kyleduo.switchbutton.SwitchButton;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class PretrainActivity extends AppCompatActivity implements View.OnClickListener {
+public class PretrainActivity extends AppCompatActivity implements View.OnClickListener, com.suke.widget.SwitchButton.OnCheckedChangeListener, PurchasesUpdatedListener {
 
     private IELTSWordDatabase IELTSdatabase;
     private TOEFLWordDatabase TOEFLdatabase;
     private SATWordDatabase SATdatabase;
     private GREWordDatabase GREdatabase;
-    private TextView learnedWordTextView, leftWordTextView;
+    private TextView levelTextView;
     private FancyButton startTrainButton;
     private RoundCornerProgressBar progressBar;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
     private SharedPreferences sp;
-    private FancyButton getProButton;
-    private CardView goProCardView;
+    private Boolean spanishSwitchState;
+
+
+
+    // UI
+    private FancyButton purchaseButton;
+    private ImageButton settingsButton;
+    private TextView progressCountTextview;
+    private com.suke.widget.SwitchButton tooEasySwitch,spanishSwitch;
+    private CardView purchaseCardView,purchaseThankYou;
+
+    // Billing
+    private BillingClient billingClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,22 +87,28 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_start_training);
 
+
+
         init();
         initDatabase();
         initUIElement();
         setActivityTitle();
+        checkSpanishState();
+        checkTooEasyState();
 
 
 
     }
 
     private void init(){
-        sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
+        sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         isIeltsChecked = sp.getBoolean("isIELTSActive",true);
         isToeflChecked = sp.getBoolean("isTOEFLActive", true);
         isSatChecked =   sp.getBoolean("isSATActive", true);
         isGreChecked =   sp.getBoolean("isGREActive",true);
+
+
 
 
     }
@@ -75,13 +118,12 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
         String level = sp.getString("level", "");
 
-        Toolbar toolbar = findViewById(R.id.start_training_toolbar);
-        setSupportActionBar(toolbar);
+
 
 
         if (level.equalsIgnoreCase("beginner")) {
 
-            toolbar.setTitle("Beginner");
+            levelTextView.setText("Beginner");
             setBeginnerLearnedwordsLengthTextView();
             setTextBeginnerTotalWordCount();
 
@@ -89,7 +131,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
         else if (level.equalsIgnoreCase("intermediate")) {
 
-            toolbar.setTitle("Intermediate");
+            levelTextView.setText("Intermediate");
             setIntermediateLearnedwordsLengthTextView();
 
 
@@ -98,31 +140,48 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         else if (level.equalsIgnoreCase("advance")) {
 
             setAdvanceLearnedwordsLengthTextView();
-            toolbar.setTitle("Advance");
+            levelTextView.setText("Advance");
 
         }
     }
 
     private void initUIElement(){
 
-        learnedWordTextView = findViewById(R.id.start_training_learned_word_text);
-        leftWordTextView = findViewById(R.id.start_training_left_word_text);
+      //  learnedWordTextView = findViewById(R.id.start_training_learned_word_text);
+       // leftWordTextView = findViewById(R.id.start_training_left_word_text);
 
+        purchaseButton = findViewById(R.id.purchase_button);
+        purchaseCardView = findViewById(R.id.purchase_card);
+        if(sp.contains("purchase")){
+
+            purchaseCardView.setVisibility(View.GONE);
+        }
+        purchaseThankYou = findViewById(R.id.purchase_thank_you);
+        purchaseButton.setOnClickListener(this);
+        spanishSwitch = findViewById(R.id.spanish_switch);
+       tooEasySwitch = findViewById(R.id.too_easy_switch);
+        spanishSwitch.setOnCheckedChangeListener(this);
+        tooEasySwitch.setOnCheckedChangeListener(this);
+
+        levelTextView = findViewById(R.id.start_training_level_textview);
         startTrainButton = findViewById(R.id.no_word_home);
         startTrainButton.setOnClickListener(this);
+        settingsButton = findViewById(R.id.start_training_settings_button);
+        settingsButton.setOnClickListener(this);
 
         progressBar = findViewById(R.id.start_training_progress);
-        progressBar.setProgressColor(getResources().getColor(R.color.middleColor));
-        progressBar.setProgressBackgroundColor(getResources().getColor(R.color.grey));
+        progressBar.setProgressColor(getResources().getColor(R.color.colorPrimary));
+        progressBar.setProgressBackgroundColor(getResources().getColor(R.color.third_background_color));
+        progressCountTextview = findViewById(R.id.progress_count_textview);
 
-        goProCardView = findViewById(R.id.getPro);
+       // goProCardView = findViewById(R.id.getPro);
 
         if(BuildConfig.FLAVOR.equalsIgnoreCase("pro") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-            goProCardView.setVisibility(View.INVISIBLE);
+       //     goProCardView.setVisibility(View.INVISIBLE);
         }
 
-        getProButton = findViewById(R.id.download_pro);
-        getProButton.setOnClickListener(this);
+       // getProButton = findViewById(R.id.download_pro);
+       // getProButton.setOnClickListener(this);
 
 
     }
@@ -646,7 +705,6 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-
     private void setBeginnerLearnedwordsLengthTextView(){
 
         int i = getIELTSBeginnerLearnedLength();
@@ -662,8 +720,9 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         int x = size-i;
         progressBar.setMax(size);
         progressBar.setProgress(i);
-        leftWordTextView.setText(x+" word left");
-        learnedWordTextView.setText(i+" word learned");
+       // leftWordTextView.setText(x+" word left");
+      //  learnedWordTextView.setText(i+" word learned");
+        progressCountTextview.setText("Progress "+i+"/"+size);
 
     }
 
@@ -689,9 +748,9 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         int x = size-i;
         progressBar.setMax(size);
         progressBar.setProgress(i);
-        leftWordTextView.setText(x+" word left");
-        learnedWordTextView.setText(i+" word learned");
-
+     //   leftWordTextView.setText(x+" word left");
+     //   learnedWordTextView.setText(i+" word learned");
+        progressCountTextview.setText("Progress "+i+"/"+size);
     }
 
 
@@ -730,18 +789,56 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
         progressBar.setMax(size);
         progressBar.setProgress(i);
-        leftWordTextView.setText(x+" word left");
-        learnedWordTextView.setText(i+" word learned");
-
+     //   leftWordTextView.setText(x+" word left");
+      //  learnedWordTextView.setText(i+" word learned");
+        progressCountTextview.setText("Progress "+i+"/"+size);
     }
 
-    private void setTextAdvanceTotalWordCount(){
+   private void checkSpanishState(){
+
+        String secondLang = sp.getString("secondlanguage","English");
+
+       assert secondLang != null;
+       if(secondLang.equalsIgnoreCase("spanish")){
+            spanishSwitchState = true;
+
+        }else {
+            spanishSwitchState = false;
+
+        }
+
+       spanishSwitch.setChecked(spanishSwitchState);
 
 
+   }
+
+   private void checkTooEasyState(){
+        boolean ieltsState = sp.getBoolean("isIELTSActive",true);
+        boolean toeflState = sp.getBoolean("isTOEFLActive",true);
+
+        if( ieltsState || toeflState){
+
+            tooEasySwitch.setChecked(false);
+        }else {
+            tooEasySwitch.setChecked(true);
+        }
+
+   }
+
+   private void changeEasyWord(boolean switchState){
+
+        if(switchState){
+
+            sp.edit().putBoolean("isIELTSActive", false).apply();
+            sp.edit().putBoolean("isTOEFLActive", false).apply();
+        }else {
+
+            sp.edit().putBoolean("isIELTSActive", true).apply();
+            sp.edit().putBoolean("isTOEFLActive", true).apply();
+        }
 
 
-
-    }
+   }
 
 
     @Override
@@ -755,12 +852,17 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             this.finish();
         }
 
-        if(v == getProButton){
+        if( v == settingsButton){
 
-            Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
-            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-            this.startActivity(rateApp);
+            this.startActivity(new Intent(this,  NewSettingActivity.class));
         }
+
+        // Billing
+        if(v == purchaseButton){
+            initiatePurchase();
+
+        }
+
 
     }
 
@@ -787,4 +889,216 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public void onCheckedChanged(com.suke.widget.SwitchButton view, boolean isChecked) {
+
+        if(view == tooEasySwitch){
+
+            changeEasyWord(isChecked);
+
+            Toast.makeText(this,"is checked: "+isChecked,Toast.LENGTH_SHORT).show();
+        }
+
+        if(view == spanishSwitch){
+
+
+            if(Objects.requireNonNull(sp.getString("secondlanguage", "english")).equalsIgnoreCase("spanish")){
+                Toast.makeText(this,"english",Toast.LENGTH_SHORT).show();
+                sp.edit().putString("secondlanguage","english").apply();
+
+            }else {
+                sp.edit().putString("secondlanguage","spanish").apply();
+                Toast.makeText(this,"Spanish",Toast.LENGTH_SHORT).show();
+            }
+
+
+
+
+        }
+    }
+
+    // Billing
+    public void setBillingClient(){
+
+        billingClient = BillingClient.newBuilder(this)
+                .setListener(this)
+                .enablePendingPurchases()
+                .build();
+
+
+        billingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(@NotNull BillingResult billingResult) {
+                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
+                    // The BillingClient is ready. You can query purchases here.
+
+                    List<String> skuList = new ArrayList<>();
+                    skuList.add("test_product");
+                    SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+                    params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+                    billingClient.querySkuDetailsAsync(params.build(),
+                            new SkuDetailsResponseListener() {
+                                @Override
+                                public void onSkuDetailsResponse(@NotNull BillingResult billingResult,
+                                                                 List<SkuDetails> skuDetailsList) {
+                                    // Process the result.
+
+
+                                    if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
+
+                                        for(SkuDetails skuDetails : skuDetailsList){
+
+                                            purchaseButton.setText(skuDetails.getPrice());
+                                            Toast.makeText(PretrainActivity.this,billingResult.getResponseCode()+" Getting Data for setting price"+skuDetailsList.size(),Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+
+
+                                }
+                            });
+                    Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT OK",Toast.LENGTH_SHORT).show();
+                }else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE){
+
+                    Toast.makeText(getApplicationContext(),"Please sign in to Google Play Store",Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+                    Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT: $billingResponseCodexx"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onBillingServiceDisconnected() {
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+                Toast.makeText(PretrainActivity.this,"BILLING | onBillingServiceDisconnected | DISCONNECTED",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+
+    @Override
+    public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
+
+        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK
+                && purchases != null) {
+            for (Purchase purchase : purchases) {
+
+                handlePurchase(purchase,billingClient);
+
+                Toast.makeText(this, "Handle Purchase", Toast.LENGTH_SHORT).show();
+            }
+        } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
+            // Handle an error caused by a user cancelling the purchase flow.
+            Toast.makeText(this, "Purchase cancelled", Toast.LENGTH_SHORT).show();
+        } else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE){
+            // Handle any other error codes.
+            Toast.makeText(this, "Please check your internet connection"+billingResult.getResponseCode(), Toast.LENGTH_SHORT).show();
+        }
+        else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED){
+
+            Toast.makeText(this, "You already own this product, go to settings to restore it", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, "Other error "+billingResult.getResponseCode(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void initiatePurchase(){
+        List<String> skuList = new ArrayList<> ();
+        skuList.add("test_product");
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(@NotNull BillingResult billingResult,
+                                                     List<SkuDetails> skuDetailsList) {
+
+
+                        if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
+
+                            // if everything is ok
+
+                            for(SkuDetails skuDetails : skuDetailsList){
+
+                                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                                    .setSkuDetails(skuDetails)
+                                    .build();
+
+                                int responseCode = billingClient.launchBillingFlow(PretrainActivity.this, billingFlowParams).getResponseCode();
+                                Log.i("Billing Response Code","Billing response code: "+responseCode);
+                            }
+
+                        }else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE){
+
+                            Toast.makeText(getApplicationContext(),"Please sign in to Google Play Store",Toast.LENGTH_SHORT).show();
+                        }else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_DISCONNECTED){
+
+                            Toast.makeText(getApplicationContext(),"Play Store service is not connected now",Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        else {
+
+                            Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT: $billingResponseCode"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+
+                });
+    }
+
+    private void handlePurchase(Purchase purchase, BillingClient billingClient){
+
+        if( purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
+
+            if (!purchase.isAcknowledged()) {
+
+                if(!sp.contains("purchase")){
+
+                    sp.edit().putBoolean("purchase",true).apply();
+                    purchaseCardView.setVisibility(View.GONE);
+                    purchaseThankYou.setVisibility(View.VISIBLE);
+
+                }
+
+                AcknowledgePurchaseParams acknowledgePurchaseParams =
+                        AcknowledgePurchaseParams.newBuilder()
+                                .setPurchaseToken(purchase.getPurchaseToken())
+                                .build();
+                billingClient.acknowledgePurchase(acknowledgePurchaseParams, new AcknowledgePurchaseResponseListener() {
+                    @Override
+                    public void onAcknowledgePurchaseResponse(@NonNull BillingResult billingResult) {
+
+                        Toast.makeText(PretrainActivity.this,"On Acknowledge",Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        }
+    }
+
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+
+        if(!sp.contains("purchase")){
+
+            setBillingClient();
+
+        }
+    }
 }
+

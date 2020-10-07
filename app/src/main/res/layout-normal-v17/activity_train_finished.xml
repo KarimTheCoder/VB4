@@ -89,7 +89,7 @@
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
                android:layout_marginTop="@dimen/keyline_2"
-                style="@style/home_card_style"
+                style="@style/rate_card_style"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView5">
@@ -352,7 +352,7 @@
         fancy:fb_focusColor="@color/colorPrimary"
         fancy:fb_radius="30dp"
         fancy:fb_text="STUDY MORE"
-        fancy:fb_textColor="@color/primary_text_color"
+        fancy:fb_textColor="@color/primary_text_color_white"
         app:layout_constraintStart_toEndOf="@+id/tf_home">
 
 

@@ -14,9 +14,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-
-
-import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
@@ -57,49 +54,49 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
-        Crashlytics.setBool("Connection Status",connected);
-
-        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
-
-        if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-        }
 
 
-
-
-        mPublisherInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-                //  if( cb != 1){
-
-                mPublisherInterstitialAd.show();
-                // }
-
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when the ad is displayed.
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when when the interstitial ad is closed.
-            }
-        });
+//        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+//        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135xxx");
+//
+//        if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+//            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+//        }
+//
+//
+//
+//
+//        mPublisherInterstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                // Code to be executed when an ad finishes loading.
+//                //  if( cb != 1){
+//
+//                mPublisherInterstitialAd.show();
+//                // }
+//
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//                // Code to be executed when an ad request fails.
+//            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                // Code to be executed when the ad is displayed.
+//            }
+//
+//            @Override
+//            public void onAdLeftApplication() {
+//                // Code to be executed when the user has left the app.
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//                // Code to be executed when when the interstitial ad is closed.
+//            }
+//        });
 
         initialization();
         getCounts();

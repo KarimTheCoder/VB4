@@ -74,7 +74,10 @@
 
     // Layout background colors
     <color name="primary_background_color">#ffffff</color>
-    <color name="secondary_background_color">#e0e0e0</color>
+    <color name="secondary_background_color">#F5F5F5</color>
+    <color name="third_background_color">#F5F5F5</color>
+
+
 
     //Card Background Color
     <color name="card_background_color">#ffffff</color>

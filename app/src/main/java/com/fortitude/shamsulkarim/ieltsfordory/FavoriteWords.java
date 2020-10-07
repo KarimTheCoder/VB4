@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
-import com.crashlytics.android.Crashlytics;
+
 import com.fortitude.shamsulkarim.ieltsfordory.Practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
@@ -68,7 +68,7 @@ public class FavoriteWords extends Fragment  {
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
-        Crashlytics.setBool("Connection Status",connected);
+
 
         fab = (FloatingActionButton)v.findViewById(R.id.fab_favorite);
         fab.setColorNormal(getResources().getColor(R.color.colorPrimary));
@@ -391,10 +391,7 @@ public class FavoriteWords extends Fragment  {
             }
 
         }
-        Crashlytics.setInt("Favorite IELTS",IELTSFavWordCount);
-        Crashlytics.setInt("Favorite TOEFL",TOEFLFavWordCount);
-        Crashlytics.setInt("Favorite SAT",SATFavWordCount);
-        Crashlytics.setInt("Favorite GRE",GREFAvWordCount);
+
 
     }
 

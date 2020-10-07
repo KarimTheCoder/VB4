@@ -43,11 +43,11 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
     private String[] GREwordArray, GREtranslationArray, GREgrammarArray, GREpronunArray, GREexample1array, GREexample2array, GREexample3Array, GREvocabularyType;
     private int[] IELTSposition, TOEFLposition, SATposition, GREposition;
     private int learnedWordCount, totalWordCount;
-    private FancyButton getPro;
+   // private FancyButton getPro;
 
-    private TextView learnedWordText, leftWordText;
+   // private TextView learnedWordText, leftWordText;
     private RoundCornerProgressBar progressBar;
-    private Toolbar toolbar;
+    //private Toolbar toolbar;
     private List<String> IELTSlearnedDatabase, TOEFLlearnedDatabase, SATlearnedDatabase, GRElearnedDatabase;
     private IELTSWordDatabase IELTSdatabase;
     private TOEFLWordDatabase TOEFLdatabase;
@@ -145,26 +145,26 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
         SATdatabase = new SATWordDatabase(this);
         GREdatabase = new GREWordDatabase(this);
 
-        getPro = findViewById(R.id.download_pro);
-        getPro.setOnClickListener(this);
-
-
-
-        toolbar = findViewById(R.id.start_training_toolbar);
-
-        learnedWordText = findViewById(R.id.start_training_learned_word_text);
-        leftWordText = findViewById(R.id.start_training_left_word_text);
+//        getPro = findViewById(R.id.download_pro);
+//        getPro.setOnClickListener(this);
+//
+//
+//
+//        toolbar = findViewById(R.id.start_training_toolbar);
+//
+//        learnedWordText = findViewById(R.id.start_training_learned_word_text);
+//        leftWordText = findViewById(R.id.start_training_left_word_text);
         progressBar = findViewById(R.id.start_training_progress);
 
         progressBar.setProgressColor(getResources().getColor(R.color.middleColor));
         progressBar.setProgressBackgroundColor(getResources().getColor(R.color.grey));
 
 
-        try {
-            setSupportActionBar(toolbar);
-        } catch (NullPointerException i) {
-
-        }
+//        try {
+//            setSupportActionBar(toolbar);
+//        } catch (NullPointerException i) {
+//
+//        }
 
 
 
@@ -179,7 +179,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
             totalWordCount = getResources().getStringArray(R.array.IELTS_words).length;
 
 
-            toolbar.setTitle("Beginner");
+            //toolbar.setTitle("Beginner");
 
 
 
@@ -188,14 +188,14 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
             totalWordCount = getResources().getStringArray(R.array.TOEFL_words).length;
 
 
-            toolbar.setTitle("Intermediate");
+          //  toolbar.setTitle("Intermediate");
 
 
 
         } else if (level.equalsIgnoreCase("advance")) {
 
 
-            toolbar.setTitle("Advance");
+         //   toolbar.setTitle("Advance");
             totalWordCount = getResources().getStringArray(R.array.SAT_words).length;
 
 
@@ -215,12 +215,12 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
 
-        if(v == getPro){
-
-            Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
-            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-            this.startActivity(rateApp);
-        }
+//        if(v == getPro){
+//
+//            Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
+//            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+//            this.startActivity(rateApp);
+//        }
 
     }
 
@@ -325,8 +325,8 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
 
 
-            learnedWordText.setText((i-words.size())+" words learned");
-            leftWordText.setText(words.size()+" words left");
+           // learnedWordText.setText((i-words.size())+" words learned");
+         //   leftWordText.setText(words.size()+" words left");
             progressBar.setMax(i);
             progressBar.setProgress(i-words.size());
 
@@ -356,10 +356,10 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
 
 
-            learnedWordText.setText((i-words.size())+" words learned");
+        //    learnedWordText.setText((i-words.size())+" words learned");
 
 
-            leftWordText.setText(words.size()+" words left");
+          //  leftWordText.setText(words.size()+" words left");
             progressBar.setMax(i);
             progressBar.setProgress(i-words.size());
 
@@ -382,8 +382,8 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
 
 
-            learnedWordText.setText((i-words.size())+" words learned");
-            leftWordText.setText(words.size()+" words left");
+            //learnedWordText.setText((i-words.size())+" words learned");
+            //leftWordText.setText(words.size()+" words left");
             progressBar.setMax(i);
             progressBar.setProgress(i-words.size());
         }

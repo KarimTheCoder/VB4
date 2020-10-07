@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.bartoszlipinski:viewpropertyobjectanimator:1.2.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fbafc39c5c5277092149a2037c90bef7/jetified-viewpropertyobjectanimator-1.2.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fbafc39c5c5277092149a2037c90bef7/jetified-viewpropertyobjectanimator-1.2.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fbafc39c5c5277092149a2037c90bef7/jetified-viewpropertyobjectanimator-1.2.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2c0dbb3889f36ba1f51a73de3baed425/jetified-viewpropertyobjectanimator-1.2.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2c0dbb3889f36ba1f51a73de3baed425/jetified-viewpropertyobjectanimator-1.2.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2c0dbb3889f36ba1f51a73de3baed425/jetified-viewpropertyobjectanimator-1.2.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.bartoszlipinski/viewpropertyobjectanimator/1.2.0/f713606f85938f15f811606d336390b8fbad1e61/viewpropertyobjectanimator-1.2.0-javadoc.jar!/" />

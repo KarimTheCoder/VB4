@@ -15,15 +15,11 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-
-import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.TrainFinishedWordRecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
@@ -41,11 +37,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-
-import io.fabric.sdk.android.services.common.Crash;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class TrainFinishedActivity extends AppCompatActivity implements View.OnClickListener {
@@ -102,58 +97,58 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
-        Crashlytics.setBool("Connection Status",connected);
 
 
         //Toast.makeText(this,"SharedLearned "+sharedLearned+" level "+level+" fivewordsize "+fiveWordSize,Toast.LENGTH_SHORT).show();
 
-        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
-
-        if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-        }
-
-
-
-
-
-                mPublisherInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-              //  if( cb != 1){
-
-                    mPublisherInterstitialAd.show();
-               // }
-
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when the ad is displayed.
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when when the interstitial ad is closed.
-            }
-        });
+//        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+//        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135xxx");
+//
+//        if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+//            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+//        }
+//
+//
+//
+//
+//
+//                mPublisherInterstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                // Code to be executed when an ad finishes loading.
+//              //  if( cb != 1){
+//
+//                    mPublisherInterstitialAd.show();
+//               // }
+//
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//                // Code to be executed when an ad request fails.
+//            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                // Code to be executed when the ad is displayed.
+//            }
+//
+//            @Override
+//            public void onAdLeftApplication() {
+//                // Code to be executed when the user has left the app.
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//                // Code to be executed when when the interstitial ad is closed.
+//            }
+//        });
         initialization();
         stylize();
         setRecyclerView();
 
         UpdateCrashlyticsLearnedWordCount();
+
 
 
     }
@@ -826,11 +821,6 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         GRECursor.close();
 
 
-        Crashlytics.setInt("IELTS Learned Count",IELTSLearnedCount);
-        Crashlytics.setInt("TOEFL Learned Count",TOEFLLeanedCount);
-        Crashlytics.setInt("SAT Learned Count",SATLearnedCount);
-        Crashlytics.setInt("GRE Learned Count",GRELearnedCount);
-
 
     }
 
@@ -850,5 +840,46 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
 
     }
+
+
+
+
+    // Check Trial State
+    private String getTrialStatus(){
+
+        String trialStatus = "";
+
+        if(sp.contains("trial_end_date")){
+
+            Date today = Calendar.getInstance().getTime();
+
+            long endMillies = sp.getLong("trial_end_date",0) ;
+            long todayMillies = today.getTime();
+            long leftMillies = endMillies - todayMillies;
+
+
+
+            if(leftMillies >=0){
+
+
+                trialStatus = "active";
+
+            }
+            else {
+
+                trialStatus = "ended";
+
+
+            }
+
+        }
+
+        return trialStatus;
+
+    }
+
+
+
+
 
 }

@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: de.cketti.mailto:email-intent-builder:2.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b0d6b370cffe7c7eecff930d19e1696c/jetified-email-intent-builder-2.0.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b0d6b370cffe7c7eecff930d19e1696c/jetified-email-intent-builder-2.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b0d6b370cffe7c7eecff930d19e1696c/jetified-email-intent-builder-2.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/68c3a4ef235f1376a874b91ac34dfadc/jetified-email-intent-builder-2.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/68c3a4ef235f1376a874b91ac34dfadc/jetified-email-intent-builder-2.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/68c3a4ef235f1376a874b91ac34dfadc/jetified-email-intent-builder-2.0.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.cketti.mailto/email-intent-builder/2.0.0/1d7dd384d4a78fafd8328d89a538f0cb6e453239/email-intent-builder-2.0.0-javadoc.jar!/" />

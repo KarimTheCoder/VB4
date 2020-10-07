@@ -32,7 +32,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.crashlytics.android.Crashlytics;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
@@ -53,7 +52,9 @@ import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
 import java.lang.invoke.WrongMethodTypeException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
@@ -140,18 +141,14 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         // This code reports to Crashlytics of connection
         boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
-        Crashlytics.setBool("Connection Status",connected);
+
 //
 //        this.startActivity(new Intent(this, PracticeFinished.class));
 //        this.finish();
-        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-
-        if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-        }
 
 
+
+        initializeAds();
 
 
         initializingSQLDatabase();
@@ -2039,6 +2036,59 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         GREexample1ArraySL = getResources().getStringArray(R.array.GRE_example1_sp);
         GREexample2ArraySL = getResources().getStringArray(R.array.GRE_example2_sp);
         GREexample3ArraySL = getResources().getStringArray(R.array.GRE_example3_sp);
+
+    }
+
+
+    private void initializeAds(){
+
+        String trialStatus = checkTrialStatus();
+
+
+        if(!sp.contains("purchase")){
+
+            if(trialStatus.equalsIgnoreCase("ended")){
+
+                mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+                mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712xxx");
+
+                if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+                    mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+                }
+            }
+        }
+
+
+
+
+    }
+
+    private String checkTrialStatus(){
+
+        String trialStatus = "ended";
+
+        if(sp.contains("trial_end_date")){
+
+            Date today = Calendar.getInstance().getTime();
+
+            long endMillies = sp.getLong("trial_end_date",0) ;
+            long todayMillies = today.getTime();
+            long leftMillies = endMillies - todayMillies;
+
+            if(leftMillies >=0){
+
+                trialStatus = "active";
+
+            }
+            else {
+
+                trialStatus = "ended";
+
+            }
+
+        }
+        return trialStatus;
+
 
     }
 }

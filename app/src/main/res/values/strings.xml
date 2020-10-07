@@ -49,36 +49,12 @@
     <string name="translation_intro">Learn English vocabulary faster with your native language. Every word, definition, and sentence is translated into your language by a set of professional native speakers. Spanish is the first language to be part of this feature, and many more languages are on the way.</string>
     <string name="theme_title">Theme</string>
     <string name="theme_description"></string>
-
-    <string-array name="theme_options">
-
-        <item> "Day"</item>
-        <item> "Night"</item>
-        <item>"Follow System"</item>
-    </string-array>
-
-
-    <string-array name="spinner_options">
-
-
-        <item> "Beginner"</item>
-        <item> "Intermediate"</item>
-        <item>"Advance"</item>
-    </string-array>
-
-    <string-array name="words_per_session_array">
-
-
-        <item> "5"</item>
-        <item> "4"</item>
-        <item> "3"</item>
-    </string-array>
-
-    <string-array name="image_quality_String_array">
-
-        <item> "High"</item>
-        <item> "Medium"</item>
-        <item> "Low"</item>
-    </string-array>
-
+    <string name="trial_ended">Trial ended</string>
+    <string name="trial_ended_description">Hi, your 7 days trial has ended. You can still use this app and enjoy most of its functions. However, if you want an ad-free experience and dark mode please consider upgrading. Thank you :)</string>
+    <string name="purchase_title">UNLOCK YOUR\nFULL POTENTIAL!</string>
+    <string name="purchase_description">Stay free of ads and save your eyes and battery with dark mode for a small one-time price.</string>
+    <string name="purchase_thank_you">Thank you for your purchase. Your contribution will help us create a better app :)</string>
+    <string name="setting_image">This is a button to go to settings</string>
+    <string name="do_you_speak_spanish">Speak Spanish? Turn on translation</string>
+    <string name="too_easy">Too easy? Turn toggle off</string>
 </resources>
