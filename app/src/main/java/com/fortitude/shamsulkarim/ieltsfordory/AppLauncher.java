@@ -16,7 +16,7 @@ public class AppLauncher extends AppCompatActivity {
         setContentView(R.layout.activity_app_launcher);
 
         this.startActivity(new Intent(this, SplashScreen.class));
-
+        this.finish();
 
     }
 

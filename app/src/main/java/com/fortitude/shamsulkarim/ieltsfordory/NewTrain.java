@@ -30,6 +30,7 @@ import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewTrainRecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
@@ -42,7 +43,9 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -52,9 +55,7 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
-import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ import java.util.TimerTask;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class NewTrain extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener{
+public class NewTrain extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
 
     private String[] IELTSwordArray,IELTSwordsArraySL, IELTStranslationArray,IELTStranslationArraySL, IELTSgrammarArray,IELTSextra, IELTSpronunArray, IELTSexample1array,IELTSexample1arraySL, IELTSexample2Array,IELTSexample2ArraySL, IELTSexample3Array,IELTSexample3ArraySL, IELTSvocabularyType;
     private String[] TOEFLwordArray, TOEFLtranslationArray, TOEFLgrammarArray, TOEFLpronunArray, TOEFLexample1array, TOEFLexample2Array, TOEFLexample3Array, TOEFLvocabularyType;
@@ -127,7 +128,10 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     public File localFile = null;
     public String audioPath= null;
     private String secondLanguage = "english";
-    ProgressBar progressBar;
+    ProgressBar progressBar, adLoading;
+
+    // UI
+
 
 
 
@@ -147,13 +151,14 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
 
+
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         level = sp.getString("level","NOTHING");
 
         languageId = sp.getInt("language",0);
         soundState = sp.getBoolean("soundState",true);
         noshowads = sp.getInt("noshowads",0);
-
+        initializeAds();
         if(!sp.contains("totalWrongCount"+level)){
 
             sp.edit().putInt("totalWrongCount"+level,0).apply();
@@ -168,7 +173,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         }
 
-        initializeAds();
+
 
 
         tts = new TextToSpeech(this, this);
@@ -197,8 +202,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         updateLearnedDatabase();
 
 
-        NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-        NewTrain.this.finish();
+       // NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+       // NewTrain.this.finish();
 
 
 
@@ -351,7 +356,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 isWhichvocbularyToText = true;
             }else {
 
-            isAdShown1 = showInterstitialAd(isAdShown1);
+         //   isAdShown1 = showInterstitialAd(isAdShown1);
             answerCard1.setVisibility(View.VISIBLE);
             answerCard2.setVisibility(View.VISIBLE);
             answerCard3.setVisibility(View.VISIBLE);
@@ -552,10 +557,17 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         speak.setVisibility(View.INVISIBLE);
         storage = FirebaseStorage.getInstance();
 
+
         progressBar = findViewById(R.id.spin_kit);
         Sprite doubleBounce = new Wave();
         progressBar.setIndeterminateDrawable(doubleBounce);
         progressBar.setVisibility(View.INVISIBLE);
+
+
+        adLoading = findViewById(R.id.spin_ad_loading);
+        Sprite threeBounce = new ThreeBounce();
+        progressBar.setIndeterminateDrawable(threeBounce);
+        adLoading.setVisibility(View.GONE);
 
         isIeltsChecked = sp.getBoolean("isIELTSActive",true);
         isToeflChecked = sp.getBoolean("isTOEFLActive", true);
@@ -1141,8 +1153,15 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 @Override
                 public void run() {
 
-                    NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-                    NewTrain.this.finish();
+
+                    hideViews();
+                    adLoading.setVisibility(View.VISIBLE);
+                    showInterstitialAd(false);
+
+
+
+                    //NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+                    //NewTrain.this.finish();
                 }
             }, 200L);
 
@@ -1766,13 +1785,14 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
     }
+
     private Boolean showInterstitialAd(Boolean isAdShown){
 
         if(mPublisherInterstitialAd.isLoaded()){
-
-
-
-            if(!isAdShown){
+//
+//
+//
+//            if(!isAdShown){
 
                 //if( cb != 1){
 
@@ -1781,11 +1801,16 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
 
-                isAdShown = true;
-            }
+//                isAdShown = true;
+            }else {
+
+            //Toast.makeText(this,"Ad is not loaded yet",Toast.LENGTH_SHORT).show();
+            NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+            NewTrain.this.finish();
+             }
 
 
-        }
+//        }
         return isAdShown;
     }
 
@@ -2074,8 +2099,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         }
         return trialStatus;
-
-
     }
 
 
@@ -2084,19 +2107,31 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         String trialStatus = checkTrialStatus();
 
 
-        if(!sp.contains("purchase")){
+        //if(!sp.contains("purchase")){
 
-            if(trialStatus.equalsIgnoreCase("ended")){
+         //   if(trialStatus.equalsIgnoreCase("ended")){
 
                 mPublisherInterstitialAd = new PublisherInterstitialAd(this);
                 mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
-                if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+              //  if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
                     mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-                }
+                    mPublisherInterstitialAd.setAdListener( new AdListener(){
 
-            }
-        }
+                        @Override
+                        public void onAdClosed() {
+                            super.onAdClosed();
+                            NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+                            NewTrain.this.finish();
+
+                            Toast.makeText(getApplicationContext(),"Sorry for the ad :(",Toast.LENGTH_SHORT).show();
+                        }
+
+                    });
+              //  }
+
+            //}
+       // }
 
 
 

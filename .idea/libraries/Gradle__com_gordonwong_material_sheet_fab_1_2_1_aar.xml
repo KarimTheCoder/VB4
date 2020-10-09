@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.gordonwong:material-sheet-fab:1.2.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/aa659f0e1f9d9983e527b258a30d3726/jetified-material-sheet-fab-1.2.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/aa659f0e1f9d9983e527b258a30d3726/jetified-material-sheet-fab-1.2.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/aa659f0e1f9d9983e527b258a30d3726/jetified-material-sheet-fab-1.2.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ef0dceddb6a4842ed7c5fbfcc629455e/jetified-material-sheet-fab-1.2.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ef0dceddb6a4842ed7c5fbfcc629455e/jetified-material-sheet-fab-1.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ef0dceddb6a4842ed7c5fbfcc629455e/jetified-material-sheet-fab-1.2.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.gordonwong/material-sheet-fab/1.2.1/e087f266bfb86aae871202b0d99b02d866cbf5c9/material-sheet-fab-1.2.1-javadoc.jar!/" />

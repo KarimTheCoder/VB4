@@ -10,6 +10,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:id="@+id/top_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -232,6 +233,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+
         android:id="@+id/answer_card2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -278,6 +280,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+
         android:id="@+id/answer_card3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -324,6 +327,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+
         android:id="@+id/answer_card4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -369,8 +373,8 @@
 
     </androidx.cardview.widget.CardView>
 
-
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/train_recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -386,6 +390,18 @@
         app:layout_constraintVertical_bias="1.0">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_ad_loading"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/colorAccent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
