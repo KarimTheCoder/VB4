@@ -1788,30 +1788,36 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     private Boolean showInterstitialAd(Boolean isAdShown){
 
-        if(mPublisherInterstitialAd.isLoaded()){
-//
-//
-//
-//            if(!isAdShown){
 
-                //if( cb != 1){
+        try{
 
-                    mPublisherInterstitialAd.show();
-               // }
+            if(mPublisherInterstitialAd.isLoaded()){
 
+                if(!isAdShown){
 
+                    if( cb != 1){
 
-//                isAdShown = true;
+                        mPublisherInterstitialAd.show();
+                    }
+
+                    isAdShown = true;
+                }
             }else {
 
-            //Toast.makeText(this,"Ad is not loaded yet",Toast.LENGTH_SHORT).show();
-            NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-            NewTrain.this.finish();
-             }
+                //Toast.makeText(this,"Ad is not loaded yet",Toast.LENGTH_SHORT).show();
+                NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+                NewTrain.this.finish();
+            }
+        }catch (NullPointerException i){
+
+            Log.i("Ad Nullpointer",i.getMessage()+"");
+        }
 
 
-//        }
-        return isAdShown;
+
+
+
+                return isAdShown;
     }
 
     private void hideViews(){
@@ -2104,17 +2110,16 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     private void initializeAds(){
 
-        String trialStatus = checkTrialStatus();
+        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        boolean isAdShow = getIsAdShow();
 
 
-        //if(!sp.contains("purchase")){
 
-         //   if(trialStatus.equalsIgnoreCase("ended")){
+        if(isAdShow){
 
-                mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-                mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
-              //  if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+                if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
                     mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
                     mPublisherInterstitialAd.setAdListener( new AdListener(){
 
@@ -2128,14 +2133,32 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                         }
 
                     });
-              //  }
+                }
 
-            //}
-       // }
-
+            }
 
 
 
+
+
+
+    }
+
+
+    private boolean getIsAdShow(){
+
+        boolean isAdShow = false;
+        String trialStatus = checkTrialStatus();
+
+        if(!sp.contains("premium")){
+
+            if(trialStatus.equalsIgnoreCase("ended")){
+
+                isAdShow = true;
+            }
+        }
+
+        return isAdShow;
 
     }
 }

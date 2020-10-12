@@ -2001,28 +2001,25 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private Boolean showInterstitialAd(Boolean isAdShown){
 
         if(mPublisherInterstitialAd.isLoaded()){
-//
-//
-//
-//            if(!isAdShown){
 
-            //if( cb != 1){
+            if(!isAdShown){
 
-            mPublisherInterstitialAd.show();
-            // }
+                if( cb != 1){
 
+                    mPublisherInterstitialAd.show();
+                }
 
+                isAdShown = true;
+            }
 
-//                isAdShown = true;
         }else {
 
             //Toast.makeText(this,"Ad is not loaded yet",Toast.LENGTH_SHORT).show();
-            Practice.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+            Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
             Practice.this.finish();
+
         }
 
-
-//        }
         return isAdShown;
     }
 
@@ -2066,33 +2063,31 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
     private void initializeAds(){
         String trialStatus = checkTrialStatus();
-
-
-        //if(!sp.contains("purchase")){
-
-        //   if(trialStatus.equalsIgnoreCase("ended")){
-
+        boolean isAdShow = getIsAdShow();
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
         mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
-        //  if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-        mPublisherInterstitialAd.setAdListener( new AdListener(){
+        if(isAdShow){
+
+
+          if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+                 mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+                 mPublisherInterstitialAd.setAdListener( new AdListener(){
 
             @Override
             public void onAdClosed() {
                 super.onAdClosed();
-                Practice.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+                Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
                 Practice.this.finish();
 
                 Toast.makeText(getApplicationContext(),"Sorry for the ad :(",Toast.LENGTH_SHORT).show();
             }
 
         });
-        //  }
+          }
 
-        //}
-        // }
+
+         }
 
 
 
@@ -2137,6 +2132,23 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         answerCard4.setVisibility(View.INVISIBLE);
         progress1.setVisibility(View.INVISIBLE);
         wordCard.setVisibility(View.INVISIBLE);
+
+    }
+
+    private boolean getIsAdShow(){
+
+        boolean isAdShow = false;
+        String trialStatus = checkTrialStatus();
+
+        if(!sp.contains("premium")){
+
+            if(trialStatus.equalsIgnoreCase("ended")){
+
+                isAdShow = true;
+            }
+        }
+
+        return isAdShow;
 
     }
 }

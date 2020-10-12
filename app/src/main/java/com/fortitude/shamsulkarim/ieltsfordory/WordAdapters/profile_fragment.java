@@ -444,7 +444,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
             try{
 
                 EmailIntentBuilder.from(getActivity().getBaseContext())
-                        .to("support@fortitudelearn.com")
+                        .to("fortitudedevs@gmail.com")
                         .subject("VB4 - FL: "+BuildConfig.FLAVOR+" VN: "+BuildConfig.VERSION_NAME+" VC: "+BuildConfig.VERSION_CODE)
                         .body("")
                         .start();

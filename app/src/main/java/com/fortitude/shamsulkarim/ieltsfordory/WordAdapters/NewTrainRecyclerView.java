@@ -668,7 +668,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
                 try{
                     EmailIntentBuilder.from(ctx)
-                            .to("support@fortitudelearn.com")
+                            .to("fortitudedevs@gmail.com")
                             .subject("Mistake found! APP: VB4"+" FL: "+ BuildConfig.FLAVOR+" VC: "+BuildConfig.VERSION_CODE+" VN: "+BuildConfig.VERSION_NAME)
                             .body("Word: "+word.getWord()+"\nDefinition: "+word.getTranslation()
                                     +"\nExample 1: "+word.example1

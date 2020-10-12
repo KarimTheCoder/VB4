@@ -200,7 +200,7 @@
                 android:layout_width="5dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:background="@drawable/bottom_bar_dot"></View>
+                android:background="@drawable/bottom_bar_dot" />
 
         </RelativeLayout>
 
