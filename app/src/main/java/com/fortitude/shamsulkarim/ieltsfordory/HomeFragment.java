@@ -6,10 +6,14 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.cardview.widget.CardView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +21,27 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.billingclient.api.AcknowledgePurchaseParams;
+import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,7 +55,7 @@ import az.plainpie.PieView;
  * Created by Shamsul Karim on 13-Dec-16.
  */
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
     // UI
@@ -62,7 +81,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private int learnedCount, totalWordCount, totalLearned;
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,6 +92,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         Window window = Objects.requireNonNull(getActivity()).getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.primary_background_color));
+
 
         if(!sp.contains("home")){
             sp.edit().putBoolean("home",true).apply();
@@ -606,7 +625,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     .setNeutralButton("Upgrade", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(getContext(), "positive clicked", Toast.LENGTH_SHORT).show();
+
+
+                            v.getContext().startActivity(new Intent(v.getContext(), PretrainActivity.class));
+                            //Toast.makeText(getContext(), "positive clicked", Toast.LENGTH_SHORT).show();
                         }
                     })
 
@@ -616,6 +638,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             sp.edit().putBoolean("home_fragment_trail_end",true).apply();
 
         }
+
+    }
+
+
+
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
     }
 }

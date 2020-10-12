@@ -50,14 +50,14 @@
     <string name="theme_title">Theme</string>
     <string name="theme_description"></string>
     <string name="trial_ended">Trial ended</string>
-    <string name="trial_ended_description">Hi, your 7 days trial has ended. You can still use this app and enjoy most of its functions. However, if you want an ad-free experience and dark mode please consider upgrading. Thank you :)</string>
+    <string name="trial_ended_description">Hi, your 7-days trial has ended. You can still use this app and enjoy most of its functions. However, if you want an ad-free experience and dark mode feature, please consider upgrading. Thank you :)</string>
     <string name="purchase_title">UNLOCK YOUR\nFULL POTENTIAL!</string>
     <string name="purchase_description">Stay free of ads and save your eyes and battery with dark mode for a small one-time price.</string>
     <string name="purchase_thank_you">Thank you for your purchase. Your contribution will help us create a better app :)</string>
     <string name="setting_image">This is a button to go to settings</string>
     <string name="do_you_speak_spanish">Speak Spanish? Turn on translation</string>
     <string name="too_easy">Too easy? Turn toggle off</string>
-    <string name="trial_info_description">Most of our important features are free but Premium+ access gives you privilage to an interrupted Ad free experience and Dark mode feature.</string>
+    <string name="trial_info_description">Most of our important features are free but <b>Premium+ access</b> gives you privilege to an interrupted Ad free experience and Dark mode feature.</string>
     <string name="trial_info_title">Enjoy free Premium+ access for 7 days</string>
     <string name="credit_card_not">Credit card not required</string>
 </resources>

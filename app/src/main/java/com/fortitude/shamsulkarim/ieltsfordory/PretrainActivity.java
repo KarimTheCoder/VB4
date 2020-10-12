@@ -974,20 +974,24 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
 
-        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK
-                && purchases != null) {
+        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
+
             for (Purchase purchase : purchases) {
 
                 handlePurchase(purchase,billingClient);
 
                 Toast.makeText(this, "Handle Purchase", Toast.LENGTH_SHORT).show();
             }
-        } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
+        }
+        else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
             // Handle an error caused by a user cancelling the purchase flow.
             Toast.makeText(this, "Purchase cancelled", Toast.LENGTH_SHORT).show();
+
+
         } else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE){
             // Handle any other error codes.
             Toast.makeText(this, "Please check your internet connection"+billingResult.getResponseCode(), Toast.LENGTH_SHORT).show();
+
         }
         else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED){
 
@@ -998,6 +1002,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         }
 
     }
+
 
     private void initiatePurchase(){
         List<String> skuList = new ArrayList<> ();
@@ -1049,8 +1054,6 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void handlePurchase(Purchase purchase, BillingClient billingClient){
-
-
 
         if( purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
 
