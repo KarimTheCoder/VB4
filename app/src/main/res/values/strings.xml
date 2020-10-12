@@ -23,7 +23,7 @@
     <string name="session_completed">Session \nCompleted!</string>
 
     <string name="you_dont_have_favorite">You don\'t have any favorite words</string>
-    <string name="brand_name">Fortitude Learn</string>
+    <string name="brand_name">Fortitude Learn™</string>
     <string name="ielts_descrition">The International English Language Testing System</string>
     <string name="toefl_description">Test of English as a Foreign Language</string>
     <string name="gre_description">The Graduate Record Examinations</string>
@@ -57,4 +57,7 @@
     <string name="setting_image">This is a button to go to settings</string>
     <string name="do_you_speak_spanish">Speak Spanish? Turn on translation</string>
     <string name="too_easy">Too easy? Turn toggle off</string>
+    <string name="trial_info_description">Most of our important features are free but Premium+ access gives you privilage to an interrupted Ad free experience and Dark mode feature.</string>
+    <string name="trial_info_title">Enjoy free Premium+ access for 7 days</string>
+    <string name="credit_card_not">Credit card not required</string>
 </resources>

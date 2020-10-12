@@ -13,7 +13,7 @@
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginBottom="@dimen/keyline_2"
-        style="@style/home_card_style"
+        style="@style/word_card_style"
         app:cardBackgroundColor="@color/card_background_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -17,11 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/keyline_6"
-
         android:layout_marginTop="@dimen/keyline_6"
         android:layout_marginEnd="@dimen/keyline_6"
-        app:cardElevation="0dp"
-        app:cardBackgroundColor="@color/secondary_background_color"
+        style="@style/purchase_card_style"
         app:layout_constraintBottom_toTopOf="@+id/cardView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +74,7 @@
                 fancy:fb_defaultColor="@color/green"
                 fancy:fb_focusColor="#D8C9E8"
                 fancy:fb_radius="15dp"
-                fancy:fb_text="$2.99 USD"
+                fancy:fb_text="BUY"
                 fancy:fb_textColor="@color/primary_text_color_white"
                 fancy:fb_textFont="@font/productbold" />
 
@@ -184,12 +182,17 @@
 
                     <TextView
                         style="@style/third_word_text_style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/keyline_4"
                         android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:textAlignment="gravity"
+                        android:gravity="center_vertical"
                         android:text="@string/do_you_speak_spanish"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/spanish_switch"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

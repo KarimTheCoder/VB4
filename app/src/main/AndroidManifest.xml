@@ -30,7 +30,9 @@
         <activity android:name=".WordAdapters.NewSettingActivity" />
         <activity android:name=".ChooseLanguageActivity" /> <!-- Register the Alarm Receiver -->
         <activity android:name=".ChooseVocabulary" />
-        <activity android:name=".AppLauncher">
+        <activity android:name=".AppLauncher"
+            android:theme="@style/Theme.Launcher"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

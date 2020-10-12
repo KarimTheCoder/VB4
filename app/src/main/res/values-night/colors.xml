@@ -34,4 +34,7 @@
     <color name="progress_fab_color_primary">@color/colorPrimary</color>
     <color name="progress_fab_color_secondary">#212121</color>
     <color name="progress_fab_color_background">#000000</color>
+
+    <color name="train_finished_recycerview_background_color">#212121</color>
+    <color name="purchase_card_backgroundcolor">#000000</color>
 </resources>

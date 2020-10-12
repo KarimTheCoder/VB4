@@ -22,6 +22,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -41,6 +43,7 @@ import com.kyleduo.switchbutton.SwitchButton;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import de.cketti.mailto.EmailIntentBuilder;
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -78,6 +81,10 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Window window = Objects.requireNonNull(getActivity()).getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.toolbar_background_color));
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile_fragment, container, false);
         toolbar = v.findViewById(R.id.profile_toolbar);

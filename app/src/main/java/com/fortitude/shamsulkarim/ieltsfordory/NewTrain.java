@@ -141,9 +141,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_new_train);
+
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
@@ -937,8 +939,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
         } }
-
-         if(v == answerCard2) {
+        if(v == answerCard2) {
 
              if (answerView2.getText().toString().equalsIgnoreCase(answer)) {
                  StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
@@ -988,7 +989,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
              }
          }
-
         if(v == answerCard3){
 
             if(answerView3.getText().toString().equalsIgnoreCase(answer)){

@@ -10,7 +10,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recycler_view_card"
-        style="@style/home_card_style"
+        style="@style/word_card_style"
         app:cardBackgroundColor="@color/card_background_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -190,7 +190,7 @@
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
-        style="@style/home_card_style"
+        style="@style/word_card_style"
         app:cardBackgroundColor="@color/card_background_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -238,7 +238,7 @@
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
-        style="@style/home_card_style"
+        style="@style/word_card_style"
         app:cardBackgroundColor="@color/card_background_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -284,7 +284,7 @@
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
-        style="@style/home_card_style"
+        style="@style/word_card_style"
         app:cardBackgroundColor="@color/card_background_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -330,7 +330,7 @@
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
-        style="@style/home_card_style"
+        style="@style/word_card_style"
         app:cardBackgroundColor="@color/card_background_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -386,6 +386,16 @@
         app:layout_constraintVertical_bias="1.0">
 
     </androidx.recyclerview.widget.RecyclerView>
-
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_ad_loading"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/colorAccent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

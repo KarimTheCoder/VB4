@@ -33,6 +33,8 @@ import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
+import com.fortitude.shamsulkarim.ieltsfordory.NewTrain;
+import com.fortitude.shamsulkarim.ieltsfordory.TrainFinishedActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -44,7 +46,9 @@ import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewTrainRecyclerView
 import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
@@ -124,10 +128,10 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private List<Integer> bWordDatabasePosition, aWordDatabasePosition, iWordDatabasePosition, greWordDatabasePosition;
 
     private PublisherInterstitialAd mPublisherInterstitialAd;
-    ProgressBar progressBar;
+    ProgressBar progressBar, adLoading;
     private String secondLanguage = "english";
     //----------------------
-
+    private View topBackground;
 
 
     @Override
@@ -135,9 +139,12 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        //       WindowManager.LayoutParams.FLAG_FULLSCREEN);
             setContentView(R.layout.activity_new_train);
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
         // This code reports to Crashlytics of connection
         boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
@@ -148,12 +155,12 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
 
-        initializeAds();
+
 
 
         initializingSQLDatabase();
         initialization();
-
+        initializeAds();
         gettingResources();
         addingLearnedDatabase();
 
@@ -252,7 +259,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             if (showCycle >= FIVE_WORD_SIZE){
 
 
-                isAdShown1 = showInterstitialAd(isAdShown1);
+                // isAdShown1 = showInterstitialAd(isAdShown1);
                 answerCard1.setVisibility(View.VISIBLE);
                 answerCard2.setVisibility(View.VISIBLE);
                 answerCard3.setVisibility(View.VISIBLE);
@@ -732,10 +739,16 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                 @Override
                 public void run() {
 
-                    Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
-                    Practice.this.finish();
+                    //Todo
+
+                    hideViews();
+                    adLoading.setVisibility(View.VISIBLE);
+                    showInterstitialAd(false);
+
+//                    Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
+//                    Practice.this.finish();
                 }
-            },0L);
+            },200L);
 
 
 
@@ -749,7 +762,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private void initialization(){
 
 
-
+        topBackground = findViewById(R.id.top_background);
         recyclerView = (RecyclerView)findViewById(R.id.train_recyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -833,6 +846,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         Sprite doubleBounce = new Wave();
         progressBar.setIndeterminateDrawable(doubleBounce);
         progressBar.setVisibility(View.INVISIBLE);
+        adLoading = findViewById(R.id.spin_ad_loading);
+        Sprite threeBounce = new ThreeBounce();
+        progressBar.setIndeterminateDrawable(threeBounce);
+        adLoading.setVisibility(View.GONE);
+
 
 
 
@@ -999,6 +1017,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                     @Override
                     public void onClick(View v) {
                         Practice.this.startActivity(new Intent(Practice.this,MainActivity.class));
+                        Practice.this.finish();
                     }
                 })
                 .setNegativeButton(android.R.string.no, null)
@@ -1982,23 +2001,28 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private Boolean showInterstitialAd(Boolean isAdShown){
 
         if(mPublisherInterstitialAd.isLoaded()){
+//
+//
+//
+//            if(!isAdShown){
+
+            //if( cb != 1){
+
+            mPublisherInterstitialAd.show();
+            // }
 
 
 
-            if( isAdShown == false){
+//                isAdShown = true;
+        }else {
 
-                //if( cb != 1){
-
-                    mPublisherInterstitialAd.show();
-               // }
-
-
-
-                isAdShown = true;
-            }
-
-
+            //Toast.makeText(this,"Ad is not loaded yet",Toast.LENGTH_SHORT).show();
+            Practice.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+            Practice.this.finish();
         }
+
+
+//        }
         return isAdShown;
     }
 
@@ -2041,22 +2065,34 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
     private void initializeAds(){
-
         String trialStatus = checkTrialStatus();
 
 
-        if(!sp.contains("purchase")){
+        //if(!sp.contains("purchase")){
 
-            if(trialStatus.equalsIgnoreCase("ended")){
+        //   if(trialStatus.equalsIgnoreCase("ended")){
 
-                mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-                mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712xxx");
+        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
-                if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-                    mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-                }
+        //  if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+        mPublisherInterstitialAd.setAdListener( new AdListener(){
+
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                Practice.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+                Practice.this.finish();
+
+                Toast.makeText(getApplicationContext(),"Sorry for the ad :(",Toast.LENGTH_SHORT).show();
             }
-        }
+
+        });
+        //  }
+
+        //}
+        // }
 
 
 
@@ -2089,6 +2125,18 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         }
         return trialStatus;
 
+
+    }
+
+    private void hideViews(){
+        topBackground.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+        answerCard1.setVisibility(View.INVISIBLE);
+        answerCard2.setVisibility(View.INVISIBLE);
+        answerCard3.setVisibility(View.INVISIBLE);
+        answerCard4.setVisibility(View.INVISIBLE);
+        progress1.setVisibility(View.INVISIBLE);
+        wordCard.setVisibility(View.INVISIBLE);
 
     }
 }

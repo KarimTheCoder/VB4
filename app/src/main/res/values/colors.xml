@@ -90,5 +90,9 @@
     <color name="progress_fab_color_secondary">@color/colorPrimaryDark</color>
     <color name="progress_fab_color_background">@color/grey100</color>
 
+    // Train finished Recyclerview Color
+    <color name="train_finished_recycerview_background_color">@color/grey100</color>
+    <color name="purchase_card_backgroundcolor">#F5F5F5</color>
+
 
 </resources>

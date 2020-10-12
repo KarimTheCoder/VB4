@@ -14,6 +14,8 @@ import androidx.cardview.widget.CardView;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -114,6 +116,9 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_setting);
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.toolbar_background_color));
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
@@ -1651,17 +1656,30 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                     Purchase.PurchasesResult results = billingClient.queryPurchases(BillingClient.SkuType.INAPP);
 
-                    for (Purchase purchase : Objects.requireNonNull(results.getPurchasesList())) {
+                    try{
+                        if(Objects.requireNonNull(results.getPurchasesList()).isEmpty()){
+                            Toast.makeText(getApplicationContext(),"Google tells us, you don't own Premium+",Toast.LENGTH_LONG).show();
+                        }else {
 
-                        if(purchase.getSku().equalsIgnoreCase("test_product")){
+                            for (Purchase purchase : Objects.requireNonNull(results.getPurchasesList())) {
 
-                            if(!sp.contains("purchase")){
+                                if(purchase.getSku().equalsIgnoreCase("test_product")){
 
-                                sp.edit().putBoolean("purchase",true).apply();
-                                Toast.makeText(getApplicationContext(),"Product: "+purchase.getSku()+" restored",Toast.LENGTH_SHORT).show();
+                                    if(!sp.contains("purchase")){
+
+                                        sp.edit().putBoolean("purchase",true).apply();
+                                        Toast.makeText(getApplicationContext(),"Product: "+purchase.getSku()+" restored",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
                         }
+                    }catch (NullPointerException i){
+                        Log.i("Billing Result", Objects.requireNonNull(i.getMessage()));
                     }
+                }
+                else if( billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE){
+
+                    Toast.makeText(getApplicationContext(),"Please connect to the internet",Toast.LENGTH_SHORT).show();
                 }
                 else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE){
 

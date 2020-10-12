@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -30,6 +31,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.Connectivit
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.github.ybq.android.spinkit.style.Wave;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -94,8 +96,10 @@ public class SplashScreen extends AppCompatActivity implements PurchasesUpdatedL
             finish();
         }else {
 
-            createDatabase();
 
+            createDatabase();
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            sp.edit().putInt("DarkMode",0).apply();
             // Billing
            // getPreviousPurchases();
         }
@@ -134,9 +138,17 @@ public class SplashScreen extends AppCompatActivity implements PurchasesUpdatedL
         }
         // Default Dark themes
         setupAppTheme();
-        progressBar = findViewById(R.id.spin_splash_screen);
-        Sprite doubleBounce = new ThreeBounce();
-        progressBar.setIndeterminateDrawable(doubleBounce);
+
+
+        try {
+
+            progressBar = findViewById(R.id.spin_splash_screen);
+            Sprite doubleBounce = new ThreeBounce();
+            progressBar.setIndeterminateDrawable(doubleBounce);
+        }catch (NullPointerException i){
+            Log.i("Progressbar",i.getMessage());
+        }
+
 
 
 

@@ -338,8 +338,11 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             Sprite doubleBounce = new Wave();
             progressBar.setIndeterminateDrawable(doubleBounce);
             progressBar.setVisibility(View.INVISIBLE);
-            progressBar = itemView.findViewById(R.id.spin_kit);
-            progressBar.setVisibility(View.INVISIBLE);
+
+          //  progressBar = itemView.findViewById(R.id.spin_kit);
+          //  progressBar.setVisibility(View.INVISIBLE);
+
+
             isVoicePronunciation = sp.getBoolean("pronunState",true);
 
 //            wordView.setTypeface(ABeeZee);

@@ -21,11 +21,13 @@
     <TextView
         android:id="@+id/title_trial_text_view"
         style="@style/primary_text_style"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
         android:layout_marginBottom="@dimen/keyline_4"
         android:gravity="center"
-        android:text="Try premium access \nfor 7 days"
+        android:text="@string/trial_info_title"
         app:layout_constraintBottom_toTopOf="@+id/description_trial_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,13 +36,13 @@
         android:id="@+id/description_trial_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="48sp"
-        android:layout_marginRight="48dp"
+        android:layout_marginStart="48sp"
+        android:layout_marginEnd="48dp"
         android:layout_marginBottom="64dp"
         android:gravity="center"
         android:textColor="@color/secondary_text_color"
         android:textSize="16sp"
-        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+        android:text="@string/trial_info_description"
         app:layout_constraintBottom_toTopOf="@+id/start_trial_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -51,14 +53,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="@dimen/keyline_6"
+        android:layout_marginBottom="@dimen/keyline_4"
         android:paddingStart="40dp"
         android:paddingTop="10dp"
         android:paddingEnd="40dp"
         android:paddingBottom="10dp"
         android:textSize="18sp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,5 +70,16 @@
         fancy:fb_radius="30dp"
         fancy:fb_text="Start now"
         fancy:fb_textColor="@color/secondary_text_color" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/keyline_4"
+        android:textSize="12sp"
+        android:text="@string/credit_card_not"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

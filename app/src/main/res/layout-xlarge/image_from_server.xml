@@ -14,8 +14,7 @@
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_2"
-        style="@style/home_card_style"
-        app:cardBackgroundColor="@color/card_background_color"
+        style="@style/train_finished_card_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

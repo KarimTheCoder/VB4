@@ -16,6 +16,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -88,8 +90,12 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_learned_words,container,false);
 
+        Window window = Objects.requireNonNull(getActivity()).getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+
         // This code reports to Crashlytics of connection
-        Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(Objects.requireNonNull(getContext()));
 
         initialization(v);
         gettingResources();

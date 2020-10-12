@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -83,10 +84,10 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_start_training);
-
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.third_background_color));
 
 
         init();
@@ -1042,6 +1043,9 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
                             Toast.makeText(getApplicationContext(),"Play Store service is not connected now",Toast.LENGTH_SHORT).show();
 
+                        }else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE){
+
+                            Toast.makeText(getApplicationContext(),"You are not connected to the internet",Toast.LENGTH_LONG).show();
                         }
 
                         else {
@@ -1056,6 +1060,8 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void handlePurchase(Purchase purchase, BillingClient billingClient){
+
+
 
         if( purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
 

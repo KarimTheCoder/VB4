@@ -3,11 +3,15 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:actionMenuTextColor">@color/primary_text_color</item>
 
+    </style>
+    <style name="Theme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/gradient</item>
     </style>
 
 
@@ -276,6 +280,16 @@
     <item name="android:layout_marginBottom">@dimen/keyline_2</item>
    </style>
 
+    <style name="word_card_style" parent="CardView">
+
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="android:layout_marginRight">@dimen/keyline_2</item>
+        <item name="android:layout_marginLeft">@dimen/keyline_2</item>
+        <item name="android:layout_marginTop">@dimen/keyline_2</item>
+        <item name="android:layout_marginBottom">@dimen/keyline_2</item>
+    </style>
+
     <style name="rate_card_style" parent="CardView">
 
         <item name="cardCornerRadius">10dp</item>
@@ -298,10 +312,16 @@
     <style name="train_finished_card_style" parent="CardView">
         <item name="elevation">0dp</item>
         <item name="cardElevation">0dp</item>
-        <item name="cardBackgroundColor">@color/grey100</item>
+        <item name="cardBackgroundColor">@color/train_finished_recycerview_background_color</item>
         <item name="cardCornerRadius">15dp</item>
         <item name="android:layout_marginTop">@dimen/keyline_2</item>
         <item name="android:layout_marginBottom">@dimen/keyline_2</item>
+    </style>
+
+    <style name="purchase_card_style" parent="CardView">
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@color/purchase_card_backgroundcolor</item>
+
     </style>
 
     <style name="home_title_style" parent="TextAppearance.AppCompat">

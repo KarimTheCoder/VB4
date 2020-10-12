@@ -48,9 +48,13 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        //        WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_practice_finished);
+
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.primary_background_color));
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);

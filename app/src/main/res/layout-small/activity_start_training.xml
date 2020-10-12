@@ -20,8 +20,7 @@
 
         android:layout_marginTop="@dimen/keyline_6"
         android:layout_marginEnd="@dimen/keyline_6"
-        app:cardElevation="0dp"
-        app:cardBackgroundColor="@color/secondary_background_color"
+        style="@style/purchase_card_style"
         app:layout_constraintBottom_toTopOf="@+id/cardView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +75,7 @@
                 fancy:fb_defaultColor="@color/green"
                 fancy:fb_focusColor="#D8C9E8"
                 fancy:fb_radius="15dp"
-                fancy:fb_text="$2.99 USD"
+                fancy:fb_text="BUY"
                 fancy:fb_textColor="@color/primary_text_color_white"
                 fancy:fb_textFont="@font/productbold" />
 
