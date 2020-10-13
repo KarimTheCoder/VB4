@@ -686,24 +686,32 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
             IELTSlearnedDatabase.add(beginnerRes.getString(3));
 
         }
+        beginnerRes.close();
+        IELTSdatabase.close();
 
         while (TOEFLres.moveToNext()) {
 
             TOEFLlearnedDatabase.add(TOEFLres.getString(3));
 
         }
+        TOEFLres.close();
+        TOEFLdatabase.close();
 
         while (SATres.moveToNext()) {
 
             SATlearnedDatabase.add(SATres.getString(3));
 
         }
+        SATres.close();
+        SATdatabase.close();
 
         while (GREres.moveToNext()) {
 
             GRElearnedDatabase.add(GREres.getString(3));
 
         }
+        GREres.close();
+        GREdatabase.close();
 
 
     }
@@ -875,23 +883,28 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
 
         }
+        ieltsRes.close();
 
         while (toeflRes.moveToNext()){
 
             toeflFavPosition.add(toeflRes.getString(2));
         }
+        toeflRes.close();
 
         while(satRes.moveToNext()){
 
             satFavPosition.add(satRes.getString(2));
 
         }
+        satRes.close();
 
         while (greRes.moveToNext()){
 
 
             greFavPosition.add(greRes.getString(2));
         }
+
+        greRes.close();
     }
 
 
@@ -937,6 +950,26 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        adapter.onDestroy();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

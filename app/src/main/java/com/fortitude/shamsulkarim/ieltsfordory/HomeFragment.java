@@ -409,6 +409,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             IELTSlearnedDatabase.add(beginnerRes.getString(3));
 
         }
+        beginnerRes.close();
+        IELTSdatabase.close();
 
         while (TOEFLres.moveToNext()) {
 
@@ -418,6 +420,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             TOEFLlearnedDatabase.add(TOEFLres.getString(3));
 
         }
+        TOEFLres.close();
+        TOEFLdatabase.close();
 
         while (SATres.moveToNext()) {
 
@@ -427,6 +431,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             SATlearnedDatabase.add(SATres.getString(3));
 
         }
+        SATres.close();
+        SATdatabase.close();
 
         while (GREres.moveToNext()) {
 
@@ -437,6 +443,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             GRElearnedDatabase.add(GREres.getString(3));
 
         }
+        GREres.close();
+        GREdatabase.close();
 
 
     }
@@ -640,8 +648,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
     }
-
-
 
 
 

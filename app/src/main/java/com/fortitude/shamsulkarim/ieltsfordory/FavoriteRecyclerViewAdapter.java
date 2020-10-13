@@ -195,6 +195,14 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
 
 
+    public void onDestroy(){
+
+        ieltsWordDatabase.close();
+        toeflWordDatabase.close();
+        satWordDatabase.close();
+        greWordDatabase.close();
+        Toast.makeText(context,"Favorite OnDestory",Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public int getItemCount() {

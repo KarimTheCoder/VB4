@@ -562,6 +562,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             }
 
         }
+        ieltsRes.close();
+        ieltsWordDatabase.close();
 
         while (toeflRes.moveToNext()){
 
@@ -577,6 +579,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                 toeflLearnedNumBuilder.append(0+"+");
             }
         }
+        toeflRes.close();
+        toeflWordDatabase.close();
 
         while (satRes.moveToNext()){
 
@@ -596,6 +600,9 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         }
 
+        satRes.close();
+        satWordDatabase.close();
+
         while (greRes.moveToNext()){
 
             if(greRes.getString(2).equalsIgnoreCase("true")){
@@ -612,6 +619,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                 greLearnedNumBuilder.append(0+"+");
             }
         }
+        greRes.close();
+        greWordDatabase.close();
 
 
 

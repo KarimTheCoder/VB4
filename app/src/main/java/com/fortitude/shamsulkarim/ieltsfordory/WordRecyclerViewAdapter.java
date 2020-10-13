@@ -138,6 +138,14 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     }
 
+    public void onDestroy(){
+        ieltsWordDatabase.close();
+        toeflWordDatabase.close();
+        satWordDatabase.close();
+        greWordDatabase.close();
+        Toast.makeText(context,"ON Dititsljdfjf",Toast.LENGTH_LONG).show();
+    }
+
 
 
     @Override
@@ -241,6 +249,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 beginnerFav.add(beginnerRes.getString(2));
 
             }
+            beginnerRes.close();
         }
 
         if( favoriteLevel == 1){
@@ -253,6 +262,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 beginnerFav.add(beginnerRes.getString(2));
 
             }
+            beginnerRes.close();
         }
 
         if( favoriteLevel == 2){
@@ -265,7 +275,8 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                     beginnerFav.add(beginnerRes.getString(2));
 
 
-            }
+                }
+            beginnerRes.close();
         }
 
 

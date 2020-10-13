@@ -633,23 +633,32 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
 
         }
+        ieltsRes.close();
+        IELTSdatabase.close();
 
         while (toeflRes.moveToNext()){
 
             toeflFavPosition.add(toeflRes.getString(2));
         }
+        toeflRes.close();
+        TOEFLdatabase.close();
 
         while(satRes.moveToNext()){
 
             satFavPosition.add(satRes.getString(2));
 
         }
+        satRes.close();
+        SATdatabase.close();
 
         while (greRes.moveToNext()){
 
 
             greFavPosition.add(greRes.getString(2));
         }
+        greRes.close();
+        GREdatabase.close();
+
     }
 
 
@@ -710,5 +719,11 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        adapter.onDestroy();
     }
 }

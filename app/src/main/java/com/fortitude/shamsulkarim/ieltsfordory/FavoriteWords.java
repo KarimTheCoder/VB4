@@ -230,6 +230,7 @@ public class FavoriteWords extends Fragment  {
 
         }
         toeflRes.close();
+        toeflWordDatabase.close();
 
         while (ieltsRes.moveToNext()){
 
@@ -241,6 +242,7 @@ public class FavoriteWords extends Fragment  {
         }
 
         ieltsRes.close();
+        ieltsWordDatabase.close();
 
         while (satRes.moveToNext()){
 
@@ -251,6 +253,7 @@ public class FavoriteWords extends Fragment  {
 
         }
         satRes.close();
+        satWordDatabase.close();
         while (greRes.moveToNext()){
 
             greFavWords.add(greRes.getString(2));
@@ -260,6 +263,7 @@ public class FavoriteWords extends Fragment  {
 
         }
         greRes.close();
+        greWordDatabase.close();
 
 
 
@@ -424,5 +428,9 @@ public class FavoriteWords extends Fragment  {
     }
 
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        adapter.onDestroy();
+    }
 }
