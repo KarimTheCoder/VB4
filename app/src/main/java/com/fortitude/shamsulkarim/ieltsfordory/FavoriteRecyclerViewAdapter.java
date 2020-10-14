@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -368,10 +369,18 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
                     //Toast.makeText(context,"Connectedssss",Toast.LENGTH_LONG).show();
 
                 } else {
+
                     //Show disconnected screen
+
                     Toast.makeText(context,"not connected",Toast.LENGTH_LONG).show();
-                    tts.setLanguage(Locale.US);
-                    tts.speak(wordName, TextToSpeech.QUEUE_ADD, null);
+                    if(tts != null){
+
+                        tts.setLanguage(Locale.US);
+                        tts.speak(wordName, TextToSpeech.QUEUE_FLUSH, null,"TTS");
+
+                    }
+
+
                 }
 
 
@@ -468,6 +477,21 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
         @Override
         public void onInit(int status) {
+
+            if (status == TextToSpeech.SUCCESS) {
+                int ttsLang = tts.setLanguage(Locale.US);
+
+                if (ttsLang == TextToSpeech.LANG_MISSING_DATA || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Log.e("TTS", "The Language is not supported!");
+                    Toast.makeText(context, "Please install English Language on your Text-to-Speech.\nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.i("TTS", "Language Supported.");
+                }
+                Log.i("TTS", "Initialization success.");
+            } else {
+                Log.e("TTS", "TTS not initialized");
+                Toast.makeText(context, "Please install Google Text-to-Speech on your phone. \nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+            }
 
         }
     }

@@ -48,6 +48,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Objects;
 
 import de.cketti.mailto.EmailIntentBuilder;
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -84,9 +85,11 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
     private FirebaseStorage storage;
     private StorageReference storageRef;
     private int cb;
+    private Context context;
 
     public NewTrainRecyclerView(Context context, Word word){
         images = new Images();
+        this.context = context;
         tts = new TextToSpeech(context, this);
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com");
@@ -132,7 +135,15 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
     }
 
-
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        ieltsWordDatabase.close();
+        toeflWordDatabasee.close();
+        satWordDatabase.close();
+        greWordDatabase.close();
+        Toast.makeText(context,"On Detached Recyclerview",Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -682,6 +693,8 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                             )
                             .start();
                 }catch (NullPointerException i){
+
+                    Log.i("RepostMistake", Objects.requireNonNull(i.getMessage()));
 
                 }
             }

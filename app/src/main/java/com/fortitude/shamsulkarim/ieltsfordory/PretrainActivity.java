@@ -1,5 +1,4 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -594,6 +593,8 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             }
             i++;
         }
+        res.close();
+        IELTSdatabase.close();
 
         return size;
 
@@ -626,6 +627,9 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             i++;
         }
 
+        res.close();
+        TOEFLdatabase.close();
+
         return size;
 
     }
@@ -657,6 +661,8 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             }
             i++;
         }
+        res.close();
+        SATdatabase.close();
 
         return size;
 
@@ -687,6 +693,9 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
 
             }
+
+            res.close();
+            GREdatabase.close();
 
             i++;
         }

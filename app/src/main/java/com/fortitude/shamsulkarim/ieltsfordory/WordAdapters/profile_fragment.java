@@ -383,12 +383,11 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
                     learnedCount++;
                 }
 
-
-
             }
-
-
         }
+
+        ieltsRes.close();
+        ieltsWordDatabase.close();
 
         while (toeflRes.moveToNext()) {
 
@@ -401,6 +400,8 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
             }
         }
+        toeflRes.close();
+        toeflWordDatabase.close();
 
         while (satRes.moveToNext()) {
 
@@ -414,22 +415,21 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
             }
         }
-
+        satRes.close();
+        satWordDatabase.close();
 
         while (greRes.moveToNext()){
 
             if(greRes.getString(3).equalsIgnoreCase("true")){
 
-
                 if(isGreChecked){
 
                     learnedCount++;
                 }
-
-
             }
-
         }
+        greRes.close();
+        greWordDatabase.close();
 
 
 

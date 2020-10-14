@@ -213,6 +213,12 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
+
+        IELTSdatabase.close();
+        TOEFLdatabase.close();
+        SATdatabase.close();
+        GREdatabase.close();
 
         if(adapter != null){
 
@@ -227,7 +233,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             tts.shutdown();
         }
 
-        super.onDestroy();
+
 
     }
 
@@ -1610,6 +1616,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 IELTSFav.add(beginnerRes.getString(2));
 
              }
+             beginnerRes.close();
 
              while (TOEFLres.moveToNext()){
 
@@ -1617,6 +1624,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                  TOEFLFav.add(TOEFLres.getString(2));
 
              }
+             TOEFLres.close();
 
              while (SATres.moveToNext()){
 
@@ -1624,6 +1632,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                  SATFav.add(SATres.getString(2));
 
              }
+             SATres.close();
 
              while (GREres.moveToNext()){
 
@@ -1631,12 +1640,14 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                  GREFav.add(GREres.getString(2));
 
              }
+             GREres.close();
 
 
 
 
 
     }
+
 
     private void updateLearnedDatabase(){
 
