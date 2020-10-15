@@ -9,6 +9,8 @@ import android.speech.tts.TextToSpeech;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,9 +68,17 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public File localFile = null;
     StorageReference gsReference;
     private FirebaseStorage storage;
+    private WordAdapterCallback wordAdapterCallback;
 
-    public WordRecyclerViewAdapter(Context context, ArrayList<Object> words) {
+    public WordRecyclerViewAdapter(Context context, ArrayList<Object> words, WordAdapterCallback wordAdapterCallback) {
         this.context = context;
+
+        try{
+
+            this.wordAdapterCallback = wordAdapterCallback;
+        }catch (ClassCastException e){
+            Log.e("WordAdapter init",e.getMessage());
+        }
 
         storage = FirebaseStorage.getInstance();
         sp = context.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
@@ -403,8 +413,14 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 } else {
                     //Show disconnected screen
                     //Toast.makeText(context,"Not connected",Toast.LENGTH_LONG).show();
-                    tts.setLanguage(Locale.US);
-                    tts.speak(wordName, TextToSpeech.QUEUE_ADD, null);
+//                    tts.setLanguage(Locale.US);
+//                    tts.speak(wordName, TextToSpeech.QUEUE_ADD, null);
+                    try {
+                        wordAdapterCallback.onMethodCallback(wordName);
+                    } catch (ClassCastException e) {
+                        // do something
+                        Log.e("WordAdapterCallback",e.getMessage());
+                    }
                 }
 
             }
@@ -544,12 +560,16 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     // Native Express ad ----------------------------------------------------------------------------
 
 
-    public class NativeExpressAdViewHolder extends RecyclerView.ViewHolder{
+    public static class NativeExpressAdViewHolder extends RecyclerView.ViewHolder{
 
 
         public NativeExpressAdViewHolder(View itemView) {
             super(itemView);
         }
+    }
+
+    public interface WordAdapterCallback{
+        void onMethodCallback(String word);
     }
 
 }

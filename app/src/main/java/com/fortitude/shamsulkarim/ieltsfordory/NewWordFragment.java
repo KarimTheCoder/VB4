@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
@@ -27,13 +32,14 @@ import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.Connectivit
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewWordFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class NewWordFragment extends Fragment implements AdapterView.OnItemSelectedListener, WordRecyclerViewAdapter.WordAdapterCallback , TextToSpeech.OnInitListener{
 
     private String[] IELTSwordArray, IELTStranslationArray, IELTSgrammarArray, IELTSpronunArray, IELTSexample1array, IELTSexample2Array, IELTSexample3Array, IELTSvocabularyType;
     private String[] TOEFLwordArray, TOEFLtranslationArray, TOEFLgrammarArray, TOEFLpronunArray, TOEFLexample1array, TOEFLexample2Array, TOEFLexample3Array, TOEFLvocabularyType;
@@ -61,7 +67,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
     private Spinner spinner;
     private int beginnerPos;
     private FloatingSearchView sv;
-
+    private TextToSpeech tts;
     public NewWordFragment() {
         // Required empty public constructor
     }
@@ -82,7 +88,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
         sp = getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         gettingResources();
         getfavoriteDatabasePosition();
-
+        tts = new TextToSpeech(getContext(), this);
         toolbar = (Toolbar)v.findViewById(R.id.word_toolbar);
         toolbar.setTitle("WORDS");
         toolbar.setTitleTextColor(getResources().getColor(R.color.beginnerS));
@@ -339,7 +345,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
 
 
-        adapter = new WordRecyclerViewAdapter(getContext(), words);
+        adapter = new WordRecyclerViewAdapter(getContext(), words,this);
         recyclerView.setAdapter(adapter);
 
 
@@ -399,7 +405,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
         addSATwords(SATbeginnerNumber,SATbeginnerNumber+SATintermediateNumber);
         addGREwords(GREbeginnerNumber,GREbeginnerNumber+GREintermediateNumber);
 
-        adapter = new WordRecyclerViewAdapter(getContext(), words);
+        adapter = new WordRecyclerViewAdapter(getContext(), words, this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -458,7 +464,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
         addSATwords(SATbeginnerNumber+SATintermediateNumber,SATwordSize);
         addGREwords(GREbeginnerNumber+GREintermediateNumber,GREwordSize);
 
-        adapter = new WordRecyclerViewAdapter(getContext(), words);
+        adapter = new WordRecyclerViewAdapter(getContext(), words, this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -725,5 +731,38 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
     public void onDestroy() {
         super.onDestroy();
         adapter.onDestroy();
+        if(tts != null ){
+            tts.stop();
+            tts.shutdown();
+        }
+    }
+
+    @Override
+    public void onMethodCallback(String word) {
+
+        if(tts != null){
+
+            tts.setLanguage(Locale.US);
+            tts.speak(word, TextToSpeech.QUEUE_FLUSH, null,"TTS");
+
+        }
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int ttsLang = tts.setLanguage(Locale.US);
+
+            if (ttsLang == TextToSpeech.LANG_MISSING_DATA || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "The Language is not supported!");
+                Toast.makeText(getContext(), "Please install English Language on your Text-to-Speech engine.\nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.i("TTS", "Language Supported.");
+            }
+            Log.i("TTS", "Initialization success.");
+        } else {
+            Log.e("TTS", "TTS not initialized");
+            Toast.makeText(getContext(), "Please install Google Text-to-Speech on your phone. \nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+        }
     }
 }

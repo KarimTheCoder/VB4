@@ -13,6 +13,7 @@ import android.speech.tts.TextToSpeech;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -66,7 +68,7 @@ import java.util.TimerTask;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class Practice extends AppCompatActivity  implements View.OnClickListener, TextToSpeech.OnInitListener{
+public class Practice extends AppCompatActivity  implements View.OnClickListener, TextToSpeech.OnInitListener, NewTrainRecyclerView.TrainAdapterCallback {
 
     private String[] IELTSwordArray,IELTSwordsArraySL, IELTStranslationArray,IELTStranslationArraySL, IELTSgrammarArray,IELTSextra, IELTSpronunArray, IELTSexample1array,IELTSexample1arraySL, IELTSexample2Array,IELTSexample2ArraySL, IELTSexample3Array,IELTSexample3ArraySL, IELTSvocabularyType;
     private String[] TOEFLwordArray, TOEFLtranslationArray, TOEFLgrammarArray, TOEFLpronunArray, TOEFLexample1array, TOEFLexample2Array, TOEFLexample3Array, TOEFLvocabularyType;
@@ -361,7 +363,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             }
 
 
-            adapter = new NewTrainRecyclerView(this,fiveWords.get(showCycle));
+            adapter = new NewTrainRecyclerView(this,fiveWords.get(showCycle),this);
             recyclerView.setAdapter(adapter);
             this.showCycle++;
             progress1.setProgress(quizCycle+showCycle);
@@ -492,6 +494,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
                 if(answerView1.getText().toString().equalsIgnoreCase(answer)){
+                    applyCorrectColor();
                     if(soundState){
 
                         correctAudio.start();
@@ -507,6 +510,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
                 }else {
 
+                    applyWrongColor();
                     if(soundState){
 
                         incorrectAudio.start();
@@ -547,8 +551,9 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
             if(v == answerCard2) {
 
-                if (answerView2.getText().toString().equalsIgnoreCase(answer)) {
 
+                if (answerView2.getText().toString().equalsIgnoreCase(answer)) {
+                    applyCorrectColor();
                     if(soundState){
 
                         correctAudio.start();
@@ -562,6 +567,8 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                     answerCardAnimation2();
 
                 } else {
+
+                    applyWrongColor();
                     if(soundState){
 
                         incorrectAudio.start();
@@ -597,7 +604,9 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
             if(v == answerCard3){
 
+
                 if(answerView3.getText().toString().equalsIgnoreCase(answer)){
+                    applyCorrectColor();
                     if(soundState){
 
                         correctAudio.start();
@@ -611,6 +620,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                     answerCardAnimation2();
 
                 }else {
+                    applyWrongColor();
                     if(soundState){
 
                         incorrectAudio.start();
@@ -646,11 +656,13 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             }
             if(v == answerCard4){
 
+
                 if(answerView4.getText().toString().equalsIgnoreCase(answer)){
                     if(soundState){
 
                         correctAudio.start();
                     }
+                    applyCorrectColor();
                     totalCorrects++;
 
                     StyleableToast.makeText(this, "Correct!", 5, R.style.correct).show();
@@ -663,6 +675,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
                 }else {
+                    applyWrongColor();
 
                     if(soundState){
 
@@ -816,7 +829,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         progress1.setProgressColor(getResources().getColor(R.color.colorPrimary));
         progress1.setSecondaryProgressColor(getResources().getColor(R.color.colorPrimaryDark));
-        progress1.setProgressBackgroundColor(getResources().getColor(R.color.grey));
+        progress1.setProgressBackgroundColor(getResources().getColor(R.color.primary_text_color_white));
         fab.setColorNormal(getResources().getColor(R.color.colorPrimary));
         fab.setColorPressed(getResources().getColor(R.color.colorPrimaryDark));
         fiveWords = new ArrayList<>();
@@ -905,7 +918,16 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+        if(tts != null){
+
+            tts.stop();
+            tts.shutdown();
+        }
+    }
 
     // ------- Animation -------------------------------
     private void answerCardAnimation(){
@@ -967,7 +989,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
         DefExamAnimation();
-        adapter = new NewTrainRecyclerView(this,fiveWords.get(quizCycle));
+        adapter = new NewTrainRecyclerView(this,fiveWords.get(quizCycle),this);
         recyclerView.setAdapter(adapter);
 
 
@@ -1026,6 +1048,20 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     }
     @Override
     public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int ttsLang = tts.setLanguage(Locale.US);
+
+            if (ttsLang == TextToSpeech.LANG_MISSING_DATA || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "The Language is not supported!");
+                Toast.makeText(this, "Please install English Language on your Text-to-Speech engine.\nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.i("TTS", "Language Supported.");
+            }
+            Log.i("TTS", "Initialization success.");
+        } else {
+            Log.e("TTS", "TTS not initialized");
+            Toast.makeText(this, "Please install Google Text-to-Speech on your phone. \nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -2150,5 +2186,43 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         return isAdShow;
 
+    }
+
+    @Override
+    public void onMethodCallback(String word) {
+
+        if(tts != null){
+
+            tts.setLanguage(Locale.US);
+            tts.speak(word, TextToSpeech.QUEUE_FLUSH, null,"TTS");
+
+        }
+        Toast.makeText(this,"Hello there, this is a callback",Toast.LENGTH_LONG).show();
+    }
+
+    private void applyWrongColor(){
+        topBackground.setBackgroundColor(getResources().getColor(R.color.red));
+        fab.setColorNormal(getResources().getColor(R.color.red));
+        progress1.setProgressColor(getResources().getColor(R.color.red));
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.red));
+        trainCircle1.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
+        trainCircle2.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
+        trainCircle3.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
+        trainCircle4.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
+    }
+    private void applyCorrectColor(){
+        topBackground.setBackgroundColor(getResources().getColor(R.color.green));
+        fab.setColorNormal(getResources().getColor(R.color.green));
+        progress1.setProgressColor(getResources().getColor(R.color.green));
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.green));
+
+        trainCircle1.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
+        trainCircle2.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
+        trainCircle3.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
+        trainCircle4.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
     }
 }

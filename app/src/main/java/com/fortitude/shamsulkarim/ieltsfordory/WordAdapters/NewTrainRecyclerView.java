@@ -4,13 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.speech.tts.TextToSpeech;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -24,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.Images;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
@@ -43,13 +38,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-
 import java.io.File;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Objects;
-
 import de.cketti.mailto.EmailIntentBuilder;
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -57,7 +48,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
  * Created by karim on 7/1/17.
  */
 
-public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements TextToSpeech.OnInitListener{
+public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private String[] examples  = new String[3];
     private Word word;
@@ -73,24 +64,30 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
     private int languageId;
     private SharedPreferences sp;
     private boolean connected;
-    private TextToSpeech tts;
+
     private String level;
     private Images images;
     private IELTSWordDatabase ieltsWordDatabase;
     private TOEFLWordDatabase toeflWordDatabasee;
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
-
+    private TrainAdapterCallback trainAdapterCallback;
 
     private FirebaseStorage storage;
     private StorageReference storageRef;
     private int cb;
     private Context context;
 
-    public NewTrainRecyclerView(Context context, Word word){
+    public NewTrainRecyclerView(Context context, Word word, TrainAdapterCallback trainAdapterCallback){
+
+        try{
+            this.trainAdapterCallback = trainAdapterCallback;
+        }catch (ClassCastException e){
+            Log.e("TrainAdapterCallback", e.getMessage());
+        }
+
         images = new Images();
         this.context = context;
-        tts = new TextToSpeech(context, this);
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com");
 
@@ -122,18 +119,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
     }
 
-    public void stop(){
 
-        //Toast.makeText(ctx,"Distory",Toast.LENGTH_LONG).show();
-        if(tts != null){
-
-
-            tts.stop();
-            tts.shutdown();
-        }
-
-
-    }
 
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -355,17 +341,14 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    @Override
-    public void onInit(int status) {
 
-    }
 
     public class DefinationAdapter extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public String audioPath= null;
         public File localFile = null;
         ProgressBar progressBar;
-        TextView translation, spanish,languageName, grammar, pronunciation, example1,example2, example3;
+        TextView translation, spanish,languageName, grammar, pronunciation, example1,example2;
         FancyButton speak, favorite;
         FirebaseStorage storage = FirebaseStorage.getInstance();
         // Create a storage reference from our app
@@ -471,8 +454,13 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                 } else {
                     //Show disconnected screen
                     //Toast.makeText(ctx,"Not connected",Toast.LENGTH_LONG).show();
-                    tts.setLanguage(Locale.US);
-                    tts.speak(wordName, TextToSpeech.QUEUE_ADD, null);
+//                    tts.setLanguage(Locale.US);
+//                    tts.speak(wordName, TextToSpeech.QUEUE_ADD, null);
+                    try{
+                        trainAdapterCallback.onMethodCallback(wordName);
+                    }catch (ClassCastException e){
+                        Log.e("TrainAdapterCallback", e.getMessage());
+                    }
                 }
 
             }
@@ -718,8 +706,11 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             }
 
         }
+    }
 
+    public interface TrainAdapterCallback{
 
+        void onMethodCallback(String word);
 
     }
 }

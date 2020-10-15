@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 
@@ -33,13 +37,14 @@ import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteWords extends Fragment  {
+public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapter.AdapterCallback, TextToSpeech.OnInitListener{
 
 
 
@@ -54,14 +59,15 @@ public class FavoriteWords extends Fragment  {
     private RecyclerView.LayoutManager layoutManager;
     static public List<Word> words = new ArrayList<>();
     private float fabY;
-    SharedPreferences sp;
+    private SharedPreferences sp;
 
-    List<String> ieltsFavWords, toeflFavWords, satFavWords, greFavWords;
-    List<Integer> ieltsDatabasePosition, toeflDatabasePosition, satDatabasePosition, greDatabasePosition;
-    boolean isFabOptionOn = false;
-    TextView noFavorite;
-    ImageView noFavoriteImage;
+    private List<String> ieltsFavWords, toeflFavWords, satFavWords, greFavWords;
+    private List<Integer> ieltsDatabasePosition, toeflDatabasePosition, satDatabasePosition, greDatabasePosition;
+    private boolean isFabOptionOn = false;
+    private TextView noFavorite;
+    private ImageView noFavoriteImage;
     private FloatingSearchView sv;
+    private TextToSpeech tts;
 
 
     @Nullable
@@ -72,6 +78,7 @@ public class FavoriteWords extends Fragment  {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
+        tts = new TextToSpeech(getContext(), this);
 
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
@@ -125,7 +132,7 @@ public class FavoriteWords extends Fragment  {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new FavoriteRecyclerViewAdapter(getContext(), words);
+        adapter = new FavoriteRecyclerViewAdapter(getContext(), words,this);
         recyclerView.setAdapter(adapter);
 
 
@@ -432,5 +439,41 @@ public class FavoriteWords extends Fragment  {
     public void onDestroy() {
         super.onDestroy();
         adapter.onDestroy();
+        if(tts != null ){
+            tts.stop();
+            tts.shutdown();
+        }
+
+    }
+
+    @Override
+    public void onMethodCallback(String wordName) {
+
+        if(tts != null){
+
+            tts.setLanguage(Locale.US);
+            tts.speak(wordName, TextToSpeech.QUEUE_FLUSH, null,"TTS");
+
+        }
+        Toast.makeText(getContext(),"Hello there, this is a callback",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int ttsLang = tts.setLanguage(Locale.US);
+
+            if (ttsLang == TextToSpeech.LANG_MISSING_DATA || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "The Language is not supported!");
+                Toast.makeText(getContext(), "Please install English Language on your Text-to-Speech engine.\nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.i("TTS", "Language Supported.");
+            }
+            Log.i("TTS", "Initialization success.");
+        } else {
+            Log.e("TTS", "TTS not initialized");
+            Toast.makeText(getContext(), "Please install Google Text-to-Speech on your phone. \nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

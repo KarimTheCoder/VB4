@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,7 @@ import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -46,7 +49,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LearnedWords extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class LearnedWords extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener,TextToSpeech.OnInitListener, WordRecyclerViewAdapter.WordAdapterCallback {
 
 
     private String[] IELTSwordArray, IELTStranslationArray, IELTSgrammarArray, IELTSpronunArray, IELTSexample1array, IELTSexample2Array, IELTSexample3Array, IELTSvocabularyType;
@@ -81,7 +84,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
     private String level;
     private int languageId;
     private FloatingSearchView sv;
-
+    private TextToSpeech tts;
     private List<String> bWord,aWord,iWord;
     private List<String> ieltsFavPosition, toeflFavPosition, satFavPosition, greFavPosition;
     private TextView item1, item2, item3;
@@ -209,7 +212,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
         sp = v.getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
 
-
+        tts = new TextToSpeech(getContext(),this);
         languageId = sp.getInt("language",0);
         beginnerFav = new ArrayList<>();
         havenotlearned = (TextView)v.findViewById(R.id.havenotlearned);
@@ -511,7 +514,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
         }
 
-        adapter = new WordRecyclerViewAdapter(getContext(), words);
+        adapter = new WordRecyclerViewAdapter(getContext(), words,this);
         recyclerView.setAdapter(adapter);
 
 
@@ -585,7 +588,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
         }
 
-        adapter = new WordRecyclerViewAdapter(getContext(), words);
+        adapter = new WordRecyclerViewAdapter(getContext(), words,this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -658,7 +661,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
         }
 
-        adapter = new WordRecyclerViewAdapter(getContext(), words);
+        adapter = new WordRecyclerViewAdapter(getContext(), words,this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -957,19 +960,40 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
     public void onDestroy() {
         super.onDestroy();
         adapter.onDestroy();
+        if(tts != null ){
+            tts.stop();
+            tts.shutdown();
+        }
 
+    }
 
+    @Override
+    public void onMethodCallback(String word) {
 
+        if(tts != null){
 
+            tts.setLanguage(Locale.US);
+            tts.speak(word, TextToSpeech.QUEUE_FLUSH, null,"TTS");
 
+        }
+    }
 
+    @Override
+    public void onInit(int status) {
 
+        if (status == TextToSpeech.SUCCESS) {
+            int ttsLang = tts.setLanguage(Locale.US);
 
-
-
-
-
-
-
+            if (ttsLang == TextToSpeech.LANG_MISSING_DATA || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "The Language is not supported!");
+                Toast.makeText(getContext(), "Please install English Language on your Text-to-Speech engine.\nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.i("TTS", "Language Supported.");
+            }
+            Log.i("TTS", "Initialization success.");
+        } else {
+            Log.e("TTS", "TTS not initialized");
+            Toast.makeText(getContext(), "Please install Google Text-to-Speech on your phone. \nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+        }
     }
 }

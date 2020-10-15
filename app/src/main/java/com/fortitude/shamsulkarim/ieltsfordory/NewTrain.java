@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.Spannable;
@@ -63,26 +64,24 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class NewTrain extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
+public class NewTrain extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener, NewTrainRecyclerView.TrainAdapterCallback {
 
     private String[] IELTSwordArray,IELTSwordsArraySL, IELTStranslationArray,IELTStranslationArraySL, IELTSgrammarArray,IELTSextra, IELTSpronunArray, IELTSexample1array,IELTSexample1arraySL, IELTSexample2Array,IELTSexample2ArraySL, IELTSexample3Array,IELTSexample3ArraySL, IELTSvocabularyType;
     private String[] TOEFLwordArray, TOEFLtranslationArray, TOEFLgrammarArray, TOEFLpronunArray, TOEFLexample1array, TOEFLexample2Array, TOEFLexample3Array, TOEFLvocabularyType;
     private String[] TOEFLwordArraySL, TOEFLtranslationArraySL,TOEFLexample1ArraySL, TOEFLexample2ArraySL, TOEFLexample3ArraySL;
-
     private String[] SATwordArray, SATtranslationArray, SATgrammarArray, SATpronunArray, SATexample1array, SATexample2Array, SATexample3Array, SATvocabularyType;
     private String[] SATwordArraySL, SATtranslationArraySL, SATexample1ArraySL, SATexample2ArraySL, SATexample3ArraySL;
-
     private String[] GREwordArray, GREtranslationArray, GREgrammarArray, GREpronunArray, GREexample1array, GREexample2array, GREexample3Array, GREvocabularyType;
     private String[] GREwordArraySL, GREtranslationArraySL, GREexample1ArraySL, GREexample2ArraySL, GREexample3ArraySL;
-
     private int[] IELTSposition, TOEFLposition, SATposition, GREposition;
     private List<String> IELTSlearnedDatabase, TOEFLlearnedDatabase, SATlearnedDatabase, GRElearnedDatabase;
-    private View topBackground;
+    private View topBackground,trainCircle1,trainCircle2,trainCircle3,trainCircle4;
     private CardView answerCard1, answerCard2, answerCard3, answerCard4, wordCard;
     private TextView wordView, answerView1, answerView2, answerView3, answerView4;
     private FloatingActionButton fab;
@@ -94,7 +93,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private ArrayList<Word> words, fiveWords,fiveWordsCopy,questionWords;
     private RoundCornerProgressBar progress1;
     private RecyclerView recyclerView;
-//    private RecyclerView.Adapter adapter;
     private NewTrainRecyclerView adapter;
     private RecyclerView.LayoutManager layoutManager;
     private String level;
@@ -111,10 +109,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private PublisherInterstitialAd mPublisherInterstitialAd;
     public String[] items;
     public boolean[] checkedItems;
-
-
     private List<String> IELTSFav, TOEFLFav, SATFav, GREFav;
-
     private IELTSWordDatabase IELTSdatabase;
     private TOEFLWordDatabase TOEFLdatabase;
     private SATWordDatabase SATdatabase;
@@ -122,13 +117,12 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private JustLearnedDatabaseBeginner justLearnedDatabaseBeginner;
     private JustLearnedDatabaseIntermediate justLearnedDatabaseIntermediate;
     private JustLearnedDatabaseAdvance justLearnedDatabaseAdvance;
-
     private StorageReference gsReference;
     private FirebaseStorage storage;
     public File localFile = null;
     public String audioPath= null;
     private String secondLanguage = "english";
-    ProgressBar progressBar, adLoading;
+    private ProgressBar progressBar, adLoading;
 
     // UI
 
@@ -146,14 +140,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-
         // This code reports to Crashlytics of connection
         Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
-
-
-
-
-
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         level = sp.getString("level","NOTHING");
 
@@ -219,13 +207,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         TOEFLdatabase.close();
         SATdatabase.close();
         GREdatabase.close();
-
-        if(adapter != null){
-
-            adapter.stop();
-        }
-
-
 
         if(tts != null){
 
@@ -500,7 +481,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 }
 
 
-                adapter = new NewTrainRecyclerView(this,fiveWords.get(showCycle));
+                adapter = new NewTrainRecyclerView(this,fiveWords.get(showCycle), this);
                 recyclerView.setAdapter(adapter);
                 this.showCycle++;
                 progress1.setProgress(quizCycle+showCycle);
@@ -545,6 +526,10 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
         topBackground = findViewById(R.id.top_background);
+        trainCircle1 = findViewById(R.id.train_circle1);
+        trainCircle2 = findViewById(R.id.train_circle2);
+        trainCircle3 = findViewById(R.id.train_circle3);
+        trainCircle4 = findViewById(R.id.train_circle4);
         wordCard = findViewById(R.id.wordCard);
         recyclerView = (RecyclerView)findViewById(R.id.train_recyclerView);
         layoutManager = new LinearLayoutManager(this);
@@ -870,6 +855,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
 
+
         String answer = "";
 
 
@@ -891,6 +877,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             if(answerView1.getText().toString().equalsIgnoreCase(answer)){
                 StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
 
+                applyCorrectColor();
                 this.quizCycle++;
 
                 this.totalCycle++;
@@ -904,6 +891,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 answerCardAnimation2();
 
             }else {
+                applyWrongColor();
 
                 if(soundState){
 
@@ -948,6 +936,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         if(v == answerCard2) {
 
              if (answerView2.getText().toString().equalsIgnoreCase(answer)) {
+                 applyCorrectColor();
                  StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
                  this.quizCycle++;
 
@@ -962,7 +951,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
              } else {
 
-
+                 applyWrongColor();
                  mistakeCollector[quizCycle] = mistakeCollector[quizCycle]+1;
                  wrongAnswerAnimation();
                  if(soundState){
@@ -998,7 +987,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         if(v == answerCard3){
 
             if(answerView3.getText().toString().equalsIgnoreCase(answer)){
-
+                applyCorrectColor();
                 StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
                 this.quizCycle++;
 
@@ -1012,6 +1001,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 answerCardAnimation2();
 
             }else {
+                applyWrongColor();
                 if(soundState){
 
                     incorrectAudio.start();
@@ -1050,7 +1040,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         if(v == answerCard4){
 
             if(answerView4.getText().toString().equalsIgnoreCase(answer)){
-
+                applyCorrectColor();
                 StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
                 this.quizCycle++;
 
@@ -1067,6 +1057,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
             }else {
+                applyWrongColor();
                 if(soundState){
 
                     incorrectAudio.start();
@@ -1271,7 +1262,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 //        wordViewMiddle.setText(fiveWords.get(quizCycle).getWord());
 
         DefExamAnimation();
-        adapter = new NewTrainRecyclerView(this,fiveWords.get(quizCycle));
+        adapter = new NewTrainRecyclerView(this,fiveWords.get(quizCycle), this);
         recyclerView.setAdapter(adapter);
 
 //        DisplayMetrics dm = new DisplayMetrics();
@@ -1302,6 +1293,20 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     @Override
     public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int ttsLang = tts.setLanguage(Locale.US);
+
+            if (ttsLang == TextToSpeech.LANG_MISSING_DATA || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "The Language is not supported!");
+                Toast.makeText(this, "Please install English Language on your Text-to-Speech engine.\nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.i("TTS", "Language Supported.");
+            }
+            Log.i("TTS", "Initialization success.");
+        } else {
+            Log.e("TTS", "TTS not initialized");
+            Toast.makeText(this, "Please install Google Text-to-Speech on your phone. \nSend us an email if you need help", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -2171,6 +2176,43 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         return isAdShow;
 
+    }
+
+    @Override
+    public void onMethodCallback(String word) {
+        if(tts != null){
+
+            tts.setLanguage(Locale.US);
+            tts.speak(word, TextToSpeech.QUEUE_FLUSH, null,"TTS");
+
+        }
+        Toast.makeText(this,"Hello there, this is a callback",Toast.LENGTH_LONG).show();
+    }
+
+    private void applyWrongColor(){
+        topBackground.setBackgroundColor(getResources().getColor(R.color.red));
+        fab.setColorNormal(getResources().getColor(R.color.red));
+        progress1.setProgressColor(getResources().getColor(R.color.red));
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.red));
+        trainCircle1.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
+        trainCircle2.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
+        trainCircle3.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
+        trainCircle4.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
+    }
+    private void applyCorrectColor(){
+        topBackground.setBackgroundColor(getResources().getColor(R.color.green));
+        fab.setColorNormal(getResources().getColor(R.color.green));
+        progress1.setProgressColor(getResources().getColor(R.color.green));
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.green));
+
+        trainCircle1.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
+        trainCircle2.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
+        trainCircle3.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
+        trainCircle4.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
     }
 }
 
