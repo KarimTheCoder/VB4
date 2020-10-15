@@ -1093,7 +1093,15 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+        if(billingClient != null){
+            billingClient.endConnection();
+        }
+
+    }
 
     @Override
     protected void onResume() {

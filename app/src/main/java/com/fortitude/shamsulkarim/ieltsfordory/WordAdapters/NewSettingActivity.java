@@ -802,6 +802,16 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(billingClient != null){
+            billingClient.endConnection();
+        }
+
+
+    }
+
     private void askToSync(){
 
         if(!NewSettingActivity.this.isFinishing()){
