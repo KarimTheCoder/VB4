@@ -74,7 +74,8 @@ public class StartTrial extends AppCompatActivity implements View.OnClickListene
     private void goHomeWhenPremium(){
 
         if(sp.contains("purchase")){
-            initializeTrialMode();
+
+            initializeTrialMode(); // Why I have used this method here?
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
 

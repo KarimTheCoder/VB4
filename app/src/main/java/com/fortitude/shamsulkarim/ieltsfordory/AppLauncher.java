@@ -38,7 +38,16 @@ public class AppLauncher extends AppCompatActivity {
 
 
         if(sp.contains("home")) {
-            startActivity(new Intent(this, MainActivity.class));
+
+            if(!sp.contains("trial_end_date")){
+
+                startActivity(new Intent(this, StartTrial.class));
+
+            }else {
+
+                startActivity(new Intent(this, MainActivity.class));
+            }
+
 
         }else {
 
