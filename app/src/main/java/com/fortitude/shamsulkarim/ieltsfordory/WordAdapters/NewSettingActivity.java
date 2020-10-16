@@ -809,6 +809,11 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             billingClient.endConnection();
         }
 
+        ieltsWordDatabase.close();
+        toeflWordDatabase.close();
+        satWordDatabase.close();
+        greWordDatabase.close();
+
 
     }
 

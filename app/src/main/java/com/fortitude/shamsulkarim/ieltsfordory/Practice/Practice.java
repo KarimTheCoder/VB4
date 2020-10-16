@@ -302,8 +302,8 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                 word = wordView.getText().toString();
 
             }
-            tts.setLanguage(Locale.US);
-            tts.speak(word, TextToSpeech.QUEUE_ADD, null);
+//            tts.setLanguage(Locale.US);
+//            tts.speak(word, TextToSpeech.QUEUE_ADD, null);
 
         }
 
