@@ -383,7 +383,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             i++;
         }
 
-        GREdatabase.close();
+        //GREdatabase.close();
         res.close();
 
         return size;
@@ -549,7 +549,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             i++;
         }
 
-        GREdatabase.close();
+       // GREdatabase.close();
         res.close();
 
         return size;
@@ -695,7 +695,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             }
 
             res.close();
-            GREdatabase.close();
+         //   GREdatabase.close();
 
             i++;
         }

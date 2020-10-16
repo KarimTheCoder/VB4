@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -74,7 +75,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         this.context = context;
 
         try{
-
             this.wordAdapterCallback = wordAdapterCallback;
         }catch (ClassCastException e){
             Log.e("WordAdapter init",e.getMessage());
@@ -344,15 +344,15 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             Typeface ABeeZee = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/ABeeZee-Regular.ttf");
             Typeface ABeeZeeItalic  = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/ABeeZee-Italic.ttf");
 
-            englishLanguage = (TextView)itemView.findViewById(R.id.card_language);
-            wordView = (TextView)itemView.findViewById(R.id.favorite_card_word);
-            translationView = (TextView)itemView.findViewById(R.id.favorite_card_translation);
-            grammarView = (TextView)itemView.findViewById(R.id.card_grammar);
-            exampleView1 = (TextView)itemView.findViewById(R.id.card_example1);
-            secondTranslation = (TextView) itemView.findViewById(R.id.card_translation_extra);
-            secondLanguage = (TextView)itemView.findViewById(R.id.card_language_extra);
-            speaker = (FancyButton) itemView.findViewById(R.id.favorite_speaker);
-            cardView = (CardView)itemView.findViewById(R.id.recycler_view_card);
+            englishLanguage = itemView.findViewById(R.id.card_language);
+            wordView = itemView.findViewById(R.id.favorite_card_word);
+            translationView = itemView.findViewById(R.id.favorite_card_translation);
+            grammarView = itemView.findViewById(R.id.card_grammar);
+            exampleView1 = itemView.findViewById(R.id.card_example1);
+            secondTranslation =  itemView.findViewById(R.id.card_translation_extra);
+            secondLanguage = itemView.findViewById(R.id.card_language_extra);
+            speaker =  itemView.findViewById(R.id.favorite_speaker);
+            cardView = itemView.findViewById(R.id.recycler_view_card);
             cardView.setPreventCornerOverlap(false);
             tts = new TextToSpeech(itemView.getContext(), this);
             progressBar = itemView.findViewById(R.id.spin_kit);
@@ -403,8 +403,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                 String wordName = word.getWord().toLowerCase();
 
-
-
                 if (ConnectivityHelper.isConnectedToNetwork(context) && isVoicePronunciation) {
                     //Show the connected screen
                     downloadAudio(wordName);
@@ -419,7 +417,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                         wordAdapterCallback.onMethodCallback(wordName);
                     } catch (ClassCastException e) {
                         // do something
-                        Log.e("WordAdapterCallback",e.getMessage());
+                        Log.e("WordAdapterCallback", Objects.requireNonNull(e.getMessage()));
                     }
                 }
 

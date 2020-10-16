@@ -83,7 +83,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
         View v = inflater.inflate(R.layout.fragment_new_word,container,false);
 
         // This code reports to Crashlytics of connection
-        Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
+        Boolean connected = ConnectivityHelper.isConnectedToNetwork(Objects.requireNonNull(getContext()));
 
         sp = getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         gettingResources();

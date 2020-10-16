@@ -233,6 +233,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
         setHasOptionsMenu(true);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
+        assert activity != null;
         activity.setSupportActionBar(toolbar);
 
         recyclerView = (RecyclerView)v.findViewById(R.id.recycler_view_learned_words);

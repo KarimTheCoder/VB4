@@ -50,33 +50,27 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private String[] examples  = new String[3];
-    private Word word;
+    private final String[] examples  = new String[3];
+    private final Word word;
     private Bitmap bitmap;
-    private Context ctx;
-    private String[] imageQualityArray = {"High","Medium","Low"};
-    private String[] imageFolderName = {"High","Medium","Low"};
+    private final Context ctx;
+    private final String[] imageQualityArray = {"High","Medium","Low"};
+    private final String[] imageFolderName = {"High","Medium","Low"};
     private final static int DEFINATION_VIEW = 0;
     private final static int EXAMPLE_VIEW = 1;
     private final static int SERVER_IMAGE_VIEW = 2;
     private final static int AD_LAYOUT = 3;
-    private static int pos;
-    private int languageId;
-    private SharedPreferences sp;
-    private boolean connected;
-
-    private String level;
-    private Images images;
-    private IELTSWordDatabase ieltsWordDatabase;
-    private TOEFLWordDatabase toeflWordDatabasee;
-    private SATWordDatabase satWordDatabase;
-    private GREWordDatabase greWordDatabase;
+    private final int languageId;
+    private final SharedPreferences sp;
+    private final boolean connected;
+    private final IELTSWordDatabase ieltsWordDatabase;
+    private final TOEFLWordDatabase toeflWordDatabasee;
+    private final SATWordDatabase satWordDatabase;
+    private final GREWordDatabase greWordDatabase;
     private TrainAdapterCallback trainAdapterCallback;
-
-    private FirebaseStorage storage;
-    private StorageReference storageRef;
-    private int cb;
-    private Context context;
+    private final StorageReference storageRef;
+    private final int cb;
+    private final Context context;
 
     public NewTrainRecyclerView(Context context, Word word, TrainAdapterCallback trainAdapterCallback){
 
@@ -86,9 +80,9 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             Log.e("TrainAdapterCallback", e.getMessage());
         }
 
-        images = new Images();
+        Images images = new Images();
         this.context = context;
-        storage = FirebaseStorage.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com");
 
 
@@ -100,7 +94,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         sp = ctx.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         cb = sp.getInt("cb",0);
         languageId = sp.getInt("language",0);
-        level = sp.getString("level","NOTHING");
+        String level = sp.getString("level", "NOTHING");
         examples[0] = word.getExample1();
         examples[1] = word.getExample2();
         examples[2] = word.getExample3()+"\n"+word.getExample3SL();
@@ -182,7 +176,6 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         int viewType = getItemViewType(position);
-        pos = position;
 
         switch (viewType){
 

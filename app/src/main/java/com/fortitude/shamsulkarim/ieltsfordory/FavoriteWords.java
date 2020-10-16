@@ -52,7 +52,6 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
     private TOEFLWordDatabase toeflWordDatabase;
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
-
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
     private FavoriteRecyclerViewAdapter adapter;
@@ -60,7 +59,6 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
     static public List<Word> words = new ArrayList<>();
     private float fabY;
     private SharedPreferences sp;
-
     private List<String> ieltsFavWords, toeflFavWords, satFavWords, greFavWords;
     private List<Integer> ieltsDatabasePosition, toeflDatabasePosition, satDatabasePosition, greDatabasePosition;
     private boolean isFabOptionOn = false;
