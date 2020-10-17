@@ -17,11 +17,8 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NoWordLeft extends AppCompatActivity implements View.OnClickListener{
 
-    TextView congratulation, completedSection, soProud;
-    ImageView noWordImage;
-    SharedPreferences sp;
-    FancyButton home, reset;
-    String level;
+    private SharedPreferences sp;
+    private String level;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +40,12 @@ public class NoWordLeft extends AppCompatActivity implements View.OnClickListene
         Typeface comfortaRegular = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Regular.ttf");
         Typeface comfoftaBold = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Bold.ttf");
 
-        congratulation = (TextView)findViewById(R.id.congratulation);
-        completedSection = (TextView)findViewById(R.id.completed_section);
-        soProud = (TextView)findViewById(R.id.so_proud);
-        noWordImage = (ImageView) findViewById(R.id.no_word_image);
-        home = (FancyButton)findViewById(R.id.no_word_home);
-        reset = (FancyButton)findViewById(R.id.reset);
+        TextView congratulation = (TextView) findViewById(R.id.congratulation);
+        TextView completedSection = (TextView) findViewById(R.id.completed_section);
+        TextView soProud = (TextView) findViewById(R.id.so_proud);
+        ImageView noWordImage = (ImageView) findViewById(R.id.no_word_image);
+        FancyButton home = (FancyButton) findViewById(R.id.no_word_home);
+        FancyButton reset = (FancyButton) findViewById(R.id.reset);
 
         congratulation.setTypeface(comfoftaBold);
         completedSection.setTypeface(comfortaRegular);

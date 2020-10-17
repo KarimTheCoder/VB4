@@ -9,7 +9,6 @@ import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,96 +16,32 @@ import android.widget.TextView;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
-import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
-
-
-import java.util.ArrayList;
-import java.util.List;
-
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class PracticeFinished extends AppCompatActivity implements View.OnClickListener{
 
     private FancyButton practiceAgain;
     private FloatingActionButton home;
-    private TextView wordCountText;
-    private int totalFavCount = 0;
-    private int mistakes = 0;
-    private int repeat;
     private CardView rateCard;
     private SharedPreferences sp;
-    private int languageId;
-    private int cb = 0;
-    private PublisherInterstitialAd mPublisherInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        //        WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_practice_finished);
 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.primary_background_color));
 
-        // This code reports to Crashlytics of connection
-        Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
-
-
-//        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-//        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135xxx");
-//
-//        if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-//            mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-//        }
-//
-//
-//
-//
-//        mPublisherInterstitialAd.setAdListener(new AdListener() {
-//            @Override
-//            public void onAdLoaded() {
-//                // Code to be executed when an ad finishes loading.
-//                //  if( cb != 1){
-//
-//                mPublisherInterstitialAd.show();
-//                // }
-//
-//            }
-//
-//            @Override
-//            public void onAdFailedToLoad(int errorCode) {
-//                // Code to be executed when an ad request fails.
-//            }
-//
-//            @Override
-//            public void onAdOpened() {
-//                // Code to be executed when the ad is displayed.
-//            }
-//
-//            @Override
-//            public void onAdLeftApplication() {
-//                // Code to be executed when the user has left the app.
-//            }
-//
-//            @Override
-//            public void onAdClosed() {
-//                // Code to be executed when when the interstitial ad is closed.
-//            }
-//        });
-
         initialization();
         getCounts();
         getMostMistakenWord();
 
-        cb = sp.getInt("cb", 0);
+        sp.getInt("cb", 0);
 
 
 
@@ -114,9 +49,9 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
 
     private void getCounts(){
 
-        mistakes = sp.getInt("mistakeFavorite",0);
-        totalFavCount = sp.getInt("favoriteWordCount",0);
-        repeat = sp.getInt("repeatationPerSession",5);
+        sp.getInt("mistakeFavorite", 0);
+        sp.getInt("favoriteWordCount", 0);
+        sp.getInt("repeatationPerSession", 5);
 
 
 
@@ -125,8 +60,8 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
     }
     private void initialization(){
 
-        sp = getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);;
-        languageId = sp.getInt("language",0);
+        sp = getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+        sp.getInt("language", 0);
         rateCard = findViewById(R.id.rate_card);
         rateCard.setOnClickListener(this);
 
@@ -134,9 +69,8 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
         home.setColorNormal(getResources().getColor(R.color.primary_text_color_white));
         practiceAgain = (FancyButton)findViewById(R.id.tf_train_again);
         practiceAgain.setText("PRACTICE AGAIN");
-
-        wordCountText = findViewById(R.id.practice_finished_word_text);
-        wordCountText.setText(sp.getInt("favoriteWordCount",0)+" "+"words were reviewed");
+        TextView wordCountText = findViewById(R.id.practice_finished_word_text);
+        wordCountText.setText(getString(R.string.words_were_reviewed,sp.getInt("favoriteWordCount",0)));
 
         boolean soundState = sp.getBoolean("soundState",true);
         MediaPlayer mPlayer2= MediaPlayer.create(this, R.raw.train_finished);
@@ -155,78 +89,8 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
 
     }
     private void getMostMistakenWord(){
-        List<String> deserialized = new ArrayList<>();
+        sp.getString("MostMistakenWord","no");
 
-        String word = sp.getString("MostMistakenWord","no");
-        StringBuilder sb = new StringBuilder(word);
-
-
-        if(word.equalsIgnoreCase("no")){
-
-
-
-        }else{
-            deserialized = builderToNums(sb);
-
-            if(languageId >0){
-
-            }else {
-
-
-            }
-
-
-
-        }
-
-
-    }
-
-    private static List<String> builderToNums(StringBuilder numBuilder){
-        List<String> backToNums = new ArrayList<>();
-        int plusCount = 0;
-        int plusI = 0;
-
-        for(int i = 0; i < numBuilder.length(); i++){
-
-            if(numBuilder.charAt(i) == '+'){
-
-                plusCount++;
-            }
-        }
-
-        int plusPosition[] = new int[plusCount];
-
-        for(int j = 0; j < numBuilder.length(); j++){
-
-            if(numBuilder.charAt(j) == '+'){
-                plusPosition[plusI] = j;
-
-                plusI++;
-
-            }
-
-        }
-
-        for( int k = 0; k < plusPosition.length-1; k++){
-
-
-            if(numBuilder.charAt(plusPosition[k]) == '+'){
-
-                String strNum = numBuilder.substring(plusPosition[k]+1, plusPosition[k+1]);
-                backToNums.add((strNum));
-            }
-        }
-
-
-        if( numBuilder.length() > 0 && numBuilder != null){
-
-            String lastNum = numBuilder.substring(plusPosition[plusCount-1]+1, numBuilder.length());
-            backToNums.add(lastNum);
-
-        }
-
-        return backToNums;
     }
 
     @Override

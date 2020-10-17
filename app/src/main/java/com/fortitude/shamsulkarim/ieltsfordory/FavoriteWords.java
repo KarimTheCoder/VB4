@@ -1,6 +1,5 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
-
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,18 +21,15 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.arlib.floatingsearchview.FloatingSearchView;
-
 import com.fortitude.shamsulkarim.ieltsfordory.Practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
-
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -46,25 +41,18 @@ import java.util.Objects;
  */
 public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapter.AdapterCallback, TextToSpeech.OnInitListener{
 
-
-
     private IELTSWordDatabase ieltsWordDatabase;
     private TOEFLWordDatabase toeflWordDatabase;
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
     private FloatingActionButton fab;
-    private RecyclerView recyclerView;
     private FavoriteRecyclerViewAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     static public List<Word> words = new ArrayList<>();
     private float fabY;
     private SharedPreferences sp;
     private List<String> ieltsFavWords, toeflFavWords, satFavWords, greFavWords;
     private List<Integer> ieltsDatabasePosition, toeflDatabasePosition, satDatabasePosition, greDatabasePosition;
     private boolean isFabOptionOn = false;
-    private TextView noFavorite;
-    private ImageView noFavoriteImage;
-    private FloatingSearchView sv;
     private TextToSpeech tts;
 
 
@@ -77,11 +65,6 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
         tts = new TextToSpeech(getContext(), this);
-
-        // This code reports to Crashlytics of connection
-        Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
-
-
         fab = (FloatingActionButton)v.findViewById(R.id.fab_favorite);
         fab.setColorNormal(getResources().getColor(R.color.colorPrimary));
         fab.setColorPressed(getResources().getColor(R.color.colorPrimaryDark));
@@ -92,9 +75,9 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         initializingSQLDatabase(v);
 
 
-        noFavorite = (TextView)v.findViewById(R.id.havenotlearned);
-        noFavoriteImage = (ImageView)v.findViewById(R.id.no_favorite_image);
-        sv= (FloatingSearchView) v.findViewById(R.id.mSearch);
+        TextView noFavorite = (TextView) v.findViewById(R.id.havenotlearned);
+        ImageView noFavoriteImage = (ImageView) v.findViewById(R.id.no_favorite_image);
+        FloatingSearchView sv = (FloatingSearchView) v.findViewById(R.id.mSearch);
 
         Toolbar toolbar= (Toolbar)v.findViewById(R.id.favoriteToolbar);
         toolbar.setTitle("FAVORITE");
@@ -126,8 +109,8 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
             noFavoriteImage.setVisibility(View.VISIBLE);
         }
 
-        recyclerView = (RecyclerView)v.findViewById(R.id.recycler_view_favorite_words);
-        layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_favorite_words);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         adapter = new FavoriteRecyclerViewAdapter(getContext(), words,this);
@@ -141,7 +124,7 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
 
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
                 if (dy > 0) {
@@ -182,8 +165,7 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
 
                     sp.edit().putString("practice","favorite").apply();
                     Intent intent = new Intent(getContext(),Practice.class);
-
-                    getContext().startActivity(intent);
+                    Objects.requireNonNull(getContext()).startActivity(intent);
 
                 }
 
@@ -280,41 +262,6 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
     public   void addFavoriteWord(){
 
         words.clear();
-        int languageId = sp.getInt("language",0);
-
-
-        String[] beginnerSecondTranslation = new String[getResources().getStringArray(R.array.IELTS_words).length];
-        String[] intermediateSecondTranslation = new String[getResources().getStringArray(R.array.TOEFL_words).length];
-        String[] advanceSecondTranslation = new String[getResources().getStringArray(R.array.SAT_words).length];
-
-        if(languageId == 0){
-
-            for(int i = 0; i < getResources().getStringArray(R.array.IELTS_words).length; i++){
-
-
-                beginnerSecondTranslation[i] = "";
-            }
-
-        }
-
-        if(languageId == 1){
-
-            beginnerSecondTranslation = getResources().getStringArray(R.array.beginner_spanish);
-            intermediateSecondTranslation = getResources().getStringArray(R.array.intermediate_spanish);
-            advanceSecondTranslation = getResources().getStringArray(R.array.advance_spanish);
-        }
-        if(languageId == 3){
-
-            beginnerSecondTranslation = getResources().getStringArray(R.array.beginner_bengali);
-            intermediateSecondTranslation = getResources().getStringArray(R.array.intermediate_bengali);
-            advanceSecondTranslation = getResources().getStringArray(R.array.advance_bengali);
-        }
-        if(languageId == 2){
-
-            beginnerSecondTranslation = getResources().getStringArray(R.array.beginner_hindi);
-            intermediateSecondTranslation = getResources().getStringArray(R.array.intermediate_hindi);
-            advanceSecondTranslation = getResources().getStringArray(R.array.advance_hindi);
-        }
 
         int toeflWordSize = toeflFavWords.size();
         int ieltsWordSize = ieltsFavWords.size();
@@ -354,17 +301,11 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         String[] greExample2 = getResources().getStringArray(R.array.GRE_example2);
         String[] greExample3 = getResources().getStringArray(R.array.GRE_example3);
 
-        int IELTSFavWordCount = 0;
-        int TOEFLFavWordCount = 0;
-        int SATFavWordCount = 0;
-        int GREFAvWordCount = 0;
-
-
         for(int i = 0; i < satWordSize; i++){
 
 
             if(satFavWords.get(i).equalsIgnoreCase("True")){
-                SATFavWordCount++;
+
                 Word word = new Word(advanceWordArray[i],advanceTranslationArray[i],"",advancePronunciationArray[i],advanceGrammarArray[i],advanceExampleArray1[i],advanceExampleArray2[i], advanceExampleArray3[i], "SAT",satDatabasePosition.get(i),"",satFavWords.get(i));
                 words.add(word);
 
@@ -375,7 +316,6 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         for(int i =0 ; i < ieltsWordSize; i++){
 
             if(ieltsFavWords.get(i).equalsIgnoreCase("True")){
-                IELTSFavWordCount++;
 
                 Word word = new Word(beginnerWordArray[i],beginnerTranslationArray[i],"",beginnerPronunciationArray[i],beginnerGrammarArray[i],beginnerExampleArray1[i],beginnerExampleArray2[i],beginnerExampleArray3[i], "IELTS",ieltsDatabasePosition.get(i),"",ieltsFavWords.get(i));
 
@@ -387,7 +327,6 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         for(int i =0 ; i < toeflWordSize; i++){
 
             if(toeflFavWords.get(i).equalsIgnoreCase("True")){
-                TOEFLFavWordCount++;
                 Word word = new Word(intermediateWordArray[i],intermediateTranslationArray[i],"",intermediatePronunciationArray[i],intermediateGrammarArray[i],intermediateExampleArray1[i],intermediateExampleArray2[i],intermediateExampleArray3[i], "TOEFL",toeflDatabasePosition.get(i),"",toeflFavWords.get(i));
                 words.add(word);
 
@@ -400,7 +339,6 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         for(int i =0 ; i < greWordSize; i++){
 
             if(greFavWords.get(i).equalsIgnoreCase("True")){
-                GREFAvWordCount++;
                Word word = new Word(greWordArray[i],greTranslationArray[i],"",grePronunciationArray[i],greGrammarArray[i],greExample1[i],greExample2[i],greExample3[i], "GRE",greDatabasePosition.get(i),"",greFavWords.get(i));
                 words.add(word);
 

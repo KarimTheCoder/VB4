@@ -4,16 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.cardview.widget.CardView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,34 +16,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.billingclient.api.AcknowledgePurchaseParams;
-import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
-import com.android.billingclient.api.BillingClient;
-import com.android.billingclient.api.BillingClientStateListener;
-import com.android.billingclient.api.BillingFlowParams;
-import com.android.billingclient.api.BillingResult;
-import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchasesUpdatedListener;
-import com.android.billingclient.api.SkuDetails;
-import com.android.billingclient.api.SkuDetailsParams;
-import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
 import az.plainpie.PieView;
 
 /**
@@ -77,8 +55,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private SATWordDatabase SATdatabase;
     private GREWordDatabase GREdatabase;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
-    private ArrayList<Word> words = new ArrayList<>();
-    private int learnedCount, totalWordCount, totalLearned;
+    private final ArrayList<Word> words = new ArrayList<>();
+    private int totalWordCount;
 
 
     @Nullable
@@ -158,41 +136,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
         }
-    }
-
-    private void setPercentageAndProgress(){
-
-        int advaceWordSize = getResources().getStringArray(R.array.SAT_words).length;
-        int intermediateWordSize = getResources().getStringArray(R.array.TOEFL_words).length;
-        int beginnerWordSize = getResources().getStringArray(R.array.IELTS_words).length;
-
-        int advanceWordLearnedSize = sp.getInt("advance",0);
-        int intermediateLearnedSize = sp.getInt("intermediate",0);
-        int beginnerLearnedSize = sp.getInt("beginner",0);
-
-        float advancePercentage = (advanceWordLearnedSize*100)/advaceWordSize;
-        float intermediatePercentage = (intermediateLearnedSize*100)/intermediateWordSize;
-        float beginnerPercentage = (beginnerLearnedSize*100)/beginnerWordSize;
-
-        advancePie.setMaxPercentage(100);
-        advancePie.setPercentage(advancePercentage);
-
-        intermediatePie.setMaxPercentage(100);
-        intermediatePie.setPercentage(intermediatePercentage);
-
-        beginnerPie.setMaxPercentage(100);
-        beginnerPie.setPercentage(beginnerPercentage);
-
-//        homeProgress.setProgressBackgroundColor(getResources().getColor(R.color.deepGrey));
-//        homeProgress.setProgressColor(getResources().getColor(R.color.colorPrimary));
-//        homeProgress.setMax(advaceWordSize+intermediateWordSize+beginnerWordSize);
-//        homeProgress.setProgress(advanceWordLearnedSize+intermediateLearnedSize+beginnerLearnedSize);
-
-
-
-
-
-
     }
 
 
@@ -322,7 +265,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             float i = (float)IELTSbeginnerNumber+(float)TOEFLbeginnerNumber+(float)SATbeginnerNumber+(float)GREbeginnerNumber;
             float learned = i-words.size();
-            learnedCount =+ (int)learned;
+//        int learnedCount = +(int) learned;
             float percentage = (learned*100)/i;
 
             beginnerPie.setMaxPercentage(100);
@@ -341,7 +284,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             i = (float)IELTSintermediateNumber+(float)TOEFLintermediateNumber+(float)SATintermediateNumber+(float)GREintermediateNumber;
             learned = i-words.size();
-            learnedCount =+ (int) learned;
+ //           learnedCount =+ (int) learned;
             percentage = (learned*100)/i;
 
             intermediatePie.setMaxPercentage(100);
@@ -361,7 +304,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             i = (int)IELTSbeginnerNumber+(int)TOEFLbeginnerNumber+(int)SATbeginnerNumber+(int)GREbeginnerNumber;
 
             learned = i-words.size();
-            learnedCount =+ (int)learned;
+//            learnedCount =+ (int)learned;
             percentage = (learned*100)/i;
 
 
@@ -386,9 +329,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
         double p = percentage / 100d;
-        double beginnerNum = p * number;
 
-        return beginnerNum;
+        return p * number;
 
     }
 
@@ -403,9 +345,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
 
-            if(beginnerRes.getString(3).equalsIgnoreCase("True")){
-                totalLearned++;
-            }
+
             IELTSlearnedDatabase.add(beginnerRes.getString(3));
 
         }
@@ -414,9 +354,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         while (TOEFLres.moveToNext()) {
 
-            if(TOEFLres.getString(3).equalsIgnoreCase("True")){
-                totalLearned++;
-            }
+
             TOEFLlearnedDatabase.add(TOEFLres.getString(3));
 
         }
@@ -425,9 +363,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         while (SATres.moveToNext()) {
 
-            if(SATres.getString(3).equalsIgnoreCase("True")){
-                totalLearned++;
-            }
             SATlearnedDatabase.add(SATres.getString(3));
 
         }
@@ -435,10 +370,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         SATdatabase.close();
 
         while (GREres.moveToNext()) {
-
-            if(GREres.getString(3).equalsIgnoreCase("True")){
-                totalLearned++;
-            }
 
             GRElearnedDatabase.add(GREres.getString(3));
 
@@ -579,10 +510,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getContext(),"Days Left: "+ TimeUnit.DAYS.convert(leftMillies,TimeUnit.MILLISECONDS),Toast.LENGTH_SHORT).show();
 
             if(!sp.contains("purchase")){
+
                 if(leftMillies >=0){
 
                     trialStatus = "active";
-                    trialStatusTextView.setText("Trial Mode: "+trialStatus);
 
                 }
                 else {
@@ -590,8 +521,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     showTrialFinished();
 
                     trialStatus = "ended";
-                    trialStatusTextView.setText("Trial Mode: "+trialStatus);
                 }
+                trialStatusTextView.setText(getString(R.string.trial_mode,trialStatus));
             }else {
 
                 trialStatus = "PREMIUM+";

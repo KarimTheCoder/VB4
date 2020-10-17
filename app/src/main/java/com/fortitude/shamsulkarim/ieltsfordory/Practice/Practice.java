@@ -32,11 +32,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
-import com.fortitude.shamsulkarim.ieltsfordory.NewTrain;
-import com.fortitude.shamsulkarim.ieltsfordory.TrainFinishedActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -45,7 +42,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewTrainRecyclerView;
-import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
@@ -55,8 +51,6 @@ import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
-
-import java.lang.invoke.WrongMethodTypeException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -88,10 +82,9 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private TOEFLWordDatabase toeflWordDatabase;
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
-    private List<Word> words = new ArrayList<>();
-    private List<Word> fiveWords, buttonQuestion;
+    private final List<Word> words = new ArrayList<>();
+    private List<Word> fiveWords;
     private SharedPreferences sp;
-    private int color;
     private CardView wordCard, answerCard1, answerCard2, answerCard3, answerCard4;
     private TextView wordView, answerView1, answerView2, answerView3, answerView4;
     private FloatingActionButton fab;
@@ -100,7 +93,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private RoundCornerProgressBar progress1;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     private int showCycle = 0;
     private int quizCycle = 0;
     private TextToSpeech tts;
@@ -108,19 +100,14 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private boolean IsWrongAnswer = true;
     private int lastMistake = 13;
     private int mistakes = 0;
-    private int[] mistakeCollector;
     private int repeatPerSession = 5;
     private int totalCycle = 0;
-    private int wordsPerSession = 5;
     private int languageId;
     private boolean soundState = true;
     private int favoriteWrongs,totalCorrects;
     private int progressCount = 0;
-    private boolean next  = true;
     private boolean  alreadyclicked = true;
     private boolean progress = false;
-    private int cb = 0;
-    boolean isAdShown1 = false;
     // DATABASE
     private IELTSWordDatabase IELTSdatabase;
     private TOEFLWordDatabase TOEFLdatabase;
@@ -149,7 +136,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
         // This code reports to Crashlytics of connection
-        boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
 
 //
 //        this.startActivity(new Intent(this, PracticeFinished.class));
@@ -187,13 +173,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         showWords(showCycle);
 
-        mistakeCollector = new int[fiveWords.size()];
+
         sp.edit().putInt("favoriteWordCount",fiveWords.size()).apply();
         languageId = sp.getInt("language",0);
         soundState = sp.getBoolean("soundState",true);
         totalCorrects = sp.getInt("totalCorrects",0);
-        cb = sp.getInt("cb",0);
-
 
 
         if(!sp.contains("favoriteWrongs")){
@@ -207,11 +191,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         }
 
-        for(int i = 0; i < mistakeCollector.length; i ++){
-
-            mistakeCollector[i] = 0;
-
-        }
 
 
 
@@ -261,7 +240,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             if (showCycle >= FIVE_WORD_SIZE){
 
 
-                // isAdShown1 = showInterstitialAd(isAdShown1);
+
                 answerCard1.setVisibility(View.VISIBLE);
                 answerCard2.setVisibility(View.VISIBLE);
                 answerCard3.setVisibility(View.VISIBLE);
@@ -269,12 +248,8 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                 quizWords(quizCycle, v);
 
             }
-
             showWords(showCycle);
-
-
             alreadyclicked = false;
-            next = false;
         }
 
 
@@ -286,36 +261,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     @Override
     public void onClick(View v) {
 
-        if( v== speak){
-            String word ="";
-
-            if(showCycle < FIVE_WORD_SIZE+1){
-
-                word = wordView.getText().toString();
-
-                if(showCycle == FIVE_WORD_SIZE){
-                    showCycle++;
-                }
-
-            }else {
-
-                word = wordView.getText().toString();
-
-            }
-//            tts.setLanguage(Locale.US);
-//            tts.speak(word, TextToSpeech.QUEUE_ADD, null);
-
-        }
-
-
         if( v == answerCard1 || v == answerCard2 || v == answerCard3 ||  v == answerCard4 ){
-
 
             if( quizCycle <= (FIVE_WORD_SIZE*repeatPerSession)-1){
                 quizWords(quizCycle, v);
-
             }
-
         }
 
     }
@@ -403,12 +353,12 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
             checkingAnswer(v);
-            cycleQuiz(quizCycle,v);
+            cycleQuiz();
         }
 
 
     }
-    private void cycleQuiz(int quizCycle, View v){
+    private void cycleQuiz(){
 
 
         if(this.quizCycle <=(FIVE_WORD_SIZE*repeatPerSession)-1){
@@ -442,8 +392,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private ArrayList<Word> gettingAnswer() {
 
         ArrayList<Word> answers = new ArrayList<>();
-        List<Word> words = new ArrayList<>();
-        words.addAll(fiveWords) ;
+        List<Word> words = new ArrayList<>(fiveWords);
         if( quizCycle == FIVE_WORD_SIZE ){
 
             quizCycle = 0;
@@ -483,9 +432,9 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
             String answer;
             if(languageId == 0){
-                answer = fiveWords.get(quizCycle).getTranslation().toString();
+                answer = fiveWords.get(quizCycle).getTranslation();
             }else {
-                answer = fiveWords.get(quizCycle).getExtra().toString();
+                answer = fiveWords.get(quizCycle).getExtra();
 
             }
 
@@ -515,7 +464,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
                         incorrectAudio.start();
                     }
-                    mistakeCollector[quizCycle] = mistakeCollector[quizCycle]+1;
+
                     //wordViewMiddle.setText("");
                     speak.setVisibility(View.INVISIBLE);
                     wrongAnswerAnimation();
@@ -576,8 +525,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                    // wordViewMiddle.setText("");
                     speak.setVisibility(View.INVISIBLE);
                     wrongAnswerAnimation();
-
-                    mistakeCollector[quizCycle] = mistakeCollector[quizCycle]+1;
                     mistakes++;
 
                     if( lastMistake == quizCycle){
@@ -628,8 +575,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                    // wordViewMiddle.setText("");
                     speak.setVisibility(View.INVISIBLE);
                     wrongAnswerAnimation();
-
-                    mistakeCollector[quizCycle] = mistakeCollector[quizCycle]+1;
                     mistakes++;
 
                     if( lastMistake == quizCycle){
@@ -670,7 +615,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                     totalCycle++;
                     answerCardAnimation2();
 
-                    cycleQuiz(quizCycle, v);
+                    cycleQuiz();
 
 
 
@@ -684,9 +629,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                 //    wordViewMiddle.setText("");
                     speak.setVisibility(View.INVISIBLE);
                     wrongAnswerAnimation();
-
-
-                    mistakeCollector[quizCycle] = mistakeCollector[quizCycle]+1;
                     mistakes++;
 
                     if( lastMistake == quizCycle){
@@ -726,23 +668,8 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         if (totalCycle == (FIVE_WORD_SIZE*repeatPerSession)){
 
-//            int pos = getMostMistakenWord(mistakeCollector);
-//
-//            if(pos != -1){
-//
-//                String word = fiveWords.get(pos).getPronun();
-//                String def = fiveWords.get(pos).getTranslation();
-//                String spanish = fiveWords.get(pos).getExtra();
-//                String example = fiveWords.get(pos).getExample2();
-//
-//                StringBuilder mostMistakenWord = new StringBuilder("shit"+"+"+word+"+"+def+"+"+spanish+"+"+example);
-//                sp.edit().putString("MostMistakenWord",mostMistakenWord.toString()).apply();
-//
-//
-//            }else {
-//                sp.edit().putString("MostMistakenWord","no").apply();
-//
-//            }
+
+
 
 
 
@@ -756,7 +683,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
                     hideViews();
                     adLoading.setVisibility(View.VISIBLE);
-                    showInterstitialAd(false);
+                    showInterstitialAd();
 
 //                    Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
 //                    Practice.this.finish();
@@ -777,7 +704,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         topBackground = findViewById(R.id.top_background);
         recyclerView = (RecyclerView)findViewById(R.id.train_recyclerView);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
@@ -785,7 +712,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         // if true this will set showCycle to maximum and skip definition session
 
 
-        wordsPerSession = sp.getInt("wordsPerSession",5);
+        sp.getInt("wordsPerSession", 5);
         repeatPerSession = sp.getInt("repeatationPerSession",5);
 
         // DATABASE
@@ -797,13 +724,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         aWordDatabasePosition = new ArrayList<>();
         iWordDatabasePosition = new ArrayList<>();
         greWordDatabasePosition = new ArrayList<>();
-
-
-        color = R.color.practiceColor;
-        buttonQuestion = new ArrayList<>();
-
         tts = new TextToSpeech(this, this);
-
         wordCard =    (CardView)findViewById(R.id.wordCard);
         wordView =    (TextView)findViewById(R.id.train_word);
         answerCard1 = (CardView)findViewById(R.id.answer_card1);
@@ -887,9 +808,9 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
             }
 
-            if(true){
+
                 showCycle = fiveWords.size();
-            }
+
         }
 
 
@@ -941,7 +862,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private void answerCardAnimation2(){
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        float width = dm.widthPixels;
         float height = dm.heightPixels;
 
         final ValueAnimator va = ValueAnimator.ofFloat(height,0);
@@ -998,7 +918,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        float width = dm.widthPixels;
         float height = dm.heightPixels;
 
         final ValueAnimator va = ValueAnimator.ofFloat(height,0);
@@ -1065,29 +984,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
     }
 
-
-
-    private int getMostMistakenWord(int[] list){
-
-        int wordIndex = 0;
-        int pos = -1;
-
-
-        for(int i = 0; i < list.length; i++){
-
-            int current = list[i];
-
-            if( current> wordIndex){
-                pos = i;
-
-               wordIndex = current;
-
-            }
-
-        }
-
-        return pos;
-    }
 
     private void initializingSQLDatabase(){
 
@@ -1373,96 +1269,22 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             }
 
         }
-
-        //Toast.makeText(this,words.get(0).getWord(),Toast.LENGTH_SHORT).show();
-
-
-
     }
 
-    public List<Word> getLearnedWords(){
+    public void getLearnedWords(){
 
-        List<Word> getWords = new ArrayList<>();
         String level = sp.getString("level","beginner");
-        int languageId = sp.getInt("language",0);
+        sp.getInt("language",0);
+        sp.getInt(level,0);
 
-        int LearnedCount = sp.getInt(level,0);
-
-        if(level.equalsIgnoreCase("beginner")){
-//
-//            String[]  beginnerWordArray= getResources().getStringArray(R.array.IELTS_words);
-//            String[] beginnerTranslationArray = getResources().getStringArray(R.array.IELTS_translation);
-//            String[] beginnerPronunciationArray = getResources().getStringArray(R.array.IELTS_pronunciation);
-//            String[] beginnerGrammarArray = getResources().getStringArray(R.array.IELTS_grammar);
-//            String[] beginnerExampleArray1 = getResources().getStringArray(R.array.IELTS_example1);
-//            String[] beginnerExampleArray2 = getResources().getStringArray(R.array.IELTS_example2);
-//            String[] beginnerExampleArray3 = getResources().getStringArray(R.array.IELTS_example3);
-//            String[] extraArray = new String[getResources().getStringArray(R.array.IELTS_words).length];
-//
-//            if(languageId == 1){
-//
-//                extraArray = getResources().getStringArray(R.array.beginner_spanish);
-//            }
-//            if(languageId == 2){
-//
-//
-//                extraArray = getResources().getStringArray(R.array.beginner_hindi);
-//            }
-//            if(languageId == 3){
-//
-//                extraArray = getResources().getStringArray(R.array.beginner_bengali);
-//
-//            }
-//
-//
-//            for(int i = 0 ; i < LearnedCount; i++){
-//
-//                getWords.add(new Word(beginnerWordArray[i],beginnerTranslationArray[i],extraArray[i],beginnerPronunciationArray[i],beginnerGrammarArray[i],beginnerExampleArray1[i], beginnerExampleArray2[i],beginnerExampleArray3[i],"beginner",0,i));
-//
-//            }
+        if(level.equalsIgnoreCase("beginner")) {
 
             getBeginnerWordData();
-
-
-
         }
 
         if(level.equalsIgnoreCase("intermediate")){
 
-
-//            String[]  beginnerWordArray= getResources().getStringArray(R.array.TOEFL_words);
-//            String[] beginnerTranslationArray = getResources().getStringArray(R.array.TOEFL_translation);
-//            String[] beginnerPronunciationArray = getResources().getStringArray(R.array.TOEFL_pronunciation);
-//            String[] beginnerGrammarArray = getResources().getStringArray(R.array.TOEFL_grammar);
-//            String[] beginnerExampleArray1 = getResources().getStringArray(R.array.TOEFL_example1);
-//            String[] beginnerExampleArray2 = getResources().getStringArray(R.array.TOEFL_example2);
-//            String[] beginnerExampleArray3 = getResources().getStringArray(R.array.TOEFL_example3);
-//            String[] extraArray = new String[getResources().getStringArray(R.array.TOEFL_words).length];
-//
-//            if(languageId == 1){
-//
-//                extraArray = getResources().getStringArray(R.array.intermediate_spanish);
-//            }
-//            if(languageId == 2){
-//
-//
-//                extraArray = getResources().getStringArray(R.array.intermediate_hindi);
-//            }
-//            if(languageId == 3){
-//
-//                extraArray = getResources().getStringArray(R.array.intermediate_bengali);
-//
-//            }
-//
-//
-//            for(int i = 0 ; i < LearnedCount; i++) {
-//
-//                getWords.add(new Word(beginnerWordArray[i], beginnerTranslationArray[i], extraArray[i], beginnerPronunciationArray[i], beginnerGrammarArray[i], beginnerExampleArray1[i], beginnerExampleArray2[i], beginnerExampleArray3[i], "beginner", 0, i));
-//
-//            }
-
             getIntermediateWordData();
-
         }
 
 
@@ -1504,8 +1326,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         }
 
-
-        return getWords;
 
     }
 
@@ -1679,9 +1499,8 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
         double p = percentage / 100d;
-        double beginnerNum = p * number;
 
-        return beginnerNum;
+        return p * number;
 
     }
 
@@ -2034,19 +1853,12 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
     }
-    private Boolean showInterstitialAd(Boolean isAdShown){
+    private void showInterstitialAd(){
 
         if(mPublisherInterstitialAd.isLoaded()){
 
-            if(!isAdShown){
+            mPublisherInterstitialAd.show();
 
-                if( cb != 1){
-
-                    mPublisherInterstitialAd.show();
-                }
-
-                isAdShown = true;
-            }
 
         }else {
 
@@ -2056,7 +1868,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         }
 
-        return isAdShown;
+
     }
 
 
@@ -2098,7 +1910,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
     private void initializeAds(){
-        String trialStatus = checkTrialStatus();
         boolean isAdShow = getIsAdShow();
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
         mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");

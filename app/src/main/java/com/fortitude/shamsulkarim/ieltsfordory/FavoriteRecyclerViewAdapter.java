@@ -2,9 +2,7 @@ package com.fortitude.shamsulkarim.ieltsfordory;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.media.MediaPlayer;
-import android.speech.tts.TextToSpeech;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,14 +28,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.util.Objects;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
@@ -48,21 +44,20 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
     public String audioPath= null;
     public File localFile = null;
-    private StorageReference gsReference;
-    private  List<Boolean> isFav = new ArrayList<>();
+    private final List<Boolean> isFav = new ArrayList<>();
     public List<Word> words,filterList;
     private CustomFilterFavorite filter;
-    private Context context;
-    private SATWordDatabase satWordDatabase;
-    private IELTSWordDatabase ieltsWordDatabase;
-    private TOEFLWordDatabase toeflWordDatabase;
-    private GREWordDatabase greWordDatabase;
-    private SharedPreferences sp;
-    private int languageId;
+    private final Context context;
+    private final SATWordDatabase satWordDatabase;
+    private final IELTSWordDatabase ieltsWordDatabase;
+    private final TOEFLWordDatabase toeflWordDatabase;
+    private final GREWordDatabase greWordDatabase;
+    private final SharedPreferences sp;
+    private final int languageId;
     private int favoriteCount;
-    private String languageName[] = {"","spanish","hindi","bengali"};
-    private FirebaseStorage storage;
-    private AdapterCallback adapterCallback;
+    private final String[] languageName = {"","spanish","hindi","bengali"};
+    private final FirebaseStorage storage;
+    private final AdapterCallback adapterCallback;
 
     public FavoriteRecyclerViewAdapter(Context context, List<Word> words, AdapterCallback adapterCallback) {
 
@@ -120,7 +115,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
 
     @Override
-    public WordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public @NotNull WordViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View view;
         if(languageId >= 1){
 
@@ -132,18 +127,15 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         }
 
 
-
-        WordViewHolder viewHolder = new WordViewHolder(view);
-        return viewHolder;
+        return new WordViewHolder(view);
     }
 
 
 
 
     public void onBindViewHolder(@NotNull WordViewHolder holder, int position) {
-        int pos = position;
-        Word word = words.get(pos);
-        if(isFav.get(pos) == true){
+        Word word = words.get(position);
+        if(isFav.get(position)){
 
 
             holder.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
@@ -228,15 +220,13 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         FancyButton favorite, speaker;
         CardView cardView;
         ProgressBar progressBar;
-        Boolean isVoicePronunciation = true;
+
 
 
 
 
         public WordViewHolder(View itemView) {
             super(itemView);
-            Typeface ABeeZee = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/ABeeZee-Regular.ttf");
-            Typeface ABeeZeeItalic  = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/ABeeZee-Italic.ttf");
 
             //englishLanguage = (TextView)itemView.findViewById(R.id.favorite_second_language);
             secondLanguageName = (TextView)itemView.findViewById(R.id.favorite_second_language2);
@@ -256,7 +246,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             cardView = (CardView)itemView.findViewById(R.id.recycler_view_card);
             cardView.setPreventCornerOverlap(false);
 
-            isVoicePronunciation = sp.getBoolean("pronunState",true);
+            sp.getBoolean("pronunState",true);
             speaker.setDisableBackgroundColor(Color.parseColor("#cccccc"));
             speaker.setDisableBorderColor(Color.parseColor("#ffffff"));
 
@@ -302,7 +292,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             progressBar.setVisibility(View.VISIBLE);
 
             wordName = wordName.toLowerCase();
-            gsReference = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com/audio/"+wordName+".mp3");
+            StorageReference gsReference = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com/audio/" + wordName + ".mp3");
 
             try{
                 localFile = File.createTempFile("Audio","mp3");
@@ -362,7 +352,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
 
 
-                if (ConnectivityHelper.isConnectedToNetwork(context) && isVoicePronunciation) {
+                if (ConnectivityHelper.isConnectedToNetwork(context)) {
                     //Show the connected screen
                     downloadAudio(wordName);
                     //Toast.makeText(context,"Connectedssss",Toast.LENGTH_LONG).show();
@@ -374,7 +364,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
                         adapterCallback.onMethodCallback(wordName);
                     } catch (ClassCastException e) {
                         // do something
-                        Log.e("AdapterCallback",e.getMessage());
+                        Log.e("AdapterCallback", Objects.requireNonNull(e.getMessage()));
                     }
 
                     Toast.makeText(context,"No internet",Toast.LENGTH_LONG).show();

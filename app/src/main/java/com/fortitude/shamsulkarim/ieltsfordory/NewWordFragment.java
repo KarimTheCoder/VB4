@@ -1,6 +1,5 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
-
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,20 +20,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
-
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -54,19 +48,14 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
     private RecyclerView recyclerView;
     private WordRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<Object> words = new ArrayList<>();
-    private List<String> beginnerFav;
-    private Toolbar toolbar;
+    private final ArrayList<Object> words = new ArrayList<>();
     private IELTSWordDatabase IELTSdatabase;
     private TOEFLWordDatabase TOEFLdatabase;
     private SATWordDatabase SATdatabase;
     private GREWordDatabase GREdatabase;
     private SharedPreferences sp;
-    private boolean connected = false;
-    private int languageId;
     private Spinner spinner;
     private int beginnerPos;
-    private FloatingSearchView sv;
     private TextToSpeech tts;
     public NewWordFragment() {
         // Required empty public constructor
@@ -79,17 +68,12 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
         Window window = Objects.requireNonNull(getActivity()).getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-
         View v = inflater.inflate(R.layout.fragment_new_word,container,false);
-
-        // This code reports to Crashlytics of connection
-        Boolean connected = ConnectivityHelper.isConnectedToNetwork(Objects.requireNonNull(getContext()));
-
-        sp = getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+        sp = Objects.requireNonNull(getContext()).getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         gettingResources();
         getfavoriteDatabasePosition();
         tts = new TextToSpeech(getContext(), this);
-        toolbar = (Toolbar)v.findViewById(R.id.word_toolbar);
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.word_toolbar);
         toolbar.setTitle("WORDS");
         toolbar.setTitleTextColor(getResources().getColor(R.color.beginnerS));
         setHasOptionsMenu(true);
@@ -97,13 +81,11 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
         if (activity != null) {
             activity.setSupportActionBar(toolbar);
         }
-        sv= (FloatingSearchView) v.findViewById(R.id.mSearch);
+        FloatingSearchView sv = (FloatingSearchView) v.findViewById(R.id.mSearch);
 
 
-
-                languageId = sp.getInt("language",0);
-                beginnerFav = new ArrayList<>();
-                spinner = v.findViewById(R.id.word_spinner);
+        sp.getInt("language", 0);
+        spinner = v.findViewById(R.id.word_spinner);
                 spinner.setOnItemSelectedListener(this);
                 setSpinnerAdapter();
                 int selection = 0;
@@ -155,7 +137,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                    @Override
-                   public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                   public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                        super.onScrolled(recyclerView, dx, dy);
 
                        beginnerPos +=dy;
@@ -166,7 +148,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
 
 
-                languageId = sp.getInt("language",0);
+                sp.getInt("language",0);
                 spinner.setSelection(selection);
 
 

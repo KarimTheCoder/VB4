@@ -53,8 +53,6 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
     private RoundCornerProgressBar progressBar;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
     private SharedPreferences sp;
-    private Boolean spanishSwitchState;
-
 
 
     // UI
@@ -112,7 +110,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
         if (level.equalsIgnoreCase("beginner")) {
 
-            levelTextView.setText("Beginner");
+            levelTextView.setText(getString(R.string.beginner));
             setBeginnerLearnedwordsLengthTextView();
             setTextBeginnerTotalWordCount();
 
@@ -120,7 +118,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
         else if (level.equalsIgnoreCase("intermediate")) {
 
-            levelTextView.setText("Intermediate");
+            levelTextView.setText(getString(R.string.intermediate));
             setIntermediateLearnedwordsLengthTextView();
 
 
@@ -129,7 +127,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         else if (level.equalsIgnoreCase("advance")) {
 
             setAdvanceLearnedwordsLengthTextView();
-            levelTextView.setText("Advance");
+            levelTextView.setText(getString(R.string.advance));
 
         }
     }
@@ -162,15 +160,6 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         progressBar.setProgressColor(getResources().getColor(R.color.colorPrimary));
         progressBar.setProgressBackgroundColor(getResources().getColor(R.color.third_background_color));
         progressCountTextview = findViewById(R.id.progress_count_textview);
-
-       // goProCardView = findViewById(R.id.getPro);
-
-        if(BuildConfig.FLAVOR.equalsIgnoreCase("pro") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-       //     goProCardView.setVisibility(View.INVISIBLE);
-        }
-
-       // getProButton = findViewById(R.id.download_pro);
-       // getProButton.setOnClickListener(this);
 
 
     }
@@ -716,12 +705,9 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         size = getBeginnerSATPercentage()+size;
         size = getBeginnerGREPercentage()+size;
 
-        int x = size-i;
         progressBar.setMax(size);
         progressBar.setProgress(i);
-       // leftWordTextView.setText(x+" word left");
-      //  learnedWordTextView.setText(i+" word learned");
-        progressCountTextview.setText("Progress "+i+"/"+size);
+        progressCountTextview.setText(getString(R.string.pretrain_progress_text,i,size));
 
     }
 
@@ -744,12 +730,9 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         size = getIntermediateGREPercentage()+size;
 
 
-        int x = size-i;
         progressBar.setMax(size);
         progressBar.setProgress(i);
-     //   leftWordTextView.setText(x+" word left");
-     //   learnedWordTextView.setText(i+" word learned");
-        progressCountTextview.setText("Progress "+i+"/"+size);
+        progressCountTextview.setText(getString(R.string.pretrain_progress_text,i,size));
     }
 
 
@@ -784,13 +767,9 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         }
 
 
-        int x = size-i;
-
         progressBar.setMax(size);
         progressBar.setProgress(i);
-     //   leftWordTextView.setText(x+" word left");
-      //  learnedWordTextView.setText(i+" word learned");
-        progressCountTextview.setText("Progress "+i+"/"+size);
+        progressCountTextview.setText(getString(R.string.pretrain_progress_text,i,size));
     }
 
    private void checkSpanishState(){
@@ -798,13 +777,8 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         String secondLang = sp.getString("secondlanguage","English");
 
        assert secondLang != null;
-       if(secondLang.equalsIgnoreCase("spanish")){
-            spanishSwitchState = true;
-
-        }else {
-            spanishSwitchState = false;
-
-        }
+       boolean spanishSwitchState;
+       spanishSwitchState = secondLang.equalsIgnoreCase("spanish");
 
        spanishSwitch.setChecked(spanishSwitchState);
 
@@ -815,12 +789,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         boolean ieltsState = sp.getBoolean("isIELTSActive",true);
         boolean toeflState = sp.getBoolean("isTOEFLActive",true);
 
-        if( ieltsState || toeflState){
-
-            tooEasySwitch.setChecked(false);
-        }else {
-            tooEasySwitch.setChecked(true);
-        }
+       tooEasySwitch.setChecked(!ieltsState && !toeflState);
 
    }
 

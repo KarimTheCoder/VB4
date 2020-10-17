@@ -1,13 +1,10 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
-import android.app.ProgressDialog;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import android.os.Bundle;
@@ -15,49 +12,19 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import com.android.billingclient.api.BillingClient;
-import com.android.billingclient.api.BillingClientStateListener;
-import com.android.billingclient.api.BillingResult;
-import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseBeginner;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.ybq.android.spinkit.sprite.Sprite;
-import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
-import com.github.ybq.android.spinkit.style.Wave;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 import java.util.Objects;
 
 
-public class SplashScreen extends AppCompatActivity implements PurchasesUpdatedListener {
-
-
-
-
-
-    // SQL Database Initialization
-    //----------------------------
-
-    private JustLearnedDatabaseBeginner justLearnedDatabase;
+public class SplashScreen extends AppCompatActivity {
 
     private SharedPreferences sp;
-
-
-    // BillingClient
-    private BillingClient billingClient;
-    ProgressBar progressBar;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +35,6 @@ public class SplashScreen extends AppCompatActivity implements PurchasesUpdatedL
 
 
 
-
-        // This code reports to Crashlytics of connection
-        checkInternetConnection();
 
         //----------------------------------------
 
@@ -142,11 +106,11 @@ public class SplashScreen extends AppCompatActivity implements PurchasesUpdatedL
 
         try {
 
-            progressBar = findViewById(R.id.spin_splash_screen);
+            ProgressBar progressBar = findViewById(R.id.spin_splash_screen);
             Sprite doubleBounce = new ThreeBounce();
             progressBar.setIndeterminateDrawable(doubleBounce);
         }catch (NullPointerException i){
-            Log.i("Progressbar",i.getMessage());
+            Log.i("Progressbar", Objects.requireNonNull(i.getMessage()));
         }
 
 
@@ -237,114 +201,19 @@ public class SplashScreen extends AppCompatActivity implements PurchasesUpdatedL
 
 
 
-    private void delayInitialization(){
 
-        final ProgressDialog dialog = ProgressDialog.show(SplashScreen.this, "",
-                "Loading. Please wait...", true);
-
-
-
-
-        Handler handler =new Handler();
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-
-
-
-
-
-                finish();
-            }
-        }, 5000L);
-
-        dialog.dismiss();
-
-
-    }
-
-    // This method Checks internet connection and reports to Crashlytics
-    private void checkInternetConnection(){
-        Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
-
-    }
-
-    // Billing
-
-    private void getPreviousPurchases(){
-
-
-        billingClient = BillingClient.newBuilder(this)
-                .enablePendingPurchases()
-                .setListener(this)
-                .build();
-
-
-        billingClient.startConnection(new BillingClientStateListener() {
-            @Override
-            public void onBillingSetupFinished(@NotNull BillingResult billingResult) {
-                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
-                    // The BillingClient is ready. You can query purchases here.
-
-
-                    Purchase.PurchasesResult results = billingClient.queryPurchases(BillingClient.SkuType.INAPP);
-
-                    for (Purchase purchase : Objects.requireNonNull(results.getPurchasesList())) {
-                        Toast.makeText(getApplicationContext(),results.getResponseCode()+" Response Code: SKU: "+purchase.getSku(),Toast.LENGTH_SHORT).show();
-
-                        if(purchase.getSku().equalsIgnoreCase("test_product")){
-
-                            if(!sp.contains("purchase")){
-
-                                sp.edit().putBoolean("purchase",true).apply();
-                                Toast.makeText(getApplicationContext(),"Product: "+purchase.getSku()+" restored",Toast.LENGTH_SHORT).show();
-
-
-                            }
-                        }
-                    }
-
-
-
-
-                }else {
-                    Toast.makeText(SplashScreen.this,"BILLING | startConnection | RESULT: $billingResponseCode"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onBillingServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-                Toast.makeText(SplashScreen.this,"BILLING | onBillingServiceDisconnected | DISCONNECTED",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-
-    }
-
-    @Override
-    public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
-
-
-
-    }
 
 
 /// Threading with Async Task
 
-    private class DatabaseAsyncTask extends AsyncTask<Integer,Integer,String>{
+    @SuppressLint("StaticFieldLeak")
+    private class  DatabaseAsyncTask extends AsyncTask<Integer,Integer,String>{
 
         private  IELTSWordDatabase ieltsWordDatabase;
         private  TOEFLWordDatabase toeflWordDatabase;
         private  SATWordDatabase satWordDatabase;
         private GREWordDatabase greWordDatabase;
-        private SharedPreferences sp = getApplicationContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);;
 
-        ProgressDialog dialog;
         // SQL Database Initialization
 //---------------------------------------------------
         private void initializingSQLDatabase(){
@@ -353,7 +222,6 @@ public class SplashScreen extends AppCompatActivity implements PurchasesUpdatedL
             satWordDatabase = new SATWordDatabase(getApplicationContext());
             toeflWordDatabase = new TOEFLWordDatabase(getApplicationContext());
             greWordDatabase = new GREWordDatabase(getApplicationContext());
-            justLearnedDatabase = new JustLearnedDatabaseBeginner(getApplicationContext());
         }
         private void IELTStoDatabaseInitialization(){
 
@@ -395,10 +263,6 @@ public class SplashScreen extends AppCompatActivity implements PurchasesUpdatedL
 
 
 
-            }else {
-
-
-
             }
 
 
@@ -435,11 +299,6 @@ public class SplashScreen extends AppCompatActivity implements PurchasesUpdatedL
 
                 }
                 sp.edit().putInt("intermediateWordCount1",CURRENTBEGINNERCOUNT).apply();
-
-
-
-
-            }else {
 
 
 

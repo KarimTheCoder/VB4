@@ -1,6 +1,5 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
-
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,25 +24,20 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.arlib.floatingsearchview.FloatingSearchView;
-
 import com.fortitude.shamsulkarim.ieltsfordory.Practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.Fab;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
-
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-
 import mehdi.sakout.fancybuttons.FancyButton;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,37 +50,29 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
     private String[] SATwordArray, SATtranslationArray, SATgrammarArray, SATpronunArray, SATexample1array, SATexample2Array, SATexample3Array, SATvocabularyType;
     private String[] GREwordArray, GREtranslationArray, GREgrammarArray, GREpronunArray, GREexample1array, GREexample2array, GREexample3Array, GREvocabularyType;
     private int[] IELTSposition, TOEFLposition, SATposition, GREposition;
-
-    private Toolbar toolbar;
     private RecyclerView recyclerView;
     private WordRecyclerViewAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<Object> words = new ArrayList<>();
+    private final ArrayList<Object> words = new ArrayList<>();
     private boolean isShowingFabOption = false;
-    private List<Word> practiceWords = new ArrayList<>();
-    private boolean connected = false;
     private List<String> IELTSlearnedDatabase, TOEFLlearnedDatabase, SATlearnedDatabase, GRElearnedDatabase;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
     private TextView havenotlearned;
     private ImageView noLearnedImage;
-    private List<String> beginnerFav;
     private IELTSWordDatabase IELTSdatabase;
     private TOEFLWordDatabase TOEFLdatabase;
     private SATWordDatabase SATdatabase;
     private GREWordDatabase GREdatabase;
     private SharedPreferences sp;
     private Spinner spinner;
-    private MaterialSheetFab materialSheetFab;
     private Fab fab;
     private int selection;
     private FancyButton startLearning;
     private String level;
-    private int languageId;
     private FloatingSearchView sv;
     private TextToSpeech tts;
-    private List<String> bWord,aWord,iWord;
     private List<String> ieltsFavPosition, toeflFavPosition, satFavPosition, greFavPosition;
     private TextView item1, item2, item3;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,9 +81,6 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
         Window window = Objects.requireNonNull(getActivity()).getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-
-        // This code reports to Crashlytics of connection
-        Boolean connected = ConnectivityHelper.isConnectedToNetwork(Objects.requireNonNull(getContext()));
 
         initialization(v);
         gettingResources();
@@ -111,7 +93,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
  @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
                 if (dy > 0) {
@@ -213,8 +195,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
 
         tts = new TextToSpeech(getContext(),this);
-        languageId = sp.getInt("language",0);
-        beginnerFav = new ArrayList<>();
+        sp.getInt("language", 0);
         havenotlearned = (TextView)v.findViewById(R.id.havenotlearned);
         havenotlearned.setVisibility(View.INVISIBLE);
         noLearnedImage = (ImageView)v.findViewById(R.id.no_learned_image);
@@ -228,7 +209,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
         startLearning.setFocusBackgroundColor(getResources().getColor(R.color.colorPrimary));
         sv= (FloatingSearchView) v.findViewById(R.id.mSearch);
 
-        toolbar = (Toolbar)v.findViewById(R.id.learned_toolbar);
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.learned_toolbar);
         toolbar.setTitle("LEARNED");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
         setHasOptionsMenu(true);
@@ -237,13 +218,10 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
         activity.setSupportActionBar(toolbar);
 
         recyclerView = (RecyclerView)v.findViewById(R.id.recycler_view_learned_words);
-        layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        bWord = new ArrayList<>();
-        aWord = new ArrayList<>();
-        iWord = new ArrayList<>();
         ieltsFavPosition = new ArrayList<>();
         toeflFavPosition = new ArrayList<>();
         satFavPosition = new ArrayList<>();
@@ -320,7 +298,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
         View overlay = v.findViewById(R.id.overlay);
         int sheetColor = getResources().getColor(R.color.colorPrimary);
         int fabColor = getResources().getColor(R.color.beginnerS);
-        materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay,
+        MaterialSheetFab materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay,
                 sheetColor, fabColor);
 
         item1 = v.findViewById(R.id.advance_fab);
@@ -361,7 +339,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
 
             if(words.size() >= 5){
-                getContext().startActivity(new Intent(getContext(), Practice.class));
+                Objects.requireNonNull(getContext()).startActivity(new Intent(getContext(), Practice.class));
 
 
 
@@ -379,7 +357,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
             sp.edit().putString("level","intermediate").apply();
 
             if(words.size() >= 5){
-                getContext().startActivity(new Intent(getContext(), Practice.class));
+                Objects.requireNonNull(getContext()).startActivity(new Intent(getContext(), Practice.class));
 
 
 
@@ -411,14 +389,13 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
             //}
 
             if(words.size() >= 5){
-                getContext().startActivity(new Intent(getContext(), Practice.class));
-                isShowingFabOption = false;
+                Objects.requireNonNull(getContext()).startActivity(new Intent(getContext(), Practice.class));
 
             }else {
                 Toast.makeText(getContext(),"There must be atleast five words", Toast.LENGTH_SHORT).show();
 
-                isShowingFabOption = false;
             }
+            isShowingFabOption = false;
         }
 
 
@@ -428,21 +405,21 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
 
                 sp.edit().putString("level","beginner").apply();
-                view.getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
+                Objects.requireNonNull(view).getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
 
             }
 
             if(level.equalsIgnoreCase("intermediate")){
 
                 sp.edit().putString("level","intermediate").apply();
-                view.getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
+                Objects.requireNonNull(view).getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
 
             }
 
             if(level.equalsIgnoreCase("advance")){
 
                 sp.edit().putString("level","advance").apply();
-                view.getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
+                Objects.requireNonNull(view).getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
 
             }
 

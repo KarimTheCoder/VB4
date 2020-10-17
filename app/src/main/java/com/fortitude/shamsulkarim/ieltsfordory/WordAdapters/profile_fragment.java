@@ -1,4 +1,5 @@
 package com.fortitude.shamsulkarim.ieltsfordory.WordAdapters;
+
 import android.annotation.TargetApi;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -8,12 +9,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,18 +31,15 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.AlarmReceiver;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.LocalData;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.NotificationScheduler;
 import com.kyleduo.switchbutton.SwitchButton;
-
-
+import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
-
 import de.cketti.mailto.EmailIntentBuilder;
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -53,29 +48,20 @@ import mehdi.sakout.fancybuttons.FancyButton;
  */
 public class profile_fragment extends Fragment implements View.OnClickListener {
 
-    private Toolbar toolbar;
     private FancyButton setReminder;
-    private SharedPreferences sp;
     private IELTSWordDatabase ieltsWordDatabase;
     private TOEFLWordDatabase toeflWordDatabase;
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
-
-
-    private int wordsPerSession,repeatationPerSession;
-
     private CardView rateCardView, bugReport, fbCard,instagramCard;
     private TextView leftTextView,learnedTextView;
-
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
 
-
     /// notification
-    private String TAG = "RemindMe";
+    private final String TAG = "RemindMe";
     private LocalData localData;
-    private SwitchButton reminderSwitch;
     private TextView tvTime;
-    private int hour, min, totalWordCount;
+    private int totalWordCount;
 
 
     @Override
@@ -87,13 +73,9 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         window.setStatusBarColor(getResources().getColor(R.color.toolbar_background_color));
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile_fragment, container, false);
-        toolbar = v.findViewById(R.id.profile_toolbar);
+        Toolbar toolbar = v.findViewById(R.id.profile_toolbar);
         setHasOptionsMenu(true);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-
-
-        // This code reports to Crashlytics of connection
-        Boolean connected = ConnectivityHelper.isConnectedToNetwork(getContext());
 
 
         //----------------------------
@@ -106,8 +88,8 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
         try{
             activity.setSupportActionBar(toolbar);
-        }catch (NullPointerException i){
-
+        }catch (NullPointerException i) {
+            i.printStackTrace();
         }
 
         return v;
@@ -117,7 +99,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
     private void initialization(View v){
 
-        sp = v.getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+        SharedPreferences sp = v.getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
         isIeltsChecked = sp.getBoolean("isIELTSActive",true);
         isToeflChecked = sp.getBoolean("isTOEFLActive", true);
@@ -129,11 +111,11 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         toeflWordDatabase = new TOEFLWordDatabase(v.getContext());
         greWordDatabase = new GREWordDatabase(v.getContext());
 
-        localData = new LocalData(getContext());
-        reminderSwitch = v.findViewById(R.id.alarm_switch);
+        localData = new LocalData(Objects.requireNonNull(getContext()));
+        SwitchButton reminderSwitch = v.findViewById(R.id.alarm_switch);
         tvTime = v.findViewById(R.id.alarm_time);
-        hour = localData.get_hour();
-        min = localData.get_min();
+        int hour = localData.get_hour();
+        int min = localData.get_min();
         setReminder = v.findViewById(R.id.set_alarm);
         tvTime.setText(getFormatedTime(hour, min));
         reminderSwitch.setChecked(localData.getReminderStatus());
@@ -152,22 +134,24 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         fbCard.setOnClickListener(this);
         instagramCard.setOnClickListener(this);
 
+
         if(!sp.contains("wordsPerSession")){
 
             sp.edit().putInt("wordsPerSession",5).apply();
-            wordsPerSession = 5;
+
         }else {
 
-            wordsPerSession = sp.getInt("wordsPerSession",5);
+            sp.getInt("wordsPerSession",5);
 
         }
+
         if(!sp.contains("repeatationPerSession")){
 
             sp.edit().putInt("repeatationPerSession",5).apply();
-            repeatationPerSession = 5;
+
         }else {
 
-            repeatationPerSession = sp.getInt("repeatationPerSession",5);
+            sp.getInt("repeatationPerSession",5);
 
         }
 
@@ -230,7 +214,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
             NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, 18, 0);
             tvTime.setText(getFormatedTime(hour, min));
             setReminder.setAlpha(1f);
-            sp.edit().putBoolean("defaultAlarm",true);
+            sp.edit().putBoolean("defaultAlarm",true).apply();
         }
 
 
@@ -271,14 +255,14 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
 
 
         try{
-            getActivity().getMenuInflater().inflate(R.menu.profile_toolbar_menus,menu);
+            Objects.requireNonNull(getActivity()).getMenuInflater().inflate(R.menu.profile_toolbar_menus,menu);
 
-        }catch (NullPointerException i ){
-
+        }catch (NullPointerException i ) {
+            i.printStackTrace();
         }
 
 
@@ -299,10 +283,10 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
                 try{
 
-                    getActivity().startActivity(new Intent(getActivity().getBaseContext(), NewSettingActivity.class));
+                    Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity().getBaseContext(), NewSettingActivity.class));
 
-                }catch (NullPointerException i){
-
+                }catch (NullPointerException i) {
+                    i.printStackTrace();
                 }
 
 
@@ -355,9 +339,8 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
         int learned = getLearnedWords();
         int left =totalWordCount - learned;
-        int percentage = (learned*100)/totalWordCount;
-        leftTextView.setText(left+" words left");
-        learnedTextView.setText(learned+" words learned");
+        leftTextView.setText(getString(R.string.word_learned,left));
+        learnedTextView.setText(getString(R.string.word_learned,learned));
 
     }
 
@@ -443,7 +426,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
             try{
 
-                EmailIntentBuilder.from(getActivity().getBaseContext())
+                EmailIntentBuilder.from(Objects.requireNonNull(getActivity()).getBaseContext())
                         .to("fortitudedevs@gmail.com")
                         .subject("VB4 - FL: "+BuildConfig.FLAVOR+" VN: "+BuildConfig.VERSION_NAME+" VC: "+BuildConfig.VERSION_CODE)
                         .body("")
@@ -539,7 +522,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
             SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT, getCurrentLocale());
             Date d = sdf.parse(oldDateString);
             sdf.applyPattern(NEW_FORMAT);
-            newDateString = sdf.format(d);
+            newDateString = sdf.format(Objects.requireNonNull(d));
         } catch (Exception e) {
             e.printStackTrace();
         }

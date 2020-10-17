@@ -1,15 +1,11 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,8 +32,6 @@ public class StartTrial extends AppCompatActivity implements View.OnClickListene
 
     private void initializeTrialMode(){
 
-        // Start Date and Today
-        Date startDate = Calendar.getInstance().getTime();
 
         // End Date
         Calendar c = Calendar.getInstance();

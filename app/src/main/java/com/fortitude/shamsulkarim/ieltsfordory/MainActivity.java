@@ -5,19 +5,14 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
-
 import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.profile_fragment;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
@@ -30,11 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import org.jetbrains.annotations.NotNull;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 
@@ -51,27 +42,18 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     //-------------------------------
 
-//    BottomNavigation bottomNavigation;
-    private SharedPreferences sp ;
     private FancyButton homeButton, wordButton, learnedButton, favoriteButton, profileButton;
 
     //-------------------------------
     private DatabaseReference ref;
-    private FirebaseDatabase firebaseDatabase;
     private FirebaseUser user;
     private StringBuilder ieltsFavNumBuilder, toeflFavNumBuilder, satFavNumBuilder, greFavNumBuilder;
     private StringBuilder ieltsLearnedNumBuilder, toeflLearnedNumBuilder, satLearnedNumBuilder, greLearnedNumBuilder;
-
-
     private Toast toast;
     private long lastBackPressTime = 0;
     private boolean connected;
-    private FirebaseAuth mAuth;
-    private String toastMsg;
     private View homeBottomLine, wordBottomLine, learnedBottomLine, favoriteBottomLine, profileBottomLine;
-
-    private  static String practice;
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +68,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                 Configuration.SCREENLAYOUT_SIZE_MASK;
 
 
+        String toastMsg;
         switch(screenSize) {
             case Configuration.SCREENLAYOUT_SIZE_LARGE:
                 toastMsg = "Large";
@@ -121,7 +104,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         }
 
 
-        sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+        //    BottomNavigation bottomNavigation;
+        SharedPreferences sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
         if(!sp.contains("soundState")){
 
@@ -150,7 +134,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         favoriteBottomLine = findViewById(R.id.favorite_bottom_line);
         profileBottomLine = findViewById(R.id.profile_bottom_line);
 
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         //database
         ieltsWordDatabase = new IELTSWordDatabase(this);
@@ -192,7 +176,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         favoriteButton.setOnClickListener(this);
         profileButton.setOnClickListener(this);
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         ref = firebaseDatabase.getReference();
         user = firebaseAuth.getCurrentUser();
         ieltsFavNumBuilder = new StringBuilder();
@@ -219,52 +203,32 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                 ref.child(mAuth.getCurrentUser().getUid()).addChildEventListener(new ChildEventListener() {
 
                     @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    public void onChildAdded(@NotNull DataSnapshot dataSnapshot, String s) {
 
                     }
 
                     @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    public void onChildChanged(@NotNull DataSnapshot dataSnapshot, String s) {
 
-//                if(dataSnapshot.exists()) {
-                        String data = dataSnapshot.getValue(String.class);
-                        String key = dataSnapshot.getKey();
-
-//                    Toast.makeText(getApplicationContext(), key + " " + data, Toast.LENGTH_SHORT).show();
-
-
-                        // if key equals to favorite
-                        if( key.equalsIgnoreCase("satFavCount") || key.equalsIgnoreCase("toeflFavCount") || key.equalsIgnoreCase("ieltsFavCount")){
-
-                            //syncDatabasesIfFavDataChanged(data, key);
-
-                        }
-
-
-                        //if key equals to learned
-
-                        if(key.equalsIgnoreCase("satLearnedCount") || key.equalsIgnoreCase("toeflLearnedCount") || key.equalsIgnoreCase("ieltsLearnedCount")){
-
-                          //  syncSPIfLearnedDataChanged(data, key);
-                        }
-
+                        dataSnapshot.getValue(String.class);
+                        dataSnapshot.getKey();
 
                     }
 
                     @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+                    public void onChildRemoved(@NotNull DataSnapshot dataSnapshot) {
 
                     }
 
                     @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                    public void onChildMoved(@NotNull DataSnapshot dataSnapshot, String s) {
 
 
 
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NotNull DatabaseError databaseError) {
 
 
                     }
@@ -319,209 +283,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     }
 
-    private void syncDatabasesIfFavDataChanged(String newData, String key){
-
-        List<Integer> newDataList;
-
-
-
-
-
-        // ADVANC FAVORITE COUNT
-
-        if(key.equalsIgnoreCase("satFavCount")){
-
-            int advanceSize = sp.getInt("advance",getResources().getStringArray(R.array.SAT_words).length);
-            // cleaning database
-
-            for(int i = 0; i < advanceSize; i++){
-                satWordDatabase.updateFav(""+(i+1),"False");
-            }
-
-            // adding new data
-
-            newDataList = builderToNums(new StringBuilder(newData));
-            if(newDataList.size() > 0){
-
-                for(int k = 0; k < newDataList.size(); k++){
-
-                    int adva = newDataList.get(k)+1;
-                    satWordDatabase.updateFav(""+adva,"True");
-
-
-
-                }
-
-            }
-
-
-            StyleableToast.makeText(this, "Advance favorite synced",10, R.style.syncing).show();
-        }
-
-        // INTERMEDIATE FAVORITE COUNT
-
-        if(key.equalsIgnoreCase("toeflFavCount")){
-
-            int intermediateSize = sp.getInt("intermediate",getResources().getStringArray(R.array.TOEFL_words).length);
-            // cleaning database
-
-            for(int i = 0; i < intermediateSize; i++){
-                toeflWordDatabase.updateFav(""+(i+1),"False");
-            }
-
-            // adding new data
-
-            newDataList = builderToNums(new StringBuilder(newData));
-            if(newDataList.size() > 0){
-
-                for(int k = 0; k < newDataList.size(); k++){
-
-                    int adva = newDataList.get(k)+1;
-                    toeflWordDatabase.updateFav(""+adva,"True");
-
-
-
-                }
-
-            }
-
-            StyleableToast.makeText(this, "Intermediate favorite synced",10, R.style.syncing).show();
-
-        }
-
-
-        // BEGINNER FAVORITE COUNT
-
-        if(key.equalsIgnoreCase("ieltsFavCount")){
-
-            int beginnerSize = sp.getInt("beginner",getResources().getStringArray(R.array.IELTS_words).length);
-            // cleaning database
-
-            for(int i = 0; i < beginnerSize; i++){
-                ieltsWordDatabase.updateFav(""+(i+1),"False");
-            }
-
-            // adding new data
-
-            newDataList = builderToNums(new StringBuilder(newData));
-            if(newDataList.size() > 0){
-
-                for(int k = 0; k < newDataList.size(); k++){
-
-                    int adva = newDataList.get(k)+1;
-                    ieltsWordDatabase.updateFav(""+adva,"True");
-
-
-
-                }
-
-            }
-            StyleableToast.makeText(this, "Beginner favorite synced",10, R.style.syncing).show();
-
-        }
-
-
-
-
-
-    }
-
-    private void syncSPIfLearnedDataChanged(String data, String key){
-
-
-        if(key.equalsIgnoreCase("satLearnedCount")){
-
-            int localAdvanceLearned = sp.getInt("advance",0);
-            int firebaseSaved = Integer.parseInt(data);
-
-            if( firebaseSaved > localAdvanceLearned){
-
-                sp.edit().putInt("advance",firebaseSaved).apply();
-                StyleableToast.makeText(this, "Advance learned words synced",10, R.style.syncing).show();
-
-            }
-
-        }
-
-        if(key.equalsIgnoreCase("toeflLearnedCount")){
-
-            int localAdvanceLearned = sp.getInt("intermediate",0);
-            int firebaseSaved = Integer.parseInt(data);
-
-            if( firebaseSaved > localAdvanceLearned){
-
-                sp.edit().putInt("intermediate",firebaseSaved).apply();
-
-                StyleableToast.makeText(this, "Intermediate learned words synced",10, R.style.syncing).show();
-
-            }
-
-        }
-
-        if(key.equalsIgnoreCase("ieltsLearnedCount")){
-
-            int localAdvanceLearned = sp.getInt("beginner",0);
-            int firebaseSaved = Integer.parseInt(data);
-
-            if( firebaseSaved > localAdvanceLearned){
-
-                sp.edit().putInt("beginner",firebaseSaved).apply();
-
-                StyleableToast.makeText(this, "Beginner learned words synced",10, R.style.syncing).show();
-
-            }
-
-        }
-
-    }
-
-    private List<Integer> builderToNums(StringBuilder numBuilder){
-
-        List<Integer> backToNums = new ArrayList<>();
-        int plusCount = 0;
-        int plusI = 0;
-
-        for(int i = 0; i < numBuilder.length(); i++){
-
-            if(numBuilder.charAt(i) == '+'){
-
-                plusCount++;
-            }
-        }
-
-        int plusPosition[] = new int[plusCount];
-
-        for(int j = 0; j < numBuilder.length(); j++){
-
-            if(numBuilder.charAt(j) == '+'){
-                plusPosition[plusI] = j;
-
-                plusI++;
-
-            }
-
-        }
-
-        for( int k = 0; k < plusPosition.length-1; k++){
-
-
-            if(numBuilder.charAt(plusPosition[k]) == '+'){
-
-                String strNum = numBuilder.substring(plusPosition[k]+1, plusPosition[k+1]);
-                backToNums.add(Integer.parseInt(strNum));
-            }
-        }
-
-
-        if( numBuilder.length() > 0 && numBuilder != null){
-
-            String lastNum = numBuilder.substring(plusPosition[plusCount-1]+1, numBuilder.length());
-            backToNums.add(Integer.parseInt(lastNum));
-
-        }
-
-        return backToNums;
-    }
 
     private void addFavAndLearnedNumber(){
 

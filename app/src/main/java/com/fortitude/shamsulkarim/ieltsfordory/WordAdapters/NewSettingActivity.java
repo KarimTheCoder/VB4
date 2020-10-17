@@ -22,14 +22,12 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
-import com.fortitude.shamsulkarim.ieltsfordory.SplashScreen;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -56,16 +54,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NewSettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, PurchasesUpdatedListener {
@@ -75,13 +70,9 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private TOEFLWordDatabase toeflWordDatabase;
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
-
-
-    private String ADVANCE_FAVORITE,ADVANCE_LEARNED, BEGINNER_FAVORITE, BEGINNER_LEARNED,INTERMEDIATE_FAVORITE,INTERMEDIATE_LEARNED, USER_NAME, GRE_FAVORITE, GRE_LEARNED;
+    private String ADVANCE_FAVORITE,ADVANCE_LEARNED, BEGINNER_FAVORITE, BEGINNER_LEARNED,INTERMEDIATE_FAVORITE,INTERMEDIATE_LEARNED, GRE_FAVORITE, GRE_LEARNED;
     private List<Integer> savedBeginnerFav, savedAdvanceFav,savedIntermediateFav, savedGreFav;
     private List<Integer> savedIeltsLearned, savedToeflLearned,savedSatLearned, savedGreLearned;
-
-    private Toolbar  toolbar;
     private FancyButton save,spanish;
     private Spinner wps, rps,imageQualitySpinner, themeSpinner;
     private int wordsPerSession,repeatationPerSession;
@@ -91,8 +82,9 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private boolean pronunciationState = true;
     private ProgressDialog progressDialog;
     private CheckBox ieltsCheckbox, toeflCheckbox, satCheckbox, greCheckbox;
-    private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked,isSignedIn;
-    private CardView privacyPolicy, signInCardView, restorePurchaseCard;
+    private boolean isSignedIn;
+    private CardView privacyPolicy;
+    private CardView restorePurchaseCard;
 
     // google sign in
     private static final String TAG = "GoogleActivity";
@@ -101,11 +93,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private GoogleSignInClient mGoogleSignInClient;
     private FancyButton signIn;
     private TextView userName, userDetail;
-
-    // firebase database
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference ref;
-    private int isPrevUser = 0;
     private boolean connected;
 
     // Billing
@@ -121,11 +109,11 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         window.setStatusBarColor(getResources().getColor(R.color.toolbar_background_color));
 
         // This code reports to Crashlytics of connection
-        Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
+        boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
 
 
         privacyPolicy = findViewById(R.id.privacy_policy_card);
-        signInCardView = findViewById(R.id.user_status);
+        CardView signInCardView = findViewById(R.id.user_status);
         restorePurchaseCard = findViewById(R.id.restore_card);
 
         privacyPolicy.setOnClickListener(this);
@@ -142,10 +130,10 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         checkboxActions();
         setSpinner();
 
-        isIeltsChecked = sp.getBoolean("isIELTSActive",true);
-        isToeflChecked = sp.getBoolean("isTOEFLActive", true);
-        isSatChecked =   sp.getBoolean("isSATActive", true);
-        isGreChecked =   sp.getBoolean("isGREActive",true);
+        boolean isIeltsChecked = sp.getBoolean("isIELTSActive", true);
+        boolean isToeflChecked = sp.getBoolean("isTOEFLActive", true);
+        boolean isSatChecked = sp.getBoolean("isSATActive", true);
+        boolean isGreChecked = sp.getBoolean("isGREActive", true);
 
         ieltsCheckbox.setChecked(isIeltsChecked);
         toeflCheckbox.setChecked(isToeflChecked);
@@ -426,11 +414,11 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
                 @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                public void onChildAdded(@NotNull DataSnapshot dataSnapshot, String s) {
                 }
 
                 @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                public void onChildChanged(@NotNull DataSnapshot dataSnapshot, String s) {
 
 //                if(dataSnapshot.exists()) {
                     String data = dataSnapshot.getValue(String.class);
@@ -439,7 +427,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                    // Toast.makeText(getApplicationContext(),key+" "+ data, Toast.LENGTH_SHORT).show();
 
                     // if key equals to favorite
-                    if( key.equalsIgnoreCase("advanceFavCount") || key.equalsIgnoreCase("intermediateFavCount") || key.equalsIgnoreCase("beginnerFavCount")){
+                    if( Objects.requireNonNull(key).equalsIgnoreCase("advanceFavCount") || key.equalsIgnoreCase("intermediateFavCount") || key.equalsIgnoreCase("beginnerFavCount")){
 
                         syncDatabasesIfFavDataChanged(data, key);
 
@@ -459,20 +447,20 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 }
 
                 @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                public void onChildRemoved(@NotNull DataSnapshot dataSnapshot) {
 
 
                 }
 
                 @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                public void onChildMoved(@NotNull DataSnapshot dataSnapshot, String s) {
 
 
 
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NotNull DatabaseError databaseError) {
 
 
                 }
@@ -485,7 +473,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     private void initialization(){
 
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-        toolbar = findViewById(R.id.ns_toolbar);
+        Toolbar toolbar = findViewById(R.id.ns_toolbar);
         save = findViewById(R.id.ns_save);
         spanish = findViewById(R.id.language_spanish);
         imageQualitySpinner = findViewById(R.id.image_quality_spinner);
@@ -534,7 +522,8 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         // [END config_signin]
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        // firebase database
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         ref = firebaseDatabase.getReference();
 
         //database
@@ -652,28 +641,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
         }
 
-        int i = sp.getInt("language",0);
-
-        if( i == 0){
-//
-//            spanishFlag.setImageResource(R.drawable.spanish_flag);
-//            englishFlag.setImageResource(R.drawable.english_flag_selected);
-//
-//            spanishText.setTypeface(null, Typeface.NORMAL);
-//            englishText.setTypeface(null, Typeface.BOLD);
-
-        }
-
-        if( i == 1){
-
-//            spanishFlag.setImageResource(R.drawable.spanish_flag_selected);
-//            englishFlag.setImageResource(R.drawable.english_flag);
-//
-//
-//            spanishText.setTypeface(null, Typeface.BOLD);
-//            englishText.setTypeface(null, Typeface.NORMAL);
-
-        }
+       sp.getInt("language",0);
 
 
 
@@ -751,9 +719,9 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
         }else {
-            userName.setText("Doggo");
-            userDetail.setText("Sign in to save your progress");
-            signIn.setText("Sign in");
+            userName.setText(getString(R.string.doggo));
+            userDetail.setText(getString(R.string.sign_in_description));
+            signIn.setText(getString(R.string.sign_in));
             isSignedIn = false;
 
             sp.edit().putBoolean("isSignedIn",isSignedIn).apply();
@@ -844,16 +812,16 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         //Toast.makeText(NewSettingActivity.this,"get firebase",Toast.LENGTH_LONG).show();
 
         try{
-            ref.child(mAuth.getCurrentUser().getUid()).addChildEventListener(new ChildEventListener() {
+            ref.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).addChildEventListener(new ChildEventListener() {
 
 
                 int i = 0;
-                String[] strData = new String[9];
-                HashMap<String,String> data = new HashMap<>();
+                final String[] strData = new String[9];
+                final HashMap<String,String> data = new HashMap<>();
                 Boolean askOnce = false;
 
                 @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                public void onChildAdded(@NotNull DataSnapshot dataSnapshot, String s) {
                     //Toast.makeText(getApplicationContext(),s+" : "+dataSnapshot.getValue(String.class),Toast.LENGTH_SHORT).show();
 
 
@@ -865,8 +833,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                         askOnce = true;
                         askToSync();
 
-                    }else {
-                        //Toast.makeText(getApplicationContext(),"new user",Toast.LENGTH_LONG).show();
                     }
 
 
@@ -907,7 +873,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                             }
                             if(j == 4){
                                 sp.edit().putString("userName",strData[4]).apply();
-                                USER_NAME = strData[4];
 
                             }
                             if(j == 5){
@@ -945,31 +910,26 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                     }
                     i++;
 
+                }
 
 
-
-
-
+                @Override
+                public void onChildChanged(@NotNull DataSnapshot dataSnapshot, String s) {
 
                 }
 
                 @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                public void onChildRemoved(@NotNull DataSnapshot dataSnapshot) {
 
                 }
 
                 @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                public void onChildMoved(@NotNull DataSnapshot dataSnapshot, String s) {
 
                 }
 
                 @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NotNull DatabaseError databaseError) {
 
                 }
             });
@@ -1391,7 +1351,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                             updateUI(user);
                             Toast.makeText(getApplicationContext(), "Successfully signed in",Toast.LENGTH_SHORT).show();
                             getFirebase();
-                            progressDialog.cancel();
                             // askToSync();
 
                         } else {
@@ -1400,9 +1359,9 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                             Toast.makeText(NewSettingActivity.this, "Failed to sign in",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
-                            progressDialog.cancel();
 
                         }
+                        progressDialog.cancel();
 
 
                         // [START_EXCLUDE]
@@ -1491,11 +1450,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
     public void onStart() {
         super.onStart();
 
-        if( mAuth.getCurrentUser() != null){
-
-        }else{
-
-        }
         sp.edit().putBoolean("isSignedIn",isSignedIn).apply();
 
        // Toast.makeText(this,"Is signed in: "+isSignedIn,Toast.LENGTH_LONG).show();

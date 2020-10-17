@@ -1,18 +1,14 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
-
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-
-import com.fortitude.shamsulkarim.ieltsfordory.purchase.in_app_purchase;
 
 public class AppLauncher extends AppCompatActivity {
 

@@ -9,7 +9,6 @@ import android.speech.tts.TextToSpeech;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import android.widget.Filterable;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -33,14 +31,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
+import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
-
 import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
@@ -48,27 +43,24 @@ import mehdi.sakout.fancybuttons.FancyButton;
  */
 
 public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
-    ArrayList<Object> words,filterList;
-    CustomFilter filter;
-    List<String> beginnerFav = new ArrayList<>();
-    Context context;
-    final static int WORD_VIEW_TYPE = 0;
-    final static int AD_VIEW_TYPE = 1;
-    SharedPreferences sp;
-    String languageName[] = {"","spanish","hindi","bengali"};
-    int languageId;
-    int favoriteCount;
-    boolean connected = false;
-    int favoriteLevel;
-
-    IELTSWordDatabase ieltsWordDatabase;
-    TOEFLWordDatabase toeflWordDatabase;
-    SATWordDatabase satWordDatabase;
-    GREWordDatabase greWordDatabase;
+    public  ArrayList<Object> words;
+    private final ArrayList<Object> filterList;
+    private CustomFilter filter;
+    private final Context context;
+    private final static int WORD_VIEW_TYPE = 0;
+    private final static int AD_VIEW_TYPE = 1;
+    private final SharedPreferences sp;
+    private final String[] languageName = {"","spanish","hindi","bengali"};
+    private final int languageId;
+    private int favoriteCount;
+    private final int favoriteLevel;
+    private final IELTSWordDatabase ieltsWordDatabase;
+    private final TOEFLWordDatabase toeflWordDatabase;
+    private final SATWordDatabase satWordDatabase;
+    private final GREWordDatabase greWordDatabase;
     public String audioPath= null;
     public File localFile = null;
-    StorageReference gsReference;
-    private FirebaseStorage storage;
+    private final FirebaseStorage storage;
     private WordAdapterCallback wordAdapterCallback;
 
     public WordRecyclerViewAdapter(Context context, ArrayList<Object> words, WordAdapterCallback wordAdapterCallback) {
@@ -115,7 +107,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
 
         View view;
 
@@ -129,8 +121,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                     view = LayoutInflater.from(parent.getContext()).inflate(R.layout.second_language,parent,false);
                 }
-                WordViewHolder viewHolder = new WordViewHolder(view);
-                return viewHolder;
+                return new WordViewHolder(view);
 
             case AD_VIEW_TYPE:
 
@@ -246,46 +237,21 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     private void favoriteWordChecker(){
 
 
-
-        beginnerFav.clear();
-
-
         if( favoriteLevel == 0){
             Cursor beginnerRes = ieltsWordDatabase.getData();
 
-
-            while (beginnerRes.moveToNext()){
-
-                beginnerFav.add(beginnerRes.getString(2));
-
-            }
             beginnerRes.close();
         }
 
         if( favoriteLevel == 1){
 
             Cursor beginnerRes = toeflWordDatabase.getData();
-
-
-            while (beginnerRes.moveToNext()){
-
-                beginnerFav.add(beginnerRes.getString(2));
-
-            }
             beginnerRes.close();
         }
 
         if( favoriteLevel == 2){
 
-                Cursor beginnerRes = satWordDatabase.getData();
-
-
-                while (beginnerRes.moveToNext()){
-
-                    beginnerFav.add(beginnerRes.getString(2));
-
-
-                }
+            Cursor beginnerRes = satWordDatabase.getData();
             beginnerRes.close();
         }
 
@@ -327,13 +293,11 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, TextToSpeech.OnInitListener{
 
 
-
-
         TextView wordView,translationView, grammarView, exampleView1, secondTranslation, secondLanguage, englishLanguage;
         FancyButton favorite, speaker;
         TextToSpeech tts;
         CardView cardView;
-        Boolean isVoicePronunciation = true;
+        Boolean isVoicePronunciation;
         ProgressBar progressBar;
 
 
@@ -393,10 +357,9 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
            // Toast.makeText(context,""+((Word) words.get(getAdapterPosition())).vocabularyType,Toast.LENGTH_SHORT).show();
 
-            int position = 1+getAdapterPosition();
             Word word = (Word) words.get(getAdapterPosition());
             int wordPos = ((Word) words.get(getAdapterPosition())).position;
-            int listPos = word.getNumber();
+
 
             if(view == speaker){
 
@@ -431,8 +394,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                     favoriteCount++;
                     sp.edit().putInt("favoriteCountProfile",favoriteCount).apply();
 
-                    beginnerFav.set(listPos,"True");
-
                     if(((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("IELTS")){
                         ieltsWordDatabase.updateFav(wordPos+"","True");
                     }
@@ -461,7 +422,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                         sp.edit().putInt("favoriteCountProfile",favoriteCount).apply();
 
                     }
-                    beginnerFav.set(listPos,"False");
 
                     if(((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("IELTS")){
                         ieltsWordDatabase.updateFav(wordPos+"","false");
@@ -500,7 +460,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             progressBar.setVisibility(View.VISIBLE);
 
             wordName = wordName.toLowerCase();
-            gsReference = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com/audio/"+wordName+".mp3");
+            StorageReference gsReference = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com/audio/" + wordName + ".mp3");
 
             try{
                 localFile = File.createTempFile("Audio","mp3");
@@ -543,7 +503,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
                  //   Toast.makeText(context,"Completed",Toast.LENGTH_LONG).show();
                     speaker.setEnabled(true);
-                    progressBar.setVisibility(View.INVISIBLE);;
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
             });
 

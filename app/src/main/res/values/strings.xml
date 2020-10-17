@@ -48,7 +48,7 @@
     <string name="privacypolicy">https://banglish1.wixsite.com/fortitude</string>
     <string name="translation_intro">Learn English vocabulary faster with your native language. Every word, definition, and sentence is translated into your language by a set of professional native speakers. Spanish is the first language to be part of this feature, and many more languages are on the way.</string>
     <string name="theme_title">Theme</string>
-    <string name="theme_description"></string>
+    <string name="theme_description">This is theme description</string>
     <string name="trial_ended">Trial ended</string>
     <string name="trial_ended_description">Hi, your 7-days trial has ended. You can still use this app and enjoy most of its functions. However, if you want an ad-free experience and dark mode feature, please consider upgrading. Thank you :)</string>
     <string name="purchase_title">UNLOCK YOUR\nFULL POTENTIAL!</string>
@@ -60,4 +60,14 @@
     <string name="trial_info_description">Most of our important features are free but <b>Premium+ access</b> gives you privilege to an interrupted Ad free experience and Dark mode feature.</string>
     <string name="trial_info_title">Enjoy free Premium+ access for 7 days</string>
     <string name="credit_card_not">Credit card not required</string>
+    <string name="trial_mode">Trial mode: %1$s</string>
+    <string name="word_learned">%1$d words learned</string>
+    <string name="word_left">%1$d words learned</string>
+    <string name="sign_in">Sign in</string>
+    <string name="beginner">Beginner</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="advance">Advance</string>
+    <string name="pretrain_progress_text">PROGRESS %1$d/%2$d</string>
+    <string name="new_words_learned">%1$d new words learned!</string>
+    <string name="words_were_reviewed">%1$d words were reviewed</string>
 </resources>

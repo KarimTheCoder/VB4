@@ -41,7 +41,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseBegi
 import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseIntermediate;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
@@ -67,7 +66,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NewTrain extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener, NewTrainRecyclerView.TrainAdapterCallback {
@@ -88,22 +86,28 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private TextToSpeech tts;
     private FancyButton speak;
     private int lastMistake = 13;
-    private int mistakes, wordsPerSession,FIVE_WORD_SIZE, showCycle, quizCycle, languageId, repeatPerSession, totalCycle, noshowads, progressCount, cb ;
+    private int mistakes;
+    private int wordsPerSession;
+    private int FIVE_WORD_SIZE;
+    private int showCycle;
+    private int quizCycle;
+    private int languageId;
+    private int repeatPerSession;
+    private int totalCycle;
+    private int progressCount;
+    private int cb ;
     private SharedPreferences sp;
     private ArrayList<Word> words, fiveWords,fiveWordsCopy,questionWords;
     private RoundCornerProgressBar progress1;
     private RecyclerView recyclerView;
     private NewTrainRecyclerView adapter;
-    private RecyclerView.LayoutManager layoutManager;
     private String level;
     private boolean IsWrongAnswer = true;
     private int[] mistakeCollector;
-    private boolean next  = true;
     private boolean  alreadyclicked = true;
     private boolean progress = false;
     private int totalMistakeCount, totalCorrects;
     private boolean soundState = true;
-    boolean isAdShown1 = false;
     boolean isWhichvocbularyToText = false;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
     private PublisherInterstitialAd mPublisherInterstitialAd;
@@ -117,7 +121,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private JustLearnedDatabaseBeginner justLearnedDatabaseBeginner;
     private JustLearnedDatabaseIntermediate justLearnedDatabaseIntermediate;
     private JustLearnedDatabaseAdvance justLearnedDatabaseAdvance;
-    private StorageReference gsReference;
     private FirebaseStorage storage;
     public File localFile = null;
     public String audioPath= null;
@@ -141,13 +144,13 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         // This code reports to Crashlytics of connection
-        Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
+        // Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         level = sp.getString("level","NOTHING");
 
         languageId = sp.getInt("language",0);
         soundState = sp.getBoolean("soundState",true);
-        noshowads = sp.getInt("noshowads",0);
+        int noshowads = sp.getInt("noshowads", 0);
         initializeAds();
         if(!sp.contains("totalWrongCount"+level)){
 
@@ -187,7 +190,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         noshowads++;
 
-        sp.edit().putInt("noshowads",noshowads).apply();
+        sp.edit().putInt("noshowads", noshowads).apply();
 
         updateLearnedDatabase();
 
@@ -294,7 +297,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         if( alreadyclicked){
             toNextWord(v);
             alreadyclicked = false;
-            next = false;
         }
 
 
@@ -305,47 +307,19 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-
-    public void settingNextProgress(){
-        final Handler handler = new Handler();
-
-        handler.post(new Runnable() {
-
-            int i = 0;
-            @Override
-            public void run() {
-                i++;
-
-
-
-
-                if( i <= 5){
-                    fab.setProgress(i,true);
-                    alreadyclicked = true;
-                }
-                handler.postDelayed(this,1000l);
-
-            }
-        });
-
-
-
-    }
-
-
     public void toNextWord(View view){
         if (showCycle >= FIVE_WORD_SIZE){
 
             // hide all the views after the learning stage
             //------------------------------
 
-            //hideViews();
+
             if(!isWhichvocbularyToText){
                 whichVocabularyToTest(view);
                 isWhichvocbularyToText = true;
             }else {
 
-         //   isAdShown1 = showInterstitialAd(isAdShown1);
+
             answerCard1.setVisibility(View.VISIBLE);
             answerCard2.setVisibility(View.VISIBLE);
             answerCard3.setVisibility(View.VISIBLE);
@@ -394,7 +368,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         if( v== speak){
 
-            String word = wordView.getText().toString();;
+            String word = wordView.getText().toString();
             if(showCycle < FIVE_WORD_SIZE+1){
 
                 word = wordView.getText().toString();
@@ -407,11 +381,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     showCycle++;
                 }
 
-            }else {
+            } //                word = wordViewMiddle.getText().toString();
 
-//                word = wordViewMiddle.getText().toString();
-
-            }
 
 //            tts.setLanguage(Locale.US);
 //            tts.speak(word, TextToSpeech.QUEUE_ADD, null);
@@ -514,7 +485,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
             checkingAnswer(v);
-            cycleQuiz(quizCycle,v);
+            cycleQuiz();
         }
 
 
@@ -532,7 +503,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         trainCircle4 = findViewById(R.id.train_circle4);
         wordCard = findViewById(R.id.wordCard);
         recyclerView = (RecyclerView)findViewById(R.id.train_recyclerView);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         wordsPerSession = sp.getInt("wordsPerSession",5);
@@ -747,15 +718,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
             }
         }
-        if(words.size() == 0){
 
-
-
-
-//            Intent intent = new Intent(this,NoWordLeft.class);
-//            this.startActivity(intent);
-//            this.finish();
-        }
 
         sp.edit().putInt("fiveWordSize",fiveWords.size()).apply();
         FIVE_WORD_SIZE = fiveWords.size();
@@ -778,7 +741,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private void cycleQuiz(int quizCycle, View v){
+    private void cycleQuiz(){
 
 
         if(this.quizCycle <= (FIVE_WORD_SIZE*repeatPerSession)-1){
@@ -787,9 +750,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             if(!IsWrongAnswer){
                 IsWrongAnswer = true;
 
-            }else {
-//                wordViewMiddle.setVisibility(View.VISIBLE);
-//                wordViewMiddle.setText(fiveWords.get(this.quizCycle).getWord());
             }
 
 
@@ -856,7 +816,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
 
-        String answer = "";
+        String answer;
 
 
         if(this.quizCycle < (FIVE_WORD_SIZE*repeatPerSession)){
@@ -1052,7 +1012,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 }
                 totalCorrects++;
 
-                cycleQuiz(quizCycle, v);
+                cycleQuiz();
 
 
 
@@ -1134,8 +1094,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 String spanish = fiveWords.get(pos).getExtra();
                 String example = fiveWords.get(pos).getExample2();
 
-                StringBuilder mostMistakenWord = new StringBuilder("shit"+"+"+word+"+"+def+"+"+spanish+"+"+example);
-                sp.edit().putString("MostMistakenWord",mostMistakenWord.toString()).apply();
+                sp.edit().putString("MostMistakenWord", "shit" + "+" + word + "+" + def + "+" + spanish + "+" + example).apply();
 
 
 
@@ -1153,7 +1112,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                     hideViews();
                     adLoading.setVisibility(View.VISIBLE);
-                    showInterstitialAd(false);
+                    showInterstitialAd();
 
 
 
@@ -1173,7 +1132,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        float width = dm.widthPixels;
         float height = dm.heightPixels;
 
         final ValueAnimator va = ValueAnimator.ofFloat(height,0);
@@ -1203,7 +1161,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        float width = dm.widthPixels;
         float height = dm.heightPixels;
 
         final ValueAnimator va = ValueAnimator.ofFloat(height,0);
@@ -1411,9 +1368,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
         double p = percentage/100d;
-        double beginnerNum = p*number;
 
-        return beginnerNum;
+        return p*number;
 
     }
 
@@ -1656,8 +1612,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     private void updateLearnedDatabase(){
 
-        int j = 1;
-
         for(int i = 0; i < fiveWords.size(); i++){
 
             Word word = fiveWords.get(i);
@@ -1699,8 +1653,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
               //  Toast.makeText(this, "GRE learned: "+word.position, Toast.LENGTH_SHORT).show();
 
             }
-
-            j++;
 
 
         }
@@ -1802,21 +1754,15 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private Boolean showInterstitialAd(Boolean isAdShown){
+    private void showInterstitialAd(){
 
 
         try{
-
             if(mPublisherInterstitialAd.isLoaded()){
 
-                if(!isAdShown){
+                if( cb != 1){
 
-                    if( cb != 1){
-
-                        mPublisherInterstitialAd.show();
-                    }
-
-                    isAdShown = true;
+                    mPublisherInterstitialAd.show();
                 }
             }else {
 
@@ -1830,10 +1776,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         }
 
 
-
-
-
-                return isAdShown;
     }
 
     private void hideViews(){
@@ -1845,17 +1787,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         answerCard4.setVisibility(View.INVISIBLE);
         progress1.setVisibility(View.INVISIBLE);
         wordCard.setVisibility(View.INVISIBLE);
-
-    }
-    private void unhideViews(){
-        topBackground.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.VISIBLE);
-        answerCard1.setVisibility(View.VISIBLE);
-        answerCard2.setVisibility(View.VISIBLE);
-        answerCard3.setVisibility(View.VISIBLE);
-        answerCard4.setVisibility(View.VISIBLE);
-        progress1.setVisibility(View.VISIBLE);
-        wordCard.setVisibility(View.VISIBLE);
 
     }
 
@@ -2015,7 +1946,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         progressBar.setVisibility(View.VISIBLE);
 
         wordName = wordName.toLowerCase();
-        gsReference = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com/audio/"+wordName+".mp3");
+        StorageReference gsReference = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com/audio/" + wordName + ".mp3");
 
         try{
             localFile = File.createTempFile("Audio","mp3");
