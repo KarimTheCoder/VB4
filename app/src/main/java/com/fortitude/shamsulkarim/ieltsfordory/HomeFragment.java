@@ -507,7 +507,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             long todayMillies = today.getTime();
             long leftMillies = endMillies - todayMillies;
 
-            Toast.makeText(getContext(),"Days Left: "+ TimeUnit.DAYS.convert(leftMillies,TimeUnit.MILLISECONDS),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(),"Days Left: "+ TimeUnit.DAYS.convert(leftMillies,TimeUnit.MILLISECONDS),Toast.LENGTH_SHORT).show();
 
             if(!sp.contains("purchase")){
 

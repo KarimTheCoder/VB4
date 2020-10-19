@@ -120,7 +120,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         toeflWordDatabasee.close();
         satWordDatabase.close();
         greWordDatabase.close();
-        Toast.makeText(context,"On Detached Recyclerview",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context,"On Detached Recyclerview",Toast.LENGTH_SHORT).show();
     }
 
     @Override

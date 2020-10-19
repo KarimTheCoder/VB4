@@ -866,19 +866,19 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
             changeEasyWord(isChecked);
 
-            Toast.makeText(this,"is checked: "+isChecked,Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this,"is checked: "+isChecked,Toast.LENGTH_SHORT).show();
         }
 
         if(view == spanishSwitch){
 
 
             if(Objects.requireNonNull(sp.getString("secondlanguage", "english")).equalsIgnoreCase("spanish")){
-                Toast.makeText(this,"english",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this,"english",Toast.LENGTH_SHORT).show();
                 sp.edit().putString("secondlanguage","english").apply();
 
             }else {
                 sp.edit().putString("secondlanguage","spanish").apply();
-                Toast.makeText(this,"Spanish",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,"Spanish",Toast.LENGTH_SHORT).show();
             }
 
 
@@ -919,7 +919,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
                                         for(SkuDetails skuDetails : skuDetailsList){
 
                                             purchaseButton.setText(skuDetails.getPrice());
-                                            Toast.makeText(PretrainActivity.this,billingResult.getResponseCode()+" Getting Data for setting price"+skuDetailsList.size(),Toast.LENGTH_SHORT).show();
+                                            //Toast.makeText(PretrainActivity.this,billingResult.getResponseCode()+" Getting Data for setting price"+skuDetailsList.size(),Toast.LENGTH_SHORT).show();
 
                                         }
                                     }
@@ -927,7 +927,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
                                 }
                             });
-                    Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT OK",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT OK",Toast.LENGTH_SHORT).show();
                 }else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE){
 
                     Toast.makeText(getApplicationContext(),"Please sign in to Google Play Store",Toast.LENGTH_SHORT).show();
@@ -941,7 +941,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             public void onBillingServiceDisconnected() {
                 // Try to restart the connection on the next request to
                 // Google Play by calling the startConnection() method.
-                Toast.makeText(PretrainActivity.this,"BILLING | onBillingServiceDisconnected | DISCONNECTED",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PretrainActivity.this,"BILLING | onBillingServiceDisconnected | DISCONNECTED",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -958,7 +958,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
                 handlePurchase(purchase,billingClient);
 
-                Toast.makeText(this, "Handle Purchase", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "Handle Purchase", Toast.LENGTH_SHORT).show();
             }
         }
         else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
@@ -976,7 +976,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(this, "You already own this product, go to settings to restore it", Toast.LENGTH_SHORT).show();
         }
         else {
-            Toast.makeText(this, "Other error "+billingResult.getResponseCode(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Other error "+billingResult.getResponseCode(), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -1020,8 +1020,8 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
                             Toast.makeText(getApplicationContext(),"Service unavailable",Toast.LENGTH_LONG).show();
                         }
                         else {
-
-                            Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT: $billingResponseCode"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
+                            Log.i("Billing Response Code","Billing response code: "+billingResult.getResponseCode());
+                           // Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT: $billingResponseCode"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -1050,7 +1050,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onAcknowledgePurchaseResponse(@NonNull BillingResult billingResult) {
 
-                        Toast.makeText(PretrainActivity.this,"On Acknowledge",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(PretrainActivity.this,"On Acknowledge",Toast.LENGTH_SHORT).show();
 
                     }
                 });

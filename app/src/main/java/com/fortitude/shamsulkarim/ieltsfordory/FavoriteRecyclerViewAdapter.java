@@ -195,7 +195,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         toeflWordDatabase.close();
         satWordDatabase.close();
         greWordDatabase.close();
-        Toast.makeText(context,"Favorite OnDestory",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context,"Favorite OnDestory",Toast.LENGTH_SHORT).show();
     }
 
     @Override

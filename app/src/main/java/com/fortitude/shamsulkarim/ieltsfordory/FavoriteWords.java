@@ -122,7 +122,6 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
 
         lastRecyclerViewPosition = sp.getInt(RECYCLER_VIEW_POSITION,0);
         recyclerView.scrollToPosition(lastRecyclerViewPosition);
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
 

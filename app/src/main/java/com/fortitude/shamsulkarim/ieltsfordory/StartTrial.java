@@ -46,7 +46,7 @@ public class StartTrial extends AppCompatActivity implements View.OnClickListene
         if(!sp.contains("trial_end_date")){
 
             sp.edit().putLong("trial_end_date", endDate.getTime()).apply();
-            Toast.makeText(this,"Trial Mode Initialized", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this,"Trial Mode Initialized", Toast.LENGTH_SHORT).show();
 
         }
 

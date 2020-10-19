@@ -122,7 +122,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         if(greWordDatabase != null){
             greWordDatabase.close();
         }
-        Toast.makeText(context,"ON ditach",Toast.LENGTH_LONG).show();
+       // Toast.makeText(context,"ON ditach",Toast.LENGTH_LONG).show();
 
 
     }
@@ -176,7 +176,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
 
-        Toast.makeText(context,"ON Dititsljdfjf",Toast.LENGTH_LONG).show();
+        //Toast.makeText(context,"ON Dititsljdfjf",Toast.LENGTH_LONG).show();
     }
 
 
