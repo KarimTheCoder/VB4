@@ -1017,14 +1017,13 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
                         }else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE){
 
-                            Toast.makeText(getApplicationContext(),"You are not connected to the internet",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Service unavailable",Toast.LENGTH_LONG).show();
                         }
-
                         else {
 
                             Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT: $billingResponseCode"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
-                        }
 
+                        }
                     }
 
 
@@ -1038,11 +1037,9 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             if (!purchase.isAcknowledged()) {
 
                 if(!sp.contains("purchase")){
-
                     sp.edit().putBoolean("purchase",true).apply();
                     purchaseCardView.setVisibility(View.GONE);
                     purchaseThankYou.setVisibility(View.VISIBLE);
-
                 }
 
                 AcknowledgePurchaseParams acknowledgePurchaseParams =

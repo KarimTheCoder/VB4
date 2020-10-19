@@ -107,6 +107,27 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+
+        if(ieltsWordDatabase != null){
+            ieltsWordDatabase.close();
+        }
+        if(toeflWordDatabase != null){
+            toeflWordDatabase.close();
+        }
+        if(satWordDatabase != null){
+            satWordDatabase.close();
+        }
+        if(greWordDatabase != null){
+            greWordDatabase.close();
+        }
+        Toast.makeText(context,"ON ditach",Toast.LENGTH_LONG).show();
+
+
+    }
+
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
 
         View view;
@@ -140,10 +161,21 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public void onDestroy(){
-        ieltsWordDatabase.close();
-        toeflWordDatabase.close();
-        satWordDatabase.close();
-        greWordDatabase.close();
+        if(ieltsWordDatabase != null){
+            ieltsWordDatabase.close();
+        }
+        if(toeflWordDatabase != null){
+            toeflWordDatabase.close();
+        }
+        if(satWordDatabase != null){
+            satWordDatabase.close();
+        }
+        if(greWordDatabase != null){
+            greWordDatabase.close();
+        }
+
+
+
         Toast.makeText(context,"ON Dititsljdfjf",Toast.LENGTH_LONG).show();
     }
 

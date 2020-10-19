@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,6 +56,8 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
     private List<Integer> ieltsDatabasePosition, toeflDatabasePosition, satDatabasePosition, greDatabasePosition;
     private boolean isFabOptionOn = false;
     private TextToSpeech tts;
+    private final String RECYCLER_VIEW_POSITION = "recyclerview_last_pos";
+    private int lastRecyclerViewPosition;
 
 
     @Nullable
@@ -65,7 +69,7 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
         tts = new TextToSpeech(getContext(), this);
-        fab = (FloatingActionButton)v.findViewById(R.id.fab_favorite);
+        fab = v.findViewById(R.id.fab_favorite);
         fab.setColorNormal(getResources().getColor(R.color.colorPrimary));
         fab.setColorPressed(getResources().getColor(R.color.colorPrimaryDark));
 
@@ -75,11 +79,11 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         initializingSQLDatabase(v);
 
 
-        TextView noFavorite = (TextView) v.findViewById(R.id.havenotlearned);
-        ImageView noFavoriteImage = (ImageView) v.findViewById(R.id.no_favorite_image);
-        FloatingSearchView sv = (FloatingSearchView) v.findViewById(R.id.mSearch);
+        TextView noFavorite =  v.findViewById(R.id.havenotlearned);
+        ImageView noFavoriteImage =  v.findViewById(R.id.no_favorite_image);
+        FloatingSearchView sv =  v.findViewById(R.id.mSearch);
 
-        Toolbar toolbar= (Toolbar)v.findViewById(R.id.favoriteToolbar);
+        Toolbar toolbar= v.findViewById(R.id.favoriteToolbar);
         toolbar.setTitle("FAVORITE");
         toolbar.setTitleTextColor(getResources().getColor(R.color.beginnerS));
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -109,19 +113,25 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
             noFavoriteImage.setVisibility(View.VISIBLE);
         }
 
-        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_favorite_words);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
+        RecyclerView recyclerView =  v.findViewById(R.id.recycler_view_favorite_words);
         recyclerView.setHasFixedSize(true);
         adapter = new FavoriteRecyclerViewAdapter(getContext(), words,this);
         recyclerView.setAdapter(adapter);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
 
-
-
+        lastRecyclerViewPosition = sp.getInt(RECYCLER_VIEW_POSITION,0);
+        recyclerView.scrollToPosition(lastRecyclerViewPosition);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
 
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                lastRecyclerViewPosition = layoutManager.findFirstVisibleItemPosition();
+
+            }
 
             @Override
             public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
@@ -211,7 +221,7 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         while (toeflRes.moveToNext()){
 
             toeflFavWords.add(toeflRes.getString(2));
-            int pos = (Integer) toeflRes.getInt(0);
+            int pos =  toeflRes.getInt(0);
             toeflDatabasePosition.add(pos);
 
 
@@ -222,7 +232,7 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         while (ieltsRes.moveToNext()){
 
             ieltsFavWords.add(ieltsRes.getString(2));
-            int pos = (Integer) ieltsRes.getInt(0);
+            int pos =  ieltsRes.getInt(0);
             ieltsDatabasePosition.add(pos);
 
 
@@ -234,7 +244,7 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         while (satRes.moveToNext()){
 
             satFavWords.add(satRes.getString(2));
-            int pos = (Integer) satRes.getInt(0);
+            int pos =  satRes.getInt(0);
             satDatabasePosition.add(pos);
 
 
@@ -244,19 +254,13 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         while (greRes.moveToNext()){
 
             greFavWords.add(greRes.getString(2));
-            int pos = (Integer) greRes.getInt(0);
+            int pos =  greRes.getInt(0);
             greDatabasePosition.add(pos);
 
 
         }
         greRes.close();
         greWordDatabase.close();
-
-
-
-
-
-
     }
 
     public   void addFavoriteWord(){
@@ -379,6 +383,9 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
             tts.stop();
             tts.shutdown();
         }
+
+        sp.edit().putInt(RECYCLER_VIEW_POSITION,lastRecyclerViewPosition).apply();
+
 
     }
 

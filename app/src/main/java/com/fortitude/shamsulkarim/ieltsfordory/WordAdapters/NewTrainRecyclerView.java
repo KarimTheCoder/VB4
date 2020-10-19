@@ -113,8 +113,6 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
     }
 
-
-
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
@@ -347,7 +345,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         // Create a storage reference from our app
         String wordName = word.getWord().toLowerCase();
         StorageReference gsReference = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com/audio/"+wordName+".mp3");
-        Boolean isVoicePronunciation = true;
+        Boolean isVoicePronunciation;
 
         //Typeface comfortaRegular;
 
@@ -356,14 +354,14 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             super(itemView);
             //comfortaRegular = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/Comfortaa-Bold.ttf");
 
-            translation = (TextView)itemView.findViewById(R.id.translation_train);
-            spanish = (TextView)itemView.findViewById(R.id.spanish_translation_train);
-            languageName = (TextView)itemView.findViewById(R.id.spanish);
-            grammar = (TextView)itemView.findViewById(R.id.grammar_train);
-            pronunciation = (TextView)itemView.findViewById(R.id.pronunciation_train);
-            speak = (FancyButton)itemView.findViewById(R.id.train_speaker_icon);
-            example1 = (TextView)itemView.findViewById(R.id.example1);
-            example2 = (TextView)itemView.findViewById(R.id.example2);
+            translation = itemView.findViewById(R.id.translation_train);
+            spanish = itemView.findViewById(R.id.spanish_translation_train);
+            languageName = itemView.findViewById(R.id.spanish);
+            grammar = itemView.findViewById(R.id.grammar_train);
+            pronunciation = itemView.findViewById(R.id.pronunciation_train);
+            speak = itemView.findViewById(R.id.train_speaker_icon);
+            example1 = itemView.findViewById(R.id.example1);
+            example2 = itemView.findViewById(R.id.example2);
             progressBar = itemView.findViewById(R.id.spin_kit);
             Sprite doubleBounce = new Wave();
             progressBar.setIndeterminateDrawable(doubleBounce);
@@ -576,7 +574,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
     }
 
-    public class ExampleAdapter extends RecyclerView.ViewHolder{
+    public static class ExampleAdapter extends RecyclerView.ViewHolder{
 
         TextView example;
         //Typeface comfortaRegular;
@@ -585,7 +583,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             super(itemView);
 
            // comfortaRegular = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/Comfortaa-Regular.ttf");
-            example = (TextView)itemView.findViewById(R.id.train_example);
+            example = itemView.findViewById(R.id.train_example);
           //  example.setTypeface(comfortaRegular);
 
 
@@ -601,14 +599,14 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         public ImageViewHolder(View itemView) {
             super(itemView);
 
-            image = (ImageView)itemView.findViewById(R.id.server_image);
+            image = itemView.findViewById(R.id.server_image);
 
-            imageState = (ImageView)itemView.findViewById(R.id.server_image_state);
-            imageText = (TextView)itemView.findViewById(R.id.image_text);
-            imageStateText = (TextView) itemView.findViewById(R.id.state_text);
+            imageState = itemView.findViewById(R.id.server_image_state);
+            imageText = itemView.findViewById(R.id.image_text);
+            imageStateText =  itemView.findViewById(R.id.state_text);
             reportmistake = itemView.findViewById(R.id.train_reportmistake);
-            imageQualitySetting = (ImageView)itemView.findViewById(R.id.image_quality);
-            imageQualitySettingText = (TextView)itemView.findViewById(R.id.image_quality_text);
+            imageQualitySetting = itemView.findViewById(R.id.image_quality);
+            imageQualitySettingText = itemView.findViewById(R.id.image_quality_text);
             reportmistake.setOnClickListener(this);
             imageQualitySetting.setOnClickListener(this);
 
@@ -685,13 +683,10 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
     private class BannerAdLayout extends  RecyclerView.ViewHolder{
 
         private AdView mAdView;
-        private Context context;
-        private View view;
 
         public BannerAdLayout(View itemView) {
             super(itemView);
-            context = itemView.getContext();
-            view = itemView;
+            Context context = itemView.getContext();
 
             if( cb != 1){
 

@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -406,11 +404,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         if( v == homeButton){
 
-//            homeButton.setIconResource(R.drawable.ic_home);
-//            wordButton.setIconResource(R.drawable.ic_words);
-//            learnedButton.setIconResource(R.drawable.ic_school);
-//            favoriteButton.setIconResource(R.drawable.ic_favorite);
-//            profileButton.setIconResource(R.drawable.ic_person);
             HomeFragment homeFragment = new HomeFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.frag,homeFragment).commit();
 
@@ -427,11 +420,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         if(v == wordButton){
 
-//            homeButton.setIconResource(R.drawable.ic_home);
-//            wordButton.setIconResource(R.drawable.ic_library_books_active);
-//            learnedButton.setIconResource(R.drawable.ic_school);
-//            favoriteButton.setIconResource(R.drawable.ic_favorite);
-//            profileButton.setIconResource(R.drawable.ic_person);
             NewWordFragment wordFragment = new NewWordFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.frag,wordFragment).commit();
 
@@ -446,11 +434,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         }
         if(v == learnedButton){
 
-//            homeButton.setIconResource(R.drawable.ic_home);
-//            wordButton.setIconResource(R.drawable.ic_library_books);
-//            learnedButton.setIconResource(R.drawable.ic_school_active);
-//            favoriteButton.setIconResource(R.drawable.ic_favorite);
-//            profileButton.setIconResource(R.drawable.ic_person);
             LearnedWords learnedWords = new LearnedWords();
             getSupportFragmentManager().beginTransaction().replace(R.id.frag,learnedWords).commit();
 
@@ -464,11 +447,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         }
         if(v == favoriteButton){
 
-//            homeButton.setIconResource(R.drawable.ic_home);
-//            wordButton.setIconResource(R.drawable.ic_library_books);
-//            learnedButton.setIconResource(R.drawable.ic_school);
-//            favoriteButton.setIconResource(R.drawable.ic_favorite_active);
-//            profileButton.setIconResource(R.drawable.ic_person);
             FavoriteWords favoriteWords = new FavoriteWords();
             getSupportFragmentManager().beginTransaction().replace(R.id.frag,favoriteWords).commit();
 
@@ -480,11 +458,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         }
         if(v == profileButton){
-//            homeButton.setIconResource(R.drawable.ic_home);
-//            wordButton.setIconResource(R.drawable.ic_library_books);
-//            learnedButton.setIconResource(R.drawable.ic_school);
-//            favoriteButton.setIconResource(R.drawable.ic_favorite);
-//            profileButton.setIconResource(R.drawable.ic_person_active);
+
             profile_fragment setting = new profile_fragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.frag,setting).commit();
 

@@ -229,21 +229,21 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             super(itemView);
 
             //englishLanguage = (TextView)itemView.findViewById(R.id.favorite_second_language);
-            secondLanguageName = (TextView)itemView.findViewById(R.id.favorite_second_language2);
-            secondTranslation = (TextView)itemView.findViewById(R.id.favorite_second_translation);
-            wordView = (TextView)itemView.findViewById(R.id.favorite_card_word);
-            translationView = (TextView)itemView.findViewById(R.id.favorite_card_translation);
-            grammarView = (TextView)itemView.findViewById(R.id.favorite_card_grammar);
+            secondLanguageName = itemView.findViewById(R.id.favorite_second_language2);
+            secondTranslation = itemView.findViewById(R.id.favorite_second_translation);
+            wordView = itemView.findViewById(R.id.favorite_card_word);
+            translationView = itemView.findViewById(R.id.favorite_card_translation);
+            grammarView = itemView.findViewById(R.id.favorite_card_grammar);
             progressBar = itemView.findViewById(R.id.spin_kit);
             Sprite doubleBounce = new Wave();
             progressBar.setIndeterminateDrawable(doubleBounce);
             progressBar.setVisibility(View.INVISIBLE);
 
-            exampleView1 = (TextView)itemView.findViewById(R.id.favorite_card_example1);
-            exampleView2 = (TextView)itemView.findViewById(R.id.favorite_card_example2);
-            exampleView3 = (TextView)itemView.findViewById(R.id.favorite_card_example3);
-            speaker = (FancyButton) itemView.findViewById(R.id.favorite_speaker);
-            cardView = (CardView)itemView.findViewById(R.id.recycler_view_card);
+            exampleView1 = itemView.findViewById(R.id.favorite_card_example1);
+            exampleView2 = itemView.findViewById(R.id.favorite_card_example2);
+            exampleView3 = itemView.findViewById(R.id.favorite_card_example3);
+            speaker =  itemView.findViewById(R.id.favorite_speaker);
+            cardView = itemView.findViewById(R.id.recycler_view_card);
             cardView.setPreventCornerOverlap(false);
 
             sp.getBoolean("pronunState",true);
@@ -276,7 +276,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 //                secondLanguageName.setText("Hindi");
 //            }
 
-            favorite = (FancyButton) itemView.findViewById(R.id.favorite_favorite);
+            favorite =  itemView.findViewById(R.id.favorite_favorite);
 
             favorite.setOnClickListener(this);
             speaker.setOnClickListener(this);
