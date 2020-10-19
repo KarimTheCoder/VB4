@@ -18,6 +18,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -86,23 +87,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                 toastMsg = "Screen size is neither large, normal or small";
         }
 
-        try {
-
-            ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-            if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-                //we are connected to a network
-                connected = true;
-            }
-            else{
-                connected = false;
-            }
-
-        }catch (NullPointerException n){
-
-            Toast.makeText(this,"Connection error",Toast.LENGTH_SHORT).show();
-        }
-
+        connected = isOnline();
 
         //    BottomNavigation bottomNavigation;
         SharedPreferences sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
@@ -162,13 +147,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             }
 
         }
-
-
-
-
-
-
-
 
         homeButton.setOnClickListener(this);
         wordButton.setOnClickListener(this);
@@ -517,6 +495,12 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             profileBottomLine.setVisibility(View.VISIBLE);
 
         }
+    }
+
+    private boolean isOnline() {
+
+        return ConnectivityHelper.isConnectedToNetwork(this);
+
     }
 }
 

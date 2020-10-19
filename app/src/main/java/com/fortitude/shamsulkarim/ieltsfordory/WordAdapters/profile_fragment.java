@@ -237,7 +237,6 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
             }
         });
 
-
         setReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -246,92 +245,66 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
             }
         });
 
-
-
-
-
-
     }
-
 
     @Override
     public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
 
-
         try{
             Objects.requireNonNull(getActivity()).getMenuInflater().inflate(R.menu.profile_toolbar_menus,menu);
-
         }catch (NullPointerException i ) {
             i.printStackTrace();
         }
-
-
-
-
-
-
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        if(item.getItemId() == R.id.profile_menu_settings){
 
-        switch (item.getItemId()){
+            try{
 
-            case R.id.profile_menu_settings:
+                Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity().getBaseContext(), NewSettingActivity.class));
 
-                try{
+            }catch (NullPointerException i) {
+                i.printStackTrace();
+            }
+        }
+        else if (item.getItemId() == R.id.menu_item_share){
 
-                    Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity().getBaseContext(), NewSettingActivity.class));
+            if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
 
-                }catch (NullPointerException i) {
-                    i.printStackTrace();
-                }
-
-
-                break;
-
-            case R.id.menu_item_share:
-
-                if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
-
-                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                    sharingIntent.setType("text/plain");
-                    String shareBodyText = "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder";
-                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
-                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
-                    startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
-                }
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBodyText = "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder";
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+                startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
+            }
                 else if(BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
 
-                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                    sharingIntent.setType("text/plain");
-                    String shareBodyText = "https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895";
-                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
-                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
-                    startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBodyText = "https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895";
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+                startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
 
 
-                }
-                else{
+            }
+            else{
 
-                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                    sharingIntent.setType("text/plain");
-                    String shareBodyText = "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro";
-                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
-                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
-                    startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBodyText = "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro";
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+                startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
 
-                }
+            }
 
-
-                return true;
         }
-
-
         return super.onOptionsItemSelected(item);
-
 
     }
 
@@ -343,8 +316,6 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         learnedTextView.setText(getString(R.string.word_learned,learned));
 
     }
-
-
 
     private int getLearnedWords() {
         int learnedCount = 0;
