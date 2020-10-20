@@ -34,68 +34,7 @@
             android:paddingBottom="8dp"
             >
 
-            <TextView
-                android:id="@+id/your_progress_so_far_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="@dimen/keyline_4"
-                android:layout_marginTop="@dimen/keyline_4"
-                android:text="@string/Your_progress_so_far"
-                style="@style/primary_text_style"
 
-                />
-
-            <TextView
-                android:id="@+id/profile_learned_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/keyline_1"
-                android:layout_marginStart="@dimen/keyline_4"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/your_progress_so_far_text"
-                style="@style/secondary_text_style_light"
-                android:text="@string/_words_left"
-
-                />
-
-            <TextView
-                android:id="@+id/profile_left_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/keyline_4"
-                android:layout_marginTop="@dimen/keyline_1"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/profile_learned_text"
-                android:text="@string/_words_left"
-                style="@style/secondary_text_style_light"
-
-                />
-
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/status_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
-                app:cardCornerRadius="10dp"
-                android:layout_alignParentTop="true"
-                >
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
 
@@ -106,7 +45,7 @@
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginEnd="@dimen/keyline_4"
                 style="@style/rate_card_style"
-                android:layout_below="@+id/profile_left_text"
+                android:layout_alignParentTop="true"
                 >
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:background="@drawable/gradient"
@@ -379,7 +318,7 @@
                             android:layout_marginStart="24dp"
                             android:layout_marginTop="24dp"
                             android:src="@drawable/fb_icon"
-                            android:tint="@color/secondary_text_color"
+                            app:tint="@color/secondary_text_color"
                             android:background="@color/secondary_background_color"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -412,7 +351,7 @@
                             android:layout_marginEnd="24dp"
                             android:layout_marginStart="24dp"
                             android:layout_marginTop="24dp"
-                            android:tint="@color/secondary_text_color"
+                            app:tint="@color/secondary_text_color"
                             android:background="@color/secondary_background_color"
                             android:src="@drawable/instagram_icon"
                             app:layout_constraintBottom_toBottomOf="parent"

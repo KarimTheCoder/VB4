@@ -288,7 +288,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
 
-        soundSwitch = (SwitchButton) findViewById(R.id.sound_switch);
+        soundSwitch =  findViewById(R.id.sound_switch);
         pronunciationSwitch = findViewById(R.id.pronun_switch);
 
         pronunciationSwitch.setOnClickListener(this);
@@ -505,12 +505,12 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
       connected = ConnectivityHelper.isConnectedToNetwork(this);
 
 
-        signIn = (FancyButton)findViewById(R.id.ns_sign_in);
+        signIn = findViewById(R.id.ns_sign_in);
         signIn.setBackgroundColor(getResources().getColor(R.color.card_background_color));
         signIn.setTextColor(getResources().getColor(R.color.primary_text_color));
 
-        userName = (TextView)findViewById(R.id.ns_username);
-        userDetail = (TextView)findViewById(R.id.user_detail);
+        userName = findViewById(R.id.ns_username);
+        userDetail = findViewById(R.id.user_detail);
 
         //Firebase and Google Sign-In
         // [START config_signin]
@@ -1528,7 +1528,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                 if(trialStatus.equalsIgnoreCase("ended")){
 
-                    Toast.makeText(this,"Please upgrade to enjoy this feature",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,"Please upgrade to enjoy dark mode feature",Toast.LENGTH_SHORT).show();
 
                 }else {
 
@@ -1632,7 +1632,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                             for (Purchase purchase : Objects.requireNonNull(results.getPurchasesList())) {
 
-                                if(purchase.getSku().equalsIgnoreCase("test_product")){
+                                if(purchase.getSku().equalsIgnoreCase("premium_plus")){
 
                                     if(!sp.contains("purchase")){
 

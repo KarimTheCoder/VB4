@@ -2117,7 +2117,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             tts.speak(word, TextToSpeech.QUEUE_FLUSH, null,"TTS");
 
         }
-        Toast.makeText(this,"Hello there, this is a callback",Toast.LENGTH_LONG).show();
+
     }
 
     private void applyWrongColor(){

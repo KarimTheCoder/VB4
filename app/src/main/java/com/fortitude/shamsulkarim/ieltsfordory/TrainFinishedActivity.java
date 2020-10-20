@@ -58,7 +58,6 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
     private JustLearnedDatabaseBeginner justLearnedDatabaseBeginner;
     private JustLearnedDatabaseIntermediate justLearnedDatabaseIntermediate;
     private JustLearnedDatabaseAdvance justLearnedDatabaseAdvance;
-    private boolean connected;
 
 
     @Override

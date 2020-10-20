@@ -5,7 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
+
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,10 +26,6 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
-import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.AlarmReceiver;
 import com.fortitude.shamsulkarim.ieltsfordory.notification.LocalData;
@@ -49,19 +45,12 @@ import mehdi.sakout.fancybuttons.FancyButton;
 public class profile_fragment extends Fragment implements View.OnClickListener {
 
     private FancyButton setReminder;
-    private IELTSWordDatabase ieltsWordDatabase;
-    private TOEFLWordDatabase toeflWordDatabase;
-    private SATWordDatabase satWordDatabase;
-    private GREWordDatabase greWordDatabase;
     private CardView rateCardView, bugReport, fbCard,instagramCard;
-    private TextView leftTextView,learnedTextView;
-    private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
 
     /// notification
     private final String TAG = "RemindMe";
     private LocalData localData;
     private TextView tvTime;
-    private int totalWordCount;
 
 
     @Override
@@ -81,7 +70,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         //----------------------------
 
         initialization(v);
-        setProgress();
+
 
         //-------------------------------
 
@@ -101,15 +90,6 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
         SharedPreferences sp = v.getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
-        isIeltsChecked = sp.getBoolean("isIELTSActive",true);
-        isToeflChecked = sp.getBoolean("isTOEFLActive", true);
-        isSatChecked =   sp.getBoolean("isSATActive", true);
-        isGreChecked =   sp.getBoolean("isGREActive",true);
-
-        ieltsWordDatabase = new IELTSWordDatabase(v.getContext());
-        satWordDatabase = new SATWordDatabase(v.getContext());
-        toeflWordDatabase = new TOEFLWordDatabase(v.getContext());
-        greWordDatabase = new GREWordDatabase(v.getContext());
 
         localData = new LocalData(Objects.requireNonNull(getContext()));
         SwitchButton reminderSwitch = v.findViewById(R.id.alarm_switch);
@@ -124,8 +104,6 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
         //Toast.makeText(v.getContext(),localData.getReminderStatus()+"",Toast.LENGTH_LONG).show();
 
 
-        leftTextView = v.findViewById(R.id.profile_left_text);
-        learnedTextView = v.findViewById(R.id.profile_learned_text);
 
         rateCardView = v.findViewById(R.id.profile_rate_card);
         bugReport = v.findViewById(R.id.bug_report_card);
@@ -161,32 +139,6 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
 
 
-
-
-        if(isIeltsChecked){
-            totalWordCount = getResources().getStringArray(R.array.IELTS_words).length;
-
-
-        }
-
-        if(isToeflChecked){
-
-            totalWordCount = totalWordCount + getResources().getStringArray(R.array.TOEFL_words).length;
-
-        }
-
-        if(isSatChecked){
-
-            totalWordCount = totalWordCount + getResources().getStringArray(R.array.SAT_words).length;
-
-
-        }
-
-        if( isGreChecked){
-
-            totalWordCount = totalWordCount + getResources().getStringArray(R.array.GRE_words).length;
-
-        }
 
 
 
@@ -308,87 +260,9 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void setProgress(){
-
-        int learned = getLearnedWords();
-        int left =totalWordCount - learned;
-        leftTextView.setText(getString(R.string.word_learned,left));
-        learnedTextView.setText(getString(R.string.word_learned,learned));
-
-    }
-
-    private int getLearnedWords() {
-        int learnedCount = 0;
-
-
-        Cursor ieltsRes = ieltsWordDatabase.getData();
-        Cursor toeflRes = toeflWordDatabase.getData();
-        Cursor satRes = satWordDatabase.getData();
-        Cursor greRes = greWordDatabase.getData();
 
 
 
-        while (ieltsRes.moveToNext()) {
-
-            if (ieltsRes.getString(3).equalsIgnoreCase("true")) {
-
-                if(isIeltsChecked){
-
-                    learnedCount++;
-                }
-
-            }
-        }
-
-        ieltsRes.close();
-        ieltsWordDatabase.close();
-
-        while (toeflRes.moveToNext()) {
-
-            if (toeflRes.getString(3).equalsIgnoreCase("true")) {
-
-                if(isToeflChecked){
-
-                    learnedCount++;
-                }
-
-            }
-        }
-        toeflRes.close();
-        toeflWordDatabase.close();
-
-        while (satRes.moveToNext()) {
-
-            if (satRes.getString(3).equalsIgnoreCase("true")) {
-
-                if(isSatChecked){
-
-                    learnedCount++;
-                }
-
-
-            }
-        }
-        satRes.close();
-        satWordDatabase.close();
-
-        while (greRes.moveToNext()){
-
-            if(greRes.getString(3).equalsIgnoreCase("true")){
-
-                if(isGreChecked){
-
-                    learnedCount++;
-                }
-            }
-        }
-        greRes.close();
-        greWordDatabase.close();
-
-
-
-        return learnedCount;
-    }
 
     @Override
     public void onClick(View v) {
