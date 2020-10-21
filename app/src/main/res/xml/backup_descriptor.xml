@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- TODO Remove the following "exclude" elements to make them a part of the auto backup -->
+    <exclude
+        domain="database"
+        path="JustLearnedDatabaseBeginner.db" />
+    <exclude
+        domain="database"
+        path="GREWordDatabase.db" />
+    <exclude
+        domain="database"
+        path="JustLearnedDatabaseIntermediate.db" />
+    <exclude
+        domain="database"
+        path="JustLearnedDatabaseAdvance.db" />
+    <exclude
+        domain="database"
+        path="IntermediateWordDatabase.db" />
+    <exclude
+        domain="database"
+        path="IELTSWordDatabase.db" />
+    <exclude
+        domain="database"
+        path="SATWordDatabase.db" />
+    <!-- Exclude the shared preferences file that contains the GCM registrationId -->
+    <exclude
+        domain="sharedpref"
+        path="com.example.shamsulkarim.vastvocabulary.xml" />
+    <exclude
+        domain="sharedpref"
+        path="com.example.shamsulkarim.vocabulary.xml" />
+    <exclude
+        domain="sharedpref"
+        path="RemindMePref.xml" />
+</full-backup-content>

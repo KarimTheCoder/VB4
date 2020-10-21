@@ -1,10 +1,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey100"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.NewWordFragment">
 
 
@@ -24,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="5dp"
+
         app:layout_constraintBottom_toTopOf="@+id/bottom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/word_toolbar" />
@@ -41,7 +40,7 @@
         android:layout_marginRight="@dimen/keyline_4"
         android:layout_marginBottom="@dimen/keyline_2"
         app:floatingSearch_close_search_on_keyboard_dismiss="false"
-
+        app:floatingSearch_backgroundColor="@color/primary_background_color"
         app:floatingSearch_searchBarMarginLeft="-2dp"
         app:floatingSearch_searchBarMarginRight="-2dp"
         app:floatingSearch_searchBarMarginTop="0dp"
@@ -68,8 +67,8 @@
             android:id="@+id/word_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             style="@style/spinnerItemStyle"
+
             android:entries="@array/words_per_session_array"
             android:spinnerMode="dropdown" />
 
@@ -77,8 +76,9 @@
 
 
 
+
+
     <View
-        android:id="@+id/view17"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@drawable/dropshadow"

@@ -1,6 +1,5 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Images {

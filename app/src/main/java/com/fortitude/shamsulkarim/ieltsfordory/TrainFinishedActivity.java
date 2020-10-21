@@ -7,7 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import androidx.constraintlayout.widget.ConstraintLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
@@ -18,7 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.TrainFinishedWordRecyclerView;
+import com.fortitude.shamsulkarim.ieltsfordory.wordAdapters.TrainFinishedWordRecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseAdvance;
@@ -27,11 +27,8 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseInte
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import com.github.clans.fab.FloatingActionButton;
-import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -43,18 +40,15 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
     private FancyButton trainAgain, favoriteButton, unlearnButton;
     private FloatingActionButton home;
     private CardView mostMistakenCard,rate;
-    private String level, toastMsg;
+    private String level;
     private List<Word> learnedWords;
     private Word mostMistakenWord;
-    private List<String> favorite;
-    private ConstraintLayout rate_card_layout;
 
     private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private IELTSWordDatabase ieltsWordDatabase;
     private TOEFLWordDatabase toeflWordDatabase;
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
-    private PublisherInterstitialAd mPublisherInterstitialAd;
     private JustLearnedDatabaseBeginner justLearnedDatabaseBeginner;
     private JustLearnedDatabaseIntermediate justLearnedDatabaseIntermediate;
     private JustLearnedDatabaseAdvance justLearnedDatabaseAdvance;
@@ -71,7 +65,6 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         window.setStatusBarColor(getResources().getColor(R.color.primary_background_color));
 
         initialization();
-        stylize();
         setRecyclerView();
 
 
@@ -141,15 +134,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
 
 
-        // firebase
 
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        // firebase
-        DatabaseReference ref = firebaseDatabase.getReference();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        StringBuilder beginnerFavNumBuilder = new StringBuilder();
-        StringBuilder intermediateFavNumBuilder = new StringBuilder();
-        StringBuilder advanceFavNumBuilder = new StringBuilder();
 
         MediaPlayer mPlayer2 = MediaPlayer.create(this, R.raw.train_finished);
 
@@ -171,16 +156,6 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void stylize(){
-
-
-//        home.setColorPressed(getResources().getColor(R.color.colorPrimary));
-//        home.setColorNormal(getResources().getColor(R.color.grey100));
-//        trainAgain.setFocusBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-//        trainAgain.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//        trainAgain.setTextColor(getResources().getColor(R.color.grey100));
-
-    }
 
 
 
@@ -549,14 +524,6 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
     }
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-
-
-
-    }
 
 
 }

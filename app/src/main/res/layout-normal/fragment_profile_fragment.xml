@@ -1,10 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_background_color"
     >
 
 
@@ -33,10 +31,6 @@
             android:layout_marginBottom="8dp"
             android:paddingBottom="8dp"
             >
-
-
-
-
 
 
 
@@ -83,7 +77,6 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView26"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
@@ -203,7 +196,6 @@
                 android:id="@+id/alarm_icon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
                 android:src="@drawable/notification_icon"
@@ -322,7 +314,7 @@
                             android:layout_marginStart="24dp"
                             android:layout_marginTop="24dp"
                             android:src="@drawable/fb_icon"
-                            app:tint="@color/secondary_text_color"
+                            app:tint="@color/primary_text_color"
                             android:background="@color/secondary_background_color"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -355,9 +347,9 @@
                             android:layout_marginEnd="24dp"
                             android:layout_marginStart="24dp"
                             android:layout_marginTop="24dp"
-                            app:tint="@color/secondary_text_color"
                             android:background="@color/secondary_background_color"
                             android:src="@drawable/instagram_icon"
+                            app:tint="@color/secondary_text_color"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

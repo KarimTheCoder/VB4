@@ -22,12 +22,6 @@
         <item name="fontFamily">@font/productreg</item>
     </style>
 
-    <style name="secondary_text_style_white" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/primary_text_color_white</item>
-        <item name="android:textSize">18sp</item>
-        <item name="fontFamily">@font/productreg</item>
-    </style>
-
     <style name="secondary_text_style_light" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/secondary_text_color</item>
         <item name="android:textSize">20sp</item>

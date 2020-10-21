@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_background_color"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.Practice.PracticeFinished">
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.practice.PracticeFinished">
 
 
     <ScrollView
@@ -65,7 +64,7 @@
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_1"
-                        android:text="5 new words learned"
+                        android:text="@string/word_learned"
                         style="@style/secondary_text_style_light"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +80,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/certificate_icon"
                         fancy:srcCompat="@drawable/session_complete_tick_mark" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -114,6 +114,7 @@
                         android:layout_marginBottom="@dimen/keyline_4"
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
+                        android:contentDescription="@string/heart_icon"
                         android:src="@drawable/rate_love_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +132,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                     <TextView
-                        android:id="@+id/textView22"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/keyline_4"
@@ -168,7 +168,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
-        android:id="@+id/view14"
         android:layout_width="0dp"
         android:layout_height="3dp"
         android:background="@drawable/bottom_shadow"

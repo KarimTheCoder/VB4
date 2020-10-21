@@ -28,17 +28,13 @@ import java.util.List;
 public class in_app_purchase extends AppCompatActivity implements PurchasesUpdatedListener, View.OnClickListener {
 
     private BillingClient billingClient;
-    private Button loadProductButton;
-    private RecyclerView recyclerView;
-    private InAppPurchaseRecyclerView adapter;
-    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_app_purchase);
         setBillingClient();
-         loadProductButton = findViewById(R.id.onShowProducts);
+        Button loadProductButton = findViewById(R.id.onShowProducts);
          loadProductButton.setOnClickListener(this);
 
 
@@ -49,12 +45,12 @@ public class in_app_purchase extends AppCompatActivity implements PurchasesUpdat
     private void initProductAdapter(List<SkuDetails> skuDetails){
 
 
-        recyclerView = findViewById(R.id.product_recycler_view);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView recyclerView = findViewById(R.id.product_recycler_view);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        adapter = new InAppPurchaseRecyclerView(this,skuDetails);
+        InAppPurchaseRecyclerView adapter = new InAppPurchaseRecyclerView(this, skuDetails);
         recyclerView.setAdapter(adapter);
 
     }
@@ -88,7 +84,7 @@ public class in_app_purchase extends AppCompatActivity implements PurchasesUpdat
                                     BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
                                             .setSkuDetails(skuDetailsList.get(0))
                                             .build();
-                                    int responseCode = billingClient.launchBillingFlow(in_app_purchase.this, billingFlowParams).getResponseCode();
+                                    billingClient.launchBillingFlow(in_app_purchase.this, billingFlowParams).getResponseCode();
 
 
 

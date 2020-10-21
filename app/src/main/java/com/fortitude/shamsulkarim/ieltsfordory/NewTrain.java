@@ -33,7 +33,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewTrainRecyclerView;
+import com.fortitude.shamsulkarim.ieltsfordory.wordAdapters.NewTrainRecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.JustLearnedDatabaseAdvance;
@@ -59,6 +59,7 @@ import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -180,10 +181,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         mistakeCollector = new int[fiveWords.size()];
 
-        for(int i = 0; i < mistakeCollector.length; i ++){
-
-            mistakeCollector[i] = 0;
-        }
+        Arrays.fill(mistakeCollector, 0);
         //Toast.makeText(this,"fiveWordsize: "+fiveWords.size()+" level: "+level+" word size: "+words.size(),Toast.LENGTH_SHORT).show();
 
         sp.edit().putInt("fiveWordSize",fiveWords.size()).apply();

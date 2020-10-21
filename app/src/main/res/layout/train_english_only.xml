@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -9,7 +8,6 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/keyline_2"
@@ -23,7 +21,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/relativeLayout4"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -58,7 +55,7 @@
                     android:layout_marginStart="@dimen/keyline_4"
                     android:layout_marginTop="@dimen/keyline_4"
                     android:layout_marginBottom="@dimen/keyline_4"
-                    android:text="adjective"
+                    android:text="@string/adjective"
                     style="@style/forth_word_text_style"
                     app:layout_constraintBottom_toBottomOf="@id/card_top_background"
                     app:layout_constraintStart_toStartOf="parent"
@@ -71,13 +68,13 @@
                     android:layout_marginStart="@dimen/keyline_4"
                     android:layout_marginTop="@dimen/keyline_4"
                     android:layout_marginBottom="@dimen/keyline_4"
-                    android:text="adjective"
+                    android:text="@string/adjective"
                     style="@style/forth_word_text_style"
                     app:layout_constraintBottom_toBottomOf="@id/card_top_background"
                     app:layout_constraintStart_toEndOf="@+id/pronunciation_train"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                <com.github.ybq.android.spinkit.SpinKitView
                     android:id="@+id/spin_kit"
                     style="@style/SpinKitView.Small.Wave"
                     android:layout_width="wrap_content"
@@ -135,7 +132,7 @@
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
-                android:text="complete; including all or nearly all elements or aspects of something"
+                android:text="@string/sentence_2"
                 style="@style/second_word_text_style"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +146,7 @@
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
-                android:text="complete; including all or nearly all elements or aspects of something"
+                android:text="@string/sentence_2"
                 style="@style/third_word_text_style"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +162,7 @@
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_2"
-                android:text="complete; including all or nearly all elements or aspects of something"
+                android:text="@string/sentence_2"
                 style="@style/third_word_text_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

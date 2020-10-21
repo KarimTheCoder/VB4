@@ -11,5 +11,4 @@
     android:paddingTop="5dp"
     android:singleLine="true"
     android:textColor="@color/spinnerColor"
-    android:background="@color/card_background_color"
     />

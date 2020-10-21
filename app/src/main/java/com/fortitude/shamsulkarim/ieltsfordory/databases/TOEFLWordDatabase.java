@@ -51,7 +51,7 @@ public class TOEFLWordDatabase extends SQLiteOpenHelper{
 
     }
 
-    public boolean insertData(String word, String fav, String learned, String blacklist, String skip){
+    public void insertData(String word, String fav, String learned, String blacklist, String skip){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -65,19 +65,12 @@ public class TOEFLWordDatabase extends SQLiteOpenHelper{
 
         long data = db.insert(TABLE_NAME,null,cv);
 
-        if(data == -1){
-            return false;
-        }else {
-            return true;
-        }
-
 
     }
 
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLE_NAME,null);
-        return res;
+        return db.rawQuery("select * from "+TABLE_NAME,null);
 
 
     }
@@ -116,7 +109,7 @@ public class TOEFLWordDatabase extends SQLiteOpenHelper{
         return true;
     }
 
-    public boolean updateFav(String id, String fav){
+    public void updateFav(String id, String fav){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -124,10 +117,9 @@ public class TOEFLWordDatabase extends SQLiteOpenHelper{
         cv.put(COL3,fav);
         db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
 
-        return true;
     }
 
-    public boolean updateLearned(String id, String learned){
+    public void updateLearned(String id, String learned){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -135,7 +127,6 @@ public class TOEFLWordDatabase extends SQLiteOpenHelper{
         cv.put(COL4,learned);
         db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
 
-        return true;
     }
 
 

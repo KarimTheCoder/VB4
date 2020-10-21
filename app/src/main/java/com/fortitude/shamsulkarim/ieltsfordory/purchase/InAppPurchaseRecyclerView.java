@@ -1,7 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.purchase;
 
 import android.content.Context;
-import android.os.TestLooperManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,28 +13,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.billingclient.api.SkuDetails;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class InAppPurchaseRecyclerView extends RecyclerView.Adapter<InAppPurchaseRecyclerView.productViewHolder>{
 
-    private List<SkuDetails> skuDetails;
-    private Context context;
+    private final List<SkuDetails> skuDetails;
 
     public InAppPurchaseRecyclerView(Context context, List<SkuDetails> skuDetails) {
 
         this.skuDetails = skuDetails;
-        this.context = context;
 
     }
 
 
 
-    public productViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public @NotNull productViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_view,parent,false);
 
-        productViewHolder viewHolder = new productViewHolder(view);
-        return viewHolder;
+        return new productViewHolder(view);
 
 
 
@@ -57,8 +56,10 @@ public class InAppPurchaseRecyclerView extends RecyclerView.Adapter<InAppPurchas
 
     static class productViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView pruductName, productDescription,productPrice;
-        Button buyButton;
+        final TextView pruductName;
+        final TextView productDescription;
+        final TextView productPrice;
+        final Button buyButton;
 
         public productViewHolder(@NonNull View itemView) {
             super(itemView);

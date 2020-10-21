@@ -72,7 +72,7 @@ public class SplashScreen extends AppCompatActivity {
 
 
     // This methods initializes the databases and when it
-    //finishes it launches the ChooseVocabulary.java activity.
+
     private void createDatabase(){
 
 
@@ -391,11 +391,6 @@ public class SplashScreen extends AppCompatActivity {
 
 
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
@@ -439,7 +434,7 @@ public class SplashScreen extends AppCompatActivity {
 //                    if(!sp.contains("home")){
 //
 //
-//                        startActivity(new Intent(getApplicationContext(), ChooseVocabulary.class));
+
 //                        finish();
 //
 //                    }

@@ -2,10 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_background_color"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.LearnedWords">
 
 
@@ -63,8 +61,8 @@
             android:id="@+id/word_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/spinnerItemStyle"
             android:spinnerMode="dropdown"
+            style="@style/spinnerItemStyle"
             android:entries="@array/spinner_options" />
 
     </androidx.cardview.widget.CardView>
@@ -72,7 +70,6 @@
 
 
     <View
-        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@drawable/dropshadow"
@@ -91,7 +88,7 @@
         android:fontFamily="@font/productreg"
 
         android:gravity="center"
-        android:text="Look at me! I have not learned any words"
+        android:text="@string/look_at_me_i_have_not_learned_any_words"
         android:textColor="@color/lowColor"
         android:textSize="18sp"
         fancy:layout_constraintBottom_toBottomOf="parent"
@@ -107,6 +104,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="15dp"
         android:src="@drawable/no_learned"
+        android:contentDescription="@string/proud_rabbit"
         fancy:layout_constraintBottom_toTopOf="@+id/havenotlearned"
         fancy:layout_constraintLeft_toLeftOf="parent"
         fancy:layout_constraintRight_toRightOf="parent" />
@@ -133,7 +131,7 @@
         fancy:layout_constraintTop_toBottomOf="@+id/havenotlearned" />
 
 
-    <com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.Fab
+    <com.fortitude.shamsulkarim.ieltsfordory.wordAdapters.Fab
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -152,7 +150,6 @@
         fancy:layout_constraintTop_toTopOf="parent" />
 
     <io.codetail.widget.RevealLinearLayout
-        android:id="@+id/revealLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="end|bottom"
@@ -178,22 +175,22 @@
                 <TextView
                     android:id="@+id/advance_fab"
                     style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableStart="@drawable/ic_train_black"
-                    android:text="Advance" />
+                    android:text="@string/advance"
+                    app:drawableStartCompat="@drawable/ic_train_black" />
 
                 <!-- Reminder -->
                 <TextView
                     android:id="@+id/intermediate_fab"
                     style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableStart="@drawable/ic_train_black"
-                    android:text="Intermediate" />
+                    android:text="@string/intermediate"
+                    app:drawableStartCompat="@drawable/ic_train_black" />
 
                 <!-- Photo -->
                 <TextView
                     android:id="@+id/beginner_fab"
                     style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableStart="@drawable/ic_train_black"
-                    android:text="Beginner" />
+                    android:text="@string/beginner"
+                    app:drawableStartCompat="@drawable/ic_train_black" />
 
 
             </LinearLayout>

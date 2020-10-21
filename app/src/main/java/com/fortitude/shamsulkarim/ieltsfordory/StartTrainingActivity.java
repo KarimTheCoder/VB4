@@ -5,26 +5,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.Toolbar;
-
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 
-import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewSettingActivity;
+import com.fortitude.shamsulkarim.ieltsfordory.wordAdapters.NewSettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -33,8 +28,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import mehdi.sakout.fancybuttons.FancyButton;
-
 public class StartTrainingActivity extends AppCompatActivity implements View.OnClickListener{
 
     private String[] IELTSwordArray, IELTStranslationArray, IELTSgrammarArray, IELTSpronunArray, IELTSexample1array, IELTSexample2Array, IELTSexample3Array, IELTSvocabularyType;
@@ -42,8 +35,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
     private String[] SATwordArray, SATtranslationArray, SATgrammarArray, SATpronunArray, SATexample1array, SATexample2Array, SATexample3Array, SATvocabularyType;
     private String[] GREwordArray, GREtranslationArray, GREgrammarArray, GREpronunArray, GREexample1array, GREexample2array, GREexample3Array, GREvocabularyType;
     private int[] IELTSposition, TOEFLposition, SATposition, GREposition;
-    private int learnedWordCount, totalWordCount;
-   // private FancyButton getPro;
+    // private FancyButton getPro;
 
    // private TextView learnedWordText, leftWordText;
     private RoundCornerProgressBar progressBar;
@@ -54,7 +46,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
     private SATWordDatabase SATdatabase;
     private GREWordDatabase GREdatabase;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
-    private ArrayList<Word> words = new ArrayList<>();
+    private final ArrayList<Word> words = new ArrayList<>();
 
 
     int i = 0;
@@ -75,7 +67,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         level = sp.getString("level", "");
-        learnedWordCount = sp.getInt(level, 0);
+        int learnedWordCount = sp.getInt(level, 0);
 
         if (!sp.contains("totalWrongCount" + level)) {
 
@@ -88,7 +80,6 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
 
         initialization();
-        levelPicker(level);
         increaseNum();
         gettingResources();
         addingLearnedDatabase();
@@ -113,7 +104,6 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.profile_menu_settings) {
             startActivity(new Intent(this, NewSettingActivity.class));
             return true;
@@ -123,7 +113,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
     }
 
 
-    public void onStartTraining(View view) {
+    public void onStartTraining() {
 
         if(words.size() == 0){
 
@@ -173,35 +163,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void levelPicker(String level) {
 
-        if (level.equalsIgnoreCase("beginner")) {
-            totalWordCount = getResources().getStringArray(R.array.IELTS_words).length;
-
-
-            //toolbar.setTitle("Beginner");
-
-
-
-        } else if (level.equalsIgnoreCase("intermediate")) {
-
-            totalWordCount = getResources().getStringArray(R.array.TOEFL_words).length;
-
-
-          //  toolbar.setTitle("Intermediate");
-
-
-
-        } else if (level.equalsIgnoreCase("advance")) {
-
-
-         //   toolbar.setTitle("Advance");
-            totalWordCount = getResources().getStringArray(R.array.SAT_words).length;
-
-
-
-        }
-    }
 
     private void increaseNum() {
 
@@ -280,7 +242,7 @@ public class StartTrainingActivity extends AppCompatActivity implements View.OnC
             Toast.makeText(this,"Ielts checked",Toast.LENGTH_LONG).show();
 
             extraIeltsNuBeginner = 1;
-            extraIeltsIntermediate = 2;
+
 
             IELTSbeginnerNumber = (int)getPercentageNumber(30, IELTSwordSize);
             IELTSintermediateNumber = (int)getPercentageNumber(40, IELTSwordSize);

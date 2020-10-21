@@ -2,8 +2,6 @@
 <resources>
 
 
-    <string name="Your_progress_so_far">Your progress so far</string>
-    <string name="_words_left">25 words left</string>
     <string name="support_us">Support Us</string>
     <string name="bug_report_image_content_description">This image displays a representation of two person chatting</string>
     <string name="support_us_description">If you are enjoying this app, please click here to give us a rating, it will help us a lot. Thank you.</string>
@@ -11,10 +9,7 @@
     <string name="report_bug">Report a Bug</string>
     <string name="bug_text"> If you encounter any type of mistakes in the app please be sure to report them to us. We will fix the issues as soon as possible. </string>
     <string name="get_support">Get Support</string>
-    <string name="Wps_title">Words Per Session</string>
     <string name="rps_title">Repetition</string>
-    <string name="rps_moto">Learn with your style</string>
-    <string name="wrp_moto">Learn at your pace</string>
     <string name="set_reminder_study">Set a Reminder to Study</string>
     <string name="reminder_demo_time">08 : 00 PM</string>
     <string name="reminder_icon_content_description">This icon displays a representation of a bell.</string>

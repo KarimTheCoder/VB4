@@ -13,8 +13,8 @@ public class CustomFilter extends Filter {
 
 
 
-    private WordRecyclerViewAdapter adapter;
-    private ArrayList<Object> filterList;
+    private final WordRecyclerViewAdapter adapter;
+    private final ArrayList<Object> filterList;
 
 
     public CustomFilter(ArrayList<Object> filterList,WordRecyclerViewAdapter adapter) {

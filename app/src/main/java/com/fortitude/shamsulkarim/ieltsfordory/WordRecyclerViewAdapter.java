@@ -17,7 +17,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -128,7 +128,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+    public RecyclerView.@NotNull ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
 
         View view;
 
@@ -136,12 +136,9 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
             case WORD_VIEW_TYPE:
-                if(languageId == 0){
-                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.one_language,parent,false);
-                }else {
 
-                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.second_language,parent,false);
-                }
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.one_language,parent,false);
+
                 return new WordViewHolder(view);
 
             case AD_VIEW_TYPE:
@@ -182,7 +179,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.@NotNull ViewHolder holder, int position) {
 
 
         int viewType = getItemViewType(position);
@@ -325,12 +322,19 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, TextToSpeech.OnInitListener{
 
 
-        TextView wordView,translationView, grammarView, exampleView1, secondTranslation, secondLanguage, englishLanguage;
-        FancyButton favorite, speaker;
-        TextToSpeech tts;
-        CardView cardView;
-        Boolean isVoicePronunciation;
-        ProgressBar progressBar;
+        final TextView wordView;
+        final TextView translationView;
+        final TextView grammarView;
+        final TextView exampleView1;
+        final TextView secondTranslation;
+        final TextView secondLanguage;
+        final TextView englishLanguage;
+        final FancyButton favorite;
+        final FancyButton speaker;
+        final TextToSpeech tts;
+        final CardView cardView;
+        final Boolean isVoicePronunciation;
+        final ProgressBar progressBar;
 
 
         public WordViewHolder(View itemView) {

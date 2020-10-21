@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
+
 import az.plainpie.PieView;
 
 /**
@@ -580,12 +580,4 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
-
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
 }

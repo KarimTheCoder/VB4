@@ -11,7 +11,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
-import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.profile_fragment;
+import com.fortitude.shamsulkarim.ieltsfordory.wordAdapters.profile_fragment;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;

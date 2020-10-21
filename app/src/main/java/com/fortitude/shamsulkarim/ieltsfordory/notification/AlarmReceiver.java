@@ -10,7 +10,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.MainActivity;
 public class AlarmReceiver extends BroadcastReceiver {
 
 
-    String TAG = "AlarmReceiver";
+    final String TAG = "AlarmReceiver";
 
 @Override
 public void onReceive(Context context, Intent intent) {

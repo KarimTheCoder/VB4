@@ -117,16 +117,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
     @Override
     public @NotNull WordViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View view;
-        if(languageId >= 1){
-
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_favorite_two_language,parent,false);
-
-        }else {
-
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_favorite_one_language,parent,false);
-        }
-
-
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_favorite_one_language,parent,false);
         return new WordViewHolder(view);
     }
 
@@ -216,10 +207,18 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
     class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView wordView,translationView, grammarView, exampleView1,exampleView2,exampleView3,secondLanguageName,secondTranslation;
-        FancyButton favorite, speaker;
-        CardView cardView;
-        ProgressBar progressBar;
+        final TextView wordView;
+        final TextView translationView;
+        final TextView grammarView;
+        final TextView exampleView1;
+        final TextView exampleView2;
+        final TextView exampleView3;
+        final TextView secondLanguageName;
+        final TextView secondTranslation;
+        final FancyButton favorite;
+        final FancyButton speaker;
+        final CardView cardView;
+        final ProgressBar progressBar;
 
 
 

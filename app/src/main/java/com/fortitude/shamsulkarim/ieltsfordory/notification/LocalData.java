@@ -1,5 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.notification;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -7,13 +8,14 @@ public class LocalData {
 
     private static final String APP_SHARED_PREFS = "RemindMePref";
 
-    private SharedPreferences appSharedPrefs;
-    private SharedPreferences.Editor prefsEditor;
+    private final SharedPreferences appSharedPrefs;
+    private final SharedPreferences.Editor prefsEditor;
 
     private static final String reminderStatus="reminderStatus";
     private static final String hour="hour";
     private static final String min="min";
 
+    @SuppressLint("CommitPrefEdits")
     public LocalData(Context context)
     {
         this.appSharedPrefs = context.getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
@@ -59,11 +61,11 @@ public class LocalData {
         prefsEditor.commit();
     }
 
-    public void reset()
-    {
-        prefsEditor.clear();
-        prefsEditor.commit();
-
-    }
+//    public void reset()
+//    {
+//        prefsEditor.clear();
+//        prefsEditor.commit();
+//
+//    }
 
 }

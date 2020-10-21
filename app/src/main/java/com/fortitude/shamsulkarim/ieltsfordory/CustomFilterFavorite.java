@@ -13,8 +13,8 @@ import java.util.List;
 public class CustomFilterFavorite extends Filter {
 
 
-    private FavoriteRecyclerViewAdapter adapter;
-    private List<Word> filterList;
+    private final FavoriteRecyclerViewAdapter adapter;
+    private final List<Word> filterList;
 
 
     public CustomFilterFavorite(List<Word> filterList,FavoriteRecyclerViewAdapter adapter) {

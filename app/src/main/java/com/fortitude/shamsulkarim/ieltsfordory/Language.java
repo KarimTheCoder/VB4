@@ -24,9 +24,7 @@ public class Language {
 
     public List<Language> getLanguages(){
 
-        List<Language> languages = new ArrayList<>();
-
-//        Language bangla = new Language(R.drawable.bangla,R.drawable.bangla_active,"Bangla");
+        //        Language bangla = new Language(R.drawable.bangla,R.drawable.bangla_active,"Bangla");
 //        Language hindi = new Language(R.drawable.hindi,R.drawable.hindi_active,"Hindi");
 //        Language english = new Language(R.drawable.english_flag,R.drawable.english_flag_selected,"English only");
 //        Language spanish = new Language(R.drawable.spanish,R.drawable.spanish_active,"Spanish");
@@ -35,7 +33,7 @@ public class Language {
 //        languages.add(spanish);
 //        languages.add(hindi);
 //        languages.add(bangla);
-        return languages;
+        return new ArrayList<>();
 
 
 

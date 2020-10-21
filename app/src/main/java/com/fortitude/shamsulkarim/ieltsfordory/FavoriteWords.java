@@ -24,7 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.arlib.floatingsearchview.FloatingSearchView;
-import com.fortitude.shamsulkarim.ieltsfordory.Practice.Practice;
+import com.fortitude.shamsulkarim.ieltsfordory.practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -49,7 +49,7 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
     private GREWordDatabase greWordDatabase;
     private FloatingActionButton fab;
     private FavoriteRecyclerViewAdapter adapter;
-    static public List<Word> words = new ArrayList<>();
+    static public final List<Word> words = new ArrayList<>();
     private float fabY;
     private SharedPreferences sp;
     private List<String> ieltsFavWords, toeflFavWords, satFavWords, greFavWords;

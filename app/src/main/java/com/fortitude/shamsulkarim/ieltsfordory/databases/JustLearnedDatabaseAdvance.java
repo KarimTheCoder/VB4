@@ -54,7 +54,7 @@ public class JustLearnedDatabaseAdvance extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertData(int collumPos, String wordPos, String word, String translation, String secondTranslation, String pronun, String grammar, String example1, String example2, String example3, String vocabularyType, String learned, String fav, String mostMistaken){
+    public void insertData(int collumPos, String wordPos, String word, String translation, String secondTranslation, String pronun, String grammar, String example1, String example2, String example3, String vocabularyType, String learned, String fav, String mostMistaken){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -76,12 +76,6 @@ public class JustLearnedDatabaseAdvance extends SQLiteOpenHelper {
 
 
         long data = db.insert(TABLE_NAME,null,cv);
-
-        if(data == -1){
-            return false;
-        }else {
-            return true;
-        }
 
 
     }
@@ -108,8 +102,7 @@ public class JustLearnedDatabaseAdvance extends SQLiteOpenHelper {
 
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLE_NAME,null);
-        return res;
+        return db.rawQuery("select * from "+TABLE_NAME,null);
 
 
     }

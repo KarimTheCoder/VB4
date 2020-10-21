@@ -30,7 +30,7 @@ import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
-import com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewSettingActivity;
+import com.fortitude.shamsulkarim.ieltsfordory.wordAdapters.NewSettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
@@ -112,7 +112,6 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
             levelTextView.setText(getString(R.string.beginner));
             setBeginnerLearnedwordsLengthTextView();
-            setTextBeginnerTotalWordCount();
 
         }
 
@@ -711,10 +710,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void setTextBeginnerTotalWordCount(){
 
-
-    }
 
     private void setIntermediateLearnedwordsLengthTextView(){
 
@@ -849,7 +845,6 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.profile_menu_settings) {
             startActivity(new Intent(this, NewSettingActivity.class));
             return true;
@@ -975,9 +970,8 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
             Toast.makeText(this, "You already own this product, go to settings to restore it", Toast.LENGTH_SHORT).show();
         }
-        else {
-            //Toast.makeText(this, "Other error "+billingResult.getResponseCode(), Toast.LENGTH_SHORT).show();
-        }
+        //Toast.makeText(this, "Other error "+billingResult.getResponseCode(), Toast.LENGTH_SHORT).show();
+
 
     }
 

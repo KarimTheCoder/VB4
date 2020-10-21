@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/primary_background_color"
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.Practice.PracticeFinished">
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.practice.PracticeFinished">
 
 
     <ScrollView
@@ -29,57 +28,57 @@
 
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cardView5"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <TextView
-                    android:id="@+id/textView21"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/keyline_4"
-                    android:layout_marginStart="@dimen/keyline_6"
-                    android:layout_marginTop="@dimen/keyline_4"
-                    android:text="@string/session_completed"
-                    style="@style/primary_text_style"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView8"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/train_finished_new_learned_word_count_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginStart="@dimen/keyline_6"
-                    android:layout_marginEnd="@dimen/keyline_4"
-                    android:layout_marginTop="@dimen/keyline_1"
-                    android:text="5 new words learned"
-                    style="@style/secondary_text_style_light"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView8"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_marginBottom="@dimen/keyline_4"
-                    android:layout_marginEnd="@dimen/keyline_4"
-                    android:layout_marginTop="@dimen/keyline_4"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cardView5"
                     app:layout_constraintTop_toTopOf="parent"
-                    fancy:srcCompat="@drawable/session_complete_tick_mark"
-                    android:layout_marginRight="@dimen/keyline_4" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginStart="@dimen/keyline_6"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:text="@string/session_completed"
+                        style="@style/primary_text_style"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView8"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/train_finished_new_learned_word_count_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="@dimen/keyline_6"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_1"
+                        android:text="@string/new_words_learned"
+                        style="@style/secondary_text_style_light"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView8"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_6"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/certificate_icon"
+                        fancy:srcCompat="@drawable/session_complete_tick_mark" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
@@ -89,14 +88,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
-                android:layout_marginTop="@dimen/keyline_2"
-                style="@style/home_card_style"
+               android:layout_marginTop="@dimen/keyline_2"
+                style="@style/rate_card_style"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView5">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/rate_card_layout"
                     android:background="@drawable/gradient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -108,14 +106,13 @@
                         android:layout_marginBottom="@dimen/keyline_4"
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
+                        android:contentDescription="@string/heart_icon"
                         android:src="@drawable/rate_love_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginRight="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView22"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/keyline_4"
@@ -135,11 +132,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
-                        android:text="Rate us"
+                        android:text="@string/rate_title"
                         style="@style/primary_text_style_white"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -154,10 +150,10 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="@dimen/keyline_6"
                 android:layout_marginTop="@dimen/keyline_4"
+                android:contentDescription="@string/cross_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/train_finished_recycler_view"
-                fancy:srcCompat="@drawable/ic_wrong_circle"
-                android:layout_marginLeft="@dimen/keyline_4" />
+                fancy:srcCompat="@drawable/ic_wrong_circle" />
 
             <TextView
                 android:id="@+id/most_mistaken_text"
@@ -166,12 +162,11 @@
                 android:layout_marginBottom="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
-                android:text="Most mistaken word"
+                android:text="@string/most_mistaken_word"
                 style="@style/third_word_text_style"
                 app:layout_constraintBottom_toBottomOf="@+id/most_mistaken_image"
                 app:layout_constraintStart_toEndOf="@+id/most_mistaken_image"
-                app:layout_constraintTop_toTopOf="@+id/most_mistaken_image"
-                android:layout_marginLeft="@dimen/keyline_4" />
+                app:layout_constraintTop_toTopOf="@+id/most_mistaken_image" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/most_mistaken_card"
@@ -201,12 +196,11 @@
                         android:layout_marginBottom="@dimen/keyline_4"
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
-                        android:text="Comprehensive"
+                        android:text="@string/word"
                         style="@style/third_word_text_style"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <mehdi.sakout.fancybuttons.FancyButton
                         android:id="@+id/train_finished_favorite"
@@ -220,7 +214,6 @@
                         android:padding="7dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/train_finished_unlearn"
-                        app:layout_constraintStart_toEndOf="@+id/grammar_train"
                         app:layout_constraintTop_toTopOf="parent"
                         fancy:fb_borderWidth="2dp"
                         fancy:fb_defaultColor="#ffffff"
@@ -253,8 +246,7 @@
                         fancy:fb_focusColor="@color/colorPrimary"
                         fancy:fb_radius="30dp"
                         fancy:fb_text="Unlearn"
-                        fancy:fb_textColor="@color/lowColor"
-                        android:layout_marginRight="@dimen/keyline_4" />
+                        fancy:fb_textColor="@color/lowColor" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -266,10 +258,10 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="@dimen/keyline_6"
                 android:layout_marginTop="@dimen/keyline_4"
+                android:contentDescription="@string/tick_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rate_card"
-                fancy:srcCompat="@drawable/ic_correct_circle"
-                android:layout_marginLeft="@dimen/keyline_4" />
+                fancy:srcCompat="@drawable/ic_correct_circle" />
 
             <TextView
                 android:id="@+id/textView23"
@@ -278,12 +270,11 @@
                 android:layout_marginBottom="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
-                android:text="Learned words"
+                android:text="@string/learned_words"
                 style="@style/third_word_text_style"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView9"
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
-                app:layout_constraintTop_toTopOf="@+id/imageView9"
-                android:layout_marginLeft="@dimen/keyline_4" />
+                app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/train_finished_recycler_view"
@@ -313,7 +304,6 @@
 
     <View
         android:alpha="0.5"
-        android:id="@+id/view14"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="@drawable/bottom_shadow"
@@ -335,9 +325,7 @@
         app:fab_showShadow="false"
         app:layout_constraintTop_toTopOf="@id/tf_button_background"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="@dimen/keyline_4" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/tf_train_again"
@@ -363,7 +351,7 @@
         fancy:fb_focusColor="@color/colorPrimary"
         fancy:fb_radius="30dp"
         fancy:fb_text="STUDY MORE"
-        fancy:fb_textColor="@color/primary_text_color"
+        fancy:fb_textColor="@color/primary_text_color_white"
         app:layout_constraintStart_toEndOf="@+id/tf_home">
 
 

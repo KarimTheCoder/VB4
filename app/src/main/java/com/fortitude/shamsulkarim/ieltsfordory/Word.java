@@ -11,11 +11,7 @@ public class Word {
 
     public String getWordSL() {
 
-        if(wordSL == null){
-            return  wordSL;
-        }else {
-            return wordSL;
-        }
+        return  wordSL;
 
     }
 
@@ -23,7 +19,20 @@ public class Word {
         this.wordSL = wordSL;
     }
 
-    public String word,wordSL, translation,extra, translationSL,pronun,grammar,example1, example1SL,example2, example2SL,example3, example3SL,vocabularyType;
+    public String word;
+    public String wordSL;
+    public String translation;
+    public String extra;
+    public String translationSL;
+    public final String pronun;
+    public final String grammar;
+    public final String example1;
+    public String example1SL;
+    public String example2;
+    public String example2SL;
+    public String example3;
+    public String example3SL;
+    public String vocabularyType;
     public boolean seen;
     public boolean removable;
     public String level;
@@ -56,7 +65,6 @@ public class Word {
         this.vocabularyType = vocabularyType;
         this.position = position;
         this.isLearned = isLearned;
-        this.favNum = favNum;
         this.isFavorite = isFavorite;
 
     }

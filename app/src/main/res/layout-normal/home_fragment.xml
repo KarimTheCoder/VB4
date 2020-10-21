@@ -26,6 +26,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="@dimen/keyline_4"
+        android:contentDescription="@string/trail_state_icon"
         android:src="@drawable/session_complete_tick_mark"
         app:layout_constraintBottom_toBottomOf="@+id/trial_status"
         app:layout_constraintEnd_toStartOf="@+id/trial_status"
@@ -37,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/keyline_4"
-        android:text="Trial mode"
+        android:text="@string/trial_mode"
         android:fontFamily="@font/sanf_thin"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,27 +88,16 @@
                     android:layout_marginTop="@dimen/keyline_4"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView3"
+                    app:layout_constraintTop_toTopOf="parent"
                     plainpie:inner_pie_padding="15"
                     plainpie:inner_text_visibility="true"
                     plainpie:percentage="75"
                     plainpie:percentage_size="10" />
 
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
 
-                    android:alpha="0.6"
-                    android:scaleType="centerCrop"
-
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/advance_text_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/keyline_4"
@@ -115,7 +105,7 @@
                     android:layout_marginTop="@dimen/keyline_4"
                     android:text="@string/advance_title"
                     style="@style/home_title_style"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/advance_pie"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -144,20 +134,9 @@
 
 
 
-                <ImageView
-                    android:visibility="invisible"
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:alpha="0.6"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/intermediate"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <TextView
-                    android:id="@+id/intermediate_text_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/keyline_4"
@@ -178,7 +157,7 @@
                     android:layout_marginTop="@dimen/keyline_4"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="parent"
                     plainpie:inner_pie_padding="15"
                     plainpie:inner_text_visibility="true"
                     plainpie:percentage="75"
@@ -207,23 +186,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
-
-                <ImageView
-                    android:visibility="invisible"
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-
-                    android:alpha="0.6"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/beginner"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
-                    android:id="@+id/beginner_text_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/keyline_4"
@@ -231,7 +194,7 @@
                     android:layout_marginTop="@dimen/keyline_4"
                     android:text="@string/beginner_title"
                     style="@style/home_title_style"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/profile_pie_view"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -243,9 +206,9 @@
                     android:layout_marginBottom="@dimen/keyline_4"
                     android:layout_marginStart="@dimen/keyline_4"
                     android:layout_marginTop="@dimen/keyline_4"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent"
                     plainpie:inner_pie_padding="15"
                     plainpie:inner_text_visibility="true"
                     plainpie:percentage="75"
