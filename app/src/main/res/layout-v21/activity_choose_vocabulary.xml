@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.ChooseVocabulary">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        style="@style/home_card_style"
+        android:layout_marginBottom="@dimen/keyline_4"
+        android:layout_marginEnd="@dimen/keyline_4"
+        android:layout_marginStart="@dimen/keyline_4"
+        android:layout_marginTop="@dimen/keyline_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:text="@string/select_vocabulary"
+                android:textAlignment="center"
+                style="@style/primary_text_style"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_1"
+                android:textAlignment="center"
+                style="@style/third_text_style"
+                android:text="@string/change_settings_later"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                android:gravity="center_horizontal" />
+
+
+            <CheckBox
+                android:id="@+id/ielts_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/keyline_2"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_2"
+                app:layout_constraintBottom_toBottomOf="@+id/textView14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_5"
+                android:text="@string/IELTS"
+                style="@style/secondary_text_style"
+                app:layout_constraintStart_toEndOf="@+id/ielts_checkbox"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_2"
+                android:text="@string/ielts_descrition"
+                style="@style/third_text_style"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView13"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+
+            <CheckBox
+                android:id="@+id/toefl_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/keyline_2"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_2"
+                app:layout_constraintBottom_toBottomOf="@+id/textView16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:text="@string/TOEFL"
+                style="@style/secondary_text_style"
+                app:layout_constraintStart_toEndOf="@+id/toefl_checkbox"
+                app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_2"
+                style="@style/third_text_style"
+                android:text="@string/toefl_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/toefl_checkbox"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+
+            <CheckBox
+                android:id="@+id/sat_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView17"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                style="@style/secondary_text_style"
+                android:text="@string/SAT"
+                app:layout_constraintStart_toEndOf="@+id/sat_checkbox"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+
+            <CheckBox
+                android:id="@+id/gre_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                app:layout_constraintBottom_toBottomOf="@+id/textView19"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                style="@style/secondary_text_style"
+                android:text="@string/GRE"
+                app:layout_constraintStart_toEndOf="@+id/gre_checkbox"
+                app:layout_constraintTop_toBottomOf="@+id/last_line" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_2"
+                style="@style/third_text_style"
+                android:text="@string/gre_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/gre_checkbox"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/train_finished_unlearn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:elevation="3dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                fancy:fb_borderColor="@color/colorPrimary"
+                fancy:fb_borderWidth="2dp"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_focusColor="@color/colorPrimary"
+                fancy:fb_radius="30dp"
+                fancy:fb_text="Continue"
+                fancy:fb_textColor="#fff" />
+
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:background="@color/secondary_text_color_light"
+                app:layout_constraintBottom_toTopOf="@+id/textView15"
+                app:layout_constraintEnd_toEndOf="@+id/textView14"
+                app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
+                android:background="@color/secondary_text_color_light"
+                app:layout_constraintBottom_toTopOf="@+id/textView17"
+                app:layout_constraintEnd_toEndOf="@+id/textView14"
+                app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+            <View
+                android:id="@+id/last_line"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/keyline_4"
+                app:layout_goneMarginTop="@dimen/keyline_4"
+                android:layout_marginTop="@dimen/keyline_4"
+                android:background="@color/secondary_text_color_light"
+                app:layout_constraintBottom_toTopOf="@+id/textView18"
+                app:layout_constraintEnd_toEndOf="@+id/textView14"
+                app:layout_constraintStart_toStartOf="@+id/textView18"
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

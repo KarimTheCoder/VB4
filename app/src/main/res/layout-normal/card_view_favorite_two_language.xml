@@ -2,10 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recycler_view_card"
@@ -43,9 +42,9 @@
                     android:id="@+id/favorite_card_word"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:fontFamily="@font/sanf_bold"
-                    android:text="Word"
+                    android:text="@string/word"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -58,16 +57,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
 
                     android:fontFamily="@font/sanf_regular"
-                    android:text="Adjective"
+                    android:text="@string/adjective"
                     android:textSize="12sp"
                     android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/favorite_card_word"
-
-                    app:layout_constraintRight_toRightOf="@id/pos_background"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <mehdi.sakout.fancybuttons.FancyButton
@@ -111,14 +108,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
             <View
                 android:layout_below="@+id/top"
 
                 android:id="@+id/englishBackground"
                 android:layout_width="50dp"
-                android:layout_height="15dp"
-                ></View>
+                android:layout_height="15dp" />
 
             <TextView
 
@@ -127,12 +122,12 @@
                 android:gravity="center"
                 android:background="@drawable/bottom_bar_dot"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text="english"
+                android:text="@string/english"
                 android:id="@+id/card_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,13 +144,13 @@
                 android:gravity="center"
                 android:background="@drawable/bottom_bar_dot"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
 
-                android:text="bengali"
+                android:text="@string/english"
                 android:id="@+id/favorite_second_language2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -175,8 +170,8 @@
                 android:layout_marginRight="18dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/sanfrancisco_medium"
-                android:text="This is an translation"
-                android:textSize="16sp"></TextView>
+                android:text="@string/this_is_an_translation"
+                android:textSize="16sp" />
 
             <TextView
 
@@ -188,7 +183,7 @@
                 android:layout_marginRight="18dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/sanfrancisco_medium"
-                android:text="This is an translation"
+                android:text="@string/this_is_an_translation"
 
                 android:textSize="16sp" />
 
@@ -203,7 +198,7 @@
                 android:layout_marginRight="18dp"
                 android:layout_marginTop="18dp"
                 android:fontFamily="@font/sanf_regular"
-                android:text="This is an translation"
+                android:text="@string/this_is_an_translation"
                 android:textSize="14sp" />
 
 
@@ -217,7 +212,7 @@
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp"
                 android:fontFamily="@font/sanf_regular"
-                android:text="Yet this young man's frank appraisal was none of those.Yet this young man's frank appraisal was none of those."
+                android:text="@string/sentence_2"
                 android:textSize="14sp" />
 
             <TextView
@@ -230,7 +225,7 @@
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp"
                 android:fontFamily="@font/sanf_regular"
-                android:text="Yet this young man's frank appraisal was none of those.Yet this young man's frank appraisal was none of those."
+                android:text="@string/sentence_2"
                 android:textSize="14sp" />
 
 

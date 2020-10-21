@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
@@ -46,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/sanf_bold"
-                    android:text="Word"
+                    android:text="@string/word"
                     android:textSize="36sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -61,8 +60,7 @@
                     app:layout_constraintStart_toEndOf="@+id/favorite_card_word"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginStart="8dp"
-                    ></View>
+                    android:layout_marginStart="8dp" />
 
                 <TextView
                     android:id="@+id/card_grammar"
@@ -72,7 +70,7 @@
                     android:layout_marginStart="16dp"
 
                     android:fontFamily="@font/sanf_regular"
-                    android:text="Adjective"
+                    android:text="@string/adjective"
                     android:textSize="22sp"
                     android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="@id/pos_background"
@@ -139,7 +137,7 @@
                 android:background="@drawable/bottom_bar_dot"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/top"
-                android:text="english"
+                android:text="@string/english"
                 android:id="@+id/card_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -153,7 +151,7 @@
             <TextView
 
                 android:gravity="center"
-                android:text="bengala"
+                android:text="@string/bengali"
                 android:id="@+id/card_language_extra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -179,11 +177,11 @@
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sanfrancisco_medium"
-                android:text="This is an translation"
+                android:text="@string/this_is_an_translation"
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_language"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/card_language" />
 
             <TextView
 
@@ -194,7 +192,7 @@
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sanfrancisco_medium"
-                android:text="This is an translation"
+                android:text="@string/this_is_an_translation"
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -211,7 +209,7 @@
                 android:layout_marginEnd="18dp"
                 android:layout_marginTop="18dp"
                 android:fontFamily="@font/sanf_regular"
-                android:text="This is an translationjfkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
+                android:text="@string/sentence_2"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

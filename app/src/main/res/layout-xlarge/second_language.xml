@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
@@ -44,9 +43,9 @@
                     android:id="@+id/favorite_card_word"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:fontFamily="@font/sanf_bold"
-                    android:text="Word"
+                    android:text="@string/word"
                     android:textSize="36sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -61,18 +60,17 @@
                     app:layout_constraintLeft_toRightOf="@+id/favorite_card_word"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginLeft="8dp"
-                    ></View>
+                    android:layout_marginStart="8dp" />
 
                 <TextView
                     android:id="@+id/card_grammar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
 
                     android:fontFamily="@font/sanf_regular"
-                    android:text="Adjective"
+                    android:text="@string/adjective"
                     android:textSize="22sp"
                     android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="@id/pos_background"
@@ -86,7 +84,7 @@
                     android:layout_width="80dp"
                     android:layout_height="70dp"
                     android:padding="0dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -104,7 +102,7 @@
                     android:layout_width="80dp"
                     android:layout_height="70dp"
                     android:padding="0dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginEnd="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/favorite"
                     app:layout_constraintTop_toTopOf="parent"
@@ -129,7 +127,7 @@
 
             <TextView
                 android:layout_marginTop="16dp"
-                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
@@ -139,7 +137,7 @@
                 android:background="@drawable/bottom_bar_dot"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/top"
-                android:text="english"
+                android:text="@string/english"
                 android:id="@+id/card_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -153,7 +151,7 @@
             <TextView
 
                 android:gravity="center"
-                android:text="bengala"
+                android:text="@string/bengali"
                 android:id="@+id/card_language_extra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -165,7 +163,7 @@
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
                 android:background="@drawable/bottom_bar_dot"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/favorite_card_translation"/>
@@ -181,11 +179,11 @@
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sanfrancisco_medium"
-                android:text="This is an translation"
+                android:text="@string/this_is_an_translation"
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_language"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/card_language" />
 
             <TextView
 
@@ -193,13 +191,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="8dp"
-
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sanfrancisco_medium"
-                android:text="This is an translation"
+                android:text="@string/this_is_an_translation"
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -216,7 +211,7 @@
                 android:layout_marginRight="18dp"
                 android:layout_marginTop="18dp"
                 android:fontFamily="@font/sanf_regular"
-                android:text="This is an translationjfkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
+                android:text="@string/sentence_2"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
