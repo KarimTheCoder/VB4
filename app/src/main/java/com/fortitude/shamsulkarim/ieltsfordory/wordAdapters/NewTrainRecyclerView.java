@@ -52,7 +52,6 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final String[] examples  = new String[3];
     private final Word word;
     private Bitmap bitmap;
     private final Context ctx;
@@ -91,12 +90,6 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         this.word = word;
         this.ctx = context;
         sp = ctx.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-        int languageId = sp.getInt("language", 0);
-        String level = sp.getString("level", "NOTHING");
-        examples[0] = word.getExample1();
-        examples[1] = word.getExample2();
-        examples[2] = word.getExample3()+"\n"+word.getExample3SL();
-
         ieltsWordDatabase = new IELTSWordDatabase(context);
         toeflWordDatabasee = new TOEFLWordDatabase(context);
         satWordDatabase = new SATWordDatabase(context);
@@ -122,7 +115,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
-    public RecyclerView.@NotNull ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
 
 
         View view;
@@ -131,8 +124,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
             return new DefinationAdapter(view);
         }
-
-        if(viewType == SERVER_IMAGE_VIEW){
+        else{
 
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_from_server,parent,false);
             return new ImageViewHolder(view);
@@ -146,7 +138,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.@NotNull ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         int viewType = getItemViewType(position);
 
@@ -273,15 +265,6 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
                 break;
 
-            case EXAMPLE_VIEW:
-                ExampleAdapter exampleAdapter = (ExampleAdapter)holder;
-
-                if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
-                    exampleAdapter.example.setText(examples[position-1]);
-                }else {
-                    exampleAdapter.example.setText(word.getExample3());
-                }
-
         }
 
     }
@@ -315,8 +298,6 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         public File localFile = null;
         final ProgressBar progressBar;
         final TextView translation;
-        final TextView spanish;
-        final TextView languageName;
         final TextView grammar;
         final TextView pronunciation;
         final TextView example1;
@@ -337,8 +318,6 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             //comfortaRegular = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/Comfortaa-Bold.ttf");
 
             translation = itemView.findViewById(R.id.translation_train);
-            spanish = itemView.findViewById(R.id.spanish_translation_train);
-            languageName = itemView.findViewById(R.id.spanish);
             grammar = itemView.findViewById(R.id.grammar_train);
             pronunciation = itemView.findViewById(R.id.pronunciation_train);
             speak = itemView.findViewById(R.id.train_speaker_icon);
@@ -535,21 +514,6 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
     }
 
-    public static class ExampleAdapter extends RecyclerView.ViewHolder{
-
-        final TextView example;
-        //Typeface comfortaRegular;
-
-        public ExampleAdapter(View itemView) {
-            super(itemView);
-
-           // comfortaRegular = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/Comfortaa-Regular.ttf");
-            example = itemView.findViewById(R.id.train_example);
-          //  example.setTypeface(comfortaRegular);
-
-
-        }
-    }
 
     public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 

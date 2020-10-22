@@ -214,7 +214,6 @@
                         android:padding="7dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/train_finished_unlearn"
-                        app:layout_constraintStart_toEndOf="@+id/grammar_train"
                         app:layout_constraintTop_toTopOf="parent"
                         fancy:fb_borderWidth="2dp"
                         fancy:fb_defaultColor="#ffffff"

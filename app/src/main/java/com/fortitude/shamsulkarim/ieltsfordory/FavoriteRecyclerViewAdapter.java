@@ -55,7 +55,6 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
     private final SharedPreferences sp;
     private final int languageId;
     private int favoriteCount;
-    private final String[] languageName = {"","spanish","hindi","bengali"};
     private final FirebaseStorage storage;
     private final AdapterCallback adapterCallback;
 
@@ -136,31 +135,11 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
         }
 
-        if(languageId == 1){
-
-
-            holder.secondLanguageName.setText(languageName[1]);
-        }
-
-        if(languageId == 2){
-
-
-            holder.secondLanguageName.setText(languageName[2]);
-        }
-
-        if(languageId == 3){
-
-
-            holder.secondLanguageName.setText(languageName[3]);
-        }
-
-
-
 
         if(languageId >= 1){
 
             holder.translationView.setText(word.getTranslation());
-            holder.secondTranslation.setText(word.getExtra());
+
 
 
         }else {
@@ -213,8 +192,6 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         final TextView exampleView1;
         final TextView exampleView2;
         final TextView exampleView3;
-        final TextView secondLanguageName;
-        final TextView secondTranslation;
         final FancyButton favorite;
         final FancyButton speaker;
         final CardView cardView;
@@ -226,10 +203,6 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
         public WordViewHolder(View itemView) {
             super(itemView);
-
-            //englishLanguage = (TextView)itemView.findViewById(R.id.favorite_second_language);
-            secondLanguageName = itemView.findViewById(R.id.favorite_second_language2);
-            secondTranslation = itemView.findViewById(R.id.favorite_second_translation);
             wordView = itemView.findViewById(R.id.favorite_card_word);
             translationView = itemView.findViewById(R.id.favorite_card_translation);
             grammarView = itemView.findViewById(R.id.favorite_card_grammar);

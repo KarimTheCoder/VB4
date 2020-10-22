@@ -128,7 +128,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
-    public RecyclerView.@NotNull ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+    public  RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
 
         View view;
 
@@ -179,7 +179,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.@NotNull ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
 
         int viewType = getItemViewType(position);
@@ -206,27 +206,11 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 if(languageId>= 1){
 
                     wordViewHolder.translationView.setText(word.getTranslation());
-                    wordViewHolder.secondTranslation.setText(word.getExtra());
                 }else{
 
                     wordViewHolder.translationView.setText(word.getTranslation());
                 }
-                if(languageId == 1){
 
-
-                    wordViewHolder.secondLanguage.setText(languageName[1]);
-                }
-
-                if(languageId == 2){
-
-
-                    wordViewHolder.secondLanguage.setText(languageName[2]);
-                }
-                if(languageId == 3){
-
-
-                    wordViewHolder.secondLanguage.setText(languageName[3]);
-                }
 
 
                 wordViewHolder.wordView.setText(word.getPronun());
@@ -326,9 +310,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         final TextView translationView;
         final TextView grammarView;
         final TextView exampleView1;
-        final TextView secondTranslation;
-        final TextView secondLanguage;
-        final TextView englishLanguage;
         final FancyButton favorite;
         final FancyButton speaker;
         final TextToSpeech tts;
@@ -344,13 +325,11 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             Typeface ABeeZee = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/ABeeZee-Regular.ttf");
             Typeface ABeeZeeItalic  = Typeface.createFromAsset(itemView.getContext().getAssets(),"fonts/ABeeZee-Italic.ttf");
 
-            englishLanguage = itemView.findViewById(R.id.card_language);
             wordView = itemView.findViewById(R.id.favorite_card_word);
             translationView = itemView.findViewById(R.id.favorite_card_translation);
             grammarView = itemView.findViewById(R.id.card_grammar);
             exampleView1 = itemView.findViewById(R.id.card_example1);
-            secondTranslation =  itemView.findViewById(R.id.card_translation_extra);
-            secondLanguage = itemView.findViewById(R.id.card_language_extra);
+
             speaker =  itemView.findViewById(R.id.favorite_speaker);
             cardView = itemView.findViewById(R.id.recycler_view_card);
             cardView.setPreventCornerOverlap(false);
@@ -359,26 +338,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             Sprite doubleBounce = new Wave();
             progressBar.setIndeterminateDrawable(doubleBounce);
             progressBar.setVisibility(View.INVISIBLE);
-
-          //  progressBar = itemView.findViewById(R.id.spin_kit);
-          //  progressBar.setVisibility(View.INVISIBLE);
-
-
             isVoicePronunciation = sp.getBoolean("pronunState",true);
-
-//            wordView.setTypeface(ABeeZee);
-//            translationView.setTypeface(ABeeZee);
-//            grammarView.setTypeface(ABeeZee);
-//            exampleView1.setTypeface(ABeeZee);
-
-            if(languageId == 1){
-                secondLanguage.setTypeface(ABeeZeeItalic);
-                englishLanguage.setTypeface(ABeeZeeItalic);
-                secondTranslation.setTypeface(ABeeZee);
-            }
-
-
-
             favorite = itemView.findViewById(R.id.favorite);
             favorite.setIconResource(R.drawable.ic_favorite_icon);
             favorite.setTag(null);
