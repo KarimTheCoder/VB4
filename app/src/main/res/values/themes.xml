@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Pretrain.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="android:colorBackground">@color/primaryBackgroundColor</item>
+        <item name="android:statusBarColor">@color/primaryBackgroundColor</item>
+        <item name="colorSurface">@color/primaryBackgroundColor</item>
+    </style>
+
+    <style name="Purchase.Card.Theme"  parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryDark">@color/greenDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="cardBackgroundColor">@color/primaryBackgroundColor</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="MainActivity.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="android:colorBackground">@color/primaryBackgroundColor</item>
+        <item name="android:statusBarColor">@color/primaryBackgroundColor</item>
+        <item name="colorSurface">@color/primaryBackgroundColor</item>
+    </style>
+
+
+
+</resources>

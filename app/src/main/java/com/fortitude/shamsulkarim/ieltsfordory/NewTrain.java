@@ -500,22 +500,22 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         trainCircle3 = findViewById(R.id.train_circle3);
         trainCircle4 = findViewById(R.id.train_circle4);
         wordCard = findViewById(R.id.wordCard);
-        recyclerView = (RecyclerView)findViewById(R.id.train_recyclerView);
+        recyclerView = findViewById(R.id.train_recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         wordsPerSession = sp.getInt("wordsPerSession",5);
         repeatPerSession = sp.getInt("repeatationPerSession",5);
-        wordView =    (TextView)findViewById(R.id.train_word);
-        answerCard1 = (CardView)findViewById(R.id.answer_card1);
-        answerCard2 = (CardView)findViewById(R.id.answer_card2);
-        answerCard3 = (CardView)findViewById(R.id.answer_card3);
-        answerCard4 = (CardView)findViewById(R.id.answer_card4);
-        answerView1 = (TextView)findViewById(R.id.train_answer_text1);
-        answerView2 = (TextView)findViewById(R.id.train_answer_text2);
-        answerView3 = (TextView)findViewById(R.id.train_answer_text3);
-        answerView4 = (TextView)findViewById(R.id.train_answer_text4);
-        speak =       (FancyButton) findViewById(R.id.train_speaker_icon);
+        wordView = findViewById(R.id.train_word);
+        answerCard1 = findViewById(R.id.answer_card1);
+        answerCard2 = findViewById(R.id.answer_card2);
+        answerCard3 = findViewById(R.id.answer_card3);
+        answerCard4 = findViewById(R.id.answer_card4);
+        answerView1 = findViewById(R.id.train_answer_text1);
+        answerView2 = findViewById(R.id.train_answer_text2);
+        answerView3 = findViewById(R.id.train_answer_text3);
+        answerView4 = findViewById(R.id.train_answer_text4);
+        speak = findViewById(R.id.train_speaker_icon);
         speak.setVisibility(View.INVISIBLE);
         storage = FirebaseStorage.getInstance();
 
@@ -537,9 +537,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         isGreChecked =   sp.getBoolean("isGREActive",true);
 
 
-        fab = (FloatingActionButton)findViewById(R.id.train_fab);
+        fab = findViewById(R.id.train_fab);
         fab.setMax(5);
-        progress1 = (RoundCornerProgressBar) findViewById(R.id.progress_1);
+        progress1 = findViewById(R.id.progress_1);
         progress1.setSecondaryProgressColor(getResources().getColor(R.color.colorPrimaryDark));
         progress1.setProgressColor(getResources().getColor(R.color.colorPrimary));
         progress1.setProgressBackgroundColor(getResources().getColor(R.color.primary_text_color_white));

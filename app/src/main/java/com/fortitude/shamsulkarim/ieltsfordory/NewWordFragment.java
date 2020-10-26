@@ -73,7 +73,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
         gettingResources();
         getfavoriteDatabasePosition();
         tts = new TextToSpeech(getContext(), this);
-        Toolbar toolbar = (Toolbar) v.findViewById(R.id.word_toolbar);
+        Toolbar toolbar = v.findViewById(R.id.word_toolbar);
         toolbar.setTitle("WORDS");
         toolbar.setTitleTextColor(getResources().getColor(R.color.beginnerS));
         setHasOptionsMenu(true);
@@ -81,7 +81,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
         if (activity != null) {
             activity.setSupportActionBar(toolbar);
         }
-        FloatingSearchView sv = (FloatingSearchView) v.findViewById(R.id.mSearch);
+        FloatingSearchView sv = v.findViewById(R.id.mSearch);
 
 
         sp.getInt("language", 0);
@@ -106,7 +106,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
                 if(selection == 0){
 
 
-                    recyclerView = (RecyclerView) v.findViewById(R.id.new_recycler_view);
+                    recyclerView = v.findViewById(R.id.new_recycler_view);
                     layoutManager = new LinearLayoutManager(getContext());
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setHasFixedSize(true);
@@ -116,7 +116,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
                 if( selection == 1){
 
 
-                    recyclerView = (RecyclerView) v.findViewById(R.id.new_recycler_view);
+                    recyclerView = v.findViewById(R.id.new_recycler_view);
                     layoutManager = new LinearLayoutManager(getContext());
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setHasFixedSize(true);
@@ -127,7 +127,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
                 if( selection == 2){
 
 
-                    recyclerView = (RecyclerView) v.findViewById(R.id.new_recycler_view);
+                    recyclerView = v.findViewById(R.id.new_recycler_view);
                     layoutManager = new LinearLayoutManager(getContext());
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setHasFixedSize(true);
@@ -297,26 +297,26 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
 
         if(isIeltsChecked){
-            IELTSbeginnerNumber = (int)getPercentageNumber(30, IELTSwordSize);
+            IELTSbeginnerNumber = getPercentageNumber(30, IELTSwordSize);
 
         }
 
         if(isToeflChecked){
 
-            TOEFLbeginnerNumber = (int) getPercentageNumber(30, TOEFLwordSize);
+            TOEFLbeginnerNumber = getPercentageNumber(30, TOEFLwordSize);
 
         }
 
         if(isSatChecked){
 
-            SATbeginnerNumber = (int) getPercentageNumber(30, SATwordSize);
+            SATbeginnerNumber = getPercentageNumber(30, SATwordSize);
 
         }
 
         if(isGreChecked){
 
 
-            GREbeginnerNumber = (int) getPercentageNumber(30, GREwordSize);
+            GREbeginnerNumber = getPercentageNumber(30, GREwordSize);
 
         }
 
@@ -467,7 +467,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
 
         if(isIeltsChecked){
-            for(int i = (int) startPoint; i  < IELTSbeginnerNumber; i++){
+            for(int i = startPoint; i  < IELTSbeginnerNumber; i++){
 
 
 
@@ -487,7 +487,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
         if(isToeflChecked){
 
 
-            for(int i = (int) startPoint; i < TOEFLbeginnerNumber; i++){
+            for(int i = startPoint; i < TOEFLbeginnerNumber; i++){
 
                 words.add(new Word(TOEFLwordArray[i], TOEFLtranslationArray[i], "", TOEFLpronunArray[i], TOEFLgrammarArray[i], TOEFLexample1array[i], TOEFLexample2Array[i], TOEFLexample3Array[i], TOEFLvocabularyType[i], TOEFLposition[i], "",toeflFavPosition.get(i)));
 
@@ -505,7 +505,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
         if(isSatChecked){
 
-            for(int i = (int) startPoint; i < SATbeginnerNumber; i++){
+            for(int i = startPoint; i < SATbeginnerNumber; i++){
 
 
                 words.add(new Word(SATwordArray[i], SATtranslationArray[i], "", SATpronunArray[i], SATgrammarArray[i], SATexample1array[i], SATexample2Array[i], SATexample3Array[i], SATvocabularyType[i], SATposition[i], "",satFavPosition.get(i)));
@@ -526,7 +526,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
         if(isGreChecked){
 
-            for(int i = (int) startPoint; i < SATbeginnerNumber; i++){
+            for(int i = startPoint; i < SATbeginnerNumber; i++){
 
                 words.add(new Word(GREwordArray[i], GREtranslationArray[i],"", GREpronunArray[i], GREgrammarArray[i], GREexample1array[i], GREexample2array[i], GREexample3Array[i],GREvocabularyType[i],GREposition[i], "",greFavPosition.get(i)));
 
@@ -670,7 +670,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
             sp.edit().putInt("prevWordSelection", 0).apply();
 
-            recyclerView = (RecyclerView) Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
+            recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
 
             layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
@@ -683,7 +683,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
             sp.edit().putInt("prevWordSelection", 1).apply();
 
-            recyclerView = (RecyclerView) Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
+            recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
             layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setHasFixedSize(true);
@@ -695,7 +695,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
             sp.edit().putInt("prevWordSelection", 2).apply();
 
-            recyclerView = (RecyclerView) Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
+            recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
             layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setHasFixedSize(true);

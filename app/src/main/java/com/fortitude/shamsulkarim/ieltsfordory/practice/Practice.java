@@ -715,7 +715,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
         topBackground = findViewById(R.id.top_background);
-        recyclerView = (RecyclerView)findViewById(R.id.train_recyclerView);
+        recyclerView = findViewById(R.id.train_recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -737,26 +737,26 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         iWordDatabasePosition = new ArrayList<>();
         greWordDatabasePosition = new ArrayList<>();
         tts = new TextToSpeech(this, this);
-        wordCard =    (CardView)findViewById(R.id.wordCard);
-        wordView =    (TextView)findViewById(R.id.train_word);
-        answerCard1 = (CardView)findViewById(R.id.answer_card1);
-        answerCard2 = (CardView)findViewById(R.id.answer_card2);
-        answerCard3 = (CardView)findViewById(R.id.answer_card3);
-        answerCard4 = (CardView)findViewById(R.id.answer_card4);
-        answerView1 = (TextView)findViewById(R.id.train_answer_text1);
-        answerView2 = (TextView)findViewById(R.id.train_answer_text2);
-        answerView3 = (TextView)findViewById(R.id.train_answer_text3);
-        answerView4 = (TextView)findViewById(R.id.train_answer_text4);
-        speak =       (FancyButton)findViewById(R.id.train_speaker_icon);
+        wordCard = findViewById(R.id.wordCard);
+        wordView = findViewById(R.id.train_word);
+        answerCard1 = findViewById(R.id.answer_card1);
+        answerCard2 = findViewById(R.id.answer_card2);
+        answerCard3 = findViewById(R.id.answer_card3);
+        answerCard4 = findViewById(R.id.answer_card4);
+        answerView1 = findViewById(R.id.train_answer_text1);
+        answerView2 = findViewById(R.id.train_answer_text2);
+        answerView3 = findViewById(R.id.train_answer_text3);
+        answerView4 = findViewById(R.id.train_answer_text4);
+        speak = findViewById(R.id.train_speaker_icon);
         speak.setVisibility(View.INVISIBLE);
        // wordViewMiddle = (TextView)findViewById(R.id.train_word_middle);
-        fab = (FloatingActionButton)findViewById(R.id.train_fab);
+        fab = findViewById(R.id.train_fab);
         fab.setMax(5);
-        progress1 = (RoundCornerProgressBar) findViewById(R.id.progress_1);
-        trainCircle1 = (View)findViewById(R.id.train_circle1);
-        trainCircle2 = (View)findViewById(R.id.train_circle2);
-        trainCircle3 = (View)findViewById(R.id.train_circle3);
-        trainCircle4 = (View)findViewById(R.id.train_circle4);
+        progress1 = findViewById(R.id.progress_1);
+        trainCircle1 = findViewById(R.id.train_circle1);
+        trainCircle2 = findViewById(R.id.train_circle2);
+        trainCircle3 = findViewById(R.id.train_circle3);
+        trainCircle4 = findViewById(R.id.train_circle4);
 
 
 
@@ -1016,7 +1016,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         while (aRes.moveToNext()){
 
             aWord.add(aRes.getString(2));
-            int pos = (Integer) aRes.getInt(0);
+            int pos = aRes.getInt(0);
             aWordDatabasePosition.add(pos);
 
         }
@@ -1024,7 +1024,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         while (bRes.moveToNext()){
 
             bWord.add(bRes.getString(2));
-            int pos = (Integer) bRes.getInt(0);
+            int pos = bRes.getInt(0);
             bWordDatabasePosition.add(pos);
 
         }
@@ -1032,7 +1032,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         while (iRes.moveToNext()){
 
             iWord.add(iRes.getString(2));
-            int pos = (Integer) iRes.getInt(0);
+            int pos = iRes.getInt(0);
             iWordDatabasePosition.add(pos);
 
         }
@@ -1040,7 +1040,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         while(greRes.moveToNext()){
 
             greWord.add(greRes.getString(2));
-            int pos = (Integer)greRes.getInt(0);
+            int pos = greRes.getInt(0);
             greWordDatabasePosition.add(pos);
 
         }
@@ -1558,7 +1558,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         if(isIeltsChecked){
 
-            for(int i = (int) startPoint; i < IELTSbeginnerNumber; i++){
+            for(int i = startPoint; i < IELTSbeginnerNumber; i++){
 
 
                 if( IELTSlearnedDatabase.get(i).equalsIgnoreCase("true")){
@@ -1605,7 +1605,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         if(isToeflChecked){
 
 
-            for(int i = (int) startPoint; i < TOEFLbeginnerNumber; i++){
+            for(int i = startPoint; i < TOEFLbeginnerNumber; i++){
 
 
                 if( TOEFLlearnedDatabase.get(i).equalsIgnoreCase("true")) {
@@ -1652,7 +1652,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         if(isSatChecked){
 
-            for(int i = (int) startPoint; i < SATbeginnerNumber; i++){
+            for(int i = startPoint; i < SATbeginnerNumber; i++){
 
 
                 if( SATlearnedDatabase.get(i).equalsIgnoreCase("true")) {
@@ -1700,7 +1700,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
      //   Toast.makeText(this,IELTSexample1arraySL[0]+": "+secondLanguage,Toast.LENGTH_LONG).show();
         if(isGreChecked){
 
-            for(int i = (int) startPoint; i < SATbeginnerNumber; i++){
+            for(int i = startPoint; i < SATbeginnerNumber; i++){
 
 
 

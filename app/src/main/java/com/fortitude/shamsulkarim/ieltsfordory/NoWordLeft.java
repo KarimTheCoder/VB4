@@ -40,12 +40,12 @@ public class NoWordLeft extends AppCompatActivity implements View.OnClickListene
         Typeface comfortaRegular = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Regular.ttf");
         Typeface comfoftaBold = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Bold.ttf");
 
-        TextView congratulation = (TextView) findViewById(R.id.congratulation);
-        TextView completedSection = (TextView) findViewById(R.id.completed_section);
-        TextView soProud = (TextView) findViewById(R.id.so_proud);
-        ImageView noWordImage = (ImageView) findViewById(R.id.no_word_image);
-        FancyButton home = (FancyButton) findViewById(R.id.no_word_home);
-        FancyButton reset = (FancyButton) findViewById(R.id.reset);
+        TextView congratulation = findViewById(R.id.congratulation);
+        TextView completedSection = findViewById(R.id.completed_section);
+        TextView soProud = findViewById(R.id.so_proud);
+        ImageView noWordImage = findViewById(R.id.no_word_image);
+        FancyButton home = findViewById(R.id.no_word_home);
+        FancyButton reset = findViewById(R.id.reset);
 
         congratulation.setTypeface(comfoftaBold);
         completedSection.setTypeface(comfortaRegular);
@@ -103,7 +103,7 @@ public class NoWordLeft extends AppCompatActivity implements View.OnClickListene
 
         sp.edit().putInt(level,0).apply();
 
-        Intent intent = new Intent(this, StartTrainingActivity.class);
+        Intent intent = new Intent(this, PretrainActivity.class);
         this.startActivity(intent);
         this.finish();
 

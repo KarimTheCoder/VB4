@@ -7,26 +7,26 @@ import androidx.core.content.ContextCompat;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 public class AppLauncher extends AppCompatActivity {
 
-
-
-
-    //in-app-purchase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_launcher);
-
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        decorView.setSystemUiVisibility(uiOptions);
         Window window = getWindow();
         Drawable background = ContextCompat.getDrawable(this,R.drawable.gradient);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(android.R.color.transparent));
         window.setNavigationBarColor(getResources().getColor(android.R.color.transparent));
         window.setBackgroundDrawable(background);
+
 
 
         SharedPreferences sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);

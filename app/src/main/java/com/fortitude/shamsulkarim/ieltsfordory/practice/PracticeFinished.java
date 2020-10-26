@@ -65,9 +65,9 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
         rateCard = findViewById(R.id.rate_card);
         rateCard.setOnClickListener(this);
 
-        home = (FloatingActionButton) findViewById(R.id.tf_home);
+        home = findViewById(R.id.tf_home);
         home.setColorNormal(getResources().getColor(R.color.primary_text_color_white));
-        practiceAgain = (FancyButton)findViewById(R.id.tf_train_again);
+        practiceAgain = findViewById(R.id.tf_train_again);
         practiceAgain.setText("PRACTICE AGAIN");
         TextView wordCountText = findViewById(R.id.practice_finished_word_text);
         wordCountText.setText(getString(R.string.words_were_reviewed,sp.getInt("favoriteWordCount",0)));

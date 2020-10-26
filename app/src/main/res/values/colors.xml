@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--    Primary Colors-->
+
+    <color name="colorPrimary">#7264f6</color>
+    <color name="colorPrimaryDark">#3539c2</color>
+    <color name="colorPrimaryLight">#a992ff</color>
+
+   <!--    Secondary colors-->
+
+    <color name="secondaryColor">#75deea</color>
+    <color name="secondaryColorDark">#3cacb8</color>
+    <color name="secondaryColorLight">#aaffff</color>
+
+
+   <!--    Background Colors-->
+
+    <color name="primaryBackgroundColor">#fafafa</color>
+    <color name="primaryBackgroundColorDark">#fafafa</color>
+    <color name="primaryBackgroundColorLight">#ffffff</color>
+    <color name="primaryBackgroundColorNight">#000000</color>
+
+
+    <!--  Solid Colors  -->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <!--   Old Colors-->
 
     <color name="spinnerColor">@color/secondary_text_color</color>
-    <color name="colorPrimary">#7264f6</color>
-    <color name="colorPrimaryDark">#76dfeb</color>
     <color name="secondaryGradiantColor">#76dfeb</color>
     <color name="colorAccent">#7264f6</color>
     <color name="grey">#E0E0E0</color>o
-    <color name="middleColor">#373d3f</color>
     <color name="lowColor">#8c979a</color>
     <color name="green">#2ecc71</color>
+    <color name="greenDark">#009a44</color>
 
     <color name="grey100">#F5F5F5</color>
 
@@ -46,6 +70,8 @@
 
     //Card Background Color
     <color name="card_background_color">#ffffff</color>
+    //Card Background Color
+    <color name="card_background_color_night">#121212</color>
 
     // Toolbar background color
     <color name="toolbar_background_color">#ffffff</color>

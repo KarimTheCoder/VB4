@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.StartTrainingActivity"
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.PretrainActivity"
     >
 
 
@@ -17,7 +17,8 @@
         android:layout_marginStart="@dimen/keyline_6"
         android:layout_marginTop="@dimen/keyline_6"
         android:layout_marginEnd="@dimen/keyline_6"
-        style="@style/purchase_card_style"
+        style="@style/Purchase.Card.Theme"
+        android:theme="@style/Purchase.Card.Theme"
         app:layout_constraintBottom_toTopOf="@+id/cardView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,12 +32,10 @@
                 android:id="@+id/purchase_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:fontFamily="@font/productbold"
                 android:text="@string/purchase_title"
-                android:textColor="@color/green"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="22sp"
-
                 app:layout_constraintEnd_toStartOf="@+id/purchase_button"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -67,13 +66,13 @@
                 app:layout_constraintBottom_toBottomOf="@+id/purchase_description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                fancy:fb_borderColor="@color/green"
+                fancy:fb_borderColor="?attr/colorPrimary"
                 fancy:fb_borderWidth="2dp"
-                fancy:fb_defaultColor="@color/green"
-                fancy:fb_focusColor="#D8C9E8"
+                fancy:fb_defaultColor="?attr/colorPrimary"
+                fancy:fb_focusColor="?attr/colorPrimaryDark"
                 fancy:fb_radius="15dp"
                 fancy:fb_text="BUY"
-                fancy:fb_textColor="@color/primary_text_color_white"
+                fancy:fb_textColor="?attr/colorOnPrimary"
                 fancy:fb_textFont="@font/productbold" />
 
 

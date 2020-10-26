@@ -171,7 +171,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         gettingLearnedWords();
 
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.train_finished_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.train_finished_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);

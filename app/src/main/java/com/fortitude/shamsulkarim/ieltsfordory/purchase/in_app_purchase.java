@@ -84,7 +84,7 @@ public class in_app_purchase extends AppCompatActivity implements PurchasesUpdat
                                     BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
                                             .setSkuDetails(skuDetailsList.get(0))
                                             .build();
-                                    billingClient.launchBillingFlow(in_app_purchase.this, billingFlowParams).getResponseCode();
+                                    billingClient.launchBillingFlow(in_app_purchase.this, billingFlowParams);
 
 
 

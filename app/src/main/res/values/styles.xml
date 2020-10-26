@@ -10,8 +10,9 @@
         <item name="android:actionMenuTextColor">@color/primary_text_color</item>
 
     </style>
+
     <style name="Theme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/gradient</item>
+        <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
 

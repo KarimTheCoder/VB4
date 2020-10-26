@@ -334,8 +334,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_information" />
-                            <entry key="sourceFile" value="C:\Users\Shams\Desktop\INBOX\VB4 Icons\New folder\information.svg" />
+                            <entry key="outputName" value="ic_splash_screen_page_land" />
+                            <entry key="sourceFile" value="C:\Users\Shams\Desktop\INBOX\VB4 Selected Icons\splash_screen_page_land.svg" />
                           </map>
                         </option>
                       </PersistentState>

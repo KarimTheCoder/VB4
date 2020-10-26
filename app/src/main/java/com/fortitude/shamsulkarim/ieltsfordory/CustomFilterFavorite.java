@@ -39,7 +39,7 @@ public class CustomFilterFavorite extends Filter {
             for (int i=0;i<filterList.size();i++)
             {
                 //CHECK
-                Word word = (Word) filterList.get(i);
+                Word word = filterList.get(i);
                 if(word.getWord().toUpperCase().contains(constraint))
                 {
                     //ADD PLAYER TO FILTERED PLAYERS

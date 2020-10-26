@@ -50,8 +50,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     private final static int WORD_VIEW_TYPE = 0;
     private final static int AD_VIEW_TYPE = 1;
     private final SharedPreferences sp;
-    private final String[] languageName = {"","spanish","hindi","bengali"};
-    private final int languageId;
     private int favoriteCount;
     private final int favoriteLevel;
     private final IELTSWordDatabase ieltsWordDatabase;
@@ -95,8 +93,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             favoriteCount = sp.getInt("favoriteCountProfile",0);
 
         }
-
-        languageId = sp.getInt("language",0);
         ieltsWordDatabase = new IELTSWordDatabase(context);
         toeflWordDatabase = new TOEFLWordDatabase(context);
         satWordDatabase = new SATWordDatabase(context);
@@ -203,16 +199,8 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 }
 //                //------------------------------------------------------------
 //
-                if(languageId>= 1){
 
-                    wordViewHolder.translationView.setText(word.getTranslation());
-                }else{
-
-                    wordViewHolder.translationView.setText(word.getTranslation());
-                }
-
-
-
+                wordViewHolder.translationView.setText(word.getTranslation());
                 wordViewHolder.wordView.setText(word.getPronun());
                 wordViewHolder.grammarView.setText(word.getGrammar());
                 wordViewHolder.exampleView1.setText(word.getExample1());

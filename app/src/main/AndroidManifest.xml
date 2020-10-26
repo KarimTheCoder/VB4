@@ -19,12 +19,16 @@
         android:fullBackupContent="@xml/backup_descriptor">
         <activity android:name=".StartTrial" />
         <activity android:name=".purchase.in_app_purchase" />
-        <activity android:name=".PretrainActivity" />
+        <activity
+            android:name=".PretrainActivity"
+            android:theme="@style/Pretrain.Theme"
+            />
 
         <activity android:name=".SplashScreen" />
-        <activity android:name=".StartTrainingActivity" />
         <activity android:name=".NoWordLeft" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/MainActivity.Theme"
+            />
         <activity android:name=".practice.Practice" />
         <activity android:name=".NewTrain" />
         <activity android:name=".TrainFinishedActivity" />

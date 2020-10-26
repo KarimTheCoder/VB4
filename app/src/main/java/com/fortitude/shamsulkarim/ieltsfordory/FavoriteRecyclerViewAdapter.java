@@ -53,7 +53,6 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
     private final TOEFLWordDatabase toeflWordDatabase;
     private final GREWordDatabase greWordDatabase;
     private final SharedPreferences sp;
-    private final int languageId;
     private int favoriteCount;
     private final FirebaseStorage storage;
     private final AdapterCallback adapterCallback;
@@ -82,8 +81,6 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             favoriteCount = sp.getInt("favoriteCountProfile",0);
 
         }
-
-        languageId =sp.getInt("language",0);
         satWordDatabase = new SATWordDatabase(context);
         ieltsWordDatabase = new IELTSWordDatabase(context);
         toeflWordDatabase = new TOEFLWordDatabase(context);
@@ -136,19 +133,9 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         }
 
 
-        if(languageId >= 1){
 
-            holder.translationView.setText(word.getTranslation());
-
-
-
-        }else {
-
-            holder.translationView.setText(word.getTranslation());
-        }
-
+        holder.translationView.setText(word.getTranslation());
         holder.wordView.setText(word.getPronun());
-
         holder.grammarView.setText(word.getGrammar());
         holder.exampleView1.setText(word.getExample1());
         holder.exampleView2.setText(word.getExample2());

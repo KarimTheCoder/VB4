@@ -196,20 +196,20 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
         tts = new TextToSpeech(getContext(),this);
         sp.getInt("language", 0);
-        havenotlearned = (TextView)v.findViewById(R.id.havenotlearned);
+        havenotlearned = v.findViewById(R.id.havenotlearned);
         havenotlearned.setVisibility(View.INVISIBLE);
-        noLearnedImage = (ImageView)v.findViewById(R.id.no_learned_image);
+        noLearnedImage = v.findViewById(R.id.no_learned_image);
         noLearnedImage.setVisibility(View.INVISIBLE);
         setSpinner(v);
 
-        startLearning = (FancyButton)v.findViewById(R.id.nl_start_learning);
+        startLearning = v.findViewById(R.id.nl_start_learning);
         startLearning.setOnClickListener(this);
         startLearning.setBackgroundResource(R.drawable.gradient);
         startLearning.setBorderColor(getResources().getColor(R.color.colorPrimaryDark));
         startLearning.setFocusBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        sv= (FloatingSearchView) v.findViewById(R.id.mSearch);
+        sv= v.findViewById(R.id.mSearch);
 
-        Toolbar toolbar = (Toolbar) v.findViewById(R.id.learned_toolbar);
+        Toolbar toolbar = v.findViewById(R.id.learned_toolbar);
         toolbar.setTitle("LEARNED");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
         setHasOptionsMenu(true);
@@ -217,7 +217,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
         assert activity != null;
         activity.setSupportActionBar(toolbar);
 
-        recyclerView = (RecyclerView)v.findViewById(R.id.recycler_view_learned_words);
+        recyclerView = v.findViewById(R.id.recycler_view_learned_words);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
