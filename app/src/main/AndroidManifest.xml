@@ -31,7 +31,9 @@
         <activity android:name=".NewTrain"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".TrainFinishedActivity" />
+        <activity android:name=".TrainFinishedActivity"
+            android:theme="@style/Main.Theme"
+            />
         <activity android:name=".practice.PracticeFinished" />
         <activity android:name=".wordAdapters.NewSettingActivity" />
          <!-- Register the Alarm Receiver -->

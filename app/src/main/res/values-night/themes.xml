@@ -27,7 +27,17 @@
         <item name="android:colorBackground">@color/black</item>
         <item name="colorPrimarySurface">@color/train_finished_recycerview_background_color</item>
         <item name="colorSurface">@color/train_finished_recycerview_background_color</item>
+        <item name="colorOnPrimary">@color/black</item>
     </style>
 
+
+    <style name="Rate.Card.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!--        Background and surface colors-->
+        <item name="background">@drawable/gradient</item>
+        <!--        Background and surface colors-->
+        <item name="colorOnPrimary">@color/black</item>
+
+    </style>
 
 </resources>

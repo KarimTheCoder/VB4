@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.practice.PracticeFinished">
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.TrainFinishedActivity"
+
+    >
 
 
     <ScrollView
@@ -95,7 +97,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardView5">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:background="@drawable/gradient"
+                    android:theme="@style/Rate.Card.Theme"
+                    style="@style/Rate.Card.Theme"
+                    android:background="?attr/background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -121,6 +125,7 @@
                         android:layout_marginTop="@dimen/keyline_1"
                         android:text="@string/rate_string"
                         style="@style/third_text_style_white"
+                        android:textColor="?attr/colorOnPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/rate_icon"
                         app:layout_constraintStart_toStartOf="parent"
@@ -134,6 +139,7 @@
                         android:layout_marginTop="@dimen/keyline_4"
                         android:text="@string/rate_title"
                         style="@style/primary_text_style_white"
+                        android:textColor="?attr/colorOnPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -171,6 +177,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/most_mistaken_card"
                 style="@style/train_finished_card_style"
+                app:cardBackgroundColor="?attr/colorPrimarySurface"
                 app:cardElevation="0dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -210,14 +217,13 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginTop="8dp"
-                        android:background="#00000000"
                         android:padding="7dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/train_finished_unlearn"
                         app:layout_constraintTop_toTopOf="parent"
                         fancy:fb_borderWidth="2dp"
-                        fancy:fb_defaultColor="#ffffff"
-                        fancy:fb_focusColor="@color/colorPrimary"
+                        fancy:fb_defaultColor="?attr/colorPrimarySurface"
+                        fancy:fb_focusColor="?attr/colorPrimary"
                         fancy:fb_ghost="true"
                         fancy:fb_iconResource="@drawable/ic_favorite_icon"
                         fancy:fb_radius="100000dp"
@@ -240,10 +246,9 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        fancy:fb_borderColor="#fff"
                         fancy:fb_borderWidth="2dp"
-                        fancy:fb_defaultColor="#fff"
-                        fancy:fb_focusColor="@color/colorPrimary"
+                        fancy:fb_defaultColor="?attr/colorSurface"
+                        fancy:fb_focusColor="?attr/colorPrimary"
                         fancy:fb_radius="30dp"
                         fancy:fb_text="Unlearn"
                         fancy:fb_textColor="@color/lowColor" />
@@ -320,8 +325,8 @@
         android:layout_marginTop="@dimen/keyline_4"
         android:layout_marginBottom="@dimen/keyline_4"
         android:src="@drawable/ic_home"
-        app:fab_colorNormal="@color/primary_text_color_white"
-        app:fab_colorPressed="@color/colorPrimary"
+        app:fab_colorNormal="?attr/colorSurface"
+        app:fab_colorPressed="?attr/colorPrimaryDark"
         app:fab_showShadow="false"
         app:layout_constraintTop_toTopOf="@id/tf_button_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -347,11 +352,11 @@
 
 
         fancy:fb_borderWidth="2dp"
-        fancy:fb_defaultColor="@color/colorPrimary"
-        fancy:fb_focusColor="@color/colorPrimary"
+        fancy:fb_defaultColor="?attr/colorPrimary"
+        fancy:fb_focusColor="?attr/colorPrimaryDark"
         fancy:fb_radius="30dp"
         fancy:fb_text="STUDY MORE"
-        fancy:fb_textColor="@color/primary_text_color"
+        fancy:fb_textColor="?attr/colorOnPrimary"
         app:layout_constraintStart_toEndOf="@+id/tf_home">
 
 

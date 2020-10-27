@@ -26,6 +26,16 @@
         <item name="android:colorBackground">@color/white</item>
         <item name="colorPrimarySurface">@color/train_finished_recycerview_background_color</item>
         <item name="colorSurface">@color/primaryBackgroundColor</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+    <style name="Rate.Card.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!--        Background and surface colors-->
+        <item name="background">@drawable/gradient</item>
+        <!--        Background and surface colors-->
+        <item name="colorOnPrimary">@color/white</item>
+
     </style>
 
 
