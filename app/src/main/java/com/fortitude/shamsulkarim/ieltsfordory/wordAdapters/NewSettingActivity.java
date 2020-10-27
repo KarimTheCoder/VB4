@@ -1632,7 +1632,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                             for (Purchase purchase : Objects.requireNonNull(results.getPurchasesList())) {
 
-                                if(purchase.getSku().equalsIgnoreCase("premium_plus")){
+                                if(purchase.getSku().equalsIgnoreCase("test_product")){
 
                                     if(!sp.contains("purchase")){
 

@@ -818,6 +818,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
         // Billing
         if(v == purchaseButton){
+
             initiatePurchase();
 
         }
@@ -893,7 +894,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
                     // The BillingClient is ready. You can query purchases here.
 
                     List<String> skuList = new ArrayList<>();
-                    skuList.add("premium_plus");
+                    skuList.add("test_product");
                     SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
                     params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
                     billingClient.querySkuDetailsAsync(params.build(),
@@ -973,7 +974,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
     private void initiatePurchase(){
         List<String> skuList = new ArrayList<> ();
-        skuList.add("premium_plus");
+        skuList.add("test_product");
         SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
         params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
         billingClient.querySkuDetailsAsync(params.build(),
