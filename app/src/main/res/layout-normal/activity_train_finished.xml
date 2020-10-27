@@ -246,7 +246,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         fancy:fb_borderWidth="2dp"
-                        fancy:fb_defaultColor="?attr/colorSurface"
+                        fancy:fb_defaultColor="?attr/background"
                         fancy:fb_focusColor="?attr/colorPrimary"
                         fancy:fb_radius="30dp"
                         fancy:fb_text="Unlearn"

@@ -39,7 +39,7 @@
         android:layout_marginRight="@dimen/keyline_4"
         android:layout_marginBottom="@dimen/keyline_2"
         app:floatingSearch_close_search_on_keyboard_dismiss="false"
-
+        app:floatingSearch_backgroundColor="@color/primary_background_color"
         app:floatingSearch_searchBarMarginLeft="-2dp"
         app:floatingSearch_searchBarMarginRight="-2dp"
         app:floatingSearch_searchBarMarginTop="0dp"

@@ -271,7 +271,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 
     @Override

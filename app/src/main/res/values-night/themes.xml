@@ -25,6 +25,7 @@
 
         <!--        Background and surface colors-->
         <item name="android:colorBackground">@color/black</item>
+        <item name="background">@color/black</item>
         <item name="colorPrimarySurface">@color/train_finished_recycerview_background_color</item>
         <item name="colorSurface">@color/train_finished_recycerview_background_color</item>
         <item name="colorOnPrimary">@color/black</item>

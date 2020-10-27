@@ -1839,6 +1839,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             }
         });
 
+
         builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -2149,6 +2150,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private void applyCorrectColor(){
         topBackground.setBackgroundColor(getResources().getColor(R.color.green));
         fab.setColorNormal(getResources().getColor(R.color.green));
+
         progress1.setProgressColor(getResources().getColor(R.color.green));
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

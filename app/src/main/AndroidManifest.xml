@@ -26,16 +26,24 @@
 
         <activity android:name=".SplashScreen" />
         <activity android:name=".NoWordLeft" />
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".practice.Practice" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".practice.Practice"
+            android:theme="@style/Main.Theme"
+            />
         <activity android:name=".NewTrain"
             android:theme="@style/Main.Theme"
             />
         <activity android:name=".TrainFinishedActivity"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".practice.PracticeFinished" />
-        <activity android:name=".wordAdapters.NewSettingActivity" />
+        <activity android:name=".practice.PracticeFinished"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".wordAdapters.NewSettingActivity"
+            android:theme="@style/Main.Theme"
+            />
          <!-- Register the Alarm Receiver -->
         <activity android:name=".AppLauncher"
             android:theme="@style/Theme.Launcher"
