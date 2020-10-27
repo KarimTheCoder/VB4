@@ -5,10 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +26,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -536,13 +540,25 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         isSatChecked =   sp.getBoolean("isSATActive", true);
         isGreChecked =   sp.getBoolean("isGREActive",true);
 
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = this.getTheme();
+
+        theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
+        @ColorInt int colorPrimaryDark = typedValue.data;
+        theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        @ColorInt int colorPrimary= typedValue.data;
+        theme.resolveAttribute(R.attr.colorPrimarySurface, typedValue, true);
+        @ColorInt int colorPrimarySurface= typedValue.data;
+
+
 
         fab = findViewById(R.id.train_fab);
         fab.setMax(5);
         progress1 = findViewById(R.id.progress_1);
-        progress1.setSecondaryProgressColor(getResources().getColor(R.color.colorPrimaryDark));
-        progress1.setProgressColor(getResources().getColor(R.color.colorPrimary));
-        progress1.setProgressBackgroundColor(getResources().getColor(R.color.primary_text_color_white));
+
+        progress1.setSecondaryProgressColor(colorPrimaryDark);
+        progress1.setProgressColor(colorPrimary);
+        progress1.setProgressBackgroundColor(colorPrimarySurface);
 
         IELTSdatabase = new IELTSWordDatabase(this);
         TOEFLdatabase = new TOEFLWordDatabase(this);

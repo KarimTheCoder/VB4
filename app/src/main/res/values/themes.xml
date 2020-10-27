@@ -17,11 +17,14 @@
         <item name="cardElevation">0dp</item>
     </style>
 
-    <style name="MainActivity.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Main.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/secondaryColor</item>
-        <item name="android:colorBackground">@color/primaryBackgroundColor</item>
-        <item name="android:statusBarColor">@color/primaryBackgroundColor</item>
+
+        <!--        Background and surface colors-->
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorPrimarySurface">@color/train_finished_recycerview_background_color</item>
         <item name="colorSurface">@color/primaryBackgroundColor</item>
     </style>
 
