@@ -2073,7 +2073,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private void initializeAds(){
 
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
         boolean isAdShow = getIsAdShow();
 
 
