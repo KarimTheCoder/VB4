@@ -1,5 +1,4 @@
 package com.fortitude.shamsulkarim.ieltsfordory;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -17,6 +16,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.forCheckingConnection.ConnectivityHelper;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -285,17 +285,13 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             if(ieltsRes.getString(2).equalsIgnoreCase("true")){
                 ieltsFavNumBuilder.append(1+"+");
             }else{
-
                 ieltsFavNumBuilder.append(0+"+");
-
             }
 
             if(ieltsRes.getString(3).equalsIgnoreCase("true")){
                 ieltsLearnedNumBuilder.append(1+"+");
             }else{
-
                 ieltsLearnedNumBuilder.append(0+"+");
-
             }
 
         }

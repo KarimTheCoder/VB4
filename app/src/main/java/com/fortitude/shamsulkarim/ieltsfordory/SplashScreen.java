@@ -104,14 +104,12 @@ public class SplashScreen extends AppCompatActivity {
         setupAppTheme();
 
 
-        try {
 
-            ProgressBar progressBar = findViewById(R.id.spin_splash_screen);
-            Sprite doubleBounce = new ThreeBounce();
-            progressBar.setIndeterminateDrawable(doubleBounce);
-        }catch (NullPointerException i){
-            Log.i("Progressbar", Objects.requireNonNull(i.getMessage()));
-        }
+
+        ProgressBar progressBar = findViewById(R.id.spin_splash_screen);
+        Sprite doubleBounce = new ThreeBounce();
+        progressBar.setIndeterminateDrawable(doubleBounce);
+
 
 
 
@@ -212,7 +210,7 @@ public class SplashScreen extends AppCompatActivity {
         private  IELTSWordDatabase ieltsWordDatabase;
         private  TOEFLWordDatabase toeflWordDatabase;
         private  SATWordDatabase satWordDatabase;
-        private GREWordDatabase greWordDatabase;
+        private  GREWordDatabase greWordDatabase;
 
         // SQL Database Initialization
 //---------------------------------------------------
@@ -390,16 +388,9 @@ public class SplashScreen extends AppCompatActivity {
         }
 
 
-
-
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-
-
-
-
-
         }
 
         @Override
@@ -419,8 +410,6 @@ public class SplashScreen extends AppCompatActivity {
            // Toast.makeText(getApplicationContext(),"Async Task Finished",Toast.LENGTH_LONG).show();
 
         }
-
-
 
         private void launchMainActivity(){
 

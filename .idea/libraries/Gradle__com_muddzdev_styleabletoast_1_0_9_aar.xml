@@ -4,6 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9623ca1132403499fe38eddd5727bbd8/jetified-styleabletoast-1.0.9/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9623ca1132403499fe38eddd5727bbd8/jetified-styleabletoast-1.0.9/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9623ca1132403499fe38eddd5727bbd8/jetified-styleabletoast-1.0.9/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c3a97a57dd2398b1773c6d96461fef90/jetified-styleabletoast-1.0.9/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c3a97a57dd2398b1773c6d96461fef90/jetified-styleabletoast-1.0.9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c3a97a57dd2398b1773c6d96461fef90/jetified-styleabletoast-1.0.9/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.muddzdev/styleabletoast/1.0.9/943605696f04a86c55a30061c0f50677db9beb78/styleabletoast-1.0.9-javadoc.jar!/" />
