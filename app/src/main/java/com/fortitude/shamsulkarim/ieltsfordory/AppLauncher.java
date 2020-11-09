@@ -16,16 +16,16 @@ public class AppLauncher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app_launcher);
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         decorView.setSystemUiVisibility(uiOptions);
         Window window = getWindow();
         Drawable background = ContextCompat.getDrawable(this,R.drawable.gradient);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(android.R.color.transparent));
-        window.setNavigationBarColor(getResources().getColor(android.R.color.transparent));
+        window.setStatusBarColor(getColor(android.R.color.transparent));
+        window.setNavigationBarColor(getColor(android.R.color.transparent));
         window.setBackgroundDrawable(background);
+
 
 
 

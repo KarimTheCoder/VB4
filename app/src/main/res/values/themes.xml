@@ -7,6 +7,7 @@
         <item name="android:colorBackground">@color/primaryBackgroundColor</item>
         <item name="android:statusBarColor">@color/primaryBackgroundColor</item>
         <item name="colorSurface">@color/primaryBackgroundColor</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Purchase.Card.Theme"  parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -28,6 +29,7 @@
         <item name="colorPrimarySurface">@color/train_finished_recycerview_background_color</item>
         <item name="colorSurface">@color/primaryBackgroundColor</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Rate.Card.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
