@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         sp = v.getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         Window window = Objects.requireNonNull(getActivity()).getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.primary_background_color));
+        window.setStatusBarColor(getContext().getColor(R.color.primary_background_color));
 
 
         if(!sp.contains("home")){
@@ -527,7 +527,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                 trialStatus = "PREMIUM+";
                 trialStatusTextView.setText(trialStatus);
-                trialStatusTextView.setTextColor(getResources().getColor(R.color.green));
+                trialStatusTextView.setTextColor(getContext().getColor(R.color.green));
             }
 
 
@@ -548,7 +548,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     .setTopColorRes(R.color.red)
                     .setButtonsColorRes(R.color.secondary_text_color)
                     .setIcon(R.drawable.ic_information)
-                    .setIconTintColor(getResources().getColor(R.color.primary_text_color_white))
+                    .setIconTintColor(getContext().getColor(R.color.primary_text_color_white))
                     .setNegativeButton("Continue with basic", new View.OnClickListener(){
 
                         @Override
@@ -560,7 +560,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     })
                     .setTitle(R.string.trial_ended)
                     .setMessage(R.string.trial_ended_description)
-                    .setNeutralButtonColor(getResources().getColor(R.color.green))
+                    .setNeutralButtonColor(getContext().getColor(R.color.green))
                     .setNeutralButton("Upgrade", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

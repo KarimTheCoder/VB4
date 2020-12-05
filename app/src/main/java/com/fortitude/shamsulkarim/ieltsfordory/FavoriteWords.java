@@ -66,12 +66,12 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
         View v = inflater.inflate(R.layout.fragment_favorite_words,container,false);
         Window window = Objects.requireNonNull(getActivity()).getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        window.setStatusBarColor(getContext().getColor(R.color.colorPrimary));
 
         tts = new TextToSpeech(getContext(), this);
         fab = v.findViewById(R.id.fab_favorite);
-        fab.setColorNormal(getResources().getColor(R.color.colorPrimary));
-        fab.setColorPressed(getResources().getColor(R.color.colorPrimaryDark));
+        fab.setColorNormal(getContext().getColor(R.color.colorPrimary));
+        fab.setColorPressed(getContext().getColor(R.color.colorPrimaryDark));
 
         fabY = fab.getY();
 
@@ -85,7 +85,7 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
 
         Toolbar toolbar= v.findViewById(R.id.favoriteToolbar);
         toolbar.setTitle("FAVORITE");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.beginnerS));
+        toolbar.setTitleTextColor(getContext().getColor(R.color.beginnerS));
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
 

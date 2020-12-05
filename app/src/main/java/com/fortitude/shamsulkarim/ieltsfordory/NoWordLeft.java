@@ -52,22 +52,22 @@ public class NoWordLeft extends AppCompatActivity implements View.OnClickListene
         soProud.setTypeface(comfortaRegular);
 
         if(level.equalsIgnoreCase("beginner")){
-            home.setTextColor(getResources().getColor(R.color.beginnerP));
-            home.setBorderColor(getResources().getColor(R.color.beginnerP));
-            reset.setBorderColor(getResources().getColor(R.color.beginnerP));
-            reset.setTextColor(getResources().getColor(R.color.beginnerP));
-            congratulation.setTextColor(getResources().getColor(R.color.beginnerP));
+            home.setTextColor(getColor(R.color.beginnerP));
+            home.setBorderColor(getColor(R.color.beginnerP));
+            reset.setBorderColor(getColor(R.color.beginnerP));
+            reset.setTextColor(getColor(R.color.beginnerP));
+            congratulation.setTextColor(getColor(R.color.beginnerP));
 
             noWordImage.setImageResource(R.drawable.beginner_no_words);
 
         }
 
         if(level.equalsIgnoreCase("intermediate")){
-            home.setTextColor(getResources().getColor(R.color.intermedateP));
-            home.setBorderColor(getResources().getColor(R.color.intermedateP));
-            reset.setBorderColor(getResources().getColor(R.color.intermedateP));
-            reset.setTextColor(getResources().getColor(R.color.intermedateP));
-            congratulation.setTextColor(getResources().getColor(R.color.intermedateP));
+            home.setTextColor(getColor(R.color.intermedateP));
+            home.setBorderColor(getColor(R.color.intermedateP));
+            reset.setBorderColor(getColor(R.color.intermedateP));
+            reset.setTextColor(getColor(R.color.intermedateP));
+            congratulation.setTextColor(getColor(R.color.intermedateP));
 
             noWordImage.setImageResource(R.drawable.intermediate_no_words);
 
@@ -75,12 +75,12 @@ public class NoWordLeft extends AppCompatActivity implements View.OnClickListene
 
         if(level.equalsIgnoreCase("advance")){
 
-            home.setTextColor(getResources().getColor(R.color.advanceP));
-            home.setBorderColor(getResources().getColor(R.color.advanceP));
-            reset.setBorderColor(getResources().getColor(R.color.advanceP));
-            reset.setTextColor(getResources().getColor(R.color.advanceP));
+            home.setTextColor(getColor(R.color.advanceP));
+            home.setBorderColor(getColor(R.color.advanceP));
+            reset.setBorderColor(getColor(R.color.advanceP));
+            reset.setTextColor(getColor(R.color.advanceP));
             noWordImage.setImageResource(R.drawable.advance_no_words);
-            congratulation.setTextColor(getResources().getColor(R.color.advanceP));
+            congratulation.setTextColor(getColor(R.color.advanceP));
 
         }
 

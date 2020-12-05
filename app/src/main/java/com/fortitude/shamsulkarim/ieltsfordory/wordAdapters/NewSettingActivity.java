@@ -106,7 +106,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_new_setting);
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.toolbar_background_color));
+        window.setStatusBarColor(getColor(R.color.toolbar_background_color));
 
         // This code reports to Crashlytics of connection
         boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
@@ -506,8 +506,8 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
         signIn = findViewById(R.id.ns_sign_in);
-        signIn.setBackgroundColor(getResources().getColor(R.color.card_background_color));
-        signIn.setTextColor(getResources().getColor(R.color.primary_text_color));
+        signIn.setBackgroundColor(getColor(R.color.card_background_color));
+        signIn.setTextColor(getColor(R.color.primary_text_color));
 
         userName = findViewById(R.id.ns_username);
         userDetail = findViewById(R.id.user_detail);
@@ -540,11 +540,11 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         if(sp.getString("secondlanguage","spanish").equalsIgnoreCase("spanish")){
 
 
-            spanish.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            spanish.setTextColor(getResources().getColor(R.color.text_white_87));
+            spanish.setBackgroundColor(getColor(R.color.colorPrimary));
+            spanish.setTextColor(getColor(R.color.text_white_87));
         }else {
-            spanish.setTextColor(getResources().getColor(R.color.primary_text_color));
-            spanish.setBackgroundColor(getResources().getColor(R.color.card_background_color));
+            spanish.setTextColor(getColor(R.color.primary_text_color));
+            spanish.setBackgroundColor(getColor(R.color.card_background_color));
         }
 
 
@@ -1421,12 +1421,12 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
 
                 sp.edit().putString("secondlanguage","english").apply();
-                spanish.setBackgroundColor(getResources().getColor(R.color.card_background_color));
-                spanish.setTextColor(getResources().getColor(R.color.primary_text_color));
+                spanish.setBackgroundColor(getColor(R.color.card_background_color));
+                spanish.setTextColor(getColor(R.color.primary_text_color));
             }else {
                 sp.edit().putString("secondlanguage","spanish").apply();
-                spanish.setTextColor(getResources().getColor(R.color.text_white_87));
-                spanish.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                spanish.setTextColor(getColor(R.color.text_white_87));
+                spanish.setBackgroundColor(getColor(R.color.colorPrimary));
             }
 
 

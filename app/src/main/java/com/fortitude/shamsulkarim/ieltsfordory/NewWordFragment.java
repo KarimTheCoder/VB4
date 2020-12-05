@@ -67,7 +67,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
                              Bundle savedInstanceState) {
         Window window = Objects.requireNonNull(getActivity()).getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        window.setStatusBarColor(getContext().getColor(R.color.colorPrimary));
         View v = inflater.inflate(R.layout.fragment_new_word,container,false);
         sp = Objects.requireNonNull(getContext()).getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         gettingResources();
@@ -75,7 +75,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
         tts = new TextToSpeech(getContext(), this);
         Toolbar toolbar = v.findViewById(R.id.word_toolbar);
         toolbar.setTitle("WORDS");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.beginnerS));
+        toolbar.setTitleTextColor(getContext().getColor(R.color.beginnerS));
         setHasOptionsMenu(true);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {

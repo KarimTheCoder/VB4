@@ -59,7 +59,7 @@ public class profile_fragment extends Fragment implements View.OnClickListener {
 
         Window window = Objects.requireNonNull(getActivity()).getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.toolbar_background_color));
+        window.setStatusBarColor(getContext().getColor(R.color.toolbar_background_color));
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile_fragment, container, false);
         Toolbar toolbar = v.findViewById(R.id.profile_toolbar);

@@ -147,7 +147,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        window.setStatusBarColor(getColor(R.color.colorPrimary));
         // This code reports to Crashlytics of connection
         // Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
@@ -332,7 +332,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                     if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
                         String combineBothLanguage = fiveWords.get(quizCycle).getWord()+"\n"+fiveWords.get(quizCycle).getWordSL();
-                        final ForegroundColorSpan lowColor = new ForegroundColorSpan(getResources().getColor(R.color.secondary_text_color));
+                        final ForegroundColorSpan lowColor = new ForegroundColorSpan(getColor(R.color.secondary_text_color));
                         SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
                         spanWord.setSpan(lowColor,fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         spanWord.setSpan(new RelativeSizeSpan(0.4f), fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -417,7 +417,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
 
                         String combineBothLanguage = fiveWords.get(showCycle).getWord()+"\n"+fiveWords.get(showCycle).getWordSL();
-                        final ForegroundColorSpan lowColor = new ForegroundColorSpan(getResources().getColor(R.color.secondary_text_color));
+                        final ForegroundColorSpan lowColor = new ForegroundColorSpan(getColor(R.color.secondary_text_color));
                         SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
                         spanWord.setSpan(lowColor,fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         spanWord.setSpan(new RelativeSizeSpan(0.6f), fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -2136,25 +2136,25 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     }
 
     private void applyWrongColor(){
-        topBackground.setBackgroundColor(getResources().getColor(R.color.red));
-        fab.setColorNormal(getResources().getColor(R.color.red));
-        progress1.setProgressColor(getResources().getColor(R.color.red));
+        topBackground.setBackgroundColor(getColor(R.color.red));
+        fab.setColorNormal(getColor(R.color.red));
+        progress1.setProgressColor(getColor(R.color.red));
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.red));
+        window.setStatusBarColor(getColor(R.color.red));
         trainCircle1.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
         trainCircle2.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
         trainCircle3.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
         trainCircle4.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
     }
     private void applyCorrectColor(){
-        topBackground.setBackgroundColor(getResources().getColor(R.color.green));
-        fab.setColorNormal(getResources().getColor(R.color.green));
+        topBackground.setBackgroundColor(getColor(R.color.green));
+        fab.setColorNormal(getColor(R.color.green));
 
-        progress1.setProgressColor(getResources().getColor(R.color.green));
+        progress1.setProgressColor(getColor(R.color.green));
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.green));
+        window.setStatusBarColor(getColor(R.color.green));
 
         trainCircle1.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
         trainCircle2.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));

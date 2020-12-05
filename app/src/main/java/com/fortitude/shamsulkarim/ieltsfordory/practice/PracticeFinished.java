@@ -35,7 +35,7 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.primary_background_color));
+        window.setStatusBarColor(getColor(R.color.primary_background_color));
 
         initialization();
         getCounts();
@@ -66,7 +66,7 @@ public class PracticeFinished extends AppCompatActivity implements View.OnClickL
         rateCard.setOnClickListener(this);
 
         home = findViewById(R.id.tf_home);
-        home.setColorNormal(getResources().getColor(R.color.primary_text_color_white));
+        home.setColorNormal(getColor(R.color.primary_text_color_white));
         practiceAgain = findViewById(R.id.tf_train_again);
         practiceAgain.setText("PRACTICE AGAIN");
         TextView wordCountText = findViewById(R.id.practice_finished_word_text);

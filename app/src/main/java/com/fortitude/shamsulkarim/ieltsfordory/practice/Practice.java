@@ -143,7 +143,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             setContentView(R.layout.activity_new_train);
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        window.setStatusBarColor(getColor(R.color.colorPrimary));
 
         // This code reports to Crashlytics of connection
 
@@ -758,11 +758,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
 
-        progress1.setProgressColor(getResources().getColor(R.color.colorPrimary));
-        progress1.setSecondaryProgressColor(getResources().getColor(R.color.colorPrimaryDark));
-        progress1.setProgressBackgroundColor(getResources().getColor(R.color.primary_text_color_white));
-        fab.setColorNormal(getResources().getColor(R.color.colorPrimary));
-        fab.setColorPressed(getResources().getColor(R.color.colorPrimaryDark));
+        progress1.setProgressColor(getColor(R.color.colorPrimary));
+        progress1.setSecondaryProgressColor(getColor(R.color.colorPrimaryDark));
+        progress1.setProgressBackgroundColor(getColor(R.color.primary_text_color_white));
+        fab.setColorNormal(getColor(R.color.colorPrimary));
+        fab.setColorPressed(getColor(R.color.colorPrimaryDark));
         fiveWords = new ArrayList<>();
 
         answerCard1.setAlpha(0f);
@@ -2022,24 +2022,24 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     }
 
     private void applyWrongColor(){
-        topBackground.setBackgroundColor(getResources().getColor(R.color.red));
-        fab.setColorNormal(getResources().getColor(R.color.red));
-        progress1.setProgressColor(getResources().getColor(R.color.red));
+        topBackground.setBackgroundColor(getColor(R.color.red));
+        fab.setColorNormal(getColor(R.color.red));
+        progress1.setProgressColor(getColor(R.color.red));
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.red));
+        window.setStatusBarColor(getColor(R.color.red));
         trainCircle1.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
         trainCircle2.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
         trainCircle3.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
         trainCircle4.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
     }
     private void applyCorrectColor(){
-        topBackground.setBackgroundColor(getResources().getColor(R.color.green));
-        fab.setColorNormal(getResources().getColor(R.color.green));
-        progress1.setProgressColor(getResources().getColor(R.color.green));
+        topBackground.setBackgroundColor(getColor(R.color.green));
+        fab.setColorNormal(getColor(R.color.green));
+        progress1.setProgressColor(getColor(R.color.green));
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.green));
+        window.setStatusBarColor(getColor(R.color.green));
 
         trainCircle1.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
         trainCircle2.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));

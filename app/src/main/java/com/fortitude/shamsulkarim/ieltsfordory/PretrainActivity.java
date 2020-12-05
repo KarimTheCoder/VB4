@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -151,8 +150,8 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         settingsButton.setOnClickListener(this);
 
         progressBar = findViewById(R.id.start_training_progress);
-        progressBar.setProgressColor(getResources().getColor(R.color.colorPrimary));
-        progressBar.setProgressBackgroundColor(getResources().getColor(R.color.third_background_color));
+        progressBar.setProgressColor(getColor(R.color.colorPrimary));
+        progressBar.setProgressBackgroundColor(getColor(R.color.third_background_color));
         progressCountTextview = findViewById(R.id.progress_count_textview);
 
 

@@ -174,12 +174,6 @@
         <item name="android:layout_marginBottom">@dimen/keyline_2</item>
     </style>
 
-    <style name="purchase_card_style" parent="CardView">
-        <item name="cardElevation">0dp</item>
-        <item name="cardBackgroundColor">@color/purchase_card_backgroundcolor</item>
-
-    </style>
-
     <style name="home_title_style" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/primary_text_color_white</item>
         <item name="android:textSize">28sp</item>

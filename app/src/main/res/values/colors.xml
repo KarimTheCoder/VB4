@@ -5,21 +5,15 @@
 
     <color name="colorPrimary">#7264f6</color>
     <color name="colorPrimaryDark">#3539c2</color>
-    <color name="colorPrimaryLight">#a992ff</color>
 
-   <!--    Secondary colors-->
+    <!--    Secondary colors-->
 
     <color name="secondaryColor">#75deea</color>
-    <color name="secondaryColorDark">#3cacb8</color>
-    <color name="secondaryColorLight">#aaffff</color>
 
 
-   <!--    Background Colors-->
+    <!--    Background Colors-->
 
     <color name="primaryBackgroundColor">#fafafa</color>
-    <color name="primaryBackgroundColorDark">#fafafa</color>
-    <color name="primaryBackgroundColorLight">#ffffff</color>
-    <color name="primaryBackgroundColorNight">#000000</color>
 
 
     <!--  Solid Colors  -->
@@ -31,7 +25,7 @@
     <color name="spinnerColor">@color/secondary_text_color</color>
     <color name="secondaryGradiantColor">#76dfeb</color>
     <color name="colorAccent">#7264f6</color>
-    <color name="grey">#E0E0E0</color>o
+    o
     <color name="lowColor">#8c979a</color>
     <color name="green">#2ecc71</color>
     <color name="greenDark">#009a44</color>
@@ -71,19 +65,14 @@
     //Card Background Color
     <color name="card_background_color">#ffffff</color>
     //Card Background Color
-    <color name="card_background_color_night">#121212</color>
 
     // Toolbar background color
     <color name="toolbar_background_color">#ffffff</color>
 
     // New Train Progress fab colors
-    <color name="progress_fab_color_primary">@color/colorPrimary</color>
-    <color name="progress_fab_color_secondary">@color/colorPrimaryDark</color>
-    <color name="progress_fab_color_background">@color/grey100</color>
 
     // Train finished Recyclerview Color
     <color name="train_finished_recycerview_background_color">@color/grey100</color>
-    <color name="purchase_card_backgroundcolor">#F5F5F5</color>
 
 
 </resources>

@@ -80,7 +80,7 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
         Window window = Objects.requireNonNull(getActivity()).getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        window.setStatusBarColor(getContext().getColor(R.color.colorPrimary));
 
         initialization(v);
         gettingResources();
@@ -205,13 +205,13 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
         startLearning = v.findViewById(R.id.nl_start_learning);
         startLearning.setOnClickListener(this);
         startLearning.setBackgroundResource(R.drawable.gradient);
-        startLearning.setBorderColor(getResources().getColor(R.color.colorPrimaryDark));
-        startLearning.setFocusBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        startLearning.setBorderColor(getContext().getColor(R.color.colorPrimaryDark));
+        startLearning.setFocusBackgroundColor(getContext().getColor(R.color.colorPrimary));
         sv= v.findViewById(R.id.mSearch);
 
         Toolbar toolbar = v.findViewById(R.id.learned_toolbar);
         toolbar.setTitle("LEARNED");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+        toolbar.setTitleTextColor(getContext().getColor(R.color.colorPrimary));
         setHasOptionsMenu(true);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
@@ -292,12 +292,12 @@ public class LearnedWords extends Fragment implements View.OnClickListener, Adap
 
 
         fab = v.findViewById(R.id.fab);
-        fab.setColorNormal(getResources().getColor(R.color.colorPrimary));
-        fab.setColorPressed(getResources().getColor(R.color.colorPrimaryDark));
+        fab.setColorNormal(getContext().getColor(R.color.colorPrimary));
+        fab.setColorPressed(getContext().getColor(R.color.colorPrimaryDark));
         View sheetView = v.findViewById(R.id.fab_sheet);
         View overlay = v.findViewById(R.id.overlay);
-        int sheetColor = getResources().getColor(R.color.colorPrimary);
-        int fabColor = getResources().getColor(R.color.beginnerS);
+        int sheetColor = getContext().getColor(R.color.colorPrimary);
+        int fabColor = getContext().getColor(R.color.beginnerS);
         MaterialSheetFab materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay,
                 sheetColor, fabColor);
 

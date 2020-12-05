@@ -62,7 +62,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_train_finished);
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.primary_background_color));
+        window.setStatusBarColor(getColor(R.color.primary_background_color));
 
         initialization();
         setRecyclerView();

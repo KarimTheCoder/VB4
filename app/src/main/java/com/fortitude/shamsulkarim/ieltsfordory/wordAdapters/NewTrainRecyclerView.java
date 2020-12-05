@@ -150,8 +150,8 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                 SpannableStringBuilder spanEx1 = new SpannableStringBuilder(word.getExample1()+"\n"+word.getExample1SL());
 
                 // Span to set text color to some RGB value
-                final ForegroundColorSpan fcs = new ForegroundColorSpan(ctx.getResources().getColor(R.color.primary_text_color));
-                final ForegroundColorSpan lowColor = new ForegroundColorSpan(ctx.getResources().getColor(R.color.third_text_color));
+                final ForegroundColorSpan fcs = new ForegroundColorSpan(ctx.getColor(R.color.primary_text_color));
+                final ForegroundColorSpan lowColor = new ForegroundColorSpan(ctx.getColor(R.color.third_text_color));
                 spanEx1.setSpan(fcs,0,word.getExample1().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
@@ -225,7 +225,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                     imageViewHolder.imageStateText.setText(R.string.waitingForImage);
                     imageViewHolder.imageText.setText(" ");
 
-                    final ForegroundColorSpan fcss = new ForegroundColorSpan(ctx.getResources().getColor(R.color.primary_text_color));
+                    final ForegroundColorSpan fcss = new ForegroundColorSpan(ctx.getColor(R.color.primary_text_color));
                     final SpannableStringBuilder spanEx3 = new SpannableStringBuilder(word.getExample3()+"\n"+word.getExample3SL());
                     spanEx3.setSpan(fcss,0,word.getExample3().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -331,8 +331,8 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             isVoicePronunciation = sp.getBoolean("pronunState",true);
             favorite.setOnClickListener(this);
             speak.setOnClickListener(this);
-            speak.setDisableBackgroundColor(ctx.getResources().getColor(R.color.primary_background_color));
-            speak.setDisableBorderColor(ctx.getResources().getColor(R.color.primary_background_color));
+            speak.setDisableBackgroundColor(ctx.getColor(R.color.primary_background_color));
+            speak.setDisableBorderColor(ctx.getColor(R.color.primary_background_color));
 
             if( ConnectivityHelper.isConnectedToNetwork(itemView.getContext()) && isVoicePronunciation){
                 speak.setEnabled(false);

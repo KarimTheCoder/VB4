@@ -97,7 +97,7 @@ public class NotificationScheduler {
                 .setContentText(content)
                 .setAutoCancel(true)
                 .setSound(alarmSound)
-                .setColor(context.getResources().getColor(R.color.colorPrimary))
+                .setColor(context.getColor(R.color.colorPrimary))
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setSmallIcon(R.drawable.ic_stat_notification_icon)
                 .setContentIntent(pendingIntent).build();
