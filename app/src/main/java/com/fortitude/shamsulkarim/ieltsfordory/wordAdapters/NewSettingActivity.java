@@ -611,35 +611,71 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
 
 
-        if(repeatationPerSession == 5){
-
+        if(repeatationPerSession == 25){
 
             rps.setSelection(0);
         }
-        else if(repeatationPerSession == 4){
-
+        else if(repeatationPerSession == 20){
 
             rps.setSelection(1);
-        }else {
+        }else if(repeatationPerSession == 15) {
 
             rps.setSelection(2);
 
+        }else if(repeatationPerSession == 10){
+            rps.setSelection(3);
+        }
+        else if(repeatationPerSession == 5){
+            rps.setSelection(4);
+
+        }else if(repeatationPerSession == 4){
+            rps.setSelection(5);
+        }
+        else if(repeatationPerSession == 3){
+            rps.setSelection(6);
         }
 
-        if(wordsPerSession == 5){
 
+        if(wordsPerSession == 25){
 
             wps.setSelection(0);
         }
-        else if(wordsPerSession == 4){
-
+        else if(wordsPerSession == 20){
 
             wps.setSelection(1);
-        }else {
+        }else if(wordsPerSession == 15) {
 
             wps.setSelection(2);
 
+        }else if(wordsPerSession == 10){
+            wps.setSelection(3);
         }
+        else if(wordsPerSession == 5){
+            wps.setSelection(4);
+
+        }else if(wordsPerSession == 4){
+            wps.setSelection(5);
+        }
+        else if(wordsPerSession == 3){
+            wps.setSelection(6);
+        }
+
+
+// TODO: 12/5/2020 delete this line if everything works
+//        if(wordsPerSession == 5){
+//
+//
+//            wps.setSelection(0);
+//        }
+//        else if(wordsPerSession == 4){
+//
+//
+//            wps.setSelection(1);
+//        }else {
+//
+//            wps.setSelection(2);
+//
+//        }
 
        sp.getInt("language",0);
 
@@ -1470,52 +1506,75 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
             if(i == 0){
 
+                wordsPerSession = 25;
+                sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+
+            }else if( i == 1){
+
+                wordsPerSession = 20;
+                sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+
+            }else if(i == 2) {
+
+                wordsPerSession = 15;
+                sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+            }else if(i == 3) {
+
+                wordsPerSession = 10;
+                sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
+            }else if(i == 4) {
 
                 wordsPerSession = 5;
-
                 sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-
-
-
-            }if( i == 1){
-
+            }else if(i == 5) {
 
                 wordsPerSession = 4;
-
                 sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-
-            }
-            if(i == 2) {
-
+            }else if(i == 6) {
 
                 wordsPerSession = 3;
                 sp.edit().putInt("wordsPerSession",wordsPerSession).apply();
-
             }
+
+
         }
 
         if(adapterView.getId() == rps.getId()){
 
             if(i == 0){
 
-
-                repeatationPerSession = 5;
+                repeatationPerSession = 25;
                 sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-
-
 
             }if( i == 1){
 
-
-                repeatationPerSession = 4;
+                repeatationPerSession = 20;
                 sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
 
             }if( i == 2){
 
+                repeatationPerSession = 15;
+                sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+            }
+            if( i == 3){
+
+                repeatationPerSession = 10;
+                sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+            }
+            if( i == 4){
+
+                repeatationPerSession = 5;
+                sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+            }
+            if( i == 5){
+
+                repeatationPerSession = 4;
+                sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
+            }
+            if( i == 6){
 
                 repeatationPerSession = 3;
                 sp.edit().putInt("repeatationPerSession",repeatationPerSession).apply();
-
             }
 
         }
