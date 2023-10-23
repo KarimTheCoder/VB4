@@ -1,21 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: com.muddzdev:styleabletoast:1.0.9@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9623ca1132403499fe38eddd5727bbd8/jetified-styleabletoast-1.0.9/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9623ca1132403499fe38eddd5727bbd8/jetified-styleabletoast-1.0.9/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9623ca1132403499fe38eddd5727bbd8/jetified-styleabletoast-1.0.9/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c3a97a57dd2398b1773c6d96461fef90/jetified-styleabletoast-1.0.9/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c3a97a57dd2398b1773c6d96461fef90/jetified-styleabletoast-1.0.9/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c3a97a57dd2398b1773c6d96461fef90/jetified-styleabletoast-1.0.9/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5032b592ca4317c82c39540777ba1bb0/jetified-styleabletoast-1.0.9/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5032b592ca4317c82c39540777ba1bb0/jetified-styleabletoast-1.0.9/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5032b592ca4317c82c39540777ba1bb0/jetified-styleabletoast-1.0.9/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/4c1ae0698df87aaeb16e0915dc2cd46a/jetified-styleabletoast-1.0.9/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/4c1ae0698df87aaeb16e0915dc2cd46a/jetified-styleabletoast-1.0.9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/4c1ae0698df87aaeb16e0915dc2cd46a/jetified-styleabletoast-1.0.9/res" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.muddzdev/styleabletoast/1.0.9/943605696f04a86c55a30061c0f50677db9beb78/styleabletoast-1.0.9-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.muddzdev/styleabletoast/1.0.9/943605696f04a86c55a30061c0f50677db9beb78/styleabletoast-1.0.9-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.muddzdev/styleabletoast/1.0.9/df1d3a1cce8dd93e1a4ba23e2c9dee7e2a5c7def/styleabletoast-1.0.9-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.muddzdev/styleabletoast/1.0.9/df1d3a1cce8dd93e1a4ba23e2c9dee7e2a5c7def/styleabletoast-1.0.9-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -18,35 +18,35 @@
         tools:replace="android:supportsRtl"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".StartTrial" />
-        <activity android:name=".purchase.in_app_purchase" />
+        <activity android:name=".ui.initial.StartTrial" />
+        <activity android:name=".ui.purchase.in_app_purchase" />
         <activity
-            android:name=".PretrainActivity"
+            android:name=".ui.train.PretrainActivity"
             android:theme="@style/Pretrain.Theme"
             />
 
-        <activity android:name=".SplashScreen" />
-        <activity android:name=".NoWordLeft" />
-        <activity android:name=".MainActivity"
+        <activity android:name=".ui.initial.SplashScreen" />
+        <activity android:name=".ui.train.NoWordLeft" />
+        <activity android:name=".ui.MainActivity"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".practice.Practice"
+        <activity android:name=".ui.practice.Practice"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".NewTrain"
+        <activity android:name=".ui.train.NewTrain"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".TrainFinishedActivity"
+        <activity android:name=".ui.train.TrainFinishedActivity"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".practice.PracticeFinished"
+        <activity android:name=".ui.practice.PracticeFinished"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".wordAdapters.NewSettingActivity"
+        <activity android:name=".ui.NewSettingActivity"
             android:theme="@style/Main.Theme"
             />
          <!-- Register the Alarm Receiver -->
-        <activity android:name=".AppLauncher"
+        <activity android:name=".ui.initial.AppLauncher"
             android:theme="@style/Theme.Launcher"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
@@ -69,7 +69,7 @@
             android:value="ca-app-pub-7815894766256601~5016349461" />
 
         <receiver
-            android:name=".notification.AlarmReceiver"
+            android:name=".utility.notification.AlarmReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

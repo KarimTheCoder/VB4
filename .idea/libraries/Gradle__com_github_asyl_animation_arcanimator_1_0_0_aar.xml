@@ -1,16 +1,14 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.asyl.animation:arcanimator:1.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3e10f365968c835f71532d6dc902ddce/jetified-arcanimator-1.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4fcce3295118498f9f0690e5a42351eb/jetified-arcanimator-1.0.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4fcce3295118498f9f0690e5a42351eb/jetified-arcanimator-1.0.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4fcce3295118498f9f0690e5a42351eb/jetified-arcanimator-1.0.0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/4fcce3295118498f9f0690e5a42351eb/jetified-arcanimator-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/4fcce3295118498f9f0690e5a42351eb/jetified-arcanimator-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.asyl.animation/arcanimator/1.0.0/dd3e57f093206c7a356c52569df7e05304ed785/arcanimator-1.0.0-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.github.asyl.animation/arcanimator/1.0.0/dd3e57f093206c7a356c52569df7e05304ed785/arcanimator-1.0.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.asyl.animation/arcanimator/1.0.0/4331f407c4b386bab89e827924b53233562bcb9b/arcanimator-1.0.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.github.asyl.animation/arcanimator/1.0.0/4331f407c4b386bab89e827924b53233562bcb9b/arcanimator-1.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

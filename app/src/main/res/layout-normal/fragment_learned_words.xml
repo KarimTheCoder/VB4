@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.LearnedWords">
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.LearnedWords">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -131,7 +131,7 @@
         fancy:layout_constraintTop_toBottomOf="@+id/havenotlearned" />
 
 
-    <com.fortitude.shamsulkarim.ieltsfordory.wordAdapters.Fab
+    <com.fortitude.shamsulkarim.ieltsfordory.adapters.Fab
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

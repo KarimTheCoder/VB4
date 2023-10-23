@@ -1,12 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-ads-base:19.6.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bef9c371411714093eb8731d69210721/jetified-play-services-ads-base-19.6.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bef9c371411714093eb8731d69210721/jetified-play-services-ads-base-19.6.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bef9c371411714093eb8731d69210721/jetified-play-services-ads-base-19.6.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/bef9c371411714093eb8731d69210721/jetified-play-services-ads-base-19.6.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/bef9c371411714093eb8731d69210721/jetified-play-services-ads-base-19.6.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-base/19.6.0/6a8b08d2a93001c8d089863beda57683994fb63d/play-services-ads-base-19.6.0-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-base/19.6.0/6a8b08d2a93001c8d089863beda57683994fb63d/play-services-ads-base-19.6.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

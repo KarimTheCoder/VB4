@@ -1,16 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.firebase:firebase-iid-interop:16.0.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a5238174f9e8c0dcb3642f48ab9eb7ea/jetified-firebase-iid-interop-16.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a5238174f9e8c0dcb3642f48ab9eb7ea/jetified-firebase-iid-interop-16.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a5238174f9e8c0dcb3642f48ab9eb7ea/jetified-firebase-iid-interop-16.0.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ea7aa8642c268355c508a32807510db/jetified-firebase-iid-interop-16.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ea7aa8642c268355c508a32807510db/jetified-firebase-iid-interop-16.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ea7aa8642c268355c508a32807510db/jetified-firebase-iid-interop-16.0.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9685f80e4de1a3097a87cb445a847ece/jetified-firebase-iid-interop-16.0.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a5d88b2f17204c6cb6ebe7c09e67fc3c/jetified-firebase-iid-interop-16.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a5d88b2f17204c6cb6ebe7c09e67fc3c/jetified-firebase-iid-interop-16.0.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a5d88b2f17204c6cb6ebe7c09e67fc3c/jetified-firebase-iid-interop-16.0.1/res" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/ce3d92ebce3595ac515d6a5c91fb4313/jetified-firebase-iid-interop-16.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/ce3d92ebce3595ac515d6a5c91fb4313/jetified-firebase-iid-interop-16.0.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

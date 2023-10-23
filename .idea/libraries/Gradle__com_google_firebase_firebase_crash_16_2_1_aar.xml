@@ -1,15 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.firebase:firebase-crash:16.2.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/28e07992853a7816c37243c434f9c64b/jetified-firebase-crash-16.2.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/28e07992853a7816c37243c434f9c64b/jetified-firebase-crash-16.2.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/28e07992853a7816c37243c434f9c64b/jetified-firebase-crash-16.2.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92a570992b9c500231793224630a2a3a/jetified-firebase-crash-16.2.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92a570992b9c500231793224630a2a3a/jetified-firebase-crash-16.2.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92a570992b9c500231793224630a2a3a/jetified-firebase-crash-16.2.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f8864f5b8d1d9cd828b1679a6036cd0/jetified-firebase-crash-16.2.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f8864f5b8d1d9cd828b1679a6036cd0/jetified-firebase-crash-16.2.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f8864f5b8d1d9cd828b1679a6036cd0/jetified-firebase-crash-16.2.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/cadd235ab715ab8daa76d9c6fbf1ef05/jetified-firebase-crash-16.2.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/cadd235ab715ab8daa76d9c6fbf1ef05/jetified-firebase-crash-16.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/cadd235ab715ab8daa76d9c6fbf1ef05/jetified-firebase-crash-16.2.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

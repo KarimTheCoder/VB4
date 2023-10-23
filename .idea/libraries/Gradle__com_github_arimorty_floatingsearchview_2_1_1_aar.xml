@@ -1,24 +1,16 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.arimorty:floatingsearchview:2.1.1@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/65fa45e31b35b9107e2a5b8b90b92e97/jetified-floatingsearchview-2.1.1/annotations.zip!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/97cee0f89cbdc149dc7d2c8bb88d28e7/jetified-floatingsearchview-2.1.1/annotations.zip!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e532f971b41b2f96aa5fbc70edcf118c/jetified-floatingsearchview-2.1.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/150636a6c63127ef44796dd97a775a00/jetified-floatingsearchview-2.1.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/65fa45e31b35b9107e2a5b8b90b92e97/jetified-floatingsearchview-2.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/65fa45e31b35b9107e2a5b8b90b92e97/jetified-floatingsearchview-2.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/65fa45e31b35b9107e2a5b8b90b92e97/jetified-floatingsearchview-2.1.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/97cee0f89cbdc149dc7d2c8bb88d28e7/jetified-floatingsearchview-2.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/97cee0f89cbdc149dc7d2c8bb88d28e7/jetified-floatingsearchview-2.1.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/97cee0f89cbdc149dc7d2c8bb88d28e7/jetified-floatingsearchview-2.1.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e532f971b41b2f96aa5fbc70edcf118c/jetified-floatingsearchview-2.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e532f971b41b2f96aa5fbc70edcf118c/jetified-floatingsearchview-2.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e532f971b41b2f96aa5fbc70edcf118c/jetified-floatingsearchview-2.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/150636a6c63127ef44796dd97a775a00/jetified-floatingsearchview-2.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/150636a6c63127ef44796dd97a775a00/jetified-floatingsearchview-2.1.1/res" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/150636a6c63127ef44796dd97a775a00/jetified-floatingsearchview-2.1.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.arimorty/floatingsearchview/2.1.1/5af5c30598fc2a62289e6870cf51cf8aea0ccc48/floatingsearchview-2.1.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.github.arimorty/floatingsearchview/2.1.1/5af5c30598fc2a62289e6870cf51cf8aea0ccc48/floatingsearchview-2.1.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
