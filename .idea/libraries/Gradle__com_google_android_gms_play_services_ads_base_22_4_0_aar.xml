@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.gms:play-services-ads-base:22.4.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/ccc6fb1a25dde58d1093dd2955dc0a09/transformed/jetified-play-services-ads-base-22.4.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/ccc6fb1a25dde58d1093dd2955dc0a09/transformed/jetified-play-services-ads-base-22.4.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-base/22.4.0/e3b892141a4b402c234b153f243f7fd418b25d0d/play-services-ads-base-22.4.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

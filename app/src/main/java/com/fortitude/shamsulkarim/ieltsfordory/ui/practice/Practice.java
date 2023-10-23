@@ -46,8 +46,6 @@ import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;
 import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
-import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 import java.util.ArrayList;
@@ -126,7 +124,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private List<String> bWord,aWord,iWord,greWord;
     private List<Integer> bWordDatabasePosition, aWordDatabasePosition, iWordDatabasePosition, greWordDatabasePosition;
 
-    private PublisherInterstitialAd mPublisherInterstitialAd;
+    //private PublisherInterstitialAd mPublisherInterstitialAd;
     ProgressBar progressBar, adLoading;
     private String secondLanguage = "english";
     //----------------------
@@ -158,7 +156,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
         initializingSQLDatabase();
         initialization();
-        initializeAds();
+//        initializeAds();
         gettingResources();
         addingLearnedDatabase();
 
@@ -693,7 +691,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
                     hideViews();
                     adLoading.setVisibility(View.VISIBLE);
-                    showInterstitialAd();
+                   // showInterstitialAd();
 
 //                    Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
 //                    Practice.this.finish();
@@ -958,16 +956,17 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     public void onBackPressed() {
 
 
+        super.onBackPressed();
         new LovelyStandardDialog(this)
                 .setTopColorRes(R.color.colorPrimary)
                 .setButtonsColorRes(R.color.colorPrimary)
                 .setIcon(R.drawable.ic_leave)
-                .setTitle("Do you want to leave this session, "+sp.getString("userName","Boo")+"?")
+                .setTitle("Do you want to leave this session, " + sp.getString("userName", "Boo") + "?")
                 .setMessage("Leaving this session will make you lose your progress")
                 .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Practice.this.startActivity(new Intent(Practice.this,MainActivity.class));
+                        Practice.this.startActivity(new Intent(Practice.this, MainActivity.class));
                         Practice.this.finish();
                     }
                 })
@@ -1863,23 +1862,23 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 
     }
-    private void showInterstitialAd(){
-
-        if(mPublisherInterstitialAd.isLoaded()){
-
-            mPublisherInterstitialAd.show();
-
-
-        }else {
-
-            //Toast.makeText(this,"Ad is not loaded yet",Toast.LENGTH_SHORT).show();
-            Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
-            Practice.this.finish();
-
-        }
-
-
-    }
+//    private void showInterstitialAd(){
+//
+//        if(mPublisherInterstitialAd.isLoaded()){
+//
+//            mPublisherInterstitialAd.show();
+//
+//
+//        }else {
+//
+//            //Toast.makeText(this,"Ad is not loaded yet",Toast.LENGTH_SHORT).show();
+//            Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
+//            Practice.this.finish();
+//
+//        }
+//
+//
+//    }
 
 
 
@@ -1919,37 +1918,37 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     }
 
 
-    private void initializeAds(){
-        boolean isAdShow = getIsAdShow();
-        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
-
-        if(isAdShow){
-
-
-          if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-                 mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-                 mPublisherInterstitialAd.setAdListener( new AdListener(){
-
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
-                Practice.this.finish();
-
-                Toast.makeText(getApplicationContext(),"Sorry for the ad :(",Toast.LENGTH_SHORT).show();
-            }
-
-        });
-          }
-
-
-         }
-
-
-
-
-    }
+//    private void initializeAds(){
+//        boolean isAdShow = getIsAdShow();
+//        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+//        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
+//
+//        if(isAdShow){
+//
+//
+//          if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+//                 mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+//                 mPublisherInterstitialAd.setAdListener( new AdListener(){
+//
+//            @Override
+//            public void onAdClosed() {
+//                super.onAdClosed();
+//                Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
+//                Practice.this.finish();
+//
+//                Toast.makeText(getApplicationContext(),"Sorry for the ad :(",Toast.LENGTH_SHORT).show();
+//            }
+//
+//        });
+//          }
+//
+//
+//         }
+//
+//
+//
+//
+//    }
 
     private String checkTrialStatus(){
 

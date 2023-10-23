@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.gordonwong:material-sheet-fab:1.2.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/7cbf762450877713d7ac82cdba28cbd4/jetified-material-sheet-fab-1.2.1/res" />
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/7cbf762450877713d7ac82cdba28cbd4/jetified-material-sheet-fab-1.2.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-2/files-2.1/7cbf762450877713d7ac82cdba28cbd4/jetified-material-sheet-fab-1.2.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/7970de00981f5b4e5e04ab4ff4283795/transformed/jetified-material-sheet-fab-1.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/7970de00981f5b4e5e04ab4ff4283795/transformed/jetified-material-sheet-fab-1.2.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/7970de00981f5b4e5e04ab4ff4283795/transformed/jetified-material-sheet-fab-1.2.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.gordonwong/material-sheet-fab/1.2.1/e087f266bfb86aae871202b0d99b02d866cbf5c9/material-sheet-fab-1.2.1-javadoc.jar!/" />

@@ -12,6 +12,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.multidex.BuildConfig;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -27,7 +29,7 @@ import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
-import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
+
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
@@ -514,13 +516,13 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         //Firebase and Google Sign-In
         // [START config_signin]
         // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
         // [END config_signin]
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        mAuth = FirebaseAuth.getInstance();
+        //mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+       // mAuth = FirebaseAuth.getInstance();
         // firebase database
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         ref = firebaseDatabase.getReference();
@@ -1476,7 +1478,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         }
 
         if( v == restorePurchaseCard){
-            getPreviousPurchases();
+          //  getPreviousPurchases();
 
             Toast.makeText(this,"Restore process started...",Toast.LENGTH_SHORT).show();
         }
@@ -1666,73 +1668,73 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
     // Billing
 
-    private void getPreviousPurchases(){
-
-
-        billingClient = BillingClient.newBuilder(this)
-                .enablePendingPurchases()
-                .setListener(this)
-                .build();
-
-
-        billingClient.startConnection(new BillingClientStateListener() {
-            @Override
-            public void onBillingSetupFinished(@NotNull BillingResult billingResult) {
-                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
-                    // The BillingClient is ready. You can query purchases here.
-
-                    Purchase.PurchasesResult results = billingClient.queryPurchases(BillingClient.SkuType.INAPP);
-
-                    try{
-                        if(Objects.requireNonNull(results.getPurchasesList()).isEmpty()){
-                            Toast.makeText(getApplicationContext(),"Google tells us, you don't own Premium+",Toast.LENGTH_LONG).show();
-                        }else {
-
-                            for (Purchase purchase : Objects.requireNonNull(results.getPurchasesList())) {
-
-                                if(purchase.getSku().equalsIgnoreCase("test_product")){
-
-                                    if(!sp.contains("purchase")){
-
-                                        sp.edit().putBoolean("purchase",true).apply();
-                                        Toast.makeText(getApplicationContext(),"Product: "+purchase.getSku()+" restored",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            }
-                        }
-                    }catch (NullPointerException i){
-                        Log.i("Billing Result", Objects.requireNonNull(i.getMessage()));
-                    }
-                }
-                else if( billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE){
-
-                    Toast.makeText(getApplicationContext(),"Please connect to the internet",Toast.LENGTH_SHORT).show();
-                }
-                else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE){
-
-                    Toast.makeText(getApplicationContext(),"Please sign in to Google Play Store",Toast.LENGTH_SHORT).show();
-
-                }else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_DISCONNECTED){
-
-                    Toast.makeText(getApplicationContext(),"Play Store service is not connected now",Toast.LENGTH_SHORT).show();
-
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"BILLING | startConnection | RESULT: $billingResponseCode"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onBillingServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-                Toast.makeText(getApplicationContext(),"BILLING | onBillingServiceDisconnected | DISCONNECTED",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-
-    }
+//    private void getPreviousPurchases(){
+//
+//
+//        billingClient = BillingClient.newBuilder(this)
+//                .enablePendingPurchases()
+//                .setListener(this)
+//                .build();
+//
+//
+//        billingClient.startConnection(new BillingClientStateListener() {
+//            @Override
+//            public void onBillingSetupFinished(@NotNull BillingResult billingResult) {
+//                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
+//                    // The BillingClient is ready. You can query purchases here.
+//
+//                    Purchase.PurchasesResult results = billingClient.queryPurchases(BillingClient.SkuType.INAPP);
+//
+//                    try{
+//                        if(Objects.requireNonNull(results.getPurchasesList()).isEmpty()){
+//                            Toast.makeText(getApplicationContext(),"Google tells us, you don't own Premium+",Toast.LENGTH_LONG).show();
+//                        }else {
+//
+//                            for (Purchase purchase : Objects.requireNonNull(results.getPurchasesList())) {
+//
+//                                if(purchase.getSku().equalsIgnoreCase("test_product")){
+//
+//                                    if(!sp.contains("purchase")){
+//
+//                                        sp.edit().putBoolean("purchase",true).apply();
+//                                        Toast.makeText(getApplicationContext(),"Product: "+purchase.getSku()+" restored",Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }catch (NullPointerException i){
+//                        Log.i("Billing Result", Objects.requireNonNull(i.getMessage()));
+//                    }
+//                }
+//                else if( billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE){
+//
+//                    Toast.makeText(getApplicationContext(),"Please connect to the internet",Toast.LENGTH_SHORT).show();
+//                }
+//                else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE){
+//
+//                    Toast.makeText(getApplicationContext(),"Please sign in to Google Play Store",Toast.LENGTH_SHORT).show();
+//
+//                }else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_DISCONNECTED){
+//
+//                    Toast.makeText(getApplicationContext(),"Play Store service is not connected now",Toast.LENGTH_SHORT).show();
+//
+//                }
+//                else {
+//                    Toast.makeText(getApplicationContext(),"BILLING | startConnection | RESULT: $billingResponseCode"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            @Override
+//            public void onBillingServiceDisconnected() {
+//                // Try to restart the connection on the next request to
+//                // Google Play by calling the startConnection() method.
+//                Toast.makeText(getApplicationContext(),"BILLING | onBillingServiceDisconnected | DISCONNECTED",Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//
+//
+//
+//    }
 
     @Override
     public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> list) {

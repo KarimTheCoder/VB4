@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-crashlytics:18.4.3@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/f671cc0d1917201069d908704808b93b/transformed/jetified-firebase-crashlytics-18.4.3/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/f671cc0d1917201069d908704808b93b/transformed/jetified-firebase-crashlytics-18.4.3/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/f671cc0d1917201069d908704808b93b/transformed/jetified-firebase-crashlytics-18.4.3/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-crashlytics/18.4.3/de6f34213f4c590844385f89ccbb63c3fc0389bb/firebase-crashlytics-18.4.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

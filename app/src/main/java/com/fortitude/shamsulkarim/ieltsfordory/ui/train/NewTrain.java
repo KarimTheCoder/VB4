@@ -54,8 +54,8 @@ import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;
 import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
-import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
+//import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+//import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -119,7 +119,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private boolean soundState = true;
     boolean isWhichvocbularyToText = false;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
-    private PublisherInterstitialAd mPublisherInterstitialAd;
+//    private PublisherInterstitialAd mPublisherInterstitialAd;
     public String[] items;
     public boolean[] checkedItems;
     private List<String> IELTSFav, TOEFLFav, SATFav, GREFav;
@@ -160,7 +160,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         languageId = sp.getInt("language",0);
         soundState = sp.getBoolean("soundState",true);
         int noshowads = sp.getInt("noshowads", 0);
-        initializeAds();
+        //initializeAds();
         if(!sp.contains("totalWrongCount"+level)){
 
             sp.edit().putInt("totalWrongCount"+level,0).apply();
@@ -1317,11 +1317,12 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     public void onBackPressed() {
 
 
+        super.onBackPressed();
         new LovelyStandardDialog(this)
                 .setTopColorRes(R.color.colorPrimary)
                 .setButtonsColorRes(R.color.colorPrimary)
                 .setIcon(R.drawable.ic_leave)
-                .setTitle("Do you want to leave this session, "+sp.getString("userName","Boo")+"?")
+                .setTitle("Do you want to leave this session, " + sp.getString("userName", "Boo") + "?")
                 .setMessage("Leaving this session will make you lose your progress")
                 .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                     @Override
@@ -1775,23 +1776,23 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private void showInterstitialAd(){
 
 
-        try{
-            if(mPublisherInterstitialAd.isLoaded()){
-
-                if( cb != 1){
-
-                    mPublisherInterstitialAd.show();
-                }
-            }else {
-
-                //Toast.makeText(this,"Ad is not loaded yet",Toast.LENGTH_SHORT).show();
-                NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-                NewTrain.this.finish();
-            }
-        }catch (NullPointerException i){
-
-            Log.i("Ad Nullpointer",i.getMessage()+"");
-        }
+//        try{
+//            if(mPublisherInterstitialAd.isLoaded()){
+//
+//                if( cb != 1){
+//
+//                    mPublisherInterstitialAd.show();
+//                }
+//            }else {
+//
+//                //Toast.makeText(this,"Ad is not loaded yet",Toast.LENGTH_SHORT).show();
+//                NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+//                NewTrain.this.finish();
+//            }
+//        }catch (NullPointerException i){
+//
+//            Log.i("Ad Nullpointer",i.getMessage()+"");
+//        }
 
 
     }
@@ -2074,41 +2075,41 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     }
 
 
-    private void initializeAds(){
-
-        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
-        boolean isAdShow = getIsAdShow();
-
-
-
-        if(isAdShow){
-
-
-                if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-                    mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-                    mPublisherInterstitialAd.setAdListener( new AdListener(){
-
-                        @Override
-                        public void onAdClosed() {
-                            super.onAdClosed();
-                            NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-                            NewTrain.this.finish();
-
-                            Toast.makeText(getApplicationContext(),"Sorry for the ad :(",Toast.LENGTH_SHORT).show();
-                        }
-
-                    });
-                }
-
-            }
-
-
-
-
-
-
-    }
+//    private void initializeAds(){
+//
+//        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+//        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
+//        boolean isAdShow = getIsAdShow();
+//
+//
+//
+//        if(isAdShow){
+//
+//
+//                if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
+//                    mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+//                    mPublisherInterstitialAd.setAdListener( new AdListener(){
+//
+//                        @Override
+//                        public void onAdClosed() {
+//                            super.onAdClosed();
+//                            NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+//                            NewTrain.this.finish();
+//
+//                            Toast.makeText(getApplicationContext(),"Sorry for the ad :(",Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                    });
+//                }
+//
+//            }
+//
+//
+//
+//
+//
+//
+//    }
 
 
     private boolean getIsAdShow(){
