@@ -2,7 +2,6 @@ package com.fortitude.shamsulkarim.ieltsfordory.data.source;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
@@ -13,47 +12,49 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GREDataSource {
+public class GREDataSource extends DataSource{
 
-    private String[] GREwordArray, GREtranslationArray, GREgrammarArray, GREpronunArray, GREexample1array, GREexample2array, GREexample3Array, GREvocabularyType;
-
-    private int[] GREposition;
+    private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
+    private final int GRE_WORD_SIZE;
+    private int[] position;
     private List<String> greFavPosition;
-    private boolean isGreChecked;
-    private GREWordDatabase GREdatabase;
-    private SharedPreferences sp;
-    private Context context;
+    private final boolean isChecked;
+    private final GREWordDatabase database;
+    private final Context context;
 
     public GREDataSource(Context context){
-
+        super(context);
         this.context = context;
-        GREdatabase = new GREWordDatabase(context);
-        sp = context.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+        GRE_WORD_SIZE = context.getResources().getStringArray(R.array.GRE_words).length;
+
+        database = new GREWordDatabase(context);
 
         greFavPosition = new ArrayList<>();
-        isGreChecked =   sp.getBoolean("isGREActive",true);
+        isChecked =   sp.getBoolean("isGREActive",true);
 
         arrayInit();
         getFavoritePosition();
     }
 
 
+
+
     private void arrayInit(){
 
-        GREwordArray = context.getResources().getStringArray(R.array.GRE_words);
-        GREtranslationArray = context.getResources().getStringArray(R.array.GRE_translation);
-        GREgrammarArray = context.getResources().getStringArray(R.array.GRE_grammar);
-        GREpronunArray = context.getResources().getStringArray(R.array.GRE_pronunciation);
-        GREexample1array = context.getResources().getStringArray(R.array.GRE_example1);
-        GREexample2array = context.getResources().getStringArray(R.array.GRE_example2);
-        GREexample3Array = context.getResources().getStringArray(R.array.GRE_example3);
-        GREvocabularyType = context.getResources().getStringArray(R.array.GRE_level);
-        GREposition = context.getResources().getIntArray(R.array.GRE_position);
+        wordArray = context.getResources().getStringArray(R.array.GRE_words);
+        translationArray = context.getResources().getStringArray(R.array.GRE_translation);
+        grammarArray = context.getResources().getStringArray(R.array.GRE_grammar);
+        pronunArray = context.getResources().getStringArray(R.array.GRE_pronunciation);
+        example1array = context.getResources().getStringArray(R.array.GRE_example1);
+        example2array = context.getResources().getStringArray(R.array.GRE_example2);
+        example3Array = context.getResources().getStringArray(R.array.GRE_example3);
+        vocabularyType = context.getResources().getStringArray(R.array.GRE_level);
+        position = context.getResources().getIntArray(R.array.GRE_position);
 
     }
 
     private void getFavoritePosition(){
-        Cursor greRes = GREdatabase.getData();
+        Cursor greRes = database.getData();
 
         while (greRes.moveToNext()){
             greFavPosition.add(greRes.getString(2));
@@ -61,16 +62,16 @@ public class GREDataSource {
 
         greRes.close();
     }
-    private List<Word> listWords (int startPoint , int SATBeginnerNumber){
-        //Todo define is learned
+    private List<Word> listWords (int startPoint , int beginnerNumber){
+        //Todo define isLearned
 
         List<Word> wordList = new ArrayList<>();
 
-        if(isGreChecked){
+        if(isChecked){
 
-            for(int i = (int) startPoint; i < SATBeginnerNumber; i++){
+            for(int i = startPoint; i < beginnerNumber; i++){
 
-                wordList.add(new Word(GREwordArray[i], GREtranslationArray[i],"", GREpronunArray[i], GREgrammarArray[i], GREexample1array[i], GREexample2array[i], GREexample3Array[i],GREvocabularyType[i],GREposition[i], "",greFavPosition.get(i)));
+                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], "",""));
 
 
             }
@@ -84,88 +85,57 @@ public class GREDataSource {
 
     }
 
-    public List<Word> getBeginnerWordData(){
 
 
 
 
-        int GREwordSize = context.getResources().getStringArray(R.array.GRE_words).length;
+
+
+    @Override
+    public List<Word> getBeginnerWords() {
 
 
         int GREbeginnerNumber = 0;
 
-
-
-
-
-        if(isGreChecked){
-
-
-            GREbeginnerNumber = (int) getPercentageNumber(30, GREwordSize);
-
+        if(isChecked){
+            GREbeginnerNumber = (int) getPercentageNumber(30, GRE_WORD_SIZE);
         }
-
 
         return listWords(0,GREbeginnerNumber);
-
     }
 
-    public List<Word> getIntermediateWordData(){
+    @Override
+    public List<Word> getIntermediateWords() {
 
 
+        int intermediateNumber = 0;
+        int beginnerNumber = 0;
 
-
-        int GREwordSize = context.getResources().getStringArray(R.array.GRE_words).length;
-
-
-        int GREintermediateNumber = 0;
-
-
-        int GREbeginnerNumber = 0;
-
-
-        if(isGreChecked){
-
-
-            GREintermediateNumber = getPercentageNumber(40, GREwordSize);
-            GREbeginnerNumber = getPercentageNumber(30, GREwordSize);
+        if(isChecked){
+            intermediateNumber = getPercentageNumber(40, GRE_WORD_SIZE);
+            beginnerNumber = getPercentageNumber(30, GRE_WORD_SIZE);
 
         }
 
-        return listWords(GREbeginnerNumber,GREbeginnerNumber+GREintermediateNumber);
-
-
-
+        return listWords(beginnerNumber,beginnerNumber+intermediateNumber);
     }
 
-    public List<Word> getAdvanceWordData(){
+    @Override
+    public List<Word> getAdvanceWords() {
+
+        int intermediateNumber = 0;
+        int beginnerNumber = 0;
 
 
-        int GREwordSize = context.getResources().getStringArray(R.array.GRE_words).length;
-        int GREintermediateNumber = 0;
-        int GREbeginnerNumber = 0;
+        if(isChecked){
 
-
-        if(isGreChecked){
-
-            GREintermediateNumber = getPercentageNumber(40, GREwordSize);
-            GREbeginnerNumber = getPercentageNumber(30, GREwordSize);
-
+            intermediateNumber = getPercentageNumber(40, GRE_WORD_SIZE);
+            beginnerNumber = getPercentageNumber(30, GRE_WORD_SIZE);
         }
 
-        return listWords(GREbeginnerNumber+GREintermediateNumber,GREwordSize);
-
-
+        return listWords(beginnerNumber+intermediateNumber,GRE_WORD_SIZE);
     }
-    private int getPercentageNumber(int percentage, int number) {
 
-
-        double p = percentage / 100d;
-        double beginnerNum = p * number;
-
-        return (int)beginnerNum;
-
-    }
 
 
 }

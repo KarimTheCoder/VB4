@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.fortitude.shamsulkarim.ieltsfordory.utility.FavLearnedState;
+import com.fortitude.shamsulkarim.ieltsfordory.data.FavLearnedState;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.FavoriteWords;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.HomeFragment;

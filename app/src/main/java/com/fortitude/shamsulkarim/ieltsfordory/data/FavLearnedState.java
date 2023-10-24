@@ -1,4 +1,4 @@
-package com.fortitude.shamsulkarim.ieltsfordory.utility;
+package com.fortitude.shamsulkarim.ieltsfordory.data;
 
 /**
  * Created by karim on 1/20/17.

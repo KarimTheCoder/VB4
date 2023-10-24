@@ -28,11 +28,13 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
+
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -43,6 +45,9 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
     private String[] SATwordArray, SATtranslationArray, SATgrammarArray, SATpronunArray, SATexample1array, SATexample2Array, SATexample3Array, SATvocabularyType;
     private String[] GREwordArray, GREtranslationArray, GREgrammarArray, GREpronunArray, GREexample1array, GREexample2array, GREexample3Array, GREvocabularyType;
     private int[] IELTSposition, TOEFLposition, SATposition, GREposition;
+
+
+    private VocabularyRepository repository;
 
     private List<String> ieltsFavPosition, toeflFavPosition, satFavPosition, greFavPosition;
     private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
@@ -68,11 +73,14 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Window window = Objects.requireNonNull(getActivity()).getWindow();
+        Window window = requireActivity().getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getContext().getColor(R.color.colorPrimary));
+        window.setStatusBarColor(requireContext().getColor(R.color.colorPrimary));
         View v = inflater.inflate(R.layout.fragment_new_word,container,false);
-        sp = Objects.requireNonNull(getContext()).getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+
+        repository = new VocabularyRepository(requireContext());
+
+        sp = requireContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         gettingResources();
         getfavoriteDatabasePosition();
         tts = new TextToSpeech(getContext(), this);
@@ -323,11 +331,21 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
         }
 
-        addIELTSwords(0,IELTSbeginnerNumber);
-        addTOEFLwords(0,TOEFLbeginnerNumber);
-        addSATwords(0,SATbeginnerNumber);
-        addGREwords(0,GREbeginnerNumber);
+        //addIELTSwords(0,IELTSbeginnerNumber);
+        //addTOEFLwords(0,TOEFLbeginnerNumber);
+        //addSATwords(0,SATbeginnerNumber);
+        //addGREwords(0,GREbeginnerNumber);
 
+
+
+        words.addAll(repository.getBeginnerVocabulary());
+
+
+
+
+
+
+        // all words
 
 
         adapter = new WordRecyclerViewAdapter(getContext(), words,this);
@@ -385,11 +403,15 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
         }
 
-        addIELTSwords(IELTSbeginnerNumber,IELTSbeginnerNumber+IELTSintermediateNumber);
-        addTOEFLwords(TOEFLbeginnerNumber,TOEFLbeginnerNumber+TOEFLintermediateNumber);
-        addSATwords(SATbeginnerNumber,SATbeginnerNumber+SATintermediateNumber);
-        addGREwords(GREbeginnerNumber,GREbeginnerNumber+GREintermediateNumber);
+//        addIELTSwords(IELTSbeginnerNumber,IELTSbeginnerNumber+IELTSintermediateNumber);
+//        addTOEFLwords(TOEFLbeginnerNumber,TOEFLbeginnerNumber+TOEFLintermediateNumber);
+//        addSATwords(SATbeginnerNumber,SATbeginnerNumber+SATintermediateNumber);
+//        addGREwords(GREbeginnerNumber,GREbeginnerNumber+GREintermediateNumber);
 
+
+
+
+        words.addAll(repository.getIntermediateVocabulary());
         adapter = new WordRecyclerViewAdapter(getContext(), words, this);
         recyclerView.setAdapter(adapter);
 
@@ -444,10 +466,15 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
         }
 
-        addIELTSwords(IELTSbeginnerNumber+IELTSintermediateNumber,IELTSwordSize);
-        addTOEFLwords(TOEFLbeginnerNumber+TOEFLintermediateNumber,TOEFLwordSize);
-        addSATwords(SATbeginnerNumber+SATintermediateNumber,SATwordSize);
-        addGREwords(GREbeginnerNumber+GREintermediateNumber,GREwordSize);
+//        addIELTSwords(IELTSbeginnerNumber+IELTSintermediateNumber,IELTSwordSize);
+//        addTOEFLwords(TOEFLbeginnerNumber+TOEFLintermediateNumber,TOEFLwordSize);
+//        addSATwords(SATbeginnerNumber+SATintermediateNumber,SATwordSize);
+//        addGREwords(GREbeginnerNumber+GREintermediateNumber,GREwordSize);
+
+
+        words.addAll(repository.getAdvanceVocabulary());
+        Log.i("All words","count: "+words.size());
+
 
         adapter = new WordRecyclerViewAdapter(getContext(), words, this);
         recyclerView.setAdapter(adapter);
@@ -655,7 +682,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
     private void setSpinnerAdapter(){
 
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()),
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(requireContext(),
                 R.array.spinner_options, R.layout.settings_spinner);
         spinnerAdapter.setDropDownViewResource(R.layout.settings_spinner_dropdown);
         spinner.setAdapter(spinnerAdapter);
@@ -673,7 +700,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
             sp.edit().putInt("prevWordSelection", 0).apply();
 
-            recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
+            recyclerView = requireView().findViewById(R.id.new_recycler_view);
 
             layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
@@ -686,7 +713,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
             sp.edit().putInt("prevWordSelection", 1).apply();
 
-            recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
+            recyclerView = requireView().findViewById(R.id.new_recycler_view);
             layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setHasFixedSize(true);
@@ -698,7 +725,7 @@ public class NewWordFragment extends Fragment implements AdapterView.OnItemSelec
 
             sp.edit().putInt("prevWordSelection", 2).apply();
 
-            recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.new_recycler_view);
+            recyclerView = requireView().findViewById(R.id.new_recycler_view);
             layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setHasFixedSize(true);
