@@ -46,7 +46,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LearnedWords extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener,TextToSpeech.OnInitListener, WordRecyclerViewAdapter.WordAdapterCallback {
+public class LearnedFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener,TextToSpeech.OnInitListener, WordRecyclerViewAdapter.WordAdapterCallback {
 
 
     private String[] IELTSwordArray, IELTStranslationArray, IELTSgrammarArray, IELTSpronunArray, IELTSexample1array, IELTSexample2Array, IELTSexample3Array, IELTSvocabularyType;

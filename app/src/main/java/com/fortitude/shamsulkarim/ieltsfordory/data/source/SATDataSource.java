@@ -41,7 +41,7 @@ public class SATDataSource extends DataSource{
 
     }
 
-    private void getFavoritePosition(){
+    public void getFavoritePosition(){
         Cursor res = database.getData();
 
         while (res.moveToNext()){
@@ -122,5 +122,10 @@ public class SATDataSource extends DataSource{
         }
 
         return listWords(beginnerNumber+intermediateNumber, WORD_SIZE);
+    }
+
+
+    public void updateFavorite(String id, String isFavorite){
+        database.updateFav(id,isFavorite);
     }
 }

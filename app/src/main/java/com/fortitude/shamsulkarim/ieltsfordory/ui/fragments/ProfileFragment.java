@@ -43,7 +43,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class profile_fragment extends Fragment implements View.OnClickListener {
+public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private FancyButton setReminder;
     private CardView rateCardView, bugReport, fbCard,instagramCard;

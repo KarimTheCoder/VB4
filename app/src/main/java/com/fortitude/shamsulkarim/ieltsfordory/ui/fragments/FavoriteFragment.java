@@ -44,7 +44,7 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapter.AdapterCallback, TextToSpeech.OnInitListener{
+public class FavoriteFragment extends Fragment implements FavoriteRecyclerViewAdapter.AdapterCallback, TextToSpeech.OnInitListener{
 
     private IELTSWordDatabase ieltsWordDatabase;
     private TOEFLWordDatabase toeflWordDatabase;
@@ -177,7 +177,7 @@ public class FavoriteWords extends Fragment implements FavoriteRecyclerViewAdapt
 
                     sp.edit().putString("practice","favorite").apply();
                     Intent intent = new Intent(getContext(),Practice.class);
-                    Objects.requireNonNull(getContext()).startActivity(intent);
+                    requireContext().startActivity(intent);
 
                 }
 

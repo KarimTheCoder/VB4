@@ -6,6 +6,7 @@ import android.database.Cursor;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 
 import java.util.ArrayList;
@@ -17,9 +18,9 @@ public class TOEFLDataSource extends DataSource{
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
 
     private int[] position;
-    private List<String> favoriteState;
+
     private final boolean isChecked;
-    private final SATWordDatabase database;
+    private final TOEFLWordDatabase database;
     private final Context context;
 
 
@@ -35,9 +36,7 @@ public class TOEFLDataSource extends DataSource{
 
         WORD_SIZE = context.getResources().getStringArray(R.array.TOEFL_words).length;
 
-        database = new SATWordDatabase(context);
-
-        favoriteState = new ArrayList<>();
+        database = new TOEFLWordDatabase(context);
         isChecked =   sp.getBoolean("isTOEFLActive",true);
 
         getFavoritePosition();
@@ -45,7 +44,9 @@ public class TOEFLDataSource extends DataSource{
 
     }
 
-    private void getFavoritePosition(){
+    public List<String> getFavoritePosition(){
+
+        List<String> favoriteState = new ArrayList<>();
         Cursor res = database.getData();
 
         while (res.moveToNext()){
@@ -53,6 +54,7 @@ public class TOEFLDataSource extends DataSource{
         }
 
         res.close();
+        return favoriteState;
     }
     private void initArray(){
 
@@ -125,5 +127,9 @@ public class TOEFLDataSource extends DataSource{
         }
 
         return listWords(beginnerNumber+intermediateNumber, WORD_SIZE);
+    }
+
+    public void updateFavorite(String id, String isFavorite){
+        database.updateFav(id,isFavorite);
     }
 }

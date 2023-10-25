@@ -13,11 +13,11 @@ import android.widget.Toast;
 
 import com.fortitude.shamsulkarim.ieltsfordory.data.FavLearnedState;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.FavoriteWords;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.FavoriteFragment;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.HomeFragment;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.LearnedWords;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.NewWordFragment;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.profile_fragment;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.LearnedFragment;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.AllWordsFragment;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.ProfileFragment;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
@@ -422,7 +422,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         if(v == wordButton){
 
-            NewWordFragment wordFragment = new NewWordFragment();
+            AllWordsFragment wordFragment = new AllWordsFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.frag,wordFragment).commit();
 
             homeBottomLine.setVisibility(View.INVISIBLE);
@@ -436,7 +436,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         }
         if(v == learnedButton){
 
-            LearnedWords learnedWords = new LearnedWords();
+            LearnedFragment learnedWords = new LearnedFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.frag,learnedWords).commit();
 
             homeBottomLine.setVisibility(View.INVISIBLE);
@@ -449,7 +449,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         }
         if(v == favoriteButton){
 
-            FavoriteWords favoriteWords = new FavoriteWords();
+            FavoriteFragment favoriteWords = new FavoriteFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.frag,favoriteWords).commit();
 
             homeBottomLine.setVisibility(View.INVISIBLE);
@@ -461,7 +461,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         }
         if(v == profileButton){
 
-            profile_fragment setting = new profile_fragment();
+            ProfileFragment setting = new ProfileFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.frag,setting).commit();
 
             homeBottomLine.setVisibility(View.INVISIBLE);

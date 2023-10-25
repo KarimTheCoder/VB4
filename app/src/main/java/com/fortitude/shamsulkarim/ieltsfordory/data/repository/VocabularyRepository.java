@@ -28,12 +28,13 @@ public class VocabularyRepository {
 
     }
 
+    // Getting vocabulary data
     public List<Word> getBeginnerVocabulary(){
 
         List<Word> words = new ArrayList<>();
-        words.addAll(ieltsDataSource.getBeginnerWords());
-        words.addAll(toeflDataSource.getBeginnerWords());
-        words.addAll(satDataSource.getBeginnerWords());
+        //words.addAll(ieltsDataSource.getBeginnerWords());
+        //words.addAll(toeflDataSource.getBeginnerWords());
+       // words.addAll(satDataSource.getBeginnerWords());
         words.addAll(greDataSource.getBeginnerWords());
 
 
@@ -64,6 +65,38 @@ public class VocabularyRepository {
 
         return words;
     }
+
+
+    // Getting favorite state
+    public List<String> getIELTSFavorite(){
+
+        return ieltsDataSource.getFavoritePosition();
+    }
+    public List<String> getTOEFLFavorite(){
+        return toeflDataSource.getFavoritePosition();
+    }
+
+    // Updating favorite state
+
+    public void updateIELTSFavoriteState(String id, String isFavorite){
+
+        ieltsDataSource.updateFavorite(id,isFavorite);
+    }
+
+    public void updateTOEFLFavoriteState(String id, String isFavorite){
+
+        toeflDataSource.updateFavorite(id,isFavorite);
+    }
+    public void updateGREFavoriteState(String id, String isFavorite){
+
+        greDataSource.updateFavorite(id,isFavorite);
+    }
+    public void updateSATFavoriteState(String id, String isFavorite){
+
+        satDataSource.updateFavorite(id,isFavorite);
+    }
+
+
 
 
 

@@ -17,7 +17,6 @@ public class IELTSDataSource extends DataSource{
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
 
     private int[] position;
-    private List<String> greFavPosition;
     private final boolean isChecked;
     private final IELTSWordDatabase database;
     private final Context context;
@@ -30,7 +29,7 @@ public class IELTSDataSource extends DataSource{
 
         database = new IELTSWordDatabase(context);
 
-        greFavPosition = new ArrayList<>();
+
         isChecked =   sp.getBoolean("isIELTSActive",true);
 
         getFavoritePosition();
@@ -39,14 +38,19 @@ public class IELTSDataSource extends DataSource{
     }
 
 
-    private void getFavoritePosition(){
+    public List<String> getFavoritePosition(){
+
+        List<String> favoriteStates = new ArrayList<>();
+
         Cursor res = database.getData();
 
         while (res.moveToNext()){
-            greFavPosition.add(res.getString(2));
+            favoriteStates.add(res.getString(2));
         }
 
         res.close();
+
+        return favoriteStates;
     }
 
     private void initArray(){
@@ -123,5 +127,9 @@ public class IELTSDataSource extends DataSource{
         }
 
         return listWords(beginnerNumber+intermediateNumber,IELTS_WORD_SIZE);
+    }
+
+    public void updateFavorite(String id, String isFavorite){
+        database.updateFav(id,isFavorite);
     }
 }

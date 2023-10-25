@@ -29,6 +29,7 @@ public class GREDataSource extends DataSource{
 
         database = new GREWordDatabase(context);
 
+
         greFavPosition = new ArrayList<>();
         isChecked =   sp.getBoolean("isGREActive",true);
 
@@ -53,7 +54,7 @@ public class GREDataSource extends DataSource{
 
     }
 
-    private void getFavoritePosition(){
+    public void getFavoritePosition(){
         Cursor greRes = database.getData();
 
         while (greRes.moveToNext()){
@@ -137,5 +138,8 @@ public class GREDataSource extends DataSource{
     }
 
 
+    public void updateFavorite(String id, String isFavorite){
+        database.updateFav(id,isFavorite);
+    }
 
 }

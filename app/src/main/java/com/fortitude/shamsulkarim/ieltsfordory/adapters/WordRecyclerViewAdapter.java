@@ -24,6 +24,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Wave;
@@ -51,21 +52,32 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     private final Context context;
     private final static int WORD_VIEW_TYPE = 0;
     private final static int AD_VIEW_TYPE = 1;
-    private final SharedPreferences sp;
+    private  SharedPreferences sp;
     private int favoriteCount;
-    private final int favoriteLevel;
-    private final IELTSWordDatabase ieltsWordDatabase;
-    private final TOEFLWordDatabase toeflWordDatabase;
-    private final SATWordDatabase satWordDatabase;
-    private final GREWordDatabase greWordDatabase;
+    private  int favoriteLevel;
+
     public String audioPath= null;
     public File localFile = null;
-    private final FirebaseStorage storage;
+    private  FirebaseStorage storage;
+    private VocabularyRepository repository;
     private WordAdapterCallback wordAdapterCallback;
 
     public WordRecyclerViewAdapter(Context context, ArrayList<Object> words, WordAdapterCallback wordAdapterCallback) {
         this.context = context;
 
+        init(context, wordAdapterCallback);
+        initDatabase(context);
+        favoriteWordChecker();
+
+        this.words = words;
+        this.filterList = words;
+    }
+
+    private void initDatabase(Context context) {
+        repository = new VocabularyRepository(context);
+    }
+
+    private void init(Context context, WordAdapterCallback wordAdapterCallback) {
         try{
             this.wordAdapterCallback = wordAdapterCallback;
         }catch (ClassCastException e){
@@ -75,15 +87,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         storage = FirebaseStorage.getInstance();
         sp = context.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         favoriteLevel = sp.getInt("prevWordSelection",0);
-//        ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-//                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-//            //we are connected to a network
-//            connected = true;
-//        }
-//        else{
-//            connected = false;
-//        }
 
         if(!sp.contains("favoriteCountProfile")){
 
@@ -95,36 +98,15 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             favoriteCount = sp.getInt("favoriteCountProfile",0);
 
         }
-        ieltsWordDatabase = new IELTSWordDatabase(context);
-        toeflWordDatabase = new TOEFLWordDatabase(context);
-        satWordDatabase = new SATWordDatabase(context);
-        greWordDatabase = new GREWordDatabase(context);
-        favoriteWordChecker();
-        this.words = words;
-        this.filterList = words;
     }
 
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
 
-        if(ieltsWordDatabase != null){
-            ieltsWordDatabase.close();
-        }
-        if(toeflWordDatabase != null){
-            toeflWordDatabase.close();
-        }
-        if(satWordDatabase != null){
-            satWordDatabase.close();
-        }
-        if(greWordDatabase != null){
-            greWordDatabase.close();
-        }
-       // Toast.makeText(context,"ON ditach",Toast.LENGTH_LONG).show();
-
-
     }
 
+    @NonNull
     @Override
     public  RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
 
@@ -156,22 +138,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public void onDestroy(){
-        if(ieltsWordDatabase != null){
-            ieltsWordDatabase.close();
-        }
-        if(toeflWordDatabase != null){
-            toeflWordDatabase.close();
-        }
-        if(satWordDatabase != null){
-            satWordDatabase.close();
-        }
-        if(greWordDatabase != null){
-            greWordDatabase.close();
-        }
 
-
-
-        //Toast.makeText(context,"ON Dititsljdfjf",Toast.LENGTH_LONG).show();
     }
 
 
@@ -238,27 +205,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void favoriteWordChecker(){
-
-
-        if( favoriteLevel == 0){
-            Cursor beginnerRes = ieltsWordDatabase.getData();
-
-            beginnerRes.close();
-        }
-
-        if( favoriteLevel == 1){
-
-            Cursor beginnerRes = toeflWordDatabase.getData();
-            beginnerRes.close();
-        }
-
-        if( favoriteLevel == 2){
-
-            Cursor beginnerRes = satWordDatabase.getData();
-            beginnerRes.close();
-        }
-
-
 
     }
 
@@ -381,19 +327,26 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                     sp.edit().putInt("favoriteCountProfile",favoriteCount).apply();
 
                     if(((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("IELTS")){
-                        ieltsWordDatabase.updateFav(wordPos+"","True");
+                      //  ieltsWordDatabase.updateFav(wordPos+"","True");
+
+                        repository.updateIELTSFavoriteState(wordPos+"","True");
+
                     }
 
                     if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("TOEFL")){
-                        toeflWordDatabase.updateFav(wordPos+"","True");
+                        //toeflWordDatabase.updateFav(wordPos+"","True");
+                        repository.updateTOEFLFavoriteState(wordPos+"","True");
+
                     }
 
                     if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("SAT")){
-                        satWordDatabase.updateFav(wordPos+"","True");
+                        //satWordDatabase.updateFav(wordPos+"","True");
+                        repository.updateSATFavoriteState(wordPos+"","True");
                     }
 
                     if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("GRE")){
-                        greWordDatabase.updateFav(wordPos+"","True");
+                        //greWordDatabase.updateFav(wordPos+"","True");
+                        repository.updateGREFavoriteState(wordPos+"","True");
                     }
 
                     favorite.setIconResource(R.drawable.ic_favorite_icon_active);
@@ -410,19 +363,25 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                     }
 
                     if(((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("IELTS")){
-                        ieltsWordDatabase.updateFav(wordPos+"","false");
+                       // ieltsWordDatabase.updateFav(wordPos+"","false");
+                        repository.updateIELTSFavoriteState(wordPos+"","false");
                     }
 
                     if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("TOEFL")){
-                        toeflWordDatabase.updateFav(wordPos+"","false");
+                        //toeflWordDatabase.updateFav(wordPos+"","false");
+                        repository.updateTOEFLFavoriteState(wordPos+"","false");
                     }
 
                     if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("SAT")){
-                        satWordDatabase.updateFav(wordPos+"","false");
+                        //satWordDatabase.updateFav(wordPos+"","false");
+                        repository.updateSATFavoriteState(wordPos+"","false");
                     }
 
                     if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("GRE")){
-                        greWordDatabase.updateFav(wordPos+"","false");
+                        //greWordDatabase.updateFav(wordPos+"","false");
+
+                        repository.updateGREFavoriteState(wordPos+"","false");
+                        
                     }
 
 
