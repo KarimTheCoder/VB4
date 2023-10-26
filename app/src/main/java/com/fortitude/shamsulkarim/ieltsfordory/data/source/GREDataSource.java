@@ -11,13 +11,16 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GREDataSource extends DataSource{
 
+    //Todo add get Favorite words
+    private static int FAVORITE_COLL = 2;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
     private final int GRE_WORD_SIZE;
     private int[] position;
-    private List<String> greFavPosition;
+    private List<String> favoriteStates;
     private final boolean isChecked;
     private final GREWordDatabase database;
     private final Context context;
@@ -30,7 +33,7 @@ public class GREDataSource extends DataSource{
         database = new GREWordDatabase(context);
 
 
-        greFavPosition = new ArrayList<>();
+        favoriteStates = new ArrayList<>();
         isChecked =   sp.getBoolean("isGREActive",true);
 
         arrayInit();
@@ -58,7 +61,7 @@ public class GREDataSource extends DataSource{
         Cursor greRes = database.getData();
 
         while (greRes.moveToNext()){
-            greFavPosition.add(greRes.getString(2));
+            favoriteStates.add(greRes.getString(FAVORITE_COLL));
         }
 
         greRes.close();
@@ -72,7 +75,7 @@ public class GREDataSource extends DataSource{
 
             for(int i = startPoint; i < beginnerNumber; i++){
 
-                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], "",""));
+                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], "",favoriteStates.get(i)));
 
 
             }
@@ -136,7 +139,19 @@ public class GREDataSource extends DataSource{
 
         return listWords(beginnerNumber+intermediateNumber,GRE_WORD_SIZE);
     }
+    public List<Word> getFavoriteWords(){
 
+        List<Word> words = new ArrayList<>();
+        words.addAll(getBeginnerWords().stream().filter( w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
+        words.addAll(getIntermediateWords().stream().filter(w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
+        words.addAll(getAdvanceWords().stream().filter(w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
+
+
+
+        return words;
+
+
+    }
 
     public void updateFavorite(String id, String isFavorite){
         database.updateFav(id,isFavorite);

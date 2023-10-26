@@ -11,9 +11,10 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TOEFLDataSource extends DataSource{
-
+    private static int FAVORITE_COLL = 2;
     private final int WORD_SIZE;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
 
@@ -22,6 +23,7 @@ public class TOEFLDataSource extends DataSource{
     private final boolean isChecked;
     private final TOEFLWordDatabase database;
     private final Context context;
+    List<String> favoriteState;
 
 
 
@@ -33,7 +35,7 @@ public class TOEFLDataSource extends DataSource{
 
 
         this.context = context;
-
+        favoriteState = new ArrayList<>();
         WORD_SIZE = context.getResources().getStringArray(R.array.TOEFL_words).length;
 
         database = new TOEFLWordDatabase(context);
@@ -46,11 +48,10 @@ public class TOEFLDataSource extends DataSource{
 
     public List<String> getFavoritePosition(){
 
-        List<String> favoriteState = new ArrayList<>();
         Cursor res = database.getData();
 
         while (res.moveToNext()){
-            favoriteState.add(res.getString(2));
+            favoriteState.add(res.getString(FAVORITE_COLL));
         }
 
         res.close();
@@ -80,7 +81,7 @@ public class TOEFLDataSource extends DataSource{
 
             for(int i = startPoint; i < beginnerNumber; i++){
 
-                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], "",""));
+                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], "",favoriteState.get(i)));
 
             }
 
@@ -128,6 +129,21 @@ public class TOEFLDataSource extends DataSource{
 
         return listWords(beginnerNumber+intermediateNumber, WORD_SIZE);
     }
+
+    public List<Word> getFavoriteWords(){
+
+        List<Word> words = new ArrayList<>();
+        words.addAll(getBeginnerWords().stream().filter( w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
+        words.addAll(getIntermediateWords().stream().filter(w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
+        words.addAll(getAdvanceWords().stream().filter(w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
+
+
+
+        return words;
+
+
+    }
+
 
     public void updateFavorite(String id, String isFavorite){
         database.updateFav(id,isFavorite);

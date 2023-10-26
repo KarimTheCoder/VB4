@@ -1,6 +1,8 @@
 package com.fortitude.shamsulkarim.ieltsfordory.data.repository;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.data.source.GREDataSource;
 import com.fortitude.shamsulkarim.ieltsfordory.data.source.IELTSDataSource;
@@ -32,9 +34,9 @@ public class VocabularyRepository {
     public List<Word> getBeginnerVocabulary(){
 
         List<Word> words = new ArrayList<>();
-        //words.addAll(ieltsDataSource.getBeginnerWords());
-        //words.addAll(toeflDataSource.getBeginnerWords());
-       // words.addAll(satDataSource.getBeginnerWords());
+        words.addAll(ieltsDataSource.getBeginnerWords());
+        words.addAll(toeflDataSource.getBeginnerWords());
+        words.addAll(satDataSource.getBeginnerWords());
         words.addAll(greDataSource.getBeginnerWords());
 
 
@@ -64,6 +66,22 @@ public class VocabularyRepository {
         words.addAll(greDataSource.getAdvanceWords());
 
         return words;
+    }
+
+
+    // Get favorite words
+    public List<Word> getFavoriteWord(){
+
+        List<Word> words = new ArrayList<>();
+
+        words.addAll(ieltsDataSource.getFavoriteWords());
+        words.addAll(toeflDataSource.getFavoriteWords());
+        words.addAll(satDataSource.getFavoriteWords());
+        words.addAll(greDataSource.getFavoriteWords());
+
+
+        return words;
+
     }
 
 

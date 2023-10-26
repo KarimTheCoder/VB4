@@ -10,9 +10,12 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IELTSDataSource extends DataSource{
 
+    private static int FAVORITE_COLL = 2;
+    private static int POSITION_COLL = 0;
     private final int IELTS_WORD_SIZE;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
 
@@ -20,7 +23,8 @@ public class IELTSDataSource extends DataSource{
     private final boolean isChecked;
     private final IELTSWordDatabase database;
     private final Context context;
-
+    private List<String> favoriteStates;
+    private List<Integer> databasePosition;
 
     public IELTSDataSource(Context context) {
         super(context);
@@ -29,6 +33,8 @@ public class IELTSDataSource extends DataSource{
 
         database = new IELTSWordDatabase(context);
 
+        favoriteStates = new ArrayList<>();
+        databasePosition = new ArrayList<>();
 
         isChecked =   sp.getBoolean("isIELTSActive",true);
 
@@ -40,16 +46,13 @@ public class IELTSDataSource extends DataSource{
 
     public List<String> getFavoritePosition(){
 
-        List<String> favoriteStates = new ArrayList<>();
-
         Cursor res = database.getData();
-
         while (res.moveToNext()){
-            favoriteStates.add(res.getString(2));
+
+            favoriteStates.add(res.getString(FAVORITE_COLL));
+            databasePosition.add(res.getInt(POSITION_COLL));
         }
-
         res.close();
-
         return favoriteStates;
     }
 
@@ -79,7 +82,7 @@ public class IELTSDataSource extends DataSource{
 
             for(int i = startPoint; i < beginnerNumber; i++){
 
-                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], "",""));
+                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], "",favoriteStates.get(i)));
 
             }
 
@@ -127,6 +130,21 @@ public class IELTSDataSource extends DataSource{
         }
 
         return listWords(beginnerNumber+intermediateNumber,IELTS_WORD_SIZE);
+    }
+
+
+    public List<Word> getFavoriteWords(){
+
+        List<Word> words = new ArrayList<>();
+        words.addAll(getBeginnerWords().stream().filter( w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
+        words.addAll(getIntermediateWords().stream().filter(w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
+        words.addAll(getAdvanceWords().stream().filter(w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
+
+
+
+        return words;
+
+
     }
 
     public void updateFavorite(String id, String isFavorite){
