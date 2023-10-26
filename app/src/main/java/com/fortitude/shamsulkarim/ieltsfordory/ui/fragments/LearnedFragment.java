@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.PretrainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.adapters.WordRecyclerViewAdapter;
@@ -40,7 +41,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
+
 import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
@@ -49,23 +50,13 @@ import mehdi.sakout.fancybuttons.FancyButton;
 public class LearnedFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener,TextToSpeech.OnInitListener, WordRecyclerViewAdapter.WordAdapterCallback {
 
 
-    private String[] IELTSwordArray, IELTStranslationArray, IELTSgrammarArray, IELTSpronunArray, IELTSexample1array, IELTSexample2Array, IELTSexample3Array, IELTSvocabularyType;
-    private String[] TOEFLwordArray, TOEFLtranslationArray, TOEFLgrammarArray, TOEFLpronunArray, TOEFLexample1array, TOEFLexample2Array, TOEFLexample3Array, TOEFLvocabularyType;
-    private String[] SATwordArray, SATtranslationArray, SATgrammarArray, SATpronunArray, SATexample1array, SATexample2Array, SATexample3Array, SATvocabularyType;
-    private String[] GREwordArray, GREtranslationArray, GREgrammarArray, GREpronunArray, GREexample1array, GREexample2array, GREexample3Array, GREvocabularyType;
-    private int[] IELTSposition, TOEFLposition, SATposition, GREposition;
+    private VocabularyRepository repository;
     private RecyclerView recyclerView;
     private WordRecyclerViewAdapter adapter;
     private final ArrayList<Object> words = new ArrayList<>();
     private boolean isShowingFabOption = false;
-    private List<String> IELTSlearnedDatabase, TOEFLlearnedDatabase, SATlearnedDatabase, GRElearnedDatabase;
-    private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
     private TextView havenotlearned;
     private ImageView noLearnedImage;
-    private IELTSWordDatabase IELTSdatabase;
-    private TOEFLWordDatabase TOEFLdatabase;
-    private SATWordDatabase SATdatabase;
-    private GREWordDatabase GREdatabase;
     private SharedPreferences sp;
     private Spinner spinner;
     private Fab fab;
@@ -74,7 +65,6 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
     private String level;
     private FloatingSearchView sv;
     private TextToSpeech tts;
-    private List<String> ieltsFavPosition, toeflFavPosition, satFavPosition, greFavPosition;
     private TextView item1, item2, item3;
 
     @Nullable
@@ -82,17 +72,13 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_learned_words,container,false);
 
-        Window window = Objects.requireNonNull(getActivity()).getWindow();
+        Window window = requireActivity().getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getContext().getColor(R.color.colorPrimary));
 
+
+        repository = new VocabularyRepository(requireContext());
         initialization(v);
-        gettingResources();
-        getfavoriteDatabasePosition();
-        addingLearnedDatabase();
-
-
-
 
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -163,23 +149,6 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
         }
         spinner.setSelection(selection);
 
-
-
-
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-
         //SEARCH
         settingUpSearch();
 
@@ -225,13 +194,6 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-
-        ieltsFavPosition = new ArrayList<>();
-        toeflFavPosition = new ArrayList<>();
-        satFavPosition = new ArrayList<>();
-        greFavPosition = new ArrayList<>();
-
-
 
     }
 
@@ -343,7 +305,7 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
 
 
             if(words.size() >= 5){
-                Objects.requireNonNull(getContext()).startActivity(new Intent(getContext(), Practice.class));
+                requireContext().startActivity(new Intent(getContext(), Practice.class));
 
 
 
@@ -361,7 +323,7 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
             sp.edit().putString("level","intermediate").apply();
 
             if(words.size() >= 5){
-                Objects.requireNonNull(getContext()).startActivity(new Intent(getContext(), Practice.class));
+                requireContext().startActivity(new Intent(getContext(), Practice.class));
 
 
 
@@ -383,17 +345,9 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
 
 
             getBeginnerWordData();
-            //int wordObjectsSize = wordObjects.size();
-
-            //for(int i =0; i < wordObjectsSize; i++){
-
-            //    Word word = (Word) wordObjects.get(i);
-            //    practiceWords.add(word);
-
-            //}
 
             if(words.size() >= 5){
-                Objects.requireNonNull(getContext()).startActivity(new Intent(getContext(), Practice.class));
+                requireContext().startActivity(new Intent(getContext(), Practice.class));
 
             }else {
                 Toast.makeText(getContext(),"There must be atleast five words", Toast.LENGTH_SHORT).show();
@@ -409,21 +363,21 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
 
 
                 sp.edit().putString("level","beginner").apply();
-                Objects.requireNonNull(view).getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
+                requireView().getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
 
             }
 
             if(level.equalsIgnoreCase("intermediate")){
 
                 sp.edit().putString("level","intermediate").apply();
-                Objects.requireNonNull(view).getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
+                requireView().getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
 
             }
 
             if(level.equalsIgnoreCase("advance")){
 
                 sp.edit().putString("level","advance").apply();
-                Objects.requireNonNull(view).getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
+                requireView().getContext().startActivity(new Intent(view.getContext(), PretrainActivity.class));
 
             }
 
@@ -439,48 +393,8 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
     private void getBeginnerWordData(){
 
         words.clear();
+        words.addAll(repository.getBeginnerLearnedWords());
 
-        int IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
-        int TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
-        int SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
-        int GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
-
-        int IELTSbeginnerNumber = 0;
-        int TOEFLbeginnerNumber = 0;
-        int SATbeginnerNumber = 0;
-        int GREbeginnerNumber = 0;
-
-
-
-
-        if(isIeltsChecked){
-            IELTSbeginnerNumber = getPercentageNumber(30, IELTSwordSize);
-
-        }
-
-        if(isToeflChecked){
-
-            TOEFLbeginnerNumber = getPercentageNumber(30, TOEFLwordSize);
-
-        }
-
-        if(isSatChecked){
-
-            SATbeginnerNumber = getPercentageNumber(30, SATwordSize);
-
-        }
-
-        if(isGreChecked){
-
-
-            GREbeginnerNumber = getPercentageNumber(30, GREwordSize);
-
-        }
-
-        addIELTSwords(0d,IELTSbeginnerNumber);
-        addTOEFLwords(0d,TOEFLbeginnerNumber);
-        addSATwords(0d,SATbeginnerNumber);
-        addGREwords(0d,GREbeginnerNumber);
 
         if(words.size() <= 0){
             havenotlearned.setVisibility(View.VISIBLE);
@@ -504,57 +418,8 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
     private void getIntermediateWordData(){
 
         words.clear();
+        words.addAll(repository.getIntermediateLearnedWords());
 
-        int IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
-        int TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
-        int SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
-        int GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
-
-        int IELTSintermediateNumber = 0;
-        int TOEFLintermediateNumber = 0;
-        int SATintermediateNumber = 0;
-        int GREintermediateNumber = 0;
-
-        int IELTSbeginnerNumber = 0;
-        int TOEFLbeginnerNumber = 0;
-        int SATbeginnerNumber = 0;
-        int GREbeginnerNumber = 0;
-
-
-
-
-        if(isIeltsChecked){
-            IELTSintermediateNumber = getPercentageNumber(40, IELTSwordSize);
-            IELTSbeginnerNumber = getPercentageNumber(30, IELTSwordSize);
-
-        }
-
-        if(isToeflChecked){
-
-            TOEFLintermediateNumber = getPercentageNumber(40, TOEFLwordSize);
-            TOEFLbeginnerNumber = getPercentageNumber(30, TOEFLwordSize);
-
-        }
-
-        if(isSatChecked){
-
-            SATintermediateNumber = getPercentageNumber(40, SATwordSize);
-            SATbeginnerNumber = getPercentageNumber(30, SATwordSize);
-
-        }
-
-        if(isGreChecked){
-
-
-            GREintermediateNumber = getPercentageNumber(40, GREwordSize);
-            GREbeginnerNumber = getPercentageNumber(30, GREwordSize);
-
-        }
-
-        addIELTSwords(IELTSbeginnerNumber,IELTSbeginnerNumber+IELTSintermediateNumber);
-        addTOEFLwords(TOEFLbeginnerNumber,TOEFLbeginnerNumber+TOEFLintermediateNumber);
-        addSATwords(SATbeginnerNumber,SATbeginnerNumber+SATintermediateNumber);
-        addGREwords(GREbeginnerNumber,GREbeginnerNumber+GREintermediateNumber);
 
         if(words.size() <= 0){
             havenotlearned.setVisibility(View.VISIBLE);
@@ -577,57 +442,8 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
     private void getAdvanceWordData(){
 
         words.clear();
+        words.addAll(repository.getAdvanceLearnedWords());
 
-        int IELTSwordSize = getResources().getStringArray(R.array.IELTS_words).length;
-        int TOEFLwordSize = getResources().getStringArray(R.array.TOEFL_words).length;
-        int SATwordSize = getResources().getStringArray(R.array.SAT_words).length;
-        int GREwordSize = getResources().getStringArray(R.array.GRE_words).length;
-
-        int IELTSintermediateNumber = 0;
-        int TOEFLintermediateNumber = 0;
-        int SATintermediateNumber = 0;
-        int GREintermediateNumber = 0;
-
-        int IELTSbeginnerNumber = 0;
-        int TOEFLbeginnerNumber = 0;
-        int SATbeginnerNumber = 0;
-        int GREbeginnerNumber = 0;
-
-
-
-
-        if(isIeltsChecked){
-            IELTSintermediateNumber = getPercentageNumber(40, IELTSwordSize);
-            IELTSbeginnerNumber = getPercentageNumber(30, IELTSwordSize);
-
-        }
-
-        if(isToeflChecked){
-
-            TOEFLintermediateNumber = getPercentageNumber(40, TOEFLwordSize);
-            TOEFLbeginnerNumber = getPercentageNumber(30, TOEFLwordSize);
-
-        }
-
-        if(isSatChecked){
-
-            SATintermediateNumber = getPercentageNumber(40, SATwordSize);
-            SATbeginnerNumber = getPercentageNumber(30, SATwordSize);
-
-        }
-
-        if(isGreChecked){
-
-
-            GREintermediateNumber = getPercentageNumber(40, GREwordSize);
-            GREbeginnerNumber = getPercentageNumber(30, GREwordSize);
-
-        }
-
-        addIELTSwords(IELTSbeginnerNumber+IELTSintermediateNumber,IELTSwordSize);
-        addTOEFLwords(TOEFLbeginnerNumber+TOEFLintermediateNumber,TOEFLwordSize);
-        addSATwords(SATbeginnerNumber+SATintermediateNumber,SATwordSize);
-        addGREwords(GREbeginnerNumber+GREintermediateNumber,GREwordSize);
 
         if(words.size() <= 0){
             havenotlearned.setVisibility(View.VISIBLE);
@@ -649,248 +465,9 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
     }
 
 
-    private int getPercentageNumber(int percentage, int number) {
 
 
-        double p = percentage / 100d;
-        double beginnerNum = p * number;
 
-        return (int) beginnerNum;
-
-    }
-
-    private void addingLearnedDatabase() {
-
-        Cursor beginnerRes = IELTSdatabase.getData();
-        Cursor TOEFLres = TOEFLdatabase.getData();
-        Cursor SATres = SATdatabase.getData();
-        Cursor GREres = GREdatabase.getData();
-
-        while (beginnerRes.moveToNext()) {
-
-            IELTSlearnedDatabase.add(beginnerRes.getString(3));
-
-        }
-        beginnerRes.close();
-        IELTSdatabase.close();
-
-        while (TOEFLres.moveToNext()) {
-
-            TOEFLlearnedDatabase.add(TOEFLres.getString(3));
-
-        }
-        TOEFLres.close();
-        TOEFLdatabase.close();
-
-        while (SATres.moveToNext()) {
-
-            SATlearnedDatabase.add(SATres.getString(3));
-
-        }
-        SATres.close();
-        SATdatabase.close();
-
-        while (GREres.moveToNext()) {
-
-            GRElearnedDatabase.add(GREres.getString(3));
-
-        }
-        GREres.close();
-        GREdatabase.close();
-
-
-    }
-
-    private  void addIELTSwords(double startPoint,double IELTSbeginnerNumber){
-
-
-
-        if(isIeltsChecked){
-            for(int i = (int) startPoint; i  < IELTSbeginnerNumber; i++){
-
-
-                if( IELTSlearnedDatabase.get(i).equalsIgnoreCase("true")){
-
-                    words.add(new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],IELTSvocabularyType[i],IELTSposition[i], IELTSlearnedDatabase.get(i),ieltsFavPosition.get(i)));
-                }
-
-            }
-
-        }
-
-
-    }
-
-    private  void addTOEFLwords(double startPoint, double TOEFLbeginnerNumber){
-
-
-        if(isToeflChecked){
-
-
-            for(int i = (int) startPoint; i < TOEFLbeginnerNumber; i++){
-
-
-                if( TOEFLlearnedDatabase.get(i).equalsIgnoreCase("true")) {
-                    words.add(new Word(TOEFLwordArray[i], TOEFLtranslationArray[i], "", TOEFLpronunArray[i], TOEFLgrammarArray[i], TOEFLexample1array[i], TOEFLexample2Array[i], TOEFLexample3Array[i], TOEFLvocabularyType[i], TOEFLposition[i], TOEFLlearnedDatabase.get(i),toeflFavPosition.get(i)));
-
-
-                }
-            }
-        }
-
-
-
-    }
-
-    private void addSATwords (double startPoint ,double SATbeginnerNumber){
-
-
-        if(isSatChecked){
-
-            for(int i = (int) startPoint; i < SATbeginnerNumber; i++){
-
-
-                if( SATlearnedDatabase.get(i).equalsIgnoreCase("true")) {
-
-                    words.add(new Word(SATwordArray[i], SATtranslationArray[i], "", SATpronunArray[i], SATgrammarArray[i], SATexample1array[i], SATexample2Array[i], SATexample3Array[i], SATvocabularyType[i], SATposition[i], SATlearnedDatabase.get(i),satFavPosition.get(i)));
-
-                }
-
-            }
-
-        }
-
-
-
-
-
-    }
-
-    private void addGREwords (double startPoint ,double SATbeginnerNumber){
-
-
-        if(isGreChecked){
-
-            for(int i = (int) startPoint; i < SATbeginnerNumber; i++){
-
-
-
-                if( GRElearnedDatabase.get(i).equalsIgnoreCase("true")) {
-
-                    words.add(new Word(GREwordArray[i], GREtranslationArray[i],"", GREpronunArray[i], GREgrammarArray[i], GREexample1array[i], GREexample2array[i], GREexample3Array[i],GREvocabularyType[i],GREposition[i], GRElearnedDatabase.get(i),greFavPosition.get(i)));
-                }
-
-            }
-
-        }
-
-
-
-
-
-    }
-
-    private void gettingResources() {
-
-
-        IELTSwordArray = getResources().getStringArray(R.array.IELTS_words);
-        IELTStranslationArray = getResources().getStringArray(R.array.IELTS_translation);
-        IELTSgrammarArray = getResources().getStringArray(R.array.IELTS_grammar);
-        IELTSpronunArray = getResources().getStringArray(R.array.IELTS_pronunciation);
-        IELTSexample1array = getResources().getStringArray(R.array.IELTS_example1);
-        IELTSexample2Array = getResources().getStringArray(R.array.IELTS_example2);
-        IELTSexample3Array = getResources().getStringArray(R.array.IELTS_example3);
-        IELTSvocabularyType = getResources().getStringArray(R.array.IELTS_level);
-        IELTSposition = getResources().getIntArray(R.array.IELTS_position);
-
-
-        TOEFLwordArray = getResources().getStringArray(R.array.TOEFL_words);
-        TOEFLtranslationArray = getResources().getStringArray(R.array.TOEFL_translation);
-        TOEFLgrammarArray = getResources().getStringArray(R.array.TOEFL_grammar);
-        TOEFLpronunArray = getResources().getStringArray(R.array.TOEFL_pronunciation);
-        TOEFLexample1array = getResources().getStringArray(R.array.TOEFL_example1);
-        TOEFLexample2Array = getResources().getStringArray(R.array.TOEFL_example2);
-        TOEFLexample3Array = getResources().getStringArray(R.array.TOEFL_example3);
-        TOEFLvocabularyType = getResources().getStringArray(R.array.TOEFL_level);
-        TOEFLposition = getResources().getIntArray(R.array.TOEFL_position);
-
-
-        SATwordArray = getResources().getStringArray(R.array.SAT_words);
-        SATtranslationArray = getResources().getStringArray(R.array.SAT_translation);
-        SATgrammarArray = getResources().getStringArray(R.array.SAT_grammar);
-        SATpronunArray = getResources().getStringArray(R.array.SAT_pronunciation);
-        SATexample1array = getResources().getStringArray(R.array.SAT_example1);
-        SATexample2Array = getResources().getStringArray(R.array.SAT_example2);
-        SATexample3Array = getResources().getStringArray(R.array.SAT_example3);
-        SATvocabularyType = getResources().getStringArray(R.array.SAT_level);
-        SATposition = getResources().getIntArray(R.array.SAT_position);
-
-
-        GREwordArray = getResources().getStringArray(R.array.GRE_words);
-        GREtranslationArray = getResources().getStringArray(R.array.GRE_translation);
-        GREgrammarArray = getResources().getStringArray(R.array.GRE_grammar);
-        GREpronunArray = getResources().getStringArray(R.array.GRE_pronunciation);
-        GREexample1array = getResources().getStringArray(R.array.GRE_example1);
-        GREexample2array = getResources().getStringArray(R.array.GRE_example2);
-        GREexample3Array = getResources().getStringArray(R.array.GRE_example3);
-        GREvocabularyType = getResources().getStringArray(R.array.GRE_level);
-        GREposition = getResources().getIntArray(R.array.GRE_position);
-
-        TOEFLdatabase = new TOEFLWordDatabase(getContext());
-        SATdatabase = new SATWordDatabase(getContext());
-        IELTSdatabase = new IELTSWordDatabase(getContext());
-        GREdatabase = new GREWordDatabase(getContext());
-
-        isIeltsChecked = sp.getBoolean("isIELTSActive",true);
-        isToeflChecked = sp.getBoolean("isTOEFLActive", true);
-        isSatChecked =   sp.getBoolean("isSATActive", true);
-        isGreChecked =   sp.getBoolean("isGREActive",true);
-
-        IELTSlearnedDatabase = new ArrayList<>();
-        TOEFLlearnedDatabase = new ArrayList<>();
-        SATlearnedDatabase = new ArrayList<>();
-        GRElearnedDatabase = new ArrayList<>();
-
-    }
-
-    private void getfavoriteDatabasePosition(){
-
-        Cursor ieltsRes = IELTSdatabase.getData();
-        Cursor toeflRes = TOEFLdatabase.getData();
-        Cursor satRes = SATdatabase.getData();
-        Cursor greRes = GREdatabase.getData();
-
-        while (ieltsRes.moveToNext()){
-
-
-            ieltsFavPosition.add(ieltsRes.getString(2));
-
-
-
-        }
-        ieltsRes.close();
-
-        while (toeflRes.moveToNext()){
-
-            toeflFavPosition.add(toeflRes.getString(2));
-        }
-        toeflRes.close();
-
-        while(satRes.moveToNext()){
-
-            satFavPosition.add(satRes.getString(2));
-
-        }
-        satRes.close();
-
-        while (greRes.moveToNext()){
-
-
-            greFavPosition.add(greRes.getString(2));
-        }
-
-        greRes.close();
-    }
 
 
 
@@ -899,7 +476,7 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
         spinner = v.findViewById(R.id.word_spinner);
         spinner.setOnItemSelectedListener(this);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()),
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
                 R.array.spinner_options, R.layout.settings_spinner);
         adapter.setDropDownViewResource(R.layout.settings_spinner_dropdown);
         spinner.setAdapter(adapter);

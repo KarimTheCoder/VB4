@@ -1,7 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.data.repository;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.data.source.GREDataSource;
@@ -69,7 +68,7 @@ public class VocabularyRepository {
     }
 
 
-    // Get favorite words
+    // Get favorite and learned words
     public List<Word> getFavoriteWord(){
 
         List<Word> words = new ArrayList<>();
@@ -80,6 +79,37 @@ public class VocabularyRepository {
         words.addAll(greDataSource.getFavoriteWords());
 
 
+        return words;
+
+    }
+
+    public List<Word> getBeginnerLearnedWords(){
+
+        List<Word> words = new ArrayList<>();
+        words.addAll(ieltsDataSource.getBeginnerLearnedWords());
+        words.addAll(toeflDataSource.getBeginnerLearnedWords());
+        words.addAll(satDataSource.getBeginnerLearnedWords());
+        words.addAll(greDataSource.getBeginnerLearnedWords());
+        return words;
+
+    }
+    public List<Word> getIntermediateLearnedWords(){
+
+        List<Word> words = new ArrayList<>();
+        words.addAll(ieltsDataSource.getIntermediateLearnedWords());
+        words.addAll(toeflDataSource.getIntermediateLearnedWords());
+        words.addAll(satDataSource.getIntermediateLearnedWords());
+        words.addAll(greDataSource.getIntermediateLearnedWords());
+        return words;
+
+    }
+    public List<Word> getAdvanceLearnedWords(){
+
+        List<Word> words = new ArrayList<>();
+        words.addAll(ieltsDataSource.getAdvanceLearnedWords());
+        words.addAll(toeflDataSource.getAdvanceLearnedWords());
+        words.addAll(satDataSource.getAdvanceLearnedWords());
+        words.addAll(greDataSource.getAdvanceLearnedWords());
         return words;
 
     }

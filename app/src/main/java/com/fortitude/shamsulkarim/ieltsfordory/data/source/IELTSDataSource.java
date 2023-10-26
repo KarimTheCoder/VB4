@@ -13,9 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class IELTSDataSource extends DataSource{
-
+    private static int LEARNED_COLL = 3;
     private static int FAVORITE_COLL = 2;
     private static int POSITION_COLL = 0;
+    private List<String> learnedStates;
     private final int IELTS_WORD_SIZE;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
 
@@ -35,7 +36,7 @@ public class IELTSDataSource extends DataSource{
 
         favoriteStates = new ArrayList<>();
         databasePosition = new ArrayList<>();
-
+        learnedStates = new ArrayList<>();
         isChecked =   sp.getBoolean("isIELTSActive",true);
 
         getFavoritePosition();
@@ -50,6 +51,7 @@ public class IELTSDataSource extends DataSource{
         while (res.moveToNext()){
 
             favoriteStates.add(res.getString(FAVORITE_COLL));
+            learnedStates.add(res.getString(LEARNED_COLL));
             databasePosition.add(res.getInt(POSITION_COLL));
         }
         res.close();
@@ -82,7 +84,7 @@ public class IELTSDataSource extends DataSource{
 
             for(int i = startPoint; i < beginnerNumber; i++){
 
-                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], "",favoriteStates.get(i)));
+                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], learnedStates.get(i),favoriteStates.get(i)));
 
             }
 
@@ -139,13 +141,20 @@ public class IELTSDataSource extends DataSource{
         words.addAll(getBeginnerWords().stream().filter( w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
         words.addAll(getIntermediateWords().stream().filter(w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
         words.addAll(getAdvanceWords().stream().filter(w -> w.isFavorite.equalsIgnoreCase("True")).collect(Collectors.toList()));
-
-
-
         return words;
-
-
     }
+
+    public List<Word> getBeginnerLearnedWords(){
+       return getBeginnerWords().stream().filter( w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    }
+
+    public List<Word> getIntermediateLearnedWords(){
+       return getIntermediateWords().stream().filter(w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    }
+    public List<Word> getAdvanceLearnedWords(){
+        return getAdvanceWords().stream().filter(w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    }
+
 
     public void updateFavorite(String id, String isFavorite){
         database.updateFav(id,isFavorite);

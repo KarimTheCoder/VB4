@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 public class TOEFLDataSource extends DataSource{
     private static int FAVORITE_COLL = 2;
+    private static int LEARNED_COLL = 3;
     private final int WORD_SIZE;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
 
@@ -23,8 +24,8 @@ public class TOEFLDataSource extends DataSource{
     private final boolean isChecked;
     private final TOEFLWordDatabase database;
     private final Context context;
-    List<String> favoriteState;
-
+    private List<String> favoriteState;
+    private List<String> learnedStates;
 
 
 
@@ -36,6 +37,8 @@ public class TOEFLDataSource extends DataSource{
 
         this.context = context;
         favoriteState = new ArrayList<>();
+        learnedStates = new ArrayList<>();
+
         WORD_SIZE = context.getResources().getStringArray(R.array.TOEFL_words).length;
 
         database = new TOEFLWordDatabase(context);
@@ -52,6 +55,7 @@ public class TOEFLDataSource extends DataSource{
 
         while (res.moveToNext()){
             favoriteState.add(res.getString(FAVORITE_COLL));
+            learnedStates.add(res.getString(LEARNED_COLL));
         }
 
         res.close();
@@ -81,7 +85,7 @@ public class TOEFLDataSource extends DataSource{
 
             for(int i = startPoint; i < beginnerNumber; i++){
 
-                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], "",favoriteState.get(i)));
+                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i],learnedStates.get(i),favoriteState.get(i)));
 
             }
 
@@ -142,6 +146,16 @@ public class TOEFLDataSource extends DataSource{
         return words;
 
 
+    }
+    public List<Word> getBeginnerLearnedWords(){
+        return getBeginnerWords().stream().filter( w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    }
+
+    public List<Word> getIntermediateLearnedWords(){
+        return getIntermediateWords().stream().filter(w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    }
+    public List<Word> getAdvanceLearnedWords(){
+        return getAdvanceWords().stream().filter(w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
     }
 
 
