@@ -45,6 +45,14 @@ public class SATDataSource extends DataSource{
 
     }
 
+    public int getLearnedWordCount(){
+
+        getFavoritePosition();
+
+        return learnedStates.size();
+
+    }
+
     public void getFavoritePosition(){
         Cursor res = database.getData();
 
@@ -155,5 +163,43 @@ public class SATDataSource extends DataSource{
 
     public void updateFavorite(String id, String isFavorite){
         database.updateFav(id,isFavorite);
+    }
+
+
+    public int getBeginnerWordCount() {
+
+
+        int beginnerCount = 0;
+
+        if(isChecked){
+            beginnerCount = (int) getPercentageNumber(30, WORD_SIZE);
+        }
+
+        return beginnerCount;
+    }
+    public int getIntermediateWordCount() {
+
+
+        int beginnerCount = 0;
+
+
+        if(isChecked){
+            beginnerCount = getPercentageNumber(40, WORD_SIZE);
+
+        }
+
+        return beginnerCount;
+    }
+    public int getAdvanceWordCount() {
+
+        int advanceCount = 0;
+
+        if(isChecked){
+
+            advanceCount = getPercentageNumber(30, WORD_SIZE);
+
+        }
+
+        return advanceCount;
     }
 }

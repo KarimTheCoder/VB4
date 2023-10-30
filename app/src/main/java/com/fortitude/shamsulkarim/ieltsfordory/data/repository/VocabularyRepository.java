@@ -114,15 +114,62 @@ public class VocabularyRepository {
 
     }
 
+    // Getting numbers
+    public int getBeginnerLearnedCount(){
 
-    // Getting favorite state
-    public List<String> getIELTSFavorite(){
+        return ieltsDataSource.getBeginnerLearnedWords().size()+
+                toeflDataSource.getBeginnerLearnedWords().size()+
+                satDataSource.getBeginnerLearnedWords().size()+
+                greDataSource.getBeginnerLearnedWords().size();
 
-        return ieltsDataSource.getFavoritePosition();
+
     }
-    public List<String> getTOEFLFavorite(){
-        return toeflDataSource.getFavoritePosition();
+
+    public int getIntermediateLearnedCount(){
+
+        // Todo write getting learned words for HomeFragment
+        return ieltsDataSource.getIntermediateLearnedWords().size()+
+                toeflDataSource.getIntermediateLearnedWords().size()+
+                satDataSource.getIntermediateLearnedWords().size()+
+                greDataSource.getIntermediateLearnedWords().size();
+
+
     }
+
+    public int getAdvanceLearnedCount(){
+
+        // Todo write getting learned words for HomeFragment
+        return ieltsDataSource.getAdvanceLearnedWords().size()+
+                toeflDataSource.getAdvanceLearnedWords().size()+
+                satDataSource.getAdvanceLearnedWords().size()+
+                greDataSource.getAdvanceLearnedWords().size();
+
+
+    }
+
+    public int getTotalBeginnerCount(){
+        return ieltsDataSource.getBeginnerWordCount()+
+                toeflDataSource.getBeginnerWordCount()+
+                satDataSource.getBeginnerWordCount()+
+                greDataSource.getBeginnerWordCount();
+    }
+
+    public int getTotalIntermediateCount(){
+        return ieltsDataSource.getIntermediateWordCount()+
+                toeflDataSource.getIntermediateWordCount()+
+                satDataSource.getIntermediateWordCount()+
+                greDataSource.getIntermediateWordCount();
+    }
+
+    public int getTotalAdvanceCount(){
+        return ieltsDataSource.getAdvanceWordCount()+
+                toeflDataSource.getAdvanceWordCount()+
+                satDataSource.getAdvanceWordCount()+
+                greDataSource.getAdvanceWordCount();
+
+    }
+
+
 
     // Updating favorite state
 

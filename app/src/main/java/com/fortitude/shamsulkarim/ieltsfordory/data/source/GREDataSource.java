@@ -19,7 +19,7 @@ public class GREDataSource extends DataSource{
     private static int FAVORITE_COLL = 2;
     private static int LEARNED_COLL = 3;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
-    private final int GRE_WORD_SIZE;
+    private final int WORD_SIZE;
     private int[] position;
     private List<String> favoriteStates;
     private List<String> learnedStates;
@@ -30,7 +30,7 @@ public class GREDataSource extends DataSource{
     public GREDataSource(Context context){
         super(context);
         this.context = context;
-        GRE_WORD_SIZE = context.getResources().getStringArray(R.array.GRE_words).length;
+        WORD_SIZE = context.getResources().getStringArray(R.array.GRE_words).length;
 
         database = new GREWordDatabase(context);
 
@@ -57,6 +57,13 @@ public class GREDataSource extends DataSource{
         example3Array = context.getResources().getStringArray(R.array.GRE_example3);
         vocabularyType = context.getResources().getStringArray(R.array.GRE_level);
         position = context.getResources().getIntArray(R.array.GRE_position);
+
+    }
+    public int getLearnedWordCount(){
+
+        getFavoritePosition();
+
+        return learnedStates.size();
 
     }
 
@@ -106,7 +113,7 @@ public class GREDataSource extends DataSource{
         int GREbeginnerNumber = 0;
 
         if(isChecked){
-            GREbeginnerNumber = (int) getPercentageNumber(30, GRE_WORD_SIZE);
+            GREbeginnerNumber = (int) getPercentageNumber(30, WORD_SIZE);
         }
 
         return listWords(0,GREbeginnerNumber);
@@ -120,8 +127,8 @@ public class GREDataSource extends DataSource{
         int beginnerNumber = 0;
 
         if(isChecked){
-            intermediateNumber = getPercentageNumber(40, GRE_WORD_SIZE);
-            beginnerNumber = getPercentageNumber(30, GRE_WORD_SIZE);
+            intermediateNumber = getPercentageNumber(40, WORD_SIZE);
+            beginnerNumber = getPercentageNumber(30, WORD_SIZE);
 
         }
 
@@ -137,11 +144,11 @@ public class GREDataSource extends DataSource{
 
         if(isChecked){
 
-            intermediateNumber = getPercentageNumber(40, GRE_WORD_SIZE);
-            beginnerNumber = getPercentageNumber(30, GRE_WORD_SIZE);
+            intermediateNumber = getPercentageNumber(40, WORD_SIZE);
+            beginnerNumber = getPercentageNumber(30, WORD_SIZE);
         }
 
-        return listWords(beginnerNumber+intermediateNumber,GRE_WORD_SIZE);
+        return listWords(beginnerNumber+intermediateNumber, WORD_SIZE);
     }
     public List<Word> getFavoriteWords(){
 
@@ -167,4 +174,40 @@ public class GREDataSource extends DataSource{
         database.updateFav(id,isFavorite);
     }
 
+    public int getBeginnerWordCount() {
+
+
+        int beginnerCount = 0;
+
+        if(isChecked){
+            beginnerCount = (int) getPercentageNumber(30, WORD_SIZE);
+        }
+
+        return beginnerCount;
+    }
+    public int getIntermediateWordCount() {
+
+
+        int beginnerCount = 0;
+
+
+        if(isChecked){
+            beginnerCount = getPercentageNumber(40, WORD_SIZE);
+
+        }
+
+        return beginnerCount;
+    }
+    public int getAdvanceWordCount() {
+
+        int advanceCount = 0;
+
+        if(isChecked){
+
+            advanceCount = getPercentageNumber(30, WORD_SIZE);
+
+        }
+
+        return advanceCount;
+    }
 }

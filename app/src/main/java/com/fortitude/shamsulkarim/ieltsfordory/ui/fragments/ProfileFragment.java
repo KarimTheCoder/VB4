@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Window window = Objects.requireNonNull(getActivity()).getWindow();
+        Window window = requireActivity().getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getContext().getColor(R.color.toolbar_background_color));
         // Inflate the layout for this fragment
@@ -92,7 +92,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         SharedPreferences sp = v.getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
 
-        localData = new LocalData(Objects.requireNonNull(getContext()));
+        localData = new LocalData(requireContext());
         SwitchButton reminderSwitch = v.findViewById(R.id.alarm_switch);
         tvTime = v.findViewById(R.id.alarm_time);
         int hour = localData.get_hour();
@@ -162,12 +162,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         if(!sp.contains("defaultAlarm")){
 
+            // Todo fix alarm
             //reminderSwitch.setChecked(true);
-            localData.setReminderStatus(true);
-            NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, 18, 0);
-            tvTime.setText(getFormatedTime(hour, min));
-            setReminder.setAlpha(1f);
-            sp.edit().putBoolean("defaultAlarm",true).apply();
+//            localData.setReminderStatus(true);
+//            NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, 18, 0);
+//            tvTime.setText(getFormatedTime(hour, min));
+//            setReminder.setAlpha(1f);
+//            sp.edit().putBoolean("defaultAlarm",true).apply();
         }
 
 
@@ -204,7 +205,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
 
         try{
-            Objects.requireNonNull(getActivity()).getMenuInflater().inflate(R.menu.profile_toolbar_menus,menu);
+            requireActivity().getMenuInflater().inflate(R.menu.profile_toolbar_menus,menu);
         }catch (NullPointerException i ) {
             i.printStackTrace();
         }
@@ -217,7 +218,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
             try{
 
-                Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity().getBaseContext(), NewSettingActivity.class));
+                requireActivity().startActivity(new Intent(getActivity().getBaseContext(), NewSettingActivity.class));
 
             }catch (NullPointerException i) {
                 i.printStackTrace();
@@ -272,7 +273,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
             try{
 
-                EmailIntentBuilder.from(Objects.requireNonNull(getActivity()).getBaseContext())
+                EmailIntentBuilder.from(requireActivity().getBaseContext())
                         .to("fortitudedevs@gmail.com")
                         .subject("VB4 - FL: "+BuildConfig.FLAVOR+" VN: "+BuildConfig.VERSION_NAME+" VC: "+BuildConfig.VERSION_CODE)
                         .body("")

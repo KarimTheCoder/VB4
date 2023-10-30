@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 
@@ -46,6 +45,14 @@ public class TOEFLDataSource extends DataSource{
 
         getFavoritePosition();
         initArray();
+
+    }
+
+    public int getLearnedWordCount(){
+
+        getFavoritePosition();
+
+        return learnedStates.size();
 
     }
 
@@ -161,5 +168,43 @@ public class TOEFLDataSource extends DataSource{
 
     public void updateFavorite(String id, String isFavorite){
         database.updateFav(id,isFavorite);
+    }
+
+
+    public int getBeginnerWordCount() {
+
+
+        int beginnerCount = 0;
+
+        if(isChecked){
+            beginnerCount = (int) getPercentageNumber(30, WORD_SIZE);
+        }
+
+        return beginnerCount;
+    }
+    public int getIntermediateWordCount() {
+
+
+        int beginnerCount = 0;
+
+
+        if(isChecked){
+            beginnerCount = getPercentageNumber(40, WORD_SIZE);
+
+        }
+
+        return beginnerCount;
+    }
+    public int getAdvanceWordCount() {
+
+        int advanceCount = 0;
+
+        if(isChecked){
+
+            advanceCount = getPercentageNumber(30, WORD_SIZE);
+
+        }
+
+        return advanceCount;
     }
 }

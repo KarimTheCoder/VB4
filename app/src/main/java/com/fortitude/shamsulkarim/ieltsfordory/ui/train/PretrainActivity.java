@@ -30,6 +30,7 @@ import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.NewSettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
@@ -44,14 +45,11 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class PretrainActivity extends AppCompatActivity implements View.OnClickListener, com.suke.widget.SwitchButton.OnCheckedChangeListener, PurchasesUpdatedListener {
 
-    private IELTSWordDatabase IELTSdatabase;
-    private TOEFLWordDatabase TOEFLdatabase;
-    private SATWordDatabase SATdatabase;
-    private GREWordDatabase GREdatabase;
+
+    private VocabularyRepository repository;
     private TextView levelTextView;
     private FancyButton startTrainButton;
     private RoundCornerProgressBar progressBar;
-    private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
     private SharedPreferences sp;
 
 
@@ -71,8 +69,10 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_start_training);
+
+        repository = new VocabularyRepository(this);
+
         init();
-        initDatabase();
         initUIElement();
         setActivityTitle();
         checkSpanishState();
@@ -83,15 +83,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void init(){
-
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-        isIeltsChecked = sp.getBoolean("isIELTSActive",true);
-        isToeflChecked = sp.getBoolean("isTOEFLActive", true);
-        isSatChecked =   sp.getBoolean("isSATActive", true);
-        isGreChecked =   sp.getBoolean("isGREActive",true);
-
-
-
 
     }
 
@@ -157,605 +149,38 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
 
     }
-    private void initDatabase(){
 
-        IELTSdatabase = new IELTSWordDatabase(this);
-        TOEFLdatabase = new TOEFLWordDatabase(this);
-        SATdatabase = new SATWordDatabase(this);
-        GREdatabase = new GREWordDatabase(this);
-    }
-
-    private int getPercentageNumber(int percentage, int number) {
-
-
-        double p = percentage / 100d;
-        double beginnerNum = p * number;
-
-        return (int)beginnerNum;
-
-    }
-   //----------------------------------------------------
-
-
-    // Below these returns lengths of wordlist size
-    private int getIELTSLength(){
-
-        if(isIeltsChecked){
-            return getResources().getStringArray(R.array.IELTS_words).length;
-        }else {
-            return 0;
-        }
-
-
-    }
-
-    private int getTOEFLLength(){
-
-        if(isToeflChecked){
-            return getResources().getStringArray(R.array.TOEFL_words).length;
-        }else {
-
-            return 0;
-        }
-
-
-    }
-
-    private int getSATLength(){
-
-        if(isSatChecked){
-            return getResources().getStringArray(R.array.SAT_words).length;
-        }else {
-            return 0;
-        }
-
-    }
-
-    private int getGRELength(){
-
-        if(isGreChecked){
-            return getResources().getStringArray(R.array.GRE_words).length;
-
-        }else {
-            return 0;
-        }
-
-    }
-    //----------------------------------------------------------------
-
-
-
-
-    // This returns IELTS BEGINNER length
-
-    private int  getIELTSBeginnerLearnedLength(){
-        int size = 0;
-        int i = 0;
-        int beginnerPercentage = getBeginnerIELTSPercentage();
-        Cursor res = IELTSdatabase.getData();
-
-
-        while (res.moveToNext()){
-
-
-            if (i == beginnerPercentage){
-
-                break;
-            }
-            if(res.getString(3).equalsIgnoreCase("true")){
-
-                size++;
-
-            }
-            i++;
-        }
-
-        IELTSdatabase.close();
-        res.close();
-
-        return size;
-
-    }
-    private int getBeginnerIELTSPercentage(){
-
-        return getPercentageNumber(30,getIELTSLength());
-
-    }
 
     //------------------------------------------------------
 
-
-    // This returns TOEFL Beginner length
-
-    private int  getTOEFLBeginnerLearnedLength(){
-        int size = 0;
-        int i = 0;
-        int beginnerPercentage = getBeginnerTOEFLPercentage();
-        Cursor res = TOEFLdatabase.getData();
-
-        while (res.moveToNext()){
-
-            if (i == beginnerPercentage){
-                break;
-            }
-
-            if(res.getString(3).equalsIgnoreCase("true")){
-                size++;
-            }
-            i++;
-        }
-
-        TOEFLdatabase.close();
-        res.close();
-
-        return size;
-
-    }
-    private int getBeginnerTOEFLPercentage(){
-
-        return getPercentageNumber(30,getTOEFLLength());
-
-    }
-
-    //------------------------------------------------------
-
-
-    // This returns SAT Beginner length
-
-    private int  getSATBeginnerLearnedLength(){
-        int size = 0;
-        int i = 0;
-
-        int beginnerPercentage = getBeginnerSATPercentage();
-
-        Cursor res = SATdatabase.getData();
-
-
-        while (res.moveToNext()){
-
-            if (i >= beginnerPercentage){
-                break;
-            }
-
-            if(res.getString(3).equalsIgnoreCase("true")){
-
-
-                size++;
-
-            }
-            i++;
-        }
-
-        SATdatabase.close();
-        res.close();
-
-        return size;
-
-    }
-    private int getBeginnerSATPercentage(){
-
-        return getPercentageNumber(30,getSATLength());
-
-    }
-
-    //------------------------------------------------------
-
-    // This returns GRE Beginner length
-
-    private int  getGREBeginnerLearnedLength(){
-        int size = 0;
-        int i = 0;
-        int beginnerPercentage = getBeginnerGREPercentage();
-
-        Cursor res = GREdatabase.getData();
-
-
-        while (res.moveToNext()){
-
-
-            if (i == beginnerPercentage){
-                break;
-            }
-
-
-            if(res.getString(3).equalsIgnoreCase("true")){
-
-                size++;
-
-            }
-            i++;
-        }
-
-        GREdatabase.close();
-        res.close();
-
-        return size;
-
-    }
-    private int getBeginnerGREPercentage(){
-
-        return getPercentageNumber(30,getGRELength());
-
-    }
-
-    //------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------------
-
-
-    // This returns IELTS intermediate length
-
-    private int  getIELTSIntermediateLearnedLength(){
-        int beginnerLength= getBeginnerIELTSPercentage();
-        int intermediateLength = getIntermediateIELTSPercentage();
-        int size = 0;
-        int i = 0;
-
-        Cursor res = IELTSdatabase.getData();
-
-        while (res.moveToNext()){
-            if (i >= beginnerLength+intermediateLength){
-                break;
-            }
-
-            if(i >= beginnerLength){
-
-                if(res.getString(3).equalsIgnoreCase("true")){
-                    size++;
-                }
-            }
-            i++;
-        }
-
-        IELTSdatabase.close();
-        res.close();
-
-        return size;
-
-    }
-
-
-
-    private int getIntermediateIELTSPercentage(){
-
-        return getPercentageNumber(40,getIELTSLength());
-
-    }
-
-    //------------------------------------------------------
-
-    // This returns TOEFL intermediate length
-
-    private int  getTOEFLIntermediateLearnedLength(){
-        int size = 0;
-        int i = 0;
-        int intermediateLength = getIntermediateTOEFLPercentage();
-        int beginnerLength = getBeginnerTOEFLPercentage();
-
-        Cursor res = TOEFLdatabase.getData();
-
-
-        while (res.moveToNext()){
-
-            if (i >= beginnerLength+intermediateLength){
-                break;
-            }
-
-            if(i >= beginnerLength){
-
-                if(res.getString(3).equalsIgnoreCase("true")){
-                    size++;
-                }
-            }
-            i++;
-        }
-
-        TOEFLdatabase.close();
-        res.close();
-
-        return size;
-
-    }
-    private int getIntermediateTOEFLPercentage(){
-
-        return getPercentageNumber(40,getTOEFLLength());
-
-    }
-
-    //------------------------------------------------------
-
-
-    // This returns SAT intermediate length
-
-    private int  getSATIntermediateLearnedLength(){
-        int size = 0;
-        int i = 0;
-        int intermediateLength = getIntermediateSATPercentage();
-        int beginnerLength = getBeginnerSATPercentage();
-
-            Cursor res = SATdatabase.getData();
-
-
-        while (res.moveToNext()){
-
-            if (i >= beginnerLength+intermediateLength){
-                break;
-            }
-
-            if(i >= beginnerLength){
-
-                if(res.getString(3).equalsIgnoreCase("true")){
-                    size++;
-                }
-            }
-            i++;
-        }
-
-        SATdatabase.close();
-        res.close();
-
-        return size;
-
-    }
-    private int getIntermediateSATPercentage(){
-
-        return getPercentageNumber(40,getSATLength());
-
-    }
-
-    //------------------------------------------------------
-
-    // This returns GRE intermediate length
-
-    private int  getGREIntermediateLearnedLength(){
-        int size = 0;
-        int i = 0;
-        int intermediateLength = getIntermediateGREPercentage();
-        int beginnerLength = getBeginnerGREPercentage();
-
-        Cursor res = GREdatabase.getData();
-
-
-        while (res.moveToNext()){
-
-            if (i >= beginnerLength+intermediateLength){
-                break;
-            }
-
-            if(i >= beginnerLength){
-
-                if(res.getString(3).equalsIgnoreCase("true")){
-                    size++;
-                }
-            }
-
-            i++;
-        }
-
-        GREdatabase.close();
-        res.close();
-
-        return size;
-
-    }
-    private int getIntermediateGREPercentage(){
-
-        return getPercentageNumber(40,getGRELength());
-
-    }
-
-    //------------------------------------------------------
-
-
-
-
-    private int getIELTSAdvanceLearnedLenth(){
-
-        Cursor res = IELTSdatabase.getData();
-
-        int x =  getBeginnerIELTSPercentage() + getIntermediateIELTSPercentage();
-        int i = 0;
-        int size = 0;
-
-
-        while(res.moveToNext()){
-
-
-            if(res.getString(3).equalsIgnoreCase("true")){
-
-                if(i >= x){
-
-                    if(i == getIELTSLength()){
-                        break;
-                    }
-                    size++;
-
-                }
-
-
-            }
-            i++;
-        }
-        res.close();
-        IELTSdatabase.close();
-
-        return size;
-
-    }
-
-    private int getTOEFLAdvanceLearnedLenth(){
-
-        Cursor res = TOEFLdatabase.getData();
-
-        int x =  getBeginnerTOEFLPercentage()+getIntermediateTOEFLPercentage();
-        int i = 0;
-        int size = 0;
-
-
-        while(res.moveToNext()){
-
-
-            if(res.getString(3).equalsIgnoreCase("true")){
-
-                if(i >= x){
-
-                    if(i == getTOEFLLength()){
-                        break;
-                    }
-                    size++;
-                }
-
-
-            }
-            i++;
-        }
-
-        res.close();
-        TOEFLdatabase.close();
-
-        return size;
-
-    }
-
-    private int getSATAdvanceLearnedLenth(){
-
-        Cursor res = SATdatabase.getData();
-
-        int x =  getBeginnerSATPercentage()+getIntermediateSATPercentage();
-        int i = 0;
-        int size = 0;
-
-
-        while(res.moveToNext()){
-
-
-            if(res.getString(3).equalsIgnoreCase("true")){
-
-                if(i >= x){
-
-                    if(i == getSATLength()){
-                        break;
-                    }
-                    size++;
-
-                }
-
-
-            }
-            i++;
-        }
-        res.close();
-        SATdatabase.close();
-
-        return size;
-
-    }
-
-    private int getGREAdvanceLearnedLenth(){
-
-        Cursor res = GREdatabase.getData();
-
-        int x =  getBeginnerGREPercentage()+getIntermediateGREPercentage();
-        int i = 0;
-        int size = 0;
-
-
-        while(res.moveToNext()){
-
-
-            if(res.getString(3).equalsIgnoreCase("true")){
-
-                if(i >= x){
-
-                    if(i == getGRELength()){
-                        break;
-                    }
-                    size++;
-
-                }
-
-
-            }
-
-
-
-            i++;
-        }
-        res.close();
-        GREdatabase.close();
-        return size;
-
-    }
 
     private void setBeginnerLearnedwordsLengthTextView(){
 
-        int i = getIELTSBeginnerLearnedLength();
-        i = getTOEFLBeginnerLearnedLength()+i;
-        i = getSATBeginnerLearnedLength()+i;
-        i = getGREBeginnerLearnedLength()+i;
+        int learnedCount = repository.getBeginnerLearnedCount();
+        int totalBeginnerCount = repository.getTotalBeginnerCount();
 
-        int size = getBeginnerIELTSPercentage();
-        size = getBeginnerTOEFLPercentage()+size;
-        size = getBeginnerSATPercentage()+size;
-        size = getBeginnerGREPercentage()+size;
-
-        progressBar.setMax(size);
-        progressBar.setProgress(i);
-        progressCountTextview.setText(getString(R.string.pretrain_progress_text,i,size));
+        progressBar.setMax(totalBeginnerCount);
+        progressBar.setProgress(learnedCount);
+        progressCountTextview.setText(getString(R.string.pretrain_progress_text,learnedCount,totalBeginnerCount));
 
     }
-
-
 
     private void setIntermediateLearnedwordsLengthTextView(){
 
-        int i = getIELTSIntermediateLearnedLength();
-        i = getTOEFLIntermediateLearnedLength()+i;
-        i = getSATIntermediateLearnedLength()+i;
-        i = getGREIntermediateLearnedLength()+i;
+        int i = repository.getIntermediateLearnedCount();
 
-
-        int size = getIntermediateIELTSPercentage();
-        size = getIntermediateTOEFLPercentage()+size;
-        size = getIntermediateSATPercentage()+size;
-        size = getIntermediateGREPercentage()+size;
-
+        int size = repository.getTotalIntermediateCount();
 
         progressBar.setMax(size);
         progressBar.setProgress(i);
         progressCountTextview.setText(getString(R.string.pretrain_progress_text,i,size));
     }
 
-
-
-
     private void setAdvanceLearnedwordsLengthTextView(){
 
-        int i = 0;
-        int size = 0;
+        int i = repository.getAdvanceLearnedCount();
+        int size = repository.getTotalAdvanceCount();
 
-        if(isIeltsChecked){
-            i = getIELTSAdvanceLearnedLenth()+i;
-            size = getBeginnerIELTSPercentage();
-
-        }
-
-        if( isToeflChecked){
-
-            i = getTOEFLAdvanceLearnedLenth()+i;
-            size = getBeginnerTOEFLPercentage()+size;
-
-        }
-
-        if(isSatChecked){
-            i = getSATAdvanceLearnedLenth()+i;
-            size = getBeginnerSATPercentage()+size;
-        }
-
-        if(isGreChecked){
-            i = getGREAdvanceLearnedLenth()+i;
-            size = getBeginnerGREPercentage()+size;
-        }
 
 
         progressBar.setMax(size);
