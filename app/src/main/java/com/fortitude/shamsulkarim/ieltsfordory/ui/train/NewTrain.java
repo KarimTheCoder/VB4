@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.adapters.NewTrainRecyclerView;
@@ -79,15 +80,8 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NewTrain extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener, NewTrainRecyclerView.TrainAdapterCallback {
 
-    private String[] IELTSwordArray,IELTSwordsArraySL, IELTStranslationArray,IELTStranslationArraySL, IELTSgrammarArray,IELTSextra, IELTSpronunArray, IELTSexample1array,IELTSexample1arraySL, IELTSexample2Array,IELTSexample2ArraySL, IELTSexample3Array,IELTSexample3ArraySL, IELTSvocabularyType;
-    private String[] TOEFLwordArray, TOEFLtranslationArray, TOEFLgrammarArray, TOEFLpronunArray, TOEFLexample1array, TOEFLexample2Array, TOEFLexample3Array, TOEFLvocabularyType;
-    private String[] TOEFLwordArraySL, TOEFLtranslationArraySL,TOEFLexample1ArraySL, TOEFLexample2ArraySL, TOEFLexample3ArraySL;
-    private String[] SATwordArray, SATtranslationArray, SATgrammarArray, SATpronunArray, SATexample1array, SATexample2Array, SATexample3Array, SATvocabularyType;
-    private String[] SATwordArraySL, SATtranslationArraySL, SATexample1ArraySL, SATexample2ArraySL, SATexample3ArraySL;
-    private String[] GREwordArray, GREtranslationArray, GREgrammarArray, GREpronunArray, GREexample1array, GREexample2array, GREexample3Array, GREvocabularyType;
-    private String[] GREwordArraySL, GREtranslationArraySL, GREexample1ArraySL, GREexample2ArraySL, GREexample3ArraySL;
-    private int[] IELTSposition, TOEFLposition, SATposition, GREposition;
-    private List<String> IELTSlearnedDatabase, TOEFLlearnedDatabase, SATlearnedDatabase, GRElearnedDatabase;
+
+    private VocabularyRepository repository;
     private View topBackground,trainCircle1,trainCircle2,trainCircle3,trainCircle4;
     private CardView answerCard1, answerCard2, answerCard3, answerCard4, wordCard;
     private TextView wordView, answerView1, answerView2, answerView3, answerView4;
@@ -118,22 +112,16 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private int totalMistakeCount, totalCorrects;
     private boolean soundState = true;
     boolean isWhichvocbularyToText = false;
-    private boolean isIeltsChecked, isToeflChecked, isSatChecked, isGreChecked;
-//    private PublisherInterstitialAd mPublisherInterstitialAd;
+
     public String[] items;
     public boolean[] checkedItems;
-    private List<String> IELTSFav, TOEFLFav, SATFav, GREFav;
-    private IELTSWordDatabase IELTSdatabase;
-    private TOEFLWordDatabase TOEFLdatabase;
-    private SATWordDatabase SATdatabase;
-    private GREWordDatabase GREdatabase;
+
     private JustLearnedDatabaseBeginner justLearnedDatabaseBeginner;
     private JustLearnedDatabaseIntermediate justLearnedDatabaseIntermediate;
     private JustLearnedDatabaseAdvance justLearnedDatabaseAdvance;
     private FirebaseStorage storage;
     public File localFile = null;
     public String audioPath= null;
-    private String secondLanguage = "english";
     private ProgressBar progressBar, adLoading;
 
     // UI
@@ -154,6 +142,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         window.setStatusBarColor(getColor(R.color.colorPrimary));
         // This code reports to Crashlytics of connection
         // Boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
+
+        repository = new VocabularyRepository(this);
+
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         level = sp.getString("level","NOTHING");
 
@@ -182,16 +173,12 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
                 initialization();
-                addingLearnedDatabase();
-                gettingResources();
                 initializingWords();
                 showWords(showCycle);
 
         mistakeCollector = new int[fiveWords.size()];
 
         Arrays.fill(mistakeCollector, 0);
-        //Toast.makeText(this,"fiveWordsize: "+fiveWords.size()+" level: "+level+" word size: "+words.size(),Toast.LENGTH_SHORT).show();
-
         sp.edit().putInt("fiveWordSize",fiveWords.size()).apply();
 
         noshowads++;
@@ -201,9 +188,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         updateLearnedDatabase();
 
 
-       // NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-       // NewTrain.this.finish();
-
 
 
     }
@@ -211,11 +195,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        IELTSdatabase.close();
-        TOEFLdatabase.close();
-        SATdatabase.close();
-        GREdatabase.close();
 
         if(tts != null){
 
@@ -539,19 +518,14 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         progressBar.setIndeterminateDrawable(threeBounce);
         adLoading.setVisibility(View.GONE);
 
-        isIeltsChecked = sp.getBoolean("isIELTSActive",true);
-        isToeflChecked = sp.getBoolean("isTOEFLActive", true);
-        isSatChecked =   sp.getBoolean("isSATActive", true);
-        isGreChecked =   sp.getBoolean("isGREActive",true);
-
         TypedValue typedValue = new TypedValue();
         Resources.Theme theme = this.getTheme();
 
-        theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
+        //theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
         @ColorInt int colorPrimaryDark = typedValue.data;
-        theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+       // theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
         @ColorInt int colorPrimary= typedValue.data;
-        theme.resolveAttribute(R.attr.colorPrimarySurface, typedValue, true);
+        //theme.resolveAttribute(R.attr.colorPrimarySurface, typedValue, true);
         @ColorInt int colorPrimarySurface= typedValue.data;
 
 
@@ -564,28 +538,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         progress1.setProgressColor(colorPrimary);
         progress1.setProgressBackgroundColor(colorPrimarySurface);
 
-        IELTSdatabase = new IELTSWordDatabase(this);
-        TOEFLdatabase = new TOEFLWordDatabase(this);
-        SATdatabase = new SATWordDatabase(this);
-        GREdatabase = new GREWordDatabase(this);
         justLearnedDatabaseBeginner = new JustLearnedDatabaseBeginner(this);
         justLearnedDatabaseIntermediate = new JustLearnedDatabaseIntermediate(this);
         justLearnedDatabaseAdvance = new JustLearnedDatabaseAdvance(this);
-
-
-        IELTSFav = new ArrayList<>();
-        TOEFLFav = new ArrayList<>();
-        SATFav = new ArrayList<>();
-        GREFav = new ArrayList<>();
-
-        IELTSlearnedDatabase = new ArrayList<>();
-        TOEFLlearnedDatabase = new ArrayList<>();
-        SATlearnedDatabase = new ArrayList<>();
-        GRElearnedDatabase = new ArrayList<>();
-
-
-
-
 
 
 
@@ -617,77 +572,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private void gettingResources() {
-
-
-            IELTSwordArray = getResources().getStringArray(R.array.IELTS_words);
-            IELTStranslationArray = getResources().getStringArray(R.array.IELTS_translation);
-            IELTSgrammarArray =  getResources().getStringArray(R.array.IELTS_grammar);
-            IELTSpronunArray =  getResources().getStringArray(R.array.IELTS_pronunciation);
-            IELTSexample1array = getResources().getStringArray(R.array.IELTS_example1);
-            IELTSexample2Array = getResources().getStringArray(R.array.IELTS_example2);
-            IELTSexample3Array = getResources().getStringArray(R.array.IELTS_example3);
-            IELTSvocabularyType = getResources().getStringArray(R.array.IELTS_level);
-            IELTSposition = getResources().getIntArray(R.array.IELTS_position);
-
-
-
-
-            TOEFLwordArray = getResources().getStringArray(R.array.TOEFL_words);
-            TOEFLtranslationArray = getResources().getStringArray(R.array.TOEFL_translation);
-            TOEFLgrammarArray =  getResources().getStringArray(R.array.TOEFL_grammar);
-            TOEFLpronunArray =  getResources().getStringArray(R.array.TOEFL_pronunciation);
-            TOEFLexample1array = getResources().getStringArray(R.array.TOEFL_example1);
-            TOEFLexample2Array = getResources().getStringArray(R.array.TOEFL_example2);
-            TOEFLexample3Array = getResources().getStringArray(R.array.TOEFL_example3);
-            TOEFLvocabularyType = getResources().getStringArray(R.array.TOEFL_level);
-            TOEFLposition = getResources().getIntArray(R.array.TOEFL_position);
-
-
-
-
-            SATwordArray = getResources().getStringArray(R.array.SAT_words);
-            SATtranslationArray = getResources().getStringArray(R.array.SAT_translation);
-            SATgrammarArray =  getResources().getStringArray(R.array.SAT_grammar);
-            SATpronunArray =  getResources().getStringArray(R.array.SAT_pronunciation);
-            SATexample1array = getResources().getStringArray(R.array.SAT_example1);
-            SATexample2Array = getResources().getStringArray(R.array.SAT_example2);
-            SATexample3Array = getResources().getStringArray(R.array.SAT_example3);
-            SATvocabularyType = getResources().getStringArray(R.array.SAT_level);
-            SATposition = getResources().getIntArray(R.array.SAT_position);
-
-
-
-
-
-
-            GREwordArray = getResources().getStringArray(R.array.GRE_words);
-            GREtranslationArray = getResources().getStringArray(R.array.GRE_translation);
-            GREgrammarArray = getResources().getStringArray(R.array.GRE_grammar);
-            GREpronunArray = getResources().getStringArray(R.array.GRE_pronunciation);
-            GREexample1array = getResources().getStringArray(R.array.GRE_example1);
-            GREexample2array =getResources().getStringArray(R.array.GRE_example2);
-            GREexample3Array = getResources().getStringArray(R.array.GRE_example3);
-            GREvocabularyType = getResources().getStringArray(R.array.GRE_level);
-            GREposition = getResources().getIntArray(R.array.GRE_position);
-
-
-            secondLanguage = sp.getString("secondlanguage","english");
-
-            if(!secondLanguage.equalsIgnoreCase("english")){
-
-                //This method initializes Spanish translation resources.
-                addSpanishTranslation();
-            }
-
-
-
-
-
-
-
-    }
-
     private  void initializingWords(){
 
         words = new ArrayList<>();
@@ -697,25 +581,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         if(!sp.contains(level)){
             sp.edit().putInt(level,0).apply();
         }
-        //int countWords = sp.getInt(level,0);
 
-
-
-
-
-
-//        for (int i = 0; i < IELTSwordArray.length; i++) {
-//            if(languageId > 0){
-//                words.add(new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],""));
-//
-//            }
-//            else{
-//
-//                words.add(new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],""));
-//
-//            }
-//
-//        }
 
         getWords();
 
@@ -1224,13 +1090,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         wordView.setVisibility(View.VISIBLE);
         speak.setVisibility(View.INVISIBLE);
 
-//        String combineBothLanguage = fiveWords.get(quizCycle).getWord()+"\n"+fiveWords.get(quizCycle).getWord();
-//        final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
-//        SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
-//        spanWord.setSpan(lowColor,fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        spanWord.setSpan(new RelativeSizeSpan(0.8f), fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
 
 
         wordView.setText(fiveWords.get(quizCycle).getWord());
@@ -1240,28 +1099,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         adapter = new NewTrainRecyclerView(this,fiveWords.get(quizCycle), this);
         recyclerView.setAdapter(adapter);
 
-//        DisplayMetrics dm = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(dm);
-//        float width = dm.widthPixels;
-//        float height = dm.heightPixels;
-//
-//        final ValueAnimator va = ValueAnimator.ofFloat(height,0);
-//
-//        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
-//
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//
-//                float value = (float)valueAnimator.getAnimatedValue();
-//                recyclerView.setTranslationY(value/10);
-//            }
-//        });
-//
-//
-//        va.setRepeatMode(ValueAnimator.REVERSE);
-//        va.setInterpolator(new DecelerateInterpolator());
-//        va.setDuration(400L);
-//        va.start();
+
 
 
     }
@@ -1337,296 +1175,20 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     private void getWords(){
 
-        double IELTSwordSize = IELTSwordArray.length;
-        double TOEFLwordSize = TOEFLwordArray.length;
-        double SATwordSize =   SATwordArray.length;
-        double GREwordSize = GREwordArray.length;
-
-        int IELTSbeginnerNumber = (int) getPercentageNumber(30d, IELTSwordSize);
-        int TOEFLbeginnerNumber = (int) getPercentageNumber(30d, TOEFLwordSize);
-        int SATbeginnerNumber = (int)  getPercentageNumber(30d, SATwordSize);
-        int GREbeginnerNumber =  (int) getPercentageNumber(30d, GREwordSize);
-
-        int IELTSintermediateNumber =(int) getPercentageNumber(40d,IELTSwordSize);
-        int TOEFLintermediateNumber = (int)getPercentageNumber(40d, TOEFLwordSize);
-        int SATintermediateNumber = (int)getPercentageNumber(40d, SATwordSize);
-        int GREintermediateNumber = (int)getPercentageNumber(40d, GREwordSize);
-
         if( level.equalsIgnoreCase("beginner")){
-
-           addIELTSwords(0d,IELTSbeginnerNumber);
-           addTOEFLwords(0d,TOEFLbeginnerNumber);
-           addSATwords(0d,SATbeginnerNumber);
-           addGREwords(0d,GREbeginnerNumber);
-
+           words.addAll(repository.getBeginnerUnlearnedWords());
         }
 
         if( level.equalsIgnoreCase("intermediate")){
-
-            addIELTSwords(IELTSbeginnerNumber,IELTSintermediateNumber+IELTSbeginnerNumber);
-            addTOEFLwords(TOEFLbeginnerNumber,TOEFLbeginnerNumber+TOEFLintermediateNumber);
-            addSATwords(SATbeginnerNumber,SATbeginnerNumber+SATintermediateNumber);
-            addGREwords(GREbeginnerNumber,GREbeginnerNumber+GREintermediateNumber);
-
+            words.addAll(repository.getIntermediateUnlearnedWords());
         }
 
         if( level.equalsIgnoreCase("advance")){
-
-            addIELTSwords(IELTSintermediateNumber+IELTSbeginnerNumber, IELTSwordSize);
-            addTOEFLwords(TOEFLintermediateNumber+TOEFLbeginnerNumber, TOEFLwordSize);
-            addSATwords(SATintermediateNumber+SATbeginnerNumber, SATwordSize);
-            addGREwords(GREintermediateNumber+GREbeginnerNumber,GREwordSize);
-
+            words.addAll(repository.getAdvanceUnlearnedWords());
         }
-
-
     }
 
 
-    private double getPercentageNumber(double percentage, double number){
-
-
-        double p = percentage/100d;
-
-        return p*number;
-
-    }
-
-    private  void addIELTSwords(double startPoint,double IELTSbeginnerNumber){
-
-
-
-
-
-        if(isIeltsChecked){
-            for(int i = (int) startPoint; i  < IELTSbeginnerNumber; i++){
-
-                Word word = new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],IELTSvocabularyType[i],IELTSposition[i], IELTSlearnedDatabase.get(i), IELTSFav.get(i));
-
-                questionWords.add(word);
-
-
-                if( IELTSlearnedDatabase.get(i).equalsIgnoreCase("false")){
-
-                    Word word1 = new Word(IELTSwordArray[i], IELTStranslationArray[i],"", IELTSpronunArray[i], IELTSgrammarArray[i], IELTSexample1array[i], IELTSexample2Array[i], IELTSexample3Array[i],IELTSvocabularyType[i],IELTSposition[i], IELTSlearnedDatabase.get(i), IELTSFav.get(i));
-
-
-
-
-                    if(!secondLanguage.equalsIgnoreCase("english")){
-
-
-                        word1.setWordSL(IELTSwordsArraySL[i]);
-                        word1.setTranslationSL(IELTStranslationArraySL[i]);
-                        word1.setExample1SL(IELTSexample1arraySL[i]);
-                        word1.setExample2SL(IELTSexample2ArraySL[i]);
-                        word1.setExample3SL(IELTSexample3ArraySL[i]);
-
-                    }else {
-
-                        word1.setWordSL("");
-                        word1.setTranslationSL("");
-                        word1.setExample1SL("");
-                        word1.setExample2SL("");
-                        word1.setExample3SL("");
-
-                    }
-
-
-                    words.add(word1);
-
-                }
-
-            }
-
-        }
-
-
-    }
-
-    private  void addTOEFLwords(double startPoint, double TOEFLbeginnerNumber){
-
-
-        if(isToeflChecked){
-
-
-            for(int i = (int) startPoint; i < TOEFLbeginnerNumber; i++){
-
-                questionWords.add(new Word(TOEFLwordArray[i], TOEFLtranslationArray[i], "", TOEFLpronunArray[i], TOEFLgrammarArray[i], TOEFLexample1array[i], TOEFLexample2Array[i], TOEFLexample3Array[i], TOEFLvocabularyType[i], TOEFLposition[i], TOEFLlearnedDatabase.get(i), TOEFLFav.get(i)));
-
-                if( TOEFLlearnedDatabase.get(i).equalsIgnoreCase("false")) {
-                    Word word = new Word(TOEFLwordArray[i], TOEFLtranslationArray[i], "", TOEFLpronunArray[i], TOEFLgrammarArray[i], TOEFLexample1array[i], TOEFLexample2Array[i], TOEFLexample3Array[i], TOEFLvocabularyType[i], TOEFLposition[i], TOEFLlearnedDatabase.get(i), TOEFLFav.get(i));
-
-
-
-                    if(!secondLanguage.equalsIgnoreCase("english")){
-
-                        word.setWordSL(TOEFLwordArraySL[i]);
-                        word.setTranslationSL(TOEFLtranslationArraySL[i]);
-                        word.setExample1SL(TOEFLexample1ArraySL[i]);
-                        word.setExample2SL(TOEFLexample2ArraySL[i]);
-                        word.setExample3SL(TOEFLexample3ArraySL[i]);
-                    }else {
-
-                        word.setWordSL("");
-                        word.setTranslationSL("");
-                        word.setExample1SL("");
-                        word.setExample2SL("");
-                        word.setExample3SL("");
-
-                    }
-
-
-
-                    words.add(word);
-
-
-                }
-            }
-        }
-
-
-
-    }
-
-    private void addSATwords (double startPoint ,double SATbeginnerNumber){
-
-
-        if(isSatChecked){
-
-            for(int i = (int) startPoint; i < SATbeginnerNumber; i++){
-
-                questionWords.add(new Word(SATwordArray[i], SATtranslationArray[i], "", SATpronunArray[i], SATgrammarArray[i], SATexample1array[i], SATexample2Array[i], SATexample3Array[i], SATvocabularyType[i], SATposition[i], SATlearnedDatabase.get(i), SATFav.get(i)));
-                if( SATlearnedDatabase.get(i).equalsIgnoreCase("false")) {
-
-                    Word word = new Word(SATwordArray[i], SATtranslationArray[i], "", SATpronunArray[i], SATgrammarArray[i], SATexample1array[i], SATexample2Array[i], SATexample3Array[i], SATvocabularyType[i], SATposition[i], SATlearnedDatabase.get(i), SATFav.get(i));
-
-
-
-
-                    if(!secondLanguage.equalsIgnoreCase("english")){
-
-                        word.setWordSL(SATwordArraySL[i]);
-                        word.setTranslationSL(SATtranslationArraySL[i]);
-                        word.setExample1SL(SATexample1ArraySL[i]);
-                        word.setExample2SL(SATexample2ArraySL[i]);
-                        word.setExample3SL(SATexample3ArraySL[i]);
-
-                    }else {
-
-                        word.setWordSL("");
-                        word.setTranslationSL("");
-                        word.setExample1SL("");
-                        word.setExample2SL("");
-                        word.setExample3SL("");
-
-                    }
-
-                    words.add(word);
-
-                }
-
-            }
-
-        }
-
-
-
-
-
-    }
-
-    private void addGREwords (double startPoint ,double SATbeginnerNumber){
-
-
-        if(isGreChecked){
-
-            for(int i = (int) startPoint; i < SATbeginnerNumber; i++){
-
-                questionWords.add(new Word(GREwordArray[i], GREtranslationArray[i],"", GREpronunArray[i], GREgrammarArray[i], GREexample1array[i], GREexample2array[i], GREexample3Array[i],GREvocabularyType[i],GREposition[i], GRElearnedDatabase.get(i),GREFav.get(i)));
-
-                if( GRElearnedDatabase.get(i).equalsIgnoreCase("false")) {
-
-                    Word word = new Word(GREwordArray[i], GREtranslationArray[i],"", GREpronunArray[i], GREgrammarArray[i], GREexample1array[i], GREexample2array[i], GREexample3Array[i],GREvocabularyType[i],GREposition[i], GRElearnedDatabase.get(i), GREFav.get(i));
-
-
-                    if(!secondLanguage.equalsIgnoreCase("english")){
-                        word.setWordSL(GREwordArraySL[i]);
-                        word.setTranslationSL(GREtranslationArraySL[i]);
-                        word.setExample1SL(GREexample1ArraySL[i]);
-                        word.setExample2SL(GREexample2ArraySL[i]);
-                        word.setExample3SL(GREexample3ArraySL[i]);
-
-                    }else {
-
-                        word.setWordSL("");
-                        word.setTranslationSL("");
-                        word.setExample1SL("");
-                        word.setExample2SL("");
-                        word.setExample3SL("");
-
-                    }
-
-
-
-
-                    words.add(word);
-                }
-
-            }
-
-        }
-
-
-
-
-
-    }
-
-    private void addingLearnedDatabase(){
-
-        Cursor beginnerRes = IELTSdatabase.getData();
-        Cursor TOEFLres =  TOEFLdatabase.getData();
-        Cursor SATres = SATdatabase.getData();
-        Cursor GREres = GREdatabase.getData();
-
-             while (beginnerRes.moveToNext()){
-
-                IELTSlearnedDatabase.add(beginnerRes.getString(3));
-                IELTSFav.add(beginnerRes.getString(2));
-
-             }
-             beginnerRes.close();
-
-             while (TOEFLres.moveToNext()){
-
-                 TOEFLlearnedDatabase.add(TOEFLres.getString(3));
-                 TOEFLFav.add(TOEFLres.getString(2));
-
-             }
-             TOEFLres.close();
-
-             while (SATres.moveToNext()){
-
-                 SATlearnedDatabase.add(SATres.getString(3));
-                 SATFav.add(SATres.getString(2));
-
-             }
-             SATres.close();
-
-             while (GREres.moveToNext()){
-
-                 GRElearnedDatabase.add(GREres.getString(3));
-                 GREFav.add(GREres.getString(2));
-
-             }
-             GREres.close();
-
-
-
-
-
-    }
 
 
     private void updateLearnedDatabase(){
@@ -1635,49 +1197,22 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
             Word word = fiveWords.get(i);
 
-
-
-
             if(word.vocabularyType.equalsIgnoreCase("IELTS")){
-
-                IELTSdatabase.updateLearned(word.position+"","true");
-
-
-
-              //  Toast.makeText(this, "IELTS learned: "+word.position, Toast.LENGTH_SHORT).show();
+                repository.updateIELTSLearnState(word.position+"","true");
             }
 
             if( word.vocabularyType.equalsIgnoreCase("TOEFL")){
-
-
-                TOEFLdatabase.updateLearned(word.position+"", "true");
-
-             //   Toast.makeText(this, "TOEFL learned: "+word.position, Toast.LENGTH_SHORT).show();
+                repository.updateTOEFLLearnState(word.position+"", "true");
             }
 
             if(word.vocabularyType.equalsIgnoreCase("SAT")){
-
-
-                SATdatabase.updateLearned(word.position+"", "true");
-
-              //  Toast.makeText(this, "SAT learned: "+word.position, Toast.LENGTH_SHORT).show();
-
+                repository.updateSATLearnState(word.position+"", "true");
             }
 
             if(word.vocabularyType.equalsIgnoreCase("GRE")){
-
-
-                GREdatabase.updateLearned(word.position+"", "true");
-
-              //  Toast.makeText(this, "GRE learned: "+word.position, Toast.LENGTH_SHORT).show();
-
+                repository.updateGRELearnState(word.position+"", "true");
             }
-
-
         }
-
-
-
     }
 
     private void updateJustlearnedDatabase(int pos){
@@ -2014,39 +1549,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private void addSpanishTranslation(){
-
-        ///IELTS Translations----
-        IELTSwordsArraySL = getResources().getStringArray(R.array.IELTS_words_sp);
-        IELTStranslationArraySL = getResources().getStringArray(R.array.IELTS_translation_sp);
-        IELTSexample1arraySL = getResources().getStringArray(R.array.IELTS_example1_sp);
-        IELTSexample2ArraySL = getResources().getStringArray(R.array.IELTS_example2_sp);
-        IELTSexample3ArraySL = getResources().getStringArray(R.array.IELTS_example3_sp);
-
-        //TOEFL Second Language Arrays
-        TOEFLwordArraySL = getResources().getStringArray(R.array.TOEFL_words_sp);
-        TOEFLtranslationArraySL = getResources().getStringArray(R.array.TOEFL_translation_sp);
-        TOEFLexample1ArraySL = getResources().getStringArray(R.array.TOEFL_example1_sp);
-        TOEFLexample2ArraySL = getResources().getStringArray(R.array.TOEFL_example2_sp);
-        TOEFLexample3ArraySL = getResources().getStringArray(R.array.TOEFL_example3_sp);
-
-        // SAT second Language Arrays
-        SATwordArraySL = getResources().getStringArray(R.array.SAT_words_sp);
-        SATtranslationArraySL = getResources().getStringArray(R.array.SAT_translation_sp);
-        SATexample1ArraySL = getResources().getStringArray(R.array.SAT_example1_sp);
-        SATexample2ArraySL = getResources().getStringArray(R.array.SAT_example2_sp);
-        SATexample3ArraySL = getResources().getStringArray(R.array.SAT_example3_sp);
-
-        // GRE Second Language Arrays
-        GREwordArraySL = getResources().getStringArray(R.array.GRE_words_sp);
-        GREtranslationArraySL = getResources().getStringArray(R.array.GRE_translation_sp);
-        GREexample1ArraySL = getResources().getStringArray(R.array.GRE_example1_sp);
-        GREexample2ArraySL = getResources().getStringArray(R.array.GRE_example2_sp);
-        GREexample3ArraySL = getResources().getStringArray(R.array.GRE_example3_sp);
-
-    }
-
-
     private String checkTrialStatus(){
 
         String trialStatus = "ended";
@@ -2073,44 +1575,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         }
         return trialStatus;
     }
-
-
-//    private void initializeAds(){
-//
-//        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
-//        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7815894766256601/7917485135");
-//        boolean isAdShow = getIsAdShow();
-//
-//
-//
-//        if(isAdShow){
-//
-//
-//                if(BuildConfig.FLAVOR.equalsIgnoreCase("free") || BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-//                    mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
-//                    mPublisherInterstitialAd.setAdListener( new AdListener(){
-//
-//                        @Override
-//                        public void onAdClosed() {
-//                            super.onAdClosed();
-//                            NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-//                            NewTrain.this.finish();
-//
-//                            Toast.makeText(getApplicationContext(),"Sorry for the ad :(",Toast.LENGTH_SHORT).show();
-//                        }
-//
-//                    });
-//                }
-//
-//            }
-//
-//
-//
-//
-//
-//
-//    }
-
 
     private boolean getIsAdShow(){
 

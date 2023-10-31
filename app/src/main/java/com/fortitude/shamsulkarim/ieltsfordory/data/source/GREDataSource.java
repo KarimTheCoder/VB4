@@ -18,7 +18,10 @@ public class GREDataSource extends DataSource{
 
     private static int FAVORITE_COLL = 2;
     private static int LEARNED_COLL = 3;
+    private final String secondLanguage;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
+
+
     private final int WORD_SIZE;
     private int[] position;
     private List<String> favoriteStates;
@@ -26,6 +29,7 @@ public class GREDataSource extends DataSource{
     private final boolean isChecked;
     private final GREWordDatabase database;
     private final Context context;
+    private String[] wordsArraySL, translationArraySL, example1arraySL, example2ArraySL, example3ArraySL;
 
     public GREDataSource(Context context){
         super(context);
@@ -37,7 +41,10 @@ public class GREDataSource extends DataSource{
 
         favoriteStates = new ArrayList<>();
         learnedStates = new ArrayList<>();
+        //todo 2 add SL state
+        secondLanguage = sp.getString("secondlanguage","english");
         isChecked =   sp.getBoolean("isGREActive",true);
+
 
         arrayInit();
         getFavoritePosition();
@@ -58,14 +65,16 @@ public class GREDataSource extends DataSource{
         vocabularyType = context.getResources().getStringArray(R.array.GRE_level);
         position = context.getResources().getIntArray(R.array.GRE_position);
 
+        //todo 1 add SL arrays
+        // Translation
+        wordsArraySL =       context.getResources().getStringArray(R.array.IELTS_words_sp);
+        translationArraySL = context.getResources().getStringArray(R.array.IELTS_translation_sp);
+        example1arraySL =    context.getResources().getStringArray(R.array.IELTS_example1_sp);
+        example2ArraySL =    context.getResources().getStringArray(R.array.IELTS_example2_sp);
+        example3ArraySL =    context.getResources().getStringArray(R.array.IELTS_example3_sp);
+
     }
-    public int getLearnedWordCount(){
 
-        getFavoritePosition();
-
-        return learnedStates.size();
-
-    }
 
     public void getFavoritePosition(){
         Cursor greRes = database.getData();
@@ -86,7 +95,35 @@ public class GREDataSource extends DataSource{
 
             for(int i = startPoint; i < beginnerNumber; i++){
 
-                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], learnedStates.get(i),favoriteStates.get(i)));
+
+                //todo 3 Add SL data
+
+                Word word = new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], learnedStates.get(i),favoriteStates.get(i));
+
+
+                if(!secondLanguage.equalsIgnoreCase("english")){
+
+
+                    word.setWordSL(wordsArraySL[i]);
+                    word.setTranslationSL(translationArraySL[i]);
+                    word.setExample1SL(example1arraySL[i]);
+                    word.setExample2SL(example2ArraySL[i]);
+                    word.setExample3SL(example3ArraySL[i]);
+
+                }else {
+
+                    word.setWordSL("");
+                    word.setTranslationSL("");
+                    word.setExample1SL("");
+                    word.setExample2SL("");
+                    word.setExample3SL("");
+
+                }
+
+                wordList.add(word);
+
+
+
 
 
             }
@@ -159,19 +196,30 @@ public class GREDataSource extends DataSource{
         return words;
     }
 
-    public List<Word> getBeginnerLearnedWords(){
-        return getBeginnerWords().stream().filter( w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    public List<Word> getBeginnerFilteredWords(String isLearned){
+
+        // returns learned or unlearned words based on parameter
+
+        return getBeginnerWords().stream().filter( w -> w.isLearned.equalsIgnoreCase(isLearned)).collect(Collectors.toList());
     }
 
-    public List<Word> getIntermediateLearnedWords(){
-        return getIntermediateWords().stream().filter(w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    public List<Word> getIntermediateFilteredWords(String isLearned){
+        // returns learned or unlearned words based on parameter
+
+        return getIntermediateWords().stream().filter(w -> w.isLearned.equalsIgnoreCase(isLearned)).collect(Collectors.toList());
     }
-    public List<Word> getAdvanceLearnedWords(){
-        return getAdvanceWords().stream().filter(w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    public List<Word> getAdvanceFilteredWords(String isLearned){
+        // returns learned or unlearned words based on parameter
+
+        return getAdvanceWords().stream().filter(w -> w.isLearned.equalsIgnoreCase(isLearned)).collect(Collectors.toList());
     }
 
     public void updateFavorite(String id, String isFavorite){
         database.updateFav(id,isFavorite);
+    }
+
+    public void updateLearnState(String id, String isLearned){
+        database.updateLearned(id,isLearned);
     }
 
     public int getBeginnerWordCount() {

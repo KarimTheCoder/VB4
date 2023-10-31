@@ -17,13 +17,14 @@ public class TOEFLDataSource extends DataSource{
     private static int LEARNED_COLL = 3;
     private final int WORD_SIZE;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
-
+    private final String secondLanguage;
     private int[] position;
+    private String[] wordsArraySL, translationArraySL, example1arraySL, example2ArraySL, example3ArraySL;
 
     private final boolean isChecked;
     private final TOEFLWordDatabase database;
     private final Context context;
-    private List<String> favoriteState;
+    private List<String> favoriteStates;
     private List<String> learnedStates;
 
 
@@ -35,14 +36,14 @@ public class TOEFLDataSource extends DataSource{
 
 
         this.context = context;
-        favoriteState = new ArrayList<>();
+        favoriteStates = new ArrayList<>();
         learnedStates = new ArrayList<>();
 
         WORD_SIZE = context.getResources().getStringArray(R.array.TOEFL_words).length;
 
         database = new TOEFLWordDatabase(context);
         isChecked =   sp.getBoolean("isTOEFLActive",true);
-
+        secondLanguage = sp.getString("secondlanguage","english");
         getFavoritePosition();
         initArray();
 
@@ -61,12 +62,12 @@ public class TOEFLDataSource extends DataSource{
         Cursor res = database.getData();
 
         while (res.moveToNext()){
-            favoriteState.add(res.getString(FAVORITE_COLL));
+            favoriteStates.add(res.getString(FAVORITE_COLL));
             learnedStates.add(res.getString(LEARNED_COLL));
         }
 
         res.close();
-        return favoriteState;
+        return favoriteStates;
     }
     private void initArray(){
 
@@ -80,6 +81,14 @@ public class TOEFLDataSource extends DataSource{
         vocabularyType = context.getResources().getStringArray(R.array.TOEFL_level);
         position = context.getResources().getIntArray(R.array.TOEFL_position);
 
+        // Translation
+        wordsArraySL =       context.getResources().getStringArray(R.array.IELTS_words_sp);
+        translationArraySL = context.getResources().getStringArray(R.array.IELTS_translation_sp);
+        example1arraySL =    context.getResources().getStringArray(R.array.IELTS_example1_sp);
+        example2ArraySL =    context.getResources().getStringArray(R.array.IELTS_example2_sp);
+        example3ArraySL =    context.getResources().getStringArray(R.array.IELTS_example3_sp);
+
+
     }
 
 
@@ -92,8 +101,29 @@ public class TOEFLDataSource extends DataSource{
 
             for(int i = startPoint; i < beginnerNumber; i++){
 
-                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i],learnedStates.get(i),favoriteState.get(i)));
+                Word word = new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], learnedStates.get(i),favoriteStates.get(i));
 
+
+                if(!secondLanguage.equalsIgnoreCase("english")){
+
+
+                    word.setWordSL(wordsArraySL[i]);
+                    word.setTranslationSL(translationArraySL[i]);
+                    word.setExample1SL(example1arraySL[i]);
+                    word.setExample2SL(example2ArraySL[i]);
+                    word.setExample3SL(example3ArraySL[i]);
+
+                }else {
+
+                    word.setWordSL("");
+                    word.setTranslationSL("");
+                    word.setExample1SL("");
+                    word.setExample2SL("");
+                    word.setExample3SL("");
+
+                }
+
+                wordList.add(word);
             }
 
         }
@@ -154,22 +184,31 @@ public class TOEFLDataSource extends DataSource{
 
 
     }
-    public List<Word> getBeginnerLearnedWords(){
-        return getBeginnerWords().stream().filter( w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    public List<Word> getBeginnerFilteredWords(String isLearned){
+
+        // returns learned or unlearned words based on parameter
+
+        return getBeginnerWords().stream().filter( w -> w.isLearned.equalsIgnoreCase(isLearned)).collect(Collectors.toList());
     }
 
-    public List<Word> getIntermediateLearnedWords(){
-        return getIntermediateWords().stream().filter(w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    public List<Word> getIntermediateFilteredWords(String isLearned){
+        // returns learned or unlearned words based on parameter
+
+        return getIntermediateWords().stream().filter(w -> w.isLearned.equalsIgnoreCase(isLearned)).collect(Collectors.toList());
     }
-    public List<Word> getAdvanceLearnedWords(){
-        return getAdvanceWords().stream().filter(w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    public List<Word> getAdvanceFilteredWords(String isLearned){
+        // returns learned or unlearned words based on parameter
+
+        return getAdvanceWords().stream().filter(w -> w.isLearned.equalsIgnoreCase(isLearned)).collect(Collectors.toList());
     }
 
 
     public void updateFavorite(String id, String isFavorite){
         database.updateFav(id,isFavorite);
     }
-
+    public void updateLearnState(String id, String isLearned){
+        database.updateLearned(id,isLearned);
+    }
 
     public int getBeginnerWordCount() {
 

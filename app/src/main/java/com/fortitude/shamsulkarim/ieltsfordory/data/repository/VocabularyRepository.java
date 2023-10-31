@@ -84,65 +84,99 @@ public class VocabularyRepository {
     }
 
     public List<Word> getBeginnerLearnedWords(){
-
+        String isLearned = "True";
         List<Word> words = new ArrayList<>();
-        words.addAll(ieltsDataSource.getBeginnerLearnedWords());
-        words.addAll(toeflDataSource.getBeginnerLearnedWords());
-        words.addAll(satDataSource.getBeginnerLearnedWords());
-        words.addAll(greDataSource.getBeginnerLearnedWords());
+        words.addAll(ieltsDataSource.getBeginnerFilteredWords(isLearned));
+        words.addAll(toeflDataSource.getBeginnerFilteredWords(isLearned));
+        words.addAll(satDataSource.getBeginnerFilteredWords(isLearned));
+        words.addAll(greDataSource.getBeginnerFilteredWords(isLearned));
         return words;
 
     }
     public List<Word> getIntermediateLearnedWords(){
-
+        String isLearned = "True";
         List<Word> words = new ArrayList<>();
-        words.addAll(ieltsDataSource.getIntermediateLearnedWords());
-        words.addAll(toeflDataSource.getIntermediateLearnedWords());
-        words.addAll(satDataSource.getIntermediateLearnedWords());
-        words.addAll(greDataSource.getIntermediateLearnedWords());
+        words.addAll(ieltsDataSource.getIntermediateFilteredWords(isLearned));
+        words.addAll(toeflDataSource.getIntermediateFilteredWords(isLearned));
+        words.addAll(satDataSource.getIntermediateFilteredWords(isLearned));
+        words.addAll(greDataSource.getIntermediateFilteredWords(isLearned));
         return words;
 
     }
     public List<Word> getAdvanceLearnedWords(){
-
+        String isLearned = "True";
         List<Word> words = new ArrayList<>();
-        words.addAll(ieltsDataSource.getAdvanceLearnedWords());
-        words.addAll(toeflDataSource.getAdvanceLearnedWords());
-        words.addAll(satDataSource.getAdvanceLearnedWords());
-        words.addAll(greDataSource.getAdvanceLearnedWords());
+        words.addAll(ieltsDataSource.getAdvanceFilteredWords(isLearned));
+        words.addAll(toeflDataSource.getAdvanceFilteredWords(isLearned));
+        words.addAll(satDataSource.getAdvanceFilteredWords(isLearned));
+        words.addAll(greDataSource.getAdvanceFilteredWords(isLearned));
         return words;
 
     }
 
+    public List<Word> getBeginnerUnlearnedWords(){
+        String isLearned = "False";
+        List<Word> words = new ArrayList<>();
+        words.addAll(ieltsDataSource.getBeginnerFilteredWords(isLearned));
+        words.addAll(toeflDataSource.getBeginnerFilteredWords(isLearned));
+        words.addAll(satDataSource.getBeginnerFilteredWords(isLearned));
+        words.addAll(greDataSource.getBeginnerFilteredWords(isLearned));
+        return words;
+
+    }
+    public List<Word> getIntermediateUnlearnedWords(){
+        String isLearned = "False";
+        List<Word> words = new ArrayList<>();
+        words.addAll(ieltsDataSource.getIntermediateFilteredWords(isLearned));
+        words.addAll(toeflDataSource.getIntermediateFilteredWords(isLearned));
+        words.addAll(satDataSource.getIntermediateFilteredWords(isLearned));
+        words.addAll(greDataSource.getIntermediateFilteredWords(isLearned));
+        return words;
+
+    }
+    public List<Word> getAdvanceUnlearnedWords(){
+        String isLearned = "False";
+        List<Word> words = new ArrayList<>();
+        words.addAll(ieltsDataSource.getAdvanceFilteredWords(isLearned));
+        words.addAll(toeflDataSource.getAdvanceFilteredWords(isLearned));
+        words.addAll(satDataSource.getAdvanceFilteredWords(isLearned));
+        words.addAll(greDataSource.getAdvanceFilteredWords(isLearned));
+        return words;
+
+    }
+
+
+
     // Getting numbers
     public int getBeginnerLearnedCount(){
 
-        return ieltsDataSource.getBeginnerLearnedWords().size()+
-                toeflDataSource.getBeginnerLearnedWords().size()+
-                satDataSource.getBeginnerLearnedWords().size()+
-                greDataSource.getBeginnerLearnedWords().size();
+        String isLearned = "True";
+        return ieltsDataSource.getBeginnerFilteredWords(isLearned).size()+
+                toeflDataSource.getBeginnerFilteredWords(isLearned).size()+
+                satDataSource.getBeginnerFilteredWords(isLearned).size()+
+                greDataSource.getBeginnerFilteredWords(isLearned).size();
 
 
     }
 
     public int getIntermediateLearnedCount(){
 
-        // Todo write getting learned words for HomeFragment
-        return ieltsDataSource.getIntermediateLearnedWords().size()+
-                toeflDataSource.getIntermediateLearnedWords().size()+
-                satDataSource.getIntermediateLearnedWords().size()+
-                greDataSource.getIntermediateLearnedWords().size();
+        String isLearned = "True";
+        return ieltsDataSource.getIntermediateFilteredWords(isLearned).size()+
+                toeflDataSource.getIntermediateFilteredWords(isLearned).size()+
+                satDataSource.getIntermediateFilteredWords(isLearned).size()+
+                greDataSource.getIntermediateFilteredWords(isLearned).size();
 
 
     }
 
     public int getAdvanceLearnedCount(){
 
-        // Todo write getting learned words for HomeFragment
-        return ieltsDataSource.getAdvanceLearnedWords().size()+
-                toeflDataSource.getAdvanceLearnedWords().size()+
-                satDataSource.getAdvanceLearnedWords().size()+
-                greDataSource.getAdvanceLearnedWords().size();
+        String isLearned = "True";
+        return ieltsDataSource.getAdvanceFilteredWords(isLearned).size()+
+                toeflDataSource.getAdvanceFilteredWords(isLearned).size()+
+                satDataSource.getAdvanceFilteredWords(isLearned).size()+
+                greDataSource.getAdvanceFilteredWords(isLearned).size();
 
 
     }
@@ -174,7 +208,6 @@ public class VocabularyRepository {
     // Updating favorite state
 
     public void updateIELTSFavoriteState(String id, String isFavorite){
-
         ieltsDataSource.updateFavorite(id,isFavorite);
     }
 
@@ -183,14 +216,27 @@ public class VocabularyRepository {
         toeflDataSource.updateFavorite(id,isFavorite);
     }
     public void updateGREFavoriteState(String id, String isFavorite){
-
         greDataSource.updateFavorite(id,isFavorite);
     }
     public void updateSATFavoriteState(String id, String isFavorite){
-
         satDataSource.updateFavorite(id,isFavorite);
     }
 
+
+    // Update learn state
+
+    public void updateIELTSLearnState(String id, String isFavorite){
+        ieltsDataSource.updateLearnState(id,isFavorite);
+    }
+    public void updateTOEFLLearnState(String id, String isFavorite){
+        toeflDataSource.updateLearnState(id,isFavorite);
+    }
+    public void updateSATLearnState(String id, String isFavorite){
+        satDataSource.updateLearnState(id,isFavorite);
+    }
+    public void updateGRELearnState(String id, String isFavorite){
+        greDataSource.updateLearnState(id,isFavorite);
+    }
 
 
 

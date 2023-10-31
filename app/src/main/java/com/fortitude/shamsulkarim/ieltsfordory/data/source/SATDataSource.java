@@ -21,7 +21,9 @@ public class SATDataSource extends DataSource{
     private List<String> favoriteStates;
     private List<String> learnedStates;
     private int[] position;
+    private String[] wordsArraySL, translationArraySL, example1arraySL, example2ArraySL, example3ArraySL;
 
+    private final String secondLanguage;
     private final boolean isChecked;
     private final SATWordDatabase database;
     private final Context context;
@@ -37,7 +39,7 @@ public class SATDataSource extends DataSource{
         favoriteStates = new ArrayList<>();
         learnedStates = new ArrayList<>();
         isChecked =   sp.getBoolean("isSATActive",true);
-
+        secondLanguage = sp.getString("secondlanguage","english");
         getFavoritePosition();
         initArray();
 
@@ -75,6 +77,12 @@ public class SATDataSource extends DataSource{
         vocabularyType = context.getResources().getStringArray(R.array.SAT_level);
         position = context.getResources().getIntArray(R.array.SAT_position);
 
+        // Translation
+        wordsArraySL =       context.getResources().getStringArray(R.array.IELTS_words_sp);
+        translationArraySL = context.getResources().getStringArray(R.array.IELTS_translation_sp);
+        example1arraySL =    context.getResources().getStringArray(R.array.IELTS_example1_sp);
+        example2ArraySL =    context.getResources().getStringArray(R.array.IELTS_example2_sp);
+        example3ArraySL =    context.getResources().getStringArray(R.array.IELTS_example3_sp);
 
     }
     private List<Word> listWords (int startPoint , int beginnerNumber){
@@ -86,8 +94,29 @@ public class SATDataSource extends DataSource{
 
             for(int i = startPoint; i < beginnerNumber; i++){
 
-                wordList.add(new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], learnedStates.get(i),favoriteStates.get(i)));
+                Word word = new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], learnedStates.get(i),favoriteStates.get(i));
 
+
+                if(!secondLanguage.equalsIgnoreCase("english")){
+
+
+                    word.setWordSL(wordsArraySL[i]);
+                    word.setTranslationSL(translationArraySL[i]);
+                    word.setExample1SL(example1arraySL[i]);
+                    word.setExample2SL(example2ArraySL[i]);
+                    word.setExample3SL(example3ArraySL[i]);
+
+                }else {
+
+                    word.setWordSL("");
+                    word.setTranslationSL("");
+                    word.setExample1SL("");
+                    word.setExample2SL("");
+                    word.setExample3SL("");
+
+                }
+
+                wordList.add(word);
             }
 
         }
@@ -150,21 +179,30 @@ public class SATDataSource extends DataSource{
 
     }
 
-    public List<Word> getBeginnerLearnedWords(){
-        return getBeginnerWords().stream().filter( w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    public List<Word> getBeginnerFilteredWords(String isLearned){
+
+        // returns learned or unlearned words based on parameter
+
+        return getBeginnerWords().stream().filter( w -> w.isLearned.equalsIgnoreCase(isLearned)).collect(Collectors.toList());
     }
 
-    public List<Word> getIntermediateLearnedWords(){
-        return getIntermediateWords().stream().filter(w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    public List<Word> getIntermediateFilteredWords(String isLearned){
+        // returns learned or unlearned words based on parameter
+
+        return getIntermediateWords().stream().filter(w -> w.isLearned.equalsIgnoreCase(isLearned)).collect(Collectors.toList());
     }
-    public List<Word> getAdvanceLearnedWords(){
-        return getAdvanceWords().stream().filter(w -> w.isLearned.equalsIgnoreCase("True")).collect(Collectors.toList());
+    public List<Word> getAdvanceFilteredWords(String isLearned){
+        // returns learned or unlearned words based on parameter
+
+        return getAdvanceWords().stream().filter(w -> w.isLearned.equalsIgnoreCase(isLearned)).collect(Collectors.toList());
     }
 
     public void updateFavorite(String id, String isFavorite){
         database.updateFav(id,isFavorite);
     }
-
+    public void updateLearnState(String id, String isLearned){
+        database.updateLearned(id,isLearned);
+    }
 
     public int getBeginnerWordCount() {
 
