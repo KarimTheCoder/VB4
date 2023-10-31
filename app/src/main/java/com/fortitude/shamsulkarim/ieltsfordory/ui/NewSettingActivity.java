@@ -35,6 +35,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -67,10 +68,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 public class NewSettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, PurchasesUpdatedListener {
 
 
-    private IELTSWordDatabase ieltsWordDatabase;
-    private TOEFLWordDatabase toeflWordDatabase;
-    private SATWordDatabase satWordDatabase;
-    private GREWordDatabase greWordDatabase;
+    private VocabularyRepository repository;
     private String ADVANCE_FAVORITE,ADVANCE_LEARNED, BEGINNER_FAVORITE, BEGINNER_LEARNED,INTERMEDIATE_FAVORITE,INTERMEDIATE_LEARNED, GRE_FAVORITE, GRE_LEARNED;
     private List<Integer> savedBeginnerFav, savedAdvanceFav,savedIntermediateFav, savedGreFav;
     private List<Integer> savedIeltsLearned, savedToeflLearned,savedSatLearned, savedGreLearned;
@@ -112,6 +110,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         // This code reports to Crashlytics of connection
         boolean connected = ConnectivityHelper.isConnectedToNetwork(this);
 
+        repository = new VocabularyRepository(this);
 
         privacyPolicy = findViewById(R.id.privacy_policy_card);
         CardView signInCardView = findViewById(R.id.user_status);
@@ -527,13 +526,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         ref = firebaseDatabase.getReference();
 
-        //database
-        ieltsWordDatabase = new IELTSWordDatabase(this);
-        satWordDatabase = new SATWordDatabase(this);
-        toeflWordDatabase = new TOEFLWordDatabase(this);
-        greWordDatabase = new GREWordDatabase(this);
-
-
         save.setOnClickListener(this);
         spanish.setOnClickListener(this);
         signIn.setOnClickListener(this);
@@ -813,13 +805,6 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
         if(billingClient != null){
             billingClient.endConnection();
         }
-
-        ieltsWordDatabase.close();
-        toeflWordDatabase.close();
-        satWordDatabase.close();
-        greWordDatabase.close();
-
-
     }
 
     private void askToSync(){
@@ -1051,9 +1036,10 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                         if(savedBeginnerFav.get(i) == 1){
 
-                            ieltsWordDatabase.updateFav(""+(i+1),"True");
+
+                            repository.updateIELTSFavoriteState(""+(i+1),"True");
                         }else {
-                            ieltsWordDatabase.updateFav(""+(i+1),"False");
+                            repository.updateIELTSFavoriteState(""+(i+1),"False");
                         }
 
 
@@ -1069,9 +1055,9 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                         if(savedIntermediateFav.get(j)== 1){
 
-                            toeflWordDatabase.updateFav(""+(j+1),"True");
+                            repository.updateTOEFLFavoriteState(""+(j+1),"True");
                         }else {
-                            toeflWordDatabase.updateFav(""+(j+1),"False");
+                            repository.updateTOEFLFavoriteState(""+(j+1),"False");
                         }
 
 
@@ -1088,10 +1074,10 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                         if(savedAdvanceFav.get(k) == 1){
 
-                            satWordDatabase.updateFav(""+(1+k),"True");
+                            repository.updateSATFavoriteState(""+(1+k),"True");
                         }else {
 
-                            satWordDatabase.updateFav(""+(1+k),"False");
+                            repository.updateSATFavoriteState(""+(1+k),"False");
                         }
 
 
@@ -1108,10 +1094,10 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                         if(savedGreFav.get(k) == 1){
 
-                            greWordDatabase.updateFav(""+(1+k),"True");
+                            repository.updateGREFavoriteState(""+(1+k),"True");
                         }else {
 
-                            greWordDatabase.updateFav(""+(1+k),"False");
+                            repository.updateGREFavoriteState(""+(1+k),"False");
                         }
 
 
@@ -1132,10 +1118,10 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                         if(savedIeltsLearned.get(k) == 1){
 
-                            ieltsWordDatabase.updateLearned(""+(1+k),"True");
+                            repository.updateIELTSLearnState(""+(1+k),"True");
                         }else {
 
-                            ieltsWordDatabase.updateLearned(""+(1+k),"False");
+                            repository.updateIELTSLearnState(""+(1+k),"False");
                         }
 
 
@@ -1153,10 +1139,10 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                         if(savedToeflLearned.get(k) == 1){
 
-                            toeflWordDatabase.updateLearned(""+(1+k),"True");
+                            repository.updateTOEFLLearnState(""+(1+k),"True");
                         }else {
 
-                            toeflWordDatabase.updateLearned(""+(1+k),"False");
+                            repository.updateTOEFLLearnState(""+(1+k),"False");
                         }
 
 
@@ -1173,10 +1159,10 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                         if(savedSatLearned.get(k) == 1){
 
-                            satWordDatabase.updateLearned(""+(1+k),"True");
+                            repository.updateSATLearnState(""+(1+k),"True");
                         }else {
 
-                            satWordDatabase.updateLearned(""+(1+k),"False");
+                            repository.updateSATLearnState(""+(1+k),"False");
                         }
 
 
@@ -1193,19 +1179,14 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
                         if(savedGreLearned.get(k) == 1){
 
-                            greWordDatabase.updateLearned(""+(1+k),"True");
+                            repository.updateGRELearnState(""+(1+k),"True");
                         }else {
 
-                            greWordDatabase.updateLearned(""+(1+k),"False");
+                            repository.updateGRELearnState(""+(1+k),"False");
                         }
                     }
 
                 }
-
-
-
-
-//                Toast.makeText(getApplicationContext(), "syncing sql...", Toast.LENGTH_SHORT).show();
             }
         }, 0L);
 
@@ -1218,6 +1199,8 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
 
     private void syncDatabasesIfFavDataChanged(String newData, String key){
 
+
+        // todo investigate why GRE not used in this method
         List<Integer> newDataList;
 
 
@@ -1232,7 +1215,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             // cleaning database
 
             for(int i = 0; i < advanceSize; i++){
-                satWordDatabase.updateFav(""+(i+1),"False");
+                repository.updateSATFavoriteState(""+(i+1),"False");
             }
 
             // adding new data
@@ -1243,7 +1226,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 for(int k = 0; k < newDataList.size(); k++){
 
                     int adva = newDataList.get(k)+1;
-                    satWordDatabase.updateFav(""+adva,"True");
+                    repository.updateSATFavoriteState(""+adva,"True");
 
 
 
@@ -1262,7 +1245,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             // cleaning database
 
             for(int i = 0; i < intermediateSize; i++){
-                toeflWordDatabase.updateFav(""+(i+1),"False");
+                repository.updateTOEFLFavoriteState(""+(i+1),"False");
             }
 
             // adding new data
@@ -1273,15 +1256,13 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 for(int k = 0; k < newDataList.size(); k++){
 
                     int adva = newDataList.get(k)+1;
-                    toeflWordDatabase.updateFav(""+adva,"True");
+                    repository.updateTOEFLFavoriteState(""+adva,"True");
 
 
 
                 }
 
             }
-            //Toast.makeText(getApplicationContext(),"intermediate favorite synced", Toast.LENGTH_SHORT).show();
-
         }
 
 
@@ -1293,7 +1274,7 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
             // cleaning database
 
             for(int i = 0; i < beginnerSize; i++){
-                ieltsWordDatabase.updateFav(""+(i+1),"False");
+                repository.updateIELTSLearnState(""+(i+1),"False");
             }
 
             // adding new data
@@ -1304,14 +1285,13 @@ public class NewSettingActivity extends AppCompatActivity implements View.OnClic
                 for(int k = 0; k < newDataList.size(); k++){
 
                     int adva = newDataList.get(k)+1;
-                    ieltsWordDatabase.updateFav(""+adva,"True");
+                    repository.updateIELTSLearnState(""+adva,"True");
 
 
 
                 }
 
             }
-            //Toast.makeText(getApplicationContext(),"beginner favorite synced", Toast.LENGTH_SHORT).show();
 
         }
 
