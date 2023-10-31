@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.adapters.TrainFinishedWordRecyclerView;
@@ -49,11 +50,8 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
     private List<Word> learnedWords;
     private Word mostMistakenWord;
 
+    private VocabularyRepository repository;
     private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private IELTSWordDatabase ieltsWordDatabase;
-    private TOEFLWordDatabase toeflWordDatabase;
-    private SATWordDatabase satWordDatabase;
-    private GREWordDatabase greWordDatabase;
     private JustLearnedDatabaseBeginner justLearnedDatabaseBeginner;
     private JustLearnedDatabaseIntermediate justLearnedDatabaseIntermediate;
     private JustLearnedDatabaseAdvance justLearnedDatabaseAdvance;
@@ -68,6 +66,8 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getColor(R.color.primary_background_color));
+
+        repository = new VocabularyRepository(this);
 
         initialization();
         setRecyclerView();
@@ -88,12 +88,6 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
         level = sp.getString("level", "beginner");
         boolean soundState = sp.getBoolean("soundState", true);
-
-        // Databases
-        ieltsWordDatabase = new IELTSWordDatabase(this);
-        satWordDatabase = new SATWordDatabase(this);
-        toeflWordDatabase = new TOEFLWordDatabase(this);
-        greWordDatabase = new GREWordDatabase(this);
 
         justLearnedDatabaseBeginner = new JustLearnedDatabaseBeginner(this);
         justLearnedDatabaseIntermediate = new JustLearnedDatabaseIntermediate(this);
@@ -318,14 +312,14 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
             if(mostMistakenWord.isFavorite.equalsIgnoreCase("true")){
 
                 mostMistakenWord.setIsFavorite("false");
-                ieltsWordDatabase.updateFav(mostMistakenWord.position+"","false");
+                repository.updateIELTSFavoriteState(mostMistakenWord.position+"","false");
                 favoriteButton.setIconResource(R.drawable.ic_favorite_icon);
 
             }else {
 
                 mostMistakenWord.setIsFavorite("true");
                 favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
-                ieltsWordDatabase.updateFav(mostMistakenWord.position+"","true");
+                repository.updateIELTSFavoriteState(mostMistakenWord.position+"","true");
             }
 
 
@@ -337,13 +331,13 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
                 mostMistakenWord.setIsFavorite("false");
                 favoriteButton.setIconResource(R.drawable.ic_favorite_icon);
-                toeflWordDatabase.updateFav(mostMistakenWord.position+"","false");
+                repository.updateTOEFLFavoriteState(mostMistakenWord.position+"","false");
 
             }else {
                 mostMistakenWord.setIsFavorite("true");
                 favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
 
-                toeflWordDatabase.updateFav(mostMistakenWord.position+"","true");
+                repository.updateTOEFLFavoriteState(mostMistakenWord.position+"","true");
             }
 
 
@@ -354,14 +348,14 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
             if(mostMistakenWord.isFavorite.equalsIgnoreCase("true")){
 
                 mostMistakenWord.setIsFavorite("false");
-                satWordDatabase.updateFav(mostMistakenWord.position+"","false");
+                repository.updateSATFavoriteState(mostMistakenWord.position+"","false");
                 favoriteButton.setIconResource(R.drawable.ic_favorite_icon);
 
             }else {
                 mostMistakenWord.setIsFavorite("true");
 
                 favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
-                satWordDatabase.updateFav(mostMistakenWord.position+"","true");
+                repository.updateSATFavoriteState(mostMistakenWord.position+"","true");
             }
 
 
@@ -373,13 +367,13 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
                 mostMistakenWord.setIsFavorite("false");
                 favoriteButton.setIconResource(R.drawable.ic_favorite_icon);
-                greWordDatabase.updateFav(mostMistakenWord.position+"","false");
+                repository.updateGREFavoriteState(mostMistakenWord.position+"","false");
 
             }else {
 
                 mostMistakenWord.setIsFavorite("true");
                 favoriteButton.setIconResource(R.drawable.ic_favorite_icon_active);
-                greWordDatabase.updateFav(mostMistakenWord.position+"","true");
+                repository.updateGREFavoriteState(mostMistakenWord.position+"","true");
             }
 
 
@@ -395,7 +389,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
             if(mostMistakenWord.isLearned.equalsIgnoreCase("true")){
 
                 mostMistakenWord.setIsLearned("false");
-                ieltsWordDatabase.updateLearned(mostMistakenWord.position+"","false");
+                repository.updateIELTSLearnState(mostMistakenWord.position+"","false");
                 unlearnButton.setText("Learn");
 
 
@@ -404,7 +398,7 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
                 mostMistakenWord.setIsLearned("true");
                 unlearnButton.setText("Unlearn");
-                ieltsWordDatabase.updateLearned(mostMistakenWord.position+"","true");
+                repository.updateIELTSLearnState(mostMistakenWord.position+"","true");
             }
 
 
@@ -416,12 +410,12 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
                 mostMistakenWord.setIsLearned("false");
                 unlearnButton.setText("Learn");
-                toeflWordDatabase.updateLearned(mostMistakenWord.position+"","false");
+                repository.updateTOEFLLearnState(mostMistakenWord.position+"","false");
 
             }else {
                 mostMistakenWord.setIsLearned("true");
                 unlearnButton.setText("Unlearn");
-                toeflWordDatabase.updateLearned(mostMistakenWord.position+"","true");
+                repository.updateTOEFLLearnState(mostMistakenWord.position+"","true");
             }
 
 
@@ -432,13 +426,13 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
             if(mostMistakenWord.isLearned.equalsIgnoreCase("true")){
 
                 mostMistakenWord.setIsLearned("false");
-                satWordDatabase.updateLearned(mostMistakenWord.position+"","false");
+                repository.updateSATLearnState(mostMistakenWord.position+"","false");
                 unlearnButton.setText("Learn");
 
             }else {
                 mostMistakenWord.setIsLearned("true");
                 unlearnButton.setText("Unlearn");
-                satWordDatabase.updateLearned(mostMistakenWord.position+"","true");
+                repository.updateSATLearnState(mostMistakenWord.position+"","true");
             }
 
 
@@ -450,13 +444,13 @@ public class TrainFinishedActivity extends AppCompatActivity implements View.OnC
 
                 mostMistakenWord.setIsLearned("false");
                 unlearnButton.setText("Learn");
-                greWordDatabase.updateLearned(mostMistakenWord.position+"","false");
+                repository.updateGRELearnState(mostMistakenWord.position+"","false");
 
             }else {
 
                 mostMistakenWord.setIsLearned("true");
                 unlearnButton.setText("Unlearn");
-                greWordDatabase.updateLearned(mostMistakenWord.position+"","true");
+                repository.updateGRELearnState(mostMistakenWord.position+"","true");
             }
 
 
