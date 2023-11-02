@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.asyl.animation:arcanimator:1.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/a48d8b4911199dc2c0f0115d093d4a32/transformed/jetified-arcanimator-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/a48d8b4911199dc2c0f0115d093d4a32/transformed/jetified-arcanimator-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/3b74541ae28c8a1dcc01dd9038eefd6d/transformed/jetified-arcanimator-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/3b74541ae28c8a1dcc01dd9038eefd6d/transformed/jetified-arcanimator-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.github.asyl.animation/arcanimator/1.0.0/dd3e57f093206c7a356c52569df7e05304ed785/arcanimator-1.0.0-javadoc.jar!/" />

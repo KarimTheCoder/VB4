@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.viewpager2:viewpager2:1.1.0-beta02@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/4e614c8eb359740c70aa0227732a3416/transformed/jetified-viewpager2-1.1.0-beta02/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/08fba91cae26a9da41c6abde360bc948/transformed/jetified-viewpager2-1.1.0-beta02/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/4e614c8eb359740c70aa0227732a3416/transformed/jetified-viewpager2-1.1.0-beta02/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/4e614c8eb359740c70aa0227732a3416/transformed/jetified-viewpager2-1.1.0-beta02/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/4e614c8eb359740c70aa0227732a3416/transformed/jetified-viewpager2-1.1.0-beta02/res" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/08fba91cae26a9da41c6abde360bc948/transformed/jetified-viewpager2-1.1.0-beta02/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/08fba91cae26a9da41c6abde360bc948/transformed/jetified-viewpager2-1.1.0-beta02/res" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/08fba91cae26a9da41c6abde360bc948/transformed/jetified-viewpager2-1.1.0-beta02/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

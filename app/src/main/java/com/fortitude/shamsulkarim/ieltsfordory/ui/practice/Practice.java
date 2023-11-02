@@ -37,6 +37,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
@@ -60,6 +61,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class Practice extends AppCompatActivity  implements View.OnClickListener, TextToSpeech.OnInitListener, NewTrainRecyclerView.TrainAdapterCallback {
 
+    private VocabularyRepository repository;
     private String[] IELTSwordArray;
     private String[] IELTSwordsArraySL;
     private String[] IELTStranslationArray;
@@ -142,6 +144,8 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getColor(R.color.colorPrimary));
+
+        repository = new VocabularyRepository(this);
 
         // This code reports to Crashlytics of connection
 

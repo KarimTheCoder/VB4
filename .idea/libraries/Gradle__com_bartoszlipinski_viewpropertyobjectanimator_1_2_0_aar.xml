@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.bartoszlipinski:viewpropertyobjectanimator:1.2.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/449a8e0a62d2044e2e60be710bf4ae89/transformed/jetified-viewpropertyobjectanimator-1.2.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/449a8e0a62d2044e2e60be710bf4ae89/transformed/jetified-viewpropertyobjectanimator-1.2.0/res" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/449a8e0a62d2044e2e60be710bf4ae89/transformed/jetified-viewpropertyobjectanimator-1.2.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/a3d225a092598068399fb470651f9af2/transformed/jetified-viewpropertyobjectanimator-1.2.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/a3d225a092598068399fb470651f9af2/transformed/jetified-viewpropertyobjectanimator-1.2.0/res" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/a3d225a092598068399fb470651f9af2/transformed/jetified-viewpropertyobjectanimator-1.2.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.bartoszlipinski/viewpropertyobjectanimator/1.2.0/f713606f85938f15f811606d336390b8fbad1e61/viewpropertyobjectanimator-1.2.0-javadoc.jar!/" />

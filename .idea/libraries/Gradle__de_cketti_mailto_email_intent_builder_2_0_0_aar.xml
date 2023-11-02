@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: de.cketti.mailto:email-intent-builder:2.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/6138ed23c9e3791d508d4e08d7089d12/transformed/jetified-email-intent-builder-2.0.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/6138ed23c9e3791d508d4e08d7089d12/transformed/jetified-email-intent-builder-2.0.0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/de53f4b317a820223ae8b42fb4374eef/transformed/jetified-email-intent-builder-2.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/de53f4b317a820223ae8b42fb4374eef/transformed/jetified-email-intent-builder-2.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/de.cketti.mailto/email-intent-builder/2.0.0/1d7dd384d4a78fafd8328d89a538f0cb6e453239/email-intent-builder-2.0.0-javadoc.jar!/" />

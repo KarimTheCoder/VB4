@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.startup:startup-runtime:1.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/293cdb2213f0208deece2506f142bab9/transformed/jetified-startup-runtime-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/293cdb2213f0208deece2506f142bab9/transformed/jetified-startup-runtime-1.0.0/res" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/293cdb2213f0208deece2506f142bab9/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/a376dff2893f802524ff0836ddb0a39c/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/a376dff2893f802524ff0836ddb0a39c/transformed/jetified-startup-runtime-1.0.0/res" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/a376dff2893f802524ff0836ddb0a39c/transformed/jetified-startup-runtime-1.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

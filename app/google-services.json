@@ -52,6 +52,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "576057269160-jn4ldt7lohte4hmffvb40ge8di6fo59m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fortitude.apps.idioms",
+            "certificate_hash": "b3dfd67ad4c799f8b7c7de007aabb47b2cc6c1ea"
+          }
+        },
+        {
           "client_id": "576057269160-lggb02ua9gmf9lmkn4vog7fokvnoej85.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -65,14 +73,6 @@
           "android_info": {
             "package_name": "com.fortitude.apps.idioms",
             "certificate_hash": "148b71c2c7438c9f9eefcf1d9a22280220e9e4e9"
-          }
-        },
-        {
-          "client_id": "576057269160-jn4ldt7lohte4hmffvb40ge8di6fo59m.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.fortitude.apps.idioms",
-            "certificate_hash": "b3dfd67ad4c799f8b7c7de007aabb47b2cc6c1ea"
           }
         },
         {
@@ -105,19 +105,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "576057269160-qlrgcpp0rc2al4h72pgh4up7hsu885d1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.fortitude.apps.vocabularybuilder",
-            "certificate_hash": "2e6dac71ade6025e3d349e17b3510fe251ef1425"
-          }
-        },
-        {
           "client_id": "576057269160-lcru1p1s43h0kqtv6bgs2rmojg1qbqo8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.fortitude.apps.vocabularybuilder",
             "certificate_hash": "19351f85696ffe7119ec463bbe7c97c51e4112dd"
+          }
+        },
+        {
+          "client_id": "576057269160-qlrgcpp0rc2al4h72pgh4up7hsu885d1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fortitude.apps.vocabularybuilder",
+            "certificate_hash": "2e6dac71ade6025e3d349e17b3510fe251ef1425"
           }
         },
         {
@@ -158,19 +158,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "576057269160-hnna9fcl13ue8t95pr60r1vncdvigd5i.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.fortitude.apps.vocabularybuilderPro",
-            "certificate_hash": "148b71c2c7438c9f9eefcf1d9a22280220e9e4e9"
-          }
-        },
-        {
           "client_id": "576057269160-fd35fl2t573j2rhm5dqnv3desnccfpfi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.fortitude.apps.vocabularybuilderPro",
             "certificate_hash": "3d6dcd295815f64d34470a9dd1d855432f9d17f4"
+          }
+        },
+        {
+          "client_id": "576057269160-hnna9fcl13ue8t95pr60r1vncdvigd5i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fortitude.apps.vocabularybuilderPro",
+            "certificate_hash": "148b71c2c7438c9f9eefcf1d9a22280220e9e4e9"
           }
         },
         {

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-components:17.1.5@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/bd55ec15b7b51ba0e427f4265521f388/transformed/jetified-firebase-components-17.1.5/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/bd55ec15b7b51ba0e427f4265521f388/transformed/jetified-firebase-components-17.1.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/bd55ec15b7b51ba0e427f4265521f388/transformed/jetified-firebase-components-17.1.5/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-components/17.1.5/e07e1ac4aa617876a7d23803691dce2422a63078/firebase-components-17.1.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

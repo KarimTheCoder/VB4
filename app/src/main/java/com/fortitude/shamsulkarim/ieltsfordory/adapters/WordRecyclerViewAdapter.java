@@ -449,6 +449,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                  //   Toast.makeText(context,"Completed",Toast.LENGTH_LONG).show();
                     speaker.setEnabled(true);
                     progressBar.setVisibility(View.INVISIBLE);
+
                 }
             });
 

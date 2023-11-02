@@ -507,6 +507,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                     //Toast.makeText(ctx,"Completed",Toast.LENGTH_LONG).show();
                     speak.setEnabled(true);
                     progressBar.setVisibility(View.INVISIBLE);
+
                 }
             });
 

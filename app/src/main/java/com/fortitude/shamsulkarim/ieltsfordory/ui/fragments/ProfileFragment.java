@@ -27,7 +27,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.NewSettingActivity;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.AlarmReceiver;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.LocalData;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.NotificationScheduler;
@@ -218,7 +218,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
             try{
 
-                requireActivity().startActivity(new Intent(getActivity().getBaseContext(), NewSettingActivity.class));
+                requireActivity().startActivity(new Intent(getActivity().getBaseContext(), SettingActivity.class));
 
             }catch (NullPointerException i) {
                 i.printStackTrace();

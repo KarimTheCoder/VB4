@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.datastore:datastore-preferences:1.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/d115dbb7028c8fc5b9bb77a873c8ecf7/transformed/jetified-datastore-preferences-1.0.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/d115dbb7028c8fc5b9bb77a873c8ecf7/transformed/jetified-datastore-preferences-1.0.0/res" />
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/d115dbb7028c8fc5b9bb77a873c8ecf7/transformed/jetified-datastore-preferences-1.0.0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/7453add9798d4a9f4d918516901cf459/transformed/jetified-datastore-preferences-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/7453add9798d4a9f4d918516901cf459/transformed/jetified-datastore-preferences-1.0.0/res" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/7453add9798d4a9f4d918516901cf459/transformed/jetified-datastore-preferences-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

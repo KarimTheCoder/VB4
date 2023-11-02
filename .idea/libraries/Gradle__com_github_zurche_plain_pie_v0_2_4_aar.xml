@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.zurche:plain-pie:v0.2.4@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/b35798b1583df9f4b3735d44a8d6ce7e/transformed/jetified-plain-pie-v0.2.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/b35798b1583df9f4b3735d44a8d6ce7e/transformed/jetified-plain-pie-v0.2.4/res" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/b35798b1583df9f4b3735d44a8d6ce7e/transformed/jetified-plain-pie-v0.2.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/844a1d6dd2757107cb34be1e0c19db0d/transformed/jetified-plain-pie-v0.2.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/844a1d6dd2757107cb34be1e0c19db0d/transformed/jetified-plain-pie-v0.2.4/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/844a1d6dd2757107cb34be1e0c19db0d/transformed/jetified-plain-pie-v0.2.4/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

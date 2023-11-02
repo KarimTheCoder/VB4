@@ -41,7 +41,7 @@
         <activity android:name=".ui.practice.PracticeFinished"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".ui.NewSettingActivity"
+        <activity android:name=".ui.SettingActivity"
             android:theme="@style/Main.Theme"
             />
          <!-- Register the Alarm Receiver -->

@@ -292,6 +292,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
                    // Toast.makeText(context,"Completed",Toast.LENGTH_LONG).show();
                     speaker.setEnabled(true);
                     progressBar.setVisibility(View.INVISIBLE);
+
                 }
             });
 

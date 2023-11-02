@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -31,11 +30,8 @@ import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.NewSettingActivity;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity;
+
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -238,7 +234,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
         if( v == settingsButton){
 
-            this.startActivity(new Intent(this,  NewSettingActivity.class));
+            this.startActivity(new Intent(this,  SettingActivity.class));
         }
 
         // Billing
@@ -267,7 +263,7 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         int id = item.getItemId();
 
         if (id == R.id.profile_menu_settings) {
-            startActivity(new Intent(this, NewSettingActivity.class));
+            startActivity(new Intent(this, SettingActivity.class));
             return true;
         }
 

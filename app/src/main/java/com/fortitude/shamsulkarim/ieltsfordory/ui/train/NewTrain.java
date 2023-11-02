@@ -1544,7 +1544,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
                // Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_LONG).show();
                 speak.setEnabled(true);
-                progressBar.setVisibility(View.INVISIBLE);            }
+                progressBar.setVisibility(View.INVISIBLE);
+
+            }
         });
 
     }

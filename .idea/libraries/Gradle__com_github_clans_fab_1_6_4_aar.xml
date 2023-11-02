@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.clans:fab:1.6.4@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/8ef5ab37e04d112f926e168d0f5a414c/transformed/jetified-fab-1.6.4/res" />
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/8ef5ab37e04d112f926e168d0f5a414c/transformed/jetified-fab-1.6.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/8ef5ab37e04d112f926e168d0f5a414c/transformed/jetified-fab-1.6.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/2fa9ed0b28ee9f1c5353fc2b01a37667/transformed/jetified-fab-1.6.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/2fa9ed0b28ee9f1c5353fc2b01a37667/transformed/jetified-fab-1.6.4/res" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/2fa9ed0b28ee9f1c5353fc2b01a37667/transformed/jetified-fab-1.6.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.github.clans/fab/1.6.4/9f4322ba4a76940484e06a05e98fa77457822f1c/fab-1.6.4-javadoc.jar!/" />

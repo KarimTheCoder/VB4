@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.firebase:firebase-datatransport:18.1.8@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/c30466c62ecaf338d201f8a62871768d/transformed/jetified-firebase-datatransport-18.1.8/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/c30466c62ecaf338d201f8a62871768d/transformed/jetified-firebase-datatransport-18.1.8/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/cbaa08448132dbc097b7536d15843a0c/transformed/jetified-firebase-datatransport-18.1.8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/cbaa08448132dbc097b7536d15843a0c/transformed/jetified-firebase-datatransport-18.1.8/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-datatransport/18.1.8/ae6a2c5e81df1e364d386064fbb19df1ae85ec88/firebase-datatransport-18.1.8-javadoc.jar!/" />

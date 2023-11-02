@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.material:material:1.10.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/62f4e4a730b17575600ffd9a24b804e9/transformed/material-1.10.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/6b08d076434cd54bf628caaa18dbcf7f/transformed/material-1.10.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/62f4e4a730b17575600ffd9a24b804e9/transformed/material-1.10.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/62f4e4a730b17575600ffd9a24b804e9/transformed/material-1.10.0/res" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/62f4e4a730b17575600ffd9a24b804e9/transformed/material-1.10.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/6b08d076434cd54bf628caaa18dbcf7f/transformed/material-1.10.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/6b08d076434cd54bf628caaa18dbcf7f/transformed/material-1.10.0/res" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/6b08d076434cd54bf628caaa18dbcf7f/transformed/material-1.10.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

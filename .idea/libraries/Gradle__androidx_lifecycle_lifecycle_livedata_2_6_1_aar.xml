@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.lifecycle:lifecycle-livedata:2.6.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/864bb7c0740cdce7d45d14947b6473e5/transformed/lifecycle-livedata-2.6.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/864bb7c0740cdce7d45d14947b6473e5/transformed/lifecycle-livedata-2.6.1/res" />
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/864bb7c0740cdce7d45d14947b6473e5/transformed/lifecycle-livedata-2.6.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/affe978d8b4a26cf1419d5450038b7a1/transformed/lifecycle-livedata-2.6.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/affe978d8b4a26cf1419d5450038b7a1/transformed/lifecycle-livedata-2.6.1/res" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/affe978d8b4a26cf1419d5450038b7a1/transformed/lifecycle-livedata-2.6.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

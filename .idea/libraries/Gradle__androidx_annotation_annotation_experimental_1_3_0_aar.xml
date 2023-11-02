@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.annotation:annotation-experimental:1.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/45238c4d90dbc850581c595c2dc29bf4/transformed/jetified-annotation-experimental-1.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/45238c4d90dbc850581c595c2dc29bf4/transformed/jetified-annotation-experimental-1.3.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/45238c4d90dbc850581c595c2dc29bf4/transformed/jetified-annotation-experimental-1.3.0/res" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/282c977a1b8da3ea29599811403599b9/transformed/jetified-annotation-experimental-1.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/282c977a1b8da3ea29599811403599b9/transformed/jetified-annotation-experimental-1.3.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/282c977a1b8da3ea29599811403599b9/transformed/jetified-annotation-experimental-1.3.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

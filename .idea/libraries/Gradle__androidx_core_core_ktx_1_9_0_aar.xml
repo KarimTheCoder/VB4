@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.core:core-ktx:1.9.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/51936529b402654befc23a6a47f3c67a/transformed/jetified-core-ktx-1.9.0/res" />
-      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/51936529b402654befc23a6a47f3c67a/transformed/jetified-core-ktx-1.9.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/51936529b402654befc23a6a47f3c67a/transformed/jetified-core-ktx-1.9.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/d9c571693ab24b0a7fc1c0d9e4147caa/transformed/jetified-core-ktx-1.9.0/res" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/d9c571693ab24b0a7fc1c0d9e4147caa/transformed/jetified-core-ktx-1.9.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/d9c571693ab24b0a7fc1c0d9e4147caa/transformed/jetified-core-ktx-1.9.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
