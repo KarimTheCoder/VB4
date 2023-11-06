@@ -75,8 +75,8 @@ public class SplashScreen extends AppCompatActivity {
             createDatabase();
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             sp.edit().putInt("DarkMode",0).apply();
-            // Billing
-           // getPreviousPurchases();
+
+
         }
 
     }
