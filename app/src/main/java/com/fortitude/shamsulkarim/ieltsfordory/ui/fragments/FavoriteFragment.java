@@ -3,7 +3,6 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,17 +28,12 @@ import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.Practice;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
 import com.github.clans.fab.FloatingActionButton;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 
 /**
@@ -205,7 +199,7 @@ public class FavoriteFragment extends Fragment implements FavoriteRecyclerViewAd
 
     public   void addFavoriteWord(){
         words.clear();
-        words.addAll(repository.getFavoriteWord());
+        words.addAll(repository.getFavoriteWords());
     }
 
     protected void fabAnimation(boolean isVisible) {

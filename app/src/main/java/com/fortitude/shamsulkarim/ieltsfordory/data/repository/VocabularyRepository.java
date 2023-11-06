@@ -69,7 +69,7 @@ public class VocabularyRepository {
 
 
     // Get favorite and learned words
-    public List<Word> getFavoriteWord(){
+    public List<Word> getFavoriteWords(){
 
         List<Word> words = new ArrayList<>();
 

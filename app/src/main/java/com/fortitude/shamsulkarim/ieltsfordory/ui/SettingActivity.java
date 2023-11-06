@@ -37,7 +37,7 @@ import java.util.Date;
 import java.util.List;
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class SettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, PurchasesUpdatedListener, SignInAndSyncCallback {
+public class SettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, SignInAndSyncCallback {
 
     private SignInAndSync signInAndSync;
     private FancyButton save,spanish;
@@ -813,11 +813,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         return trialStatus;
 
-
-    }
-
-    @Override
-    public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> list) {
 
     }
 
