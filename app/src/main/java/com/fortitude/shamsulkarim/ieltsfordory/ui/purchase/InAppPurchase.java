@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class in_app_purchase extends AppCompatActivity implements PurchasesUpdatedListener, View.OnClickListener {
+public class InAppPurchase extends AppCompatActivity implements PurchasesUpdatedListener, View.OnClickListener {
 
     private BillingClient billingClient;
 
@@ -84,23 +84,23 @@ public class in_app_purchase extends AppCompatActivity implements PurchasesUpdat
                                     BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
                                             .setSkuDetails(skuDetailsList.get(0))
                                             .build();
-                                    billingClient.launchBillingFlow(in_app_purchase.this, billingFlowParams);
+                                    billingClient.launchBillingFlow(InAppPurchase.this, billingFlowParams);
 
 
 
-                                    Toast.makeText(in_app_purchase.this,billingResult.getResponseCode()+" Getting Data..."+skuDetailsList.size(),Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(InAppPurchase.this,billingResult.getResponseCode()+" Getting Data..."+skuDetailsList.size(),Toast.LENGTH_SHORT).show();
                                 }
                             });
-                    Toast.makeText(in_app_purchase.this,"BILLING | startConnection | RESULT OK",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InAppPurchase.this,"BILLING | startConnection | RESULT OK",Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(in_app_purchase.this,"BILLING | startConnection | RESULT: $billingResponseCode",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InAppPurchase.this,"BILLING | startConnection | RESULT: $billingResponseCode",Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onBillingServiceDisconnected() {
                 // Try to restart the connection on the next request to
                 // Google Play by calling the startConnection() method.
-                Toast.makeText(in_app_purchase.this,"BILLING | onBillingServiceDisconnected | DISCONNECTED",Toast.LENGTH_SHORT).show();
+                Toast.makeText(InAppPurchase.this,"BILLING | onBillingServiceDisconnected | DISCONNECTED",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -130,7 +130,7 @@ public class in_app_purchase extends AppCompatActivity implements PurchasesUpdat
 
                             // Process the result.
                             initProductAdapter(skuDetailsList);
-                            Toast.makeText(in_app_purchase.this,"Getting Data..."+skuDetailsList.size(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(InAppPurchase.this,"Getting Data..."+skuDetailsList.size(),Toast.LENGTH_SHORT).show();
                         }
                     });
         }

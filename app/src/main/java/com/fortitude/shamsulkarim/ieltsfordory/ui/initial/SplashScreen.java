@@ -17,6 +17,8 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.DatabaseInitializer;
+import com.fortitude.shamsulkarim.ieltsfordory.data.TaskListener;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
@@ -88,8 +90,24 @@ public class SplashScreen extends AppCompatActivity {
 
 
 
-        DatabaseAsyncTask databaseTask = new DatabaseAsyncTask();
-        databaseTask.execute(10);
+       // DatabaseAsyncTask databaseTask = new DatabaseAsyncTask();
+        //databaseTask.execute(10);
+
+        DatabaseInitializer dbInitializer = new DatabaseInitializer(this, new TaskListener() {
+            @Override
+            public void onComplete() {
+                startActivity(new Intent(getApplicationContext(), StartTrial.class));
+                finish();
+            }
+
+            @Override
+            public void onFailed() {
+
+            }
+        });
+
+        dbInitializer.execute();
+
 
     }
 

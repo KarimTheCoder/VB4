@@ -1,4 +1,4 @@
-package com.fortitude.shamsulkarim.ieltsfordory.adapters;
+package com.fortitude.shamsulkarim.ieltsfordory.utility;
 
 import android.content.Context;
 import android.util.AttributeSet;
