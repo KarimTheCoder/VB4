@@ -1,4 +1,4 @@
-package com.fortitude.shamsulkarim.ieltsfordory.data;
+package com.fortitude.shamsulkarim.ieltsfordory.data.initializer;
 
 
 import android.content.Context;

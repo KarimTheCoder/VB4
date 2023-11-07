@@ -15,10 +15,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.DatabaseInitializer;
-import com.fortitude.shamsulkarim.ieltsfordory.data.TaskListener;
+import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.DatabaseInitializer;
+import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.TaskListener;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
@@ -30,6 +31,7 @@ import com.github.ybq.android.spinkit.style.ThreeBounce;
 
 public class SplashScreen extends AppCompatActivity {
 
+    private TextView progressText;
     private SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class SplashScreen extends AppCompatActivity {
         window.setBackgroundDrawable(background);
 
 
+        progressText = findViewById(R.id.textView20);
 
 
         //----------------------------------------
@@ -59,7 +62,14 @@ public class SplashScreen extends AppCompatActivity {
         // This methods Initializes database at the first launch of the app
         // after first launch it sends you to MainActivity.java activity.
 
-        initializeOrMainActivity();
+        Handler handler = new Handler();
+
+        handler.postDelayed(this::initializeOrMainActivity,1500L);
+
+
+
+
+        //initializeOrMainActivity();
 
         //-----------------------------------------------------------------
 
@@ -88,16 +98,21 @@ public class SplashScreen extends AppCompatActivity {
 
     private void createDatabase(){
 
-
-
        // DatabaseAsyncTask databaseTask = new DatabaseAsyncTask();
-        //databaseTask.execute(10);
+       // databaseTask.execute(10);
+
 
         DatabaseInitializer dbInitializer = new DatabaseInitializer(this, new TaskListener() {
             @Override
             public void onComplete() {
                 startActivity(new Intent(getApplicationContext(), StartTrial.class));
                 finish();
+            }
+
+            @Override
+            public void onProgress() {
+
+                progressText.setText("We are preparing the app...");
             }
 
             @Override

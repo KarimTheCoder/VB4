@@ -1,4 +1,4 @@
-package com.fortitude.shamsulkarim.ieltsfordory.data;
+package com.fortitude.shamsulkarim.ieltsfordory.data.initializer;
 
 import android.content.Context;
 
@@ -27,8 +27,9 @@ public class DatabaseInitializer {
         // Check if the task is done
         while (!taskExecutor.isTaskDone()) {
             System.out.println("Task is still in progress...");
+            taskListener.onProgress();
             try {
-                Thread.sleep(500); // Check every second
+                Thread.sleep(1000); // Check every second
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

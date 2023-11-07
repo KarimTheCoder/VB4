@@ -75,4 +75,5 @@
     
     <string name="google_client_id">"576057269160-7fuvcqcdidumlgtecrrcs4b0unklh85b.apps.googleusercontent.com"</string>
     <string name="client_id">"576057269160-872i8m7d8acvc4vbp1nrrqt9p42mv7dq.apps.googleusercontent.com"</string>
+    <string name="loading_text">We are preparing the app...</string>
 </resources>
