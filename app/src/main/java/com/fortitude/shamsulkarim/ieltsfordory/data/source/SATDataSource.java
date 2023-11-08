@@ -78,11 +78,11 @@ public class SATDataSource extends DataSource{
         position = context.getResources().getIntArray(R.array.SAT_position);
 
         // Translation
-        wordsArraySL =       context.getResources().getStringArray(R.array.IELTS_words_sp);
-        translationArraySL = context.getResources().getStringArray(R.array.IELTS_translation_sp);
-        example1arraySL =    context.getResources().getStringArray(R.array.IELTS_example1_sp);
-        example2ArraySL =    context.getResources().getStringArray(R.array.IELTS_example2_sp);
-        example3ArraySL =    context.getResources().getStringArray(R.array.IELTS_example3_sp);
+        wordsArraySL =       context.getResources().getStringArray(R.array.SAT_words_sp);
+        translationArraySL = context.getResources().getStringArray(R.array.SAT_translation_sp);
+        example1arraySL =    context.getResources().getStringArray(R.array.SAT_example1_sp);
+        example2ArraySL =    context.getResources().getStringArray(R.array.SAT_example2_sp);
+        example3ArraySL =    context.getResources().getStringArray(R.array.SAT_example3_sp);
 
     }
     private List<Word> listWords (int startPoint , int beginnerNumber){

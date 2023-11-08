@@ -3,6 +3,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.data.source;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
@@ -41,7 +42,7 @@ public class GREDataSource extends DataSource{
 
         favoriteStates = new ArrayList<>();
         learnedStates = new ArrayList<>();
-        //todo 2 add SL state
+
         secondLanguage = sp.getString("secondlanguage","english");
         isChecked =   sp.getBoolean("isGREActive",true);
 
@@ -65,19 +66,19 @@ public class GREDataSource extends DataSource{
         vocabularyType = context.getResources().getStringArray(R.array.GRE_level);
         position = context.getResources().getIntArray(R.array.GRE_position);
 
-        //todo 1 add SL arrays
-        // Translation
-        wordsArraySL =       context.getResources().getStringArray(R.array.IELTS_words_sp);
-        translationArraySL = context.getResources().getStringArray(R.array.IELTS_translation_sp);
-        example1arraySL =    context.getResources().getStringArray(R.array.IELTS_example1_sp);
-        example2ArraySL =    context.getResources().getStringArray(R.array.IELTS_example2_sp);
-        example3ArraySL =    context.getResources().getStringArray(R.array.IELTS_example3_sp);
+
+        wordsArraySL =       context.getResources().getStringArray(R.array.GRE_words_sp);
+        translationArraySL = context.getResources().getStringArray(R.array.GRE_translation_sp);
+        example1arraySL =    context.getResources().getStringArray(R.array.GRE_example1_sp);
+        example2ArraySL =    context.getResources().getStringArray(R.array.GRE_example2_sp);
+        example3ArraySL =    context.getResources().getStringArray(R.array.GRE_example3_sp);
 
     }
 
 
     public void getFavoritePosition(){
         Cursor greRes = database.getData();
+
 
         while (greRes.moveToNext()){
             favoriteStates.add(greRes.getString(FAVORITE_COLL));
@@ -86,6 +87,32 @@ public class GREDataSource extends DataSource{
 
         greRes.close();
     }
+
+
+    public boolean wasDatabaseLoadedProperly(){
+
+        int databaseSize = 0;
+
+        Cursor res = database.getData();
+
+        while (res.moveToNext()){
+
+            databaseSize++;
+        }
+        res.close();
+
+
+        if(databaseSize< WORD_SIZE){
+            Log.i("Database","Database was not loaded properly!");
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+
+
+
     private List<Word> listWords (int startPoint , int beginnerNumber){
 
 
@@ -94,9 +121,6 @@ public class GREDataSource extends DataSource{
         if(isChecked){
 
             for(int i = startPoint; i < beginnerNumber; i++){
-
-
-                //todo 3 Add SL data
 
                 Word word = new Word(wordArray[i], translationArray[i],"", pronunArray[i], grammarArray[i], example1array[i], example2array[i], example3Array[i], vocabularyType[i], position[i], learnedStates.get(i),favoriteStates.get(i));
 
