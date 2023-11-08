@@ -1000,8 +1000,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
 
-                    //NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
-                    //NewTrain.this.finish();
+                    NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
+                    NewTrain.this.finish();
                 }
             }, 200L);
 
@@ -1177,14 +1177,17 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         if( level.equalsIgnoreCase("beginner")){
            words.addAll(repository.getBeginnerUnlearnedWords());
+           questionWords.addAll(repository.getBeginnerUnlearnedWords());
         }
 
         if( level.equalsIgnoreCase("intermediate")){
             words.addAll(repository.getIntermediateUnlearnedWords());
+            questionWords.addAll(repository.getIntermediateUnlearnedWords());
         }
 
         if( level.equalsIgnoreCase("advance")){
             words.addAll(repository.getAdvanceUnlearnedWords());
+            questionWords.addAll(repository.getAdvanceUnlearnedWords());
         }
     }
 
