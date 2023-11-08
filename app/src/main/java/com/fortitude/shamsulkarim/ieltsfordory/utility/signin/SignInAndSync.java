@@ -349,9 +349,9 @@ public class SignInAndSync {
 
     }
 
-    public void authenticateUser(int requestCode, Intent data) {
+    public void authenticateUser( Intent data) {
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
+
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
@@ -368,7 +368,7 @@ public class SignInAndSync {
                 callback.updateUI();
                 // [END_EXCLUDE]
             }
-        }
+
     }
 
 

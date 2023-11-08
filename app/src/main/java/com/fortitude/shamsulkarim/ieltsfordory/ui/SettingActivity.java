@@ -1,8 +1,15 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +58,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private FancyButton signIn;
     private TextView userName, userDetail;
     private boolean connected;
+    ActivityResultLauncher<Intent> activityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -286,6 +294,30 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+
+
+        activityResultLauncher =
+                registerForActivityResult(
+                        new ActivityResultContracts.StartActivityForResult(),
+                        new ActivityResultCallback<ActivityResult>() {
+                            @Override
+                            public void onActivityResult(ActivityResult result) {
+
+                                if (result.getResultCode() == Activity.RESULT_OK) {
+                                    Intent data = result.getData();
+                                    int requestCode = result.getResultCode();
+
+                                    // Do something with the data
+
+                                    signInAndSync.authenticateUser( data);
+
+                                }
+
+
+
+                            }
+                        }
+                );
     }
 
 
@@ -492,10 +524,23 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         if(connected){
             Intent signInIntent = signInAndSync.getSignInIntent();
-            int RC_SIGN_IN = signInAndSync.getRC_SIGN_IN();
-            startActivityForResult(signInIntent, RC_SIGN_IN);
+            //int RC_SIGN_IN = signInAndSync.getRC_SIGN_IN();
+            //startActivityForResult(signInIntent, RC_SIGN_IN);
 
             Toast.makeText(this,"Signing in initiated",Toast.LENGTH_SHORT).show();
+            activityResultLauncher.launch(signInIntent);
+
+
+
+
+
+
+
+
+
+
+
+
 
         }else {
 
@@ -553,7 +598,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        signInAndSync.authenticateUser(requestCode, data);
+        signInAndSync.authenticateUser(data);
     }
 
 
