@@ -1,11 +1,9 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -18,12 +16,10 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.android.billingclient.api.BillingResult;
-import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.signin.SignInAndSync;
@@ -34,7 +30,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.kyleduo.switchbutton.SwitchButton;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, SignInAndSyncCallback {
@@ -47,7 +42,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private SwitchButton soundSwitch, pronunciationSwitch;
     private boolean switchState = true;
     private boolean pronunciationState = true;
-    private ProgressDialog progressDialog;
+    private ProgressBar progressBar;
     private CheckBox ieltsCheckbox, toeflCheckbox, satCheckbox, greCheckbox;
     private boolean isSignedIn;
     private CardView privacyPolicy;
@@ -320,9 +315,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
 
         ///---------------
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
+        progressBar =  findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.INVISIBLE);
 
         // Checking Network Connection
 
@@ -510,6 +504,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void signOut() {
+
+        progressStatus(false);
         // Firebase sign out
         signInAndSync.getmAuth().signOut();
 
@@ -521,6 +517,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     public void onComplete(@NonNull Task<Void> task) {
                         updateUI(null);
 
+                        progressStatus(true);
                         Toast.makeText(getApplicationContext(),"Sign-out complete!",Toast.LENGTH_SHORT).show();
 
                     }
@@ -825,9 +822,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         if(isCompleted){
 
-            progressDialog.cancel();
+
+            progressBar.setVisibility(View.INVISIBLE);
         }else {
-            progressDialog.show();
+
+            progressBar.setVisibility(View.VISIBLE);
         }
 
     }

@@ -2,7 +2,6 @@ package com.fortitude.shamsulkarim.ieltsfordory.utility.signin;
 
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,12 +9,9 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -35,14 +31,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.Executor;
 
 public class SignInAndSync {
 
@@ -177,7 +170,7 @@ public class SignInAndSync {
     public FirebaseUser firebaseAuthenticationWithGoogle(GoogleSignInAccount acct){
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
-        //showProgressDialog();
+        callback.progressStatus(false);
         // [END_EXCLUDE]
 
         callback.progressStatus(false);
@@ -242,7 +235,7 @@ public class SignInAndSync {
 
                     if(dataSnapshot.exists() &&  i == 8){
 
-                        //progressDialog.cancel();
+                        callback.progressStatus(true);
                         askOnce = true;
                         askToSync();
 
@@ -390,6 +383,7 @@ public class SignInAndSync {
                     .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            callback.progressStatus(false);
                             syncSQL();
                         }
                     })
@@ -577,6 +571,7 @@ public class SignInAndSync {
 
 
 
+        callback.progressStatus(true);
 
     }
 
