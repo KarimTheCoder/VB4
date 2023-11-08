@@ -4,12 +4,16 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
 
 import com.fortitude.shamsulkarim.ieltsfordory.data.FavLearnedState;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
@@ -226,6 +230,25 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         }
 
 
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+                if (lastBackPressTime < System.currentTimeMillis() - 4000) {
+                    toast = Toast.makeText(getApplicationContext(), "Press back again to close this app", Toast.LENGTH_LONG);
+                    toast.show();
+                    lastBackPressTime = System.currentTimeMillis();
+
+                } else {
+                    if (toast != null) {
+                        toast.cancel();
+                    }
+                    finish();
+                }
+            }
+        });
+
+
     }
 
 
@@ -383,23 +406,23 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
 
     }
+//
+//    @Override
+//    public void onBackPressed() {
+//        if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
+//            toast = Toast.makeText(this, "Press back again to close this app", Toast.LENGTH_LONG);
+//            toast.show();
+//            this.lastBackPressTime = System.currentTimeMillis();
+//        } else {
+//            if (toast != null) {
+//                toast.cancel();
+//            }
+//            super.onBackPressed();
+//        }
+//
+//    }
 
-    @Override
-    public void onBackPressed() {
-        if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
-            toast = Toast.makeText(this, "Press back again to close this app", Toast.LENGTH_LONG);
-            toast.show();
-            this.lastBackPressTime = System.currentTimeMillis();
-        } else {
-            if (toast != null) {
-                toast.cancel();
-            }
-            super.onBackPressed();
-        }
 
-
-
-    }
 
     @Override
     public void onClick(View v) {
