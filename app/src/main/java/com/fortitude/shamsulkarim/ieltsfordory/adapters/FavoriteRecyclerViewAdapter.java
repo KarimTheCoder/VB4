@@ -207,31 +207,6 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             speaker.setDisableBorderColor(Color.parseColor("#ffffff"));
 
 
-            //speaker.setEnabled(false);
-
-//
-//            wordView.setTypeface(ABeeZee);
-//            translationView.setTypeface(ABeeZee);
-//            grammarView.setTypeface(ABeeZee);
-//
-//            exampleView1.setTypeface(ABeeZee);
-//
-//
-//            exampleView2.setTypeface(ABeeZee);
-//            exampleView3.setTypeface(ABeeZee);
-//
-//            if(languageId == 1){
-//                secondLanguageName.setTypeface(ABeeZeeItalic);
-//                secondTranslation.setTypeface(ABeeZee);
-////                secondLanguageName.setText("Spanish");
-//            }
-//            if(languageId == 2){
-//                secondLanguageName.setText("Bangla");
-//            }
-//            if(languageId == 3){
-//                secondLanguageName.setText("Hindi");
-//            }
-
             favorite =  itemView.findViewById(R.id.favorite_favorite);
 
             favorite.setOnClickListener(this);

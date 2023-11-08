@@ -4,16 +4,13 @@ import android.content.Context;
 
 public class DatabaseInitializer {
 
-    private TaskListener taskListener;
-    private Context context;
-    private DatabaseTask dbTask;
-    private TaskExecutor taskExecutor;
+    private final TaskListener taskListener;
+    private final TaskExecutor taskExecutor;
 
 
     public DatabaseInitializer(Context context, TaskListener taskListener) {
-        this.context = context;
         this.taskListener = taskListener;
-        dbTask = new DatabaseTask(context);
+        DatabaseTask dbTask = new DatabaseTask(context);
         taskExecutor = new TaskExecutor(dbTask);
 
 
