@@ -275,12 +275,12 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         @Override
         public void onClick(View view) {
 
-            Word word = words.get(getAdapterPosition());
+            Word word = words.get(getBindingAdapterPosition());
 
             if( view == speaker){
 
 
-                String wordName = words.get(getAdapterPosition()).getWord().toLowerCase();
+                String wordName = words.get(getBindingAdapterPosition()).getWord().toLowerCase();
 
 
 
@@ -317,7 +317,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
                     favorite.setIconResource(R.drawable.ic_favorite_icon);
                     favorite.setTag(R.drawable.ic_favorite_icon);
-                    isFav.set(getAdapterPosition(),false);
+                    isFav.set(getBindingAdapterPosition(),false);
 
 
                     if(favoriteCount > 0){
@@ -365,24 +365,24 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
                     favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                     favorite.setTag(null);
 
-                    if(words.get(getAdapterPosition()).level.equalsIgnoreCase("IELTS")){
+                    if(words.get(getBindingAdapterPosition()).level.equalsIgnoreCase("IELTS")){
 
                         repository.updateIELTSFavoriteState(words.get(getBindingAdapterPosition()).position+"","True");
 
                     }
 
-                    if(words.get(getAdapterPosition()).level.equalsIgnoreCase("TOEFL")){
+                    if(words.get(getBindingAdapterPosition()).level.equalsIgnoreCase("TOEFL")){
                         repository.updateTOEFLFavoriteState(words.get(getBindingAdapterPosition()).position+"","True");
 
                     }
 
-                    if(words.get(getAdapterPosition()).level.equalsIgnoreCase("SAT")){
+                    if(words.get(getBindingAdapterPosition()).level.equalsIgnoreCase("SAT")){
                         repository.updateSATFavoriteState(words.get(getBindingAdapterPosition()).position+"","True");
 
 
 
                     }
-                    if(words.get(getAdapterPosition()).level.equalsIgnoreCase("GRE")){
+                    if(words.get(getBindingAdapterPosition()).level.equalsIgnoreCase("GRE")){
 
                         repository.updateGREFavoriteState(words.get(getBindingAdapterPosition()).position+"","True");
 
