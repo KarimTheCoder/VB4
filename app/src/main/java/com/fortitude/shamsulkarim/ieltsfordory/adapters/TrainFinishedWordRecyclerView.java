@@ -179,12 +179,12 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
         @Override
         public void onClick(View v) {
 
-            mostMistakenWord = words.get(getAdapterPosition());
+            mostMistakenWord = words.get(getBindingAdapterPosition());
 
-            String vocabularyType = words.get(getAdapterPosition()).vocabularyType;
-            String isFavorite = words.get(getAdapterPosition()).isFavorite;
-            String isLearned = words.get(getAdapterPosition()).isLearned;
-            int databasePosition = words.get(getAdapterPosition()).position;
+            String vocabularyType = words.get(getBindingAdapterPosition()).vocabularyType;
+            String isFavorite = words.get(getBindingAdapterPosition()).isFavorite;
+            String isLearned = words.get(getBindingAdapterPosition()).isLearned;
+            int databasePosition = words.get(getBindingAdapterPosition()).position;
 
             //Toast.makeText(v.getContext(),vocabularyType,Toast.LENGTH_SHORT).show();
 
@@ -202,7 +202,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
                     if(vocabularyType.equalsIgnoreCase("IELTS")){
 
                         favorite.setIconResource(R.drawable.ic_favorite_icon);
-                        words.get(getAdapterPosition()).setIsFavorite("false");
+                        words.get(getBindingAdapterPosition()).setIsFavorite("false");
                         ieltsWordDatabase.updateFav(""+databasePosition,"false");
 
 
@@ -211,7 +211,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
                     if( vocabularyType.equalsIgnoreCase("TOEFL")){
 
                         favorite.setIconResource(R.drawable.ic_favorite_icon);
-                        words.get(getAdapterPosition()).setIsFavorite("false");
+                        words.get(getBindingAdapterPosition()).setIsFavorite("false");
                         toeflWordDatabase.updateFav(""+databasePosition,"false");
 
                     }
@@ -219,7 +219,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
                     if( vocabularyType.equalsIgnoreCase("SAT")){
 
                         favorite.setIconResource(R.drawable.ic_favorite_icon);
-                        words.get(getAdapterPosition()).setIsFavorite("false");
+                        words.get(getBindingAdapterPosition()).setIsFavorite("false");
                         satWordDatabase.updateFav(""+databasePosition,"false");
 
                     }
@@ -227,7 +227,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
                     if( vocabularyType.equalsIgnoreCase("GRE")){
 
                         favorite.setIconResource(R.drawable.ic_favorite_icon);
-                        words.get(getAdapterPosition()).setIsFavorite("false");
+                        words.get(getBindingAdapterPosition()).setIsFavorite("false");
                         greWordDatabase.updateFav(""+databasePosition,"false");
 
                     }
@@ -238,7 +238,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
                     if(vocabularyType.equalsIgnoreCase("IELTS")){
 
                         favorite.setIconResource(R.drawable.ic_favorite_icon_active);
-                        words.get(getAdapterPosition()).setIsFavorite("true");
+                        words.get(getBindingAdapterPosition()).setIsFavorite("true");
                         ieltsWordDatabase.updateFav(""+databasePosition,"true");
 
 
@@ -247,7 +247,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
                     if( vocabularyType.equalsIgnoreCase("TOEFL")){
 
                         favorite.setIconResource(R.drawable.ic_favorite_icon_active);
-                        words.get(getAdapterPosition()).setIsFavorite("true");
+                        words.get(getBindingAdapterPosition()).setIsFavorite("true");
                         toeflWordDatabase.updateFav(""+databasePosition,"true");
 
                     }
@@ -255,7 +255,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
                     if( vocabularyType.equalsIgnoreCase("SAT")){
 
                         favorite.setIconResource(R.drawable.ic_favorite_icon_active);
-                        words.get(getAdapterPosition()).setIsFavorite("true");
+                        words.get(getBindingAdapterPosition()).setIsFavorite("true");
                         satWordDatabase.updateFav(""+databasePosition,"true");
 
                     }
@@ -263,7 +263,7 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
                     if( vocabularyType.equalsIgnoreCase("GRE")){
 
                         favorite.setIconResource(R.drawable.ic_favorite_icon_active);
-                        words.get(getAdapterPosition()).setIsFavorite("true");
+                        words.get(getBindingAdapterPosition()).setIsFavorite("true");
                         greWordDatabase.updateFav(""+databasePosition,"true");
 
                     }
