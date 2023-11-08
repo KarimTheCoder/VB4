@@ -289,8 +289,8 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
            // Toast.makeText(context,""+((Word) words.get(getAdapterPosition())).vocabularyType,Toast.LENGTH_SHORT).show();
 
-            Word word = (Word) words.get(getAdapterPosition());
-            int wordPos = ((Word) words.get(getAdapterPosition())).position;
+            Word word = (Word) words.get(getBindingAdapterPosition());
+            int wordPos = ((Word) words.get(getBindingAdapterPosition())).position;
 
 
             if(view == speaker){
@@ -326,25 +326,25 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                     favoriteCount++;
                     sp.edit().putInt("favoriteCountProfile",favoriteCount).apply();
 
-                    if(((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("IELTS")){
+                    if(((Word) words.get(getBindingAdapterPosition())).vocabularyType.equalsIgnoreCase("IELTS")){
                       //  ieltsWordDatabase.updateFav(wordPos+"","True");
 
                         repository.updateIELTSFavoriteState(wordPos+"","True");
 
                     }
 
-                    if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("TOEFL")){
+                    if( ((Word) words.get(getBindingAdapterPosition())).vocabularyType.equalsIgnoreCase("TOEFL")){
                         //toeflWordDatabase.updateFav(wordPos+"","True");
                         repository.updateTOEFLFavoriteState(wordPos+"","True");
 
                     }
 
-                    if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("SAT")){
+                    if( ((Word) words.get(getBindingAdapterPosition())).vocabularyType.equalsIgnoreCase("SAT")){
                         //satWordDatabase.updateFav(wordPos+"","True");
                         repository.updateSATFavoriteState(wordPos+"","True");
                     }
 
-                    if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("GRE")){
+                    if( ((Word) words.get(getBindingAdapterPosition())).vocabularyType.equalsIgnoreCase("GRE")){
                         //greWordDatabase.updateFav(wordPos+"","True");
                         repository.updateGREFavoriteState(wordPos+"","True");
                     }
@@ -362,22 +362,22 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                     }
 
-                    if(((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("IELTS")){
+                    if(((Word) words.get(getBindingAdapterPosition())).vocabularyType.equalsIgnoreCase("IELTS")){
                        // ieltsWordDatabase.updateFav(wordPos+"","false");
                         repository.updateIELTSFavoriteState(wordPos+"","false");
                     }
 
-                    if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("TOEFL")){
+                    if( ((Word) words.get(getBindingAdapterPosition())).vocabularyType.equalsIgnoreCase("TOEFL")){
                         //toeflWordDatabase.updateFav(wordPos+"","false");
                         repository.updateTOEFLFavoriteState(wordPos+"","false");
                     }
 
-                    if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("SAT")){
+                    if( ((Word) words.get(getBindingAdapterPosition())).vocabularyType.equalsIgnoreCase("SAT")){
                         //satWordDatabase.updateFav(wordPos+"","false");
                         repository.updateSATFavoriteState(wordPos+"","false");
                     }
 
-                    if( ((Word) words.get(getAdapterPosition())).vocabularyType.equalsIgnoreCase("GRE")){
+                    if( ((Word) words.get(getBindingAdapterPosition())).vocabularyType.equalsIgnoreCase("GRE")){
                         //greWordDatabase.updateFav(wordPos+"","false");
 
                         repository.updateGREFavoriteState(wordPos+"","false");
