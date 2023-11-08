@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.fortitude.shamsulkarim.ieltsfordory">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission
@@ -13,30 +13,47 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".PretrainActivity" />
-        <activity android:name="com.fortitude.apps.vocabularybuilder.ChooseLanguageActivity" />
-        <activity android:name=".SplashScreen">
+        android:supportsRtl="false"
+        tools:replace="android:supportsRtl"
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
+        <activity android:name=".ui.initial.StartTrial" />
+        <activity android:name=".ui.purchase.InAppPurchase" />
+        <activity
+            android:name=".ui.train.PretrainActivity"
+            android:theme="@style/Pretrain.Theme"
+            />
 
-        </activity>
-        <activity android:name=".StartTrainingActivity" />
-        <activity android:name=".NoWordLeft" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Practice.Practice" />
-        <activity android:name=".NewTrain" />
-        <activity android:name=".TrainFinishedActivity" />
-        <activity android:name=".Practice.PracticeFinished" />
-        <activity android:name=".WordAdapters.NewSettingActivity" />
-        <activity android:name=".ChooseLanguageActivity" /> <!-- Register the Alarm Receiver -->
-        <activity android:name=".ChooseVocabulary" />
-        <activity android:name=".AppLauncher" >
+        <activity android:name=".ui.initial.SplashScreen" />
+        <activity android:name=".ui.train.NoWordLeft" />
+        <activity android:name=".ui.MainActivity"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".ui.practice.Practice"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".ui.train.NewTrain"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".ui.train.TrainFinishedActivity"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".ui.practice.PracticeFinished"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".ui.SettingActivity"
+            android:theme="@style/Main.Theme"
+            />
+         <!-- Register the Alarm Receiver -->
+        <activity android:name=".ui.initial.AppLauncher"
+            android:theme="@style/Theme.Launcher"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <meta-data
@@ -44,13 +61,17 @@
             android:resource="@array/preloaded_fonts" /> <!-- <meta-data -->
         <!-- android:name="io.fabric.ApiKey" -->
         <!-- android:value="92bbc6255603d1a30b14cb34e5b1554e6a6adb76" /> -->
+
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+<!--       Real AdMob App ID android:value="ca-app-pub-7815894766256601~5016349461"-->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7815894766256601~5016349461" />
 
         <receiver
-            android:name=".notification.AlarmReceiver"
-            android:enabled="false">
+            android:name=".utility.notification.AlarmReceiver"
+            android:enabled="false"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

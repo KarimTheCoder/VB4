@@ -5,15 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_background_color"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.NewTrain">
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.ui.train.NewTrain">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/top_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient"
+        android:background="?attr/colorPrimary"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +41,7 @@
             android:layout_marginBottom="@dimen/keyline_4"
             app:cardCornerRadius="20dp"
             app:cardElevation="6dp"
-            app:cardBackgroundColor="@color/card_background_color"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/top_background"
@@ -60,7 +59,6 @@
 
 
                     <View
-                        android:id="@+id/view3"
                         android:layout_width="1dp"
                         android:layout_height="1dp"
                         android:layout_marginBottom="8dp"
@@ -82,7 +80,7 @@
                         android:layout_marginTop="@dimen/keyline_4"
                         android:layout_marginEnd="@dimen/keyline_4"
                         style="@style/primary_text_style"
-                        android:text="Comprehensive"
+                        android:text="@string/word"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -91,8 +89,8 @@
                         android:id="@+id/train_fab"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:fab_colorPressed="@color/colorPrimaryDark"
-                        app:fab_colorNormal="@color/colorPrimary"
+                        app:fab_colorPressed="?attr/colorPrimaryDark"
+                        app:fab_colorNormal="?attr/colorPrimary"
                         android:layout_marginTop="@dimen/keyline_4"
                         android:layout_marginBottom="@dimen/keyline_4"
                         android:layout_marginEnd="@dimen/keyline_4"
@@ -100,14 +98,13 @@
                         app:fab_label="Next"
                         android:onClick="next"
                         android:src="@drawable/next_icon"
-                        app:fab_progress_backgroundColor="@color/grey"
-                        app:fab_progress_color="@color/colorPrimaryDark"
+                        app:fab_progress_backgroundColor="?attr/colorPrimarySurface"
+                        app:fab_progress_color="?attr/colorPrimary"
                         app:fab_showShadow="false"
                         app:layout_constraintBottom_toBottomOf="parent"
 
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginRight="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <mehdi.sakout.fancybuttons.FancyButton
                         android:id="@+id/train_speaker_icon"
@@ -127,19 +124,17 @@
                         fancy:fb_ghost="true"
                         fancy:fb_iconResource="@drawable/speak"
                         fancy:fb_radius="100000dp"
-                        fancy:fb_text=""
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        fancy:fb_text="" />
 
-                    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <com.github.ybq.android.spinkit.SpinKitView
                         android:id="@+id/spin_kit"
                         style="@style/SpinKitView.Small.Wave"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="0dp"
-                        android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        app:SpinKit_Color="@color/colorAccent"
+                        app:SpinKit_Color="?attr/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="@+id/train_speaker_icon"
                         app:layout_constraintStart_toEndOf="@+id/train_speaker_icon"
                         app:layout_constraintTop_toTopOf="@+id/train_speaker_icon" />
@@ -192,8 +187,8 @@
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
-        style="@style/home_card_style"
-        app:cardBackgroundColor="@color/card_background_color"
+        style="@style/word_card_style"
+        app:cardBackgroundColor="?attr/colorPrimarySurface"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_background"
@@ -226,9 +221,8 @@
                 android:layout_marginTop="@dimen/keyline_4"
                 android:layout_toEndOf="@+id/train_circle1"
                 style="@style/secondary_text_style"
-                android:text="difficult to stand on, move on, or hold because of being smooth, wet, icy, etc "
-                android:layout_toRightOf="@+id/train_circle1"
-                android:layout_marginRight="@dimen/keyline_4" />
+                android:text="@string/sentence_2"
+                />
 
         </RelativeLayout>
 
@@ -241,8 +235,8 @@
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
-        style="@style/home_card_style"
-        app:cardBackgroundColor="@color/card_background_color"
+        style="@style/word_card_style"
+        app:cardBackgroundColor="?attr/colorPrimarySurface"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_card1">
@@ -273,9 +267,8 @@
                 android:layout_marginTop="@dimen/keyline_4"
                 android:layout_toEndOf="@+id/train_circle2"
                 style="@style/secondary_text_style"
-                android:text="difficult to stand on, move on, or hold because of being smooth, wet, icy, etc "
-                android:layout_marginRight="@dimen/keyline_4"
-                android:layout_toRightOf="@+id/train_circle2" />
+                android:text="@string/sentence_2"
+                />
 
         </RelativeLayout>
 
@@ -288,8 +281,8 @@
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
-        style="@style/home_card_style"
-        app:cardBackgroundColor="@color/card_background_color"
+        style="@style/word_card_style"
+        app:cardBackgroundColor="?attr/colorPrimarySurface"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_card2">
@@ -320,9 +313,8 @@
                 android:layout_marginTop="@dimen/keyline_4"
                 android:layout_toEndOf="@+id/train_circle3"
                 style="@style/secondary_text_style"
-                android:text="difficult to stand on, move on, or hold because of being smooth, wet, icy, etc "
-                android:layout_marginRight="@dimen/keyline_4"
-                android:layout_toRightOf="@+id/train_circle3" />
+                android:text="@string/sentence_2"
+                />
 
         </RelativeLayout>
 
@@ -335,8 +327,8 @@
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_4"
-        style="@style/home_card_style"
-        app:cardBackgroundColor="@color/card_background_color"
+        style="@style/word_card_style"
+        app:cardBackgroundColor="?attr/colorPrimarySurface"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_card3">
@@ -367,9 +359,8 @@
                 android:layout_marginTop="@dimen/keyline_4"
                 android:layout_toEndOf="@+id/train_circle4"
                 style="@style/secondary_text_style"
-                android:text="difficult to stand on, move on, or hold because of being smooth, wet, icy, etc "
-                android:layout_marginRight="@dimen/keyline_4"
-                android:layout_toRightOf="@+id/train_circle4" />
+                android:text="@string/sentence_2"
+                />
 
         </RelativeLayout>
 
@@ -393,5 +384,15 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_ad_loading"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/colorAccent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
 
     <string-array name="GRE_words">
@@ -1282,7 +1282,7 @@
         <item> "Qui·es·cent"  </item>
         <item> "Rar·e·fied"  </item>
         <item> "Re·cal·ci·trant"  </item>
-        <item> "Re·cant"  </item>
+        <item tools:ignore="Typos"> "Re·cant"  </item>
         <item> "Re·cluse"  </item>
         <item> "Re·con·dite"  </item>
         <item> "Re·frac·to·ry"  </item>

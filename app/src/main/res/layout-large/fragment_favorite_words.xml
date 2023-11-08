@@ -1,11 +1,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_background_color"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.FavoriteWords">
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.FavoriteFragment">
 
 
     <TextView
@@ -22,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:contentDescription="@string/rabbit_with_egg"
         android:id="@+id/no_favorite_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +41,6 @@
         app:layout_constraintTop_toBottomOf="@+id/favoriteToolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_word_favorite"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/dummy_bottom_navigation"
@@ -80,7 +78,6 @@
 
 
     <View
-        android:id="@+id/view7"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@drawable/dropshadow"

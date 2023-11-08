@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string-array name="SAT_words">
 
         <item> "Abjure"  </item>
@@ -1315,7 +1315,7 @@
         <item> "Mach·i·nate"  </item>
         <item> "Mag·is·te·ri·al"  </item>
         <item> "Ma·lin·ger"  </item>
-        <item> "Men·di·cant"  </item>
+        <item tools:ignore="Typos"> "Men·di·cant"  </item>
         <item> "Me·te·or·ic"  </item>
         <item> "Mo·di·cum"  </item>
         <item> "Mor·dant"  </item>
@@ -1901,7 +1901,7 @@
         <item> "Because I do not have season tickets, I have to wait until the incumbent ticket holders purchase their playoff seats before I can buy my own."  </item>
         <item> "Because of the team’s industrious players, the city is going to win its first basketball championship in over forty years."  </item>
         <item> "Unfortunately, the scam artist is using his ingenuity with computers to acquire people’s credit card numbers from the websites they visit."  </item>
-        <item> "If Kurt had had an inkling the startup company would become so profitable, he would have purchased more shares."  </item>
+        <item> "If Kurt had an inkling the startup company would become so profitable, he would have purchased more shares."  </item>
         <item> "The reason I broke up with my boyfriend was because of his intermittent verbal assaults that often happened without warning."  </item>
         <item> "Drivers were irked by the higher gasoline prices."  </item>
         <item> "According to him, Mr Major is irresolute, obsessed with his image, and shifts according to the latest opinion poll."  </item>
@@ -2438,7 +2438,7 @@
         <item> "Deign is to do something that you think you should not have to do because you are too important. Since the immigrants are the only people who will deign to perform low-paying jobs, they are the individuals who usually pick the onion crops."  </item>
         <item> "If someone freely and openly shows their emotions or feelings, they are demonstrative. Because Susan was raised in a family that was far from demonstrative, she is not comfortable sharing her emotions."  </item>
         <item> "Denoument is the final part something such as a book, a movie or series of events. It's that part of every movie after the big action scene, where things get explained, and the characters tie up loose ends. For example, as in all fairy tales, the boy and the girl become a couple at the denouement."  </item>
-        <item> "To be desiccated is to be dried out or lifeless. Since the roses have become desiccated, you may wanna throw them in the trash."  </item>
+        <item> "To be desiccated is to be dried out or lifeless. Since the roses have become desiccated, you may want to throw them in the trash."  </item>
         <item> "A desideratum is something that is needed or wanted. You could use desideratum instead of using must-have. For example, a desideratum for the role of a teacher is a certification in English."  </item>
         <item> "A despot does not allow people to have much freedom or speak out against the leadership. A despot is a ruler who has total power and who often uses that power in cruel and unfair ways. For example, a despot is a kind of ruler who would sit in his golden palace while allowing his people to die of hunger."  </item>
         <item> "Despotic describes characteristics of a ruler who governs with an iron fist, who doesn't care about the welfare of the people. If you are a manager who likes to berate his employees for every little mistake and make them work late, you are a despotic manager."  </item>

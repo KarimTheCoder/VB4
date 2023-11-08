@@ -19,9 +19,6 @@
     <string name="wps_description">Choose how many words you want to learn per seesion</string>
     <string name="rps_description">Choose how many times you want a word to be repeated</string>
 
-    <string name="sound_of_quiz_session">Sound of quiz session</string>
-    <string name="sound_of_quiz_session_subtitle">Turn off or on sound of the quiz sessions here</string>
-
     <string name="pronunciation_title">Pronunciation</string>
     <string name="pronunciation_description">Turn on to use real human pronunciation(internet required) or turn off to use text-to-speech engine(no internet required)</string>
 

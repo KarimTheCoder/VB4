@@ -31,7 +31,7 @@
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
-                android:text="Comprehensive"
+                android:text="@string/word"
                 style="@style/secondary_text_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,8 +56,7 @@
                 fancy:fb_iconResource="@drawable/ic_favorite_icon"
                 fancy:fb_radius="100000dp"
                 fancy:fb_text=""
-                app:layout_constraintEnd_toStartOf="@+id/train_finished_recycler_view_unlearn"
-                android:layout_marginRight="@dimen/keyline_4" />
+                app:layout_constraintEnd_toStartOf="@+id/train_finished_recycler_view_unlearn" />
 
 
             <mehdi.sakout.fancybuttons.FancyButton
@@ -83,7 +82,7 @@
                 fancy:fb_radius="30dp"
                 fancy:fb_text="Unlearn"
                 fancy:fb_textColor="@color/lowColor"
-                android:layout_marginRight="@dimen/keyline_4" />
+                />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    android:background="@color/primary_background_color"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.WordAdapters.NewSettingActivity">
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -131,7 +130,6 @@
                         app:layout_constraintTop_toTopOf="@+id/ielts_checkbox" />
 
                     <TextView
-                        android:id="@+id/textView30"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -202,7 +200,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/choose_language_header"
@@ -216,7 +214,6 @@
                         android:text="@string/tap_to_choose_translation"
                         style="@style/primary_text_style"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -235,46 +232,33 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/choose_language_header" />
 
-                    <ScrollView
-                        android:id="@+id/language_scrollview"
-                        android:layout_width="match_parent"
+
+
+                    <mehdi.sakout.fancybuttons.FancyButton
+                        android:id="@+id/language_spanish"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginTop="@dimen/keyline_4"
-                        android:layout_marginBottom="@dimen/keyline_4"
-                        android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginStart="@dimen/keyline_4"
-                        app:layout_constraintTop_toBottomOf="@id/choose_language_subheader"
-                        >
-
-                        <mehdi.sakout.fancybuttons.FancyButton
-                            android:id="@+id/language_spanish"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="8dp"
-                            android:elevation="2dp"
-
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="20dp"
-                            android:paddingBottom="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            fancy:fb_borderColor="@color/colorPrimary"
-                            fancy:fb_borderWidth="2dp"
-                            fancy:fb_defaultColor="@color/colorPrimary"
-                            fancy:fb_focusColor="@color/colorPrimary"
-                            fancy:fb_radius="30dp"
-                            fancy:fb_text="Spanish"
-                            fancy:fb_textColor="#ffffff" />
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:elevation="2dp"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/choose_language_subheader"
+                        fancy:fb_borderColor="@color/colorPrimary"
+                        fancy:fb_borderWidth="2dp"
+                        fancy:fb_defaultColor="@color/colorPrimary"
+                        fancy:fb_focusColor="@color/colorPrimary"
+                        fancy:fb_radius="30dp"
+                        fancy:fb_text="Spanish"
+                        fancy:fb_textColor="#ffffff" />
 
 
-                    </ScrollView>
+
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -352,9 +336,9 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:visibility="gone"
-                android:id="@+id/theme_card"
+                android:id="@+id/restore_card"
                 android:layout_width="0dp"
+                app:cardElevation="4dp"
                 android:layout_height="wrap_content"
                 style="@style/primary_card_style"
                 app:cardBackgroundColor="@color/card_background_color"
@@ -367,18 +351,71 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-
-
-
                     <TextView
-                        android:id="@+id/theme_card_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:text="@string/restore_purchase"
+                        style="@style/secondary_text_style"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/theme_card"
+                android:layout_width="0dp"
+                app:cardElevation="4dp"
+                android:layout_height="wrap_content"
+                style="@style/primary_card_style"
+                app:cardBackgroundColor="@color/card_background_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/restore_card">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_1"
                         android:text="@string/theme_title"
                         style="@style/primary_text_style"
                         app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/premium_tag_theme" />
+
+                    <TextView
+                        android:id="@+id/premium_tag_theme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:background="@drawable/bottom_bar_dot"
+                        android:fontFamily="@font/productbold"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textSize="12sp"
+                        android:text="@string/premium"
+
+                        android:textColor="@color/primary_text_color_white"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Spinner
@@ -504,7 +541,6 @@
 
 
                     <TextView
-                        android:id="@+id/wps_explain"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/keyline_4"
@@ -552,6 +588,7 @@
 
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -597,7 +634,6 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/wps_explain4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/keyline_4"
@@ -629,6 +665,7 @@
 
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -648,7 +685,6 @@
                     >
 
                     <View
-                        android:id="@+id/viewpronun"
                         android:layout_width="1dp"
                         android:layout_height="1dp"
                         android:layout_marginBottom="8dp"
@@ -673,7 +709,6 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/pronun_explain4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/keyline_1"
@@ -705,6 +740,7 @@
 
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/privacy_policy_card"
                 android:layout_width="match_parent"
@@ -779,7 +815,6 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/image_quality_subtitle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"

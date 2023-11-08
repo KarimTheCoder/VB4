@@ -12,6 +12,10 @@
     // Layout Background Color
     <color name="primary_background_color">#000000</color>
     <color name="secondary_background_color">#121212</color>
+    <color name="third_background_color">#000000</color>
+
+
+
     // Toolbar Background Color
     <color name="toolbar_background_color">#121212</color>
 
@@ -27,7 +31,6 @@
     <color name="colorPrimaryDark">#121212</color>
 
     // New Train Progress fab colors
-    <color name="progress_fab_color_primary">@color/colorPrimary</color>
-    <color name="progress_fab_color_secondary">#212121</color>
-    <color name="progress_fab_color_background">#000000</color>
+
+    <color name="train_finished_recycerview_background_color">#121212</color>
 </resources>

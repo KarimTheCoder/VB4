@@ -31,7 +31,7 @@
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
-                android:text="Comprehensive"
+                android:text="@string/word"
                 style="@style/secondary_text_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
                 fancy:fb_radius="30dp"
                 fancy:fb_text="Unlearn"
                 fancy:fb_textColor="@color/lowColor"
-                android:layout_marginRight="@dimen/keyline_4" />
+                />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

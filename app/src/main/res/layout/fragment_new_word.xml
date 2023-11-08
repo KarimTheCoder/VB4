@@ -1,11 +1,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_background_color"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.NewWordFragment">
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.AllWordsFragment">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -80,7 +78,6 @@
 
 
     <View
-        android:id="@+id/view17"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@drawable/dropshadow"

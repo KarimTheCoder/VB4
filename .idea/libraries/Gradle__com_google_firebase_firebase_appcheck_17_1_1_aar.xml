@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-appcheck:17.1.1@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/0ef125b3e177a8bf016e9b87d8f01f00/transformed/jetified-firebase-appcheck-17.1.1/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/0ef125b3e177a8bf016e9b87d8f01f00/transformed/jetified-firebase-appcheck-17.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/0ef125b3e177a8bf016e9b87d8f01f00/transformed/jetified-firebase-appcheck-17.1.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-appcheck/17.1.1/2f3b05c04e62d1bd9206cc72482f3b1aaeaac6a2/firebase-appcheck-17.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

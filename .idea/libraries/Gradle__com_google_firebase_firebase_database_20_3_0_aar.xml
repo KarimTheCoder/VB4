@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-database:20.3.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/474ae6a69f0928d439501ec0b84496b9/transformed/jetified-firebase-database-20.3.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/474ae6a69f0928d439501ec0b84496b9/transformed/jetified-firebase-database-20.3.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-database/20.3.0/a36843248e237c44c0bbcdb39fc058c446b3bc1c/firebase-database-20.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -2,15 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout6"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recycler_view_card"
-        style="@style/home_card_style"
+        style="@style/word_card_style"
         app:cardBackgroundColor="@color/card_background_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +22,6 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -39,7 +35,6 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <View
-                    android:id="@+id/view8"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@drawable/dropshadow"
@@ -51,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/keyline_4"
-                    android:text="Word"
+                    android:text="@string/word"
                     style="@style/primary_text_style"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -68,15 +63,15 @@
                     android:layout_marginStart="@dimen/keyline_4"
                     android:layout_marginTop="@dimen/keyline_4"
                     android:layout_marginBottom="@dimen/keyline_4"
-                    android:text="Adjective"
+                    android:text="@string/adjective"
                     style="@style/third_text_style"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/favorite_card_word"
 
-                    android:layout_marginLeft="@dimen/keyline_4" />
+                    />
 
-                <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                <com.github.ybq.android.spinkit.SpinKitView
                     android:id="@+id/spin_kit"
                     style="@style/SpinKitView.Small.Wave"
                     android:layout_width="wrap_content"
@@ -138,7 +133,7 @@
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
                 android:layout_marginEnd="@dimen/keyline_4"
-                android:text="This is an translationdfddddddddddddddddddddddddddddddddddddddddd"
+                android:text="@string/sentence_2"
                 style="@style/secondary_text_style"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/top" />
@@ -152,7 +147,7 @@
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_5"
                 android:layout_marginEnd="@dimen/keyline_4"
-                android:text="This is an tradddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddnslation"
+                android:text="@string/sentence_2"
                 style="@style/third_text_style"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/favorite_card_translation" />
@@ -166,7 +161,7 @@
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_2"
                 android:layout_marginEnd="@dimen/keyline_4"
-                android:text="Yet this young man's frank appraisal was none of those.Yet this young man's frank appraisal was none of those."
+                android:text="@string/sentence_2"
                 style="@style/third_text_style"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/favorite_card_example1" />
@@ -180,7 +175,7 @@
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginBottom="@dimen/keyline_4"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:text="Yet this young man's frank appraisal was none of those.Yet this young man's frank appraisal was none of those."
+                android:text="@string/sentence_2"
                 style="@style/third_text_style"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/favorite_card_example2" />

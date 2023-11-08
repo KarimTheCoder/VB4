@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.ui.initial.StartTrial">
+
+
+    <ImageView
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:contentDescription="@string/picture_of_woman_learning"
+        android:src="@drawable/ic_start_trial_image"
+        app:layout_constraintBottom_toTopOf="@+id/title_trial_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_trial_text_view"
+        style="@style/primary_text_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="@dimen/keyline_4"
+        android:gravity="center"
+        android:text="@string/trial_info_title"
+        app:layout_constraintBottom_toTopOf="@+id/description_trial_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/description_trial_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48sp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="64dp"
+        android:gravity="center"
+        android:textColor="@color/secondary_text_color"
+        android:textSize="16sp"
+        android:text="@string/trial_info_description"
+        app:layout_constraintBottom_toTopOf="@+id/start_trial_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/start_trial_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="@dimen/keyline_4"
+        android:paddingStart="40dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="40dp"
+        android:paddingBottom="10dp"
+        android:textSize="18sp"
+
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        fancy:fb_borderWidth="2dp"
+        fancy:fb_defaultColor="#5CE67D"
+        fancy:fb_focusColor="#D8C9E8"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Start now"
+        fancy:fb_textColor="@color/secondary_text_color" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/keyline_4"
+        android:textSize="12sp"
+        android:text="@string/credit_card_not"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

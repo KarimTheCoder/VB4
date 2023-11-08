@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
@@ -14,14 +13,12 @@
         android:layout_marginEnd="@dimen/keyline_4"
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginTop="@dimen/keyline_2"
-        style="@style/home_card_style"
-        app:cardBackgroundColor="@color/card_background_color"
+        style="@style/train_finished_card_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/relativeLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -33,8 +30,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="@dimen/keyline_6"
-
-
+                android:contentDescription="@string/no_internet_image_description"
                 android:layout_marginBottom="@dimen/keyline_6"
                 android:src="@drawable/no_internet"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +65,7 @@
                 android:layout_marginTop="@dimen/keyline_4"
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginBottom="@dimen/keyline_4"
-                android:text="a comprehensive list of sources"
+                android:text="@string/sentence_2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/server_image" />
@@ -80,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:scaleType="centerCrop"
+                android:contentDescription="@string/visula_cue_image_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -94,6 +91,7 @@
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginRight="@dimen/keyline_4"
                 android:layout_marginBottom="@dimen/keyline_4"
+                android:contentDescription="@string/visula_cue_image_resolution_description"
                 android:src="@drawable/ic_adjust"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -105,11 +103,10 @@
                 android:layout_marginEnd="@dimen/keyline_4"
                 android:fontFamily="@font/productreg"
                 android:gravity="center"
-                android:text="medium"
+                android:text="@string/medium"
                 app:layout_constraintBottom_toBottomOf="@id/image_quality"
                 app:layout_constraintEnd_toStartOf="@+id/image_quality"
-                app:layout_constraintTop_toTopOf="@id/image_quality"
-                android:layout_marginRight="@dimen/keyline_4" />
+                app:layout_constraintTop_toTopOf="@id/image_quality" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -126,7 +123,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/productreg"
-        android:text="Report a mistake"
+        android:text="@string/report_a_mistake"
         android:gravity="center"
         android:textColor="@color/lowColor"
         app:layout_constraintBottom_toBottomOf="parent"

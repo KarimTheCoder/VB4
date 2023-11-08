@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/primary_background_color"
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.Practice.PracticeFinished">
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.ui.train.TrainFinishedActivity"
+
+    >
 
 
     <ScrollView
@@ -59,7 +60,7 @@
                     android:layout_marginStart="@dimen/keyline_6"
                     android:layout_marginEnd="@dimen/keyline_4"
                     android:layout_marginTop="@dimen/keyline_1"
-                    android:text="5 new words learned"
+                    android:text="@string/new_words_learned"
                     style="@style/secondary_text_style_light"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageView8"
@@ -76,8 +77,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    fancy:srcCompat="@drawable/session_complete_tick_mark"
-                    android:layout_marginRight="@dimen/keyline_4" />
+                    android:contentDescription="@string/certificate_icon"
+                    fancy:srcCompat="@drawable/session_complete_tick_mark" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -96,8 +97,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardView5">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/rate_card_layout"
-                    android:background="@drawable/gradient"
+                    android:theme="@style/Rate.Card.Theme"
+                    style="@style/Rate.Card.Theme"
+                    android:background="?attr/background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -108,14 +110,13 @@
                         android:layout_marginBottom="@dimen/keyline_4"
                         android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
+                        android:contentDescription="@string/heart_icon"
                         android:src="@drawable/rate_love_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginRight="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView22"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/keyline_4"
@@ -124,6 +125,7 @@
                         android:layout_marginTop="@dimen/keyline_1"
                         android:text="@string/rate_string"
                         style="@style/third_text_style_white"
+                        android:textColor="?attr/colorOnPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/rate_icon"
                         app:layout_constraintStart_toStartOf="parent"
@@ -135,11 +137,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
-                        android:text="Rate us"
+                        android:text="@string/rate_title"
                         style="@style/primary_text_style_white"
+                        android:textColor="?attr/colorOnPrimary"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -152,12 +154,12 @@
                 android:id="@+id/most_mistaken_image"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_6"
                 android:layout_marginTop="@dimen/keyline_4"
+                android:contentDescription="@string/cross_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/train_finished_recycler_view"
-                fancy:srcCompat="@drawable/ic_wrong_circle"
-                android:layout_marginLeft="@dimen/keyline_4" />
+                fancy:srcCompat="@drawable/ic_wrong_circle" />
 
             <TextView
                 android:id="@+id/most_mistaken_text"
@@ -166,16 +168,16 @@
                 android:layout_marginBottom="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
-                android:text="Most mistaken word"
+                android:text="@string/most_mistaken_word"
                 style="@style/third_word_text_style"
                 app:layout_constraintBottom_toBottomOf="@+id/most_mistaken_image"
                 app:layout_constraintStart_toEndOf="@+id/most_mistaken_image"
-                app:layout_constraintTop_toTopOf="@+id/most_mistaken_image"
-                android:layout_marginLeft="@dimen/keyline_4" />
+                app:layout_constraintTop_toTopOf="@+id/most_mistaken_image" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/most_mistaken_card"
                 style="@style/train_finished_card_style"
+                app:cardBackgroundColor="?attr/colorPrimarySurface"
                 app:cardElevation="0dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -201,12 +203,11 @@
                         android:layout_marginBottom="@dimen/keyline_4"
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
-                        android:text="Comprehensive"
+                        android:text="@string/word"
                         style="@style/third_word_text_style"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="@dimen/keyline_4" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <mehdi.sakout.fancybuttons.FancyButton
                         android:id="@+id/train_finished_favorite"
@@ -216,15 +217,13 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginTop="8dp"
-                        android:background="#00000000"
                         android:padding="7dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/train_finished_unlearn"
-                        app:layout_constraintStart_toEndOf="@+id/grammar_train"
                         app:layout_constraintTop_toTopOf="parent"
                         fancy:fb_borderWidth="2dp"
-                        fancy:fb_defaultColor="#ffffff"
-                        fancy:fb_focusColor="@color/colorPrimary"
+                        fancy:fb_defaultColor="?attr/colorPrimarySurface"
+                        fancy:fb_focusColor="?attr/colorPrimary"
                         fancy:fb_ghost="true"
                         fancy:fb_iconResource="@drawable/ic_favorite_icon"
                         fancy:fb_radius="100000dp"
@@ -247,14 +246,12 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        fancy:fb_borderColor="#fff"
                         fancy:fb_borderWidth="2dp"
-                        fancy:fb_defaultColor="#fff"
-                        fancy:fb_focusColor="@color/colorPrimary"
+                        fancy:fb_defaultColor="?attr/background"
+                        fancy:fb_focusColor="?attr/colorPrimary"
                         fancy:fb_radius="30dp"
                         fancy:fb_text="Unlearn"
-                        fancy:fb_textColor="@color/lowColor"
-                        android:layout_marginRight="@dimen/keyline_4" />
+                        fancy:fb_textColor="@color/lowColor" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -264,12 +261,12 @@
                 android:id="@+id/imageView9"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="@dimen/keyline_4"
+                android:layout_marginStart="@dimen/keyline_6"
                 android:layout_marginTop="@dimen/keyline_4"
+                android:contentDescription="@string/tick_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rate_card"
-                fancy:srcCompat="@drawable/ic_correct_circle"
-                android:layout_marginLeft="@dimen/keyline_4" />
+                fancy:srcCompat="@drawable/ic_correct_circle" />
 
             <TextView
                 android:id="@+id/textView23"
@@ -278,12 +275,11 @@
                 android:layout_marginBottom="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
                 android:layout_marginTop="@dimen/keyline_4"
-                android:text="Learned words"
+                android:text="@string/learned_words"
                 style="@style/third_word_text_style"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView9"
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
-                app:layout_constraintTop_toTopOf="@+id/imageView9"
-                android:layout_marginLeft="@dimen/keyline_4" />
+                app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/train_finished_recycler_view"
@@ -313,7 +309,6 @@
 
     <View
         android:alpha="0.5"
-        android:id="@+id/view14"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="@drawable/bottom_shadow"
@@ -330,14 +325,12 @@
         android:layout_marginTop="@dimen/keyline_4"
         android:layout_marginBottom="@dimen/keyline_4"
         android:src="@drawable/ic_home"
-        app:fab_colorNormal="@color/primary_text_color_white"
-        app:fab_colorPressed="@color/colorPrimary"
+        app:fab_colorNormal="?attr/colorSurface"
+        app:fab_colorPressed="?attr/colorPrimaryDark"
         app:fab_showShadow="false"
         app:layout_constraintTop_toTopOf="@id/tf_button_background"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="@dimen/keyline_4" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/tf_train_again"
@@ -359,11 +352,11 @@
 
 
         fancy:fb_borderWidth="2dp"
-        fancy:fb_defaultColor="@color/colorPrimary"
-        fancy:fb_focusColor="@color/colorPrimary"
+        fancy:fb_defaultColor="?attr/colorPrimary"
+        fancy:fb_focusColor="?attr/colorPrimaryDark"
         fancy:fb_radius="30dp"
         fancy:fb_text="STUDY MORE"
-        fancy:fb_textColor="@color/primary_text_color"
+        fancy:fb_textColor="?attr/colorOnPrimary"
         app:layout_constraintStart_toEndOf="@+id/tf_home">
 
 

@@ -2,83 +2,78 @@
     <string name="app_name">Vocabulary Builder</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_practice_finished">PracticeFinishedActivity</string>
     <string name="noInternet">No internet connection. Cannot load the image</string>
     <string name="waitingForImage">Waiting for the image to load.</string>
-    <string name="buyapptitle">GO PRO! \nACHIEVE MORE!</string>
-    <string name="buyappfeatures">Instant photo load\nNo ads\nFull offline</string>
-    <string name="removeAds">FUND THE APP\nBY REMOVING ADS</string>
-    <string name="whyremove">We need your help for further development of the app</string>
-    <string name="weakWord">WEAK\nWORD</string>
-    <string name="you_ordered">you_ordered</string>
     <string name="rate_string">If you are enjoying this app, please click here to give us a rating, it will help us a lot.</string>
     <string name="congratulations">Congratulations!</string>
     <string name="proud">So proud of you!</string>
-    <string name="speak_spanish">Do you speak Spanish?</string>
     <string name="learned_all_word">You\'ve learned all the words of this section</string>
-    <string name="your_progress_in_this_section">Your progress in this section</string>
 
-    <string name="pro_ad_text">Your favorite Vocabulary Builder is now ad free</string>
     <string name="session_completed">Session \nCompleted!</string>
 
     <string name="you_dont_have_favorite">You don\'t have any favorite words</string>
-    <string name="brand_name">Fortitude Learn</string>
-    <string name="ielts_descrition">The International English Language Testing System</string>
-    <string name="toefl_description">Test of English as a Foreign Language</string>
-    <string name="gre_description">The Graduate Record Examinations</string>
-    <string name="change_settings_later">You can also change your preference \nin the settings later</string>
-    <string name="select_vocabulary">Select vocabulary</string>
+    <string name="brand_name">Fortitude Learn™</string>
     <string name="advance_title">ADVANCE</string>
     <string name="intermediate_title">INTERMEDIATE</string>
     <string name="beginner_title">BEGINNER</string>
 
     <string name="sign_in_text">Sign-in to save your progress</string>
     <string name="wps_text">Words Per Session</string>
-    <string name="rps_text">Repetition Per Session</string>
-    <string name="completed_text">Completed!</string>
     <string name="rate_title">Support Us</string>
-    <string name="report_a_bug_text">Report a Bug</string>
-    <string name="setReminder_text">Set a reminder to study</string>
-    <string name="choose_vocabulary_text">Choose preferred vocabulary</string>
-    <string name="wps_text_details">Choose how many words you want to learn per session</string>
-    <string name="rps_text_details">Choose how many times a word should repeat</string>
     <string name="sound_text">Sound</string>
     <string name="sound_text_detail">Turn off or on sound of the quiz sessions</string>
-    <string name="privacypolicy">https://banglish1.wixsite.com/fortitude</string>
-    <string name="translation_intro">Learn English vocabulary faster with your native language. Every word, definition, and sentence is translated into your language by a set of professional native speakers. Spanish is the first language to be part of this feature, and many more languages are on the way.</string>
     <string name="theme_title">Theme</string>
-    <string name="theme_description"></string>
-
-    <string-array name="theme_options">
-
-        <item> "Day"</item>
-        <item> "Night"</item>
-        <item>"Follow System"</item>
-    </string-array>
-
-
-    <string-array name="spinner_options">
-
-
-        <item> "Beginner"</item>
-        <item> "Intermediate"</item>
-        <item>"Advance"</item>
-    </string-array>
-
-    <string-array name="words_per_session_array">
-
-
-        <item> "5"</item>
-        <item> "4"</item>
-        <item> "3"</item>
-    </string-array>
-
-    <string-array name="image_quality_String_array">
-
-        <item> "High"</item>
-        <item> "Medium"</item>
-        <item> "Low"</item>
-    </string-array>
-
+    <string name="trial_ended">Trial ended</string>
+    <string name="trial_ended_description">Hi, your 7-days trial has ended. You can still use this app and enjoy most of its functions. However, if you want an ad-free experience and dark mode feature, please consider upgrading. Thank you :)</string>
+    <string name="purchase_title">UNLOCK YOUR\nFULL POTENTIAL!</string>
+    <string name="purchase_description">Stay free of ads and save your eyes and battery with dark mode for a small one-time price.</string>
+    <string name="purchase_thank_you">Thank you for your purchase. Your contribution will help us create a better app :)</string>
+    <string name="setting_image">This is a button to go to settings</string>
+    <string name="do_you_speak_spanish">Speak Spanish? Turn on translation</string>
+    <string name="too_easy">Too easy? Turn toggle off</string>
+    <string name="trial_info_description">Most of our important features are free but <b>Premium+ access</b> gives you privilege to an interrupted Ad free experience and Dark mode feature.</string>
+    <string name="trial_info_title">Enjoy free Premium+ access for 7 days</string>
+    <string name="credit_card_not">Credit card not required</string>
+    <string name="trial_mode">Trial mode: %1$s</string>
+    <string name="word_learned">%1$d words learned</string>
+    <string name="sign_in">Sign in</string>
+    <string name="pretrain_progress_text">PROGRESS %1$d/%2$d</string>
+    <string name="new_words_learned">%1$d new words learned!</string>
+    <string name="words_were_reviewed">%1$d words were reviewed</string>
+    <string name="word">Word</string>
+    <string name="sentence_2">Yet this young man\'s frank appraisal was none of those.Yet this young man\'s frank appraisal was none of those.</string>
+    <string name="premium">premium</string>
+    <string name="fortitude_icon_description">Icon of Fortitude Learn</string>
+    <string name="happy_rabbit_face">Happy rabbit face</string>
+    <string name="certificate_icon">Certificate icon</string>
+    <string name="heart_icon">Heart icon</string>
+    <string name="picture_of_woman_learning">a picture of a educated woman</string>
+    <string name="cross_icon">a cross icon for most mistaken words</string>
+    <string name="tick_icon">a tick mark icon for learned words</string>
+    <string name="rabbit_with_egg">a happy rabbit offering you an egg</string>
+    <string name="proud_rabbit">a proud rabbit who have not learned any words</string>
+    <string name="trail_state_icon">Icon letting you know the status of your subscription</string>
+    <string name="no_internet_image_description">a sad rabbit because there is no internet</string>
+    <string name="visula_cue_image_description">A visual cue image</string>
+    <string name="visula_cue_image_resolution_description">A toggle button for changing visual cue image resolution</string>
+    <string name="advance">Advance</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="beginner">Beginner</string>
+    <string name="restore_purchase">Restore purchase</string>
+    <string name="products">Products</string>
+    <string name="most_mistaken_word">Most mistaken word</string>
+    <string name="learned_words">Learned words</string>
+    <string name="look_at_me_i_have_not_learned_any_words">Look at me! I have not learned any words</string>
+    <string name="medium">medium</string>
+    <string name="report_a_mistake">Report a mistake</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_description">Product Description</string>
+    <string name="price">Price</string>
+    <string name="buy">Buy</string>
+    <string name="share">Share</string>
+    <string name="settings">Settings</string>
+    
+    <string name="google_client_id">"576057269160-7fuvcqcdidumlgtecrrcs4b0unklh85b.apps.googleusercontent.com"</string>
+    <string name="client_id">"576057269160-872i8m7d8acvc4vbp1nrrqt9p42mv7dq.apps.googleusercontent.com"</string>
+    <string name="loading_text">We are preparing the app...</string>
 </resources>
