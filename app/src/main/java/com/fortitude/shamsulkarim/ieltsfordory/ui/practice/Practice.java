@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
@@ -41,6 +43,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.adapters.NewTrainRecyclerView;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.train.NewTrain;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
@@ -129,6 +132,29 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         }
 
 
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+                new LovelyStandardDialog(Practice.this)
+                        .setTopColorRes(R.color.colorPrimary)
+                        .setButtonsColorRes(R.color.colorPrimary)
+                        .setIcon(R.drawable.ic_leave)
+                        .setTitle("Do you want to leave this session, " + sp.getString("userName", "Boo") + "?")
+                        .setMessage("Leaving this session will make you lose your progress")
+                        .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Practice.this.startActivity(new Intent(Practice.this, MainActivity.class));
+                                Practice.this.finish();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
+
+            }
+        });
 
 
     }
@@ -874,28 +900,6 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     }
 
 
-    @Override
-    public void onBackPressed() {
-
-
-        super.onBackPressed();
-        new LovelyStandardDialog(this)
-                .setTopColorRes(R.color.colorPrimary)
-                .setButtonsColorRes(R.color.colorPrimary)
-                .setIcon(R.drawable.ic_leave)
-                .setTitle("Do you want to leave this session, " + sp.getString("userName", "Boo") + "?")
-                .setMessage("Leaving this session will make you lose your progress")
-                .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Practice.this.startActivity(new Intent(Practice.this, MainActivity.class));
-                        Practice.this.finish();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, null)
-                .show();
-
-    }
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {

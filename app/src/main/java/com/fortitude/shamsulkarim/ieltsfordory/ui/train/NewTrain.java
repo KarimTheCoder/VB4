@@ -1174,7 +1174,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
     }
-    
+
 
     private void getWords(){
 
