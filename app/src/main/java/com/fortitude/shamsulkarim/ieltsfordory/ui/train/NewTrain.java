@@ -11,6 +11,7 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -186,6 +187,30 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         sp.edit().putInt("noshowads", noshowads).apply();
 
         updateLearnedDatabase();
+
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+                new LovelyStandardDialog(NewTrain.this)
+                        .setTopColorRes(R.color.colorPrimary)
+                        .setButtonsColorRes(R.color.colorPrimary)
+                        .setIcon(R.drawable.ic_leave)
+                        .setTitle("Do you want to leave this session, " + sp.getString("userName", "Boo") + "?")
+                        .setMessage("Leaving this session will make you lose your progress")
+                        .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                NewTrain.this.startActivity(new Intent(NewTrain.this, MainActivity.class));
+                                NewTrain.this.finish();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
+
+            }
+        });
 
 
 
@@ -1149,29 +1174,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
 
     }
-
-
-    @Override
-    public void onBackPressed() {
-
-
-        super.onBackPressed();
-        new LovelyStandardDialog(this)
-                .setTopColorRes(R.color.colorPrimary)
-                .setButtonsColorRes(R.color.colorPrimary)
-                .setIcon(R.drawable.ic_leave)
-                .setTitle("Do you want to leave this session, " + sp.getString("userName", "Boo") + "?")
-                .setMessage("Leaving this session will make you lose your progress")
-                .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        NewTrain.this.startActivity(new Intent(NewTrain.this, MainActivity.class));
-                        NewTrain.this.finish();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, null)
-                .show();
-    }
+    
 
     private void getWords(){
 
