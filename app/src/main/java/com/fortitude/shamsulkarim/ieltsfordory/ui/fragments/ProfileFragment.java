@@ -25,6 +25,8 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity;
@@ -94,15 +96,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         localData = new LocalData(requireContext());
         SwitchButton reminderSwitch = v.findViewById(R.id.alarm_switch);
+
         tvTime = v.findViewById(R.id.alarm_time);
         int hour = localData.get_hour();
         int min = localData.get_min();
         setReminder = v.findViewById(R.id.set_alarm);
+        setReminder.setEnabled(false);
         tvTime.setText(getFormatedTime(hour, min));
-        reminderSwitch.setChecked(localData.getReminderStatus());
-
-
-        //Toast.makeText(v.getContext(),localData.getReminderStatus()+"",Toast.LENGTH_LONG).show();
+        //reminderSwitch.setChecked(localData.getReminderStatus());
 
 
 
@@ -177,15 +178,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 localData.setReminderStatus(isChecked);
                 if (isChecked) {
-                    Log.d(TAG, "onCheckedChanged: true");
-                    NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, localData.get_hour(), localData.get_min());
-                    setReminder.setAlpha(1f);
+
+                    Toast.makeText(getContext(),"Reminder unavailable for now",Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "onCheckedChanged: true");
+                    //NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, localData.get_hour(), localData.get_min());
+                    //setReminder.setAlpha(1f);
 
 
                 } else {
-                    Log.d(TAG, "onCheckedChanged: false");
-                    NotificationScheduler.cancelReminder(getContext(), AlarmReceiver.class);
-                    setReminder.setAlpha(0.4f);
+                    Toast.makeText(getContext(),"Reminder unavailable for now",Toast.LENGTH_SHORT).show();
+
+                    // Log.d(TAG, "onCheckedChanged: false");
+                   // NotificationScheduler.cancelReminder(getContext(), AlarmReceiver.class);
+                   // setReminder.setAlpha(0.4f);
                 }
 
             }
