@@ -39,7 +39,7 @@ import java.util.Objects;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class PretrainActivity extends AppCompatActivity implements View.OnClickListener, com.suke.widget.SwitchButton.OnCheckedChangeListener, PurchasesUpdatedListener {
+public class PretrainActivity extends AppCompatActivity implements View.OnClickListener, com.suke.widget.SwitchButton.OnCheckedChangeListener {
 
 
     private VocabularyRepository repository;
@@ -55,9 +55,6 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
     private TextView progressCountTextview;
     private com.suke.widget.SwitchButton tooEasySwitch,spanishSwitch;
     private CardView purchaseCardView,purchaseThankYou;
-
-    // Billing
-    private BillingClient billingClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,9 +112,6 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initUIElement(){
-
-      //  learnedWordTextView = findViewById(R.id.start_training_learned_word_text);
-       // leftWordTextView = findViewById(R.id.start_training_left_word_text);
 
         purchaseButton = findViewById(R.id.purchase_button);
         purchaseCardView = findViewById(R.id.purchase_card);
@@ -237,13 +231,10 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
             this.startActivity(new Intent(this,  SettingActivity.class));
         }
 
-        // Billing
-        if(v == purchaseButton){
+        if( v == purchaseButton){
 
-            initiatePurchase();
-
+            Toast.makeText(this,"Currently upgrade is unavailable.", Toast.LENGTH_SHORT).show();
         }
-
 
     }
 
@@ -299,184 +290,13 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    // Billing
-    public void setBillingClient(){
-
-        billingClient = BillingClient.newBuilder(this)
-                .setListener(this)
-                .enablePendingPurchases()
-                .build();
-
-
-        billingClient.startConnection(new BillingClientStateListener() {
-            @Override
-            public void onBillingSetupFinished(@NotNull BillingResult billingResult) {
-                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
-                    // The BillingClient is ready. You can query purchases here.
-
-                    List<String> skuList = new ArrayList<>();
-                    skuList.add("test_product");
-                    SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
-                    params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
-                    billingClient.querySkuDetailsAsync(params.build(),
-                            new SkuDetailsResponseListener() {
-                                @Override
-                                public void onSkuDetailsResponse(@NotNull BillingResult billingResult,
-                                                                 List<SkuDetails> skuDetailsList) {
-                                    // Process the result.
-
-
-                                    if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
-
-                                        for(SkuDetails skuDetails : skuDetailsList){
-
-                                            purchaseButton.setText(skuDetails.getPrice());
-                                            //Toast.makeText(PretrainActivity.this,billingResult.getResponseCode()+" Getting Data for setting price"+skuDetailsList.size(),Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    }
-
-
-                                }
-                            });
-                    //Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT OK",Toast.LENGTH_SHORT).show();
-                }else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE){
-
-                    Toast.makeText(getApplicationContext(),"Please sign in to Google Play Store",Toast.LENGTH_SHORT).show();
-                }
-
-                else {
-                    Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT: $billingResponseCodexx"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onBillingServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-                //Toast.makeText(PretrainActivity.this,"BILLING | onBillingServiceDisconnected | DISCONNECTED",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-    }
-
-
-    @Override
-    public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
-
-        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
-
-            for (Purchase purchase : purchases) {
-
-                handlePurchase(purchase,billingClient);
-
-               // Toast.makeText(this, "Handle Purchase", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
-            // Handle an error caused by a user cancelling the purchase flow.
-            Toast.makeText(this, "Purchase cancelled", Toast.LENGTH_SHORT).show();
-
-
-        } else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE){
-            // Handle any other error codes.
-            Toast.makeText(this, "Please check your internet connection"+billingResult.getResponseCode(), Toast.LENGTH_SHORT).show();
-
-        }
-        else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED){
-
-            Toast.makeText(this, "You already own this product, go to settings to restore it", Toast.LENGTH_SHORT).show();
-        }
-        //Toast.makeText(this, "Other error "+billingResult.getResponseCode(), Toast.LENGTH_SHORT).show();
-
-
-    }
-
-
-    private void initiatePurchase(){
-        List<String> skuList = new ArrayList<> ();
-        skuList.add("test_product");
-        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
-        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
-        billingClient.querySkuDetailsAsync(params.build(),
-                new SkuDetailsResponseListener() {
-                    @Override
-                    public void onSkuDetailsResponse(@NotNull BillingResult billingResult,
-                                                     List<SkuDetails> skuDetailsList) {
-
-
-                        if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
-
-                            // if everything is ok
-
-                            for(SkuDetails skuDetails : skuDetailsList){
-
-                                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                                    .setSkuDetails(skuDetails)
-                                    .build();
-
-                                int responseCode = billingClient.launchBillingFlow(PretrainActivity.this, billingFlowParams).getResponseCode();
-                                Log.i("Billing Response Code","Billing response code: "+responseCode);
-                            }
-
-                        }else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE){
-
-                            Toast.makeText(getApplicationContext(),"Please sign in to Google Play Store",Toast.LENGTH_SHORT).show();
-                        }else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_DISCONNECTED){
-
-                            Toast.makeText(getApplicationContext(),"Play Store service is not connected now",Toast.LENGTH_SHORT).show();
-
-                        }else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE){
-
-                            Toast.makeText(getApplicationContext(),"Service unavailable",Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            Log.i("Billing Response Code","Billing response code: "+billingResult.getResponseCode());
-                           // Toast.makeText(PretrainActivity.this,"BILLING | startConnection | RESULT: $billingResponseCode"+billingResult.getResponseCode(),Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-
-
-                });
-    }
-
-    private void handlePurchase(Purchase purchase, BillingClient billingClient){
-
-        if( purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
-
-            if (!purchase.isAcknowledged()) {
-
-                if(!sp.contains("purchase")){
-                    sp.edit().putBoolean("purchase",true).apply();
-                    purchaseCardView.setVisibility(View.GONE);
-                    purchaseThankYou.setVisibility(View.VISIBLE);
-                }
-
-                AcknowledgePurchaseParams acknowledgePurchaseParams =
-                        AcknowledgePurchaseParams.newBuilder()
-                                .setPurchaseToken(purchase.getPurchaseToken())
-                                .build();
-                billingClient.acknowledgePurchase(acknowledgePurchaseParams, new AcknowledgePurchaseResponseListener() {
-                    @Override
-                    public void onAcknowledgePurchaseResponse(@NonNull BillingResult billingResult) {
-
-                        //Toast.makeText(PretrainActivity.this,"On Acknowledge",Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-            }
-        }
-    }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        if(billingClient != null){
-            billingClient.endConnection();
-        }
+
 
     }
 
@@ -486,11 +306,6 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
-        if(!sp.contains("purchase")){
-
-            setBillingClient();
-
-        }
     }
 }
 

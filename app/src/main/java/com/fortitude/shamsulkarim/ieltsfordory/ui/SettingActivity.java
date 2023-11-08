@@ -629,9 +629,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         if( v == restorePurchaseCard){
-          //  getPreviousPurchases();
-
-            Toast.makeText(this,"Restore process started...",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Restore is unavailable",Toast.LENGTH_SHORT).show();
         }
     }
     @Override
