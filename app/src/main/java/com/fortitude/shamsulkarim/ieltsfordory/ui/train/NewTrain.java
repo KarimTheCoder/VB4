@@ -1,4 +1,5 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.train;
+
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -6,21 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -37,27 +27,30 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.adapters.NewTrainRecyclerView;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.JustLearnedDatabaseAdvance;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.JustLearnedDatabaseBeginner;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.JustLearnedDatabaseIntermediate;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;
-import com.google.android.gms.ads.AdListener;
-//import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
-//import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -66,6 +59,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,17 +67,22 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NewTrain extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener, NewTrainRecyclerView.TrainAdapterCallback {
 
 
+    public String[] items;
+    public boolean[] checkedItems;
+    public File localFile = null;
+    public String audioPath = null;
+    boolean isWhichvocbularyToText = false;
     private VocabularyRepository repository;
-    private View topBackground,trainCircle1,trainCircle2,trainCircle3,trainCircle4;
+    private View topBackground, trainCircle1, trainCircle2, trainCircle3, trainCircle4;
     private CardView answerCard1, answerCard2, answerCard3, answerCard4, wordCard;
     private TextView wordView, answerView1, answerView2, answerView3, answerView4;
     private FloatingActionButton fab;
@@ -99,43 +98,33 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private int repeatPerSession;
     private int totalCycle;
     private int progressCount;
-    private int cb ;
+    private int cb;
     private SharedPreferences sp;
-    private ArrayList<Word> words, fiveWords,fiveWordsCopy,questionWords;
+    private ArrayList<Word> words, fiveWords, fiveWordsCopy, questionWords;
     private RoundCornerProgressBar progress1;
     private RecyclerView recyclerView;
     private NewTrainRecyclerView adapter;
     private String level;
     private boolean IsWrongAnswer = true;
     private int[] mistakeCollector;
-    private boolean  alreadyclicked = true;
+    private boolean alreadyclicked = true;
     private boolean progress = false;
     private int totalMistakeCount, totalCorrects;
     private boolean soundState = true;
-    boolean isWhichvocbularyToText = false;
-
-    public String[] items;
-    public boolean[] checkedItems;
-
     private JustLearnedDatabaseBeginner justLearnedDatabaseBeginner;
     private JustLearnedDatabaseIntermediate justLearnedDatabaseIntermediate;
     private JustLearnedDatabaseAdvance justLearnedDatabaseAdvance;
     private FirebaseStorage storage;
-    public File localFile = null;
-    public String audioPath= null;
     private ProgressBar progressBar, adLoading;
 
     // UI
-
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_new_train);
 
         Window window = getWindow();
@@ -147,40 +136,37 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         repository = new VocabularyRepository(this);
 
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-        level = sp.getString("level","NOTHING");
+        level = sp.getString("level", "NOTHING");
 
-        languageId = sp.getInt("language",0);
-        soundState = sp.getBoolean("soundState",true);
+        languageId = sp.getInt("language", 0);
+        soundState = sp.getBoolean("soundState", true);
         int noshowads = sp.getInt("noshowads", 0);
         //initializeAds();
-        if(!sp.contains("totalWrongCount"+level)){
+        if (!sp.contains("totalWrongCount" + level)) {
 
-            sp.edit().putInt("totalWrongCount"+level,0).apply();
+            sp.edit().putInt("totalWrongCount" + level, 0).apply();
 
 
-
-        }else {
-            totalMistakeCount = sp.getInt("totalWrongCount"+level,0);
-            totalCorrects =  sp.getInt("totalCorrects",0);
-            cb = sp.getInt("cb",0);
+        } else {
+            totalMistakeCount = sp.getInt("totalWrongCount" + level, 0);
+            totalCorrects = sp.getInt("totalCorrects", 0);
+            cb = sp.getInt("cb", 0);
 
 
         }
 
 
-
-
         tts = new TextToSpeech(this, this);
 
 
-                initialization();
-                initializingWords();
-                showWords(showCycle);
+        initialization();
+        initializingWords();
+        showWords(showCycle);
 
         mistakeCollector = new int[fiveWords.size()];
 
         Arrays.fill(mistakeCollector, 0);
-        sp.edit().putInt("fiveWordSize",fiveWords.size()).apply();
+        sp.edit().putInt("fiveWordSize", fiveWords.size()).apply();
 
         noshowads++;
 
@@ -213,30 +199,27 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         });
 
 
-
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        if(tts != null){
+        if (tts != null) {
 
             tts.stop();
             tts.shutdown();
         }
 
 
-
     }
 
-    public void next(View v){
+    public void next(View v) {
         speak.setVisibility(View.INVISIBLE);
 
-        Timer T=new Timer();
+        Timer T = new Timer();
 
-        if(!progress){
+        if (!progress) {
 
             progress = true;
 
@@ -244,18 +227,15 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             T.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
-                    runOnUiThread(new Runnable()
-                    {
+                    runOnUiThread(new Runnable() {
                         @Override
-                        public void run()
-                        {
+                        public void run() {
 
                             progressCount++;
-                            fab.setProgress(progressCount,true);
+                            fab.setProgress(progressCount, true);
 
 
-
-                            if( progressCount == 5){
+                            if (progressCount == 5) {
                                 progressCount = 0;
                                 alreadyclicked = true;
                                 progress = false;
@@ -304,53 +284,46 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 //
 //
 //
-        if( alreadyclicked){
+        if (alreadyclicked) {
             toNextWord(v);
             alreadyclicked = false;
         }
 
 
-
-
-
-
-
     }
 
-    public void toNextWord(View view){
-        if (showCycle >= FIVE_WORD_SIZE){
+    public void toNextWord(View view) {
+        if (showCycle >= FIVE_WORD_SIZE) {
 
             // hide all the views after the learning stage
             //------------------------------
 
 
-            if(!isWhichvocbularyToText){
+            if (!isWhichvocbularyToText) {
                 whichVocabularyToTest(view);
                 isWhichvocbularyToText = true;
-            }else {
+            } else {
 
 
-            answerCard1.setVisibility(View.VISIBLE);
-            answerCard2.setVisibility(View.VISIBLE);
-            answerCard3.setVisibility(View.VISIBLE);
-            answerCard4.setVisibility(View.VISIBLE);
-            speak.setVisibility(View.INVISIBLE);
+                answerCard1.setVisibility(View.VISIBLE);
+                answerCard2.setVisibility(View.VISIBLE);
+                answerCard3.setVisibility(View.VISIBLE);
+                answerCard4.setVisibility(View.VISIBLE);
+                speak.setVisibility(View.INVISIBLE);
 
-                if(fiveWords.size()>0){
+                if (fiveWords.size() > 0) {
 
-                    if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
-                        String combineBothLanguage = fiveWords.get(quizCycle).getWord()+"\n"+fiveWords.get(quizCycle).getWordSL();
+                    if (sp.getString("secondlanguage", "english").equalsIgnoreCase("spanish")) {
+                        String combineBothLanguage = fiveWords.get(quizCycle).getWord() + "\n" + fiveWords.get(quizCycle).getWordSL();
                         final ForegroundColorSpan lowColor = new ForegroundColorSpan(getColor(R.color.secondary_text_color));
                         SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
-                        spanWord.setSpan(lowColor,fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        spanWord.setSpan(new RelativeSizeSpan(0.4f), fiveWords.get(quizCycle).getWord().length(),1+fiveWords.get(quizCycle).getWordSL().length()+fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        spanWord.setSpan(lowColor, fiveWords.get(quizCycle).getWord().length(), 1 + fiveWords.get(quizCycle).getWordSL().length() + fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        spanWord.setSpan(new RelativeSizeSpan(0.4f), fiveWords.get(quizCycle).getWord().length(), 1 + fiveWords.get(quizCycle).getWordSL().length() + fiveWords.get(quizCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         wordView.setText(spanWord);
 
-                    }else {
+                    } else {
                         wordView.setText(fiveWords.get(quizCycle).getWord());
                     }
-
-
 
 
                 }
@@ -363,23 +336,19 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             //------------------------------
 
 
-
-
-
-
-
         }
 
         showWords(showCycle);
 
     }
+
     @Override
     public void onClick(View v) {
 
-        if( v== speak){
+        if (v == speak) {
 
             String word = wordView.getText().toString();
-            if(showCycle < FIVE_WORD_SIZE+1){
+            if (showCycle < FIVE_WORD_SIZE + 1) {
 
                 word = wordView.getText().toString();
 
@@ -387,7 +356,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 //                tts.speak(word, TextToSpeech.QUEUE_ADD, null);
                 downloadAudio(word);
 
-                if(showCycle == FIVE_WORD_SIZE){
+                if (showCycle == FIVE_WORD_SIZE) {
                     showCycle++;
                 }
 
@@ -401,11 +370,10 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         }
 
 
-        if( v == answerCard1 || v == answerCard2 || v == answerCard3 ||  v == answerCard4 ){
+        if (v == answerCard1 || v == answerCard2 || v == answerCard3 || v == answerCard4) {
 
 
-
-            if( quizCycle <= (FIVE_WORD_SIZE*repeatPerSession)-1){
+            if (quizCycle <= (FIVE_WORD_SIZE * repeatPerSession) - 1) {
                 quizWords(quizCycle, v);
             }
 
@@ -414,75 +382,70 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private void showWords(int showCycle){
+    private void showWords(int showCycle) {
 
         Handler handler = new Handler();
 
-            if( showCycle < FIVE_WORD_SIZE){
+        if (showCycle < FIVE_WORD_SIZE) {
 
-                try{
+            try {
 
-                    if(sp.getString("secondlanguage","english").equalsIgnoreCase("spanish")){
+                if (sp.getString("secondlanguage", "english").equalsIgnoreCase("spanish")) {
 
-                        String combineBothLanguage = fiveWords.get(showCycle).getWord()+"\n"+fiveWords.get(showCycle).getWordSL();
-                        final ForegroundColorSpan lowColor = new ForegroundColorSpan(getColor(R.color.secondary_text_color));
-                        SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
-                        spanWord.setSpan(lowColor,fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        spanWord.setSpan(new RelativeSizeSpan(0.6f), fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
+                    String combineBothLanguage = fiveWords.get(showCycle).getWord() + "\n" + fiveWords.get(showCycle).getWordSL();
+                    final ForegroundColorSpan lowColor = new ForegroundColorSpan(getColor(R.color.secondary_text_color));
+                    SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
+                    spanWord.setSpan(lowColor, fiveWords.get(showCycle).getWord().length(), 1 + fiveWords.get(showCycle).getWordSL().length() + fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spanWord.setSpan(new RelativeSizeSpan(0.6f), fiveWords.get(showCycle).getWord().length(), 1 + fiveWords.get(showCycle).getWordSL().length() + fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
-                        wordView.setText(spanWord);
-                    }else {
+                    wordView.setText(spanWord);
+                } else {
 
-                        wordView.setText(fiveWords.get(showCycle).getWord());
-                    }
-
-
-                }catch (NullPointerException i){
-                    Log.i("Error","Quiz Cycle: "+quizCycle+" ShowCycle: "+showCycle);
- 
+                    wordView.setText(fiveWords.get(showCycle).getWord());
                 }
+
+
+            } catch (NullPointerException i) {
+                Log.i("Error", "Quiz Cycle: " + quizCycle + " ShowCycle: " + showCycle);
+
+            }
 
 //                wordViewMiddle.setText(fiveWords.get(showCycle).getWord());
 
 
-                if(showCycle == 0){
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            DefExamAnimation();
-                        }
-                    }, 200L);
-                }else {
+            if (showCycle == 0) {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DefExamAnimation();
+                    }
+                }, 200L);
+            } else {
 
 
-                    DefExamAnimation();
-                }
-
-
-                adapter = new NewTrainRecyclerView(this,fiveWords.get(showCycle), this);
-                recyclerView.setAdapter(adapter);
-                this.showCycle++;
-                progress1.setProgress(quizCycle+showCycle);
+                DefExamAnimation();
             }
 
+
+            adapter = new NewTrainRecyclerView(this, fiveWords.get(showCycle), this);
+            recyclerView.setAdapter(adapter);
+            this.showCycle++;
+            progress1.setProgress(quizCycle + showCycle);
+        }
 
 
     }
 
 
-    private void quizWords(int quizCycle, View v){
+    private void quizWords(int quizCycle, View v) {
 
 
-
-        if(quizCycle == 0){
+        if (quizCycle == 0) {
 
             answerCardAnimation();
         }
-        if(showCycle >= FIVE_WORD_SIZE|| quizCycle <= (FIVE_WORD_SIZE*repeatPerSession)-1){
-
+        if (showCycle >= FIVE_WORD_SIZE || quizCycle <= (FIVE_WORD_SIZE * repeatPerSession) - 1) {
 
 
             //hideViews();
@@ -501,9 +464,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private void initialization(){
+    private void initialization() {
         //Typeface comfortaRegular = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Regular.ttf");
-
 
 
         topBackground = findViewById(R.id.top_background);
@@ -516,8 +478,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        wordsPerSession = sp.getInt("wordsPerSession",5);
-        repeatPerSession = sp.getInt("repeatationPerSession",5);
+        wordsPerSession = sp.getInt("wordsPerSession", 5);
+        repeatPerSession = sp.getInt("repeatationPerSession", 5);
         wordView = findViewById(R.id.train_word);
         answerCard1 = findViewById(R.id.answer_card1);
         answerCard2 = findViewById(R.id.answer_card2);
@@ -548,11 +510,10 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         //theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
         @ColorInt int colorPrimaryDark = typedValue.data;
-       // theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
-        @ColorInt int colorPrimary= typedValue.data;
+        // theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        @ColorInt int colorPrimary = typedValue.data;
         //theme.resolveAttribute(R.attr.colorPrimarySurface, typedValue, true);
-        @ColorInt int colorPrimarySurface= typedValue.data;
-
+        @ColorInt int colorPrimarySurface = typedValue.data;
 
 
         fab = findViewById(R.id.train_fab);
@@ -566,7 +527,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         justLearnedDatabaseBeginner = new JustLearnedDatabaseBeginner(this);
         justLearnedDatabaseIntermediate = new JustLearnedDatabaseIntermediate(this);
         justLearnedDatabaseAdvance = new JustLearnedDatabaseAdvance(this);
-
 
 
         fiveWords = new ArrayList<>();
@@ -597,30 +557,29 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private  void initializingWords(){
+    private void initializingWords() {
 
         words = new ArrayList<>();
 
 
         SharedPreferences sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-        if(!sp.contains(level)){
-            sp.edit().putInt(level,0).apply();
+        if (!sp.contains(level)) {
+            sp.edit().putInt(level, 0).apply();
         }
 
 
         getWords();
 
 
-       // wordsPerSession += countWords;
+        // wordsPerSession += countWords;
 
-        if( wordsPerSession > words.size()){
+        if (wordsPerSession > words.size()) {
             wordsPerSession = words.size();
         }
 
 
-
-        if(wordsPerSession <= words.size()){
-            for ( int k = 0; k < wordsPerSession;k++) {
+        if (wordsPerSession <= words.size()) {
+            for (int k = 0; k < wordsPerSession; k++) {
 
                 fiveWords.add(words.get(k));
 
@@ -629,47 +588,45 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         }
 
 
-        sp.edit().putInt("fiveWordSize",fiveWords.size()).apply();
+        sp.edit().putInt("fiveWordSize", fiveWords.size()).apply();
         FIVE_WORD_SIZE = fiveWords.size();
-        progress1.setMax(FIVE_WORD_SIZE+(FIVE_WORD_SIZE*repeatPerSession));
+        progress1.setMax(FIVE_WORD_SIZE + (FIVE_WORD_SIZE * repeatPerSession));
         progress1.setSecondaryProgress(FIVE_WORD_SIZE);
 
 
+    }
+
+    private void answerCardAnimation() {
+
+
+        answerCard1.animate().translationY(0f).alpha(1f).setDuration(500L).setInterpolator(new AccelerateDecelerateInterpolator());
+        answerCard2.animate().translationY(0f).alpha(1f).setDuration(500L).setInterpolator(new AccelerateDecelerateInterpolator());
+        answerCard3.animate().translationY(0f).alpha(1f).setDuration(500L).setInterpolator(new AccelerateDecelerateInterpolator());
+        answerCard4.animate().translationY(0f).alpha(1f).setDuration(500L).setInterpolator(new AccelerateDecelerateInterpolator());
+
 
     }
 
-    private void answerCardAnimation(){
+    private void cycleQuiz() {
 
 
-                answerCard1.animate().translationY(0f).alpha(1f).setDuration(500L).setInterpolator(new AccelerateDecelerateInterpolator());
-                answerCard2.animate().translationY(0f).alpha(1f).setDuration(500L).setInterpolator(new AccelerateDecelerateInterpolator());
-                answerCard3.animate().translationY(0f).alpha(1f).setDuration(500L).setInterpolator(new AccelerateDecelerateInterpolator());
-                answerCard4.animate().translationY(0f).alpha(1f).setDuration(500L).setInterpolator(new AccelerateDecelerateInterpolator());
-
-
-
-    }
-
-    private void cycleQuiz(){
-
-
-        if(this.quizCycle <= (FIVE_WORD_SIZE*repeatPerSession)-1){
+        if (this.quizCycle <= (FIVE_WORD_SIZE * repeatPerSession) - 1) {
 
             ArrayList<Word> answers = gettingAnswer();
-            if(!IsWrongAnswer){
+            if (!IsWrongAnswer) {
                 IsWrongAnswer = true;
 
             }
 
 
-            if( languageId == 0){
+            if (languageId == 0) {
 
                 answerView1.setText(answers.get(0).getTranslation());
                 answerView2.setText(answers.get(1).getTranslation());
                 answerView3.setText(answers.get(2).getTranslation());
                 answerView4.setText(answers.get(3).getTranslation());
 
-            }else {
+            } else {
                 answerView1.setText(answers.get(0).getExtra());
                 answerView2.setText(answers.get(1).getExtra());
                 answerView3.setText(answers.get(2).getExtra());
@@ -678,14 +635,12 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             }
 
 
-
-
         }
 
     }
 
     private ArrayList<Word> gettingAnswer() {
-        if( quizCycle == FIVE_WORD_SIZE ){
+        if (quizCycle == FIVE_WORD_SIZE) {
 
             quizCycle = 0;
         }
@@ -693,284 +648,271 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         ArrayList<Word> answers = new ArrayList<>();
 
 
-        if( this.quizCycle <=(FIVE_WORD_SIZE*repeatPerSession)-1){
+        if (this.quizCycle <= (FIVE_WORD_SIZE * repeatPerSession) - 1) {
 
 
-        Word word = fiveWords.get(this.quizCycle);
+            Word word = fiveWords.get(this.quizCycle);
 
             Collections.shuffle(questionWords);
-        for (int i = 0; i < 4;i++) {
+            for (int i = 0; i < 4; i++) {
 
-            answers.add(questionWords.get(i));
+                answers.add(questionWords.get(i));
 
-        }
+            }
 
-        if( !answers.contains(word)){
+            if (!answers.contains(word)) {
 
-            answers.set(0,word);
+                answers.set(0, word);
 
-        }
+            }
 
-        Collections.shuffle(answers);
+            Collections.shuffle(answers);
 
         }
         return answers;
     }
 
-    private void checkingAnswer(final View v){
+    private void checkingAnswer(final View v) {
 
         MediaPlayer correctAudio = MediaPlayer.create(this, R.raw.correct);
         MediaPlayer incorrectAudio = MediaPlayer.create(this, R.raw.incorrect);
 
 
-
-
         String answer;
 
 
-        if(this.quizCycle < (FIVE_WORD_SIZE*repeatPerSession)){
+        if (this.quizCycle < (FIVE_WORD_SIZE * repeatPerSession)) {
 
-            if(languageId == 0){
+            if (languageId == 0) {
                 answer = fiveWords.get(quizCycle).getTranslation();
-            }
-            else {
+            } else {
                 answer = fiveWords.get(quizCycle).getExtra();
 
             }
 
 
+            if (v == answerCard1) {
 
+                if (answerView1.getText().toString().equalsIgnoreCase(answer)) {
+                    StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
 
-        if(v == answerCard1){
+                    applyCorrectColor();
+                    this.quizCycle++;
 
-            if(answerView1.getText().toString().equalsIgnoreCase(answer)){
-                StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
+                    this.totalCycle++;
 
-                applyCorrectColor();
-                this.quizCycle++;
+                    if (soundState) {
 
-                this.totalCycle++;
-
-                if(soundState){
-
-                    correctAudio.start();
-                }
-                totalCorrects++;
-
-                answerCardAnimation2();
-
-            }else {
-                applyWrongColor();
-
-                if(soundState){
-
-                    incorrectAudio.start();
-                }
-
-                mistakeCollector[quizCycle] = mistakeCollector[quizCycle]+1;
-
-                wrongAnswerAnimation();
-
-                mistakes++;
-                totalMistakeCount++;
-
-                if( lastMistake == quizCycle){
-                    StyleableToast.makeText(this, "wrong answer again",10, R.style.wrong_again).show();
-
-
-                }else {
-
-
-                    
-                    lastMistake = quizCycle;
-                    if(mistakes <= 3){
-
-                        StyleableToast.makeText(this, "Wrong answer", 10, R.style.wrong).show();
-
+                        correctAudio.start();
                     }
-                    if(mistakes >= 4){
-                        StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
+                    totalCorrects++;
 
+                    answerCardAnimation2();
+
+                } else {
+                    applyWrongColor();
+
+                    if (soundState) {
+
+                        incorrectAudio.start();
                     }
-                }
+
+                    mistakeCollector[quizCycle] = mistakeCollector[quizCycle] + 1;
+
+                    wrongAnswerAnimation();
+
+                    mistakes++;
+                    totalMistakeCount++;
+
+                    if (lastMistake == quizCycle) {
+                        StyleableToast.makeText(this, "wrong answer again", 10, R.style.wrong_again).show();
 
 
+                    } else {
 
 
+                        lastMistake = quizCycle;
+                        if (mistakes <= 3) {
 
+                            StyleableToast.makeText(this, "Wrong answer", 10, R.style.wrong).show();
 
+                        }
+                        if (mistakes >= 4) {
+                            StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
 
-
-        } }
-        if(v == answerCard2) {
-
-             if (answerView2.getText().toString().equalsIgnoreCase(answer)) {
-                 applyCorrectColor();
-                 StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
-                 this.quizCycle++;
-
-                 this.totalCycle++;
-                 if(soundState){
-
-                     correctAudio.start();
-                 }
-                 totalCorrects++;
-
-                 answerCardAnimation2();
-
-             } else {
-
-                 applyWrongColor();
-                 mistakeCollector[quizCycle] = mistakeCollector[quizCycle]+1;
-                 wrongAnswerAnimation();
-                 if(soundState){
-
-                     incorrectAudio.start();
-                 }
-
-
-                 mistakes++;
-                 totalMistakeCount++;
-
-                 if( lastMistake == quizCycle){
-                     StyleableToast.makeText(this, "wrong answer again", 10, R.style.wrong_again).show();
-
-
-                 }else {
-
-                     lastMistake = quizCycle;
-                     if(mistakes <= 3){
-
-                         StyleableToast.makeText(this, "Wrong answer!", 10, R.style.wrong).show();
-
-                     }
-                     if(mistakes >= 4){
-                         StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
-
-                     }
-                 }
-
-
-             }
-         }
-        if(v == answerCard3){
-
-            if(answerView3.getText().toString().equalsIgnoreCase(answer)){
-                applyCorrectColor();
-                StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
-                this.quizCycle++;
-
-                this.totalCycle++;
-                if(soundState){
-
-                    correctAudio.start();
-                }
-                totalCorrects++;
-
-                answerCardAnimation2();
-
-            }else {
-                applyWrongColor();
-                if(soundState){
-
-                    incorrectAudio.start();
-                }
-
-                mistakeCollector[quizCycle] = mistakeCollector[quizCycle]+1;
-
-                wrongAnswerAnimation();
-
-
-                mistakes++;
-                totalMistakeCount++;
-
-                if( lastMistake == quizCycle){
-                    StyleableToast.makeText(this, "Wrong answer again", 10, R.style.wrong_again).show();
-
-
-                }else {
-
-                    lastMistake = quizCycle;
-                    if(mistakes <= 3){
-
-                        StyleableToast.makeText(this, "Wrong answer!", 10, R.style.wrong).show();
-
+                        }
                     }
-                    if(mistakes >= 4){
-                        StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
 
-                    }
+
                 }
+            }
+            if (v == answerCard2) {
+
+                if (answerView2.getText().toString().equalsIgnoreCase(answer)) {
+                    applyCorrectColor();
+                    StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
+                    this.quizCycle++;
+
+                    this.totalCycle++;
+                    if (soundState) {
+
+                        correctAudio.start();
+                    }
+                    totalCorrects++;
+
+                    answerCardAnimation2();
+
+                } else {
+
+                    applyWrongColor();
+                    mistakeCollector[quizCycle] = mistakeCollector[quizCycle] + 1;
+                    wrongAnswerAnimation();
+                    if (soundState) {
+
+                        incorrectAudio.start();
+                    }
+
+
+                    mistakes++;
+                    totalMistakeCount++;
+
+                    if (lastMistake == quizCycle) {
+                        StyleableToast.makeText(this, "wrong answer again", 10, R.style.wrong_again).show();
+
+
+                    } else {
+
+                        lastMistake = quizCycle;
+                        if (mistakes <= 3) {
+
+                            StyleableToast.makeText(this, "Wrong answer!", 10, R.style.wrong).show();
+
+                        }
+                        if (mistakes >= 4) {
+                            StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
+
+                        }
+                    }
+
+
+                }
+            }
+            if (v == answerCard3) {
+
+                if (answerView3.getText().toString().equalsIgnoreCase(answer)) {
+                    applyCorrectColor();
+                    StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
+                    this.quizCycle++;
+
+                    this.totalCycle++;
+                    if (soundState) {
+
+                        correctAudio.start();
+                    }
+                    totalCorrects++;
+
+                    answerCardAnimation2();
+
+                } else {
+                    applyWrongColor();
+                    if (soundState) {
+
+                        incorrectAudio.start();
+                    }
+
+                    mistakeCollector[quizCycle] = mistakeCollector[quizCycle] + 1;
+
+                    wrongAnswerAnimation();
+
+
+                    mistakes++;
+                    totalMistakeCount++;
+
+                    if (lastMistake == quizCycle) {
+                        StyleableToast.makeText(this, "Wrong answer again", 10, R.style.wrong_again).show();
+
+
+                    } else {
+
+                        lastMistake = quizCycle;
+                        if (mistakes <= 3) {
+
+                            StyleableToast.makeText(this, "Wrong answer!", 10, R.style.wrong).show();
+
+                        }
+                        if (mistakes >= 4) {
+                            StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
+
+                        }
+                    }
+
+                }
+
+
+            }
+            if (v == answerCard4) {
+
+                if (answerView4.getText().toString().equalsIgnoreCase(answer)) {
+                    applyCorrectColor();
+                    StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
+                    this.quizCycle++;
+
+                    this.totalCycle++;
+                    answerCardAnimation2();
+                    if (soundState) {
+
+                        correctAudio.start();
+                    }
+                    totalCorrects++;
+
+                    cycleQuiz();
+
+
+                } else {
+                    applyWrongColor();
+                    if (soundState) {
+
+                        incorrectAudio.start();
+                    }
+
+
+                    mistakeCollector[quizCycle] = mistakeCollector[quizCycle] + 1;
+
+                    wrongAnswerAnimation();
+
+
+                    mistakes++;
+                    totalMistakeCount++;
+
+                    if (lastMistake == quizCycle) {
+                        StyleableToast.makeText(this, "wrong answer again?", 10, R.style.wrong_again).show();
+
+
+                    } else {
+
+                        lastMistake = quizCycle;
+                        if (mistakes <= 3) {
+
+                            StyleableToast.makeText(this, "Wrong answer", 10, R.style.wrong).show();
+
+                        }
+                        if (mistakes >= 4) {
+                            StyleableToast.makeText(this, "Oh no! Wrong answer", 10, R.style.MyToast).show();
+
+                        }
+                    }
+
+                }
+
 
             }
 
-
-        }
-        if(v == answerCard4){
-
-            if(answerView4.getText().toString().equalsIgnoreCase(answer)){
-                applyCorrectColor();
-                StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
-                this.quizCycle++;
-
-                this.totalCycle++;
-                answerCardAnimation2();
-                if(soundState){
-
-                    correctAudio.start();
-                }
-                totalCorrects++;
-
-                cycleQuiz();
-
-
-
-            }else {
-                applyWrongColor();
-                if(soundState){
-
-                    incorrectAudio.start();
-                }
-
-
-                mistakeCollector[quizCycle] = mistakeCollector[quizCycle]+1;
-
-                wrongAnswerAnimation();
-
-
-                mistakes++;
-                totalMistakeCount++;
-
-                if( lastMistake == quizCycle){
-                    StyleableToast.makeText(this, "wrong answer again?", 10, R.style.wrong_again).show();
-
-
-                }else {
-
-                    lastMistake = quizCycle;
-                    if(mistakes <= 3){
-
-                        StyleableToast.makeText(this, "Wrong answer", 10, R.style.wrong).show();
-
-                    }
-                    if(mistakes >= 4){
-                        StyleableToast.makeText(this, "Oh no! Wrong answer", 10, R.style.MyToast).show();
-
-                    }
-                }
-
-            }
-
-
-        }
-
         }
 
 
+        progress1.setProgress(totalCycle + showCycle);
 
-        progress1.setProgress(totalCycle+showCycle);
-
-        if( quizCycle == FIVE_WORD_SIZE ){
+        if (quizCycle == FIVE_WORD_SIZE) {
 
             quizCycle = 0;
         }
@@ -983,7 +925,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         wordView.setText(fiveWords.get(quizCycle).getWord());
 
-        if (totalCycle == (FIVE_WORD_SIZE*repeatPerSession)){
+        if (totalCycle == (FIVE_WORD_SIZE * repeatPerSession)) {
 
 
             int pos = getMostMistakenWord(mistakeCollector);
@@ -993,10 +935,10 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             updateJustlearnedDatabase(pos);
 
 
-            sp.edit().putInt("NTmistakes",mistakes).apply();
-            sp.edit().putInt("totalWrongCount"+level,totalMistakeCount).apply();
-            sp.edit().putInt("totalCorrects",totalCorrects).apply();
-            if(pos != -1){
+            sp.edit().putInt("NTmistakes", mistakes).apply();
+            sp.edit().putInt("totalWrongCount" + level, totalMistakeCount).apply();
+            sp.edit().putInt("totalCorrects", totalCorrects).apply();
+            if (pos != -1) {
 
                 String word = fiveWords.get(pos).getPronun();
                 String def = fiveWords.get(pos).getTranslation();
@@ -1006,9 +948,8 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                 sp.edit().putString("MostMistakenWord", "shit" + "+" + word + "+" + def + "+" + spanish + "+" + example).apply();
 
 
-
-            }else {
-                sp.edit().putString("MostMistakenWord","no").apply();
+            } else {
+                sp.edit().putString("MostMistakenWord", "no").apply();
 
             }
 
@@ -1024,12 +965,10 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     showInterstitialAd();
 
 
-
                     NewTrain.this.startActivity(new Intent(getApplicationContext(), TrainFinishedActivity.class));
                     NewTrain.this.finish();
                 }
             }, 200L);
-
 
 
         }
@@ -1037,21 +976,21 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private void DefExamAnimation(){
+    private void DefExamAnimation() {
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         float height = dm.heightPixels;
 
-        final ValueAnimator va = ValueAnimator.ofFloat(height,0);
+        final ValueAnimator va = ValueAnimator.ofFloat(height, 0);
 
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
 
-                float value = (float)valueAnimator.getAnimatedValue();
-                recyclerView.setTranslationY(value/10);
+                float value = (float) valueAnimator.getAnimatedValue();
+                recyclerView.setTranslationY(value / 10);
             }
         });
 
@@ -1062,28 +1001,26 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         va.start();
 
 
-
-
     }
 
-    private void answerCardAnimation2(){
+    private void answerCardAnimation2() {
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         float height = dm.heightPixels;
 
-        final ValueAnimator va = ValueAnimator.ofFloat(height,0);
+        final ValueAnimator va = ValueAnimator.ofFloat(height, 0);
 
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
 
-                float value = (float)valueAnimator.getAnimatedValue();
-                answerCard1.setTranslationY(value/10);
-                answerCard2.setTranslationY(value/10);
-                answerCard3.setTranslationY(value/10);
-                answerCard4.setTranslationY(value/10);
+                float value = (float) valueAnimator.getAnimatedValue();
+                answerCard1.setTranslationY(value / 10);
+                answerCard2.setTranslationY(value / 10);
+                answerCard3.setTranslationY(value / 10);
+                answerCard4.setTranslationY(value / 10);
             }
         });
 
@@ -1094,15 +1031,13 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         va.start();
 
 
-
-
     }
 
 
-    private void wrongAnswerAnimation(){
+    private void wrongAnswerAnimation() {
         IsWrongAnswer = false;
 
-       fab.animate().scaleX(1f).scaleY(1f).setDuration(350L).setInterpolator(new AnticipateOvershootInterpolator());
+        fab.animate().scaleX(1f).scaleY(1f).setDuration(350L).setInterpolator(new AnticipateOvershootInterpolator());
 
         recyclerView.setVisibility(View.VISIBLE);
 //
@@ -1116,15 +1051,12 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         speak.setVisibility(View.INVISIBLE);
 
 
-
         wordView.setText(fiveWords.get(quizCycle).getWord());
 //        wordViewMiddle.setText(fiveWords.get(quizCycle).getWord());
 
         DefExamAnimation();
-        adapter = new NewTrainRecyclerView(this,fiveWords.get(quizCycle), this);
+        adapter = new NewTrainRecyclerView(this, fiveWords.get(quizCycle), this);
         recyclerView.setAdapter(adapter);
-
-
 
 
     }
@@ -1149,17 +1081,17 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     }
 
 
-    private int getMostMistakenWord(int[] list){
+    private int getMostMistakenWord(int[] list) {
 
         int wordIndex = 0;
         int pos = -1;
 
 
-        for(int i = 0; i < list.length; i++){
+        for (int i = 0; i < list.length; i++) {
 
             int current = list[i];
 
-            if( current> wordIndex){
+            if (current > wordIndex) {
                 pos = i;
 
                 wordIndex = current;
@@ -1171,57 +1103,53 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         return pos;
 
 
-
-
     }
 
 
-    private void getWords(){
+    private void getWords() {
 
-        if( level.equalsIgnoreCase("beginner")){
-           words.addAll(repository.getBeginnerUnlearnedWords());
-           questionWords.addAll(repository.getBeginnerUnlearnedWords());
+        if (level.equalsIgnoreCase("beginner")) {
+            words.addAll(repository.getBeginnerUnlearnedWords());
+            questionWords.addAll(repository.getBeginnerUnlearnedWords());
         }
 
-        if( level.equalsIgnoreCase("intermediate")){
+        if (level.equalsIgnoreCase("intermediate")) {
             words.addAll(repository.getIntermediateUnlearnedWords());
             questionWords.addAll(repository.getIntermediateUnlearnedWords());
         }
 
-        if( level.equalsIgnoreCase("advance")){
+        if (level.equalsIgnoreCase("advance")) {
             words.addAll(repository.getAdvanceUnlearnedWords());
             questionWords.addAll(repository.getAdvanceUnlearnedWords());
         }
     }
 
 
+    private void updateLearnedDatabase() {
 
-
-    private void updateLearnedDatabase(){
-
-        for(int i = 0; i < fiveWords.size(); i++){
+        for (int i = 0; i < fiveWords.size(); i++) {
 
             Word word = fiveWords.get(i);
 
-            if(word.vocabularyType.equalsIgnoreCase("IELTS")){
-                repository.updateIELTSLearnState(word.position+"","true");
+            if (word.vocabularyType.equalsIgnoreCase("IELTS")) {
+                repository.updateIELTSLearnState(word.position + "", "true");
             }
 
-            if( word.vocabularyType.equalsIgnoreCase("TOEFL")){
-                repository.updateTOEFLLearnState(word.position+"", "true");
+            if (word.vocabularyType.equalsIgnoreCase("TOEFL")) {
+                repository.updateTOEFLLearnState(word.position + "", "true");
             }
 
-            if(word.vocabularyType.equalsIgnoreCase("SAT")){
-                repository.updateSATLearnState(word.position+"", "true");
+            if (word.vocabularyType.equalsIgnoreCase("SAT")) {
+                repository.updateSATLearnState(word.position + "", "true");
             }
 
-            if(word.vocabularyType.equalsIgnoreCase("GRE")){
-                repository.updateGRELearnState(word.position+"", "true");
+            if (word.vocabularyType.equalsIgnoreCase("GRE")) {
+                repository.updateGRELearnState(word.position + "", "true");
             }
         }
     }
 
-    private void updateJustlearnedDatabase(int pos){
+    private void updateJustlearnedDatabase(int pos) {
 
         justLearnedDatabaseBeginner.removeAll();
         justLearnedDatabaseIntermediate.removeAll();
@@ -1231,71 +1159,41 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         int j = 1;
 
 
-        if(level.equalsIgnoreCase("beginner")){
+        if (level.equalsIgnoreCase("beginner")) {
 
-            for(int i = 0; i < fiveWords.size(); i++){
+            for (int i = 0; i < fiveWords.size(); i++) {
                 Word word = fiveWords.get(i);
 
-                if(i == pos){
+                if (i == pos) {
 
-                    justLearnedDatabaseBeginner.insertData(j,""+word.position,word.getWord(),word.getTranslation(),word.getExtra(),word.getPronun(),word.getGrammar(),word.getExample1(),word.getExample2(),word.getExample3(),word.vocabularyType,"true",word.isFavorite(),"true");
+                    justLearnedDatabaseBeginner.insertData(j, "" + word.position, word.getWord(), word.getTranslation(), word.getExtra(), word.getPronun(), word.getGrammar(), word.getExample1(), word.getExample2(), word.getExample3(), word.vocabularyType, "true", word.isFavorite(), "true");
 
                 }
 
 
-
-                justLearnedDatabaseBeginner.insertData(j,""+word.position,word.getWord(),word.getTranslation(),word.getExtra(),word.getPronun(),word.getGrammar(),word.getExample1(),word.getExample2(),word.getExample3(),word.vocabularyType,"true",word.isFavorite(),"false");
+                justLearnedDatabaseBeginner.insertData(j, "" + word.position, word.getWord(), word.getTranslation(), word.getExtra(), word.getPronun(), word.getGrammar(), word.getExample1(), word.getExample2(), word.getExample3(), word.vocabularyType, "true", word.isFavorite(), "false");
 
                 j++;
 
             }
         }
 
-        if(level.equalsIgnoreCase("intermediate")){
+        if (level.equalsIgnoreCase("intermediate")) {
 
 
-            for(int i = 0; i < fiveWords.size(); i++){
+            for (int i = 0; i < fiveWords.size(); i++) {
                 Word word = fiveWords.get(i);
 
-                if( i == pos){
+                if (i == pos) {
 
-                    justLearnedDatabaseIntermediate.insertData(j,""+word.position,word.getWord(),word.getTranslation(),word.getExtra(),word.getPronun(),word.getGrammar(),word.getExample1(),word.getExample2(),word.getExample3(),word.vocabularyType,"true",word.isFavorite, "true");
-
-
-                }else {
-
-                    justLearnedDatabaseIntermediate.insertData(j,""+word.position,word.getWord(),word.getTranslation(),word.getExtra(),word.getPronun(),word.getGrammar(),word.getExample1(),word.getExample2(),word.getExample3(),word.vocabularyType,"true",word.isFavorite, "false");
-
-                }
+                    justLearnedDatabaseIntermediate.insertData(j, "" + word.position, word.getWord(), word.getTranslation(), word.getExtra(), word.getPronun(), word.getGrammar(), word.getExample1(), word.getExample2(), word.getExample3(), word.vocabularyType, "true", word.isFavorite, "true");
 
 
+                } else {
 
-
-                j++;
-
-            }
-
-
-        }
-
-        if(level.equalsIgnoreCase("advance")){
-
-
-            for(int i = 0; i < fiveWords.size(); i++){
-                Word word = fiveWords.get(i);
-
-
-                if(pos == i){
-
-                    justLearnedDatabaseAdvance.insertData(j,""+word.position,word.getWord(),word.getTranslation(),word.getExtra(),word.getPronun(),word.getGrammar(),word.getExample1(),word.getExample2(),word.getExample3(),word.vocabularyType,"true",word.isFavorite, "true");
-
-
-                }else {
-
-                    justLearnedDatabaseAdvance.insertData(j,""+word.position,word.getWord(),word.getTranslation(),word.getExtra(),word.getPronun(),word.getGrammar(),word.getExample1(),word.getExample2(),word.getExample3(),word.vocabularyType,"true",word.isFavorite, "false");
+                    justLearnedDatabaseIntermediate.insertData(j, "" + word.position, word.getWord(), word.getTranslation(), word.getExtra(), word.getPronun(), word.getGrammar(), word.getExample1(), word.getExample2(), word.getExample3(), word.vocabularyType, "true", word.isFavorite, "false");
 
                 }
-
 
 
                 j++;
@@ -1305,20 +1203,40 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         }
 
+        if (level.equalsIgnoreCase("advance")) {
 
 
+            for (int i = 0; i < fiveWords.size(); i++) {
+                Word word = fiveWords.get(i);
 
 
+                if (pos == i) {
 
+                    justLearnedDatabaseAdvance.insertData(j, "" + word.position, word.getWord(), word.getTranslation(), word.getExtra(), word.getPronun(), word.getGrammar(), word.getExample1(), word.getExample2(), word.getExample3(), word.vocabularyType, "true", word.isFavorite, "true");
+
+
+                } else {
+
+                    justLearnedDatabaseAdvance.insertData(j, "" + word.position, word.getWord(), word.getTranslation(), word.getExtra(), word.getPronun(), word.getGrammar(), word.getExample1(), word.getExample2(), word.getExample3(), word.vocabularyType, "true", word.isFavorite, "false");
+
+                }
+
+
+                j++;
+
+            }
+
+
+        }
 
 
     }
 
-    private void showInterstitialAd(){
+    private void showInterstitialAd() {
 
     }
 
-    private void hideViews(){
+    private void hideViews() {
         topBackground.setVisibility(View.INVISIBLE);
         recyclerView.setVisibility(View.INVISIBLE);
         answerCard1.setVisibility(View.INVISIBLE);
@@ -1330,7 +1248,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private void whichVocabularyToTest(View v){
+    private void whichVocabularyToTest(View v) {
 
         final View view = v;
         fiveWordsCopy.addAll(fiveWords);
@@ -1340,16 +1258,14 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         checkedItems = new boolean[fiveWords.size()];
 
 
-
-
-        for(int i = 0; i < fiveWords.size(); i++){
+        for (int i = 0; i < fiveWords.size(); i++) {
 
             items[i] = fiveWords.get(i).getWord();
             checkedItems[i] = false;
 
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.AlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         builder.setTitle("Which vocabularies do you want to test?");
 
 
@@ -1372,21 +1288,21 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                 fiveWords.clear();
 
-                for(int i = 0; i < checkedItems.length; i++){
+                for (int i = 0; i < checkedItems.length; i++) {
 
 
-                    if(checkedItems[i]){
+                    if (checkedItems[i]) {
                         fiveWords.add(userSelectedWords.get(i));
                     }
                 }
 
-                if(fiveWords.size()>0){
+                if (fiveWords.size() > 0) {
 
 
-                    progress1.setMax(userSelectedWords.size()+(fiveWords.size()*repeatPerSession));
+                    progress1.setMax(userSelectedWords.size() + (fiveWords.size() * repeatPerSession));
                     wordView.setText(fiveWords.get(quizCycle).getWord());
                     quizWords(quizCycle, view);
-                }else{
+                } else {
 
                     fiveWords.addAll(userSelectedWords);
                     updateJustlearnedDatabase(-1);
@@ -1414,14 +1330,6 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         AlertDialog dialog = builder.create();
         dialog.show();
-
-
-
-
-
-
-
-
 
 
 //
@@ -1482,16 +1390,16 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 //        unhideViews();
     }
 
-    public void downloadAudio(String wordName){
+    public void downloadAudio(String wordName) {
 
         progressBar.setVisibility(View.VISIBLE);
 
         wordName = wordName.toLowerCase();
         StorageReference gsReference = storage.getReferenceFromUrl("gs://fir-userauthentication-f751c.appspot.com/audio/" + wordName + ".mp3");
 
-        try{
-            localFile = File.createTempFile("Audio","mp3");
-        }catch (IOException e){
+        try {
+            localFile = File.createTempFile("Audio", "mp3");
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -1500,12 +1408,12 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-               // Toast.makeText(getApplicationContext() , localFile.getAbsolutePath(),Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getApplicationContext() , localFile.getAbsolutePath(),Toast.LENGTH_SHORT).show();
                 audioPath = localFile.getAbsolutePath();
 
                 MediaPlayer mp = new MediaPlayer();
-               // Toast.makeText(getApplicationContext(),audioPath,Toast.LENGTH_LONG).show();
-                try{
+                // Toast.makeText(getApplicationContext(),audioPath,Toast.LENGTH_LONG).show();
+                try {
 
                     mp.setDataSource(audioPath);
                     mp.prepare();
@@ -1515,20 +1423,19 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                         @Override
                         public void onCompletion(MediaPlayer mp) {
                             speak.setEnabled(true);
-                           // Toast.makeText(getApplicationContext(),"play finished", Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getApplicationContext(),"play finished", Toast.LENGTH_LONG).show();
                         }
                     });
-                }catch (IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
-
 
 
             }
         }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
-               // Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_LONG).show();
                 speak.setEnabled(true);
                 progressBar.setVisibility(View.INVISIBLE);
 
@@ -1537,24 +1444,23 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private String checkTrialStatus(){
+    private String checkTrialStatus() {
 
         String trialStatus = "ended";
 
-        if(sp.contains("trial_end_date")){
+        if (sp.contains("trial_end_date")) {
 
             Date today = Calendar.getInstance().getTime();
 
-            long endMillies = sp.getLong("trial_end_date",0) ;
+            long endMillies = sp.getLong("trial_end_date", 0);
             long todayMillies = today.getTime();
             long leftMillies = endMillies - todayMillies;
 
-            if(leftMillies >=0){
+            if (leftMillies >= 0) {
 
                 trialStatus = "active";
 
-            }
-            else {
+            } else {
 
                 trialStatus = "ended";
 
@@ -1564,14 +1470,14 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         return trialStatus;
     }
 
-    private boolean getIsAdShow(){
+    private boolean getIsAdShow() {
 
         boolean isAdShow = false;
         String trialStatus = checkTrialStatus();
 
-        if(!sp.contains("premium")){
+        if (!sp.contains("premium")) {
 
-            if(trialStatus.equalsIgnoreCase("ended")){
+            if (trialStatus.equalsIgnoreCase("ended")) {
 
                 isAdShow = true;
             }
@@ -1583,28 +1489,29 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
     @Override
     public void onMethodCallback(String word) {
-        if(tts != null){
+        if (tts != null) {
 
             tts.setLanguage(Locale.US);
-            tts.speak(word, TextToSpeech.QUEUE_FLUSH, null,"TTS");
+            tts.speak(word, TextToSpeech.QUEUE_FLUSH, null, "TTS");
 
         }
 
     }
 
-    private void applyWrongColor(){
+    private void applyWrongColor() {
         topBackground.setBackgroundColor(getColor(R.color.red));
         fab.setColorNormal(getColor(R.color.red));
         progress1.setProgressColor(getColor(R.color.red));
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getColor(R.color.red));
-        trainCircle1.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
-        trainCircle2.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
-        trainCircle3.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
-        trainCircle4.setBackground(ContextCompat.getDrawable(this,R.drawable.red_bottom_bar_dot));
+        trainCircle1.setBackground(ContextCompat.getDrawable(this, R.drawable.red_bottom_bar_dot));
+        trainCircle2.setBackground(ContextCompat.getDrawable(this, R.drawable.red_bottom_bar_dot));
+        trainCircle3.setBackground(ContextCompat.getDrawable(this, R.drawable.red_bottom_bar_dot));
+        trainCircle4.setBackground(ContextCompat.getDrawable(this, R.drawable.red_bottom_bar_dot));
     }
-    private void applyCorrectColor(){
+
+    private void applyCorrectColor() {
         topBackground.setBackgroundColor(getColor(R.color.green));
         fab.setColorNormal(getColor(R.color.green));
 
@@ -1613,10 +1520,10 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getColor(R.color.green));
 
-        trainCircle1.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
-        trainCircle2.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
-        trainCircle3.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
-        trainCircle4.setBackground(ContextCompat.getDrawable(this,R.drawable.green_bottom_bar_dot));
+        trainCircle1.setBackground(ContextCompat.getDrawable(this, R.drawable.green_bottom_bar_dot));
+        trainCircle2.setBackground(ContextCompat.getDrawable(this, R.drawable.green_bottom_bar_dot));
+        trainCircle3.setBackground(ContextCompat.getDrawable(this, R.drawable.green_bottom_bar_dot));
+        trainCircle4.setBackground(ContextCompat.getDrawable(this, R.drawable.green_bottom_bar_dot));
     }
 }
 

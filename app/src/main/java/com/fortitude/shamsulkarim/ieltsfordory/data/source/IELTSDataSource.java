@@ -16,7 +16,7 @@ public class IELTSDataSource extends DataSource{
     private final static int LEARNED_COLL = 3;
     private final static int FAVORITE_COLL = 2;
     private final static int POSITION_COLL = 0;
-    private List<String> learnedStates;
+    private final List<String> learnedStates;
     private final int WORD_SIZE;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
     private String[] wordsArraySL, translationArraySL, example1arraySL, example2ArraySL, example3ArraySL;
@@ -25,8 +25,8 @@ public class IELTSDataSource extends DataSource{
     private final boolean isChecked;
     private final IELTSWordDatabase database;
     private final Context context;
-    private List<String> favoriteStates;
-    private List<Integer> databasePosition;
+    private final List<String> favoriteStates;
+    private final List<Integer> databasePosition;
     private final String secondLanguage;
 
     public IELTSDataSource(Context context) {

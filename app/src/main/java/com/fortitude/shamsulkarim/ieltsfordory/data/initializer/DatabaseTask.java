@@ -17,7 +17,7 @@ public class DatabaseTask implements Task{
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
 
-    private Context context;
+    private final Context context;
 
     public DatabaseTask(Context context) {
         this.context = context;

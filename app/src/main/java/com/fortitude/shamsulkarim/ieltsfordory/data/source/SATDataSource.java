@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 
 public class SATDataSource extends DataSource{
 
-    private static int FAVORITE_COLL = 2;
-    private static int LEARNED_COLL = 3;
+    private static final int FAVORITE_COLL = 2;
+    private static final int LEARNED_COLL = 3;
 
     private final int WORD_SIZE;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
-    private List<String> favoriteStates;
-    private List<String> learnedStates;
+    private final List<String> favoriteStates;
+    private final List<String> learnedStates;
     private int[] position;
     private String[] wordsArraySL, translationArraySL, example1arraySL, example2ArraySL, example3ArraySL;
 

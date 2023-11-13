@@ -17,16 +17,16 @@ import java.util.stream.Collectors;
 public class GREDataSource extends DataSource{
 
 
-    private static int FAVORITE_COLL = 2;
-    private static int LEARNED_COLL = 3;
+    private static final int FAVORITE_COLL = 2;
+    private static final int LEARNED_COLL = 3;
     private final String secondLanguage;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
 
 
     private final int WORD_SIZE;
     private int[] position;
-    private List<String> favoriteStates;
-    private List<String> learnedStates;
+    private final List<String> favoriteStates;
+    private final List<String> learnedStates;
     private final boolean isChecked;
     private final GREWordDatabase database;
     private final Context context;

@@ -7,7 +7,7 @@ import java.util.concurrent.Future;
 
 public class TaskExecutor {
 
-    private ExecutorService executor;
+    private final ExecutorService executor;
     private Future<String> taskFuture;
     private final Task task;
     public TaskExecutor(Task task) {

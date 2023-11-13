@@ -4,6 +4,6 @@ public interface SignInAndSyncCallback {
 
 
 
-    public void updateUI();
-    public void progressStatus(boolean isCompleted);
+    void updateUI();
+    void progressStatus(boolean isCompleted);
 }

@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getContext();
 
-        assertEquals("com.example.shamsulkarim.vastvocabulary", appContext.getPackageName());
+        assertEquals("com.fortitude.apps.vocabularybuilder.test", appContext.getPackageName());
     }
 }

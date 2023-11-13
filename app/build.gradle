@@ -66,7 +66,7 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.5.1', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.6.0-alpha01', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
@@ -97,10 +97,12 @@ dependencies {
     implementation 'com.github.zurche:plain-pie:v0.2.4'
     implementation 'com.github.arimorty:floatingsearchview:2.1.1'
     implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+    implementation 'androidx.tracing:tracing:1.1.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.firebase:firebase-analytics:21.5.0'
     implementation 'com.google.firebase:firebase-crashlytics:18.5.1'
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
      testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.0-alpha01'
 }
 apply plugin: 'com.google.gms.google-services'

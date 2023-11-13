@@ -40,20 +40,20 @@ import java.util.Objects;
 public class SignInAndSync {
 
 
-    private VocabularyRepository repository;
+    private final VocabularyRepository repository;
     private List<Integer> savedBeginnerFav, savedAdvanceFav,savedIntermediateFav, savedGreFav;
     private List<Integer> savedIeltsLearned, savedToeflLearned,savedSatLearned, savedGreLearned;
     private String ADVANCE_FAVORITE,ADVANCE_LEARNED, BEGINNER_FAVORITE, BEGINNER_LEARNED,INTERMEDIATE_FAVORITE,INTERMEDIATE_LEARNED, GRE_FAVORITE, GRE_LEARNED;
     private static final String TAG = "GoogleActivity";
     private final int RC_SIGN_IN = 9001;
-    private FirebaseAuth mAuth;
-    private GoogleSignInClient mGoogleSignInClient;
-    private DatabaseReference ref;
-    private boolean connected;
-    private SharedPreferences sp;
-    private Context context;
+    private final FirebaseAuth mAuth;
+    private final GoogleSignInClient mGoogleSignInClient;
+    private final DatabaseReference ref;
+    private final boolean connected;
+    private final SharedPreferences sp;
+    private final Context context;
 
-    private SignInAndSyncCallback callback;
+    private final SignInAndSyncCallback callback;
 
     public SignInAndSync(Context context, SignInAndSyncCallback callback) {
 
@@ -377,6 +377,8 @@ public class SignInAndSync {
         // todo this below code must be called if following condition
         //is met: if(!SettingActivity.this.isFinishing())
             new LovelyStandardDialog(context)
+                    .setButtonsColorRes(R.color.colorPrimary)
+                    .setTopColorRes(R.color.colorPrimary)
                     .setIcon(R.drawable.data_found)
                     .setTitle("Saved progress on the cloud found!")
                     .setMessage("Do you want to sync the progress?")
