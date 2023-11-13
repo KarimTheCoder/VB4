@@ -119,17 +119,10 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
 
     public void onBindViewHolder(@NotNull WordViewHolder holder, int position) {
+
+
         Word word = words.get(position);
-        if(isFav.get(position)){
-
-
-            holder.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
-        }else {
-         holder.favorite.setIconResource(R.drawable.ic_favorite_icon);
-
-
-        }
-
+        holder.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
 
 
         holder.translationView.setText(word.getTranslation());
@@ -311,10 +304,6 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
                 if(word.isFavorite.equalsIgnoreCase("True")){
 
-                    favorite.setIconResource(R.drawable.ic_favorite_icon);
-                    favorite.setTag(R.drawable.ic_favorite_icon);
-                    isFav.set(getBindingAdapterPosition(),false);
-
 
                     if(favoriteCount > 0){
 
@@ -388,9 +377,9 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
                 }
 
 
-
-
-            }
+                words.remove(getBindingAdapterPosition());
+                isFav.remove(getBindingAdapterPosition());
+                notifyItemRemoved(getBindingAdapterPosition());}
         }
 
 
