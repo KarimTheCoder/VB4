@@ -520,9 +520,9 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         fab.setMax(5);
         progress1 = findViewById(R.id.progress_1);
 
-        progress1.setSecondaryProgressColor(colorPrimaryDark);
-        progress1.setProgressColor(colorPrimary);
-        progress1.setProgressBackgroundColor(colorPrimarySurface);
+        progress1.setProgressColor(getColor(R.color.colorPrimary));
+        progress1.setSecondaryProgressColor(getColor(R.color.colorPrimaryDark));
+        progress1.setProgressBackgroundColor(getColor(R.color.primary_text_color_white));
 
         justLearnedDatabaseBeginner = new JustLearnedDatabaseBeginner(this);
         justLearnedDatabaseIntermediate = new JustLearnedDatabaseIntermediate(this);
