@@ -172,7 +172,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
         sp.edit().putInt("noshowads", noshowads).apply();
 
-        updateLearnedDatabase();
+        //updateLearnedDatabase();
 
 
         getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
