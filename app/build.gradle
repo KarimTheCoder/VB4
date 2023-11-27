@@ -11,7 +11,7 @@ android {
         targetSdk 34
         versionCode 53
         multiDexEnabled true
-        versionName "4.1.0"
+        versionName "4.4.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
