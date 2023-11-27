@@ -1,7 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.initial;
 
 
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -10,7 +9,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 import android.view.View;
@@ -20,9 +18,7 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
-
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -40,6 +36,10 @@ public class UserFlowTest {
 
     @Test
     public void userFlowTest() throws InterruptedException {
+
+
+
+
         Thread.sleep(4000L);
         ViewInteraction fancyButton = onView(
                 allOf(withId(R.id.start_trial_button)));

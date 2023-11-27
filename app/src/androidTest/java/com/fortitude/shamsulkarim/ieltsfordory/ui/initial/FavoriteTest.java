@@ -76,7 +76,7 @@ public class FavoriteTest {
         assertTextInRecyclerViewText(1,FAV_RECYCLERVIEW,FAV_TRANS_TEXTVIEW,"A part that forms when you tie a piece of rope, string, fabric, etc., to itself or to something else");
 
         clickRecyclerViewButton(0,FAV_RECYCLERVIEW,FAV_FAV_BUTTON);
-        clickRecyclerViewButton(1,FAV_RECYCLERVIEW,FAV_FAV_BUTTON);
+        clickRecyclerViewButton(0,FAV_RECYCLERVIEW,FAV_FAV_BUTTON);
 
 
         clickOnAllWordFragment();
@@ -88,7 +88,7 @@ public class FavoriteTest {
         assertTextInRecyclerViewText(0,FAV_RECYCLERVIEW,FAV_TRANS_TEXTVIEW,"Without making errors");
         assertTextInRecyclerViewText(1,FAV_RECYCLERVIEW,FAV_TRANS_TEXTVIEW,"To display for the public");
         clickRecyclerViewButton(0,FAV_RECYCLERVIEW,FAV_FAV_BUTTON);
-        clickRecyclerViewButton(1,FAV_RECYCLERVIEW,FAV_FAV_BUTTON);
+        clickRecyclerViewButton(0,FAV_RECYCLERVIEW,FAV_FAV_BUTTON);
 
 
 
@@ -102,7 +102,7 @@ public class FavoriteTest {
         assertTextInRecyclerViewText(0,FAV_RECYCLERVIEW,FAV_TRANS_TEXTVIEW,"Protection from harm");
         assertTextInRecyclerViewText(1,FAV_RECYCLERVIEW,FAV_TRANS_TEXTVIEW,"A strong effect");
         clickRecyclerViewButton(0,FAV_RECYCLERVIEW,FAV_FAV_BUTTON);
-        clickRecyclerViewButton(1,FAV_RECYCLERVIEW,FAV_FAV_BUTTON);
+        clickRecyclerViewButton(0,FAV_RECYCLERVIEW,FAV_FAV_BUTTON);
 
 
 
