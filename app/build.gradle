@@ -9,9 +9,9 @@ android {
         applicationId 'com.fortitude.apps.vocabularybuilder'
         minSdk 26
         targetSdk 34
-        versionCode 52
+        versionCode 53
         multiDexEnabled true
-        versionName "VB4 Sonic 3"
+        versionName "4.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
