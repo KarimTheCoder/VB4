@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: androidx.core:core-ktx:1.9.0@aar">
+  <library name="Gradle: androidx.core:core-ktx:1.9.0@aar" external-system-id="GRADLE">
     <CLASSES>
       <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/d9c571693ab24b0a7fc1c0d9e4147caa/transformed/jetified-core-ktx-1.9.0/res" />
       <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/d9c571693ab24b0a7fc1c0d9e4147caa/transformed/jetified-core-ktx-1.9.0/AndroidManifest.xml" />

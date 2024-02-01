@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: androidx.viewpager2:viewpager2:1.1.0-beta02@aar">
+  <library name="Gradle: androidx.viewpager2:viewpager2:1.1.0-beta02@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/08fba91cae26a9da41c6abde360bc948/transformed/jetified-viewpager2-1.1.0-beta02/annotations.zip!/" />
     </ANNOTATIONS>

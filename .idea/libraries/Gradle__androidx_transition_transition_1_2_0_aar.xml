@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.transition:transition:1.2.0@aar" external-system-id="GRADLE">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/b0caaa73c26e975e66cb92a3e51aac5d/transformed/transition-1.2.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/b0caaa73c26e975e66cb92a3e51aac5d/transformed/transition-1.2.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/b0caaa73c26e975e66cb92a3e51aac5d/transformed/transition-1.2.0/res" />
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/b0caaa73c26e975e66cb92a3e51aac5d/transformed/transition-1.2.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/androidx.transition/transition/1.2.0/65d2a5dab39f120d3f584fdead252ce81ec7dbee/transition-1.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

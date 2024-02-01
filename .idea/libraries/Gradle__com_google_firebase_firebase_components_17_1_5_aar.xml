@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.firebase:firebase-components:17.1.5@aar">
+  <library name="Gradle: com.google.firebase:firebase-components:17.1.5@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/bd55ec15b7b51ba0e427f4265521f388/transformed/jetified-firebase-components-17.1.5/annotations.zip!/" />
     </ANNOTATIONS>

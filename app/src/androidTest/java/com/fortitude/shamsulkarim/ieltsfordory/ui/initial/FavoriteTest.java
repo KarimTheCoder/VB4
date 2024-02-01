@@ -4,12 +4,10 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.initial;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.fortitude.shamsulkarim.ieltsfordory.TestUtils.withRecyclerView;
 import static org.hamcrest.Matchers.anything;
@@ -19,10 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
-import androidx.test.espresso.action.ScrollToAction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -55,10 +51,9 @@ public class FavoriteTest {
     @Test
     public void favoriteTest() throws InterruptedException {
 
-        Thread.sleep(4000L);
+            Thread.sleep(4000L);
 
-        ViewInteraction fancyButton = onView(
-                allOf(withId(R.id.start_trial_button)));
+        ViewInteraction fancyButton = onView(allOf(withId(R.id.start_trial_button)));
         fancyButton.perform(click());
 
 

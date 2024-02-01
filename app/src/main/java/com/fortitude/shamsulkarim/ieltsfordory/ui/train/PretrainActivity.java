@@ -1,6 +1,4 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.train;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import android.content.Context;
@@ -8,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,24 +14,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.android.billingclient.api.AcknowledgePurchaseParams;
-import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
-import com.android.billingclient.api.BillingClient;
-import com.android.billingclient.api.BillingClientStateListener;
-import com.android.billingclient.api.BillingFlowParams;
-import com.android.billingclient.api.BillingResult;
-import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchasesUpdatedListener;
-import com.android.billingclient.api.SkuDetails;
-import com.android.billingclient.api.SkuDetailsParams;
-import com.android.billingclient.api.SkuDetailsResponseListener;
+import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity;
 
-import org.jetbrains.annotations.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -119,6 +103,16 @@ public class PretrainActivity extends AppCompatActivity implements View.OnClickL
 
             purchaseCardView.setVisibility(View.GONE);
         }
+
+
+        if (BuildConfig.FLAVOR.equals("pro")) {
+            purchaseCardView.setVisibility(View.GONE);
+        } else {
+            purchaseCardView.setVisibility(View.VISIBLE);
+        }
+
+
+
         purchaseThankYou = findViewById(R.id.purchase_thank_you);
         purchaseButton.setOnClickListener(this);
         spanishSwitch = findViewById(R.id.spanish_switch);

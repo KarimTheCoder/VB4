@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: androidx.datastore:datastore:1.0.0@aar">
+  <library name="Gradle: androidx.datastore:datastore:1.0.0@aar" external-system-id="GRADLE">
     <CLASSES>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/f9214849b610d268979ffb83cd5cc79e/transformed/jetified-datastore-1.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/f9214849b610d268979ffb83cd5cc79e/transformed/jetified-datastore-1.0.0/res" />

@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.firebase:firebase-storage:20.3.0@aar">
+  <library name="Gradle: com.google.firebase:firebase-storage:20.3.0@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/0ef46a55ed64addeec58b25d800ab2cf/transformed/jetified-firebase-storage-20.3.0/annotations.zip!/" />
     </ANNOTATIONS>

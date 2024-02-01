@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.firebaseui:firebase-ui-auth:4.3.1@aar">
+  <library name="Gradle: com.firebaseui:firebase-ui-auth:4.3.1@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/6eb3c6dba7f8838d76b1cfe9f6bf4ed9/transformed/jetified-firebase-ui-auth-4.3.1/annotations.zip!/" />
     </ANNOTATIONS>

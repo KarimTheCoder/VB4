@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.PretrainActivity;
@@ -66,7 +67,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         advanceCard.setPreventCornerOverlap(false);
         intermediateCard.setPreventCornerOverlap(false);
         beginnerCard.setPreventCornerOverlap(false);
-        trialStatusTextView =v.findViewById(R.id.trial_status);
         advancePie = v.findViewById(R.id.advance_pie);
         intermediatePie = v.findViewById(R.id.intermediate_pie);
         beginnerPie = v.findViewById(R.id.profile_pie_view);
@@ -79,9 +79,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         setProgress();
 
 
+        freeVersion(v);
 
-        checkTrialStatus();
         return v;
+    }
+
+    private void freeVersion(View v){
+
+
+        if(!BuildConfig.FLAVOR.equalsIgnoreCase("pro")){
+
+            trialStatusTextView =v.findViewById(R.id.trial_status);
+
+            checkTrialStatus();
+
+        }
+
+
+
+
+
     }
 
 

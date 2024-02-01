@@ -6,14 +6,12 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
-import android.window.OnBackInvokedDispatcher;
 
 import com.fortitude.shamsulkarim.ieltsfordory.data.FavLearnedState;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
@@ -225,8 +223,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                 Toast.makeText(this,"Reference exception",Toast.LENGTH_SHORT).show();
 
             }
-
-
         }
 
 

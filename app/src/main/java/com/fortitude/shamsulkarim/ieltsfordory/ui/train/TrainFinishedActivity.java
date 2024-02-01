@@ -25,13 +25,9 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyReposit
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.adapters.TrainFinishedWordRecyclerView;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.JustLearnedDatabaseAdvance;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.JustLearnedDatabaseBeginner;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.JustLearnedDatabaseIntermediate;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 

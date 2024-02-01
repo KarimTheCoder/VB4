@@ -8,7 +8,6 @@ import android.net.Uri;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -784,7 +783,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
                     if(i == 0){
 
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                         sp.edit().putInt("DarkMode",0).apply();
                     }else if(i == 1){
 

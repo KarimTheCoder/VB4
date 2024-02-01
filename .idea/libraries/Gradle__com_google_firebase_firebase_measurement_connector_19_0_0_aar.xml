@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.firebase:firebase-measurement-connector:19.0.0@aar">
+  <library name="Gradle: com.google.firebase:firebase-measurement-connector:19.0.0@aar" external-system-id="GRADLE">
     <CLASSES>
       <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/373f73685d3dd838f1d9457093ad49de/transformed/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/373f73685d3dd838f1d9457093ad49de/transformed/jetified-firebase-measurement-connector-19.0.0/jars/classes.jar!/" />

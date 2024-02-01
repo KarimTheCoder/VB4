@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.android.gms:play-services-auth-base:18.0.4@aar">
+  <library name="Gradle: com.google.android.gms:play-services-auth-base:18.0.4@aar" external-system-id="GRADLE">
     <CLASSES>
       <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/92e08d4ff319e5c104c3a688d06d5d4c/transformed/jetified-play-services-auth-base-18.0.4/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/92e08d4ff319e5c104c3a688d06d5d4c/transformed/jetified-play-services-auth-base-18.0.4/jars/classes.jar!/" />

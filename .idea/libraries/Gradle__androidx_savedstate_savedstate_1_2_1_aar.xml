@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: androidx.savedstate:savedstate:1.2.1@aar">
+  <library name="Gradle: androidx.savedstate:savedstate:1.2.1@aar" external-system-id="GRADLE">
     <CLASSES>
       <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/bd69fe8f413d43b9ae744d8499aff5b6/transformed/jetified-savedstate-1.2.1/res" />
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/bd69fe8f413d43b9ae744d8499aff5b6/transformed/jetified-savedstate-1.2.1/jars/classes.jar!/" />

@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.android.datatransport:transport-backend-cct:3.1.9@aar">
+  <library name="Gradle: com.google.android.datatransport:transport-backend-cct:3.1.9@aar" external-system-id="GRADLE">
     <CLASSES>
       <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/721fd0c6f0f8454ac0186a280994ca64/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/721fd0c6f0f8454ac0186a280994ca64/transformed/jetified-transport-backend-cct-3.1.9/jars/classes.jar!/" />

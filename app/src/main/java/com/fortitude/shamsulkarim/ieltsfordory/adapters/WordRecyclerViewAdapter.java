@@ -2,7 +2,6 @@ package com.fortitude.shamsulkarim.ieltsfordory.adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.speech.tts.TextToSpeech;
@@ -20,10 +19,6 @@ import android.widget.TextView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
 import com.github.ybq.android.spinkit.sprite.Sprite;

@@ -1,13 +1,11 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.fragments;
 
-import android.annotation.TargetApi;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
@@ -382,13 +380,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         return newDateString;
     }
 
-    @TargetApi(Build.VERSION_CODES.N)
+
     public Locale getCurrentLocale() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return getResources().getConfiguration().getLocales().get(0);
-        } else {
-            //noinspection deprecation
-            return getResources().getConfiguration().locale;
-        }
+        return getResources().getConfiguration().getLocales().get(0);
     }
 }

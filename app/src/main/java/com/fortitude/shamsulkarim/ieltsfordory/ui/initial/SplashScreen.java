@@ -1,10 +1,8 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.initial;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -21,10 +19,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.DatabaseInitializer;
 import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.TaskListener;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 

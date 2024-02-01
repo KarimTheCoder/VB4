@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: androidx.browser:browser:1.4.0@aar">
+  <library name="Gradle: androidx.browser:browser:1.4.0@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/ba23bf7f9f4b3bd735d98ee597f1bd41/transformed/browser-1.4.0/annotations.zip!/" />
     </ANNOTATIONS>

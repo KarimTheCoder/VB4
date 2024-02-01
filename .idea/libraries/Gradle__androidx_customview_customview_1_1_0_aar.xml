@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: androidx.customview:customview:1.1.0@aar">
+  <library name="Gradle: androidx.customview:customview:1.1.0@aar" external-system-id="GRADLE">
     <CLASSES>
       <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/580243d1a5b122cc7f93df9229c49df7/transformed/customview-1.1.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/580243d1a5b122cc7f93df9229c49df7/transformed/customview-1.1.0/jars/classes.jar!/" />

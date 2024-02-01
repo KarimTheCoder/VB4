@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.test.espresso:espresso-idling-resource:3.6.0-alpha01@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/baa7ee28d544018ec93ac5c4b55294be/transformed/espresso-idling-resource-3.6.0-alpha01/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/baa7ee28d544018ec93ac5c4b55294be/transformed/espresso-idling-resource-3.6.0-alpha01/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-idling-resource/3.6.0-alpha01/b07a731080918cc192d3a9213ab8f257ff798b35/espresso-idling-resource-3.6.0-alpha01-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

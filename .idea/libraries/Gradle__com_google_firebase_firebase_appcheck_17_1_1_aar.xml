@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.firebase:firebase-appcheck:17.1.1@aar">
+  <library name="Gradle: com.google.firebase:firebase-appcheck:17.1.1@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/Desktop/kotlin-coroutines-master/coroutines-codelab/.gradle/caches/transforms-3/0ef125b3e177a8bf016e9b87d8f01f00/transformed/jetified-firebase-appcheck-17.1.1/annotations.zip!/" />
     </ANNOTATIONS>
