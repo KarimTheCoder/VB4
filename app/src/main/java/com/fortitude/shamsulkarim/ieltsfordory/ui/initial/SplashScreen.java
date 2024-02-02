@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.DatabaseInitializer;
 import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.TaskListener;
@@ -99,8 +100,20 @@ public class SplashScreen extends AppCompatActivity {
         DatabaseInitializer dbInitializer = new DatabaseInitializer(this, new TaskListener() {
             @Override
             public void onComplete() {
-                startActivity(new Intent(getApplicationContext(), StartTrial.class));
-                finish();
+
+                if(BuildConfig.FLAVOR.equalsIgnoreCase("pro")){
+
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                }else {
+
+                    startActivity(new Intent(getApplicationContext(), StartTrial.class));
+                    finish();
+                }
+
+
+
+
             }
 
             @Override
