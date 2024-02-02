@@ -775,7 +775,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
             if(!sp.contains("purchase")){
 
-                if(trialStatus.equalsIgnoreCase("ended")){
+                if(trialStatus.equalsIgnoreCase("ended") && BuildConfig.FLAVOR.equalsIgnoreCase("free")){
 
                     Toast.makeText(this,"Please upgrade to enjoy dark mode feature",Toast.LENGTH_SHORT).show();
 
@@ -783,14 +783,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
                     if(i == 0){
 
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                         sp.edit().putInt("DarkMode",0).apply();
                     }else if(i == 1){
 
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         sp.edit().putInt("DarkMode",1).apply();
                     }else {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                         sp.edit().putInt("DarkMode",2).apply();
                     }
 
@@ -800,14 +800,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
                 if(i == 0){
 
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                     sp.edit().putInt("DarkMode",0).apply();
                 }else if(i == 1){
 
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     sp.edit().putInt("DarkMode",1).apply();
                 }else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     sp.edit().putInt("DarkMode",2).apply();
                 }
 
@@ -849,9 +849,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         }
 
-
         return trialStatus;
-
 
     }
 
