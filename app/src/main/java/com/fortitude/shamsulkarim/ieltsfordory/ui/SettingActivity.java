@@ -782,15 +782,16 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 }else {
 
                     if(i == 0){
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                         sp.edit().putInt("DarkMode",0).apply();
                     }else if(i == 1){
 
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         sp.edit().putInt("DarkMode",1).apply();
                     }else {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+
                         sp.edit().putInt("DarkMode",2).apply();
                     }
 
@@ -799,15 +800,17 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 if(i == 0){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                     sp.edit().putInt("DarkMode",0).apply();
+
                 }else if(i == 1){
 
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     sp.edit().putInt("DarkMode",1).apply();
                 }else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+
                     sp.edit().putInt("DarkMode",2).apply();
                 }
 

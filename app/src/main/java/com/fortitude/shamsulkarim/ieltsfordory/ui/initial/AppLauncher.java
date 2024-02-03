@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 
@@ -38,7 +39,7 @@ public class AppLauncher extends AppCompatActivity {
 
         if(sp.contains("home")) {
 
-            if(!sp.contains("trial_end_date")){
+            if(!sp.contains("trial_end_date") && !BuildConfig.FLAVOR.equalsIgnoreCase("pro")){
 
                 startActivity(new Intent(this, StartTrial.class));
 
