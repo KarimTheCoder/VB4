@@ -116,37 +116,19 @@ public class UserFlowTest {
         fancyButton6.perform(click());
 
         ViewInteraction cardView = onView(
-                allOf(withId(R.id.beginner_card_home),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                        3),
-                                2),
-                        isDisplayed()));
+                allOf(withId(R.id.beginner_card_home)));
         cardView.perform(click());
 
         pressBack();
 
         ViewInteraction cardView2 = onView(
-                allOf(withId(R.id.intermediate_card_home),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                        3),
-                                1),
-                        isDisplayed()));
+                allOf(withId(R.id.intermediate_card_home)));
         cardView2.perform(click());
 
         pressBack();
 
         ViewInteraction cardView3 = onView(
-                allOf(withId(R.id.advance_card_home),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                        3),
-                                0),
-                        isDisplayed()));
+                allOf(withId(R.id.advance_card_home)));
         cardView3.perform(click());
 
         ViewInteraction fancyButton7 = onView(
