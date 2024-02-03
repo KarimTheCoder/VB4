@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        tools:node="remove" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="false"
+        tools:replace="android:supportsRtl"
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
+        <activity android:name=".ui.initial.StartTrial" />
+        <activity
+            android:name=".ui.train.PretrainActivity"
+            android:theme="@style/Pretrain.Theme"
+            />
+
+        <activity android:name=".ui.initial.SplashScreen" />
+        <activity android:name=".ui.train.NoWordLeft" />
+        <activity android:name=".ui.MainActivity"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".ui.practice.Practice"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".ui.train.NewTrain"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".ui.train.TrainFinishedActivity"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".ui.practice.PracticeFinished"
+            android:theme="@style/Main.Theme"
+            />
+        <activity android:name=".ui.SettingActivity"
+            android:theme="@style/Main.Theme"
+            />
+         <!-- Register the Alarm Receiver -->
+        <activity android:name=".ui.initial.AppLauncher"
+            android:theme="@style/Theme.Launcher"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" /> <!-- <meta-data -->
+
+
+        <receiver
+            android:name=".utility.notification.AlarmReceiver"
+            android:enabled="false"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

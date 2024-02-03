@@ -9,7 +9,7 @@ android {
         applicationId 'com.fortitude.apps.vocabularybuilder'
         minSdk 26
         targetSdk 34
-        versionCode 54
+        versionCode 55
         multiDexEnabled true
         versionName "4.4.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -31,7 +31,7 @@ android {
         }
         pro{
             applicationId 'com.fortitude.apps.vocabularybuilderPro'
-            versionNameSuffix "pro"
+            versionNameSuffix " pro"
 
         }
         huawei{
