@@ -235,7 +235,7 @@ public class SignInAndSync {
 
                     if(dataSnapshot.exists() &&  i == 8){
 
-                        callback.progressStatus(true);
+                        callback.progressStatus(false);
                         askOnce = true;
                         askToSync();
 
@@ -386,10 +386,17 @@ public class SignInAndSync {
                         @Override
                         public void onClick(View v) {
                             callback.progressStatus(false);
+
+
                             syncSQL();
                         }
                     })
-                    .setNegativeButton(android.R.string.no, null)
+                    .setNegativeButton(android.R.string.no, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            callback.progressStatus(true);
+                        }
+                    })
                     .show();
 
     }

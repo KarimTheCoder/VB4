@@ -529,18 +529,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this,"Signing in initiated",Toast.LENGTH_SHORT).show();
             activityResultLauncher.launch(signInIntent);
 
-
-
-
-
-
-
-
-
-
-
-
-
         }else {
 
             Toast.makeText(this,"Please connect to the internet",Toast.LENGTH_SHORT).show();
