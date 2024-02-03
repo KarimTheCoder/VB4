@@ -81,33 +81,32 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/rate_card"
+                style="@style/rate_card_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
-               android:layout_marginTop="@dimen/keyline_2"
-                style="@style/rate_card_style"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView5">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     style="@style/Rate.Card.Theme"
-                    android:theme="@style/Rate.Card.Theme"
-                    android:background="?attr/background"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="?attr/background"
+                    android:theme="@style/Rate.Card.Theme">
 
                     <ImageView
                         android:id="@+id/rate_icon"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:layout_marginBottom="@dimen/keyline_4"
-                        android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
                         android:contentDescription="@string/heart_icon"
                         android:src="@drawable/rate_love_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -115,14 +114,14 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        style="@style/third_text_style_white"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/keyline_4"
-                        android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_1"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
                         android:text="@string/rate_string"
-                        style="@style/third_text_style_white"
                         android:textColor="?attr/colorOnPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/rate_icon"
@@ -131,12 +130,12 @@
 
                     <TextView
                         android:id="@+id/textView7"
+                        style="@style/primary_text_style_white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
                         android:text="@string/rate_title"
-                        style="@style/primary_text_style_white"
                         android:textColor="?attr/colorOnPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -161,33 +160,32 @@
 
             <TextView
                 android:id="@+id/most_mistaken_text"
+                style="@style/third_word_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/keyline_4"
-                android:layout_marginStart="@dimen/keyline_4"
-                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginStart="16dp"
                 android:text="@string/most_mistaken_word"
-                style="@style/third_word_text_style"
+
+
                 app:layout_constraintBottom_toBottomOf="@+id/most_mistaken_image"
                 app:layout_constraintStart_toEndOf="@+id/most_mistaken_image"
-                app:layout_constraintTop_toTopOf="@+id/most_mistaken_image" />
+                app:layout_constraintTop_toTopOf="@id/most_mistaken_image" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/most_mistaken_card"
                 style="@style/train_finished_card_style"
-                app:cardBackgroundColor="?attr/colorPrimarySurface"
-                app:cardElevation="0dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
-                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginBottom="@dimen/keyline_4"
+                app:cardBackgroundColor="?attr/colorPrimarySurface"
                 app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/most_mistaken_text">
+                app:layout_constraintTop_toBottomOf="@+id/most_mistaken_image">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -196,13 +194,13 @@
                     <TextView
 
                         android:id="@+id/train_finished_word"
+                        style="@style/third_word_text_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/keyline_4"
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
                         android:text="@string/word"
-                        style="@style/third_word_text_style"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -211,10 +209,10 @@
                         android:id="@+id/train_finished_favorite"
                         android:layout_width="71dp"
                         android:layout_height="35dp"
-                        android:layout_marginBottom="8dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
                         android:background="#00000000"
                         android:padding="7dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -233,14 +231,14 @@
                         android:id="@+id/train_finished_unlearn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/keyline_4"
-                        android:layout_marginEnd="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginEnd="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
                         android:elevation="3dp"
-                        android:paddingBottom="10dp"
                         android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
                         android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -257,7 +255,7 @@
             </androidx.cardview.widget.CardView>
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/learned_words_image"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="@dimen/keyline_6"
@@ -269,27 +267,25 @@
 
             <TextView
                 android:id="@+id/textView23"
+                style="@style/third_word_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/keyline_4"
-                android:layout_marginStart="@dimen/keyline_4"
-                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginStart="16dp"
                 android:text="@string/learned_words"
-                style="@style/third_word_text_style"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-                app:layout_constraintStart_toEndOf="@+id/imageView9"
-                app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                app:layout_constraintBottom_toBottomOf="@+id/learned_words_image"
+                app:layout_constraintStart_toEndOf="@+id/learned_words_image"
+                app:layout_constraintTop_toTopOf="@+id/learned_words_image" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/train_finished_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/keyline_4"
                 android:layout_marginStart="@dimen/keyline_4"
-                android:layout_marginTop="@dimen/keyline_4"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/keyline_4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                app:layout_constraintTop_toBottomOf="@+id/learned_words_image" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

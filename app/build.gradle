@@ -9,9 +9,9 @@ android {
         applicationId 'com.fortitude.apps.vocabularybuilder'
         minSdk 26
         targetSdk 34
-        versionCode 53
+        versionCode 54
         multiDexEnabled true
-        versionName "4.4.0"
+        versionName "4.4.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -32,6 +32,7 @@ android {
         pro{
             applicationId 'com.fortitude.apps.vocabularybuilderPro'
             versionNameSuffix "pro"
+
         }
         huawei{
             applicationId 'com.fortitude.apps.vocabularybuilder'
@@ -71,7 +72,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    implementation "com.android.billingclient:billing:6.0.1"
+    implementation "com.android.billingclient:billing:6.1.0"
     implementation 'com.github.medyo:fancybuttons:1.9.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
