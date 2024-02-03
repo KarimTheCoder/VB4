@@ -30,7 +30,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Wave;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -610,7 +609,6 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
     private static class BannerAdLayout extends  RecyclerView.ViewHolder{
 
-        private AdView mAdView;
 
         public BannerAdLayout(View itemView) {
             super(itemView);
