@@ -2,14 +2,27 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AppLauncherTest">
-        <State />
-      </entry>
       <entry key="FavoriteTest">
         <State />
       </entry>
       <entry key="UserFlowTest">
         <State />
+      </entry>
+      <entry key="UserFlowTest (1)">
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\Samsul Karim\.android\avd\Pixel_4_API_33_Taramisu.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-02-03T11:42:38.036821300Z" />
+        </State>
       </entry>
       <entry key="app">
         <State />
