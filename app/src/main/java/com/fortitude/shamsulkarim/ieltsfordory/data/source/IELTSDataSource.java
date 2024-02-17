@@ -67,6 +67,21 @@ public class IELTSDataSource extends DataSource{
 
     }
 
+    public int getIELTSDatabaseSize(){
+
+
+        int size = 0;
+
+        Cursor res = database.getData();
+        while (res.moveToNext()){
+
+
+            size++;
+        }
+        res.close();
+        return size;
+    }
+
     private void initArray(){
 
         wordArray = context.getResources().getStringArray(R.array.IELTS_words);

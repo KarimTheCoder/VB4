@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.utils.DatabaseChecker;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 
 import java.util.Calendar;
@@ -30,6 +31,13 @@ public class StartTrial extends AppCompatActivity implements View.OnClickListene
         uiInitialization();
         codeInitialization();
         goHomeWhenPremium();
+
+        DatabaseChecker databaseChecker = new DatabaseChecker(this);
+        if(!databaseChecker.isDatabaseLoaded()){
+
+            startActivity(new Intent(this, AppLauncher.class));
+
+        }
     }
 
 

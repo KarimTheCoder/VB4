@@ -58,8 +58,7 @@ public class SplashScreen extends AppCompatActivity {
         // after first launch it sends you to MainActivity.java activity.
 
         Handler handler = new Handler();
-
-        handler.postDelayed(this::initializeOrMainActivity,1500L);
+        handler.postDelayed(this::initializeOrMainActivity,1000L);
 
 
 
@@ -73,18 +72,20 @@ public class SplashScreen extends AppCompatActivity {
     private void initializeOrMainActivity(){
 
 
-        if(sp.contains("home")){
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        }else {
+//        if(sp.contains("home")){
+//            startActivity(new Intent(this, MainActivity.class));
+//            finish();
+//        }else {
 
 
             createDatabase();
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             sp.edit().putInt("DarkMode",0).apply();
+//        }
 
 
-        }
+
+
 
     }
 
@@ -196,6 +197,10 @@ public class SplashScreen extends AppCompatActivity {
 
     }
 
+
+
+    //Default settings
+
     private void setupAppTheme(){
 
         if(!sp.contains("DarkMode")){
@@ -225,7 +230,6 @@ public class SplashScreen extends AppCompatActivity {
 
         }
     }
-
     private void setupDefaultVocabulary(){
 
         if(!sp.contains("home")){
@@ -239,12 +243,9 @@ public class SplashScreen extends AppCompatActivity {
 
         }
     }
-
     private void setupDefaultLanguage(){
 
         if(!sp.contains("home")){
-
-
             sp.edit().putString("secondlanguage","english").apply();
         }
 

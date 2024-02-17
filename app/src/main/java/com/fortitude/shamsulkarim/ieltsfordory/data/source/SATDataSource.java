@@ -55,6 +55,21 @@ public class SATDataSource extends DataSource{
 
     }
 
+    public int getSATDatabaseSize(){
+
+
+        int size = 0;
+
+        Cursor res = database.getData();
+        while (res.moveToNext()){
+
+
+            size++;
+        }
+        res.close();
+        return size;
+    }
+
     public void getFavoritePosition(){
         Cursor res = database.getData();
 

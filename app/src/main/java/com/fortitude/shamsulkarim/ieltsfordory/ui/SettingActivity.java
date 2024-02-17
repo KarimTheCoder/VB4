@@ -652,7 +652,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         if( v == privacyPolicy){
 
 
-            Uri appUrl = Uri.parse("https://banglish1.wixsite.com/fortitude");
+            Uri appUrl = Uri.parse("https://banglish1.wixsite.com/vbprivacypolicy");
             Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
             this.startActivity(rateApp);
         }

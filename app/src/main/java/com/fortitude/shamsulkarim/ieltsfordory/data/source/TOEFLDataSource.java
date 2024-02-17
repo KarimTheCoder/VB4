@@ -93,6 +93,21 @@ public class TOEFLDataSource extends DataSource{
     }
 
 
+    public int getTOEFLDatabaseSize(){
+
+
+        int size = 0;
+
+        Cursor res = database.getData();
+        while (res.moveToNext()){
+
+
+            size++;
+        }
+        res.close();
+        return size;
+    }
+
     private List<Word> listWords (int startPoint , int beginnerNumber){
         //Todo define isLearned
 

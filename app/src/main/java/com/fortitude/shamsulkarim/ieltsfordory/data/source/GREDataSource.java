@@ -88,6 +88,21 @@ public class GREDataSource extends DataSource{
         greRes.close();
     }
 
+    public int getGREDatabaseSize(){
+
+
+        int size = 0;
+
+        Cursor res = database.getData();
+        while (res.moveToNext()){
+
+
+            size++;
+        }
+        res.close();
+        return size;
+    }
+
 
     public boolean wasDatabaseLoadedProperly(){
 

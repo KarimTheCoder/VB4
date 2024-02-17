@@ -9,6 +9,8 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.data.source.IELTSDataSource;
+import com.fortitude.shamsulkarim.ieltsfordory.data.utils.DatabaseChecker;
 
 public class DatabaseTask implements Task{
 
@@ -16,6 +18,7 @@ public class DatabaseTask implements Task{
     private TOEFLWordDatabase toeflWordDatabase;
     private SATWordDatabase satWordDatabase;
     private GREWordDatabase greWordDatabase;
+    private DatabaseChecker databaseChecker;
 
     private final Context context;
 
@@ -40,6 +43,7 @@ public class DatabaseTask implements Task{
         satWordDatabase = new SATWordDatabase(context);
         toeflWordDatabase = new TOEFLWordDatabase(context);
         greWordDatabase = new GREWordDatabase(context);
+        databaseChecker = new DatabaseChecker(context);
     }
 
     private void IELTStoDatabaseInitialization(){
@@ -48,47 +52,45 @@ public class DatabaseTask implements Task{
 
 
 
-
-
         if(!sp.contains("beginnerWordCount1")){
             final int beginnerWordLength = context.getResources().getStringArray(R.array.IELTS_words).length;
             sp.edit().putInt("beginnerWordCount1",beginnerWordLength).apply();
 
+
             for(int i = 0; i < beginnerWordLength; i++){
-
                 ieltsWordDatabase.insertData(""+i,"false","false", "false","false");
-
             }
 
         }
+
+        if(!databaseChecker.isIELTSDatabaseLoaded()){
+
+            int currentSize = databaseChecker.getCurrentIELTSDatabaseSize();
+            int requiredSize = context.getResources().getStringArray(R.array.IELTS_words).length;
+
+            for(int i = currentSize; i < requiredSize; i++){
+                ieltsWordDatabase.insertData(""+i,"false","false", "false","false");
+            }
+
+        }
+
+
+
+
+
+
+
         int PREVIOUSBEGINNERCOUNT = sp.getInt("beginnerWordCount1",0);
         int CURRENTBEGINNERCOUNT = context.getResources().getStringArray(R.array.IELTS_words).length;
 
-
-
         if(CURRENTBEGINNERCOUNT > PREVIOUSBEGINNERCOUNT){
 
-
             for(int i = PREVIOUSBEGINNERCOUNT; i < CURRENTBEGINNERCOUNT; i++){
-
                 ieltsWordDatabase.insertData(""+i,"false","false", "false", "false");
-
-
-
-
             }
             sp.edit().putInt("beginnerWordCount1",CURRENTBEGINNERCOUNT).apply();
 
-
-
-
         }
-
-
-
-
-
-
 
     }
 
@@ -107,6 +109,22 @@ public class DatabaseTask implements Task{
             }
 
         }
+
+        if(!databaseChecker.isTOEFLDatabaseLoaded()){
+
+            int currentSize = databaseChecker.getCurrentTOEFLDatabaseSize();
+            int requiredSize = context.getResources().getStringArray(R.array.TOEFL_words).length;
+
+            for(int i = currentSize; i < requiredSize; i++){
+                toeflWordDatabase.insertData(""+i,"false","false", "false","false");
+            }
+
+        }
+
+
+
+
+
         int PREVIOUSBEGINNERCOUNT = sp.getInt("intermediateWordCount1",0);
         int CURRENTBEGINNERCOUNT = context.getResources().getStringArray(R.array.TOEFL_words).length;
 
@@ -142,6 +160,21 @@ public class DatabaseTask implements Task{
             }
 
         }
+
+        if(!databaseChecker.isSATLDatabaseLoaded()){
+
+            int currentSize = databaseChecker.getCurrentSAtDatabaseSize();
+            int requiredSize = context.getResources().getStringArray(R.array.SAT_words).length;
+
+            for(int i = currentSize; i < requiredSize; i++){
+                satWordDatabase.insertData(""+i,"false","false", "false","false");
+            }
+
+        }
+
+
+
+
         int PREVIOUSBEGINNERCOUNT = sp.getInt("advanceWordCount1",0);
         int CURRENTBEGINNERCOUNT = context.getResources().getStringArray(R.array.SAT_words).length;
 
@@ -184,6 +217,20 @@ public class DatabaseTask implements Task{
             }
 
         }
+
+
+        if(!databaseChecker.isGRELDatabaseLoaded()){
+
+            int currentSize = databaseChecker.getCurrentGREDatabaseSize();
+            int requiredSize = context.getResources().getStringArray(R.array.GRE_words).length;
+
+            for(int i = currentSize; i < requiredSize; i++){
+                greWordDatabase.insertData(""+i,"false","false", "false","false");
+            }
+
+        }
+
+
         int PREVIOUSBEGINNERCOUNT = sp.getInt("GREwordCount1",0);
         int CURRENTBEGINNERCOUNT = context.getResources().getStringArray(R.array.GRE_words).length;
 

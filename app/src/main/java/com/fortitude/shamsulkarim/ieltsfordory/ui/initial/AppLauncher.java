@@ -1,18 +1,22 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.initial;
 import android.content.Context;
-import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
+import android.widget.Toast;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.DatabaseInitializer;
+import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.TaskListener;
+import com.fortitude.shamsulkarim.ieltsfordory.data.utils.DatabaseChecker;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 
 public class AppLauncher extends AppCompatActivity {
@@ -37,7 +41,10 @@ public class AppLauncher extends AppCompatActivity {
         applyTheme(sp);
 
 
-        if(sp.contains("home")) {
+        DatabaseChecker db = new DatabaseChecker(this);
+
+
+        if(db.isDatabaseLoaded()){
 
             if(!sp.contains("trial_end_date") && !BuildConfig.FLAVOR.equalsIgnoreCase("pro")){
 
@@ -48,16 +55,57 @@ public class AppLauncher extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
             }
 
+            finish();
 
-        }else {
+        }
+        else {
 
             this.startActivity(new Intent(this, SplashScreen.class));
+
+            //createDatabase();
+            finish();
         }
-        finish();
+
+
+
 
 
     }
 
+    private void createDatabase(){
+        DatabaseInitializer dbInitializer = new DatabaseInitializer(this, new TaskListener() {
+            @Override
+            public void onComplete() {
+
+                if(BuildConfig.FLAVOR.equalsIgnoreCase("pro")){
+
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                }else {
+
+                    startActivity(new Intent(getApplicationContext(), StartTrial.class));
+                    finish();
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onProgress() {
+
+                Toast.makeText(AppLauncher.this,"Please wait a moment",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailed() {
+                Toast.makeText(AppLauncher.this,"Database loading failed",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        dbInitializer.execute();
+    }
 
     private void applyTheme(SharedPreferences sp){
 
@@ -76,9 +124,6 @@ public class AppLauncher extends AppCompatActivity {
                 // code block
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-
-
-
     }
 
 
