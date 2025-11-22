@@ -54,11 +54,12 @@ import com.github.ybq.android.spinkit.style.Wave;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
-import com.yarolegovich.lovelydialog.LovelyStandardDialog;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -71,7 +72,6 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NewTrain extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener, NewTrainRecyclerView.TrainAdapterCallback {
 
@@ -87,7 +87,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
     private TextView wordView, answerView1, answerView2, answerView3, answerView4;
     private FloatingActionButton fab;
     private TextToSpeech tts;
-    private FancyButton speak;
+    private MaterialButton speak;
     private int lastMistake = 13;
     private int mistakes;
     private int wordsPerSession;
@@ -179,21 +179,30 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             @Override
             public void handleOnBackPressed() {
 
-                new LovelyStandardDialog(NewTrain.this)
-                        .setTopColorRes(R.color.colorPrimary)
-                        .setButtonsColorRes(R.color.colorPrimary)
-                        .setIcon(R.drawable.ic_leave)
-                        .setTitle("Do you want to leave this session, " + sp.getString("userName", "Boo") + "?")
-                        .setMessage("Leaving this session will make you lose your progress")
-                        .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                NewTrain.this.startActivity(new Intent(NewTrain.this, MainActivity.class));
-                                NewTrain.this.finish();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(NewTrain.this);
+                builder.setTitle("Do you want to leave this session, " + sp.getString("userName", "Boo") + "?");
+                builder.setMessage("Leaving this session will make you lose your progress");
+                builder.setIcon(R.drawable.ic_leave);
+
+// 1. Positive Button (OK) - Leave Logic
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        NewTrain.this.startActivity(new Intent(NewTrain.this, MainActivity.class));
+                        NewTrain.this.finish();
+                    }
+                });
+
+// 2. Negative Button (No) - Dismiss
+                builder.setNegativeButton(android.R.string.no, null);
+
+// 3. Show and Colorize
+                AlertDialog dialog = builder.show();
+
+// Optional: Force button colors to primary (to match setButtonsColorRes)
+                int primaryColor = getColor(R.color.colorPrimary);
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(primaryColor);
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(primaryColor);
 
             }
         });
@@ -694,7 +703,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
             if (v == answerCard1) {
 
                 if (answerView1.getText().toString().equalsIgnoreCase(answer)) {
-                    StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
+                    Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
 
                     applyCorrectColor();
                     this.quizCycle++;
@@ -725,7 +734,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     totalMistakeCount++;
 
                     if (lastMistake == quizCycle) {
-                        StyleableToast.makeText(this, "wrong answer again", 10, R.style.wrong_again).show();
+                        Toast.makeText(this, "wrong answer again", Toast.LENGTH_SHORT).show();
 
 
                     } else {
@@ -734,11 +743,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                         lastMistake = quizCycle;
                         if (mistakes <= 3) {
 
-                            StyleableToast.makeText(this, "Wrong answer", 10, R.style.wrong).show();
+                            Toast.makeText(this, "Wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                         if (mistakes >= 4) {
-                            StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
+                            Toast.makeText(this, "Oh no! wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -750,7 +759,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                 if (answerView2.getText().toString().equalsIgnoreCase(answer)) {
                     applyCorrectColor();
-                    StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
+                    Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                     this.quizCycle++;
 
                     this.totalCycle++;
@@ -777,7 +786,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     totalMistakeCount++;
 
                     if (lastMistake == quizCycle) {
-                        StyleableToast.makeText(this, "wrong answer again", 10, R.style.wrong_again).show();
+                        Toast.makeText(this, "wrong answer again", Toast.LENGTH_SHORT).show();
 
 
                     } else {
@@ -785,11 +794,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                         lastMistake = quizCycle;
                         if (mistakes <= 3) {
 
-                            StyleableToast.makeText(this, "Wrong answer!", 10, R.style.wrong).show();
+                            Toast.makeText(this, "Wrong answer!", Toast.LENGTH_SHORT).show();
 
                         }
                         if (mistakes >= 4) {
-                            StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
+                            Toast.makeText(this, "Oh no! wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -801,7 +810,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                 if (answerView3.getText().toString().equalsIgnoreCase(answer)) {
                     applyCorrectColor();
-                    StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
+                    Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                     this.quizCycle++;
 
                     this.totalCycle++;
@@ -829,7 +838,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     totalMistakeCount++;
 
                     if (lastMistake == quizCycle) {
-                        StyleableToast.makeText(this, "Wrong answer again", 10, R.style.wrong_again).show();
+                        Toast.makeText(this, "Wrong answer again", Toast.LENGTH_SHORT).show();
 
 
                     } else {
@@ -837,11 +846,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                         lastMistake = quizCycle;
                         if (mistakes <= 3) {
 
-                            StyleableToast.makeText(this, "Wrong answer!", 10, R.style.wrong).show();
+                            Toast.makeText(this, "Wrong answer!", Toast.LENGTH_SHORT).show();
 
                         }
                         if (mistakes >= 4) {
-                            StyleableToast.makeText(this, "Oh no! wrong answer", 10, R.style.MyToast).show();
+                            Toast.makeText(this, "Oh no! wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -854,7 +863,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
 
                 if (answerView4.getText().toString().equalsIgnoreCase(answer)) {
                     applyCorrectColor();
-                    StyleableToast.makeText(this, "Correct!", 10, R.style.correct).show();
+                    Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                     this.quizCycle++;
 
                     this.totalCycle++;
@@ -885,7 +894,7 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                     totalMistakeCount++;
 
                     if (lastMistake == quizCycle) {
-                        StyleableToast.makeText(this, "wrong answer again?", 10, R.style.wrong_again).show();
+                        Toast.makeText(this, "wrong answer again?", Toast.LENGTH_SHORT).show();
 
 
                     } else {
@@ -893,11 +902,11 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
                         lastMistake = quizCycle;
                         if (mistakes <= 3) {
 
-                            StyleableToast.makeText(this, "Wrong answer", 10, R.style.wrong).show();
+                            Toast.makeText(this, "Wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                         if (mistakes >= 4) {
-                            StyleableToast.makeText(this, "Oh no! Wrong answer", 10, R.style.MyToast).show();
+                            Toast.makeText(this, "Oh no! Wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -1526,7 +1535,3 @@ public class NewTrain extends AppCompatActivity implements View.OnClickListener,
         trainCircle4.setBackground(ContextCompat.getDrawable(this, R.drawable.green_bottom_bar_dot));
     }
 }
-
-
-
-

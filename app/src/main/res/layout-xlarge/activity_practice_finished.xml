@@ -187,35 +187,32 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <mehdi.sakout.fancybuttons.FancyButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/tf_train_again"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/keyline_2"
+        android:layout_marginTop="@dimen/keyline_2"
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
-        android:layout_marginTop="@dimen/keyline_2"
         android:elevation="2dp"
-
-        android:paddingBottom="10dp"
         android:paddingStart="20dp"
-        android:paddingEnd="20dp"
         android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintTop_toTopOf="@+id/tf_home"
-        fancy:fb_borderWidth="2dp"
-        fancy:fb_defaultColor="@color/colorPrimary"
-        fancy:fb_focusColor="@color/colorPrimary"
-        fancy:fb_radius="30dp"
-        fancy:fb_text="STUDY AGAIN"
-        fancy:fb_textColor="#fff"
-        app:layout_constraintStart_toEndOf="@+id/tf_home">
-
-
-    </mehdi.sakout.fancybuttons.FancyButton>
-
+        app:layout_constraintStart_toEndOf="@+id/tf_home"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="2dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:rippleColor="#D8C9E8"
+        app:cornerRadius="30dp"
+        android:text="STUDY AGAIN"
+        android:textColor="#fff"
+        android:insetTop="0dp"
+        android:insetBottom="0dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,17 +29,17 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.databases.JustLearnedDatabas
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.JustLearnedDatabaseBeginner;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.JustLearnedDatabaseIntermediate;
 import com.github.clans.fab.FloatingActionButton;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
-import mehdi.sakout.fancybuttons.FancyButton;
 
 public class TrainFinishedActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView  words, mostMistenText, newLearnedWordCount;
     private ImageView mostMistakenImage;
-    private FancyButton trainAgain, favoriteButton, unlearnButton;
+    private MaterialButton trainAgain, favoriteButton, unlearnButton;
     private FloatingActionButton home;
     private CardView mostMistakenCard,rate;
     private String level;

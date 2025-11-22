@@ -32,16 +32,16 @@ import com.fortitude.shamsulkarim.ieltsfordory.utility.signin.SignInAndSync;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.signin.SignInAndSyncCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseUser;
 import com.kyleduo.switchbutton.SwitchButton;
 import java.util.Calendar;
 import java.util.Date;
-import mehdi.sakout.fancybuttons.FancyButton;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, SignInAndSyncCallback {
 
     private SignInAndSync signInAndSync;
-    private FancyButton save,spanish;
+    private MaterialButton save,spanish;
     private Spinner wps, rps,imageQualitySpinner, themeSpinner;
     private int wordsPerSession,repeatationPerSession;
     private SharedPreferences sp;
@@ -54,7 +54,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private CardView privacyPolicy;
     private CardView restorePurchaseCard;
 
-    private FancyButton signIn;
+    private MaterialButton signIn;
     private TextView userName, userDetail;
     private boolean connected;
     ActivityResultLauncher<Intent> activityResultLauncher;

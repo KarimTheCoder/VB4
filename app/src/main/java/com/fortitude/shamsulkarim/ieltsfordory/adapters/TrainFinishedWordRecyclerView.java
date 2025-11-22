@@ -14,10 +14,10 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
-import mehdi.sakout.fancybuttons.FancyButton;
 
 public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFinishedWordRecyclerView.WordViewHolder>  {
 
@@ -80,8 +80,8 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
 
     class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        final FancyButton unlearnButton;
-        final FancyButton favorite;
+        final MaterialButton unlearnButton;
+        final MaterialButton favorite;
         Word mostMistakenWord;
         final TextView word;
 

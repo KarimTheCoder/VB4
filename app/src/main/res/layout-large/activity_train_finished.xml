@@ -205,7 +205,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <mehdi.sakout.fancybuttons.FancyButton
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/train_finished_favorite"
                         android:layout_width="71dp"
                         android:layout_height="35dp"
@@ -213,21 +213,24 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
-                        android:background="#00000000"
-                        android:padding="7dp"
+                        android:padding="0dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/train_finished_unlearn"
                         app:layout_constraintTop_toTopOf="parent"
-                        fancy:fb_borderWidth="2dp"
-                        fancy:fb_defaultColor="?attr/colorPrimarySurface"
-                        fancy:fb_focusColor="?attr/colorPrimary"
-                        fancy:fb_ghost="true"
-                        fancy:fb_iconResource="@drawable/ic_favorite_icon"
-                        fancy:fb_radius="100000dp"
-                        fancy:fb_text="" />
+                        app:strokeColor="?attr/colorPrimarySurface"
+                        app:strokeWidth="2dp"
+                        app:backgroundTint="@android:color/transparent"
+                        app:rippleColor="?attr/colorPrimary"
+                        app:cornerRadius="18dp"
+                        app:icon="@drawable/ic_favorite_icon"
+                        app:iconTint="?attr/colorPrimarySurface"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="" />
 
-
-                    <mehdi.sakout.fancybuttons.FancyButton
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/train_finished_unlearn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -243,12 +246,15 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        fancy:fb_borderWidth="2dp"
-                        fancy:fb_defaultColor="?attr/background"
-                        fancy:fb_focusColor="?attr/colorPrimary"
-                        fancy:fb_radius="30dp"
-                        fancy:fb_text="Unlearn"
-                        fancy:fb_textColor="@color/lowColor" />
+                        app:strokeColor="?attr/background"
+                        app:strokeWidth="2dp"
+                        app:backgroundTint="?attr/background"
+                        app:rippleColor="?attr/colorPrimary"
+                        app:cornerRadius="30dp"
+                        android:text="Unlearn"
+                        android:textColor="@color/lowColor"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -327,36 +333,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <mehdi.sakout.fancybuttons.FancyButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/tf_train_again"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="@dimen/keyline_4"
         android:layout_marginEnd="@dimen/keyline_4"
-        android:layout_marginTop="8dp"
         android:elevation="0dp"
-
-        android:paddingBottom="10dp"
+        android:stateListAnimator="@null"
         android:paddingStart="20dp"
-        android:paddingEnd="20dp"
         android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
         app:layout_constraintTop_toTopOf="@id/tf_button_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
-
-        fancy:fb_borderWidth="2dp"
-        fancy:fb_defaultColor="?attr/colorPrimary"
-        fancy:fb_focusColor="?colorPrimaryDark"
-        fancy:fb_radius="30dp"
-        fancy:fb_text="STUDY MORE"
-        fancy:fb_textColor="@color/primary_text_color_white"
-        app:layout_constraintStart_toEndOf="@+id/tf_home">
-
-
-    </mehdi.sakout.fancybuttons.FancyButton>
-
+        app:layout_constraintStart_toEndOf="@+id/tf_home"
+        app:strokeWidth="2dp"
+        app:strokeColor="?attr/colorPrimary"
+        app:backgroundTint="?attr/colorPrimary"
+        app:rippleColor="?attr/colorPrimaryDark"
+        app:cornerRadius="30dp"
+        android:text="STUDY MORE"
+        android:textColor="@color/primary_text_color_white"
+        android:insetTop="0dp"
+        android:insetBottom="0dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

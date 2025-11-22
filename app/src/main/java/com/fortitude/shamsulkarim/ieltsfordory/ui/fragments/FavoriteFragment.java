@@ -29,7 +29,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.Practice;
 import com.github.clans.fab.FloatingActionButton;
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,7 +153,7 @@ public class FavoriteFragment extends Fragment implements FavoriteRecyclerViewAd
 
                 if(words.size() < 5){
 
-                    StyleableToast.makeText(view.getContext(), "At least five words needed", 10, R.style.favorite).show();
+                    Toast.makeText(view.getContext(), "At least five words needed",Toast.LENGTH_LONG).show();
 
 
                 }else {

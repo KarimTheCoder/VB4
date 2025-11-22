@@ -3,13 +3,17 @@ package com.fortitude.shamsulkarim.ieltsfordory.utility.signin;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
@@ -20,6 +24,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,8 +35,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.yarolegovich.lovelydialog.LovelyStandardDialog;
+
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,9 +47,9 @@ public class SignInAndSync {
 
 
     private final VocabularyRepository repository;
-    private List<Integer> savedBeginnerFav, savedAdvanceFav,savedIntermediateFav, savedGreFav;
-    private List<Integer> savedIeltsLearned, savedToeflLearned,savedSatLearned, savedGreLearned;
-    private String ADVANCE_FAVORITE,ADVANCE_LEARNED, BEGINNER_FAVORITE, BEGINNER_LEARNED,INTERMEDIATE_FAVORITE,INTERMEDIATE_LEARNED, GRE_FAVORITE, GRE_LEARNED;
+    private List<Integer> savedBeginnerFav, savedAdvanceFav, savedIntermediateFav, savedGreFav;
+    private List<Integer> savedIeltsLearned, savedToeflLearned, savedSatLearned, savedGreLearned;
+    private String ADVANCE_FAVORITE, ADVANCE_LEARNED, BEGINNER_FAVORITE, BEGINNER_LEARNED, INTERMEDIATE_FAVORITE, INTERMEDIATE_LEARNED, GRE_FAVORITE, GRE_LEARNED;
     private static final String TAG = "GoogleActivity";
     private final int RC_SIGN_IN = 9001;
     private final FirebaseAuth mAuth;
@@ -68,7 +74,6 @@ public class SignInAndSync {
         repository = new VocabularyRepository(context);
 
 
-
         //.requestIdToken(getString(R.string.default_web_client_id))
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(context.getString(R.string.google_client_id))
@@ -82,10 +87,9 @@ public class SignInAndSync {
         ref = firebaseDatabase.getReference();
 
 
-
         //todo here are some sign in code
 
-        if(mAuth.getCurrentUser() != null && connected){
+        if (mAuth.getCurrentUser() != null && connected) {
 
             ref.child(mAuth.getCurrentUser().getUid()).addChildEventListener(new ChildEventListener() {
 
@@ -99,12 +103,12 @@ public class SignInAndSync {
 
 //                if(dataSnapshot.exists()) {
                     String data = dataSnapshot.getValue(String.class);
-                    String key  = dataSnapshot.getKey();
+                    String key = dataSnapshot.getKey();
 
                     // Toast.makeText(getApplicationContext(),key+" "+ data, Toast.LENGTH_SHORT).show();
 
                     // if key equals to favorite
-                    if( Objects.requireNonNull(key).equalsIgnoreCase("advanceFavCount") || key.equalsIgnoreCase("intermediateFavCount") || key.equalsIgnoreCase("beginnerFavCount")){
+                    if (Objects.requireNonNull(key).equalsIgnoreCase("advanceFavCount") || key.equalsIgnoreCase("intermediateFavCount") || key.equalsIgnoreCase("beginnerFavCount")) {
 
                         syncDatabasesIfFavDataChanged(data, key);
 
@@ -113,12 +117,10 @@ public class SignInAndSync {
 
                     //if key equals to learned
 
-                    if(key.equalsIgnoreCase("advanceLearnedCount") || key.equalsIgnoreCase("intermediateLearnedCount") || key.equalsIgnoreCase("beginnerLearnedCount")){
+                    if (key.equalsIgnoreCase("advanceLearnedCount") || key.equalsIgnoreCase("intermediateLearnedCount") || key.equalsIgnoreCase("beginnerLearnedCount")) {
 
                         syncSPIfLearnedDataChanged(data, key);
                     }
-
-
 
 
                 }
@@ -133,7 +135,6 @@ public class SignInAndSync {
                 public void onChildMoved(@NotNull DataSnapshot dataSnapshot, String s) {
 
 
-
                 }
 
                 @Override
@@ -145,11 +146,10 @@ public class SignInAndSync {
         }
 
 
-
     }
 
 
-    public Intent getSignInIntent(){
+    public Intent getSignInIntent() {
         return mGoogleSignInClient.getSignInIntent();
     }
 
@@ -157,7 +157,7 @@ public class SignInAndSync {
         return mAuth;
     }
 
-    public GoogleSignInClient getSignInClient(){
+    public GoogleSignInClient getSignInClient() {
 
         return mGoogleSignInClient;
     }
@@ -167,7 +167,7 @@ public class SignInAndSync {
     }
 
 
-    public FirebaseUser firebaseAuthenticationWithGoogle(GoogleSignInAccount acct){
+    public FirebaseUser firebaseAuthenticationWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
         callback.progressStatus(false);
@@ -188,7 +188,7 @@ public class SignInAndSync {
                             user[0] = mAuth.getCurrentUser();
                             //updateUI(user);
                             callback.updateUI();
-                            Toast.makeText(context, "Successfully signed in",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Successfully signed in", Toast.LENGTH_SHORT).show();
                             getFirebase();
 
                             callback.progressStatus(true);
@@ -205,7 +205,6 @@ public class SignInAndSync {
                         }
 
 
-
                     }
                 });
 
@@ -214,16 +213,16 @@ public class SignInAndSync {
     }
 
 
-    public void getFirebase(){
+    public void getFirebase() {
 
 
-        try{
+        try {
             ref.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).addChildEventListener(new ChildEventListener() {
 
 
                 int i = 0;
                 final String[] strData = new String[9];
-                final HashMap<String,String> data = new HashMap<>();
+                final HashMap<String, String> data = new HashMap<>();
                 Boolean askOnce = false;
 
                 @Override
@@ -231,9 +230,7 @@ public class SignInAndSync {
                     //Toast.makeText(getApplicationContext(),s+" : "+dataSnapshot.getValue(String.class),Toast.LENGTH_SHORT).show();
 
 
-
-
-                    if(dataSnapshot.exists() &&  i == 8){
+                    if (dataSnapshot.exists() && i == 8) {
 
                         callback.progressStatus(false);
                         askOnce = true;
@@ -247,64 +244,60 @@ public class SignInAndSync {
                     String state = dataSnapshot.getValue(String.class);
 
                     strData[i] = state;
-                    data.put(s,state);
+                    data.put(s, state);
 
 
+                    if (strData[8] != null) {
 
-                    if(strData[8] != null){
+                        for (int j = 0; j < strData.length; j++) {
 
-                        for(int j = 0; j < strData.length; j++){
-
-                            if(j == 0){
+                            if (j == 0) {
 
                                 GRE_FAVORITE = strData[0];
 
                             }
-                            if(j == 1){
+                            if (j == 1) {
 
                                 GRE_LEARNED = strData[1];
 
                             }
-                            if(j == 2){
+                            if (j == 2) {
 
                                 BEGINNER_FAVORITE = strData[2];
 
 
                             }
-                            if(j == 3){
+                            if (j == 3) {
 
 
                                 BEGINNER_LEARNED = strData[3];
 
                             }
-                            if(j == 4){
-                                sp.edit().putString("userName",strData[4]).apply();
+                            if (j == 4) {
+                                sp.edit().putString("userName", strData[4]).apply();
 
                             }
-                            if(j == 5){
+                            if (j == 5) {
 
                                 ADVANCE_FAVORITE = strData[5];
 
 
                             }
-                            if( j == 6){
-
+                            if (j == 6) {
 
 
                                 ADVANCE_LEARNED = strData[6];
 
                             }
 
-                            if( j == 7){
-
+                            if (j == 7) {
 
 
                                 INTERMEDIATE_FAVORITE = strData[7];
 
                             }
 
-                            if( j == 8){
-
+                            if (j == 8) {
 
 
                                 INTERMEDIATE_LEARNED = strData[8];
@@ -339,70 +332,79 @@ public class SignInAndSync {
 
                 }
             });
-        }catch (NullPointerException n){
+        } catch (NullPointerException n) {
 
-            Toast.makeText(context,"Reference exception",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Reference exception", Toast.LENGTH_SHORT).show();
 
         }
 
 
-
     }
 
-    public void authenticateUser( Intent data) {
+    public void authenticateUser(Intent data) {
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
 
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthenticationWithGoogle(account);
+        try {
+            // Google Sign In was successful, authenticate with Firebase
+            GoogleSignInAccount account = task.getResult(ApiException.class);
+            firebaseAuthenticationWithGoogle(account);
 
 
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
+        } catch (ApiException e) {
+            // Google Sign In failed, update UI appropriately
+            Log.w(TAG, "Google sign in failed", e);
 
-                // [START_EXCLUDE]
-                callback.updateUI();
-                // [END_EXCLUDE]
-            }
+            // [START_EXCLUDE]
+            callback.updateUI();
+            // [END_EXCLUDE]
+        }
 
     }
 
 
-    private void askToSync(){
+    private void askToSync() {
 
         // todo this below code must be called if following condition
         //is met: if(!SettingActivity.this.isFinishing())
-            new LovelyStandardDialog(context)
-                    .setButtonsColorRes(R.color.colorPrimary)
-                    .setTopColorRes(R.color.colorPrimary)
-                    .setIcon(R.drawable.data_found)
-                    .setTitle("Saved progress on the cloud found!")
-                    .setMessage("Do you want to sync the progress?")
-                    .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            callback.progressStatus(false);
 
+// ...
 
-                            syncSQL();
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            callback.progressStatus(true);
-                        }
-                    })
-                    .show();
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
+        builder.setTitle("Saved progress on the cloud found!");
+        builder.setMessage("Do you want to sync the progress?");
+        builder.setIcon(R.drawable.data_found);
+
+// 1. Positive Button (Yes/OK)
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                callback.progressStatus(false);
+                syncSQL();
+            }
+        });
+
+// 2. Negative Button (No)
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                callback.progressStatus(true);
+            }
+        });
+
+// 3. Show and Colorize
+        AlertDialog dialog = builder.show();
+
+// Optional: Set button text colors to Primary Color (to match setButtonsColorRes)
+        int primaryColor = context.getColor(R.color.colorPrimary);
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(primaryColor);
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(primaryColor);
 
     }
 
 
-    private void syncSQL(){
+    private void syncSQL() {
         addingBuilderToNums();
 
         Handler handler = new Handler();
@@ -414,20 +416,19 @@ public class SignInAndSync {
 
                 //Toast.makeText(getApplicationContext(),"Syncingdfksfjlsj"+savedBeginnerFav.size(),Toast.LENGTH_SHORT).show();
 
-                if(savedBeginnerFav.size() > 0){
+                if (savedBeginnerFav.size() > 0) {
 
-                    for(int i = 0; i <savedBeginnerFav.size();i++){
+                    for (int i = 0; i < savedBeginnerFav.size(); i++) {
 
                         // Toast.makeText(getApplicationContext(),""+savedBeginnerFav.get(i),Toast.LENGTH_SHORT).show();
 
-                        if(savedBeginnerFav.get(i) == 1){
+                        if (savedBeginnerFav.get(i) == 1) {
 
 
-                            repository.updateIELTSFavoriteState(""+(i+1),"True");
-                        }else {
-                            repository.updateIELTSFavoriteState(""+(i+1),"False");
+                            repository.updateIELTSFavoriteState("" + (i + 1), "True");
+                        } else {
+                            repository.updateIELTSFavoriteState("" + (i + 1), "False");
                         }
-
 
 
                     }
@@ -435,58 +436,52 @@ public class SignInAndSync {
 
                 }
 
-                if(savedIntermediateFav.size() > 0){
+                if (savedIntermediateFav.size() > 0) {
 
-                    for(int j = 0; j < savedIntermediateFav.size(); j++){
+                    for (int j = 0; j < savedIntermediateFav.size(); j++) {
 
-                        if(savedIntermediateFav.get(j)== 1){
+                        if (savedIntermediateFav.get(j) == 1) {
 
-                            repository.updateTOEFLFavoriteState(""+(j+1),"True");
-                        }else {
-                            repository.updateTOEFLFavoriteState(""+(j+1),"False");
+                            repository.updateTOEFLFavoriteState("" + (j + 1), "True");
+                        } else {
+                            repository.updateTOEFLFavoriteState("" + (j + 1), "False");
                         }
-
-
 
 
                     }
 
                 }
 
-                if(savedAdvanceFav.size() > 0){
+                if (savedAdvanceFav.size() > 0) {
 
-                    for(int k = 0; k < savedAdvanceFav.size(); k++){
+                    for (int k = 0; k < savedAdvanceFav.size(); k++) {
 
 
-                        if(savedAdvanceFav.get(k) == 1){
+                        if (savedAdvanceFav.get(k) == 1) {
 
-                            repository.updateSATFavoriteState(""+(1+k),"True");
-                        }else {
+                            repository.updateSATFavoriteState("" + (1 + k), "True");
+                        } else {
 
-                            repository.updateSATFavoriteState(""+(1+k),"False");
+                            repository.updateSATFavoriteState("" + (1 + k), "False");
                         }
-
-
 
 
                     }
 
                 }
 
-                if(savedGreFav.size() > 0){
+                if (savedGreFav.size() > 0) {
 
-                    for(int k = 0; k < savedGreFav.size(); k++){
+                    for (int k = 0; k < savedGreFav.size(); k++) {
 
 
-                        if(savedGreFav.get(k) == 1){
+                        if (savedGreFav.get(k) == 1) {
 
-                            repository.updateGREFavoriteState(""+(1+k),"True");
-                        }else {
+                            repository.updateGREFavoriteState("" + (1 + k), "True");
+                        } else {
 
-                            repository.updateGREFavoriteState(""+(1+k),"False");
+                            repository.updateGREFavoriteState("" + (1 + k), "False");
                         }
-
-
 
 
                     }
@@ -497,20 +492,18 @@ public class SignInAndSync {
                 // Syncing Learned
 
 
-                if(savedIeltsLearned.size() > 0){
+                if (savedIeltsLearned.size() > 0) {
 
-                    for(int k = 0; k < savedIeltsLearned.size(); k++){
+                    for (int k = 0; k < savedIeltsLearned.size(); k++) {
 
 
-                        if(savedIeltsLearned.get(k) == 1){
+                        if (savedIeltsLearned.get(k) == 1) {
 
-                            repository.updateIELTSLearnState(""+(1+k),"True");
-                        }else {
+                            repository.updateIELTSLearnState("" + (1 + k), "True");
+                        } else {
 
-                            repository.updateIELTSLearnState(""+(1+k),"False");
+                            repository.updateIELTSLearnState("" + (1 + k), "False");
                         }
-
-
 
 
                     }
@@ -518,57 +511,53 @@ public class SignInAndSync {
                 }
 
 
-                if(savedToeflLearned.size() > 0){
+                if (savedToeflLearned.size() > 0) {
 
-                    for(int k = 0; k < savedToeflLearned.size(); k++){
+                    for (int k = 0; k < savedToeflLearned.size(); k++) {
 
 
-                        if(savedToeflLearned.get(k) == 1){
+                        if (savedToeflLearned.get(k) == 1) {
 
-                            repository.updateTOEFLLearnState(""+(1+k),"True");
-                        }else {
+                            repository.updateTOEFLLearnState("" + (1 + k), "True");
+                        } else {
 
-                            repository.updateTOEFLLearnState(""+(1+k),"False");
+                            repository.updateTOEFLLearnState("" + (1 + k), "False");
                         }
-
-
 
 
                     }
 
                 }
 
-                if(savedSatLearned.size() > 0){
+                if (savedSatLearned.size() > 0) {
 
-                    for(int k = 0; k < savedSatLearned.size(); k++){
+                    for (int k = 0; k < savedSatLearned.size(); k++) {
 
 
-                        if(savedSatLearned.get(k) == 1){
+                        if (savedSatLearned.get(k) == 1) {
 
-                            repository.updateSATLearnState(""+(1+k),"True");
-                        }else {
+                            repository.updateSATLearnState("" + (1 + k), "True");
+                        } else {
 
-                            repository.updateSATLearnState(""+(1+k),"False");
+                            repository.updateSATLearnState("" + (1 + k), "False");
                         }
-
-
 
 
                     }
 
                 }
 
-                if(savedGreLearned.size() > 0){
+                if (savedGreLearned.size() > 0) {
 
-                    for(int k = 0; k < savedGreLearned.size(); k++){
+                    for (int k = 0; k < savedGreLearned.size(); k++) {
 
 
-                        if(savedGreLearned.get(k) == 1){
+                        if (savedGreLearned.get(k) == 1) {
 
-                            repository.updateGRELearnState(""+(1+k),"True");
-                        }else {
+                            repository.updateGRELearnState("" + (1 + k), "True");
+                        } else {
 
-                            repository.updateGRELearnState(""+(1+k),"False");
+                            repository.updateGRELearnState("" + (1 + k), "False");
                         }
                     }
 
@@ -577,14 +566,11 @@ public class SignInAndSync {
         }, 0L);
 
 
-
-
-
         callback.progressStatus(true);
 
     }
 
-    private void addingBuilderToNums(){
+    private void addingBuilderToNums() {
 
         savedAdvanceFav = new ArrayList<>();
         savedIntermediateFav = new ArrayList<>();
@@ -599,12 +585,12 @@ public class SignInAndSync {
 
         savedIeltsLearned = builderToNums(new StringBuilder(BEGINNER_LEARNED));
         savedToeflLearned = builderToNums(new StringBuilder(INTERMEDIATE_LEARNED));
-        savedSatLearned =   builderToNums(new StringBuilder(ADVANCE_LEARNED));
-        savedGreLearned =   builderToNums(new StringBuilder(GRE_LEARNED));
+        savedSatLearned = builderToNums(new StringBuilder(ADVANCE_LEARNED));
+        savedGreLearned = builderToNums(new StringBuilder(GRE_LEARNED));
 
-        savedBeginnerFav =  builderToNums(new StringBuilder(BEGINNER_FAVORITE));
+        savedBeginnerFav = builderToNums(new StringBuilder(BEGINNER_FAVORITE));
         savedIntermediateFav = builderToNums(new StringBuilder(INTERMEDIATE_FAVORITE));
-        savedAdvanceFav  = builderToNums(new StringBuilder(ADVANCE_FAVORITE));
+        savedAdvanceFav = builderToNums(new StringBuilder(ADVANCE_FAVORITE));
         savedGreFav = builderToNums(new StringBuilder(GRE_FAVORITE));
 
 //        sp.edit().putInt("intermediate", Integer.parseInt(INTERMEDIATE_LEARNED)).apply();
@@ -613,59 +599,55 @@ public class SignInAndSync {
 
     }
 
-    private List<Integer> builderToNums(StringBuilder numBuilder){
+    private List<Integer> builderToNums(StringBuilder numBuilder) {
 
         List<Integer> backToNums = new ArrayList<>();
         String string = numBuilder.toString();
 
-        for(int i = 0; i < string.length();){
+        for (int i = 0; i < string.length(); ) {
 
-            if(string.substring(i, i+1).equalsIgnoreCase("1")){
+            if (string.substring(i, i + 1).equalsIgnoreCase("1")) {
 
                 backToNums.add(1);
-            }else {
+            } else {
 
 
                 backToNums.add(0);
 
             }
-            i = i+2;
+            i = i + 2;
         }
 
         return backToNums;
     }
 
-    private void syncDatabasesIfFavDataChanged(String newData, String key){
+    private void syncDatabasesIfFavDataChanged(String newData, String key) {
 
 
         // todo investigate why GRE not used in this method
         List<Integer> newDataList;
 
 
-
-
-
         // ADVANC FAVORITE COUNT
 
-        if(key.equalsIgnoreCase("advanceFavCount")){
+        if (key.equalsIgnoreCase("advanceFavCount")) {
 
-            int advanceSize = sp.getInt("advance",context.getResources().getStringArray(R.array.SAT_words).length);
+            int advanceSize = sp.getInt("advance", context.getResources().getStringArray(R.array.SAT_words).length);
             // cleaning database
 
-            for(int i = 0; i < advanceSize; i++){
-                repository.updateSATFavoriteState(""+(i+1),"False");
+            for (int i = 0; i < advanceSize; i++) {
+                repository.updateSATFavoriteState("" + (i + 1), "False");
             }
 
             // adding new data
 
             newDataList = builderToNums(new StringBuilder(newData));
-            if(newDataList.size() > 0){
+            if (newDataList.size() > 0) {
 
-                for(int k = 0; k < newDataList.size(); k++){
+                for (int k = 0; k < newDataList.size(); k++) {
 
-                    int adva = newDataList.get(k)+1;
-                    repository.updateSATFavoriteState(""+adva,"True");
-
+                    int adva = newDataList.get(k) + 1;
+                    repository.updateSATFavoriteState("" + adva, "True");
 
 
                 }
@@ -677,25 +659,24 @@ public class SignInAndSync {
 
         // INTERMEDIATE FAVORITE COUNT
 
-        if(key.equalsIgnoreCase("intermediateFavCount")){
+        if (key.equalsIgnoreCase("intermediateFavCount")) {
 
-            int intermediateSize = sp.getInt("intermediate",context.getResources().getStringArray(R.array.TOEFL_words).length);
+            int intermediateSize = sp.getInt("intermediate", context.getResources().getStringArray(R.array.TOEFL_words).length);
             // cleaning database
 
-            for(int i = 0; i < intermediateSize; i++){
-                repository.updateTOEFLFavoriteState(""+(i+1),"False");
+            for (int i = 0; i < intermediateSize; i++) {
+                repository.updateTOEFLFavoriteState("" + (i + 1), "False");
             }
 
             // adding new data
 
             newDataList = builderToNums(new StringBuilder(newData));
-            if(newDataList.size() > 0){
+            if (newDataList.size() > 0) {
 
-                for(int k = 0; k < newDataList.size(); k++){
+                for (int k = 0; k < newDataList.size(); k++) {
 
-                    int adva = newDataList.get(k)+1;
-                    repository.updateTOEFLFavoriteState(""+adva,"True");
-
+                    int adva = newDataList.get(k) + 1;
+                    repository.updateTOEFLFavoriteState("" + adva, "True");
 
 
                 }
@@ -706,25 +687,24 @@ public class SignInAndSync {
 
         // BEGINNER FAVORITE COUNT
 
-        if(key.equalsIgnoreCase("beginnerFavCount")){
+        if (key.equalsIgnoreCase("beginnerFavCount")) {
 
-            int beginnerSize = sp.getInt("beginner",context.getResources().getStringArray(R.array.TOEFL_words).length);
+            int beginnerSize = sp.getInt("beginner", context.getResources().getStringArray(R.array.TOEFL_words).length);
             // cleaning database
 
-            for(int i = 0; i < beginnerSize; i++){
-                repository.updateIELTSLearnState(""+(i+1),"False");
+            for (int i = 0; i < beginnerSize; i++) {
+                repository.updateIELTSLearnState("" + (i + 1), "False");
             }
 
             // adding new data
 
             newDataList = builderToNums(new StringBuilder(newData));
-            if(newDataList.size() > 0){
+            if (newDataList.size() > 0) {
 
-                for(int k = 0; k < newDataList.size(); k++){
+                for (int k = 0; k < newDataList.size(); k++) {
 
-                    int adva = newDataList.get(k)+1;
-                    repository.updateIELTSLearnState(""+adva,"True");
-
+                    int adva = newDataList.get(k) + 1;
+                    repository.updateIELTSLearnState("" + adva, "True");
 
 
                 }
@@ -734,50 +714,47 @@ public class SignInAndSync {
         }
 
 
-
-
-
     }
 
-    private void syncSPIfLearnedDataChanged(String data, String key){
+    private void syncSPIfLearnedDataChanged(String data, String key) {
 
 
-        if(key.equalsIgnoreCase("advanceLearndCount")){
+        if (key.equalsIgnoreCase("advanceLearndCount")) {
 
-            int localAdvanceLearned = sp.getInt("advance",0);
+            int localAdvanceLearned = sp.getInt("advance", 0);
             int firebaseSaved = Integer.parseInt(data);
 
-            if( firebaseSaved > localAdvanceLearned){
+            if (firebaseSaved > localAdvanceLearned) {
 
-                sp.edit().putInt("advance",firebaseSaved).apply();
+                sp.edit().putInt("advance", firebaseSaved).apply();
                 // Toast.makeText(getApplicationContext(),"Synced "+ key, Toast.LENGTH_SHORT).show();
 
             }
 
         }
 
-        if(key.equalsIgnoreCase("intermediateLearnedCount")){
+        if (key.equalsIgnoreCase("intermediateLearnedCount")) {
 
-            int localAdvanceLearned = sp.getInt("intermediate",0);
+            int localAdvanceLearned = sp.getInt("intermediate", 0);
             int firebaseSaved = Integer.parseInt(data);
 
-            if( firebaseSaved > localAdvanceLearned){
+            if (firebaseSaved > localAdvanceLearned) {
 
-                sp.edit().putInt("intermediate",firebaseSaved).apply();
+                sp.edit().putInt("intermediate", firebaseSaved).apply();
                 //Toast.makeText(getApplicationContext(),"Synced "+ key, Toast.LENGTH_SHORT).show();
 
             }
 
         }
 
-        if(key.equalsIgnoreCase("beginnerLearnedCount")){
+        if (key.equalsIgnoreCase("beginnerLearnedCount")) {
 
-            int localAdvanceLearned = sp.getInt("beginner",0);
+            int localAdvanceLearned = sp.getInt("beginner", 0);
             int firebaseSaved = Integer.parseInt(data);
 
-            if( firebaseSaved > localAdvanceLearned){
+            if (firebaseSaved > localAdvanceLearned) {
 
-                sp.edit().putInt("beginner",firebaseSaved).apply();
+                sp.edit().putInt("beginner", firebaseSaved).apply();
                 // Toast.makeText(getApplicationContext(),"Synced "+ key, Toast.LENGTH_SHORT).show();
 
             }

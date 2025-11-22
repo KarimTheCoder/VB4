@@ -4,12 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,19 +17,28 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.train.PretrainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.adapters.WordRecyclerViewAdapter;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.Practice;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.train.PretrainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.Fab;
+import com.google.android.material.button.MaterialButton;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
+
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Locale;
-
-import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,7 +57,7 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
     private Spinner spinner;
     private Fab fab;
     private int selection;
-    private FancyButton startLearning;
+    private MaterialButton startLearning;
     private String level;
     private FloatingSearchView sv;
     private TextToSpeech tts;
@@ -171,8 +174,6 @@ public class LearnedFragment extends Fragment implements View.OnClickListener, A
         startLearning = v.findViewById(R.id.nl_start_learning);
         startLearning.setOnClickListener(this);
         startLearning.setBackgroundResource(R.drawable.gradient);
-        startLearning.setBorderColor(getContext().getColor(R.color.colorPrimaryDark));
-        startLearning.setFocusBackgroundColor(getContext().getColor(R.color.colorPrimary));
         sv= v.findViewById(R.id.mSearch);
 
         Toolbar toolbar = v.findViewById(R.id.learned_toolbar);

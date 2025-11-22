@@ -25,6 +25,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.databases.IELTSWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.SATWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.TOEFLWordDatabase;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -33,7 +34,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import org.jetbrains.annotations.NotNull;
-import mehdi.sakout.fancybuttons.FancyButton;
 
 
 public class MainActivity extends AppCompatActivity  implements View.OnClickListener{
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     //-------------------------------
 
-    private FancyButton homeButton, wordButton, learnedButton, favoriteButton, profileButton;
+    private MaterialButton homeButton, wordButton, learnedButton, favoriteButton, profileButton;
 
     //-------------------------------
     private DatabaseReference ref;

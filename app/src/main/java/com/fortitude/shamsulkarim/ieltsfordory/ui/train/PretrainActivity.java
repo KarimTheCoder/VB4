@@ -18,23 +18,23 @@ import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.Objects;
 
-import mehdi.sakout.fancybuttons.FancyButton;
 
 public class PretrainActivity extends AppCompatActivity implements View.OnClickListener, com.suke.widget.SwitchButton.OnCheckedChangeListener {
 
 
     private VocabularyRepository repository;
     private TextView levelTextView;
-    private FancyButton startTrainButton;
+    private MaterialButton startTrainButton;
     private RoundCornerProgressBar progressBar;
     private SharedPreferences sp;
 
 
     // UI
-    private FancyButton purchaseButton;
+    private MaterialButton purchaseButton;
     private ImageButton settingsButton;
     private TextView progressCountTextview;
     private com.suke.widget.SwitchButton tooEasySwitch,spanishSwitch;

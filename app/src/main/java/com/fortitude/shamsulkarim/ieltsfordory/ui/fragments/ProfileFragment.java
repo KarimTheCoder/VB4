@@ -31,6 +31,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.AlarmReceiver;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.LocalData;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.NotificationScheduler;
+import com.google.android.material.button.MaterialButton;
 import com.kyleduo.switchbutton.SwitchButton;
 import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
@@ -38,14 +39,13 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 import de.cketti.mailto.EmailIntentBuilder;
-import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
-    private FancyButton setReminder;
+    private MaterialButton setReminder;
     private CardView rateCardView, bugReport, fbCard,instagramCard;
 
     /// notification

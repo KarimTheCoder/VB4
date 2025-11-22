@@ -1,10 +1,12 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.cardview.widget.CardView;
@@ -21,7 +23,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.PretrainActivity;
-import com.yarolegovich.lovelydialog.LovelyStandardDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -228,35 +230,41 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         if(!sp.contains("home_fragment_trail_end")){
 
-            new LovelyStandardDialog(getContext(), LovelyStandardDialog.ButtonLayout.VERTICAL)
-                    .setTopColorRes(R.color.red)
-                    .setButtonsColorRes(R.color.secondary_text_color)
-                    .setIcon(R.drawable.ic_information)
-                    .setIconTintColor(getContext().getColor(R.color.primary_text_color_white))
-                    .setNegativeButton("Continue with basic", new View.OnClickListener(){
 
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(getContext(), "Continue with Basic", Toast.LENGTH_SHORT).show();
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                            sp.edit().putInt("DarkMode",0).apply();
-                        }
-                    })
-                    .setTitle(R.string.trial_ended)
-                    .setMessage(R.string.trial_ended_description)
-                    .setNeutralButtonColor(getContext().getColor(R.color.green))
-                    .setNeutralButton("Upgrade", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+// ... inside your function ...
 
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+            builder.setTitle(R.string.trial_ended);
+            builder.setMessage(R.string.trial_ended_description);
+            builder.setIcon(R.drawable.ic_information);
 
-                            v.getContext().startActivity(new Intent(v.getContext(), PretrainActivity.class));
-                            //Toast.makeText(getContext(), "positive clicked", Toast.LENGTH_SHORT).show();
-                        }
-                    })
+// 1. The "Upgrade" Button (Primary Action -> Positive)
+            builder.setPositiveButton("Upgrade", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Use getContext() or the Activity context here
+                    startActivity(new Intent(getContext(), PretrainActivity.class));
+                }
+            });
 
+// 2. The "Continue" Button (Secondary Action -> Negative)
+            builder.setNegativeButton("Continue with basic", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(getContext(), "Continue with Basic", Toast.LENGTH_SHORT).show();
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    sp.edit().putInt("DarkMode", 0).apply();
+                }
+            });
 
-                    .show();
+// 3. Show the dialog
+            AlertDialog dialog = builder.show();
+
+// 4. Apply Custom Colors (Optional - to match your old look)
+// Set "Upgrade" to Green
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getContext().getColor(R.color.green));
+// Set "Continue" to Secondary Color
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getContext().getColor(R.color.secondary_text_color));
 
             sp.edit().putBoolean("home_fragment_trail_end",true).apply();
 

@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
+import com.google.android.material.button.MaterialButton;
 
-import mehdi.sakout.fancybuttons.FancyButton;
 
 public class NoWordLeft extends AppCompatActivity implements View.OnClickListener{
 
@@ -47,8 +47,8 @@ public class NoWordLeft extends AppCompatActivity implements View.OnClickListene
         TextView completedSection = findViewById(R.id.completed_section);
         TextView soProud = findViewById(R.id.so_proud);
         ImageView noWordImage = findViewById(R.id.no_word_image);
-        FancyButton home = findViewById(R.id.no_word_home);
-        FancyButton reset = findViewById(R.id.reset);
+        MaterialButton home = findViewById(R.id.no_word_home);
+        MaterialButton reset = findViewById(R.id.reset);
 
         congratulation.setTypeface(comfoftaBold);
         completedSection.setTypeface(comfortaRegular);
@@ -56,8 +56,6 @@ public class NoWordLeft extends AppCompatActivity implements View.OnClickListene
 
         if(level.equalsIgnoreCase("beginner")){
             home.setTextColor(getColor(R.color.beginnerP));
-            home.setBorderColor(getColor(R.color.beginnerP));
-            reset.setBorderColor(getColor(R.color.beginnerP));
             reset.setTextColor(getColor(R.color.beginnerP));
             congratulation.setTextColor(getColor(R.color.beginnerP));
 
@@ -67,8 +65,6 @@ public class NoWordLeft extends AppCompatActivity implements View.OnClickListene
 
         if(level.equalsIgnoreCase("intermediate")){
             home.setTextColor(getColor(R.color.intermedateP));
-            home.setBorderColor(getColor(R.color.intermedateP));
-            reset.setBorderColor(getColor(R.color.intermedateP));
             reset.setTextColor(getColor(R.color.intermedateP));
             congratulation.setTextColor(getColor(R.color.intermedateP));
 
@@ -79,8 +75,6 @@ public class NoWordLeft extends AppCompatActivity implements View.OnClickListene
         if(level.equalsIgnoreCase("advance")){
 
             home.setTextColor(getColor(R.color.advanceP));
-            home.setBorderColor(getColor(R.color.advanceP));
-            reset.setBorderColor(getColor(R.color.advanceP));
             reset.setTextColor(getColor(R.color.advanceP));
             noWordImage.setImageResource(R.drawable.advance_no_words);
             congratulation.setTextColor(getColor(R.color.advanceP));

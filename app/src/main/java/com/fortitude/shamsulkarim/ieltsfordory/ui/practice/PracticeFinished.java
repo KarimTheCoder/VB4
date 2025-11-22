@@ -17,11 +17,11 @@ import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.github.clans.fab.FloatingActionButton;
-import mehdi.sakout.fancybuttons.FancyButton;
+import com.google.android.material.button.MaterialButton;
 
 public class PracticeFinished extends AppCompatActivity implements View.OnClickListener{
 
-    private FancyButton practiceAgain;
+    private MaterialButton practiceAgain;
     private FloatingActionButton home;
     private CardView rateCard;
     private SharedPreferences sp;

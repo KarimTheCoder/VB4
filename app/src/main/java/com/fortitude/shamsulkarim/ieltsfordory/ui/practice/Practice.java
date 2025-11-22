@@ -2,6 +2,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.practice;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -11,6 +12,7 @@ import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
@@ -42,8 +44,10 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
-import com.yarolegovich.lovelydialog.LovelyStandardDialog;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+// StyleableToast import removed
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -52,7 +56,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
-import mehdi.sakout.fancybuttons.FancyButton;
+
 
 public class Practice extends AppCompatActivity  implements View.OnClickListener, TextToSpeech.OnInitListener, NewTrainRecyclerView.TrainAdapterCallback {
 
@@ -63,7 +67,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
     private CardView wordCard, answerCard1, answerCard2, answerCard3, answerCard4;
     private TextView wordView, answerView1, answerView2, answerView3, answerView4;
     private FloatingActionButton fab;
-    private FancyButton speak;
+    private MaterialButton speak;
     private View trainCircle1, trainCircle2, trainCircle3, trainCircle4;
     private RoundCornerProgressBar progress1;
     private RecyclerView recyclerView;
@@ -96,8 +100,8 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        //       WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            setContentView(R.layout.activity_new_train);
+        //        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_new_train);
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getColor(R.color.colorPrimary));
@@ -131,22 +135,30 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             @Override
             public void handleOnBackPressed() {
 
-                new LovelyStandardDialog(Practice.this)
-                        .setTopColorRes(R.color.colorPrimary)
-                        .setButtonsColorRes(R.color.colorPrimary)
-                        .setIcon(R.drawable.ic_leave)
-                        .setTitle("Do you want to leave this session, " + sp.getString("userName", "Boo") + "?")
-                        .setMessage("Leaving this session will make you lose your progress")
-                        .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Practice.this.startActivity(new Intent(Practice.this, MainActivity.class));
-                                Practice.this.finish();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(Practice.this);
+                builder.setTitle("Do you want to leave this session, " + sp.getString("userName", "Boo") + "?");
+                builder.setMessage("Leaving this session will make you lose your progress");
+                builder.setIcon(R.drawable.ic_leave);
 
+                // 1. Positive Button (OK)
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Practice.this.startActivity(new Intent(Practice.this, MainActivity.class));
+                        Practice.this.finish();
+                    }
+                });
+
+                // 2. Negative Button (No)
+                builder.setNegativeButton(android.R.string.no, null);
+
+                // 3. Show the dialog
+                AlertDialog dialog = builder.show();
+
+                // Optional: Color the buttons to match your previous look
+                int primaryColor = getColor(R.color.colorPrimary);
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(primaryColor);
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(primaryColor);
             }
         });
 
@@ -246,15 +258,15 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                 SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
 
 
-             //   Toast.makeText(this, "Word length: "+fiveWords.get(showCycle).getWordSL(), Toast.LENGTH_LONG).show();
-               spanWord.setSpan(lowColor,fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-               spanWord.setSpan(new RelativeSizeSpan(0.4f), fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                //   Toast.makeText(this, "Word length: "+fiveWords.get(showCycle).getWordSL(), Toast.LENGTH_LONG).show();
+                spanWord.setSpan(lowColor,fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spanWord.setSpan(new RelativeSizeSpan(0.4f), fiveWords.get(showCycle).getWord().length(),1+fiveWords.get(showCycle).getWordSL().length()+fiveWords.get(showCycle).getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 wordView.setText(spanWord);
 
             }else {
                 wordView.setText(fiveWords.get(showCycle).getWord());
             }
-           // wordViewMiddle.setText(fiveWords.get(showCycle).getWord());
+            // wordViewMiddle.setText(fiveWords.get(showCycle).getWord());
 
             if(showCycle == 0){
                 handler.postDelayed(new Runnable() {
@@ -325,7 +337,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                 IsWrongAnswer = true;
 
             }else {
-               // wordViewMiddle.setVisibility(View.VISIBLE);
+                // wordViewMiddle.setVisibility(View.VISIBLE);
                 wordView.setText(fiveWords.get(this.quizCycle).getWord());
             }
 
@@ -407,7 +419,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                     }
                     totalCorrects++;
 
-                    StyleableToast.makeText(this, "Correct!", 5, R.style.correct).show();
+                    Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
 
                     this.quizCycle++;
                     totalCycle++;
@@ -429,7 +441,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                     mistakes++;
 
                     if( lastMistake == quizCycle){
-                        StyleableToast.makeText(this, "wrong answer again", 5, R.style.wrong_again).show();
+                        Toast.makeText(this, "wrong answer again", Toast.LENGTH_LONG).show();
 
 
                     }else {
@@ -437,11 +449,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                         lastMistake = quizCycle;
                         if(mistakes <= 3){
 
-                            StyleableToast.makeText(this, "Wrong Answer", 5, R.style.wrong).show();
+                            Toast.makeText(this, "Wrong Answer", Toast.LENGTH_LONG).show();
 
                         }
                         if(mistakes >= 4){
-                            StyleableToast.makeText(this, "Oh no! wrong answer", 5, R.style.MyToast).show();
+                            Toast.makeText(this, "Oh no! wrong answer", Toast.LENGTH_LONG).show();
 
                         }
                     }
@@ -466,7 +478,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                     }
                     totalCorrects++;
 
-                    StyleableToast.makeText(this, "Correct!", 5, R.style.correct).show();
+                    Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                     this.quizCycle++;
                     totalCycle++;
 
@@ -479,13 +491,13 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
                         incorrectAudio.start();
                     }
-                   // wordViewMiddle.setText("");
+                    // wordViewMiddle.setText("");
                     speak.setVisibility(View.INVISIBLE);
                     wrongAnswerAnimation();
                     mistakes++;
 
                     if( lastMistake == quizCycle){
-                        StyleableToast.makeText(this, "wrong answer again", 5, R.style.wrong_again).show();
+                        Toast.makeText(this, "wrong answer again", Toast.LENGTH_SHORT).show();
 
 
                     }else {
@@ -493,11 +505,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                         lastMistake = quizCycle;
                         if(mistakes <= 3){
 
-                            StyleableToast.makeText(this, "Wrong answer", 5, R.style.wrong).show();
+                            Toast.makeText(this, "Wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                         if(mistakes >= 4){
-                            StyleableToast.makeText(this, "Oh no! wrong answer", 5, R.style.MyToast).show();
+                            Toast.makeText(this, "Oh no! wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -517,7 +529,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                     }
                     totalCorrects++;
 
-                    StyleableToast.makeText(this, "Correct!", 5, R.style.correct).show();
+                    Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                     this.quizCycle++;
                     totalCycle++;
 
@@ -529,13 +541,13 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
                         incorrectAudio.start();
                     }
-                   // wordViewMiddle.setText("");
+                    // wordViewMiddle.setText("");
                     speak.setVisibility(View.INVISIBLE);
                     wrongAnswerAnimation();
                     mistakes++;
 
                     if( lastMistake == quizCycle){
-                        StyleableToast.makeText(this, "Wrong answer again", 5, R.style.wrong_again).show();
+                        Toast.makeText(this, "Wrong answer again", Toast.LENGTH_SHORT).show();
 
 
                     }else {
@@ -543,11 +555,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                         lastMistake = quizCycle;
                         if(mistakes <= 3){
 
-                            StyleableToast.makeText(this, "Wrong answer", 5, R.style.wrong).show();
+                            Toast.makeText(this, "Wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                         if(mistakes >= 4){
-                            StyleableToast.makeText(this, "Oh no! wrong answer", 5, R.style.MyToast).show();
+                            Toast.makeText(this, "Oh no! wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -567,7 +579,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                     applyCorrectColor();
                     totalCorrects++;
 
-                    StyleableToast.makeText(this, "Correct!", 5, R.style.correct).show();
+                    Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                     this.quizCycle++;
                     totalCycle++;
                     answerCardAnimation2();
@@ -583,13 +595,13 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
                         incorrectAudio.start();
                     }
-                //    wordViewMiddle.setText("");
+                    //    wordViewMiddle.setText("");
                     speak.setVisibility(View.INVISIBLE);
                     wrongAnswerAnimation();
                     mistakes++;
 
                     if( lastMistake == quizCycle){
-                        StyleableToast.makeText(this, "wrong answer again?", 5, R.style.wrong_again).show();
+                        Toast.makeText(this, "wrong answer again?", Toast.LENGTH_SHORT).show();
 
 
                     }else {
@@ -597,11 +609,11 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
                         lastMistake = quizCycle;
                         if(mistakes <= 3){
 
-                            StyleableToast.makeText(this, "Wrong answer", 5, R.style.wrong).show();
+                            Toast.makeText(this, "Wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                         if(mistakes >= 4){
-                            StyleableToast.makeText(this, "Oh no! Wrong answer", 5, R.style.MyToast).show();
+                            Toast.makeText(this, "Oh no! Wrong answer", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -640,7 +652,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
                     hideViews();
                     adLoading.setVisibility(View.VISIBLE);
-                   // showInterstitialAd();
+                    // showInterstitialAd();
 
                     Practice.this.startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
                     Practice.this.finish();
@@ -686,7 +698,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         answerView4 = findViewById(R.id.train_answer_text4);
         speak = findViewById(R.id.train_speaker_icon);
         speak.setVisibility(View.INVISIBLE);
-       // wordViewMiddle = (TextView)findViewById(R.id.train_word_middle);
+        // wordViewMiddle = (TextView)findViewById(R.id.train_word_middle);
         fab = findViewById(R.id.train_fab);
         fab.setMax(5);
         progress1 = findViewById(R.id.progress_1);
@@ -739,7 +751,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
 
 //        wordViewMiddle.setVisibility(View.INVISIBLE);
 
-      //  wordView.setTypeface(comfortaRegular);
+        //  wordView.setTypeface(comfortaRegular);
     }
     private void addingNewWords() {
 
@@ -759,7 +771,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
             }
 
 
-                showCycle = fiveWords.size();
+            showCycle = fiveWords.size();
 
         }
 
@@ -845,8 +857,8 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         fab.animate().scaleX(1f).scaleY(1f).setDuration(350L).setInterpolator(new AnticipateOvershootInterpolator());
 
         recyclerView.setVisibility(View.VISIBLE);
-      //  wordViewMiddle.setText("");
-      //  wordViewMiddle.setVisibility(View.INVISIBLE);
+        //  wordViewMiddle.setText("");
+        //  wordViewMiddle.setVisibility(View.INVISIBLE);
         answerCard1.setVisibility(View.INVISIBLE);
         answerCard2.setVisibility(View.INVISIBLE);
         answerCard3.setVisibility(View.INVISIBLE);
@@ -855,7 +867,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         wordView.setVisibility(View.VISIBLE);
 
         wordView.setText(fiveWords.get(quizCycle).getWord());
-    //    wordViewMiddle.setText(fiveWords.get(quizCycle).getWord());
+        //    wordViewMiddle.setText(fiveWords.get(quizCycle).getWord());
 
 
         DefExamAnimation();
@@ -928,7 +940,7 @@ public class Practice extends AppCompatActivity  implements View.OnClickListener
         if(level.equalsIgnoreCase("intermediate")){
 
             fiveWords.addAll(repository.getIntermediateLearnedWords());
-           // getIntermediateWordData();
+            // getIntermediateWordData();
         }
 
 

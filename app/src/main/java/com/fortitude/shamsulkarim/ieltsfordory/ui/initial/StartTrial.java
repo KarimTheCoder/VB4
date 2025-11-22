@@ -9,16 +9,16 @@ import android.view.View;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.utils.DatabaseChecker;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import mehdi.sakout.fancybuttons.FancyButton;
 
 public class StartTrial extends AppCompatActivity implements View.OnClickListener {
 
     //UI
-    private FancyButton startTrialButton;
+    private MaterialButton startTrialButton;
     // Code
     private SharedPreferences sp;
 
