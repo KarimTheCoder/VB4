@@ -5,7 +5,7 @@ buildscript {
         agp_version = '8.1.2'
     }
     repositories {
-        jcenter()
+        mavenCentral()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
@@ -15,9 +15,9 @@ buildscript {
 
     dependencies {
         classpath "com.android.tools.build:gradle:$agp_version"
-        classpath 'com.google.gms:google-services:4.4.0'
+        classpath 'com.google.gms:google-services:4.4.4'
 
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.6'
 
     }
 
@@ -31,12 +31,12 @@ allprojects {
             url 'https://maven.google.com/'
         }
 
-        jcenter()
+        mavenCentral()
         google()
 
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
