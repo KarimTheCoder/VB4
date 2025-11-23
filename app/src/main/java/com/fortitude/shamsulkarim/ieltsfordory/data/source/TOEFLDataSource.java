@@ -11,6 +11,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TOEFLDataSource extends DataSource{
     private static final int FAVORITE_COLL = 2;
@@ -24,8 +25,8 @@ public class TOEFLDataSource extends DataSource{
     private final boolean isChecked;
     private final TOEFLWordDatabase database;
     private final Context context;
-    private final List<String> favoriteStates;
-    private final List<String> learnedStates;
+    private final CopyOnWriteArrayList<String> favoriteStates;
+    private final CopyOnWriteArrayList<String> learnedStates;
 
 
 
@@ -36,12 +37,12 @@ public class TOEFLDataSource extends DataSource{
 
 
         this.context = context;
-        favoriteStates = new ArrayList<>();
-        learnedStates = new ArrayList<>();
+        favoriteStates = new CopyOnWriteArrayList<>();
+        learnedStates = new CopyOnWriteArrayList<>();
 
         WORD_SIZE = context.getResources().getStringArray(R.array.TOEFL_words).length;
 
-        database = new TOEFLWordDatabase(context);
+        database = TOEFLWordDatabase.getInstance(context);
         isChecked =   sp.getBoolean("isTOEFLActive",true);
         secondLanguage = sp.getString("secondlanguage","english");
         getFavoritePosition();
@@ -58,14 +59,13 @@ public class TOEFLDataSource extends DataSource{
     }
 
     public List<String> getFavoritePosition(){
-
+        favoriteStates.clear();
+        learnedStates.clear();
         Cursor res = database.getData();
-
         while (res.moveToNext()){
             favoriteStates.add(res.getString(FAVORITE_COLL));
             learnedStates.add(res.getString(LEARNED_COLL));
         }
-
         res.close();
         return favoriteStates;
     }

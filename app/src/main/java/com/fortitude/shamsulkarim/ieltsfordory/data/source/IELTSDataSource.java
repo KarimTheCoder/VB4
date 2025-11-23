@@ -11,12 +11,13 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class IELTSDataSource extends DataSource{
     private final static int LEARNED_COLL = 3;
     private final static int FAVORITE_COLL = 2;
     private final static int POSITION_COLL = 0;
-    private final List<String> learnedStates;
+    private final CopyOnWriteArrayList<String> learnedStates;
     private final int WORD_SIZE;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
     private String[] wordsArraySL, translationArraySL, example1arraySL, example2ArraySL, example3ArraySL;
@@ -25,8 +26,8 @@ public class IELTSDataSource extends DataSource{
     private final boolean isChecked;
     private final IELTSWordDatabase database;
     private final Context context;
-    private final List<String> favoriteStates;
-    private final List<Integer> databasePosition;
+    private final CopyOnWriteArrayList<String> favoriteStates;
+    private final CopyOnWriteArrayList<Integer> databasePosition;
     private final String secondLanguage;
 
     public IELTSDataSource(Context context) {
@@ -34,11 +35,11 @@ public class IELTSDataSource extends DataSource{
         this.context = context;
         WORD_SIZE = context.getResources().getStringArray(R.array.IELTS_words).length;
 
-        database = new IELTSWordDatabase(context);
+        database = IELTSWordDatabase.getInstance(context);
 
-        favoriteStates = new ArrayList<>();
-        databasePosition = new ArrayList<>();
-        learnedStates = new ArrayList<>();
+        favoriteStates = new CopyOnWriteArrayList<>();
+        databasePosition = new CopyOnWriteArrayList<>();
+        learnedStates = new CopyOnWriteArrayList<>();
         isChecked =   sp.getBoolean("isIELTSActive",true);
         secondLanguage = sp.getString("secondlanguage","english");
         getFavoritePosition();
@@ -55,16 +56,16 @@ public class IELTSDataSource extends DataSource{
     }
 
     public void getFavoritePosition(){
-
+        favoriteStates.clear();
+        learnedStates.clear();
+        databasePosition.clear();
         Cursor res = database.getData();
         while (res.moveToNext()){
-
             favoriteStates.add(res.getString(FAVORITE_COLL));
             learnedStates.add(res.getString(LEARNED_COLL));
             databasePosition.add(res.getInt(POSITION_COLL));
         }
         res.close();
-
     }
 
     public int getIELTSDatabaseSize(){

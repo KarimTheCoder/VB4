@@ -1,6 +1,7 @@
 package com.fortitude.shamsulkarim.ieltsfordory.data.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.data.source.GREDataSource;
@@ -10,8 +11,17 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.source.TOEFLDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
+/**
+ * Aggregates vocabulary from IELTS/TOEFL/SAT/GRE data sources.
+ * Uses a fixed thread pool to fetch lists in parallel to reduce latency
+ * while preserving the existing synchronous API.
+ */
 public class VocabularyRepository {
 
     private final GREDataSource greDataSource;
@@ -19,6 +29,7 @@ public class VocabularyRepository {
     private final SATDataSource satDataSource;
     private final TOEFLDataSource toeflDataSource;
 
+    private final ExecutorService pool;
     public VocabularyRepository(Context context){
 
         ieltsDataSource = new IELTSDataSource(context);
@@ -26,45 +37,55 @@ public class VocabularyRepository {
         satDataSource = new SATDataSource(context);
         greDataSource = new GREDataSource(context);
         toeflDataSource = new TOEFLDataSource(context);
+        pool = Executors.newFixedThreadPool(4);
 
+    }
+
+    private List<Word> invokeAndMerge(List<Callable<List<Word>>> tasks) {
+        try {
+            List<Future<List<Word>>> futures = pool.invokeAll(tasks);
+            List<Word> merged = new ArrayList<>();
+            for (Future<List<Word>> f : futures) {
+                merged.addAll(f.get());
+            }
+            return merged;
+        } catch (Exception e) {
+            Log.w("VocabularyRepository", "Parallel fetch failed, falling back", e);
+            List<Word> merged = new ArrayList<>();
+            for (Callable<List<Word>> t : tasks) {
+                try { merged.addAll(t.call()); } catch (Exception ignored) { }
+            }
+            return merged;
+        }
     }
 
     // Getting vocabulary data
+    /** Fetches beginner-level vocabulary across all sources in parallel. */
     public List<Word> getBeginnerVocabulary(){
-
-        List<Word> words = new ArrayList<>();
-        words.addAll(ieltsDataSource.getBeginnerWords());
-        words.addAll(toeflDataSource.getBeginnerWords());
-        words.addAll(satDataSource.getBeginnerWords());
-        words.addAll(greDataSource.getBeginnerWords());
-
-
-        return words;
+        List<Callable<List<Word>>> tasks = new ArrayList<>();
+        tasks.add(() -> ieltsDataSource.getBeginnerWords());
+        tasks.add(() -> toeflDataSource.getBeginnerWords());
+        tasks.add(() -> satDataSource.getBeginnerWords());
+        tasks.add(() -> greDataSource.getBeginnerWords());
+        return invokeAndMerge(tasks);
     }
+    /** Fetches intermediate-level vocabulary across all sources in parallel. */
     public List<Word> getIntermediateVocabulary(){
-
-        List<Word> words = new ArrayList<>();
-
-
-
-        words.addAll(ieltsDataSource.getIntermediateWords());
-        words.addAll(toeflDataSource.getIntermediateWords());
-        words.addAll(satDataSource.getIntermediateWords());
-        words.addAll(greDataSource.getIntermediateWords());
-
-        return words;
+        List<Callable<List<Word>>> tasks = new ArrayList<>();
+        tasks.add(() -> ieltsDataSource.getIntermediateWords());
+        tasks.add(() -> toeflDataSource.getIntermediateWords());
+        tasks.add(() -> satDataSource.getIntermediateWords());
+        tasks.add(() -> greDataSource.getIntermediateWords());
+        return invokeAndMerge(tasks);
     }
+    /** Fetches advanced-level vocabulary across all sources in parallel. */
     public List<Word> getAdvanceVocabulary(){
-        List<Word> words = new ArrayList<>();
-
-
-
-        words.addAll(ieltsDataSource.getAdvanceWords());
-        words.addAll(toeflDataSource.getAdvanceWords());
-        words.addAll(satDataSource.getAdvanceWords());
-        words.addAll(greDataSource.getAdvanceWords());
-
-        return words;
+        List<Callable<List<Word>>> tasks = new ArrayList<>();
+        tasks.add(() -> ieltsDataSource.getAdvanceWords());
+        tasks.add(() -> toeflDataSource.getAdvanceWords());
+        tasks.add(() -> satDataSource.getAdvanceWords());
+        tasks.add(() -> greDataSource.getAdvanceWords());
+        return invokeAndMerge(tasks);
     }
 
 

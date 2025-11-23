@@ -13,6 +13,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GREDataSource extends DataSource{
 
@@ -25,8 +26,8 @@ public class GREDataSource extends DataSource{
 
     private final int WORD_SIZE;
     private int[] position;
-    private final List<String> favoriteStates;
-    private final List<String> learnedStates;
+    private final CopyOnWriteArrayList<String> favoriteStates;
+    private final CopyOnWriteArrayList<String> learnedStates;
     private final boolean isChecked;
     private final GREWordDatabase database;
     private final Context context;
@@ -37,11 +38,11 @@ public class GREDataSource extends DataSource{
         this.context = context;
         WORD_SIZE = context.getResources().getStringArray(R.array.GRE_words).length;
 
-        database = new GREWordDatabase(context);
+        database = GREWordDatabase.getInstance(context);
 
 
-        favoriteStates = new ArrayList<>();
-        learnedStates = new ArrayList<>();
+        favoriteStates = new CopyOnWriteArrayList<>();
+        learnedStates = new CopyOnWriteArrayList<>();
 
         secondLanguage = sp.getString("secondlanguage","english");
         isChecked =   sp.getBoolean("isGREActive",true);
@@ -77,14 +78,13 @@ public class GREDataSource extends DataSource{
 
 
     public void getFavoritePosition(){
+        favoriteStates.clear();
+        learnedStates.clear();
         Cursor greRes = database.getData();
-
-
         while (greRes.moveToNext()){
             favoriteStates.add(greRes.getString(FAVORITE_COLL));
             learnedStates.add(greRes.getString(LEARNED_COLL));
         }
-
         greRes.close();
     }
 
