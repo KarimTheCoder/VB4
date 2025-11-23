@@ -402,23 +402,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
 
     }
-//
-//    @Override
-//    public void onBackPressed() {
-//        if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
-//            toast = Toast.makeText(this, "Press back again to close this app", Toast.LENGTH_LONG);
-//            toast.show();
-//            this.lastBackPressTime = System.currentTimeMillis();
-//        } else {
-//            if (toast != null) {
-//                toast.cancel();
-//            }
-//            super.onBackPressed();
-//        }
-//
-//    }
-
-
 
     @Override
     public void onClick(View v) {

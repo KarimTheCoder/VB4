@@ -1,5 +1,7 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.initial;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.data.utils.DatabaseChecker;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.google.android.material.button.MaterialButton;
@@ -14,13 +17,12 @@ import com.google.android.material.button.MaterialButton;
 import java.util.Calendar;
 import java.util.Date;
 
-
 public class StartTrial extends AppCompatActivity implements View.OnClickListener {
 
-    //UI
     private MaterialButton startTrialButton;
     // Code
     private SharedPreferences sp;
+    private AppPreferences prefs;
 
 
     @Override
@@ -33,54 +35,39 @@ public class StartTrial extends AppCompatActivity implements View.OnClickListene
         goHomeWhenPremium();
 
         DatabaseChecker databaseChecker = new DatabaseChecker(this);
-        if(!databaseChecker.isDatabaseLoaded()){
+        if (!databaseChecker.isDatabaseLoaded()) {
 
             startActivity(new Intent(this, AppLauncher.class));
+            finish();
 
         }
     }
-
-
-    private void initializeTrialMode(){
-
-
-        // End Date
+    private void initializeTrialMode() {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.DATE, 7);  // number of days to add
         Date endDate = c.getTime();
 
-        // Debug
-//        String endDateString = DateFormat.getDateInstance().format(endDate);
-//        Toast.makeText(this,"End Date: "+endDateString,Toast.LENGTH_SHORT).show();
-
-        // Save End Date
-        if(!sp.contains("trial_end_date")){
-
-            sp.edit().putLong("trial_end_date", endDate.getTime()).apply();
-           // Toast.makeText(this,"Trial Mode Initialized", Toast.LENGTH_SHORT).show();
-
+        if (!prefs.contains(AppPreferences.KEY_TRIAL_END_DATE)) {
+            prefs.setLong(AppPreferences.KEY_TRIAL_END_DATE, endDate.getTime());
         }
-
     }
 
-
-    private void codeInitialization(){
-
+    private void codeInitialization() {
         sp = getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-
+        prefs = com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences.get(this);
     }
-    private void uiInitialization(){
 
-        startTrialButton  = findViewById(R.id.start_trial_button);
+    private void uiInitialization() {
+        prefs = AppPreferences.get(this);
+        startTrialButton = findViewById(R.id.start_trial_button);
         startTrialButton.setOnClickListener(this);
 
     }
 
-    private void goHomeWhenPremium(){
+    private void goHomeWhenPremium() {
 
-        if(sp.contains("purchase")){
+        if (prefs.isPremium()) {
 
-            initializeTrialMode(); // Why I have used this method here?
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
 
@@ -90,7 +77,7 @@ public class StartTrial extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
 
-        if(view == startTrialButton){
+        if (view == startTrialButton) {
             initializeTrialMode();
 
             startActivity(new Intent(getApplicationContext(), MainActivity.class));

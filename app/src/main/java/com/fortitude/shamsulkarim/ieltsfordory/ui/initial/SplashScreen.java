@@ -1,9 +1,11 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.initial;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
@@ -19,6 +21,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.DatabaseInitializer;
 import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.TaskListener;
+import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
@@ -28,6 +31,8 @@ public class SplashScreen extends AppCompatActivity {
 
     private TextView progressText;
     private SharedPreferences sp;
+    private AppPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,84 +42,42 @@ public class SplashScreen extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         decorView.setSystemUiVisibility(uiOptions);
         Window window = getWindow();
-        Drawable background = ContextCompat.getDrawable(this,R.drawable.gradient);
+        Drawable background = ContextCompat.getDrawable(this, R.drawable.gradient);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getColor(android.R.color.transparent));
         window.setNavigationBarColor(getColor(android.R.color.transparent));
         window.setBackgroundDrawable(background);
 
-
         progressText = findViewById(R.id.textView20);
 
-
-        //----------------------------------------
-
-        // This method initializes default settings
         initialize();
 
-        //---------------------------------------
-
-        // This methods Initializes database at the first launch of the app
-        // after first launch it sends you to MainActivity.java activity.
-
         Handler handler = new Handler();
-        handler.postDelayed(this::initializeOrMainActivity,1000L);
-
-
-
-
-        //initializeOrMainActivity();
-
-        //-----------------------------------------------------------------
+        handler.postDelayed(this::initializeOrMainActivity, 1000L);
 
     }
 
-    private void initializeOrMainActivity(){
+    private void initializeOrMainActivity() {
 
-
-//        if(sp.contains("home")){
-//            startActivity(new Intent(this, MainActivity.class));
-//            finish();
-//        }else {
-
-
-            createDatabase();
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            sp.edit().putInt("DarkMode",0).apply();
-//        }
-
-
-
-
+        createDatabase();
 
     }
 
-
-    // This methods initializes the databases and when it
-
-    private void createDatabase(){
-
-       // DatabaseAsyncTask databaseTask = new DatabaseAsyncTask();
-       // databaseTask.execute(10);
-
+    private void createDatabase() {
 
         DatabaseInitializer dbInitializer = new DatabaseInitializer(this, new TaskListener() {
             @Override
             public void onComplete() {
 
-                if(BuildConfig.FLAVOR.equalsIgnoreCase("pro")){
+                if (BuildConfig.FLAVOR.equalsIgnoreCase("pro")) {
 
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-                }else {
+                } else {
 
                     startActivity(new Intent(getApplicationContext(), StartTrial.class));
                     finish();
                 }
-
-
-
-
             }
 
             @Override
@@ -128,34 +91,23 @@ public class SplashScreen extends AppCompatActivity {
 
             }
         });
-
         dbInitializer.execute();
-
-
     }
 
-    private void initialize(){
+    private void initialize() {
         sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-
-        //Default Settings Initializtion
-
-        if(!sp.contains("wordsPerSession")){
-
-            sp.edit().putInt("wordsPerSession",3).apply();
+        prefs = AppPreferences.get(this);
+        AppPreferences.migrateLegacy(this);
 
 
-
+        if (!prefs.contains(AppPreferences.KEY_WORDS_PER_SESSION)) {
+            prefs.setInt(AppPreferences.KEY_WORDS_PER_SESSION, 3);
         }
-        if(!sp.contains("repeatationPerSession")){
-
-            sp.edit().putInt("repeatationPerSession",3).apply();
-
-
+        if (!prefs.contains(AppPreferences.KEY_REPEATATION_PER_SESSION)) {
+            prefs.setInt(AppPreferences.KEY_REPEATATION_PER_SESSION, 3);
         }
         // Default Dark themes
         setupAppTheme();
-
-
 
 
         ProgressBar progressBar = findViewById(R.id.spin_splash_screen);
@@ -163,28 +115,20 @@ public class SplashScreen extends AppCompatActivity {
         progressBar.setIndeterminateDrawable(doubleBounce);
 
 
+        prefs.setString(AppPreferences.KEY_ADV_FAV, "");
+        prefs.setString(AppPreferences.KEY_ADV_LEARNED, "0");
+        prefs.setString(AppPreferences.KEY_BEG_FAV, "");
+        prefs.setString(AppPreferences.KEY_BEG_LEARNED, "0");
+        prefs.setString(AppPreferences.KEY_INT_FAV, "");
+        prefs.setString(AppPreferences.KEY_INT_LEARNED, "0");
 
-
-
-        sp.edit().putString("advanceFavNum","").apply();
-        sp.edit().putString("advanceLearnedNum","0").apply();
-        sp.edit().putString("beginnerFavNum","").apply();
-        sp.edit().putString("beginnerLearnedNum","0").apply();
-        sp.edit().putString("intermediateFavNum", "").apply();
-        sp.edit().putString("intermediateLearnedNum","0").apply();
-
-        if(!sp.contains("skip")){
-
-
-            sp.edit().putBoolean("skip",false).apply();
+        if (!prefs.contains(AppPreferences.KEY_SKIP)) {
+            prefs.setBool(AppPreferences.KEY_SKIP, false);
         }
 
 
-        if(!sp.contains("favoriteCountProfile")){
-
-            sp.edit().putInt("favoriteCountProfile",0).apply();
-
-
+        if (!prefs.contains(AppPreferences.KEY_FAVORITE_COUNT_PROFILE)) {
+            prefs.setInt(AppPreferences.KEY_FAVORITE_COUNT_PROFILE, 0);
         }
 
         setupDefaultVocabulary();
@@ -192,26 +136,22 @@ public class SplashScreen extends AppCompatActivity {
         //--------------------------------------------------------------
 
 
-
-
-
     }
-
 
 
     //Default settings
 
-    private void setupAppTheme(){
+    private void setupAppTheme() {
 
-        if(!sp.contains("DarkMode")){
+        if (!sp.contains("DarkMode")) {
 
-            sp.edit().putInt("DarkMode",0).apply();
+            sp.edit().putInt("DarkMode", 0).apply();
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }else {
+        } else {
 
-            int darkMode = sp.getInt("DarkMode",0);
+            int darkMode = sp.getInt("DarkMode", 0);
 
-            switch(darkMode) {
+            switch (darkMode) {
 
                 case 1:
 
@@ -230,23 +170,24 @@ public class SplashScreen extends AppCompatActivity {
 
         }
     }
-    private void setupDefaultVocabulary(){
 
-        if(!sp.contains("home")){
+    private void setupDefaultVocabulary() {
 
-            sp.edit().putBoolean("isIELTSActive",true).apply();
-            sp.edit().putBoolean("isTOEFLActive",true).apply();
-            sp.edit().putBoolean("isSATActive",true).apply();
-            sp.edit().putBoolean("isGREActive",true).apply();
+        if (!prefs.contains(AppPreferences.KEY_HOME)) {
 
+            prefs.setBool("isIELTSActive", true);
+            prefs.setBool("isTOEFLActive", true);
+            prefs.setBool("isSATActive", true);
+            prefs.setBool("isGREActive", true);
 
 
         }
     }
-    private void setupDefaultLanguage(){
 
-        if(!sp.contains("home")){
-            sp.edit().putString("secondlanguage","english").apply();
+    private void setupDefaultLanguage() {
+
+        if (!prefs.contains(AppPreferences.KEY_HOME)) {
+            prefs.setString("secondlanguage", "english");
         }
 
     }
