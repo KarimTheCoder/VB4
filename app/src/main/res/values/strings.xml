@@ -73,6 +73,13 @@
     <string name="share">Share</string>
     <string name="settings">Settings</string>
     
+    <!-- Bottom Navigation -->
+    <string name="home">Home</string>
+    <string name="words">Words</string>
+    <string name="learned">Learned</string>
+    <string name="favorite">Favorite</string>
+    <string name="profile">Profile</string>
+    
     <string name="google_client_id">"576057269160-7fuvcqcdidumlgtecrrcs4b0unklh85b.apps.googleusercontent.com"</string>
     <string name="client_id">"576057269160-872i8m7d8acvc4vbp1nrrqt9p42mv7dq.apps.googleusercontent.com"</string>
     <string name="loading_text">We are preparing the app...</string>
