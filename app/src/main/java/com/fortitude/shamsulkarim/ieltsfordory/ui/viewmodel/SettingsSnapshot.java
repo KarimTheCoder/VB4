@@ -11,8 +11,12 @@ public class SettingsSnapshot {
     public final boolean toeflActive;
     public final boolean satActive;
     public final boolean greActive;
+    public final boolean isSpanish;
+    public final boolean isTrialActive;
 
-    public SettingsSnapshot(boolean sound, boolean pronun, int imageQuality, int darkMode, int wordsPerSession, int repeatationPerSession, boolean ieltsActive, boolean toeflActive, boolean satActive, boolean greActive) {
+    public SettingsSnapshot(boolean sound, boolean pronun, int imageQuality, int darkMode, int wordsPerSession,
+            int repeatationPerSession, boolean ieltsActive, boolean toeflActive, boolean satActive, boolean greActive,
+            boolean isSpanish, boolean isTrialActive) {
         this.sound = sound;
         this.pronun = pronun;
         this.imageQuality = imageQuality;
@@ -23,6 +27,7 @@ public class SettingsSnapshot {
         this.toeflActive = toeflActive;
         this.satActive = satActive;
         this.greActive = greActive;
+        this.isSpanish = isSpanish;
+        this.isTrialActive = isTrialActive;
     }
 }
-

@@ -874,7 +874,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/ns_sign_in"
+        android:id="@+id/ns_save"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="@dimen/keyline_4"
@@ -893,7 +893,7 @@
         app:backgroundTint="#ffffff"
         app:rippleColor="@color/colorPrimary"
         app:cornerRadius="30dp"
-        android:text="Sign in"
+        android:text="SAVE"
         android:textColor="@color/colorPrimary"
         android:insetTop="0dp"
         android:insetBottom="0dp" />

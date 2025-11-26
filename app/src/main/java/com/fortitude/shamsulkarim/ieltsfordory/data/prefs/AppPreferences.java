@@ -28,6 +28,8 @@ public final class AppPreferences {
     public static final String KEY_BEG_LEARNED = "beginnerLearnedNum";
     public static final String KEY_INT_FAV = "intermediateFavNum";
     public static final String KEY_INT_LEARNED = "intermediateLearnedNum";
+    public static final String KEY_IS_SIGNED_IN = "isSignedIn";
+    public static final String KEY_USER_NAME = "userName";
 
     private final SharedPreferences sp;
 
@@ -82,4 +84,9 @@ public final class AppPreferences {
         if (legacy.contains("GREwordCount1")) e.putInt("GREwordCount1", legacy.getInt("GREwordCount1", 0));
         e.apply();
     }
+
+    public boolean isSignedIn(){ return sp.getBoolean(KEY_IS_SIGNED_IN, false); }
+    public void setSignedIn(boolean v){ sp.edit().putBoolean(KEY_IS_SIGNED_IN, v).apply(); }
+    public String getUserName(){ return sp.getString(KEY_USER_NAME, "Doggo"); }
+    public void setUserName(String name){ sp.edit().putString(KEY_USER_NAME, name).apply(); }
 }
