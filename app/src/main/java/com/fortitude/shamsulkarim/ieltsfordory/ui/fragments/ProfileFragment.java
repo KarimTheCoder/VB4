@@ -4,13 +4,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,19 +20,27 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.viewmodel.SettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.AlarmReceiver;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.LocalData;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.NotificationScheduler;
 import com.google.android.material.button.MaterialButton;
 import com.kyleduo.switchbutton.SwitchButton;
+
 import org.jetbrains.annotations.NotNull;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+
 import de.cketti.mailto.EmailIntentBuilder;
 
 /**
@@ -149,7 +152,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         bugReport.setOnClickListener(this);
 
 
-        if (!localData.getReminderStatus()){
+        if (!localData.getReminderStatus()) {
             setReminder.setAlpha(0.4f);
         }else {
             setReminder.setAlpha(1f);

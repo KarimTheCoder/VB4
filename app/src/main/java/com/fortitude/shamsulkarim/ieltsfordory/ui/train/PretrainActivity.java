@@ -17,7 +17,7 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.viewmodel.SettingActivity;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Objects;
