@@ -36,6 +36,18 @@ public final class AppPreferences {
     public static final String KEY_FAVORITE_SCROLL_POS = "recyclerview_last_pos";
     public static final String KEY_PRACTICE_MODE = "practice";
     public static final String KEY_PREV_LEARNED_SELECTION = "prevLearnedSelection";
+    public static final String KEY_DEFAULT_ALARM = "defaultAlarm";
+    public static final String KEY_SECOND_LANGUAGE = "secondlanguage";
+    public static final String KEY_IS_IELTS_ACTIVE = "isIELTSActive";
+    public static final String KEY_IS_TOEFL_ACTIVE = "isTOEFLActive";
+    public static final String KEY_IS_SAT_ACTIVE = "isSATActive";
+    public static final String KEY_IS_GRE_ACTIVE = "isGREActive";
+    public static final String KEY_SOUND_STATE = "soundState";
+    public static final String KEY_MISTAKE_FAVORITE = "mistakeFavorite";
+    public static final String KEY_FAVORITE_WORD_COUNT = "favoriteWordCount";
+    public static final String KEY_MOST_MISTAKEN_WORD = "MostMistakenWord";
+    public static final String KEY_TOTAL_CORRECTS = "totalCorrects";
+    public static final String KEY_FAVORITE_WRONGS = "favoriteWrongs";
 
     private final SharedPreferences sp;
 
@@ -135,6 +147,70 @@ public final class AppPreferences {
         setInt(KEY_PREV_LEARNED_SELECTION, v);
     }
 
+    public int getWordsPerSession() {
+        return getInt(KEY_WORDS_PER_SESSION, 5);
+    }
+
+    public void setWordsPerSession(int v) {
+        setInt(KEY_WORDS_PER_SESSION, v);
+    }
+
+    public int getRepeatationPerSession() {
+        return getInt(KEY_REPEATATION_PER_SESSION, 5);
+    }
+
+    public void setRepeatationPerSession(int v) {
+        setInt(KEY_REPEATATION_PER_SESSION, v);
+    }
+
+    public boolean isDefaultAlarmSet() {
+        return getBool(KEY_DEFAULT_ALARM, false);
+    }
+
+    public void setDefaultAlarmSet(boolean v) {
+        setBool(KEY_DEFAULT_ALARM, v);
+    }
+
+    public String getSecondLanguage() {
+        return getString(KEY_SECOND_LANGUAGE, "English");
+    }
+
+    public void setSecondLanguage(String v) {
+        setString(KEY_SECOND_LANGUAGE, v);
+    }
+
+    public boolean isIELTSActive() {
+        return getBool(KEY_IS_IELTS_ACTIVE, true);
+    }
+
+    public void setIELTSActive(boolean v) {
+        setBool(KEY_IS_IELTS_ACTIVE, v);
+    }
+
+    public boolean isTOEFLActive() {
+        return getBool(KEY_IS_TOEFL_ACTIVE, true);
+    }
+
+    public void setTOEFLActive(boolean v) {
+        setBool(KEY_IS_TOEFL_ACTIVE, v);
+    }
+
+    public boolean isSATActive() {
+        return getBool(KEY_IS_SAT_ACTIVE, true);
+    }
+
+    public void setSATActive(boolean v) {
+        setBool(KEY_IS_SAT_ACTIVE, v);
+    }
+
+    public boolean isGREActive() {
+        return getBool(KEY_IS_GRE_ACTIVE, true);
+    }
+
+    public void setGREActive(boolean v) {
+        setBool(KEY_IS_GRE_ACTIVE, v);
+    }
+
     public boolean isPremium() {
         return sp.contains(KEY_PURCHASE) || sp.contains(KEY_PREMIUM);
     }
@@ -188,6 +264,10 @@ public final class AppPreferences {
         setInt(KEY_DARK_MODE, v);
     }
 
+    public int getDarkMode() {
+        return getInt(KEY_DARK_MODE, 0);
+    }
+
     public static void migrateLegacy(Context context) {
         SharedPreferences legacy = context.getSharedPreferences("com.example.shamsulkarim.vastvocabulary",
                 Context.MODE_PRIVATE);
@@ -218,5 +298,57 @@ public final class AppPreferences {
 
     public void setUserName(String name) {
         sp.edit().putString(KEY_USER_NAME, name).apply();
+    }
+
+    public void setLevelProgress(String level, int value) {
+        setInt(level, value);
+    }
+
+    public boolean getSoundState() {
+        return getBool(KEY_SOUND_STATE, true);
+    }
+
+    public void setSoundState(boolean v) {
+        setBool(KEY_SOUND_STATE, v);
+    }
+
+    public int getMistakeFavorite() {
+        return getInt(KEY_MISTAKE_FAVORITE, 0);
+    }
+
+    public void setMistakeFavorite(int v) {
+        setInt(KEY_MISTAKE_FAVORITE, v);
+    }
+
+    public int getFavoriteWordCount() {
+        return getInt(KEY_FAVORITE_WORD_COUNT, 0);
+    }
+
+    public void setFavoriteWordCount(int v) {
+        setInt(KEY_FAVORITE_WORD_COUNT, v);
+    }
+
+    public String getMostMistakenWord() {
+        return getString(KEY_MOST_MISTAKEN_WORD, "no");
+    }
+
+    public void setMostMistakenWord(String v) {
+        setString(KEY_MOST_MISTAKEN_WORD, v);
+    }
+
+    public int getTotalCorrects() {
+        return getInt(KEY_TOTAL_CORRECTS, 0);
+    }
+
+    public void setTotalCorrects(int v) {
+        setInt(KEY_TOTAL_CORRECTS, v);
+    }
+
+    public int getFavoriteWrongs() {
+        return getInt(KEY_FAVORITE_WRONGS, 0);
+    }
+
+    public void setFavoriteWrongs(int v) {
+        setInt(KEY_FAVORITE_WRONGS, v);
     }
 }

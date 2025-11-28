@@ -1,9 +1,7 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.fragments;
 
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,23 +14,21 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
-import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentProfileFragmentBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.viewmodel.SettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.AlarmReceiver;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.LocalData;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.NotificationScheduler;
-import com.google.android.material.button.MaterialButton;
-import com.kyleduo.switchbutton.SwitchButton;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,322 +42,219 @@ import de.cketti.mailto.EmailIntentBuilder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+public class ProfileFragment extends Fragment {
 
-    private MaterialButton setReminder;
-    private CardView rateCardView, bugReport, fbCard,instagramCard;
-
-    /// notification
+    private FragmentProfileFragmentBinding binding;
     private final String TAG = "RemindMe";
     private LocalData localData;
-    private TextView tvTime;
-
+    private AppPreferences prefs;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
 
         Window window = requireActivity().getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getContext().getColor(R.color.toolbar_background_color));
+        window.setStatusBarColor(requireContext().getColor(R.color.toolbar_background_color));
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_profile_fragment, container, false);
-        Toolbar toolbar = v.findViewById(R.id.profile_toolbar);
+        binding = FragmentProfileFragmentBinding.inflate(inflater, container, false);
+        View v = binding.getRoot();
+
         setHasOptionsMenu(true);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
 
+        // ----------------------------
 
-        //----------------------------
+        initialization();
 
-        initialization(v);
+        // -------------------------------
 
-
-        //-------------------------------
-
-
-        try{
-            activity.setSupportActionBar(toolbar);
-        }catch (NullPointerException i) {
+        try {
+            if (activity != null) {
+                activity.setSupportActionBar(binding.profileToolbar);
+            }
+        } catch (NullPointerException i) {
             i.printStackTrace();
         }
 
         return v;
-
-
     }
 
-    private void initialization(View v){
+    private void initialization() {
 
-        SharedPreferences sp = v.getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
-
-
+        prefs = AppPreferences.get(requireContext());
         localData = new LocalData(requireContext());
-        SwitchButton reminderSwitch = v.findViewById(R.id.alarm_switch);
 
-        tvTime = v.findViewById(R.id.alarm_time);
         int hour = localData.get_hour();
         int min = localData.get_min();
-        setReminder = v.findViewById(R.id.set_alarm);
-        setReminder.setEnabled(false);
-        tvTime.setText(getFormatedTime(hour, min));
-        //reminderSwitch.setChecked(localData.getReminderStatus());
+        binding.setAlarm.setEnabled(false);
+        binding.alarmTime.setText(getFormatedTime(hour, min));
 
+        binding.fbCard.setOnClickListener(v -> {
+            Uri appUrl = Uri.parse("https://www.facebook.com/FortitudeLearn/");
+            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+            startActivity(rateApp);
+        });
 
+        binding.instagramCard.setOnClickListener(v -> {
+            Uri appUrl = Uri.parse("https://www.instagram.com/fortitudelearn/");
+            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+            startActivity(rateApp);
+        });
 
-        rateCardView = v.findViewById(R.id.profile_rate_card);
-        bugReport = v.findViewById(R.id.bug_report_card);
-        fbCard = v.findViewById(R.id.fb_card);
-        instagramCard = v.findViewById(R.id.instagram_card);
-        fbCard.setOnClickListener(this);
-        instagramCard.setOnClickListener(this);
-
-
-        if(!sp.contains("wordsPerSession")){
-
-            sp.edit().putInt("wordsPerSession",5).apply();
-
-        }else {
-
-            sp.getInt("wordsPerSession",5);
-
+        if (!prefs.contains(AppPreferences.KEY_WORDS_PER_SESSION)) {
+            prefs.setWordsPerSession(5);
+        } else {
+            prefs.getWordsPerSession();
         }
 
-        if(!sp.contains("repeatationPerSession")){
-
-            sp.edit().putInt("repeatationPerSession",5).apply();
-
-        }else {
-
-            sp.getInt("repeatationPerSession",5);
-
+        if (!prefs.contains(AppPreferences.KEY_REPEATATION_PER_SESSION)) {
+            prefs.setRepeatationPerSession(5);
+        } else {
+            prefs.getRepeatationPerSession();
         }
 
+        binding.profileRateCard.setOnClickListener(v -> {
+            if (BuildConfig.FLAVOR.equalsIgnoreCase("free")) {
+                Uri appUrl = Uri
+                        .parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                startActivity(rateApp);
 
+            } else if (BuildConfig.FLAVOR.equalsIgnoreCase("huawei")) {
+                Uri appUrl = Uri.parse(
+                        "https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                startActivity(rateApp);
+            } else {
+                Uri appUrl = Uri
+                        .parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
+                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+                startActivity(rateApp);
+            }
+        });
 
+        binding.bugReportCard.setOnClickListener(v -> {
+            try {
+                EmailIntentBuilder.from(requireActivity().getBaseContext())
+                        .to("fortitudedevs@gmail.com")
+                        .subject("VB4 - FL: " + BuildConfig.FLAVOR + " VN: " + BuildConfig.VERSION_NAME + " VC: "
+                                + BuildConfig.VERSION_CODE)
+                        .body("")
+                        .start();
+            } catch (NullPointerException ignored) {
 
-
-
-
-
-
-
-
-
-
-        rateCardView.setOnClickListener(this);
-        bugReport.setOnClickListener(this);
-
+            }
+        });
 
         if (!localData.getReminderStatus()) {
-            setReminder.setAlpha(0.4f);
-        }else {
-            setReminder.setAlpha(1f);
+            binding.setAlarm.setAlpha(0.4f);
+        } else {
+            binding.setAlarm.setAlpha(1f);
         }
 
+        // -------------SET DEFAULT alaarm
 
-
-        //-------------SET DEFAULT alaarm
-
-        if(!sp.contains("defaultAlarm")){
-
+        if (!prefs.isDefaultAlarmSet()) {
             // Todo fix alarm
-            //reminderSwitch.setChecked(true);
-//            localData.setReminderStatus(true);
-//            NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, 18, 0);
-//            tvTime.setText(getFormatedTime(hour, min));
-//            setReminder.setAlpha(1f);
-//            sp.edit().putBoolean("defaultAlarm",true).apply();
+            // binding.alarmSwitch.setChecked(true);
+            // localData.setReminderStatus(true);
+            // NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, 18, 0);
+            // binding.alarmTime.setText(getFormatedTime(hour, min));
+            // binding.setAlarm.setAlpha(1f);
+            // prefs.setDefaultAlarmSet(true);
         }
 
-
-        reminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        binding.alarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 localData.setReminderStatus(isChecked);
                 if (isChecked) {
-
-                    Toast.makeText(getContext(),"Reminder unavailable for now",Toast.LENGTH_SHORT).show();
-                    //Log.d(TAG, "onCheckedChanged: true");
-                    //NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, localData.get_hour(), localData.get_min());
-                    //setReminder.setAlpha(1f);
-
-
+                    Toast.makeText(getContext(), "Reminder unavailable for now", Toast.LENGTH_SHORT).show();
+                    // Log.d(TAG, "onCheckedChanged: true");
+                    // NotificationScheduler.setReminder(getContext(), AlarmReceiver.class,
+                    // localData.get_hour(), localData.get_min());
+                    // binding.setAlarm.setAlpha(1f);
                 } else {
-                    Toast.makeText(getContext(),"Reminder unavailable for now",Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(getContext(), "Reminder unavailable for now", Toast.LENGTH_SHORT).show();
                     // Log.d(TAG, "onCheckedChanged: false");
-                   // NotificationScheduler.cancelReminder(getContext(), AlarmReceiver.class);
-                   // setReminder.setAlpha(0.4f);
+                    // NotificationScheduler.cancelReminder(getContext(), AlarmReceiver.class);
+                    // binding.setAlarm.setAlpha(0.4f);
                 }
-
             }
         });
 
-        setReminder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (localData.getReminderStatus())
-                    showTimePickerDialog(localData.get_hour(), localData.get_min());
-            }
+        binding.setAlarm.setOnClickListener(view -> {
+            if (localData.getReminderStatus())
+                showTimePickerDialog(localData.get_hour(), localData.get_min());
         });
-
     }
 
     @Override
     public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
-
-        try{
-            requireActivity().getMenuInflater().inflate(R.menu.profile_toolbar_menus,menu);
-        }catch (NullPointerException i ) {
+        try {
+            requireActivity().getMenuInflater().inflate(R.menu.profile_toolbar_menus, menu);
+        } catch (NullPointerException i) {
             i.printStackTrace();
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId() == R.id.profile_menu_settings){
-
-            try{
-
+        if (item.getItemId() == R.id.profile_menu_settings) {
+            try {
                 requireActivity().startActivity(new Intent(getActivity().getBaseContext(), SettingActivity.class));
-
-            }catch (NullPointerException i) {
+            } catch (NullPointerException i) {
                 i.printStackTrace();
             }
-        }
-        else if (item.getItemId() == R.id.menu_item_share){
-
-            if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
-
+        } else if (item.getItemId() == R.id.menu_item_share) {
+            if (BuildConfig.FLAVOR.equalsIgnoreCase("free")) {
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 String shareBodyText = "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder";
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Learn vocabulary using this app");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
                 startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
-            }
-                else if(BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-
+            } else if (BuildConfig.FLAVOR.equalsIgnoreCase("huawei")) {
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 String shareBodyText = "https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895";
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Learn vocabulary using this app");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
                 startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
-
-
-            }
-            else{
-
+            } else {
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 String shareBodyText = "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro";
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Learn vocabulary using this app");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Learn vocabulary using this app");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
                 startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
-
             }
-
         }
         return super.onOptionsItemSelected(item);
-
     }
-
-
-
-
 
     @Override
-    public void onClick(View v) {
-
-        if(v == bugReport){
-
-            try{
-
-                EmailIntentBuilder.from(requireActivity().getBaseContext())
-                        .to("fortitudedevs@gmail.com")
-                        .subject("VB4 - FL: "+BuildConfig.FLAVOR+" VN: "+BuildConfig.VERSION_NAME+" VC: "+BuildConfig.VERSION_CODE)
-                        .body("")
-                        .start();
-            }catch (NullPointerException ignored){
-
-            }
-
-
-
-        }
-
-        if( v == rateCardView){
-
-            if(BuildConfig.FLAVOR.equalsIgnoreCase("free")){
-                Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
-                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-                this.startActivity(rateApp);
-
-            }
-            else if(BuildConfig.FLAVOR.equalsIgnoreCase("huawei")){
-
-                Uri appUrl = Uri.parse("https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895");
-                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-                this.startActivity(rateApp);
-            }
-
-            else {
-
-                Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
-                Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-                this.startActivity(rateApp);
-            }
-
-        }
-
-        if(v == fbCard){
-
-            Uri appUrl = Uri.parse("https://www.facebook.com/FortitudeLearn/");
-            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-            this.startActivity(rateApp);
-
-        }
-
-        if( v == instagramCard){
-
-
-
-
-            Uri appUrl = Uri.parse("https://www.instagram.com/fortitudelearn/");
-            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-            this.startActivity(rateApp);
-        }
-
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
-
-
 
     /// SET NOTIFICATION
 
     private void showTimePickerDialog(int h, int m) {
-
-
-
         TimePickerDialog builder = new TimePickerDialog(getContext(), R.style.DialogTheme,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hour, int min) {
-                        Log.d(TAG, "onTimeSet: hour " + hour);
-                        Log.d(TAG, "onTimeSet: min " + min);
-                        localData.set_hour(hour);
-                        localData.set_min(min);
-                        tvTime.setText(getFormatedTime(hour, min));
-                        NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, localData.get_hour(), localData.get_min());
-
-
-                    }
+                (timePicker, hour, min) -> {
+                    Log.d(TAG, "onTimeSet: hour " + hour);
+                    Log.d(TAG, "onTimeSet: min " + min);
+                    localData.set_hour(hour);
+                    localData.set_min(min);
+                    binding.alarmTime.setText(getFormatedTime(hour, min));
+                    NotificationScheduler.setReminder(getContext(), AlarmReceiver.class, localData.get_hour(),
+                            localData.get_min());
                 }, h, m, false);
 
-
         builder.show();
-
     }
 
     public String getFormatedTime(int h, int m) {
@@ -382,7 +275,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         return newDateString;
     }
-
 
     public Locale getCurrentLocale() {
         return getResources().getConfiguration().getLocales().get(0);
