@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    tools:context="com.fortitude.shamsulkarim.ieltsfordory.ui.SettingActivity">
+    tools:context="com.fortitude.shamsulkarim.ieltsfordory.ui.viewmodel.SettingActivity">
 
     <ProgressBar
         android:id="@+id/progressbar"
@@ -246,28 +246,30 @@
 
 
 
-                        <mehdi.sakout.fancybuttons.FancyButton
-                            android:id="@+id/language_spanish"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginTop="@dimen/keyline_4"
-                            android:layout_marginStart="@dimen/keyline_4"
-                            android:layout_marginBottom="@dimen/keyline_4"
-                            android:elevation="2dp"
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="20dp"
-                            android:paddingBottom="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/choose_language_subheader"
-                            fancy:fb_borderColor="@color/colorPrimary"
-                            fancy:fb_borderWidth="2dp"
-                            fancy:fb_defaultColor="@color/colorPrimary"
-                            fancy:fb_focusColor="@color/colorPrimary"
-                            fancy:fb_radius="30dp"
-                            fancy:fb_text="Spanish"
-                            fancy:fb_textColor="#ffffff" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/language_spanish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/keyline_4"
+                        android:layout_marginStart="@dimen/keyline_4"
+                        android:layout_marginBottom="@dimen/keyline_4"
+                        android:elevation="2dp"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/choose_language_subheader"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="2dp"
+                        app:backgroundTint="@color/colorPrimary"
+                        app:rippleColor="#D8C9E8"
+                        app:cornerRadius="30dp"
+                        android:text="Spanish"
+                        android:textColor="#ffffff"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp" />
 
 
 
@@ -318,7 +320,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ns_username" />
 
-                    <mehdi.sakout.fancybuttons.FancyButton
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/ns_sign_in"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
@@ -333,13 +335,15 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        fancy:fb_borderColor="@color/colorPrimary"
-                        fancy:fb_borderWidth="2dp"
-                        fancy:fb_defaultColor="#ffffff"
-                        fancy:fb_focusColor="@color/colorPrimary"
-                        fancy:fb_radius="30dp"
-                        fancy:fb_text="Sign in"
-                        fancy:fb_textColor="@color/colorPrimary" />
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="2dp"
+                        app:backgroundTint="#ffffff"
+                        app:rippleColor="@color/colorPrimary"
+                        app:cornerRadius="30dp"
+                        android:text="Sign in"
+                        android:textColor="@color/colorPrimary"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -869,7 +873,7 @@
     </ScrollView>
 
 
-    <mehdi.sakout.fancybuttons.FancyButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/ns_save"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -877,22 +881,22 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:elevation="2dp"
-
-
-        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        fancy:fb_borderColor="@color/colorPrimary"
-        fancy:fb_borderWidth="2dp"
-        fancy:fb_defaultColor="@color/colorPrimary"
-        fancy:fb_focusColor="@color/colorPrimary"
-        fancy:fb_radius="30dp"
-        fancy:fb_text="SAVE"
-        fancy:fb_textColor="#fff" />
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="2dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:rippleColor="#D8C9E8"
+        app:cornerRadius="30dp"
+        android:text="SAVE"
+        android:textColor="#fff"
+        android:insetTop="0dp"
+        android:insetBottom="0dp" />
 
 
     <View

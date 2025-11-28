@@ -9,6 +9,7 @@ public class TaskExecutor {
 
     private final ExecutorService executor;
     private Future<String> taskFuture;
+    private volatile boolean failed = false;
     private final Task task;
     public TaskExecutor(Task task) {
         this.task = task;
@@ -17,15 +18,15 @@ public class TaskExecutor {
     }
 
     public void executeTask() {
-        // Submit a task and get a Future object
         taskFuture = executor.submit(() -> {
-            // Simulate a time-consuming task
-
-            //Todo: initialize databases here
-            task.execute();
-
-
-            return "Task completed!";
+            try {
+                task.execute();
+                return "Task completed!";
+            } catch (Exception e) {
+                failed = true;
+                e.printStackTrace();
+                return "Task failed!";
+            }
         });
     }
 
@@ -48,6 +49,10 @@ public class TaskExecutor {
 
     public void shutdownExecutor() {
         executor.shutdown();
+    }
+
+    public boolean hasFailed() {
+        return failed;
     }
 
 

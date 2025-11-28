@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.Launcher" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/ic_splash_screen_page</item>
     </style>
 </resources>

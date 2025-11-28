@@ -6,9 +6,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 
 import java.util.ArrayList;
 
-/**
- * Created by shamsul on 2/3/18.
- */
+
 
 public class CustomFilter extends Filter {
 

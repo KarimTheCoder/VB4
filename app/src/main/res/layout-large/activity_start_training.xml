@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toStartOf="@id/purchase_title"
                 app:layout_constraintTop_toBottomOf="@id/purchase_title" />
 
-            <mehdi.sakout.fancybuttons.FancyButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/purchase_button"
                 android:layout_width="150dp"
                 android:layout_height="0dp"
@@ -66,14 +66,16 @@
                 app:layout_constraintBottom_toBottomOf="@+id/purchase_description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                fancy:fb_borderColor="?attr/colorPrimary"
-                fancy:fb_borderWidth="2dp"
-                fancy:fb_defaultColor="?attr/colorPrimary"
-                fancy:fb_focusColor="?attr/colorPrimaryDark"
-                fancy:fb_radius="15dp"
-                fancy:fb_text="BUY"
-                fancy:fb_textColor="?attr/colorOnPrimary"
-                fancy:fb_textFont="@font/productbold" />
+                app:strokeColor="?attr/colorPrimary"
+                app:strokeWidth="2dp"
+                app:backgroundTint="?attr/colorPrimary"
+                app:rippleColor="?attr/colorPrimaryDark"
+                app:cornerRadius="15dp"
+                android:text="BUY"
+                android:textColor="?attr/colorOnPrimary"
+                android:fontFamily="@font/productbold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -272,7 +274,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/progress_count_textview"
                 app:rcBackgroundPadding="5dp" />
 
-            <mehdi.sakout.fancybuttons.FancyButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/no_word_home"
                 android:layout_width="0dp"
                 android:layout_height="65dp"
@@ -283,21 +285,21 @@
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
                 android:textSize="18sp"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/translation_card"
                 app:layout_constraintHorizontal_bias="0.51"
                 app:layout_constraintStart_toStartOf="@id/translation_card"
                 app:layout_constraintTop_toBottomOf="@id/start_training_progress"
-                fancy:fb_borderColor="@color/colorPrimary"
-                fancy:fb_borderWidth="2dp"
-                fancy:fb_defaultColor="@color/colorPrimary"
-                fancy:fb_focusColor="#D8C9E8"
-                fancy:fb_radius="30dp"
-                fancy:fb_text="Learn"
-                fancy:fb_textColor="@color/primary_text_color_white"
-                fancy:fb_textFont="@font/productbold" />
-
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp"
+                app:backgroundTint="@color/colorPrimary"
+                app:rippleColor="#D8C9E8"
+                app:cornerRadius="30dp"
+                android:text="Learn"
+                android:textColor="@color/primary_text_color_white"
+                android:fontFamily="@font/productbold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

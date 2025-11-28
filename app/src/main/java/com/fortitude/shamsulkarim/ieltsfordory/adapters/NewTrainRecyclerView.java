@@ -33,6 +33,7 @@ import com.github.ybq.android.spinkit.style.Wave;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -43,7 +44,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import de.cketti.mailto.EmailIntentBuilder;
-import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
  * Created by karim on 7/1/17.
@@ -301,8 +301,8 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         final TextView pronunciation;
         final TextView example1;
         final TextView example2;
-        final FancyButton speak;
-        final FancyButton favorite;
+        final MaterialButton speak;
+        final MaterialButton favorite;
         final FirebaseStorage storage = FirebaseStorage.getInstance();
         // Create a storage reference from our app
         final String wordName = word.getWord().toLowerCase();
@@ -330,8 +330,6 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             isVoicePronunciation = sp.getBoolean("pronunState",true);
             favorite.setOnClickListener(this);
             speak.setOnClickListener(this);
-            speak.setDisableBackgroundColor(ctx.getColor(R.color.primary_background_color));
-            speak.setDisableBorderColor(ctx.getColor(R.color.primary_background_color));
 
             if( ConnectivityHelper.isConnectedToNetwork(itemView.getContext()) && isVoicePronunciation){
                 speak.setEnabled(false);

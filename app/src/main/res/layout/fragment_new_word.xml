@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.AllWordsFragment">
 
 
@@ -22,10 +23,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="5dp"
+        android:overScrollMode="ifContentScrolls"
 
         app:layout_constraintBottom_toTopOf="@+id/bottom"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/word_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/word_toolbar"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <com.arlib.floatingsearchview.FloatingSearchView
@@ -49,7 +52,8 @@
         app:floatingSearch_suggestionsListAnimDuration="250"
         app:layout_constraintBottom_toBottomOf="@+id/word_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/word_toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/word_toolbar"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.cardview.widget.CardView
 
@@ -57,18 +61,16 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/keyline_4"
         app:cardBackgroundColor="@color/transparent"
-        app:cardElevation="0dp"
+        app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/word_toolbar"
         app:layout_constraintEnd_toEndOf="@+id/mSearch"
-
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/word_toolbar">
 
         <Spinner
             android:id="@+id/word_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/spinnerItemStyle"
-            android:entries="@array/words_per_session_array"
             android:spinnerMode="dropdown" />
 
     </androidx.cardview.widget.CardView>

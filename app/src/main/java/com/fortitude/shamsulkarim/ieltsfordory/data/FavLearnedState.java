@@ -7,11 +7,11 @@ package com.fortitude.shamsulkarim.ieltsfordory.data;
 public class FavLearnedState {
 
 
-     String ieltsLearnedCount, toeflLearnedCount, satLearnedCount, greLearnedCount;
+    String ieltsLearnedCount, toeflLearnedCount, satLearnedCount, greLearnedCount;
     String ieltsFavCount, toeflFavCount, satFavCount, greFavCount;
     String name;
 
-    public FavLearnedState(String name, String beginnerLearnedCount, String intermediateLearnedCount, String advanceLearnedCount,String greLearnedCount, String beginnerFavCount, String intermediateFavCount, String advanceFavCount, String greFavCount) {
+    public FavLearnedState(String name, String beginnerLearnedCount, String intermediateLearnedCount, String advanceLearnedCount, String greLearnedCount, String beginnerFavCount, String intermediateFavCount, String advanceFavCount, String greFavCount) {
         this.ieltsLearnedCount = beginnerLearnedCount;
         this.toeflLearnedCount = intermediateLearnedCount;
         this.satLearnedCount = advanceLearnedCount;

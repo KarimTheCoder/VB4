@@ -10,6 +10,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SATDataSource extends DataSource{
 
@@ -18,8 +19,8 @@ public class SATDataSource extends DataSource{
 
     private final int WORD_SIZE;
     private String[] wordArray, translationArray, grammarArray, pronunArray, example1array, example2array, example3Array, vocabularyType;
-    private final List<String> favoriteStates;
-    private final List<String> learnedStates;
+    private final CopyOnWriteArrayList<String> favoriteStates;
+    private final CopyOnWriteArrayList<String> learnedStates;
     private int[] position;
     private String[] wordsArraySL, translationArraySL, example1arraySL, example2ArraySL, example3ArraySL;
 
@@ -35,9 +36,9 @@ public class SATDataSource extends DataSource{
 
         WORD_SIZE = context.getResources().getStringArray(R.array.SAT_words).length;
 
-        database = new SATWordDatabase(context);
-        favoriteStates = new ArrayList<>();
-        learnedStates = new ArrayList<>();
+        database = SATWordDatabase.getInstance(context);
+        favoriteStates = new CopyOnWriteArrayList<>();
+        learnedStates = new CopyOnWriteArrayList<>();
         isChecked =   sp.getBoolean("isSATActive",true);
         secondLanguage = sp.getString("secondlanguage","english");
         getFavoritePosition();
@@ -71,13 +72,13 @@ public class SATDataSource extends DataSource{
     }
 
     public void getFavoritePosition(){
+        favoriteStates.clear();
+        learnedStates.clear();
         Cursor res = database.getData();
-
         while (res.moveToNext()){
             favoriteStates.add(res.getString(FAVORITE_COLL));
             learnedStates.add(res.getString(LEARNED_COLL));
         }
-
         res.close();
     }
     private void initArray(){

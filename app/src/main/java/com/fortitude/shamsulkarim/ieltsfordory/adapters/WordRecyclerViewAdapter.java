@@ -26,6 +26,7 @@ import com.github.ybq.android.spinkit.style.Wave;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -34,7 +35,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
-import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
  * Created by sk on 12/30/16.
@@ -241,8 +241,8 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         final TextView translationView;
         final TextView grammarView;
         final TextView exampleView1;
-        final FancyButton favorite;
-        final FancyButton speaker;
+        final MaterialButton favorite;
+        final MaterialButton speaker;
         final TextToSpeech tts;
         final CardView cardView;
         final Boolean isVoicePronunciation;

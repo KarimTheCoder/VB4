@@ -3,6 +3,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.data.initializer;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
@@ -21,19 +22,57 @@ public class DatabaseTask implements Task{
     private DatabaseChecker databaseChecker;
 
     private final Context context;
+    DatabaseInitConfig config;
 
-    public DatabaseTask(Context context) {
+    public DatabaseTask(Context context, DatabaseInitConfig config) {
         this.context = context;
+        this.config = config;
     }
 
     @Override
     public void execute() {
 
+        Log.d("DB_INIT","Starting database initialization");
         initializingSQLDatabase();
-        IELTStoDatabaseInitialization();
-        TOEFLDatabaseInitialization();
-        SATDatabaseInitialization();
-        GREDatabaseInitialization();
+        java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(4);
+        java.util.concurrent.ExecutorService pool = java.util.concurrent.Executors.newFixedThreadPool(config.getParallelism());
+        pool.execute(() -> { try { Log.d("DB_INIT","Init IELTS"); runWithRetry(this::IELTStoDatabaseInitialization, "IELTS"); } finally { latch.countDown(); } });
+        pool.execute(() -> { try { Log.d("DB_INIT","Init TOEFL"); runWithRetry(this::TOEFLDatabaseInitialization, "TOEFL"); } finally { latch.countDown(); } });
+        pool.execute(() -> { try { Log.d("DB_INIT","Init SAT"); runWithRetry(this::SATDatabaseInitialization, "SAT"); } finally { latch.countDown(); } });
+        pool.execute(() -> { try { Log.d("DB_INIT","Init GRE"); runWithRetry(this::GREDatabaseInitialization, "GRE"); } finally { latch.countDown(); } });
+
+        try {
+            boolean completed = latch.await(config.getTimeoutMs(), java.util.concurrent.TimeUnit.MILLISECONDS);
+            if (!completed) {
+                pool.shutdownNow();
+                throw new RuntimeException("Initialization timed out");
+            }
+        } catch (InterruptedException e) {
+            pool.shutdownNow();
+            throw new RuntimeException("Initialization interrupted", e);
+        }
+        pool.shutdown();
+        Log.d("DB_INIT","All database initialization complete");
+        ieltsWordDatabase.close();
+        toeflWordDatabase.close();
+        satWordDatabase.close();
+        greWordDatabase.close();
+    }
+
+    private void runWithRetry(Runnable r, String label) {
+        int attempts = 0;
+        while (true) {
+            try {
+                r.run();
+                return;
+            } catch (Exception e) {
+                attempts++;
+                Log.e("DB_INIT", label + " phase failed (attempt " + attempts + ")", e);
+                if (attempts > config.getMaxRetries()) {
+                    throw e;
+                }
+            }
+        }
     }
 
 
@@ -44,11 +83,15 @@ public class DatabaseTask implements Task{
         toeflWordDatabase = new TOEFLWordDatabase(context);
         greWordDatabase = new GREWordDatabase(context);
         databaseChecker = new DatabaseChecker(context);
+        ieltsWordDatabase.setWriteAheadLoggingEnabled(true);
+        toeflWordDatabase.setWriteAheadLoggingEnabled(true);
+        satWordDatabase.setWriteAheadLoggingEnabled(true);
+        greWordDatabase.setWriteAheadLoggingEnabled(true);
     }
 
     private void IELTStoDatabaseInitialization(){
 
-        SharedPreferences sp = context.getSharedPreferences("com.example.shamsulkarim.vastvocabulary", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
 
 
@@ -96,7 +139,7 @@ public class DatabaseTask implements Task{
 
     private void TOEFLDatabaseInitialization(){
 
-        SharedPreferences sp = context.getSharedPreferences("com.example.shamsulkarim.vastvocabulary", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
         if(!sp.contains("intermediateWordCount1")){
             final int intermediateWordLength = context.getResources().getStringArray(R.array.TOEFL_words).length;
@@ -146,7 +189,7 @@ public class DatabaseTask implements Task{
 
     private void SATDatabaseInitialization(){
 
-        SharedPreferences sp = context.getSharedPreferences("com.example.shamsulkarim.vastvocabulary", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
 
         if(!sp.contains("advanceWordCount1")){
@@ -203,7 +246,7 @@ public class DatabaseTask implements Task{
     private void GREDatabaseInitialization(){
 
 
-        SharedPreferences sp = context.getSharedPreferences("com.example.shamsulkarim.vastvocabulary", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
 
         if(!sp.contains("GREwordCount1")){

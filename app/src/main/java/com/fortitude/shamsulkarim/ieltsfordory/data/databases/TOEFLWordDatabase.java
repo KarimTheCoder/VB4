@@ -5,12 +5,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by sk on 1/1/17.
  */
 
+/**
+ * TOEFL vocabulary database helper with WAL, indexes, and synchronized transactional writes.
+ */
 public class TOEFLWordDatabase extends SQLiteOpenHelper{
+    private final Object lock = new Object();
+    private static volatile TOEFLWordDatabase INSTANCE;
 
 
     public static final String DATABASE_NAME = "IntermediateWordDatabase.db";
@@ -33,26 +39,38 @@ public class TOEFLWordDatabase extends SQLiteOpenHelper{
 
 
     public TOEFLWordDatabase(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
+        setWriteAheadLoggingEnabled(true);
+    }
+
+    public static TOEFLWordDatabase getInstance(Context context) {
+        if (INSTANCE == null) {
+            synchronized (TOEFLWordDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new TOEFLWordDatabase(context.getApplicationContext());
+                }
+            }
+        }
+        return INSTANCE;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("create table "+TABLE_NAME+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,WORD TEXT,FAV TEXT,LEARNED TEXT, BLACKLIST TEXT, SKIP TEXT)");
+        db.execSQL("CREATE INDEX IF NOT EXISTS idx_"+TABLE_NAME+"_fav ON "+TABLE_NAME+"("+COL3+")");
+        db.execSQL("CREATE INDEX IF NOT EXISTS idx_"+TABLE_NAME+"_learned ON "+TABLE_NAME+"("+COL4+")");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
-        onCreate(db);
-
+        db.execSQL("CREATE INDEX IF NOT EXISTS idx_"+TABLE_NAME+"_fav ON "+TABLE_NAME+"("+COL3+")");
+        db.execSQL("CREATE INDEX IF NOT EXISTS idx_"+TABLE_NAME+"_learned ON "+TABLE_NAME+"("+COL4+")");
     }
 
     public void insertData(String word, String fav, String learned, String blacklist, String skip){
-
+        if (word == null) throw new IllegalArgumentException("word is required");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL2,word);
@@ -60,83 +78,122 @@ public class TOEFLWordDatabase extends SQLiteOpenHelper{
         cv.put(COL4,learned);
         cv.put(COL5, blacklist);
         cv.put(COL6, skip);
-
-
-
-        long data = db.insert(TABLE_NAME,null,cv);
-
-
+        long rowId = db.insert(TABLE_NAME,null,cv);
+        Log.d("DB_TOEFL","insertData rowId="+rowId);
     }
 
     public Cursor getData(){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("select * from "+TABLE_NAME,null);
-
-
     }
 
     public boolean updateBlacklist(String id, String blacklist){
-
+        if (id == null || id.isEmpty()) throw new IllegalArgumentException("id required");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL1,id);
         cv.put(COL5,blacklist);
-        db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
-
+        synchronized (lock) {
+            db.beginTransaction();
+            try {
+                db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+        }
         return true;
     }
 
     public boolean updateskip(String id, String skip){
-
+        if (id == null || id.isEmpty()) throw new IllegalArgumentException("id required");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL1,id);
         cv.put(COL6,skip);
-        db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
-
+        synchronized (lock) {
+            db.beginTransaction();
+            try {
+                db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+        }
         return true;
     }
 
 
     public boolean dbUpdate(String id, String newInt){
-
+        if (id == null || id.isEmpty()) throw new IllegalArgumentException("id required");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL1,id);
         cv.put(COL2,newInt);
-        db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
-
+        synchronized (lock) {
+            db.beginTransaction();
+            try {
+                db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+        }
         return true;
     }
 
     public void updateFav(String id, String fav){
-
+        if (id == null || id.isEmpty()) throw new IllegalArgumentException("id required");
+        if (fav == null || !("True".equalsIgnoreCase(fav) || "False".equalsIgnoreCase(fav))) throw new IllegalArgumentException("fav must be True/False");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL1,id);
         cv.put(COL3,fav);
-        db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
-
+        synchronized (lock) {
+            db.beginTransaction();
+            try {
+                db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
+                db.setTransactionSuccessful();
+                Log.d("DB_TOEFL","updateFav id="+id+" fav="+fav);
+            } finally {
+                db.endTransaction();
+            }
+        }
     }
 
     public void updateLearned(String id, String learned){
-
+        if (id == null || id.isEmpty()) throw new IllegalArgumentException("id required");
+        if (learned == null || !("True".equalsIgnoreCase(learned) || "False".equalsIgnoreCase(learned))) throw new IllegalArgumentException("learned must be True/False");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL1,id);
         cv.put(COL4,learned);
-        db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
-
+        synchronized (lock) {
+            db.beginTransaction();
+            try {
+                db.update(TABLE_NAME, cv, "ID = ?", new String[] {id});
+                db.setTransactionSuccessful();
+                Log.d("DB_TOEFL","updateLearned id="+id+" learned="+learned);
+            } finally {
+                db.endTransaction();
+            }
+        }
     }
 
 
     public int deleteData(String id){
+        if (id == null || id.isEmpty()) throw new IllegalArgumentException("id required");
         SQLiteDatabase db = this.getWritableDatabase();
-
-        return db.delete(TABLE_NAME, "ID = ?", new String[]{id});
-
-
-
+        synchronized (lock) {
+            db.beginTransaction();
+            try {
+                int rows = db.delete(TABLE_NAME, "ID = ?", new String[]{id});
+                db.setTransactionSuccessful();
+                return rows;
+            } finally {
+                db.endTransaction();
+            }
+        }
     }
 
     public int getProfilesCount() {

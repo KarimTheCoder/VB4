@@ -1,147 +1,96 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.Fragment;
-import androidx.cardview.widget.CardView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.Fragment;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.databinding.HomeFragmentBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.PretrainActivity;
-import com.yarolegovich.lovelydialog.LovelyStandardDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import az.plainpie.PieView;
 
 /**
  * Created by Shamsul Karim on 13-Dec-16.
  */
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment {
 
-
+    private HomeFragmentBinding binding;
     private VocabularyRepository repository;
-
-    // UI
-    private TextView trialStatusTextView;
-    private CardView advanceCard,intermediateCard,beginnerCard;
-    private PieView advancePie, intermediatePie, beginnerPie;
-    private SharedPreferences sp;
-
-
+    private AppPreferences prefs;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+        binding = HomeFragmentBinding.inflate(inflater, container, false);
+        View v = binding.getRoot();
 
-        View v = inflater.inflate(R.layout.home_fragment,container,false);
-        sp = v.getContext().getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+        prefs = AppPreferences.get(requireContext());
         Window window = requireActivity().getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getContext().getColor(R.color.primary_background_color));
+        window.setStatusBarColor(requireContext().getColor(R.color.primary_background_color));
 
         repository = new VocabularyRepository(requireContext());
 
-        if(!sp.contains("home")){
-            sp.edit().putBoolean("home",true).apply();
+        if (!prefs.isHomeVisited()) {
+            prefs.setHomeVisited(true);
         }
 
-        advanceCard = v.findViewById(R.id.advance_card_home);
-        intermediateCard = v.findViewById(R.id.intermediate_card_home);
-        beginnerCard = v.findViewById(R.id.beginner_card_home);
-        advanceCard.setPreventCornerOverlap(false);
-        intermediateCard.setPreventCornerOverlap(false);
-        beginnerCard.setPreventCornerOverlap(false);
-        advancePie = v.findViewById(R.id.advance_pie);
-        intermediatePie = v.findViewById(R.id.intermediate_pie);
-        beginnerPie = v.findViewById(R.id.profile_pie_view);
+        binding.advanceCardHome.setPreventCornerOverlap(false);
+        binding.intermediateCardHome.setPreventCornerOverlap(false);
+        binding.beginnerCardHome.setPreventCornerOverlap(false);
 
-        advanceCard.setOnClickListener(this);
-        intermediateCard.setOnClickListener(this);
-        beginnerCard.setOnClickListener(this);
+        binding.advanceCardHome.setOnClickListener(view -> {
+            prefs.setLevel("advance");
+            requireContext().startActivity(new Intent(requireContext(), PretrainActivity.class));
+        });
 
+        binding.intermediateCardHome.setOnClickListener(view -> {
+            prefs.setLevel("intermediate");
+            requireContext().startActivity(new Intent(requireContext(), PretrainActivity.class));
+        });
+
+        binding.beginnerCardHome.setOnClickListener(view -> {
+            prefs.setLevel("beginner");
+            requireContext().startActivity(new Intent(requireContext(), PretrainActivity.class));
+        });
 
         setProgress();
-
-
-        freeVersion(v);
+        freeVersion();
 
         return v;
     }
 
-    private void freeVersion(View v){
-
-
-        if(!BuildConfig.FLAVOR.equalsIgnoreCase("pro")){
-
-            trialStatusTextView =v.findViewById(R.id.trial_status);
-
+    private void freeVersion() {
+        if (!BuildConfig.FLAVOR.equalsIgnoreCase("pro")) {
             checkTrialStatus();
-
-        }
-
-
-
-
-
-    }
-
-
-    @Override
-    public void onClick(View v) {
-
-
-        if(v == advanceCard){
-
-            sp.edit().putString("level","advance").apply();
-            v.getContext().startActivity(new Intent(v.getContext(), PretrainActivity.class));
-
-
-        }
-
-        if(v ==intermediateCard){
-
-            sp.edit().putString("level","intermediate").apply();
-            v.getContext().startActivity(new Intent(v.getContext(), PretrainActivity.class));
-
-
-        }
-
-        if(v == beginnerCard){
-
-            sp.edit().putString("level","beginner").apply();
-            v.getContext().startActivity(new Intent(v.getContext(), PretrainActivity.class));
-
-
         }
     }
-
-
-
-
 
     private void setProgress() {
-
         setBeginnerProgress();
         setIntermediateProgress();
         setAdvanceProgress();
-
-
     }
 
     private void setAdvanceProgress() {
@@ -150,10 +99,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         int totalAdvCount = repository.getTotalAdvanceCount();
 
         learned = repository.getAdvanceLearnedCount();
-        percentage = (learned*100)/totalAdvCount;
+        percentage = (learned * 100) / totalAdvCount;
 
-        advancePie.setMaxPercentage(100);
-        advancePie.setPercentage(percentage);
+        binding.advancePie.setMaxPercentage(100);
+        binding.advancePie.setPercentage(percentage);
     }
 
     private void setIntermediateProgress() {
@@ -162,106 +111,84 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         int totalInterCount = repository.getTotalIntermediateCount();
 
         learned = repository.getIntermediateLearnedCount();
-        percentage = (learned*100)/totalInterCount;
+        percentage = (learned * 100) / totalInterCount;
 
-        intermediatePie.setMaxPercentage(100);
-        intermediatePie.setPercentage(percentage);
+        binding.intermediatePie.setMaxPercentage(100);
+        binding.intermediatePie.setPercentage(percentage);
     }
 
     private void setBeginnerProgress() {
         int totalBeginnerCount = repository.getTotalBeginnerCount();
         int learned = repository.getBeginnerLearnedCount();
-        int percentage = (learned*100)/totalBeginnerCount;
+        int percentage = (learned * 100) / totalBeginnerCount;
 
-        beginnerPie.setMaxPercentage(100);
-        beginnerPie.setPercentage(percentage);
+        binding.profilePieView.setMaxPercentage(100);
+        binding.profilePieView.setPercentage(percentage);
     }
 
-
     // Check Trial State
-    private void checkTrialStatus(){
-
+    private void checkTrialStatus() {
         String trialStatus;
 
-        if(sp.contains("trial_end_date")){
-
+        if (prefs.getTrialEndDate() != 0) {
             Date today = Calendar.getInstance().getTime();
 
-            long endMillies = sp.getLong("trial_end_date",0) ;
+            long endMillies = prefs.getTrialEndDate();
             long todayMillies = today.getTime();
             long leftMillies = endMillies - todayMillies;
 
-            //Toast.makeText(getContext(),"Days Left: "+ TimeUnit.DAYS.convert(leftMillies,TimeUnit.MILLISECONDS),Toast.LENGTH_SHORT).show();
-
-            if(!sp.contains("purchase")){
-
-                if(leftMillies >=0){
-
+            if (!prefs.isPremium()) {
+                if (leftMillies >= 0) {
                     trialStatus = "active";
-
-                }
-                else {
-
+                } else {
                     showTrialFinished();
-
                     trialStatus = "ended";
                 }
-                trialStatusTextView.setText(getString(R.string.trial_mode,trialStatus));
-            }else {
-
+                binding.trialStatus.setText(getString(R.string.trial_mode, trialStatus));
+            } else {
                 trialStatus = "PREMIUM+";
-                trialStatusTextView.setText(trialStatus);
-                trialStatusTextView.setTextColor(getContext().getColor(R.color.green));
+                binding.trialStatus.setText(trialStatus);
+                binding.trialStatus.setTextColor(requireContext().getColor(R.color.green));
             }
-
-
         }
-
-
-
-
-
     }
 
+    private void showTrialFinished() {
+        if (!prefs.isHomeFragmentTrialEndShown()) {
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
+            builder.setTitle(R.string.trial_ended);
+            builder.setMessage(R.string.trial_ended_description);
+            builder.setIcon(R.drawable.ic_information);
 
-    private void showTrialFinished(){
+            // 1. The "Upgrade" Button (Primary Action -> Positive)
+            builder.setPositiveButton("Upgrade", (dialog, which) -> {
+                startActivity(new Intent(requireContext(), PretrainActivity.class));
+            });
 
-        if(!sp.contains("home_fragment_trail_end")){
+            // 2. The "Continue" Button (Secondary Action -> Negative)
+            builder.setNegativeButton("Continue with basic", (dialog, which) -> {
+                Toast.makeText(requireContext(), "Continue with Basic", Toast.LENGTH_SHORT).show();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                prefs.setDarkMode(0);
+            });
 
-            new LovelyStandardDialog(getContext(), LovelyStandardDialog.ButtonLayout.VERTICAL)
-                    .setTopColorRes(R.color.red)
-                    .setButtonsColorRes(R.color.secondary_text_color)
-                    .setIcon(R.drawable.ic_information)
-                    .setIconTintColor(getContext().getColor(R.color.primary_text_color_white))
-                    .setNegativeButton("Continue with basic", new View.OnClickListener(){
+            // 3. Show the dialog
+            AlertDialog dialog = builder.show();
 
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(getContext(), "Continue with Basic", Toast.LENGTH_SHORT).show();
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                            sp.edit().putInt("DarkMode",0).apply();
-                        }
-                    })
-                    .setTitle(R.string.trial_ended)
-                    .setMessage(R.string.trial_ended_description)
-                    .setNeutralButtonColor(getContext().getColor(R.color.green))
-                    .setNeutralButton("Upgrade", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+            // 4. Apply Custom Colors (Optional - to match your old look)
+            // Set "Upgrade" to Green
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(requireContext().getColor(R.color.green));
+            // Set "Continue" to Secondary Color
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                    .setTextColor(requireContext().getColor(R.color.secondary_text_color));
 
-
-                            v.getContext().startActivity(new Intent(v.getContext(), PretrainActivity.class));
-                            //Toast.makeText(getContext(), "positive clicked", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-
-
-                    .show();
-
-            sp.edit().putBoolean("home_fragment_trail_end",true).apply();
-
+            prefs.setHomeFragmentTrialEndShown(true);
         }
-
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

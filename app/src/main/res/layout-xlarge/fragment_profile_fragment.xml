@@ -226,25 +226,27 @@
                 android:text="@string/reminder_demo_time"
                 style="@style/third_text_style" />
 
-            <mehdi.sakout.fancybuttons.FancyButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/set_alarm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_centerInParent="true"
                 android:layout_marginTop="16dp"
+                android:layout_centerInParent="true"
                 android:layout_below="@+id/alarm_time"
-                android:paddingBottom="10dp"
                 android:paddingStart="20dp"
-                android:paddingEnd="20dp"
                 android:paddingTop="10dp"
-                fancy:fb_borderColor="@color/card_background_color"
-                fancy:fb_borderWidth="2dp"
-                fancy:fb_defaultColor="@color/card_background_color"
-                fancy:fb_focusColor="@color/colorPrimary"
-                fancy:fb_radius="0dp"
-                fancy:fb_text="SET TIME"
-                fancy:fb_textColor="@color/colorPrimary" />
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                app:strokeColor="@color/card_background_color"
+                app:strokeWidth="2dp"
+                app:backgroundTint="@color/card_background_color"
+                app:rippleColor="@color/colorPrimary"
+                app:cornerRadius="0dp"
+                android:text="SET TIME"
+                android:textColor="@color/colorPrimary"
+                android:insetTop="0dp"
+                android:insetBottom="0dp" />
 
             <com.kyleduo.switchbutton.SwitchButton
                 android:id="@+id/alarm_switch"

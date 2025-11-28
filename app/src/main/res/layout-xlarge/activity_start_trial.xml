@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <mehdi.sakout.fancybuttons.FancyButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/start_trial_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,17 +59,19 @@
         android:paddingEnd="40dp"
         android:paddingBottom="10dp"
         android:textSize="18sp"
-
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        fancy:fb_borderWidth="2dp"
-        fancy:fb_defaultColor="#5CE67D"
-        fancy:fb_focusColor="#D8C9E8"
-        fancy:fb_radius="30dp"
-        fancy:fb_text="Start now"
-        fancy:fb_textColor="@color/secondary_text_color" />
+        app:strokeWidth="2dp"
+        app:strokeColor="#5CE67D"
+        app:backgroundTint="#5CE67D"
+        app:rippleColor="#D8C9E8"
+        app:cornerRadius="30dp"
+        android:text="Start now"
+        android:textColor="@color/secondary_text_color"
+        android:insetTop="0dp"
+        android:insetBottom="0dp" />
 
     <TextView
         android:id="@+id/textView10"

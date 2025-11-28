@@ -105,7 +105,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <mehdi.sakout.fancybuttons.FancyButton
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/train_speaker_icon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -113,17 +113,22 @@
                         android:layout_marginStart="@dimen/keyline_4"
                         android:layout_marginTop="@dimen/keyline_4"
                         android:visibility="invisible"
-                        android:background="#00000000"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/train_word"
                         app:layout_constraintTop_toTopOf="parent"
-                        fancy:fb_borderWidth="2dp"
-                        fancy:fb_defaultColor="#ffffff"
-                        fancy:fb_focusColor="@color/colorPrimary"
-                        fancy:fb_ghost="true"
-                        fancy:fb_iconResource="@drawable/speak"
-                        fancy:fb_radius="100000dp"
-                        fancy:fb_text="" />
+                        app:strokeColor="#ffffff"
+                        app:strokeWidth="2dp"
+                        app:backgroundTint="@android:color/transparent"
+                        app:rippleColor="@color/colorPrimary"
+                        app:cornerRadius="25dp"
+                        app:icon="@drawable/speak"
+                        app:iconTint="#ffffff"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp"
+                        android:padding="0dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="" />
 
                     <com.github.ybq.android.spinkit.SpinKitView
                         android:id="@+id/spin_kit"

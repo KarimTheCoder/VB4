@@ -25,6 +25,7 @@ import com.github.ybq.android.spinkit.style.Wave;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -34,7 +35,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
  * Created by sk on 1/1/17.
@@ -165,8 +165,8 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         final TextView exampleView1;
         final TextView exampleView2;
         final TextView exampleView3;
-        final FancyButton favorite;
-        final FancyButton speaker;
+        final MaterialButton favorite;
+        final MaterialButton speaker;
         final CardView cardView;
         final ProgressBar progressBar;
 
@@ -192,8 +192,6 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             cardView.setPreventCornerOverlap(false);
 
             sp.getBoolean("pronunState",true);
-            speaker.setDisableBackgroundColor(Color.parseColor("#cccccc"));
-            speaker.setDisableBorderColor(Color.parseColor("#ffffff"));
 
 
             favorite =  itemView.findViewById(R.id.favorite_favorite);
