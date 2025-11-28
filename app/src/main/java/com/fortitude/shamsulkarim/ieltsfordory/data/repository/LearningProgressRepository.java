@@ -331,4 +331,16 @@ public class LearningProgressRepository {
             greWordDatabase.updateFav(word.position + "", newStatus);
         }
     }
+
+    public void updateLearnedStatus(Word word, String newStatus) {
+        if (word.vocabularyType.equalsIgnoreCase("IELTS")) {
+            ieltsWordDatabase.updateLearned(word.position + "", newStatus);
+        } else if (word.vocabularyType.equalsIgnoreCase("TOEFL")) {
+            toeflWordDatabase.updateLearned(word.position + "", newStatus);
+        } else if (word.vocabularyType.equalsIgnoreCase("SAT")) {
+            satWordDatabase.updateLearned(word.position + "", newStatus);
+        } else if (word.vocabularyType.equalsIgnoreCase("GRE")) {
+            greWordDatabase.updateLearned(word.position + "", newStatus);
+        }
+    }
 }
