@@ -48,6 +48,8 @@ public final class AppPreferences {
     public static final String KEY_MOST_MISTAKEN_WORD = "MostMistakenWord";
     public static final String KEY_TOTAL_CORRECTS = "totalCorrects";
     public static final String KEY_FAVORITE_WRONGS = "favoriteWrongs";
+    public static final String KEY_IMAGE_QUALITY = "imageQuality";
+    public static final String KEY_PRONUN_STATE = "pronunState";
 
     private final SharedPreferences sp;
 
@@ -350,5 +352,21 @@ public final class AppPreferences {
 
     public void setFavoriteWrongs(int v) {
         setInt(KEY_FAVORITE_WRONGS, v);
+    }
+
+    public int getImageQuality() {
+        return getInt(KEY_IMAGE_QUALITY, 1);
+    }
+
+    public void setImageQuality(int v) {
+        setInt(KEY_IMAGE_QUALITY, v);
+    }
+
+    public boolean getPronunState() {
+        return getBool(KEY_PRONUN_STATE, true);
+    }
+
+    public void setPronunState(boolean v) {
+        setBool(KEY_PRONUN_STATE, v);
     }
 }

@@ -35,7 +35,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.adapters.NewTrainRecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.AudioRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseAudioRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseMediaRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewTrainBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.viewmodel.NewTrainViewModel;
@@ -79,7 +79,7 @@ public class NewTrain extends AppCompatActivity
         window.setStatusBarColor(getColor(R.color.colorPrimary));
 
         ttsController = new TtsController(this);
-        audioRepository = new FirebaseAudioRepository();
+        audioRepository = new FirebaseMediaRepository();
 
         initialization();
         viewModel.initializingWords();
@@ -508,18 +508,18 @@ public class NewTrain extends AppCompatActivity
                 viewModel.totalMistakeCount++;
 
                 if (viewModel.lastMistake == viewModel.quizCycle) {
-                    String[] msgs = {"wrong answer again", "wrong answer again", "Wrong answer again",
-                            "wrong answer again?"};
+                    String[] msgs = { "wrong answer again", "wrong answer again", "Wrong answer again",
+                            "wrong answer again?" };
                     Toast.makeText(this, msgs[index], Toast.LENGTH_SHORT).show();
                 } else {
                     viewModel.lastMistake = viewModel.quizCycle;
                     if (viewModel.mistakes <= 3) {
-                        String[] msgs = {"Wrong answer", "Wrong answer!", "Wrong answer!", "Wrong answer"};
+                        String[] msgs = { "Wrong answer", "Wrong answer!", "Wrong answer!", "Wrong answer" };
                         Toast.makeText(this, msgs[index], Toast.LENGTH_SHORT).show();
                     }
                     if (viewModel.mistakes >= 4) {
-                        String[] msgs = {"Oh no! wrong answer", "Oh no! wrong answer", "Oh no! wrong answer",
-                                "Oh no! Wrong answer"};
+                        String[] msgs = { "Oh no! wrong answer", "Oh no! wrong answer", "Oh no! wrong answer",
+                                "Oh no! Wrong answer" };
                         Toast.makeText(this, msgs[index], Toast.LENGTH_SHORT).show();
                     }
                 }

@@ -10,7 +10,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.WordRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.LearningProgressRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.TrainUiState;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import android.os.CountDownTimer;
 
 public class NewTrainViewModel extends AndroidViewModel {
 
-    private final WordRepository repository;
+    private final LearningProgressRepository repository;
     private final SharedPreferences sp;
 
     // State Variables
@@ -54,7 +54,7 @@ public class NewTrainViewModel extends AndroidViewModel {
 
     public NewTrainViewModel(@NonNull Application application) {
         super(application);
-        repository = new WordRepository(application);
+        repository = new LearningProgressRepository(application);
         sp = application.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
         loadPreferences();

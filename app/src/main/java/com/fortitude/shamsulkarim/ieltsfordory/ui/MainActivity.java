@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.FavLearnedState;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.WordRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.LearningProgressRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.data.sync.FirebaseSyncManager;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.AllWordsFragment;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.FavoriteFragment;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private FirebaseRepository firebaseRepository;
     private FirebaseSyncManager syncManager;
-    private WordRepository wordRepository;
+    private LearningProgressRepository learningProgressRepository;
     private Toast toast;
     private long lastBackPressTime = 0;
     private boolean connected;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize repositories
         firebaseRepository = new FirebaseRepository(this);
         syncManager = new FirebaseSyncManager();
-        wordRepository = new WordRepository(this);
+        learningProgressRepository = new LearningProgressRepository(this);
 
         // Initialize bottom navigation
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -127,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
         String userName = sp.getString("userName", "Boo");
 
-        // Get aggregated state from WordRepository
-        FavLearnedState favLearnedState = wordRepository.getFavLearnedState(userName);
+        // Get aggregated state from LearningProgressRepository
+        FavLearnedState favLearnedState = learningProgressRepository.getFavLearnedState(userName);
 
         // Upload to Firebase
         try {
