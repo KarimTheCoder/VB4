@@ -369,4 +369,12 @@ public final class AppPreferences {
     public void setPronunState(boolean v) {
         setBool(KEY_PRONUN_STATE, v);
     }
+
+    public int getFavoriteCountProfile() {
+        return getInt(KEY_FAVORITE_COUNT_PROFILE, 0);
+    }
+
+    public void setFavoriteCountProfile(int v) {
+        setInt(KEY_FAVORITE_COUNT_PROFILE, v);
+    }
 }
