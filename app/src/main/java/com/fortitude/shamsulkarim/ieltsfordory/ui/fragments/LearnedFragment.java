@@ -53,7 +53,7 @@ public class LearnedFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+            @Nullable Bundle savedInstanceState) {
         binding = FragmentLearnedWordsBinding.inflate(inflater, container, false);
         View v = binding.getRoot();
 
@@ -337,9 +337,7 @@ public class LearnedFragment extends Fragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (adapter != null) {
-            adapter.onDestroy();
-        }
+
         if (ttsController != null) {
             ttsController.shutdown();
             ttsController = null;
