@@ -25,7 +25,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentProfileFragmentBinding;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.viewmodel.SettingActivity;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.settings.SettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.AlarmReceiver;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.LocalData;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.NotificationScheduler;

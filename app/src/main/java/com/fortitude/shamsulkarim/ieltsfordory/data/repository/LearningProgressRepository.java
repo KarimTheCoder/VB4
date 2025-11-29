@@ -343,4 +343,55 @@ public class LearningProgressRepository {
             greWordDatabase.updateLearned(word.position + "", newStatus);
         }
     }
+
+    public static class JustLearnedSessionData {
+        public final List<Word> learnedWords;
+        public final Word mostMistakenWord;
+
+        public JustLearnedSessionData(List<Word> learnedWords, Word mostMistakenWord) {
+            this.learnedWords = learnedWords;
+            this.mostMistakenWord = mostMistakenWord;
+        }
+    }
+
+    public JustLearnedSessionData getJustLearnedWords(String level) {
+        List<Word> learnedWords = new ArrayList<>();
+        Word mostMistakenWord = null;
+        Cursor cursor = null;
+
+        try {
+            if (level.equalsIgnoreCase("beginner")) {
+                cursor = justLearnedDatabaseBeginner.getData();
+            } else if (level.equalsIgnoreCase("intermediate")) {
+                cursor = justLearnedDatabaseIntermediate.getData();
+            } else if (level.equalsIgnoreCase("advance")) {
+                cursor = justLearnedDatabaseAdvance.getData();
+            }
+
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    // Replicating logic from TrainFinishedActivity
+                    // Note: Intermediate was passing "True" for isLearned, others "", preserving
+                    // this behavior for now to be safe
+                    String isLearnedVal = level.equalsIgnoreCase("intermediate") ? "True" : "";
+
+                    Word word = new Word(cursor.getString(2) + "", "", "", "", "", "", "", "",
+                            cursor.getString(10) + "", Integer.parseInt(cursor.getString(1)), isLearnedVal,
+                            cursor.getString(12));
+
+                    if (cursor.getString(13).equalsIgnoreCase("false")) {
+                        learnedWords.add(word);
+                    } else {
+                        mostMistakenWord = word;
+                    }
+                }
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return new JustLearnedSessionData(learnedWords, mostMistakenWord);
+    }
 }

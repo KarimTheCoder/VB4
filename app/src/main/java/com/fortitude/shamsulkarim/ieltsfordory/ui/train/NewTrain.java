@@ -32,13 +32,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.adapters.NewTrainRecyclerView;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.train.NewTrainRecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.AudioRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseMediaRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewTrainBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.viewmodel.NewTrainViewModel;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.train.NewTrainViewModel;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.tts.TtsController;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;

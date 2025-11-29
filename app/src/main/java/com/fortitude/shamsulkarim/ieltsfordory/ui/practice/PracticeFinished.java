@@ -14,7 +14,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityPracticeFinishedBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.viewmodel.PracticeFinishedViewModel;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.PracticeFinishedViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 public class PracticeFinished extends AppCompatActivity {

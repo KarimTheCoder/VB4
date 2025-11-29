@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.adapters.NewTrainRecyclerView;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.train.NewTrainRecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewTrainBinding;

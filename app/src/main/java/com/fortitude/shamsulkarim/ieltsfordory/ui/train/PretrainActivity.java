@@ -16,7 +16,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityStartTrainingBinding;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.viewmodel.SettingActivity;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.settings.SettingActivity;
 
 import java.util.Objects;
 
