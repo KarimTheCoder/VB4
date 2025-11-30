@@ -63,28 +63,28 @@ public class VocabularyRepository {
     /** Fetches beginner-level vocabulary across all sources in parallel. */
     public List<Word> getBeginnerVocabulary(){
         List<Callable<List<Word>>> tasks = new ArrayList<>();
-        tasks.add(() -> ieltsDataSource.getBeginnerWords());
-        tasks.add(() -> toeflDataSource.getBeginnerWords());
-        tasks.add(() -> satDataSource.getBeginnerWords());
-        tasks.add(() -> greDataSource.getBeginnerWords());
+        tasks.add(ieltsDataSource::getBeginnerWords);
+        tasks.add(toeflDataSource::getBeginnerWords);
+        tasks.add(satDataSource::getBeginnerWords);
+        tasks.add(greDataSource::getBeginnerWords);
         return invokeAndMerge(tasks);
     }
     /** Fetches intermediate-level vocabulary across all sources in parallel. */
     public List<Word> getIntermediateVocabulary(){
         List<Callable<List<Word>>> tasks = new ArrayList<>();
-        tasks.add(() -> ieltsDataSource.getIntermediateWords());
-        tasks.add(() -> toeflDataSource.getIntermediateWords());
-        tasks.add(() -> satDataSource.getIntermediateWords());
-        tasks.add(() -> greDataSource.getIntermediateWords());
+        tasks.add(ieltsDataSource::getIntermediateWords);
+        tasks.add(toeflDataSource::getIntermediateWords);
+        tasks.add(satDataSource::getIntermediateWords);
+        tasks.add(greDataSource::getIntermediateWords);
         return invokeAndMerge(tasks);
     }
     /** Fetches advanced-level vocabulary across all sources in parallel. */
     public List<Word> getAdvanceVocabulary(){
         List<Callable<List<Word>>> tasks = new ArrayList<>();
-        tasks.add(() -> ieltsDataSource.getAdvanceWords());
-        tasks.add(() -> toeflDataSource.getAdvanceWords());
-        tasks.add(() -> satDataSource.getAdvanceWords());
-        tasks.add(() -> greDataSource.getAdvanceWords());
+        tasks.add(ieltsDataSource::getAdvanceWords);
+        tasks.add(toeflDataSource::getAdvanceWords);
+        tasks.add(satDataSource::getAdvanceWords);
+        tasks.add(greDataSource::getAdvanceWords);
         return invokeAndMerge(tasks);
     }
 

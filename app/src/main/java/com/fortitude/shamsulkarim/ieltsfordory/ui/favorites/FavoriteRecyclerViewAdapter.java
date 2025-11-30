@@ -18,8 +18,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseMediaRepo
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.LearningProgressRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.CardViewFavoriteOneLanguageBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
-import com.fortitude.shamsulkarim.ieltsfordory.adapters.CustomFilterFavorite;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;

@@ -5,8 +5,7 @@ import android.content.Context;
 import com.fortitude.shamsulkarim.ieltsfordory.data.FavLearnedState;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -17,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class FirebaseRepository {
 
-    private final FirebaseAuth firebaseAuth;
     private final DatabaseReference databaseReference;
     private final Context context;
 
@@ -28,27 +26,8 @@ public class FirebaseRepository {
      */
     public FirebaseRepository(Context context) {
         this.context = context;
-        this.firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         this.databaseReference = firebaseDatabase.getReference();
-    }
-
-    /**
-     * Get the current authenticated Firebase user
-     * 
-     * @return FirebaseUser if authenticated, null otherwise
-     */
-    public FirebaseUser getCurrentUser() {
-        return firebaseAuth.getCurrentUser();
-    }
-
-    /**
-     * Check if a user is currently authenticated
-     * 
-     * @return true if user is authenticated, false otherwise
-     */
-    public boolean isUserAuthenticated() {
-        return firebaseAuth.getCurrentUser() != null;
     }
 
     /**
@@ -58,15 +37,6 @@ public class FirebaseRepository {
      */
     public DatabaseReference getDatabaseReference() {
         return databaseReference;
-    }
-
-    /**
-     * Get the FirebaseAuth instance
-     * 
-     * @return FirebaseAuth instance
-     */
-    public FirebaseAuth getFirebaseAuth() {
-        return firebaseAuth;
     }
 
     /**
@@ -81,20 +51,19 @@ public class FirebaseRepository {
     /**
      * Update user data to Firebase
      * 
+     * @param userId          The user ID to update data for
      * @param favLearnedState The user's favorite and learned state data
      * @param listener        Callback for completion (can be null)
      */
-    public void updateUserData(FavLearnedState favLearnedState, OnCompleteListener<Void> listener) {
-        FirebaseUser currentUser = getCurrentUser();
-
-        if (currentUser != null && isConnected()) {
+    public void updateUserData(String userId, FavLearnedState favLearnedState, OnCompleteListener<Void> listener) {
+        if (userId != null && isConnected()) {
             try {
                 if (listener != null) {
-                    databaseReference.child(currentUser.getUid())
+                    databaseReference.child(userId)
                             .setValue(favLearnedState)
                             .addOnCompleteListener(listener);
                 } else {
-                    databaseReference.child(currentUser.getUid())
+                    databaseReference.child(userId)
                             .setValue(favLearnedState);
                 }
             } catch (Exception e) {
@@ -106,9 +75,22 @@ public class FirebaseRepository {
     /**
      * Update user data to Firebase (simplified version without callback)
      * 
+     * @param userId          The user ID to update data for
      * @param favLearnedState The user's favorite and learned state data
      */
-    public void updateUserData(FavLearnedState favLearnedState) {
-        updateUserData(favLearnedState, null);
+    public void updateUserData(String userId, FavLearnedState favLearnedState) {
+        updateUserData(userId, favLearnedState, null);
+    }
+
+    public void addChildEventListener(String userId, ChildEventListener listener) {
+        if (userId != null) {
+            databaseReference.child(userId).addChildEventListener(listener);
+        }
+    }
+
+    public void removeChildEventListener(String userId, ChildEventListener listener) {
+        if (userId != null && listener != null) {
+            databaseReference.child(userId).removeEventListener(listener);
+        }
     }
 }

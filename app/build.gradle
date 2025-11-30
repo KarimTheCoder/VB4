@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'
 apply plugin:  'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-android {
+  android {
     compileSdkVersion 36
     defaultConfig {
         applicationId 'com.fortitude.apps.vocabularybuilder'
@@ -42,19 +45,20 @@ android {
         }
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-
-    }
     namespace 'com.fortitude.shamsulkarim.ieltsfordory'
-    compileOptions {
-        sourceCompatibility agp_version
-        targetCompatibility agp_version
-    }
     buildToolsVersion '33.0.1'
 
     buildFeatures {
         viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
     }
 }
 
@@ -68,7 +72,7 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.6.0-alpha01', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.7.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
@@ -107,5 +111,28 @@ dependencies {
 
     // Material
     implementation 'com.google.android.material:material:1.13.0'
+
+    // Credential Manager
+    implementation "androidx.credentials:credentials:1.5.0"
+    implementation "androidx.credentials:credentials-play-services-auth:1.5.0"
+    implementation "com.google.android.libraries.identity.googleid:googleid:1.1.1"
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.1.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0'
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'org.jetbrains.kotlin:kotlin-stdlib:2.1.0',
+              'org.jetbrains.kotlin:kotlin-stdlib-common:2.1.0',
+              'org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.0',
+              'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0'
+        eachDependency { details ->
+            if (details.requested.group == 'org.jetbrains.kotlin' && details.requested.name.startsWith('kotlin-stdlib')) {
+                details.useVersion '2.1.0'
+            }
+        }
+    }
 }
 apply plugin: 'com.google.gms.google-services'

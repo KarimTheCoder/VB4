@@ -1,39 +1,38 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.settings;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
+
 import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.auth.AuthManager;
 import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data.sync.FirebaseSyncManager;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewSettingBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.signin.SignInAndSync;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.signin.SignInAndSyncCallback;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SettingActivity extends AppCompatActivity implements SignInAndSyncCallback {
+public class SettingActivity extends AppCompatActivity {
 
     private ActivityNewSettingBinding binding;
     private SettingViewModel viewModel;
-    private SignInAndSync signInAndSync;
-    private ActivityResultLauncher<Intent> activityResultLauncher;
+    private AuthManager authManager;
+    private FirebaseSyncManager firebaseSyncManager;
     private AppPreferences prefs;
 
     @Override
@@ -47,7 +46,9 @@ public class SettingActivity extends AppCompatActivity implements SignInAndSyncC
         window.setStatusBarColor(getColor(R.color.toolbar_background_color));
 
         prefs = AppPreferences.get(this);
-        signInAndSync = new SignInAndSync(this, this);
+        authManager = new AuthManager(this);
+        FirebaseRepository firebaseRepository = new FirebaseRepository(this);
+        firebaseSyncManager = new FirebaseSyncManager(this, firebaseRepository);
         viewModel = new ViewModelProvider(this).get(SettingViewModel.class);
 
         setupUI();
@@ -226,20 +227,29 @@ public class SettingActivity extends AppCompatActivity implements SignInAndSyncC
         binding.nsSignIn.setBackgroundColor(getColor(R.color.card_background_color));
         binding.nsSignIn.setTextColor(getColor(R.color.primary_text_color));
 
-        activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        signInAndSync.authenticateUser(result.getData());
-                    }
-                });
-
         binding.nsSignIn.setOnClickListener(v -> {
-            if (signInAndSync.getmAuth().getCurrentUser() == null) {
+            if (!authManager.isUserAuthenticated()) {
                 if (ConnectivityHelper.isConnectedToNetwork(this)) {
                     progressStatus(false);
                     binding.nsSignIn.setEnabled(false);
-                    activityResultLauncher.launch(signInAndSync.getSignInIntent());
+                    authManager.signIn(this, new AuthManager.AuthCallback() {
+                        @Override
+                        public void onSuccess(FirebaseUser user) {
+                            updateUI();
+                            startSync(user.getUid());
+                            Toast.makeText(SettingActivity.this, "Successfully signed in", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            Log.e("SettingActivity", "Sign-in failed", e);
+                            Toast.makeText(SettingActivity.this, "Sign-in failed: " + e.getMessage(), Toast.LENGTH_LONG)
+                                    .show();
+                            progressStatus(true);
+                            binding.nsSignIn.setEnabled(true);
+                        }
+                    });
                 } else {
                     Toast.makeText(this, "Please connect to the internet", Toast.LENGTH_SHORT).show();
                 }
@@ -249,14 +259,43 @@ public class SettingActivity extends AppCompatActivity implements SignInAndSyncC
         });
     }
 
+    private void startSync(String userId) {
+        firebaseSyncManager.startSync(userId, new FirebaseSyncManager.SyncCallback() {
+            @Override
+            public void onCloudDataFound(Runnable confirmSync) {
+                new com.google.android.material.dialog.MaterialAlertDialogBuilder(SettingActivity.this)
+                        .setTitle("Saved progress on the cloud found!")
+                        .setMessage("Do you want to sync the progress?")
+                        .setIcon(R.drawable.data_found)
+                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            progressStatus(false);
+                            confirmSync.run();
+                        })
+                        .setNegativeButton(android.R.string.no, (dialog, which) -> {
+                            progressStatus(true);
+                        })
+                        .show();
+            }
+
+            @Override
+            public void onSyncComplete() {
+                progressStatus(true);
+                Toast.makeText(SettingActivity.this, "Sync complete", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSyncError(Exception e) {
+                progressStatus(true);
+            }
+        });
+    }
+
     private void signOut() {
         progressStatus(false);
-        signInAndSync.getmAuth().signOut();
-        signInAndSync.getSignInClient().signOut().addOnCompleteListener(this, task -> {
-            viewModel.onSignedOut();
-            progressStatus(true);
-            Toast.makeText(getApplicationContext(), "Sign-out complete!", Toast.LENGTH_SHORT).show();
-        });
+        authManager.signOut();
+        viewModel.onSignedOut();
+        progressStatus(true);
+        Toast.makeText(getApplicationContext(), "Sign-out complete!", Toast.LENGTH_SHORT).show();
     }
 
     private void updateSignInUI(String name, String email, boolean signedIn) {
@@ -270,15 +309,13 @@ public class SettingActivity extends AppCompatActivity implements SignInAndSyncC
             prefs.setUserName(name);
     }
 
-    @Override
     public void updateUI() {
-        FirebaseUser user = signInAndSync.getmAuth().getCurrentUser();
+        FirebaseUser user = authManager.getCurrentUser();
         if (user != null) {
             viewModel.onAuthenticated(user.getDisplayName(), user.getEmail());
         }
     }
 
-    @Override
     public void progressStatus(boolean isCompleted) {
         binding.progressbar.setVisibility(isCompleted ? View.INVISIBLE : View.VISIBLE);
     }
@@ -286,8 +323,9 @@ public class SettingActivity extends AppCompatActivity implements SignInAndSyncC
     @Override
     public void onStart() {
         super.onStart();
-        if (signInAndSync.getmAuth().getCurrentUser() != null) {
+        if (authManager.isUserAuthenticated()) {
             updateUI();
+            startSync(authManager.getCurrentUser().getUid());
         }
     }
 }

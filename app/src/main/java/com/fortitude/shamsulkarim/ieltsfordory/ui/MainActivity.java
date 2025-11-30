@@ -7,11 +7,9 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Toast;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.FavLearnedState;
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseRepository;
@@ -26,10 +24,13 @@ import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.Connectivity
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.fortitude.shamsulkarim.ieltsfordory.data.auth.AuthManager;
+
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private FirebaseRepository firebaseRepository;
+    private AuthManager authManager;
     private FirebaseSyncManager syncManager;
     private LearningProgressRepository learningProgressRepository;
     private Toast toast;
@@ -78,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Initialize repositories
+        authManager = new AuthManager(this);
         firebaseRepository = new FirebaseRepository(this);
-        syncManager = new FirebaseSyncManager();
+        syncManager = new FirebaseSyncManager(this, firebaseRepository);
         learningProgressRepository = new LearningProgressRepository(this);
 
         // Initialize bottom navigation
@@ -87,13 +89,11 @@ public class MainActivity extends AppCompatActivity {
         setupBottomNavigation();
 
         // firebase auto sync
-        if (firebaseRepository.isUserAuthenticated() && connected) {
+        if (authManager.isUserAuthenticated() && connected) {
             try {
-                FirebaseUser currentUser = firebaseRepository.getCurrentUser();
+                FirebaseUser currentUser = authManager.getCurrentUser();
                 if (currentUser != null) {
-                    syncManager.startAutoSync(
-                            firebaseRepository.getDatabaseReference(),
-                            currentUser.getUid());
+                    syncManager.startSync(currentUser.getUid(), null);
                 }
             } catch (NullPointerException n) {
                 Toast.makeText(this, "Reference exception", Toast.LENGTH_SHORT).show();
@@ -132,7 +132,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Upload to Firebase
         try {
-            firebaseRepository.updateUserData(favLearnedState);
+            if (authManager.isUserAuthenticated()) {
+                firebaseRepository.updateUserData(authManager.getCurrentUser().getUid(), favLearnedState);
+            }
         } catch (Exception e) {
             Toast.makeText(this, "update failure", Toast.LENGTH_SHORT).show();
         }
@@ -143,13 +145,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        if (firebaseRepository.isUserAuthenticated() && connected) {
+        if (authManager.isUserAuthenticated() && connected) {
             updateFirebase();
         }
-
-        // Stop auto-sync when activity stops
-        syncManager.stopAutoSync();
-
     }
 
     private void setupBottomNavigation() {

@@ -1,134 +1,268 @@
 package com.fortitude.shamsulkarim.ieltsfordory.data.sync;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
+
+import com.fortitude.shamsulkarim.ieltsfordory.R;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
- * Manager class to handle Firebase auto-sync functionality.
- * This class manages the lifecycle of Firebase ChildEventListener
- * for real-time data synchronization.
+ * Manager class to handle Firebase synchronization logic.
+ * Orchestrates data flow between FirebaseRepository (Remote) and
+ * VocabularyRepository (Local).
  */
 public class FirebaseSyncManager {
 
-    private DatabaseReference databaseReference;
-    private ChildEventListener childEventListener;
-    private String currentUserId;
+    private static final String TAG = "FirebaseSyncManager";
+    private final FirebaseRepository firebaseRepository;
+    private final VocabularyRepository vocabularyRepository;
+    private final Context context;
+    private final SharedPreferences sp;
 
-    /**
-     * Callback interface for sync events
-     */
+    private List<Integer> savedBeginnerFav, savedAdvanceFav, savedIntermediateFav, savedGreFav;
+    private List<Integer> savedIeltsLearned, savedToeflLearned, savedSatLearned, savedGreLearned;
+    private String ADVANCE_FAVORITE, ADVANCE_LEARNED, BEGINNER_FAVORITE, BEGINNER_LEARNED, INTERMEDIATE_FAVORITE,
+            INTERMEDIATE_LEARNED, GRE_FAVORITE, GRE_LEARNED;
+
     public interface SyncCallback {
-        void onChildAdded(@NotNull DataSnapshot dataSnapshot, String previousChildName);
+        void onCloudDataFound(Runnable confirmSync);
 
-        void onChildChanged(@NotNull DataSnapshot dataSnapshot, String previousChildName);
+        void onSyncComplete();
 
-        void onChildRemoved(@NotNull DataSnapshot dataSnapshot);
-
-        void onChildMoved(@NotNull DataSnapshot dataSnapshot, String previousChildName);
-
-        void onCancelled(@NotNull DatabaseError databaseError);
+        void onSyncError(Exception e);
     }
 
-    /**
-     * Start auto-sync for a specific user
-     * 
-     * @param databaseReference Firebase database reference
-     * @param userId            User ID to sync data for
-     * @param callback          Callback for sync events (can be null for default
-     *                          behavior)
-     */
-    public void startAutoSync(DatabaseReference databaseReference, String userId, final SyncCallback callback) {
-        // Stop any existing sync first
-        stopAutoSync();
+    public FirebaseSyncManager(Context context, FirebaseRepository firebaseRepository) {
+        this.context = context;
+        this.firebaseRepository = firebaseRepository;
+        this.vocabularyRepository = new VocabularyRepository(context);
+        this.sp = context.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
+    }
 
-        this.databaseReference = databaseReference;
-        this.currentUserId = userId;
+    public void startSync(String userId, SyncCallback callback) {
+        firebaseRepository.addChildEventListener(userId, new ChildEventListener() {
+            int i = 0;
+            final String[] strData = new String[9];
+            final HashMap<String, String> data = new HashMap<>();
+            boolean askOnce = false;
 
-        // Create the child event listener
-        childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NotNull DataSnapshot dataSnapshot, String s) {
-                if (callback != null) {
-                    callback.onChildAdded(dataSnapshot, s);
+                if (dataSnapshot.exists() && i == 8 && !askOnce) {
+                    askOnce = true;
+                    if (callback != null) {
+                        callback.onCloudDataFound(() -> performInitialSync(callback));
+                    }
                 }
+
+                String state = dataSnapshot.getValue(String.class);
+                strData[i] = state;
+                data.put(dataSnapshot.getKey(), state);
+
+                if (strData[8] != null) {
+                    parseData(strData);
+                }
+                i++;
             }
 
             @Override
             public void onChildChanged(@NotNull DataSnapshot dataSnapshot, String s) {
-                if (callback != null) {
-                    callback.onChildChanged(dataSnapshot, s);
-                } else {
-                    // Default behavior - just get the value
-                    dataSnapshot.getValue(String.class);
-                    dataSnapshot.getKey();
+                String data = dataSnapshot.getValue(String.class);
+                String key = dataSnapshot.getKey();
+
+                if (key != null) {
+                    if (key.equalsIgnoreCase("advanceFavCount") || key.equalsIgnoreCase("intermediateFavCount")
+                            || key.equalsIgnoreCase("beginnerFavCount")) {
+                        syncDatabasesIfFavDataChanged(data, key);
+                    }
+                    if (key.equalsIgnoreCase("advanceLearnedCount") || key.equalsIgnoreCase("intermediateLearnedCount")
+                            || key.equalsIgnoreCase("beginnerLearnedCount")) {
+                        syncSPIfLearnedDataChanged(data, key);
+                    }
                 }
             }
 
             @Override
             public void onChildRemoved(@NotNull DataSnapshot dataSnapshot) {
-                if (callback != null) {
-                    callback.onChildRemoved(dataSnapshot);
-                }
             }
 
             @Override
             public void onChildMoved(@NotNull DataSnapshot dataSnapshot, String s) {
-                if (callback != null) {
-                    callback.onChildMoved(dataSnapshot, s);
-                }
             }
 
             @Override
             public void onCancelled(@NotNull DatabaseError databaseError) {
                 if (callback != null) {
-                    callback.onCancelled(databaseError);
+                    callback.onSyncError(databaseError.toException());
                 }
             }
-        };
-
-        // Attach the listener to the user's node
-        try {
-            databaseReference.child(userId).addChildEventListener(childEventListener);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
     }
 
-    /**
-     * Start auto-sync with default callback behavior
-     * 
-     * @param databaseReference Firebase database reference
-     * @param userId            User ID to sync data for
-     */
-    public void startAutoSync(DatabaseReference databaseReference, String userId) {
-        startAutoSync(databaseReference, userId, null);
+    private void parseData(String[] strData) {
+        GRE_FAVORITE = strData[0];
+        GRE_LEARNED = strData[1];
+        BEGINNER_FAVORITE = strData[2];
+        BEGINNER_LEARNED = strData[3];
+        sp.edit().putString("userName", strData[4]).apply();
+        ADVANCE_FAVORITE = strData[5];
+        ADVANCE_LEARNED = strData[6];
+        INTERMEDIATE_FAVORITE = strData[7];
+        INTERMEDIATE_LEARNED = strData[8];
     }
 
-    /**
-     * Stop auto-sync and remove the listener
-     */
-    public void stopAutoSync() {
-        if (childEventListener != null && databaseReference != null && currentUserId != null) {
-            try {
-                databaseReference.child(currentUserId).removeEventListener(childEventListener);
-            } catch (Exception e) {
-                e.printStackTrace();
+    private void performInitialSync(SyncCallback callback) {
+        addingBuilderToNums();
+
+        new Handler(Looper.getMainLooper()).post(() -> {
+            syncSQL();
+            if (callback != null) {
+                callback.onSyncComplete();
             }
-            childEventListener = null;
-            currentUserId = null;
+        });
+    }
+
+    private void syncSQL() {
+        syncFavorites(savedBeginnerFav, this::updateBeginnerFav);
+        syncFavorites(savedIntermediateFav, this::updateIntermediateFav);
+        syncFavorites(savedAdvanceFav, this::updateAdvanceFav);
+        syncFavorites(savedGreFav, this::updateGreFav);
+
+        syncLearned(savedIeltsLearned, this::updateIeltsLearned);
+        syncLearned(savedToeflLearned, this::updateToeflLearned);
+        syncLearned(savedSatLearned, this::updateSatLearned);
+        syncLearned(savedGreLearned, this::updateGreLearned);
+    }
+
+    private void syncFavorites(List<Integer> list, UpdateAction action) {
+        if (list != null && list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                action.update("" + (i + 1), list.get(i) == 1 ? "True" : "False");
+            }
         }
     }
 
-    /**
-     * Check if auto-sync is currently active
-     * 
-     * @return true if sync is active, false otherwise
-     */
-    public boolean isSyncActive() {
-        return childEventListener != null;
+    private void syncLearned(List<Integer> list, UpdateAction action) {
+        if (list != null && list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                action.update("" + (i + 1), list.get(i) == 1 ? "True" : "False");
+            }
+        }
+    }
+
+    @FunctionalInterface
+    interface UpdateAction {
+        void update(String id, String state);
+    }
+
+    private void updateBeginnerFav(String id, String state) {
+        vocabularyRepository.updateIELTSFavoriteState(id, state);
+    }
+
+    private void updateIntermediateFav(String id, String state) {
+        vocabularyRepository.updateTOEFLFavoriteState(id, state);
+    }
+
+    private void updateAdvanceFav(String id, String state) {
+        vocabularyRepository.updateSATFavoriteState(id, state);
+    }
+
+    private void updateGreFav(String id, String state) {
+        vocabularyRepository.updateGREFavoriteState(id, state);
+    }
+
+    private void updateIeltsLearned(String id, String state) {
+        vocabularyRepository.updateIELTSLearnState(id, state);
+    }
+
+    private void updateToeflLearned(String id, String state) {
+        vocabularyRepository.updateTOEFLLearnState(id, state);
+    }
+
+    private void updateSatLearned(String id, String state) {
+        vocabularyRepository.updateSATLearnState(id, state);
+    }
+
+    private void updateGreLearned(String id, String state) {
+        vocabularyRepository.updateGRELearnState(id, state);
+    }
+
+    private void addingBuilderToNums() {
+        savedAdvanceFav = builderToNums(new StringBuilder(ADVANCE_FAVORITE));
+        savedIntermediateFav = builderToNums(new StringBuilder(INTERMEDIATE_FAVORITE));
+        savedBeginnerFav = builderToNums(new StringBuilder(BEGINNER_FAVORITE));
+        savedGreFav = builderToNums(new StringBuilder(GRE_FAVORITE));
+
+        savedIeltsLearned = builderToNums(new StringBuilder(BEGINNER_LEARNED));
+        savedToeflLearned = builderToNums(new StringBuilder(INTERMEDIATE_LEARNED));
+        savedSatLearned = builderToNums(new StringBuilder(ADVANCE_LEARNED));
+        savedGreLearned = builderToNums(new StringBuilder(GRE_LEARNED));
+    }
+
+    private List<Integer> builderToNums(StringBuilder numBuilder) {
+        List<Integer> backToNums = new ArrayList<>();
+        String string = numBuilder.toString();
+        for (int i = 0; i < string.length();) {
+            if (string.substring(i, i + 1).equalsIgnoreCase("1")) {
+                backToNums.add(1);
+            } else {
+                backToNums.add(0);
+            }
+            i = i + 2;
+        }
+        return backToNums;
+    }
+
+    private void syncDatabasesIfFavDataChanged(String newData, String key) {
+        List<Integer> newDataList = builderToNums(new StringBuilder(newData));
+        if (newDataList.size() > 0) {
+            if (key.equalsIgnoreCase("advanceFavCount")) {
+                resetAndSync(R.array.SAT_words, "advance", newDataList, this::updateAdvanceFav);
+            } else if (key.equalsIgnoreCase("intermediateFavCount")) {
+                resetAndSync(R.array.TOEFL_words, "intermediate", newDataList, this::updateIntermediateFav);
+            } else if (key.equalsIgnoreCase("beginnerFavCount")) {
+                resetAndSync(R.array.TOEFL_words, "beginner", newDataList, this::updateBeginnerFav);
+            }
+        }
+    }
+
+    private void resetAndSync(int arrayResId, String spKey, List<Integer> newDataList, UpdateAction action) {
+        int size = sp.getInt(spKey, context.getResources().getStringArray(arrayResId).length);
+        for (int i = 0; i < size; i++) {
+            action.update("" + (i + 1), "False");
+        }
+        for (int k = 0; k < newDataList.size(); k++) {
+            action.update("" + (newDataList.get(k) + 1), "True");
+        }
+    }
+
+    private void syncSPIfLearnedDataChanged(String data, String key) {
+        int firebaseSaved = Integer.parseInt(data);
+        if (key.equalsIgnoreCase("advanceLearnedCount")) {
+            updateSPIfHigher("advance", firebaseSaved);
+        } else if (key.equalsIgnoreCase("intermediateLearnedCount")) {
+            updateSPIfHigher("intermediate", firebaseSaved);
+        } else if (key.equalsIgnoreCase("beginnerLearnedCount")) {
+            updateSPIfHigher("beginner", firebaseSaved);
+        }
+    }
+
+    private void updateSPIfHigher(String key, int firebaseValue) {
+        int localValue = sp.getInt(key, 0);
+        if (firebaseValue > localValue) {
+            sp.edit().putInt(key, firebaseValue).apply();
+        }
     }
 }

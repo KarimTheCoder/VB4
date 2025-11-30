@@ -19,7 +19,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseMediaRepo
 import com.fortitude.shamsulkarim.ieltsfordory.data.repository.LearningProgressRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.OneLanguageBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
-import com.fortitude.shamsulkarim.ieltsfordory.adapters.CustomFilter;
+import com.fortitude.shamsulkarim.ieltsfordory.ui.train.CustomFilter;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Wave;
 
