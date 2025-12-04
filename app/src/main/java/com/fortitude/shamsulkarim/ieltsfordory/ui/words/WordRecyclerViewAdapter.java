@@ -12,11 +12,14 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.AudioRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseMediaRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.LearningProgressRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.model.AudioData;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase;
+import org.koin.java.KoinJavaComponent;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.OneLanguageBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.CustomFilter;
@@ -38,8 +41,8 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
     private AppPreferences prefs;
     private int favoriteCount;
 
-    private FirebaseMediaRepository firebaseMediaRepository;
-    private LearningProgressRepository repository;
+    private DownloadAudioUseCase downloadAudioUseCase;
+    private UpdateFavoriteStatusUseCase updateFavoriteStatusUseCase;
     private WordAdapterCallback wordAdapterCallback;
 
     public WordRecyclerViewAdapter(Context context, ArrayList<Object> words, WordAdapterCallback wordAdapterCallback) {
@@ -51,7 +54,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
     }
 
     private void initDatabase(Context context) {
-        repository = new LearningProgressRepository(context);
+        updateFavoriteStatusUseCase = KoinJavaComponent.get(UpdateFavoriteStatusUseCase.class);
     }
 
     private void init(Context context, WordAdapterCallback wordAdapterCallback) {
@@ -60,7 +63,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
         } catch (ClassCastException e) {
             Log.e("WordAdapter init", e.getMessage());
         }
-        firebaseMediaRepository = new FirebaseMediaRepository();
+        downloadAudioUseCase = KoinJavaComponent.get(DownloadAudioUseCase.class);
         prefs = AppPreferences.get(context);
         if (!prefs.contains(AppPreferences.KEY_FAVORITE_COUNT_PROFILE)) {
             prefs.setFavoriteCountProfile(0);
@@ -141,7 +144,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
                 if (binding.favorite.getTag() == null) {
                     favoriteCount++;
                     prefs.setFavoriteCountProfile(favoriteCount);
-                    repository.updateFavoriteStatus(word, "True");
+                    updateFavoriteStatusUseCase.execute(word, "True");
                     binding.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                     binding.favorite.setTag(R.drawable.ic_favorite_icon_active);
                 } else {
@@ -149,7 +152,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
                         favoriteCount--;
                         prefs.setFavoriteCountProfile(favoriteCount);
                     }
-                    repository.updateFavoriteStatus(word, "false");
+                    updateFavoriteStatusUseCase.execute(word, "false");
                     binding.favorite.setIconResource(R.drawable.ic_favorite_icon);
                     binding.favorite.setTag(null);
                 }
@@ -158,10 +161,10 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
 
         public void downloadAudio(String wordName) {
             binding.spinKit.setVisibility(View.VISIBLE);
-            firebaseMediaRepository.downloadAudio(wordName, new AudioRepository.Callback() {
+            downloadAudioUseCase.execute(wordName, new AudioRepository.Callback() {
                 @Override
-                public void onAudioReady(File audioFile) {
-                    String audioPath = audioFile.getAbsolutePath();
+                public void onSuccess(AudioData data) {
+                    String audioPath = data.getLocalPath();
                     MediaPlayer mp = new MediaPlayer();
                     try {
                         mp.setDataSource(audioPath);

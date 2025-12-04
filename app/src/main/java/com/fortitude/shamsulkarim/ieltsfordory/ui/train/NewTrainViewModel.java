@@ -9,9 +9,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.LearningProgressRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.train.TrainUiState;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.FetchSessionWordsUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.GetAllUnlearnedWordsUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateLearnedStatusUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateJustLearnedStatusUseCase;
+import org.koin.java.KoinJavaComponent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +26,10 @@ import android.os.CountDownTimer;
 
 public class NewTrainViewModel extends AndroidViewModel {
 
-    private final LearningProgressRepository repository;
+    private final FetchSessionWordsUseCase fetchSessionWordsUseCase;
+    private final GetAllUnlearnedWordsUseCase getAllUnlearnedWordsUseCase;
+    private final UpdateLearnedStatusUseCase updateLearnedStatusUseCase;
+    private final UpdateJustLearnedStatusUseCase updateJustLearnedStatusUseCase;
     private final SharedPreferences sp;
 
     // State Variables
@@ -54,7 +60,10 @@ public class NewTrainViewModel extends AndroidViewModel {
 
     public NewTrainViewModel(@NonNull Application application) {
         super(application);
-        repository = new LearningProgressRepository(application);
+        fetchSessionWordsUseCase = KoinJavaComponent.get(FetchSessionWordsUseCase.class);
+        getAllUnlearnedWordsUseCase = KoinJavaComponent.get(GetAllUnlearnedWordsUseCase.class);
+        updateLearnedStatusUseCase = KoinJavaComponent.get(UpdateLearnedStatusUseCase.class);
+        updateJustLearnedStatusUseCase = KoinJavaComponent.get(UpdateJustLearnedStatusUseCase.class);
         sp = application.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
 
         loadPreferences();
@@ -92,7 +101,7 @@ public class NewTrainViewModel extends AndroidViewModel {
         }
 
         // Use Repository to fetch words
-        List<Word> sessionWords = repository.fetchSessionWords(level, wordsPerSession);
+        List<Word> sessionWords = fetchSessionWordsUseCase.execute(level, wordsPerSession);
 
         fiveWords.clear();
         fiveWords.addAll(sessionWords);
@@ -111,7 +120,7 @@ public class NewTrainViewModel extends AndroidViewModel {
 
     public void getQuestionWords() {
         questionWords.clear();
-        questionWords.addAll(repository.getAllUnlearnedWords(level));
+        questionWords.addAll(getAllUnlearnedWordsUseCase.execute(level));
     }
 
     public ArrayList<Word> gettingAnswer() {
@@ -157,11 +166,11 @@ public class NewTrainViewModel extends AndroidViewModel {
     }
 
     public void updateLearnedDatabase() {
-        repository.updateLearnedStatus(fiveWords);
+        updateLearnedStatusUseCase.execute(fiveWords);
     }
 
     public void updateJustlearnedDatabase(int pos) {
-        repository.updateJustLearnedStatus(level, fiveWords, pos);
+        updateJustLearnedStatusUseCase.execute(level, fiveWords, pos);
     }
 
     public void saveProgress() {

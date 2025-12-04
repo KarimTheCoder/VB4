@@ -14,10 +14,10 @@ import androidx.core.content.ContextCompat;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.DatabaseInitializer;
-import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.TaskListener;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.utils.DatabaseChecker;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.initializer.DatabaseInitializer;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.initializer.TaskListener;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.utils.DatabaseChecker;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 
 public class AppLauncher extends AppCompatActivity {

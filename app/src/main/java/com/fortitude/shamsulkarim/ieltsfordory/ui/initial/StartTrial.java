@@ -4,11 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.utils.DatabaseChecker;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.utils.DatabaseChecker;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityStartTrialBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 

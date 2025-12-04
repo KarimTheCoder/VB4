@@ -16,11 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.arlib.floatingsearchview.FloatingSearchView;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetFavoriteWordsUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentFavoriteWordsBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.tts.TtsController;
@@ -32,7 +32,7 @@ public class FavoriteFragment extends Fragment
         implements FavoriteRecyclerViewAdapter.AdapterCallback {
 
     private FragmentFavoriteWordsBinding binding;
-    private VocabularyRepository repository;
+    private GetFavoriteWordsUseCase getFavoriteWordsUseCase;
     private FavoriteRecyclerViewAdapter adapter;
     static public final List<Word> words = new ArrayList<>();
     private float fabY;
@@ -52,7 +52,7 @@ public class FavoriteFragment extends Fragment
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(requireContext().getColor(R.color.colorPrimary));
 
-        repository = new VocabularyRepository(requireContext());
+        getFavoriteWordsUseCase = KoinJavaComponent.get(GetFavoriteWordsUseCase.class);
         ttsController = new TtsController(requireContext());
 
         binding.fabFavorite.setColorNormal(requireContext().getColor(R.color.colorPrimary));
@@ -125,7 +125,7 @@ public class FavoriteFragment extends Fragment
 
     public void addFavoriteWord() {
         words.clear();
-        words.addAll(repository.getFavoriteWords());
+        words.addAll(getFavoriteWordsUseCase.execute());
     }
 
     protected void fabAnimation(boolean isVisible) {

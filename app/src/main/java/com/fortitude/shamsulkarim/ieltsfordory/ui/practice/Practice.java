@@ -1,7 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.practice;
 
 import android.animation.ValueAnimator;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -31,8 +30,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.NewTrainRecyclerView;
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewTrainBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.tts.TtsController;
@@ -43,7 +42,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class Practice extends AppCompatActivity
         implements View.OnClickListener, NewTrainRecyclerView.TrainAdapterCallback {

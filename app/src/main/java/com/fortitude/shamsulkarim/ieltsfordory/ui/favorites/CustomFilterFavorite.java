@@ -2,8 +2,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.favorites;
 
 import android.widget.Filter;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.favorites.FavoriteRecyclerViewAdapter;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
 
 import java.util.ArrayList;
 import java.util.List;

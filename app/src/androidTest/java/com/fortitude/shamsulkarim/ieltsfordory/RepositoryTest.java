@@ -5,7 +5,7 @@ import android.util.Log;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.repository.VocabularyRepository;
 
 import org.junit.Assert;
 import org.junit.Before;

@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityStartTrainingBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.settings.SettingActivity;
 

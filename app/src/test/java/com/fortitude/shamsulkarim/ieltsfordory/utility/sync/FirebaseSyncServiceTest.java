@@ -1,11 +1,11 @@
 package com.fortitude.shamsulkarim.ieltsfordory.utility.sync;
 
 import com.fortitude.shamsulkarim.ieltsfordory.application.service.SyncService;
-import com.fortitude.shamsulkarim.ieltsfordory.data.FavLearnedState;
-import com.fortitude.shamsulkarim.ieltsfordory.domain.sync.AuthProvider;
-import com.fortitude.shamsulkarim.ieltsfordory.domain.sync.DatabaseApi;
-import com.fortitude.shamsulkarim.ieltsfordory.domain.sync.FavLearnedStateProvider;
-import com.fortitude.shamsulkarim.ieltsfordory.domain.sync.NetworkChecker;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.FavLearnedState;
+import com.fortitude.shamsulkarim.ieltsfordory.domain_old.sync.AuthProvider;
+import com.fortitude.shamsulkarim.ieltsfordory.domain_old.sync.DatabaseApi;
+import com.fortitude.shamsulkarim.ieltsfordory.domain_old.sync.FavLearnedStateProvider;
+import com.fortitude.shamsulkarim.ieltsfordory.domain_old.sync.NetworkChecker;
 import org.junit.Test;
 import java.util.concurrent.atomic.AtomicReference;
 import static org.junit.Assert.*;

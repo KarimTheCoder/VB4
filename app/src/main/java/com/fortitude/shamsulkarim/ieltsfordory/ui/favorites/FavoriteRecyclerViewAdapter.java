@@ -11,11 +11,13 @@ import android.widget.Filterable;
 import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.AudioRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseMediaRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.LearningProgressRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.model.AudioData;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase;
+import org.koin.java.KoinJavaComponent;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.CardViewFavoriteOneLanguageBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
 import org.jetbrains.annotations.NotNull;
@@ -36,11 +38,11 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
     private CustomFilterFavorite filter;
     private final Context context;
 
-    private final LearningProgressRepository repository;
+    private final UpdateFavoriteStatusUseCase updateFavoriteStatusUseCase;
 
     private final AppPreferences prefs;
     private int favoriteCount;
-    private final FirebaseMediaRepository firebaseMediaRepository;
+    private final DownloadAudioUseCase downloadAudioUseCase;
     private final AdapterCallback adapterCallback;
 
     public FavoriteRecyclerViewAdapter(Context context, List<Word> words, AdapterCallback adapterCallback) {
@@ -50,8 +52,8 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             throw new ClassCastException();
         }
         this.context = context;
-        repository = new LearningProgressRepository(context);
-        firebaseMediaRepository = new FirebaseMediaRepository();
+        updateFavoriteStatusUseCase = org.koin.java.KoinJavaComponent.get(UpdateFavoriteStatusUseCase.class);
+        downloadAudioUseCase = KoinJavaComponent.get(DownloadAudioUseCase.class);
         this.words = words;
         this.filterList = words;
         prefs = AppPreferences.get(context);
@@ -115,10 +117,10 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
         public void downloadAudio(String wordName) {
             binding.spinKit.setVisibility(View.VISIBLE);
-            firebaseMediaRepository.downloadAudio(wordName, new AudioRepository.Callback() {
+            downloadAudioUseCase.execute(wordName, new AudioRepository.Callback() {
                 @Override
-                public void onAudioReady(File audioFile) {
-                    audioPath = audioFile.getAbsolutePath();
+                public void onSuccess(AudioData data) {
+                    audioPath = data.getLocalPath();
                     MediaPlayer mp = new MediaPlayer();
                     try {
                         mp.setDataSource(audioPath);
@@ -168,14 +170,14 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
                         favoriteCount--;
                         prefs.setFavoriteCountProfile(favoriteCount);
                     }
-                    repository.updateFavoriteStatus(word, "False");
+                    updateFavoriteStatusUseCase.execute(word, "False");
                 } else {
                     favoriteCount++;
                     prefs.setFavoriteCountProfile(favoriteCount);
                     isFav.set(getBindingAdapterPosition(), true);
                     binding.favoriteFavorite.setIconResource(R.drawable.ic_favorite_icon_active);
                     binding.favoriteFavorite.setTag(null);
-                    repository.updateFavoriteStatus(word, "True");
+                    updateFavoriteStatusUseCase.execute(word, "True");
                 }
                 words.remove(getBindingAdapterPosition());
                 isFav.remove(getBindingAdapterPosition());

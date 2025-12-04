@@ -18,10 +18,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.auth.AuthManager;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.sync.FirebaseSyncManager;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.auth.AuthManager;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.sync.FirebaseSyncManager;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.AddChildEventListenerUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewSettingBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
@@ -33,6 +34,7 @@ public class SettingActivity extends AppCompatActivity {
     private SettingViewModel viewModel;
     private AuthManager authManager;
     private FirebaseSyncManager firebaseSyncManager;
+    private AddChildEventListenerUseCase addChildEventListenerUseCase;
     private AppPreferences prefs;
 
     @Override
@@ -47,8 +49,8 @@ public class SettingActivity extends AppCompatActivity {
 
         prefs = AppPreferences.get(this);
         authManager = new AuthManager(this);
-        FirebaseRepository firebaseRepository = new FirebaseRepository(this);
-        firebaseSyncManager = new FirebaseSyncManager(this, firebaseRepository);
+        addChildEventListenerUseCase = KoinJavaComponent.get(AddChildEventListenerUseCase.class);
+        firebaseSyncManager = new FirebaseSyncManager(this, addChildEventListenerUseCase);
         viewModel = new ViewModelProvider(this).get(SettingViewModel.class);
 
         setupUI();

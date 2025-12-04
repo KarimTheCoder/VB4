@@ -26,6 +26,7 @@ googleid = "1.1.1"
 billing = "8.1.0"
 kotlin = "2.2.21"
 coroutines = "1.10.2"
+koin = "3.5.6"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -69,4 +70,26 @@ androidx-credentials-play-services-auth = { group = "androidx.credentials", name
 googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
 
 billing = { group = "com.android.billingclient", name = "billing", version.ref = "billing" }
-switch-button = { module = "com.github.zcweng:switch-button", version.ref = "switch-button" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-android-compat = { group = "io.insert-koin", name = "koin-android-compat", version.ref = "koin" }
+
+[bundles]
+firebase = [
+  "firebase-auth",
+  "firebase-database",
+  "firebase-storage",
+  "firebase-analytics",
+  "firebase-crashlytics",
+  "firebase-ui-auth"
+]
+androidTest = [
+  "androidx-test-ext-junit",
+  "androidx-espresso-core"
+]
+ui = [
+  "androidx-appcompat",
+  "androidx-material",
+  "androidx-constraintlayout",
+  "androidx-recyclerview",
+  "androidx-cardview"
+]

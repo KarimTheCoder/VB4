@@ -5,10 +5,10 @@ import android.content.Context;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.DatabaseInitConfig;
-import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.DatabaseInitializer;
-import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.InitializationHealth;
-import com.fortitude.shamsulkarim.ieltsfordory.data.initializer.TaskListener;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.initializer.DatabaseInitConfig;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.initializer.DatabaseInitializer;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.initializer.InitializationHealth;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.initializer.TaskListener;
 
 import org.junit.Assert;
 import org.junit.Test;

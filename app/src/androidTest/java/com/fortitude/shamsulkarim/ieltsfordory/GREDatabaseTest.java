@@ -6,7 +6,7 @@ import android.util.Log;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data.databases.GREWordDatabase;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.databases.GREWordDatabase;
 
 import org.junit.After;
 import org.junit.Before;

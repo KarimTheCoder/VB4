@@ -17,13 +17,12 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentProfileFragmentBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.settings.SettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.AlarmReceiver;

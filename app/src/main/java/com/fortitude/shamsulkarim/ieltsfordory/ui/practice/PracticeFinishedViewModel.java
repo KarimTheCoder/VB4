@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
 
 public class PracticeFinishedViewModel extends AndroidViewModel {
 

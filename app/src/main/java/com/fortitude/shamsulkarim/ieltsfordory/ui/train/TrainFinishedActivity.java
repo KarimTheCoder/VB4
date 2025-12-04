@@ -15,10 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.train.TrainFinishedWordRecyclerView;
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.LearningProgressRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.model.JustLearnedSessionData;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.GetJustLearnedSessionDataUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateLearnedStatusSingleUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityTrainFinishedBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 
@@ -31,7 +34,9 @@ public class TrainFinishedActivity extends AppCompatActivity {
     private List<Word> learnedWords;
     private Word mostMistakenWord;
 
-    private LearningProgressRepository repository;
+    private GetJustLearnedSessionDataUseCase getJustLearnedSessionDataUseCase;
+    private UpdateFavoriteStatusUseCase updateFavoriteStatusUseCase;
+    private UpdateLearnedStatusSingleUseCase updateLearnedStatusSingleUseCase;
     private AppPreferences prefs;
     private ActivityTrainFinishedBinding binding;
 
@@ -47,7 +52,9 @@ public class TrainFinishedActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getColor(R.color.primary_background_color));
 
-        repository = new LearningProgressRepository(this);
+        getJustLearnedSessionDataUseCase = KoinJavaComponent.get(GetJustLearnedSessionDataUseCase.class);
+        updateFavoriteStatusUseCase = KoinJavaComponent.get(UpdateFavoriteStatusUseCase.class);
+        updateLearnedStatusSingleUseCase = KoinJavaComponent.get(UpdateLearnedStatusSingleUseCase.class);
         prefs = AppPreferences.get(this);
 
         initialization();
@@ -115,15 +122,15 @@ public class TrainFinishedActivity extends AppCompatActivity {
     }
 
     private void gettingLearnedWords() {
-        LearningProgressRepository.JustLearnedSessionData data = repository.getJustLearnedWords(level);
-        learnedWords.addAll(data.learnedWords);
+        JustLearnedSessionData data = getJustLearnedSessionDataUseCase.execute(level);
+        learnedWords.addAll(data.getLearnedWords());
 
-        if (data.mostMistakenWord != null) {
+        if (data.getMostMistakenWord() != null) {
             binding.mostMistakenCard.setVisibility(View.VISIBLE);
             binding.mostMistakenImage.setVisibility(View.VISIBLE);
             binding.mostMistakenText.setVisibility(View.VISIBLE);
 
-            mostMistakenWord = data.mostMistakenWord;
+            mostMistakenWord = data.getMostMistakenWord();
             binding.trainFinishedWord.setText(mostMistakenWord.getWord());
 
             if ("True".equalsIgnoreCase(mostMistakenWord.isFavorite)) {
@@ -138,23 +145,23 @@ public class TrainFinishedActivity extends AppCompatActivity {
     private void setFavorite() {
         if (mostMistakenWord.isFavorite.equalsIgnoreCase("true")) {
             mostMistakenWord.setIsFavorite("false");
-            repository.updateFavoriteStatus(mostMistakenWord, "false");
+            updateFavoriteStatusUseCase.execute(mostMistakenWord, "false");
             binding.trainFinishedFavorite.setIconResource(R.drawable.ic_favorite_icon);
         } else {
             mostMistakenWord.setIsFavorite("true");
             binding.trainFinishedFavorite.setIconResource(R.drawable.ic_favorite_icon_active);
-            repository.updateFavoriteStatus(mostMistakenWord, "true");
+            updateFavoriteStatusUseCase.execute(mostMistakenWord, "true");
         }
     }
 
     private void setUnlearn() {
         if (mostMistakenWord.isLearned.equalsIgnoreCase("true")) {
             mostMistakenWord.setIsLearned("false");
-            repository.updateLearnedStatus(mostMistakenWord, "false");
+            updateLearnedStatusSingleUseCase.execute(mostMistakenWord, "false");
             binding.trainFinishedUnlearn.setText("Learn");
         } else {
             mostMistakenWord.setIsLearned("true");
-            repository.updateLearnedStatus(mostMistakenWord, "true");
+            updateLearnedStatusSingleUseCase.execute(mostMistakenWord, "true");
             binding.trainFinishedUnlearn.setText("Unlearn");
         }
     }

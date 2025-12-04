@@ -1,6 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.practice;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
 import java.util.ArrayList;
 import java.util.List;
 

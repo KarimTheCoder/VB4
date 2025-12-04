@@ -32,13 +32,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.train.NewTrainRecyclerView;
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.AudioRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseMediaRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.model.AudioData;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewTrainBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
-import com.fortitude.shamsulkarim.ieltsfordory.ui.train.NewTrainViewModel;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.tts.TtsController;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
@@ -62,7 +62,7 @@ public class NewTrain extends AppCompatActivity
 
     private TtsController ttsController;
     private NewTrainRecyclerView adapter;
-    private AudioRepository audioRepository;
+    private DownloadAudioUseCase downloadAudioUseCase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class NewTrain extends AppCompatActivity
         window.setStatusBarColor(getColor(R.color.colorPrimary));
 
         ttsController = new TtsController(this);
-        audioRepository = new FirebaseMediaRepository();
+        downloadAudioUseCase = KoinJavaComponent.get(DownloadAudioUseCase.class);
 
         initialization();
         viewModel.initializingWords();
@@ -680,18 +680,17 @@ public class NewTrain extends AppCompatActivity
         binding.spinKit.setVisibility(View.VISIBLE);
         binding.trainSpeakerIcon.setEnabled(false);
 
-        audioRepository.downloadAudio(wordName, new AudioRepository.Callback() {
+        downloadAudioUseCase.execute(wordName, new AudioRepository.Callback() {
             @Override
-            public void onAudioReady(File audioFile) {
+            public void onSuccess(AudioData data) {
                 binding.spinKit.setVisibility(View.INVISIBLE);
-                audioPath = audioFile.getAbsolutePath();
+                audioPath = data.getLocalPath();
 
                 MediaPlayer mp = new MediaPlayer();
                 try {
                     mp.setDataSource(audioPath);
                     mp.prepare();
                     mp.start();
-                    // Keep disabled while playing
                     binding.trainSpeakerIcon.setEnabled(false);
                     mp.setOnCompletionListener(mp1 -> binding.trainSpeakerIcon.setEnabled(true));
                 } catch (IOException e) {

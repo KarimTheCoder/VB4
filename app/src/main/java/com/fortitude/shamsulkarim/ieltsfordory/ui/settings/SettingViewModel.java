@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
 
 public class SettingViewModel extends AndroidViewModel {
     private final MutableLiveData<SettingsUiState> state = new MutableLiveData<>();

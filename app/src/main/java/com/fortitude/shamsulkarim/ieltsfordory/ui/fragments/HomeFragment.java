@@ -1,7 +1,5 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.fragments;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,8 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.repository.VocabularyRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.HomeFragmentBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.PretrainActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;

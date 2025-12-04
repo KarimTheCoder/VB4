@@ -11,10 +11,13 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.FavLearnedState;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.LearningProgressRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.sync.FirebaseSyncManager;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.FavLearnedState;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.auth.AuthManager;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.sync.FirebaseSyncManager;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.UpdateUserDataUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.AddChildEventListenerUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.GetFavLearnedStateUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.words.AllWordsFragment;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.favorites.FavoriteFragment;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.HomeFragment;
@@ -24,15 +27,15 @@ import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.Connectivity
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseUser;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data.auth.AuthManager;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    private FirebaseRepository firebaseRepository;
+    private UpdateUserDataUseCase updateUserDataUseCase;
+    private GetFavLearnedStateUseCase getFavLearnedStateUseCase;
     private AuthManager authManager;
     private FirebaseSyncManager syncManager;
-    private LearningProgressRepository learningProgressRepository;
     private Toast toast;
     private long lastBackPressTime = 0;
     private boolean connected;
@@ -80,9 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize repositories
         authManager = new AuthManager(this);
-        firebaseRepository = new FirebaseRepository(this);
-        syncManager = new FirebaseSyncManager(this, firebaseRepository);
-        learningProgressRepository = new LearningProgressRepository(this);
+        updateUserDataUseCase = KoinJavaComponent.get(UpdateUserDataUseCase.class);
+        getFavLearnedStateUseCase = KoinJavaComponent.get(GetFavLearnedStateUseCase.class);
+        AddChildEventListenerUseCase addChildEventListenerUseCase = KoinJavaComponent.get(AddChildEventListenerUseCase.class);
+        syncManager = new FirebaseSyncManager(this, addChildEventListenerUseCase);
 
         // Initialize bottom navigation
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -128,12 +132,12 @@ public class MainActivity extends AppCompatActivity {
         String userName = sp.getString("userName", "Boo");
 
         // Get aggregated state from LearningProgressRepository
-        FavLearnedState favLearnedState = learningProgressRepository.getFavLearnedState(userName);
+        FavLearnedState favLearnedState = getFavLearnedStateUseCase.execute(userName);
 
         // Upload to Firebase
         try {
             if (authManager.isUserAuthenticated()) {
-                firebaseRepository.updateUserData(authManager.getCurrentUser().getUid(), favLearnedState);
+                updateUserDataUseCase.execute(authManager.getCurrentUser().getUid(), favLearnedState, null);
             }
         } catch (Exception e) {
             Toast.makeText(this, "update failure", Toast.LENGTH_SHORT).show();

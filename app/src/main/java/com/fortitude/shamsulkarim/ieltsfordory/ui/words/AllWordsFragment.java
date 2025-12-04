@@ -17,8 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetVocabularyUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentNewWordBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.tts.TtsController;
 
@@ -30,7 +31,7 @@ public class AllWordsFragment extends Fragment
         implements WordRecyclerViewAdapter.WordAdapterCallback {
 
     private FragmentNewWordBinding binding;
-    private VocabularyRepository repository;
+    private GetVocabularyUseCase getVocabularyUseCase;
     private WordRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private final ArrayList<Object> words = new ArrayList<>();
@@ -50,7 +51,7 @@ public class AllWordsFragment extends Fragment
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(requireContext().getColor(R.color.colorPrimary));
 
-        repository = new VocabularyRepository(requireContext());
+        getVocabularyUseCase = KoinJavaComponent.get(GetVocabularyUseCase.class);
         prefs = AppPreferences.get(requireContext());
         ttsController = new TtsController(requireContext());
 
@@ -119,11 +120,11 @@ public class AllWordsFragment extends Fragment
     private void showWordsForSelection(int selection) {
         words.clear();
         if (selection == 0) {
-            words.addAll(repository.getBeginnerVocabulary());
+            words.addAll(getVocabularyUseCase.execute("beginner"));
         } else if (selection == 1) {
-            words.addAll(repository.getIntermediateVocabulary());
+            words.addAll(getVocabularyUseCase.execute("intermediate"));
         } else if (selection == 2) {
-            words.addAll(repository.getAdvanceVocabulary());
+            words.addAll(getVocabularyUseCase.execute("advance"));
         }
         adapter.notifyDataSetChanged();
     }

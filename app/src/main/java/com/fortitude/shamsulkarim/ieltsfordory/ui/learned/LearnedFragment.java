@@ -20,8 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetLearnedWordsUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentLearnedWordsBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.PretrainActivity;
@@ -36,7 +37,7 @@ public class LearnedFragment extends Fragment
         implements WordRecyclerViewAdapter.WordAdapterCallback {
 
     private FragmentLearnedWordsBinding binding;
-    private VocabularyRepository repository;
+    private GetLearnedWordsUseCase getLearnedWordsUseCase;
     private WordRecyclerViewAdapter adapter;
     private final ArrayList<Object> words = new ArrayList<>();
     private boolean isShowingFabOption = false;
@@ -56,7 +57,7 @@ public class LearnedFragment extends Fragment
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(requireContext().getColor(R.color.colorPrimary));
 
-        repository = new VocabularyRepository(requireContext());
+        getLearnedWordsUseCase = KoinJavaComponent.get(GetLearnedWordsUseCase.class);
         initialization();
 
         binding.recyclerViewLearnedWords.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -197,7 +198,7 @@ public class LearnedFragment extends Fragment
 
     private void getBeginnerWordData() {
         words.clear();
-        words.addAll(repository.getBeginnerLearnedWords());
+        words.addAll(getLearnedWordsUseCase.execute("beginner"));
         if (words.size() <= 0) {
             binding.havenotlearned.setVisibility(View.VISIBLE);
             binding.noLearnedImage.setVisibility(View.VISIBLE);
@@ -215,7 +216,7 @@ public class LearnedFragment extends Fragment
 
     private void getIntermediateWordData() {
         words.clear();
-        words.addAll(repository.getIntermediateLearnedWords());
+        words.addAll(getLearnedWordsUseCase.execute("intermediate"));
         if (words.size() <= 0) {
             binding.havenotlearned.setVisibility(View.VISIBLE);
             binding.noLearnedImage.setVisibility(View.VISIBLE);
@@ -233,7 +234,7 @@ public class LearnedFragment extends Fragment
 
     private void getAdvanceWordData() {
         words.clear();
-        words.addAll(repository.getAdvanceLearnedWords());
+        words.addAll(getLearnedWordsUseCase.execute("advance"));
         if (words.size() <= 0) {
             binding.havenotlearned.setVisibility(View.VISIBLE);
             binding.noLearnedImage.setVisibility(View.VISIBLE);

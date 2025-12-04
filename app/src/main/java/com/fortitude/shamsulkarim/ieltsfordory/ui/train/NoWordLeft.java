@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNoWordLeftBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 

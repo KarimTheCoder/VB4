@@ -2,7 +2,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.train;
 
 import android.widget.Filter;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.words.WordRecyclerViewAdapter;
 
 import java.util.ArrayList;

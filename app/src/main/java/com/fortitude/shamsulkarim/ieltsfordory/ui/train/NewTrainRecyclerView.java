@@ -19,10 +19,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.FirebaseMediaRepository;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.LearningProgressRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.model.AudioData;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.ImageRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.media.model.ImageData;
+import org.koin.java.KoinJavaComponent;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ImageFromServerBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.TrainEnglishOnlyBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
@@ -54,9 +60,10 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
     private final static int AD_LAYOUT = 3;
     private final AppPreferences prefs;
     private final boolean connected;
-    private final LearningProgressRepository learningProgressRepository;
+    private final UpdateFavoriteStatusUseCase updateFavoriteStatusUseCase;
     private TrainAdapterCallback trainAdapterCallback;
-    private final FirebaseMediaRepository firebaseMediaRepository;
+    private final DownloadAudioUseCase downloadAudioUseCase;
+    private final ImageRepository imageRepository;
 
     public NewTrainRecyclerView(Context context, Word word, TrainAdapterCallback trainAdapterCallback) {
 
@@ -66,12 +73,13 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             Log.e("TrainAdapterCallback", e.getMessage());
         }
 
-        firebaseMediaRepository = new FirebaseMediaRepository();
+        downloadAudioUseCase = org.koin.java.KoinJavaComponent.get(DownloadAudioUseCase.class);
+        imageRepository = KoinJavaComponent.get(ImageRepository.class);
 
         this.word = word;
         this.ctx = context;
         prefs = AppPreferences.get(ctx);
-        learningProgressRepository = new LearningProgressRepository(context);
+        updateFavoriteStatusUseCase = KoinJavaComponent.get(UpdateFavoriteStatusUseCase.class);
         connected = isOnline();
 
     }
@@ -186,30 +194,25 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                             word.getExample3() + "\n" + word.getExample3SL());
                     spanEx3.setSpan(fcss, 0, word.getExample3().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-                    firebaseMediaRepository.downloadImage(wordName, imageQualityString,
-                            new FirebaseMediaRepository.ImageCallback() {
+                    imageRepository.downloadImage(wordName, imageQualityString,
+                            new ImageRepository.Callback() {
                                 @Override
-                                public void onImageReady(byte[] bytes) {
-                                    // Use the bytes to display the image
-                                    // String path=
-                                    // Environment.getExternalStorageDirectory()+"/"+editTextName.getText().toString();
+                                public void onSuccess(ImageData data) {
+                                    byte[] bytes = data.getBytes();
                                     bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                                     imageViewHolder.binding.serverImage.setImageBitmap(bitmap);
-
                                     imageViewHolder.binding.serverImageState.setImageResource(0);
                                     if (prefs.getSecondLanguage().equalsIgnoreCase("spanish")) {
                                         imageViewHolder.binding.imageText.setText(spanEx3);
                                     } else {
                                         imageViewHolder.binding.imageText.setText(word.getExample3());
                                     }
-
                                     imageViewHolder.binding.stateText.setText(" ");
                                     Log.d("NewTrainRecyclerView", "Image loaded successfully for: " + wordName);
                                 }
 
                                 @Override
                                 public void onError(Exception e) {
-                                    // Handle error
                                     Log.e("NewTrainRecyclerView", "Error loading image for: " + wordName, e);
                                     imageViewHolder.binding.serverImageState.setImageResource(R.drawable.no_internet);
                                     imageViewHolder.binding.stateText.setText("Error loading image");
@@ -324,7 +327,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             if (v == binding.trainFavoriteIcon) {
 
                 String newStatus = word.getIsFavorite().equalsIgnoreCase("false") ? "true" : "false";
-                learningProgressRepository.updateFavoriteStatus(word, newStatus);
+                updateFavoriteStatusUseCase.execute(word, newStatus);
 
                 if (newStatus.equals("true")) {
                     binding.trainFavoriteIcon.setIconResource(R.drawable.ic_favorite_icon_active);
@@ -340,18 +343,17 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         public void downloadAudio() {
             binding.spinKit.setVisibility(View.VISIBLE);
 
-            firebaseMediaRepository.downloadAudio(wordName,
-                    new com.fortitude.shamsulkarim.ieltsfordory.data.repository.AudioRepository.Callback() {
+            downloadAudioUseCase.execute(wordName,
+                    new AudioRepository.Callback() {
                         @Override
-                        public void onAudioReady(File audioFile) {
-                            audioPath = audioFile.getAbsolutePath();
+                        public void onSuccess(AudioData data) {
+                            audioPath = data.getLocalPath();
                             binding.trainSpeakerIcon.setEnabled(true);
                             binding.spinKit.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
                         public void onError(Exception e) {
-                            // Handle error
                             binding.spinKit.setVisibility(View.INVISIBLE);
                         }
                     });

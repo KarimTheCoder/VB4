@@ -4,7 +4,7 @@ import android.content.Context;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import com.fortitude.shamsulkarim.ieltsfordory.compat.v1.VocabularyRepositoryV1;
-import com.fortitude.shamsulkarim.ieltsfordory.data.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.repository.VocabularyRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
