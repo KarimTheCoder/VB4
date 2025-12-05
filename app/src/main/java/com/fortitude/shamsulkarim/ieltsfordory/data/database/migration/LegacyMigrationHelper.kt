@@ -109,6 +109,13 @@ class LegacyMigrationHelper(
 
         try {
             db = SQLiteDatabase.openDatabase(dbFile.path, null, SQLiteDatabase.OPEN_READONLY)
+            
+            // Check if the table exists
+            if (!tableExists(db, WORD_TABLE)) {
+                Log.d(TAG, "Table $WORD_TABLE does not exist in $dbName, skipping")
+                return 0
+            }
+            
             cursor = db.rawQuery("SELECT * FROM $WORD_TABLE", null)
 
             val entities = mutableListOf<WordProgressEntity>()
@@ -141,15 +148,38 @@ class LegacyMigrationHelper(
             }
 
             // Insert all entities into Room
-            database.wordProgressDao().insertAll(entities)
+            if (entities.isNotEmpty()) {
+                database.wordProgressDao().insertAll(entities)
+            }
             Log.d(TAG, "Migrated $count records from $dbName")
 
+        } catch (e: Exception) {
+            Log.w(TAG, "Error migrating $dbName: ${e.message}", e)
+            // Don't throw - just skip this database
         } finally {
             cursor?.close()
             db?.close()
         }
 
         return count
+    }
+
+    /**
+     * Checks if a table exists in the database.
+     */
+    private fun tableExists(db: SQLiteDatabase, tableName: String): Boolean {
+        var cursor: Cursor? = null
+        return try {
+            cursor = db.rawQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+                arrayOf(tableName)
+            )
+            cursor.count > 0
+        } catch (e: Exception) {
+            false
+        } finally {
+            cursor?.close()
+        }
     }
 
     /**
@@ -168,6 +198,13 @@ class LegacyMigrationHelper(
 
         try {
             db = SQLiteDatabase.openDatabase(dbFile.path, null, SQLiteDatabase.OPEN_READONLY)
+            
+            // Check if the table exists
+            if (!tableExists(db, SESSION_TABLE)) {
+                Log.d(TAG, "Table $SESSION_TABLE does not exist in $dbName, skipping")
+                return 0
+            }
+            
             cursor = db.rawQuery("SELECT * FROM $SESSION_TABLE", null)
 
             val entities = mutableListOf<SessionWordEntity>()
@@ -211,9 +248,14 @@ class LegacyMigrationHelper(
             }
 
             // Insert all entities into Room
-            database.sessionWordDao().insertAll(entities)
+            if (entities.isNotEmpty()) {
+                database.sessionWordDao().insertAll(entities)
+            }
             Log.d(TAG, "Migrated $count records from $dbName")
 
+        } catch (e: Exception) {
+            Log.w(TAG, "Error migrating $dbName: ${e.message}", e)
+            // Don't throw - just skip this database
         } finally {
             cursor?.close()
             db?.close()
