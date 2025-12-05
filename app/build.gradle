@@ -119,6 +119,12 @@ dependencies {
     // AndroidX DataStore
     implementation libs.androidx.datastore.preferences
 
+    // Room Database
+    implementation libs.room.runtime
+    implementation libs.room.ktx
+    kapt libs.room.compiler
+    androidTestImplementation libs.room.testing
+
     // JitPack AAR artifact
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
 }

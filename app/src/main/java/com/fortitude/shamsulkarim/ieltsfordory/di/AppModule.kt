@@ -1,10 +1,13 @@
 package com.fortitude.shamsulkarim.ieltsfordory.di
 
+import androidx.room.Room
 import com.fortitude.shamsulkarim.ieltsfordory.data.media.firebase.FirebaseAudioRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.media.firebase.FirebaseImageRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.firebase.FirebaseDatabaseRepository
-import com.fortitude.shamsulkarim.ieltsfordory.data.learning.sql.SqlLearningRepository
-import com.fortitude.shamsulkarim.ieltsfordory.data.vocabulary.AggregatedVocabularyRepository
+import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.VocabularyDatabase
+import com.fortitude.shamsulkarim.ieltsfordory.data.database.migration.LegacyMigrationHelper
+import com.fortitude.shamsulkarim.ieltsfordory.data.learning.room.RoomLearningRepository
+import com.fortitude.shamsulkarim.ieltsfordory.data.vocabulary.room.RoomVocabularyRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.connectivity.AndroidConnectivityRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.tts.AndroidTtsRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.auth.FirebaseAuthRepository
@@ -49,19 +52,46 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.IsUserAuthent
 import org.koin.dsl.module
 
 val appModule = module {
+    // ========== Room Database ==========
+    single {
+        Room.databaseBuilder(
+            get(),
+            VocabularyDatabase::class.java,
+            "vocabulary_db"
+        ).build()
+    }
+
+    // Room DAOs
+    single { get<VocabularyDatabase>().wordProgressDao() }
+    single { get<VocabularyDatabase>().sessionWordDao() }
+
+    // Legacy Migration Helper
+    single { LegacyMigrationHelper(get(), get()) }
+
+    // ========== Repositories ==========
     single<AudioRepository> { FirebaseAudioRepository() }
     single<ImageRepository> { FirebaseImageRepository() }
     single<DatabaseRepository> { FirebaseDatabaseRepository(get()) }
-    single<LearningRepository> { SqlLearningRepository(get()) }
-    single<VocabularyRepository> { AggregatedVocabularyRepository(get()) }
+    
+    // Room-backed repositories (replacing legacy SQLite)
+    single<VocabularyRepository> { RoomVocabularyRepository(get(), get()) }
+    single<LearningRepository> { RoomLearningRepository(get(), get(), get(), get()) }
+    
     single<TtsRepository> { AndroidTtsRepository(get()) }
     single<ConnectivityRepository> { AndroidConnectivityRepository(get()) }
     single<AuthRepository> { FirebaseAuthRepository(get()) }
+
+    // ========== Use Cases ==========
+    // Media
     factory { DownloadAudioUseCase(get()) }
     factory { DownloadImageUseCase(get()) }
+    
+    // Database
     factory { UpdateUserDataUseCase(get()) }
     factory { AddChildEventListenerUseCase(get()) }
     factory { RemoveChildEventListenerUseCase(get()) }
+    
+    // Learning
     factory { GetFavLearnedStateUseCase(get()) }
     factory { FetchSessionWordsUseCase(get()) }
     factory { GetAllUnlearnedWordsUseCase(get()) }
@@ -70,6 +100,8 @@ val appModule = module {
     factory { UpdateFavoriteStatusUseCase(get()) }
     factory { UpdateLearnedStatusSingleUseCase(get()) }
     factory { GetJustLearnedSessionDataUseCase(get()) }
+    
+    // Vocabulary
     factory { GetVocabularyUseCase(get()) }
     factory { GetFavoriteWordsUseCase(get()) }
     factory { GetLearnedWordsUseCase(get()) }
@@ -78,13 +110,20 @@ val appModule = module {
     factory { GetTotalCountUseCase(get()) }
     factory { UpdateFavoriteStateUseCase(get()) }
     factory { UpdateLearnStateUseCase(get()) }
+    
+    // TTS
     factory { IsTtsReadyUseCase(get()) }
     factory { SpeakTextUseCase(get()) }
     factory { StopTtsUseCase(get()) }
     factory { ShutdownTtsUseCase(get()) }
+    
+    // Connectivity
     factory { IsConnectedUseCase(get()) }
+    
+    // Auth
     factory { SignInUseCase(get()) }
     factory { SignOutUseCase(get()) }
     factory { GetCurrentUserUseCase(get()) }
     factory { IsUserAuthenticatedUseCase(get()) }
 }
+
