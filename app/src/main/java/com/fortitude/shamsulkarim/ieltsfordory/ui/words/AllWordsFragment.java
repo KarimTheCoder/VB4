@@ -21,7 +21,10 @@ import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetVocabularyUseCase;
 import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentNewWordBinding;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.tts.TtsController;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.IsTtsReadyUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.SpeakTextUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.StopTtsUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.ShutdownTtsUseCase;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +39,10 @@ public class AllWordsFragment extends Fragment
     private RecyclerView.LayoutManager layoutManager;
     private final ArrayList<Object> words = new ArrayList<>();
     private AppPreferences prefs;
-    private TtsController ttsController;
+    private SpeakTextUseCase speakTextUseCase;
+    private IsTtsReadyUseCase isTtsReadyUseCase;
+    private StopTtsUseCase stopTtsUseCase;
+    private ShutdownTtsUseCase shutdownTtsUseCase;
 
     public AllWordsFragment() {
     }
@@ -53,7 +59,10 @@ public class AllWordsFragment extends Fragment
 
         getVocabularyUseCase = KoinJavaComponent.get(GetVocabularyUseCase.class);
         prefs = AppPreferences.get(requireContext());
-        ttsController = new TtsController(requireContext());
+        speakTextUseCase = KoinJavaComponent.get(SpeakTextUseCase.class);
+        isTtsReadyUseCase = KoinJavaComponent.get(IsTtsReadyUseCase.class);
+        stopTtsUseCase = KoinJavaComponent.get(StopTtsUseCase.class);
+        shutdownTtsUseCase = KoinJavaComponent.get(ShutdownTtsUseCase.class);
 
         binding.wordToolbar.setTitle("WORDS");
         binding.wordToolbar.setTitleTextColor(requireContext().getColor(R.color.beginnerS));
@@ -189,24 +198,23 @@ public class AllWordsFragment extends Fragment
         if (adapter != null) {
             adapter.onDestroy();
         }
-        if (ttsController != null) {
-            ttsController.shutdown();
-            ttsController = null;
+        if (shutdownTtsUseCase != null) {
+            shutdownTtsUseCase.execute();
         }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (ttsController != null) {
-            ttsController.stop();
+        if (stopTtsUseCase != null) {
+            stopTtsUseCase.execute();
         }
     }
 
     @Override
     public void onMethodCallback(String word) {
-        if (ttsController != null && ttsController.isReady()) {
-            ttsController.speak(word, true);
+        if (isTtsReadyUseCase != null && isTtsReadyUseCase.execute()) {
+            speakTextUseCase.execute(word, true);
         }
     }
 }

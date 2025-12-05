@@ -34,7 +34,10 @@ import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
 import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewTrainBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.tts.TtsController;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.IsTtsReadyUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.SpeakTextUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.ShutdownTtsUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;
@@ -51,7 +54,9 @@ public class Practice extends AppCompatActivity
     private PracticeViewModel viewModel;
 
     private RecyclerView.Adapter adapter;
-    private TtsController ttsController;
+    private SpeakTextUseCase speakTextUseCase;
+    private IsTtsReadyUseCase isTtsReadyUseCase;
+    private ShutdownTtsUseCase shutdownTtsUseCase;
     private boolean soundState = true;
 
     @Override
@@ -68,6 +73,9 @@ public class Practice extends AppCompatActivity
         window.setStatusBarColor(getColor(R.color.colorPrimary));
 
         prefs = AppPreferences.get(this);
+        speakTextUseCase = KoinJavaComponent.get(SpeakTextUseCase.class);
+        isTtsReadyUseCase = KoinJavaComponent.get(IsTtsReadyUseCase.class);
+        shutdownTtsUseCase = KoinJavaComponent.get(ShutdownTtsUseCase.class);
         viewModel = new ViewModelProvider(this).get(PracticeViewModel.class);
 
         initialization();
@@ -238,7 +246,7 @@ public class Practice extends AppCompatActivity
         binding.trainRecyclerView.setLayoutManager(layoutManager);
         binding.trainRecyclerView.setHasFixedSize(true);
 
-        ttsController = new TtsController(this);
+        
 
         binding.trainSpeakerIcon.setVisibility(View.INVISIBLE);
         binding.trainFab.setMax(5);
@@ -286,8 +294,8 @@ public class Practice extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (ttsController != null) {
-            ttsController.shutdown();
+        if (shutdownTtsUseCase != null) {
+            shutdownTtsUseCase.execute();
         }
     }
 
@@ -416,8 +424,8 @@ public class Practice extends AppCompatActivity
 
     @Override
     public void onMethodCallback(String word) {
-        if (ttsController != null) {
-            ttsController.speak(word, true);
+        if (isTtsReadyUseCase != null && isTtsReadyUseCase.execute()) {
+            speakTextUseCase.execute(word, true);
         }
         Toast.makeText(this, "Hello there, this is a callback", Toast.LENGTH_LONG).show();
     }

@@ -39,7 +39,8 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudi
 import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewTrainBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.tts.TtsController;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.ShutdownTtsUseCase;
+import org.koin.java.KoinJavaComponent;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;
@@ -60,7 +61,7 @@ public class NewTrain extends AppCompatActivity
     public File localFile = null;
     public String audioPath = null;
 
-    private TtsController ttsController;
+    private ShutdownTtsUseCase shutdownTtsUseCase;
     private NewTrainRecyclerView adapter;
     private DownloadAudioUseCase downloadAudioUseCase;
 
@@ -78,7 +79,7 @@ public class NewTrain extends AppCompatActivity
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getColor(R.color.colorPrimary));
 
-        ttsController = new TtsController(this);
+        shutdownTtsUseCase = KoinJavaComponent.get(ShutdownTtsUseCase.class);
         downloadAudioUseCase = KoinJavaComponent.get(DownloadAudioUseCase.class);
 
         initialization();
@@ -124,8 +125,8 @@ public class NewTrain extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (ttsController != null) {
-            ttsController.shutdown();
+        if (shutdownTtsUseCase != null) {
+            shutdownTtsUseCase.execute();
         }
     }
 
@@ -711,9 +712,9 @@ public class NewTrain extends AppCompatActivity
 
     @Override
     public void onMethodCallback(String word) {
-        if (ttsController != null) {
-            ttsController.speak(word, true);
-        }
+//        if (ttsController != null) {
+//            ttsController.speak(word, true);
+//        }
     }
 
     private void applyWrongColor() {

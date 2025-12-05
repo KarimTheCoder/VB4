@@ -5,6 +5,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.media.firebase.FirebaseImage
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.firebase.FirebaseDatabaseRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.learning.sql.SqlLearningRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.vocabulary.AggregatedVocabularyRepository
+import com.fortitude.shamsulkarim.ieltsfordory.data.tts.AndroidTtsRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.ImageRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase
@@ -31,6 +32,11 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetLear
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetTotalCountUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.UpdateFavoriteStateUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.UpdateLearnStateUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.TtsRepository
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.IsTtsReadyUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.SpeakTextUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.StopTtsUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.ShutdownTtsUseCase
 import org.koin.dsl.module
 
 val appModule = module {
@@ -39,6 +45,7 @@ val appModule = module {
     single<DatabaseRepository> { FirebaseDatabaseRepository(get()) }
     single<LearningRepository> { SqlLearningRepository(get()) }
     single<VocabularyRepository> { AggregatedVocabularyRepository(get()) }
+    single<TtsRepository> { AndroidTtsRepository(get()) }
     factory { DownloadAudioUseCase(get()) }
     factory { DownloadImageUseCase(get()) }
     factory { UpdateUserDataUseCase(get()) }
@@ -60,4 +67,8 @@ val appModule = module {
     factory { GetTotalCountUseCase(get()) }
     factory { UpdateFavoriteStateUseCase(get()) }
     factory { UpdateLearnStateUseCase(get()) }
+    factory { IsTtsReadyUseCase(get()) }
+    factory { SpeakTextUseCase(get()) }
+    factory { StopTtsUseCase(get()) }
+    factory { ShutdownTtsUseCase(get()) }
 }

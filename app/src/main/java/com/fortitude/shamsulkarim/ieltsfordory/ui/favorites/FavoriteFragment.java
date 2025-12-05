@@ -23,7 +23,10 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetFavo
 import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentFavoriteWordsBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.Practice;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.tts.TtsController;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.IsTtsReadyUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.SpeakTextUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.StopTtsUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.ShutdownTtsUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +41,10 @@ public class FavoriteFragment extends Fragment
     private float fabY;
     private AppPreferences prefs;
     private boolean isFabOptionOn = false;
-    private TtsController ttsController;
+    private SpeakTextUseCase speakTextUseCase;
+    private IsTtsReadyUseCase isTtsReadyUseCase;
+    private StopTtsUseCase stopTtsUseCase;
+    private ShutdownTtsUseCase shutdownTtsUseCase;
     private int lastRecyclerViewPosition;
 
     @Nullable
@@ -53,7 +59,10 @@ public class FavoriteFragment extends Fragment
         window.setStatusBarColor(requireContext().getColor(R.color.colorPrimary));
 
         getFavoriteWordsUseCase = KoinJavaComponent.get(GetFavoriteWordsUseCase.class);
-        ttsController = new TtsController(requireContext());
+        speakTextUseCase = KoinJavaComponent.get(SpeakTextUseCase.class);
+        isTtsReadyUseCase = KoinJavaComponent.get(IsTtsReadyUseCase.class);
+        stopTtsUseCase = KoinJavaComponent.get(StopTtsUseCase.class);
+        shutdownTtsUseCase = KoinJavaComponent.get(ShutdownTtsUseCase.class);
 
         binding.fabFavorite.setColorNormal(requireContext().getColor(R.color.colorPrimary));
         binding.fabFavorite.setColorPressed(requireContext().getColor(R.color.colorPrimaryDark));
@@ -150,9 +159,8 @@ public class FavoriteFragment extends Fragment
         if (adapter != null) {
             adapter.onDestroy();
         }
-        if (ttsController != null) {
-            ttsController.shutdown();
-            ttsController = null;
+        if (shutdownTtsUseCase != null) {
+            shutdownTtsUseCase.execute();
         }
         if (prefs != null) {
             prefs.setFavoriteScrollPos(lastRecyclerViewPosition);
@@ -162,15 +170,15 @@ public class FavoriteFragment extends Fragment
     @Override
     public void onStop() {
         super.onStop();
-        if (ttsController != null) {
-            ttsController.stop();
+        if (stopTtsUseCase != null) {
+            stopTtsUseCase.execute();
         }
     }
 
     @Override
     public void onMethodCallback(String wordName) {
-        if (ttsController != null && ttsController.isReady()) {
-            ttsController.speak(wordName, true);
+        if (isTtsReadyUseCase != null && isTtsReadyUseCase.execute()) {
+            speakTextUseCase.execute(wordName, true);
         }
         Toast.makeText(getContext(), "Hello there, this is a callback", Toast.LENGTH_LONG).show();
     }

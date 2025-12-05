@@ -26,7 +26,9 @@ import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentLearnedWordsBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.Practice;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.PretrainActivity;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.tts.TtsController;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.IsTtsReadyUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.SpeakTextUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.ShutdownTtsUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.words.WordRecyclerViewAdapter;
 
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +46,9 @@ public class LearnedFragment extends Fragment
     private AppPreferences prefs;
     private int selection;
     private String level;
-    private TtsController ttsController;
+    private SpeakTextUseCase speakTextUseCase;
+    private IsTtsReadyUseCase isTtsReadyUseCase;
+    private ShutdownTtsUseCase shutdownTtsUseCase;
 
     @Nullable
     @Override
@@ -58,6 +62,9 @@ public class LearnedFragment extends Fragment
         window.setStatusBarColor(requireContext().getColor(R.color.colorPrimary));
 
         getLearnedWordsUseCase = KoinJavaComponent.get(GetLearnedWordsUseCase.class);
+        speakTextUseCase = KoinJavaComponent.get(SpeakTextUseCase.class);
+        isTtsReadyUseCase = KoinJavaComponent.get(IsTtsReadyUseCase.class);
+        shutdownTtsUseCase = KoinJavaComponent.get(ShutdownTtsUseCase.class);
         initialization();
 
         binding.recyclerViewLearnedWords.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -96,7 +103,6 @@ public class LearnedFragment extends Fragment
     private void initialization() {
         setUpFab();
         prefs = AppPreferences.get(requireContext());
-        ttsController = new TtsController(requireContext());
         binding.havenotlearned.setVisibility(View.INVISIBLE);
         binding.noLearnedImage.setVisibility(View.INVISIBLE);
         setSpinner();
@@ -290,16 +296,15 @@ public class LearnedFragment extends Fragment
         if (adapter != null) {
             adapter.onDestroy();
         }
-        if (ttsController != null) {
-            ttsController.shutdown();
-            ttsController = null;
+        if (shutdownTtsUseCase != null) {
+            shutdownTtsUseCase.execute();
         }
     }
 
     @Override
     public void onMethodCallback(String word) {
-        if (ttsController != null && ttsController.isReady()) {
-            ttsController.speak(word, true);
+        if (isTtsReadyUseCase != null && isTtsReadyUseCase.execute()) {
+            speakTextUseCase.execute(word, true);
         }
     }
 }
