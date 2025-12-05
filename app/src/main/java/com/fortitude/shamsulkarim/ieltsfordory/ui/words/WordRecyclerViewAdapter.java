@@ -21,7 +21,7 @@ import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase;
 import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.OneLanguageBinding;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.usecase.IsConnectedUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.CustomFilter;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Wave;
@@ -43,6 +43,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
 
     private DownloadAudioUseCase downloadAudioUseCase;
     private UpdateFavoriteStatusUseCase updateFavoriteStatusUseCase;
+    private IsConnectedUseCase isConnectedUseCase;
     private WordAdapterCallback wordAdapterCallback;
 
     public WordRecyclerViewAdapter(Context context, ArrayList<Object> words, WordAdapterCallback wordAdapterCallback) {
@@ -64,6 +65,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
             Log.e("WordAdapter init", e.getMessage());
         }
         downloadAudioUseCase = KoinJavaComponent.get(DownloadAudioUseCase.class);
+        isConnectedUseCase = KoinJavaComponent.get(IsConnectedUseCase.class);
         prefs = AppPreferences.get(context);
         if (!prefs.contains(AppPreferences.KEY_FAVORITE_COUNT_PROFILE)) {
             prefs.setFavoriteCountProfile(0);
@@ -130,7 +132,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
             Word word = (Word) words.get(getBindingAdapterPosition());
             if (view == binding.favoriteSpeaker) {
                 String wordName = word.getWord().toLowerCase();
-                if (ConnectivityHelper.isConnectedToNetwork(context) && isVoicePronunciation) {
+                if (isConnectedUseCase.execute() && isVoicePronunciation) {
                     downloadAudio(wordName);
                 } else {
                     try {

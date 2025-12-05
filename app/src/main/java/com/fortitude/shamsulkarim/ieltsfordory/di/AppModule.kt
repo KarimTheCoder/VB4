@@ -5,7 +5,9 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.media.firebase.FirebaseImage
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.firebase.FirebaseDatabaseRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.learning.sql.SqlLearningRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.vocabulary.AggregatedVocabularyRepository
+import com.fortitude.shamsulkarim.ieltsfordory.data.connectivity.AndroidConnectivityRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.tts.AndroidTtsRepository
+import com.fortitude.shamsulkarim.ieltsfordory.data.auth.FirebaseAuthRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.ImageRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase
@@ -37,6 +39,13 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.IsTtsReadyUseC
 import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.SpeakTextUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.StopTtsUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.ShutdownTtsUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.ConnectivityRepository
+import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.usecase.IsConnectedUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.AuthRepository
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignInUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignOutUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.GetCurrentUserUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.IsUserAuthenticatedUseCase
 import org.koin.dsl.module
 
 val appModule = module {
@@ -46,6 +55,8 @@ val appModule = module {
     single<LearningRepository> { SqlLearningRepository(get()) }
     single<VocabularyRepository> { AggregatedVocabularyRepository(get()) }
     single<TtsRepository> { AndroidTtsRepository(get()) }
+    single<ConnectivityRepository> { AndroidConnectivityRepository(get()) }
+    single<AuthRepository> { FirebaseAuthRepository(get()) }
     factory { DownloadAudioUseCase(get()) }
     factory { DownloadImageUseCase(get()) }
     factory { UpdateUserDataUseCase(get()) }
@@ -71,4 +82,9 @@ val appModule = module {
     factory { SpeakTextUseCase(get()) }
     factory { StopTtsUseCase(get()) }
     factory { ShutdownTtsUseCase(get()) }
+    factory { IsConnectedUseCase(get()) }
+    factory { SignInUseCase(get()) }
+    factory { SignOutUseCase(get()) }
+    factory { GetCurrentUserUseCase(get()) }
+    factory { IsUserAuthenticatedUseCase(get()) }
 }

@@ -31,7 +31,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFav
 import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ImageFromServerBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.TrainEnglishOnlyBinding;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.usecase.IsConnectedUseCase;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Wave;
 
@@ -60,6 +60,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
     private final static int AD_LAYOUT = 3;
     private final AppPreferences prefs;
     private final boolean connected;
+    private final IsConnectedUseCase isConnectedUseCase;
     private final UpdateFavoriteStatusUseCase updateFavoriteStatusUseCase;
     private TrainAdapterCallback trainAdapterCallback;
     private final DownloadAudioUseCase downloadAudioUseCase;
@@ -79,15 +80,14 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
         this.word = word;
         this.ctx = context;
         prefs = AppPreferences.get(ctx);
+        isConnectedUseCase = org.koin.java.KoinJavaComponent.get(IsConnectedUseCase.class);
         updateFavoriteStatusUseCase = KoinJavaComponent.get(UpdateFavoriteStatusUseCase.class);
         connected = isOnline();
 
     }
 
     private boolean isOnline() {
-
-        return ConnectivityHelper.isConnectedToNetwork(ctx);
-
+        return isConnectedUseCase.execute();
     }
 
     @Override
@@ -270,7 +270,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             binding.trainFavoriteIcon.setOnClickListener(this);
             binding.trainSpeakerIcon.setOnClickListener(this);
 
-            if (ConnectivityHelper.isConnectedToNetwork(binding.getRoot().getContext()) && isVoicePronunciation) {
+            if (isConnectedUseCase.execute() && isVoicePronunciation) {
                 binding.trainSpeakerIcon.setEnabled(false);
                 downloadAudio();
             } else {
@@ -289,7 +289,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
                 MediaPlayer mp = new MediaPlayer();
 
-                if (ConnectivityHelper.isConnectedToNetwork(ctx) && isVoicePronunciation) {
+                if (isConnectedUseCase.execute() && isVoicePronunciation) {
                     // Show the connected screen
                     try {
 

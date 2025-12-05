@@ -18,24 +18,32 @@ import androidx.lifecycle.ViewModelProvider;
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.auth.AuthManager;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.AuthRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignInUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignOutUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.GetCurrentUserUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.IsUserAuthenticatedUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.data_old.sync.FirebaseSyncManager;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.AddChildEventListenerUseCase;
 import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewSettingBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.usecase.IsConnectedUseCase;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SettingActivity extends AppCompatActivity {
 
     private ActivityNewSettingBinding binding;
     private SettingViewModel viewModel;
-    private AuthManager authManager;
+    private SignInUseCase signInUseCase;
+    private SignOutUseCase signOutUseCase;
+    private GetCurrentUserUseCase getCurrentUserUseCase;
+    private IsUserAuthenticatedUseCase isUserAuthenticatedUseCase;
     private FirebaseSyncManager firebaseSyncManager;
     private AddChildEventListenerUseCase addChildEventListenerUseCase;
     private AppPreferences prefs;
+    private IsConnectedUseCase isConnectedUseCase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +56,13 @@ public class SettingActivity extends AppCompatActivity {
         window.setStatusBarColor(getColor(R.color.toolbar_background_color));
 
         prefs = AppPreferences.get(this);
-        authManager = new AuthManager(this);
+        signInUseCase = KoinJavaComponent.get(SignInUseCase.class);
+        signOutUseCase = KoinJavaComponent.get(SignOutUseCase.class);
+        getCurrentUserUseCase = KoinJavaComponent.get(GetCurrentUserUseCase.class);
+        isUserAuthenticatedUseCase = KoinJavaComponent.get(IsUserAuthenticatedUseCase.class);
         addChildEventListenerUseCase = KoinJavaComponent.get(AddChildEventListenerUseCase.class);
         firebaseSyncManager = new FirebaseSyncManager(this, addChildEventListenerUseCase);
+        isConnectedUseCase = KoinJavaComponent.get(IsConnectedUseCase.class);
         viewModel = new ViewModelProvider(this).get(SettingViewModel.class);
 
         setupUI();
@@ -230,11 +242,11 @@ public class SettingActivity extends AppCompatActivity {
         binding.nsSignIn.setTextColor(getColor(R.color.primary_text_color));
 
         binding.nsSignIn.setOnClickListener(v -> {
-            if (!authManager.isUserAuthenticated()) {
-                if (ConnectivityHelper.isConnectedToNetwork(this)) {
+            if (!isUserAuthenticatedUseCase.execute()) {
+                if (isConnectedUseCase.execute()) {
                     progressStatus(false);
                     binding.nsSignIn.setEnabled(false);
-                    authManager.signIn(this, new AuthManager.AuthCallback() {
+                    signInUseCase.execute(this, new AuthRepository.AuthCallback() {
                         @Override
                         public void onSuccess(FirebaseUser user) {
                             updateUI();
@@ -294,7 +306,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private void signOut() {
         progressStatus(false);
-        authManager.signOut();
+        signOutUseCase.execute();
         viewModel.onSignedOut();
         progressStatus(true);
         Toast.makeText(getApplicationContext(), "Sign-out complete!", Toast.LENGTH_SHORT).show();
@@ -312,7 +324,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void updateUI() {
-        FirebaseUser user = authManager.getCurrentUser();
+        FirebaseUser user = getCurrentUserUseCase.execute();
         if (user != null) {
             viewModel.onAuthenticated(user.getDisplayName(), user.getEmail());
         }
@@ -325,9 +337,10 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        if (authManager.isUserAuthenticated()) {
+        if (isUserAuthenticatedUseCase.execute()) {
             updateUI();
-            startSync(authManager.getCurrentUser().getUid());
+            FirebaseUser u = getCurrentUserUseCase.execute();
+            if (u != null) startSync(u.getUid());
         }
     }
 }

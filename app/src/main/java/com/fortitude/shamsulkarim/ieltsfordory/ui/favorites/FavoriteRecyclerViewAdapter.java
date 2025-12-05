@@ -19,7 +19,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudi
 import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.CardViewFavoriteOneLanguageBinding;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.usecase.IsConnectedUseCase;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -43,6 +43,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
     private final AppPreferences prefs;
     private int favoriteCount;
     private final DownloadAudioUseCase downloadAudioUseCase;
+    private final IsConnectedUseCase isConnectedUseCase;
     private final AdapterCallback adapterCallback;
 
     public FavoriteRecyclerViewAdapter(Context context, List<Word> words, AdapterCallback adapterCallback) {
@@ -54,6 +55,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         this.context = context;
         updateFavoriteStatusUseCase = org.koin.java.KoinJavaComponent.get(UpdateFavoriteStatusUseCase.class);
         downloadAudioUseCase = KoinJavaComponent.get(DownloadAudioUseCase.class);
+        isConnectedUseCase = KoinJavaComponent.get(IsConnectedUseCase.class);
         this.words = words;
         this.filterList = words;
         prefs = AppPreferences.get(context);
@@ -153,7 +155,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             Word word = words.get(getBindingAdapterPosition());
             if (view == binding.favoriteSpeaker) {
                 String wordName = words.get(getBindingAdapterPosition()).getWord().toLowerCase();
-                if (ConnectivityHelper.isConnectedToNetwork(context)) {
+                if (isConnectedUseCase.execute()) {
                     downloadAudio(wordName);
                 } else {
                     try {

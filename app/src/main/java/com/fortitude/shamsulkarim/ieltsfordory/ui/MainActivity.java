@@ -12,7 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data_old.FavLearnedState;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.auth.AuthManager;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.IsUserAuthenticatedUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.GetCurrentUserUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.data_old.sync.FirebaseSyncManager;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.UpdateUserDataUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.AddChildEventListenerUseCase;
@@ -23,7 +24,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.ui.favorites.FavoriteFragment;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.HomeFragment;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.learned.LearnedFragment;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.fragments.ProfileFragment;
-import com.fortitude.shamsulkarim.ieltsfordory.utility.connectivity.ConnectivityHelper;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.usecase.IsConnectedUseCase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -34,11 +35,13 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private UpdateUserDataUseCase updateUserDataUseCase;
     private GetFavLearnedStateUseCase getFavLearnedStateUseCase;
-    private AuthManager authManager;
+    private IsUserAuthenticatedUseCase isUserAuthenticatedUseCase;
+    private GetCurrentUserUseCase getCurrentUserUseCase;
     private FirebaseSyncManager syncManager;
     private Toast toast;
     private long lastBackPressTime = 0;
     private boolean connected;
+    private IsConnectedUseCase isConnectedUseCase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 toastMsg = "Screen size is neither large, normal or small";
         }
 
-        connected = isOnline();
+        isConnectedUseCase = KoinJavaComponent.get(IsConnectedUseCase.class);
+        connected = isConnectedUseCase.execute();
 
         // BottomNavigation bottomNavigation;
         SharedPreferences sp = this.getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE);
@@ -82,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Initialize repositories
-        authManager = new AuthManager(this);
+        isUserAuthenticatedUseCase = KoinJavaComponent.get(IsUserAuthenticatedUseCase.class);
+        getCurrentUserUseCase = KoinJavaComponent.get(GetCurrentUserUseCase.class);
         updateUserDataUseCase = KoinJavaComponent.get(UpdateUserDataUseCase.class);
         getFavLearnedStateUseCase = KoinJavaComponent.get(GetFavLearnedStateUseCase.class);
         AddChildEventListenerUseCase addChildEventListenerUseCase = KoinJavaComponent.get(AddChildEventListenerUseCase.class);
@@ -93,9 +98,9 @@ public class MainActivity extends AppCompatActivity {
         setupBottomNavigation();
 
         // firebase auto sync
-        if (authManager.isUserAuthenticated() && connected) {
+        if (isUserAuthenticatedUseCase.execute() && connected) {
             try {
-                FirebaseUser currentUser = authManager.getCurrentUser();
+                FirebaseUser currentUser = getCurrentUserUseCase.execute();
                 if (currentUser != null) {
                     syncManager.startSync(currentUser.getUid(), null);
                 }
@@ -136,8 +141,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Upload to Firebase
         try {
-            if (authManager.isUserAuthenticated()) {
-                updateUserDataUseCase.execute(authManager.getCurrentUser().getUid(), favLearnedState, null);
+            if (isUserAuthenticatedUseCase.execute()) {
+                updateUserDataUseCase.execute(getCurrentUserUseCase.execute().getUid(), favLearnedState, null);
             }
         } catch (Exception e) {
             Toast.makeText(this, "update failure", Toast.LENGTH_SHORT).show();
@@ -149,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        if (authManager.isUserAuthenticated() && connected) {
+        if (isUserAuthenticatedUseCase.execute() && connected) {
             updateFirebase();
         }
     }
@@ -186,8 +191,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isOnline() {
-
-        return ConnectivityHelper.isConnectedToNetwork(this);
-
+        return isConnectedUseCase.execute();
     }
 }
