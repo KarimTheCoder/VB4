@@ -17,11 +17,13 @@ import androidx.fragment.app.Fragment;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.HomeFragmentBinding;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetLearnedCountUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetTotalCountUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.PretrainActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import org.koin.java.KoinJavaComponent;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -33,7 +35,8 @@ import java.util.Date;
 public class HomeFragment extends Fragment {
 
     private HomeFragmentBinding binding;
-    private VocabularyRepository repository;
+    private GetLearnedCountUseCase getLearnedCountUseCase;
+    private GetTotalCountUseCase getTotalCountUseCase;
     private AppPreferences prefs;
 
     @Nullable
@@ -48,7 +51,8 @@ public class HomeFragment extends Fragment {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(requireContext().getColor(R.color.primary_background_color));
 
-        repository = new VocabularyRepository(requireContext());
+        getLearnedCountUseCase = KoinJavaComponent.get(GetLearnedCountUseCase.class);
+        getTotalCountUseCase = KoinJavaComponent.get(GetTotalCountUseCase.class);
 
         if (!prefs.isHomeVisited()) {
             prefs.setHomeVisited(true);
@@ -94,9 +98,9 @@ public class HomeFragment extends Fragment {
     private void setAdvanceProgress() {
         int learned;
         int percentage;
-        int totalAdvCount = repository.getTotalAdvanceCount();
+        int totalAdvCount = getTotalCountUseCase.execute("advance");
 
-        learned = repository.getAdvanceLearnedCount();
+        learned = getLearnedCountUseCase.execute("advance");
         percentage = (learned * 100) / totalAdvCount;
 
         binding.advancePie.setMaxPercentage(100);
@@ -106,9 +110,9 @@ public class HomeFragment extends Fragment {
     private void setIntermediateProgress() {
         int percentage;
         int learned;
-        int totalInterCount = repository.getTotalIntermediateCount();
+        int totalInterCount = getTotalCountUseCase.execute("intermediate");
 
-        learned = repository.getIntermediateLearnedCount();
+        learned = getLearnedCountUseCase.execute("intermediate");
         percentage = (learned * 100) / totalInterCount;
 
         binding.intermediatePie.setMaxPercentage(100);
@@ -116,8 +120,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void setBeginnerProgress() {
-        int totalBeginnerCount = repository.getTotalBeginnerCount();
-        int learned = repository.getBeginnerLearnedCount();
+        int totalBeginnerCount = getTotalCountUseCase.execute("beginner");
+        int learned = getLearnedCountUseCase.execute("beginner");
         int percentage = (learned * 100) / totalBeginnerCount;
 
         binding.profilePieView.setMaxPercentage(100);

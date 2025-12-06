@@ -2,7 +2,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.train;
 
 import android.widget.Filter;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.words.WordRecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -28,11 +28,11 @@ public class CustomFilter extends Filter {
             // CHANGE TO UPPER
             constraint = constraint.toString().toUpperCase();
             // STORE OUR FILTERED PLAYERS
-            ArrayList<Word> filteredPlayers = new ArrayList<>();
+            ArrayList<VocabularyWord> filteredPlayers = new ArrayList<>();
 
             for (int i = 0; i < filterList.size(); i++) {
                 // CHECK
-                Word word = (Word) filterList.get(i);
+                VocabularyWord word = (VocabularyWord) filterList.get(i);
                 if (word.getWord().toUpperCase().contains(constraint)) {
                     // ADD PLAYER TO FILTERED PLAYERS
                     filteredPlayers.add(word);

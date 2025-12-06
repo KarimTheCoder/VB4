@@ -12,8 +12,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.model.AudioData;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase;
@@ -84,16 +84,18 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
-        Word word = (Word) words.get(position);
-        if (((Word) words.get(position)).isFavorite.equalsIgnoreCase("true")) {
+        VocabularyWord word = (VocabularyWord) words.get(position);
+        if (word.isFavorite()) {
             holder.binding.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
         } else {
             holder.binding.favorite.setIconResource(R.drawable.ic_favorite_icon);
         }
         holder.binding.favoriteCardTranslation.setText(word.getTranslation());
-        holder.binding.favoriteCardWord.setText(word.getPronun());
-        holder.binding.cardGrammar.setText(word.getGrammar());
-        holder.binding.cardExample1.setText(word.getExample1());
+        String pronunciation = word.getPronunciation() != null ? word.getPronunciation() : "";
+        holder.binding.favoriteCardWord.setText(pronunciation);
+        String grammar = word.getGrammar() != null ? word.getGrammar() : "";
+        holder.binding.cardGrammar.setText(grammar);
+        holder.binding.cardExample1.setText(word.getExample1() != null ? word.getExample1() : "");
     }
 
     @Override
@@ -129,7 +131,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
 
         @Override
         public void onClick(View view) {
-            Word word = (Word) words.get(getBindingAdapterPosition());
+            VocabularyWord word = (VocabularyWord) words.get(getBindingAdapterPosition());
             if (view == binding.favoriteSpeaker) {
                 String wordName = word.getWord().toLowerCase();
                 if (isConnectedUseCase.execute() && isVoicePronunciation) {
@@ -146,7 +148,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
                 if (binding.favorite.getTag() == null) {
                     favoriteCount++;
                     prefs.setFavoriteCountProfile(favoriteCount);
-                    updateFavoriteStatusUseCase.execute(word, "True");
+                    updateFavoriteStatusUseCase.execute(word, true);
                     binding.favorite.setIconResource(R.drawable.ic_favorite_icon_active);
                     binding.favorite.setTag(R.drawable.ic_favorite_icon_active);
                 } else {
@@ -154,7 +156,7 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
                         favoriteCount--;
                         prefs.setFavoriteCountProfile(favoriteCount);
                     }
-                    updateFavoriteStatusUseCase.execute(word, "false");
+                    updateFavoriteStatusUseCase.execute(word, false);
                     binding.favorite.setIconResource(R.drawable.ic_favorite_icon);
                     binding.favorite.setTag(null);
                 }

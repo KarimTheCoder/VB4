@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentProfileFragmentBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.settings.SettingActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.AlarmReceiver;

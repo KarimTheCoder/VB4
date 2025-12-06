@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -16,16 +16,18 @@ import androidx.core.content.ContextCompat;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.initializer.DatabaseInitializer;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.initializer.TaskListener;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 
+/**
+ * Splash screen shown briefly for branding.
+ * Room database migration runs async in MyApplication.onCreate().
+ */
 public class SplashScreen extends AppCompatActivity {
 
-    private TextView progressText;
+    private static final long SPLASH_DELAY_MS = 1500;
     private AppPreferences prefs;
 
     @Override
@@ -33,9 +35,11 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_screen);
+
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         decorView.setSystemUiVisibility(uiOptions);
+
         Window window = getWindow();
         Drawable background = ContextCompat.getDrawable(this, R.drawable.gradient);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -43,40 +47,24 @@ public class SplashScreen extends AppCompatActivity {
         window.setNavigationBarColor(getColor(android.R.color.transparent));
         window.setBackgroundDrawable(background);
 
-        progressText = findViewById(R.id.textView20);
-
         initialize();
 
-        Handler handler = new Handler();
-        handler.postDelayed(this::initializeOrMainActivity, 1000L);
+        // Setup loading spinner
+        ProgressBar progressBar = findViewById(R.id.spin_splash_screen);
+        Sprite doubleBounce = new ThreeBounce();
+        progressBar.setIndeterminateDrawable(doubleBounce);
+
+        // Navigate after brief splash delay
+        new Handler(Looper.getMainLooper()).postDelayed(this::navigateToNextScreen, SPLASH_DELAY_MS);
     }
 
-    private void initializeOrMainActivity() {
-        createDatabase();
-    }
-
-    private void createDatabase() {
-        DatabaseInitializer dbInitializer = new DatabaseInitializer(this, new TaskListener() {
-            @Override
-            public void onComplete() {
-                if (BuildConfig.FLAVOR.equalsIgnoreCase("pro")) {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                } else {
-                    startActivity(new Intent(getApplicationContext(), StartTrial.class));
-                    finish();
-                }
-            }
-
-            @Override
-            public void onProgress() {
-                progressText.setText("We are preparing the app...");
-            }
-
-            @Override
-            public void onFailed() {
-            }
-        });
-        dbInitializer.execute();
+    private void navigateToNextScreen() {
+        if (BuildConfig.FLAVOR.equalsIgnoreCase("pro")) {
+            startActivity(new Intent(this, MainActivity.class));
+        } else {
+            startActivity(new Intent(this, StartTrial.class));
+        }
+        finish();
     }
 
     private void initialize() {
@@ -89,12 +77,8 @@ public class SplashScreen extends AppCompatActivity {
         if (!prefs.contains(AppPreferences.KEY_REPEATATION_PER_SESSION)) {
             prefs.setInt(AppPreferences.KEY_REPEATATION_PER_SESSION, 3);
         }
-        // Default Dark themes
-        setupAppTheme();
 
-        ProgressBar progressBar = findViewById(R.id.spin_splash_screen);
-        Sprite doubleBounce = new ThreeBounce();
-        progressBar.setIndeterminateDrawable(doubleBounce);
+        setupAppTheme();
 
         prefs.setString(AppPreferences.KEY_ADV_FAV, "");
         prefs.setString(AppPreferences.KEY_ADV_LEARNED, "0");
@@ -115,14 +99,12 @@ public class SplashScreen extends AppCompatActivity {
         setupDefaultLanguage();
     }
 
-    // Default settings
     private void setupAppTheme() {
         if (!prefs.contains(AppPreferences.KEY_DARK_MODE)) {
             prefs.setDarkMode(0);
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         } else {
             int darkMode = prefs.getDarkMode();
-
             switch (darkMode) {
                 case 1:
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

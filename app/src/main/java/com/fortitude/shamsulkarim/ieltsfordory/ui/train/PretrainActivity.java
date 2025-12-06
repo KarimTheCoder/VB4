@@ -13,16 +13,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetLearnedCountUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetTotalCountUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityStartTrainingBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.settings.SettingActivity;
+import org.koin.java.KoinJavaComponent;
 
 import java.util.Objects;
 
 public class PretrainActivity extends AppCompatActivity {
 
-    private VocabularyRepository repository;
+    private GetLearnedCountUseCase getLearnedCountUseCase;
+    private GetTotalCountUseCase getTotalCountUseCase;
     private AppPreferences prefs;
     private ActivityStartTrainingBinding binding;
 
@@ -34,7 +37,8 @@ public class PretrainActivity extends AppCompatActivity {
         binding = ActivityStartTrainingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        repository = new VocabularyRepository(this);
+        getLearnedCountUseCase = KoinJavaComponent.get(GetLearnedCountUseCase.class);
+        getTotalCountUseCase = KoinJavaComponent.get(GetTotalCountUseCase.class);
         prefs = AppPreferences.get(this);
 
         initUIElement();
@@ -104,8 +108,8 @@ public class PretrainActivity extends AppCompatActivity {
     // ------------------------------------------------------
 
     private void setBeginnerLearnedwordsLengthTextView() {
-        int learnedCount = repository.getBeginnerLearnedCount();
-        int totalBeginnerCount = repository.getTotalBeginnerCount();
+        int learnedCount = getLearnedCountUseCase.execute("beginner");
+        int totalBeginnerCount = getTotalCountUseCase.execute("beginner");
 
         binding.startTrainingProgress.setMax(totalBeginnerCount);
         binding.startTrainingProgress.setProgress(learnedCount);
@@ -114,8 +118,8 @@ public class PretrainActivity extends AppCompatActivity {
     }
 
     private void setIntermediateLearnedwordsLengthTextView() {
-        int i = repository.getIntermediateLearnedCount();
-        int size = repository.getTotalIntermediateCount();
+        int i = getLearnedCountUseCase.execute("intermediate");
+        int size = getTotalCountUseCase.execute("intermediate");
 
         binding.startTrainingProgress.setMax(size);
         binding.startTrainingProgress.setProgress(i);
@@ -123,8 +127,8 @@ public class PretrainActivity extends AppCompatActivity {
     }
 
     private void setAdvanceLearnedwordsLengthTextView() {
-        int i = repository.getAdvanceLearnedCount();
-        int size = repository.getTotalAdvanceCount();
+        int i = getLearnedCountUseCase.execute("advance");
+        int size = getTotalCountUseCase.execute("advance");
 
         binding.startTrainingProgress.setMax(size);
         binding.startTrainingProgress.setProgress(i);

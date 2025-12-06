@@ -2,7 +2,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.favorites;
 
 import android.widget.Filter;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +14,9 @@ import java.util.List;
 public class CustomFilterFavorite extends Filter {
 
     private final FavoriteRecyclerViewAdapter adapter;
-    private final List<Word> filterList;
+    private final List<VocabularyWord> filterList;
 
-    public CustomFilterFavorite(List<Word> filterList, FavoriteRecyclerViewAdapter adapter) {
+    public CustomFilterFavorite(List<VocabularyWord> filterList, FavoriteRecyclerViewAdapter adapter) {
         this.adapter = adapter;
         this.filterList = filterList;
 
@@ -32,11 +32,11 @@ public class CustomFilterFavorite extends Filter {
             // CHANGE TO UPPER
             constraint = constraint.toString().toUpperCase();
             // STORE OUR FILTERED PLAYERS
-            List<Word> filteredPlayers = new ArrayList<>();
+            List<VocabularyWord> filteredPlayers = new ArrayList<>();
 
             for (int i = 0; i < filterList.size(); i++) {
                 // CHECK
-                Word word = filterList.get(i);
+                VocabularyWord word = filterList.get(i);
                 if (word.getWord().toUpperCase().contains(constraint)) {
                     // ADD PLAYER TO FILTERED PLAYERS
                     filteredPlayers.add(word);
@@ -57,7 +57,7 @@ public class CustomFilterFavorite extends Filter {
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
 
-        adapter.words = (ArrayList<Word>) results.values;
+        adapter.words = (ArrayList<VocabularyWord>) results.values;
 
         // REFRESH
         adapter.notifyDataSetChanged();

@@ -32,7 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.model.AudioData;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase;
@@ -155,18 +155,20 @@ public class NewTrain extends AppCompatActivity
                 if (!viewModel.fiveWords.isEmpty()) {
 
                     if (viewModel.getSecondLanguage().equalsIgnoreCase("spanish")) {
+                        String wordSecondLang = viewModel.fiveWords.get(viewModel.quizCycle).getWordSecondLang();
+                        String wordSL = wordSecondLang != null ? wordSecondLang : "";
                         String combineBothLanguage = viewModel.fiveWords.get(viewModel.quizCycle).getWord() + "\n"
-                                + viewModel.fiveWords.get(viewModel.quizCycle).getWordSL();
+                                + wordSL;
                         final ForegroundColorSpan lowColor = new ForegroundColorSpan(
                                 getColor(R.color.secondary_text_color));
                         SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
                         spanWord.setSpan(lowColor, viewModel.fiveWords.get(viewModel.quizCycle).getWord().length(),
-                                1 + viewModel.fiveWords.get(viewModel.quizCycle).getWordSL().length()
+                                1 + wordSL.length()
                                         + viewModel.fiveWords.get(viewModel.quizCycle).getWord().length(),
                                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         spanWord.setSpan(new RelativeSizeSpan(0.4f),
                                 viewModel.fiveWords.get(viewModel.quizCycle).getWord().length(),
-                                1 + viewModel.fiveWords.get(viewModel.quizCycle).getWordSL().length()
+                                1 + wordSL.length()
                                         + viewModel.fiveWords.get(viewModel.quizCycle).getWord().length(),
                                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         binding.trainWord.setText(spanWord);
@@ -230,18 +232,19 @@ public class NewTrain extends AppCompatActivity
             try {
 
                 if (viewModel.getSecondLanguage().equalsIgnoreCase("spanish")) {
-
+                    String wordSecondLang = viewModel.fiveWords.get(showCycle).getWordSecondLang();
+                    String wordSL = wordSecondLang != null ? wordSecondLang : "";
                     String combineBothLanguage = viewModel.fiveWords.get(showCycle).getWord() + "\n"
-                            + viewModel.fiveWords.get(showCycle).getWordSL();
+                            + wordSL;
                     final ForegroundColorSpan lowColor = new ForegroundColorSpan(
                             getColor(R.color.secondary_text_color));
                     SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
                     spanWord.setSpan(lowColor, viewModel.fiveWords.get(showCycle).getWord().length(),
-                            1 + viewModel.fiveWords.get(showCycle).getWordSL().length()
+                            1 + wordSL.length()
                                     + viewModel.fiveWords.get(showCycle).getWord().length(),
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     spanWord.setSpan(new RelativeSizeSpan(0.6f), viewModel.fiveWords.get(showCycle).getWord().length(),
-                            1 + viewModel.fiveWords.get(showCycle).getWordSL().length()
+                            1 + wordSL.length()
                                     + viewModel.fiveWords.get(showCycle).getWord().length(),
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -368,7 +371,7 @@ public class NewTrain extends AppCompatActivity
 
         if (viewModel.quizCycle <= (viewModel.FIVE_WORD_SIZE * viewModel.repeatPerSession) - 1) {
 
-            ArrayList<Word> answers = viewModel.gettingAnswer();
+            ArrayList<VocabularyWord> answers = viewModel.gettingAnswer();
             if (!viewModel.IsWrongAnswer) {
                 viewModel.IsWrongAnswer = true;
 
@@ -382,10 +385,14 @@ public class NewTrain extends AppCompatActivity
                 binding.trainAnswerText4.setText(answers.get(3).getTranslation());
 
             } else {
-                binding.trainAnswerText1.setText(answers.get(0).getExtra());
-                binding.trainAnswerText2.setText(answers.get(1).getExtra());
-                binding.trainAnswerText3.setText(answers.get(2).getExtra());
-                binding.trainAnswerText4.setText(answers.get(3).getExtra());
+                String extra0 = answers.get(0).getTranslationSecondLang();
+                String extra1 = answers.get(1).getTranslationSecondLang();
+                String extra2 = answers.get(2).getTranslationSecondLang();
+                String extra3 = answers.get(3).getTranslationSecondLang();
+                binding.trainAnswerText1.setText(extra0 != null ? extra0 : "");
+                binding.trainAnswerText2.setText(extra1 != null ? extra1 : "");
+                binding.trainAnswerText3.setText(extra2 != null ? extra2 : "");
+                binding.trainAnswerText4.setText(extra3 != null ? extra3 : "");
 
             }
 
@@ -456,7 +463,8 @@ public class NewTrain extends AppCompatActivity
         if (viewModel.languageId == 0) {
             answer = viewModel.fiveWords.get(viewModel.quizCycle).getTranslation();
         } else {
-            answer = viewModel.fiveWords.get(viewModel.quizCycle).getExtra();
+            String extra = viewModel.fiveWords.get(viewModel.quizCycle).getTranslationSecondLang();
+            answer = extra != null ? extra : "";
         }
 
         android.widget.TextView selectedTextView = null;
@@ -616,7 +624,7 @@ public class NewTrain extends AppCompatActivity
         final View view = v;
         viewModel.fiveWordsCopy.addAll(viewModel.fiveWords);
 
-        final ArrayList<Word> userSelectedWords = new ArrayList<>(viewModel.fiveWords);
+        final ArrayList<VocabularyWord> userSelectedWords = new ArrayList<>(viewModel.fiveWords);
         items = new String[viewModel.fiveWords.size()];
         checkedItems = new boolean[viewModel.fiveWords.size()];
 
@@ -712,9 +720,9 @@ public class NewTrain extends AppCompatActivity
 
     @Override
     public void onMethodCallback(String word) {
-//        if (ttsController != null) {
-//            ttsController.speak(word, true);
-//        }
+        // if (ttsController != null) {
+        // ttsController.speak(word, true);
+        // }
     }
 
     private void applyWrongColor() {

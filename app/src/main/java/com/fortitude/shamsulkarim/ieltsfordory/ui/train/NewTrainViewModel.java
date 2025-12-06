@@ -9,7 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.FetchSessionWordsUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.GetAllUnlearnedWordsUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateLearnedStatusUseCase;
@@ -33,10 +33,10 @@ public class NewTrainViewModel extends AndroidViewModel {
     private final SharedPreferences sp;
 
     // State Variables
-    public ArrayList<Word> words = new ArrayList<>();
-    public ArrayList<Word> fiveWords = new ArrayList<>();
-    public ArrayList<Word> fiveWordsCopy = new ArrayList<>();
-    public ArrayList<Word> questionWords = new ArrayList<>();
+    public ArrayList<VocabularyWord> words = new ArrayList<>();
+    public ArrayList<VocabularyWord> fiveWords = new ArrayList<>();
+    public ArrayList<VocabularyWord> fiveWordsCopy = new ArrayList<>();
+    public ArrayList<VocabularyWord> questionWords = new ArrayList<>();
 
     public int mistakes;
     public int lastMistake = 13;
@@ -101,7 +101,7 @@ public class NewTrainViewModel extends AndroidViewModel {
         }
 
         // Use Repository to fetch words
-        List<Word> sessionWords = fetchSessionWordsUseCase.execute(level, wordsPerSession);
+        List<VocabularyWord> sessionWords = fetchSessionWordsUseCase.execute(level, wordsPerSession);
 
         fiveWords.clear();
         fiveWords.addAll(sessionWords);
@@ -123,7 +123,7 @@ public class NewTrainViewModel extends AndroidViewModel {
         questionWords.addAll(getAllUnlearnedWordsUseCase.execute(level));
     }
 
-    public ArrayList<Word> gettingAnswer() {
+    public ArrayList<VocabularyWord> gettingAnswer() {
         if (quizCycle == FIVE_WORD_SIZE) {
             quizCycle = 0;
         }
@@ -132,10 +132,10 @@ public class NewTrainViewModel extends AndroidViewModel {
             getQuestionWords();
         }
 
-        ArrayList<Word> answers = new ArrayList<>();
+        ArrayList<VocabularyWord> answers = new ArrayList<>();
 
         if (this.quizCycle <= (FIVE_WORD_SIZE * repeatPerSession) - 1) {
-            Word word = fiveWords.get(this.quizCycle);
+            VocabularyWord word = fiveWords.get(this.quizCycle);
 
             Collections.shuffle(questionWords);
             for (int i = 0; i < 4; i++) {
@@ -181,10 +181,12 @@ public class NewTrainViewModel extends AndroidViewModel {
 
     public void saveMostMistakenWord(int pos) {
         if (pos != -1) {
-            String word = fiveWords.get(pos).getPronun();
+            String word = fiveWords.get(pos).getPronunciation() != null ? fiveWords.get(pos).getPronunciation() : "";
             String def = fiveWords.get(pos).getTranslation();
-            String spanish = fiveWords.get(pos).getExtra();
-            String example = fiveWords.get(pos).getExample2();
+            String spanish = fiveWords.get(pos).getTranslationSecondLang() != null
+                    ? fiveWords.get(pos).getTranslationSecondLang()
+                    : "";
+            String example = fiveWords.get(pos).getExample2() != null ? fiveWords.get(pos).getExample2() : "";
 
             sp.edit().putString("MostMistakenWord", "shit" + "+" + word + "+" + def + "+" + spanish + "+" + example)
                     .apply();

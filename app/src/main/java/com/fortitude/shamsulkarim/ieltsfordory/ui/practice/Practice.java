@@ -30,8 +30,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.train.NewTrainRecyclerView;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityNewTrainBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.IsTtsReadyUseCase;
@@ -121,13 +121,21 @@ public class Practice extends AppCompatActivity
         if (!state.currentOptions.isEmpty()) {
             int langId = prefs.getInt(AppPreferences.KEY_LANGUAGE, 0);
             binding.trainAnswerText1.setText(langId == 0 ? state.currentOptions.get(0).getTranslation()
-                    : state.currentOptions.get(0).getExtra());
+                    : (state.currentOptions.get(0).getTranslationSecondLang() != null
+                            ? state.currentOptions.get(0).getTranslationSecondLang()
+                            : ""));
             binding.trainAnswerText2.setText(langId == 0 ? state.currentOptions.get(1).getTranslation()
-                    : state.currentOptions.get(1).getExtra());
+                    : (state.currentOptions.get(1).getTranslationSecondLang() != null
+                            ? state.currentOptions.get(1).getTranslationSecondLang()
+                            : ""));
             binding.trainAnswerText3.setText(langId == 0 ? state.currentOptions.get(2).getTranslation()
-                    : state.currentOptions.get(2).getExtra());
+                    : (state.currentOptions.get(2).getTranslationSecondLang() != null
+                            ? state.currentOptions.get(2).getTranslationSecondLang()
+                            : ""));
             binding.trainAnswerText4.setText(langId == 0 ? state.currentOptions.get(3).getTranslation()
-                    : state.currentOptions.get(3).getExtra());
+                    : (state.currentOptions.get(3).getTranslationSecondLang() != null
+                            ? state.currentOptions.get(3).getTranslationSecondLang()
+                            : ""));
         }
 
         // Handle Visibility (Show vs Quiz)
@@ -200,16 +208,17 @@ public class Practice extends AppCompatActivity
         }
     }
 
-    private void updateWordText(Word word) {
+    private void updateWordText(VocabularyWord word) {
         if (prefs.getSecondLanguage().equalsIgnoreCase("spanish")) {
-            String combineBothLanguage = word.getWord() + "\n" + word.getWordSL();
+            String wordSL = word.getWordSecondLang() != null ? word.getWordSecondLang() : "";
+            String combineBothLanguage = word.getWord() + "\n" + wordSL;
             final ForegroundColorSpan lowColor = new ForegroundColorSpan(Color.parseColor("#8c979a"));
             SpannableStringBuilder spanWord = new SpannableStringBuilder(combineBothLanguage);
             spanWord.setSpan(lowColor, word.getWord().length(),
-                    1 + word.getWordSL().length() + word.getWord().length(),
+                    1 + wordSL.length() + word.getWord().length(),
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             spanWord.setSpan(new RelativeSizeSpan(0.4f), word.getWord().length(),
-                    1 + word.getWordSL().length() + word.getWord().length(),
+                    1 + wordSL.length() + word.getWord().length(),
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             binding.trainWord.setText(spanWord);
         } else {
@@ -245,8 +254,6 @@ public class Practice extends AppCompatActivity
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         binding.trainRecyclerView.setLayoutManager(layoutManager);
         binding.trainRecyclerView.setHasFixedSize(true);
-
-        
 
         binding.trainSpeakerIcon.setVisibility(View.INVISIBLE);
         binding.trainFab.setMax(5);

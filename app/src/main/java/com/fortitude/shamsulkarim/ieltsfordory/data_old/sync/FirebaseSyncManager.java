@@ -7,6 +7,7 @@ import android.os.Looper;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.AddChildEventListenerUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularySource;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.UpdateFavoriteStateUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.UpdateLearnStateUseCase;
 import org.koin.java.KoinJavaComponent;
@@ -153,7 +154,7 @@ public class FirebaseSyncManager {
     private void syncFavorites(List<Integer> list, UpdateAction action) {
         if (list != null && list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
-                action.update("" + (i + 1), list.get(i) == 1 ? "True" : "False");
+                action.update(i + 1, list.get(i) == 1);
             }
         }
     }
@@ -161,46 +162,46 @@ public class FirebaseSyncManager {
     private void syncLearned(List<Integer> list, UpdateAction action) {
         if (list != null && list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
-                action.update("" + (i + 1), list.get(i) == 1 ? "True" : "False");
+                action.update(i + 1, list.get(i) == 1);
             }
         }
     }
 
     @FunctionalInterface
     interface UpdateAction {
-        void update(String id, String state);
+        void update(int wordId, boolean state);
     }
 
-    private void updateBeginnerFav(String id, String state) {
-        updateFavoriteStateUseCase.execute("IELTS", id, state);
+    private void updateBeginnerFav(int wordId, boolean state) {
+        updateFavoriteStateUseCase.execute(VocabularySource.IELTS, wordId, state);
     }
 
-    private void updateIntermediateFav(String id, String state) {
-        updateFavoriteStateUseCase.execute("TOEFL", id, state);
+    private void updateIntermediateFav(int wordId, boolean state) {
+        updateFavoriteStateUseCase.execute(VocabularySource.TOEFL, wordId, state);
     }
 
-    private void updateAdvanceFav(String id, String state) {
-        updateFavoriteStateUseCase.execute("SAT", id, state);
+    private void updateAdvanceFav(int wordId, boolean state) {
+        updateFavoriteStateUseCase.execute(VocabularySource.SAT, wordId, state);
     }
 
-    private void updateGreFav(String id, String state) {
-        updateFavoriteStateUseCase.execute("GRE", id, state);
+    private void updateGreFav(int wordId, boolean state) {
+        updateFavoriteStateUseCase.execute(VocabularySource.GRE, wordId, state);
     }
 
-    private void updateIeltsLearned(String id, String state) {
-        updateLearnStateUseCase.execute("IELTS", id, state);
+    private void updateIeltsLearned(int wordId, boolean state) {
+        updateLearnStateUseCase.execute(VocabularySource.IELTS, wordId, state);
     }
 
-    private void updateToeflLearned(String id, String state) {
-        updateLearnStateUseCase.execute("TOEFL", id, state);
+    private void updateToeflLearned(int wordId, boolean state) {
+        updateLearnStateUseCase.execute(VocabularySource.TOEFL, wordId, state);
     }
 
-    private void updateSatLearned(String id, String state) {
-        updateLearnStateUseCase.execute("SAT", id, state);
+    private void updateSatLearned(int wordId, boolean state) {
+        updateLearnStateUseCase.execute(VocabularySource.SAT, wordId, state);
     }
 
-    private void updateGreLearned(String id, String state) {
-        updateLearnStateUseCase.execute("GRE", id, state);
+    private void updateGreLearned(int wordId, boolean state) {
+        updateLearnStateUseCase.execute(VocabularySource.GRE, wordId, state);
     }
 
     private void addingBuilderToNums() {
@@ -245,10 +246,10 @@ public class FirebaseSyncManager {
     private void resetAndSync(int arrayResId, String spKey, List<Integer> newDataList, UpdateAction action) {
         int size = sp.getInt(spKey, context.getResources().getStringArray(arrayResId).length);
         for (int i = 0; i < size; i++) {
-            action.update("" + (i + 1), "False");
+            action.update(i + 1, false);
         }
         for (int k = 0; k < newDataList.size(); k++) {
-            action.update("" + (newDataList.get(k) + 1), "True");
+            action.update(newDataList.get(k) + 1, true);
         }
     }
 

@@ -9,9 +9,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.repository.VocabularyRepository;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetFavoriteWordsUseCase;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetLearnedWordsUseCase;
+import org.koin.java.KoinJavaComponent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,9 +26,10 @@ public class PracticeViewModel extends AndroidViewModel {
     private final MutableLiveData<PracticeUiState> _uiState = new MutableLiveData<>(new PracticeUiState());
     public final LiveData<PracticeUiState> uiState = _uiState;
 
-    private final VocabularyRepository repository;
+    private final GetFavoriteWordsUseCase getFavoriteWordsUseCase;
+    private final GetLearnedWordsUseCase getLearnedWordsUseCase;
     private final AppPreferences prefs;
-    private final List<Word> fiveWords = new ArrayList<>();
+    private final List<VocabularyWord> fiveWords = new ArrayList<>();
 
     private int FIVE_WORD_SIZE = 0;
     private int repeatPerSession = 5;
@@ -38,7 +41,8 @@ public class PracticeViewModel extends AndroidViewModel {
 
     public PracticeViewModel(@NonNull Application application) {
         super(application);
-        repository = new VocabularyRepository(application);
+        getFavoriteWordsUseCase = KoinJavaComponent.get(GetFavoriteWordsUseCase.class);
+        getLearnedWordsUseCase = KoinJavaComponent.get(GetLearnedWordsUseCase.class);
         prefs = AppPreferences.get(application);
         loadData();
     }
@@ -83,19 +87,13 @@ public class PracticeViewModel extends AndroidViewModel {
         String practice = prefs.getPracticeMode();
 
         if (practice.equalsIgnoreCase("favorite")) {
-            fiveWords.addAll(repository.getFavoriteWords());
-            for (int i = 0; i < fiveWords.size(); i++) {
-                fiveWords.get(i).setSeen(false);
-            }
+            fiveWords.addAll(getFavoriteWordsUseCase.execute());
             int startCycle = fiveWords.size();
             updateState(s -> s.showCycle = startCycle);
         }
 
         if (practice.equalsIgnoreCase("learned")) {
             getLearnedWords();
-            for (int i = 0; i < fiveWords.size(); i++) {
-                fiveWords.get(i).setSeen(false);
-            }
         }
 
         prefs.setFavoriteWordCount(fiveWords.size());
@@ -104,13 +102,7 @@ public class PracticeViewModel extends AndroidViewModel {
 
     private void getLearnedWords() {
         String level = prefs.getLevel();
-        if (level.equalsIgnoreCase("beginner")) {
-            fiveWords.addAll(repository.getBeginnerLearnedWords());
-        } else if (level.equalsIgnoreCase("intermediate")) {
-            fiveWords.addAll(repository.getIntermediateLearnedWords());
-        } else if (level.equalsIgnoreCase("advance")) {
-            fiveWords.addAll(repository.getAdvanceLearnedWords());
-        }
+        fiveWords.addAll(getLearnedWordsUseCase.execute(level));
     }
 
     public void onNextClicked() {
@@ -179,11 +171,13 @@ public class PracticeViewModel extends AndroidViewModel {
         if (current.currentOptions.isEmpty() || cardIndex < 0 || cardIndex >= current.currentOptions.size())
             return;
 
-        Word selectedWord = current.currentOptions.get(cardIndex);
-        Word correctWord = fiveWords.get(current.quizCycle);
+        VocabularyWord selectedWord = current.currentOptions.get(cardIndex);
+        VocabularyWord correctWord = fiveWords.get(current.quizCycle);
 
-        String answer = (languageId == 0) ? correctWord.getTranslation() : correctWord.getExtra();
-        String selected = (languageId == 0) ? selectedWord.getTranslation() : selectedWord.getExtra();
+        String answer = (languageId == 0) ? correctWord.getTranslation()
+                : (correctWord.getTranslationSecondLang() != null ? correctWord.getTranslationSecondLang() : "");
+        String selected = (languageId == 0) ? selectedWord.getTranslation()
+                : (selectedWord.getTranslationSecondLang() != null ? selectedWord.getTranslationSecondLang() : "");
 
         if (selected.equalsIgnoreCase(answer)) {
             totalCorrects++;
@@ -232,11 +226,11 @@ public class PracticeViewModel extends AndroidViewModel {
         int wordIndex = current.quizCycle % FIVE_WORD_SIZE;
 
         if (current.quizCycle <= (FIVE_WORD_SIZE * repeatPerSession) - 1) {
-            Word word = fiveWords.get(wordIndex);
-            List<Word> options = new ArrayList<>(fiveWords);
+            VocabularyWord word = fiveWords.get(wordIndex);
+            List<VocabularyWord> options = new ArrayList<>(fiveWords);
             Collections.shuffle(options);
 
-            List<Word> finalOptions = new ArrayList<>();
+            List<VocabularyWord> finalOptions = new ArrayList<>();
             for (int i = 0; i < 4 && i < options.size(); i++) {
                 finalOptions.add(options.get(i));
             }

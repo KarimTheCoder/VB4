@@ -9,27 +9,34 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateLearnedStatusSingleUseCase;
 import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.TrainFinishedWordRecyclerViewBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFinishedWordRecyclerView.WordViewHolder> {
 
-    private final List<Word> words;
+    private final List<VocabularyWord> words;
+    private final List<Boolean> favoriteStates;
+    private final List<Boolean> learnedStates;
     private final static int WORD_VIEW_TYPE = 0;
     private final UpdateFavoriteStatusUseCase updateFavoriteStatusUseCase;
     private final UpdateLearnedStatusSingleUseCase updateLearnedStatusSingleUseCase;
 
-    public TrainFinishedWordRecyclerView(Context context, List<Word> words) {
-
+    public TrainFinishedWordRecyclerView(Context context, List<VocabularyWord> words) {
         this.words = words;
+        this.favoriteStates = new ArrayList<>();
+        this.learnedStates = new ArrayList<>();
+        for (VocabularyWord word : words) {
+            favoriteStates.add(word.isFavorite());
+            learnedStates.add(word.isLearned());
+        }
         updateFavoriteStatusUseCase = KoinJavaComponent.get(UpdateFavoriteStatusUseCase.class);
         updateLearnedStatusSingleUseCase = KoinJavaComponent.get(UpdateLearnedStatusSingleUseCase.class);
-
     }
 
     @NonNull
@@ -42,13 +49,13 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
 
     @Override
     public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
-
         holder.binding.trainFinishedRecyclerViewWord.setText(words.get(position).getWord());
 
-        if (words.get(position).getIsFavorite().equalsIgnoreCase("true")) {
+        if (favoriteStates.get(position)) {
             holder.binding.trainFinishedRecyclerViewFavorite.setIconResource(R.drawable.ic_favorite_icon_active);
+        } else {
+            holder.binding.trainFinishedRecyclerViewFavorite.setIconResource(R.drawable.ic_favorite_icon);
         }
-
     }
 
     public int getItemViewType(int position) {
@@ -65,7 +72,6 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
     class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         final TrainFinishedWordRecyclerViewBinding binding;
-        Word mostMistakenWord;
 
         public WordViewHolder(TrainFinishedWordRecyclerViewBinding binding) {
             super(binding.getRoot());
@@ -76,51 +82,43 @@ public class TrainFinishedWordRecyclerView extends RecyclerView.Adapter<TrainFin
         }
 
         private void setUnlearn() {
+            int pos = getBindingAdapterPosition();
+            VocabularyWord word = words.get(pos);
+            boolean isLearned = learnedStates.get(pos);
 
-            if (mostMistakenWord.isLearned.equalsIgnoreCase("true")) {
-
-                mostMistakenWord.setIsLearned("false");
-                updateLearnedStatusSingleUseCase.execute(mostMistakenWord, "false");
+            if (isLearned) {
+                learnedStates.set(pos, false);
+                updateLearnedStatusSingleUseCase.execute(word, false);
                 binding.trainFinishedRecyclerViewUnlearn.setText("Learn");
-
             } else {
-
-                mostMistakenWord.setIsLearned("true");
-                updateLearnedStatusSingleUseCase.execute(mostMistakenWord, "true");
+                learnedStates.set(pos, true);
+                updateLearnedStatusSingleUseCase.execute(word, true);
                 binding.trainFinishedRecyclerViewUnlearn.setText("Unlearn");
             }
-
         }
 
         @Override
         public void onClick(View v) {
-
-            mostMistakenWord = words.get(getBindingAdapterPosition());
-
-            String isFavorite = words.get(getBindingAdapterPosition()).isFavorite;
+            int pos = getBindingAdapterPosition();
+            VocabularyWord word = words.get(pos);
 
             if (v == binding.trainFinishedRecyclerViewUnlearn) {
-
                 setUnlearn();
             }
 
             if (v == binding.trainFinishedRecyclerViewFavorite) {
+                boolean isFavorite = favoriteStates.get(pos);
 
-                if (isFavorite.equalsIgnoreCase("true")) {
-
+                if (isFavorite) {
+                    favoriteStates.set(pos, false);
                     binding.trainFinishedRecyclerViewFavorite.setIconResource(R.drawable.ic_favorite_icon);
-                    words.get(getBindingAdapterPosition()).setIsFavorite("false");
-                    updateFavoriteStatusUseCase.execute(words.get(getBindingAdapterPosition()), "false");
-
+                    updateFavoriteStatusUseCase.execute(word, false);
                 } else {
-
+                    favoriteStates.set(pos, true);
                     binding.trainFinishedRecyclerViewFavorite.setIconResource(R.drawable.ic_favorite_icon_active);
-                    words.get(getBindingAdapterPosition()).setIsFavorite("true");
-                    updateFavoriteStatusUseCase.execute(words.get(getBindingAdapterPosition()), "true");
+                    updateFavoriteStatusUseCase.execute(word, true);
                 }
             }
-
         }
     }
-
 }

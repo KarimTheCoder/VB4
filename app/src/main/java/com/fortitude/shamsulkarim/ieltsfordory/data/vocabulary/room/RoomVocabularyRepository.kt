@@ -5,8 +5,9 @@ import android.content.SharedPreferences
 import com.fortitude.shamsulkarim.ieltsfordory.R
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.dao.WordProgressDao
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.entity.WordProgressEntity
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepository
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularySource
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -32,8 +33,8 @@ class RoomVocabularyRepository(
         loadWordArrays()
     }
 
-    override fun getVocabulary(level: String): List<Word> = runBlocking {
-        val words = mutableListOf<Word>()
+    override fun getVocabulary(level: String): List<VocabularyWord> = runBlocking {
+        val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
             val arrays = wordArrays[source] ?: return@forEach
@@ -42,15 +43,15 @@ class RoomVocabularyRepository(
             
             for (i in startIndex until endIndex) {
                 val progress = progressMap[i]
-                words.add(createWord(source, i, arrays, progress))
+                words.add(createVocabularyWord(source, i, level, arrays, progress))
             }
         }
         
         words
     }
 
-    override fun getFavoriteWords(): List<Word> = runBlocking {
-        val words = mutableListOf<Word>()
+    override fun getFavoriteWords(): List<VocabularyWord> = runBlocking {
+        val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
             val arrays = wordArrays[source] ?: return@forEach
@@ -58,7 +59,8 @@ class RoomVocabularyRepository(
             
             favorites.forEach { progress ->
                 if (progress.wordId < arrays.words.size) {
-                    words.add(createWord(source, progress.wordId, arrays, progress))
+                    val level = determineLevelForIndex(source, progress.wordId)
+                    words.add(createVocabularyWord(source, progress.wordId, level, arrays, progress))
                 }
             }
         }
@@ -66,8 +68,8 @@ class RoomVocabularyRepository(
         words
     }
 
-    override fun getLearnedWords(level: String): List<Word> = runBlocking {
-        val words = mutableListOf<Word>()
+    override fun getLearnedWords(level: String): List<VocabularyWord> = runBlocking {
+        val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
             val arrays = wordArrays[source] ?: return@forEach
@@ -78,7 +80,7 @@ class RoomVocabularyRepository(
             for (i in startIndex until endIndex) {
                 if (i in learnedSet) {
                     val progress = learned.find { it.wordId == i }
-                    words.add(createWord(source, i, arrays, progress))
+                    words.add(createVocabularyWord(source, i, level, arrays, progress))
                 }
             }
         }
@@ -86,8 +88,8 @@ class RoomVocabularyRepository(
         words
     }
 
-    override fun getUnlearnedWords(level: String): List<Word> = runBlocking {
-        val words = mutableListOf<Word>()
+    override fun getUnlearnedWords(level: String): List<VocabularyWord> = runBlocking {
+        val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
             val arrays = wordArrays[source] ?: return@forEach
@@ -97,7 +99,7 @@ class RoomVocabularyRepository(
             for (i in startIndex until endIndex) {
                 val progress = progressMap[i]
                 if (progress == null || !progress.isLearned) {
-                    words.add(createWord(source, i, arrays, progress))
+                    words.add(createVocabularyWord(source, i, level, arrays, progress))
                 }
             }
         }
@@ -131,24 +133,16 @@ class RoomVocabularyRepository(
         return count
     }
 
-    override fun updateFavorite(source: String, id: String, isFavorite: String) = runBlocking {
-        val wordId = id.toIntOrNull() ?: return@runBlocking
-        val favorite = isFavorite.equals("true", ignoreCase = true)
-        
-        // Ensure the record exists
-        ensureProgressExists(source.uppercase(), wordId)
-        
-        wordProgressDao.updateFavorite(source.uppercase(), wordId, favorite)
+    override fun updateFavorite(source: VocabularySource, wordId: Int, isFavorite: Boolean) = runBlocking {
+        val sourceStr = source.name
+        ensureProgressExists(sourceStr, wordId)
+        wordProgressDao.updateFavorite(sourceStr, wordId, isFavorite)
     }
 
-    override fun updateLearnState(source: String, id: String, isLearned: String) = runBlocking {
-        val wordId = id.toIntOrNull() ?: return@runBlocking
-        val learned = isLearned.equals("true", ignoreCase = true)
-        
-        // Ensure the record exists
-        ensureProgressExists(source.uppercase(), wordId)
-        
-        wordProgressDao.updateLearned(source.uppercase(), wordId, learned)
+    override fun updateLearnState(source: VocabularySource, wordId: Int, isLearned: Boolean) = runBlocking {
+        val sourceStr = source.name
+        ensureProgressExists(sourceStr, wordId)
+        wordProgressDao.updateLearned(sourceStr, wordId, isLearned)
     }
 
     // ========== Private Helper Methods ==========
@@ -246,53 +240,52 @@ class RoomVocabularyRepository(
         }
     }
 
+    private fun determineLevelForIndex(source: String, index: Int): String {
+        val arrays = wordArrays[source] ?: return "beginner"
+        val totalSize = arrays.words.size
+        val beginnerEnd = getPercentage(30, totalSize)
+        val intermediateEnd = beginnerEnd + getPercentage(40, totalSize)
+
+        return when {
+            index < beginnerEnd -> "beginner"
+            index < intermediateEnd -> "intermediate"
+            else -> "advanced"
+        }
+    }
+
     private fun getPercentage(percentage: Int, total: Int): Int {
         return (percentage / 100.0 * total).toInt()
     }
 
-    private fun createWord(
+    private fun createVocabularyWord(
         source: String,
         index: Int,
+        level: String,
         arrays: WordArrays,
         progress: WordProgressEntity?
-    ): Word {
+    ): VocabularyWord {
         val secondLanguage = prefs.getString("secondlanguage", "english") ?: "english"
         val useSecondLanguage = !secondLanguage.equals("english", ignoreCase = true)
 
-        val word = Word(
-            arrays.words.getOrNull(index) ?: "",
-            arrays.translations.getOrNull(index) ?: "",
-            "",
-            arrays.pronunciation.getOrNull(index) ?: "",
-            arrays.grammar.getOrNull(index) ?: "",
-            arrays.example1.getOrNull(index) ?: "",
-            arrays.example2.getOrNull(index) ?: "",
-            arrays.example3.getOrNull(index) ?: "",
-            arrays.level.getOrNull(index) ?: "",
-            arrays.position.getOrNull(index) ?: index,
-            if (progress?.isLearned == true) "True" else "False",
-            if (progress?.isFavorite == true) "True" else "False"
+        return VocabularyWord(
+            id = arrays.position.getOrNull(index) ?: index,
+            word = arrays.words.getOrNull(index) ?: "",
+            translation = arrays.translations.getOrNull(index) ?: "",
+            pronunciation = arrays.pronunciation.getOrNull(index),
+            grammar = arrays.grammar.getOrNull(index),
+            example1 = arrays.example1.getOrNull(index),
+            example2 = arrays.example2.getOrNull(index),
+            example3 = arrays.example3.getOrNull(index),
+            source = VocabularySource.valueOf(source),
+            level = level,
+            isFavorite = progress?.isFavorite == true,
+            isLearned = progress?.isLearned == true,
+            wordSecondLang = if (useSecondLanguage) arrays.wordsSL.getOrNull(index) else null,
+            translationSecondLang = if (useSecondLanguage) arrays.translationsSL.getOrNull(index) else null,
+            example1SecondLang = if (useSecondLanguage) arrays.example1SL.getOrNull(index) else null,
+            example2SecondLang = if (useSecondLanguage) arrays.example2SL.getOrNull(index) else null,
+            example3SecondLang = if (useSecondLanguage) arrays.example3SL.getOrNull(index) else null
         )
-
-        // Set vocabulary type/source
-        word.vocabularyType = source
-
-        // Set second language if enabled
-        if (useSecondLanguage) {
-            word.wordSL = arrays.wordsSL.getOrNull(index) ?: ""
-            word.translationSL = arrays.translationsSL.getOrNull(index) ?: ""
-            word.example1SL = arrays.example1SL.getOrNull(index) ?: ""
-            word.example2SL = arrays.example2SL.getOrNull(index) ?: ""
-            word.example3SL = arrays.example3SL.getOrNull(index) ?: ""
-        } else {
-            word.wordSL = ""
-            word.translationSL = ""
-            word.example1SL = ""
-            word.example2SL = ""
-            word.example3SL = ""
-        }
-
-        return word
     }
 
     private suspend fun ensureProgressExists(source: String, wordId: Int) {
@@ -338,3 +331,4 @@ private data class WordArrays(
         return 31 * words.contentHashCode() + isActive.hashCode()
     }
 }
+

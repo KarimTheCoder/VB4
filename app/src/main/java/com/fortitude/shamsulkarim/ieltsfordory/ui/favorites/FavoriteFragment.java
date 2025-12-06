@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetFavoriteWordsUseCase;
 import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentFavoriteWordsBinding;
@@ -37,7 +37,7 @@ public class FavoriteFragment extends Fragment
     private FragmentFavoriteWordsBinding binding;
     private GetFavoriteWordsUseCase getFavoriteWordsUseCase;
     private FavoriteRecyclerViewAdapter adapter;
-    static public final List<Word> words = new ArrayList<>();
+    static public final List<VocabularyWord> words = new ArrayList<>();
     private float fabY;
     private AppPreferences prefs;
     private boolean isFabOptionOn = false;

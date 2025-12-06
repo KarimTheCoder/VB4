@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.model.AudioData;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase;
@@ -49,7 +49,7 @@ import de.cketti.mailto.EmailIntentBuilder;
 
 public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final Word word;
+    private VocabularyWord word;
     private Bitmap bitmap;
     private final Context ctx;
     private final String[] imageQualityArray = { "High", "Medium", "Low" };
@@ -66,7 +66,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
     private final DownloadAudioUseCase downloadAudioUseCase;
     private final ImageRepository imageRepository;
 
-    public NewTrainRecyclerView(Context context, Word word, TrainAdapterCallback trainAdapterCallback) {
+    public NewTrainRecyclerView(Context context, VocabularyWord word, TrainAdapterCallback trainAdapterCallback) {
 
         try {
             this.trainAdapterCallback = trainAdapterCallback;
@@ -120,32 +120,38 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
             case DEFINATION_VIEW:
 
                 SpannableStringBuilder spanEx1 = new SpannableStringBuilder(
-                        word.getExample1() + "\n" + word.getExample1SL());
+                        (word.getExample1() != null ? word.getExample1() : "") + "\n"
+                                + (word.getExample1SecondLang() != null ? word.getExample1SecondLang() : ""));
 
                 // Span to set text color to some RGB value
                 final ForegroundColorSpan fcs = new ForegroundColorSpan(ctx.getColor(R.color.primary_text_color));
                 final ForegroundColorSpan lowColor = new ForegroundColorSpan(ctx.getColor(R.color.third_text_color));
-                spanEx1.setSpan(fcs, 0, word.getExample1().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                String example1 = word.getExample1() != null ? word.getExample1() : "";
+                spanEx1.setSpan(fcs, 0, example1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+                String example2 = word.getExample2() != null ? word.getExample2() : "";
+                String example2SL = word.getExample2SecondLang() != null ? word.getExample2SecondLang() : "";
                 SpannableStringBuilder spanEx2 = new SpannableStringBuilder(
-                        word.getExample2() + "\n" + word.getExample2SL());
-                spanEx2.setSpan(fcs, 0, word.getExample2().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        example2 + "\n" + example2SL);
+                spanEx2.setSpan(fcs, 0, example2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+                String translationSL = word.getTranslationSecondLang() != null ? word.getTranslationSecondLang() : "";
                 SpannableStringBuilder spanDef = new SpannableStringBuilder(
-                        word.getTranslation() + "\n" + word.getTranslationSL());
+                        word.getTranslation() + "\n" + translationSL);
                 spanDef.setSpan(lowColor, word.getTranslation().length(),
-                        1 + word.getTranslation().length() + word.getTranslationSL().length(),
+                        1 + word.getTranslation().length() + translationSL.length(),
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-                SpannableStringBuilder spanWord = new SpannableStringBuilder(word.getWord() + "\n" + word.getWordSL());
+                String wordSL = word.getWordSecondLang() != null ? word.getWordSecondLang() : "";
+                SpannableStringBuilder spanWord = new SpannableStringBuilder(word.getWord() + "\n" + wordSL);
                 spanWord.setSpan(lowColor, word.getWord().length(),
-                        1 + word.getWordSL().length() + word.getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        1 + wordSL.length() + word.getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 spanWord.setSpan(new RelativeSizeSpan(0.8f), word.getWord().length(),
-                        1 + word.getWordSL().length() + word.getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        1 + wordSL.length() + word.getWord().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                 DefinationAdapter definationAdapter = (DefinationAdapter) holder;
 
-                if (word.getIsFavorite().equalsIgnoreCase("true")) {
+                if (word.isFavorite()) {
 
                     definationAdapter.binding.trainFavoriteIcon.setIconResource(R.drawable.ic_favorite_icon_active);
                 }
@@ -153,15 +159,19 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                 if (!prefs.getSecondLanguage().equalsIgnoreCase("spanish")) {
 
                     definationAdapter.binding.translationTrain.setText(word.getTranslation());
-                    definationAdapter.binding.pronunciationTrain.setText(word.getPronun());
-                    definationAdapter.binding.example1.setText(word.getExample1());
-                    definationAdapter.binding.example2.setText(word.getExample2());
-                    definationAdapter.binding.grammarTrain.setText(word.getGrammar());
+                    String pronunciation = word.getPronunciation() != null ? word.getPronunciation() : "";
+                    definationAdapter.binding.pronunciationTrain.setText(pronunciation);
+                    definationAdapter.binding.example1.setText(word.getExample1() != null ? word.getExample1() : "");
+                    definationAdapter.binding.example2.setText(word.getExample2() != null ? word.getExample2() : "");
+                    String grammar = word.getGrammar() != null ? word.getGrammar() : "";
+                    definationAdapter.binding.grammarTrain.setText(grammar);
                 } else {
                     definationAdapter.binding.example1.setText(spanEx1);
                     definationAdapter.binding.example2.setText(spanEx2);
-                    definationAdapter.binding.pronunciationTrain.setText(word.getPronun());
-                    definationAdapter.binding.grammarTrain.setText(word.getGrammar());
+                    String pronunciation = word.getPronunciation() != null ? word.getPronunciation() : "";
+                    definationAdapter.binding.pronunciationTrain.setText(pronunciation);
+                    String grammar = word.getGrammar() != null ? word.getGrammar() : "";
+                    definationAdapter.binding.grammarTrain.setText(grammar);
                     definationAdapter.binding.translationTrain.setText(spanDef);
                 }
 
@@ -179,7 +189,7 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                 if (connected) {
                     String wordName;
 
-                    if (word.vocabularyType.equalsIgnoreCase("TOEFL")) {
+                    if (word.getSource().name().equalsIgnoreCase("TOEFL")) {
                         wordName = word.getWord();
                     } else {
                         wordName = word.getWord().toLowerCase();
@@ -190,9 +200,11 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                     imageViewHolder.binding.imageText.setText(" ");
 
                     final ForegroundColorSpan fcss = new ForegroundColorSpan(ctx.getColor(R.color.primary_text_color));
+                    String example3 = word.getExample3() != null ? word.getExample3() : "";
+                    String example3SL = word.getExample3SecondLang() != null ? word.getExample3SecondLang() : "";
                     final SpannableStringBuilder spanEx3 = new SpannableStringBuilder(
-                            word.getExample3() + "\n" + word.getExample3SL());
-                    spanEx3.setSpan(fcss, 0, word.getExample3().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            example3 + "\n" + example3SL);
+                    spanEx3.setSpan(fcss, 0, example3.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                     imageRepository.downloadImage(wordName, imageQualityString,
                             new ImageRepository.Callback() {
@@ -205,7 +217,8 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                                     if (prefs.getSecondLanguage().equalsIgnoreCase("spanish")) {
                                         imageViewHolder.binding.imageText.setText(spanEx3);
                                     } else {
-                                        imageViewHolder.binding.imageText.setText(word.getExample3());
+                                        imageViewHolder.binding.imageText
+                                                .setText(word.getExample3() != null ? word.getExample3() : "");
                                     }
                                     imageViewHolder.binding.stateText.setText(" ");
                                     Log.d("NewTrainRecyclerView", "Image loaded successfully for: " + wordName);
@@ -326,15 +339,15 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
 
             if (v == binding.trainFavoriteIcon) {
 
-                String newStatus = word.getIsFavorite().equalsIgnoreCase("false") ? "true" : "false";
+                boolean newStatus = !word.isFavorite();
                 updateFavoriteStatusUseCase.execute(word, newStatus);
 
-                if (newStatus.equals("true")) {
+                if (newStatus) {
                     binding.trainFavoriteIcon.setIconResource(R.drawable.ic_favorite_icon_active);
                 } else {
                     binding.trainFavoriteIcon.setIconResource(R.drawable.ic_favorite_icon);
                 }
-                word.setIsFavorite(newStatus);
+                word = word.withFavorite(newStatus);
 
             }
 
@@ -415,9 +428,13 @@ public class NewTrainRecyclerView extends RecyclerView.Adapter<RecyclerView.View
                             .subject("Mistake found! APP: VB4" + " FL: " + BuildConfig.FLAVOR + " VC: "
                                     + BuildConfig.VERSION_CODE + " VN: " + BuildConfig.VERSION_NAME)
                             .body("Word: " + word.getWord() + "\nDefinition: " + word.getTranslation() + "\nExample 1: "
-                                    + word.example1 + "\nExample 2: " + word.example2 + "\nExample 3: " + word.example3
-                                    + "\nVocabulary type: " + word.vocabularyType + "\nPOS: " + word.grammar
-                                    + "\nSyllable: " + word.pronun + "\nPosition: " + word.position
+                                    + (word.getExample1() != null ? word.getExample1() : "") + "\nExample 2: "
+                                    + (word.getExample2() != null ? word.getExample2() : "") + "\nExample 3: "
+                                    + (word.getExample3() != null ? word.getExample3() : "")
+                                    + "\nVocabulary type: " + word.getSource().name() + "\nPOS: "
+                                    + (word.getGrammar() != null ? word.getGrammar() : "")
+                                    + "\nSyllable: " + (word.getPronunciation() != null ? word.getPronunciation() : "")
+                                    + "\nPosition: " + word.getId()
                                     + "\nPlease describe the mistake here: ")
                             .start();
                 } catch (NullPointerException i) {

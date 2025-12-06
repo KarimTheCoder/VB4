@@ -23,7 +23,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignInUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignOutUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.GetCurrentUserUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.IsUserAuthenticatedUseCase;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.data_old.sync.FirebaseSyncManager;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.AddChildEventListenerUseCase;
 import org.koin.java.KoinJavaComponent;
@@ -340,7 +340,8 @@ public class SettingActivity extends AppCompatActivity {
         if (isUserAuthenticatedUseCase.execute()) {
             updateUI();
             FirebaseUser u = getCurrentUserUseCase.execute();
-            if (u != null) startSync(u.getUid());
+            if (u != null)
+                startSync(u.getUid());
         }
     }
 }

@@ -1,9 +1,10 @@
 package com.fortitude.shamsulkarim.ieltsfordory.domain.learning.model
 
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
 
 data class JustLearnedSessionData(
-    val learnedWords: List<Word>,
-    val mostMistakenWord: Word?
+    val learnedWords: List<VocabularyWord>,
+    val mostMistakenWord: VocabularyWord?
 )
+
 

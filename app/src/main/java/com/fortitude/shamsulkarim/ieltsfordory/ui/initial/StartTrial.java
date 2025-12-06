@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.utils.DatabaseChecker;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.ActivityStartTrialBinding;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
 
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Screen for starting the trial period.
+ * Room database migration runs async in MyApplication.onCreate().
+ */
 public class StartTrial extends AppCompatActivity {
 
     private ActivityStartTrialBinding binding;
@@ -27,14 +30,6 @@ public class StartTrial extends AppCompatActivity {
         uiInitialization();
         codeInitialization();
         goHomeWhenPremium();
-
-        DatabaseChecker databaseChecker = new DatabaseChecker(this);
-        if (!databaseChecker.isDatabaseLoaded()) {
-
-            startActivity(new Intent(this, AppLauncher.class));
-            finish();
-
-        }
     }
 
     private void initializeTrialMode() {
@@ -55,20 +50,15 @@ public class StartTrial extends AppCompatActivity {
         prefs = AppPreferences.get(this);
         binding.startTrialButton.setOnClickListener(v -> {
             initializeTrialMode();
-
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         });
-
     }
 
     private void goHomeWhenPremium() {
-
         if (prefs.isPremium()) {
-
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
-
         }
     }
 

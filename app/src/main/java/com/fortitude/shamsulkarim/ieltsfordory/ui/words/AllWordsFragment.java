@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetVocabularyUseCase;
 import org.koin.java.KoinJavaComponent;
 import com.fortitude.shamsulkarim.ieltsfordory.databinding.FragmentNewWordBinding;
@@ -29,6 +30,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.ShutdownTtsUse
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllWordsFragment extends Fragment
         implements WordRecyclerViewAdapter.WordAdapterCallback {
@@ -128,13 +130,16 @@ public class AllWordsFragment extends Fragment
 
     private void showWordsForSelection(int selection) {
         words.clear();
+        List<VocabularyWord> vocabularyWords;
         if (selection == 0) {
-            words.addAll(getVocabularyUseCase.execute("beginner"));
+            vocabularyWords = getVocabularyUseCase.execute("beginner");
         } else if (selection == 1) {
-            words.addAll(getVocabularyUseCase.execute("intermediate"));
-        } else if (selection == 2) {
-            words.addAll(getVocabularyUseCase.execute("advance"));
+            vocabularyWords = getVocabularyUseCase.execute("intermediate");
+        } else {
+            vocabularyWords = getVocabularyUseCase.execute("advance");
         }
+        // Add VocabularyWord directly - adapter now expects VocabularyWord
+        words.addAll(vocabularyWords);
         adapter.notifyDataSetChanged();
     }
 

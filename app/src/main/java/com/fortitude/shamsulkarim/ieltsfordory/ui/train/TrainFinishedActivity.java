@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.model.JustLearnedSessionData;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.GetJustLearnedSessionDataUseCase;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase;
@@ -31,8 +31,10 @@ import java.util.List;
 public class TrainFinishedActivity extends AppCompatActivity {
 
     private String level;
-    private List<Word> learnedWords;
-    private Word mostMistakenWord;
+    private List<VocabularyWord> learnedWords;
+    private VocabularyWord mostMistakenWord;
+    private boolean mostMistakenIsFavorite;
+    private boolean mostMistakenIsLearned;
 
     private GetJustLearnedSessionDataUseCase getJustLearnedSessionDataUseCase;
     private UpdateFavoriteStatusUseCase updateFavoriteStatusUseCase;
@@ -131,9 +133,11 @@ public class TrainFinishedActivity extends AppCompatActivity {
             binding.mostMistakenText.setVisibility(View.VISIBLE);
 
             mostMistakenWord = data.getMostMistakenWord();
+            mostMistakenIsFavorite = mostMistakenWord.isFavorite();
+            mostMistakenIsLearned = mostMistakenWord.isLearned();
             binding.trainFinishedWord.setText(mostMistakenWord.getWord());
 
-            if ("True".equalsIgnoreCase(mostMistakenWord.isFavorite)) {
+            if (mostMistakenIsFavorite) {
                 binding.trainFinishedFavorite.setIconResource(R.drawable.ic_favorite_icon_active);
             }
         }
@@ -143,25 +147,25 @@ public class TrainFinishedActivity extends AppCompatActivity {
     }
 
     private void setFavorite() {
-        if (mostMistakenWord.isFavorite.equalsIgnoreCase("true")) {
-            mostMistakenWord.setIsFavorite("false");
-            updateFavoriteStatusUseCase.execute(mostMistakenWord, "false");
+        if (mostMistakenIsFavorite) {
+            mostMistakenIsFavorite = false;
+            updateFavoriteStatusUseCase.execute(mostMistakenWord, false);
             binding.trainFinishedFavorite.setIconResource(R.drawable.ic_favorite_icon);
         } else {
-            mostMistakenWord.setIsFavorite("true");
+            mostMistakenIsFavorite = true;
             binding.trainFinishedFavorite.setIconResource(R.drawable.ic_favorite_icon_active);
-            updateFavoriteStatusUseCase.execute(mostMistakenWord, "true");
+            updateFavoriteStatusUseCase.execute(mostMistakenWord, true);
         }
     }
 
     private void setUnlearn() {
-        if (mostMistakenWord.isLearned.equalsIgnoreCase("true")) {
-            mostMistakenWord.setIsLearned("false");
-            updateLearnedStatusSingleUseCase.execute(mostMistakenWord, "false");
+        if (mostMistakenIsLearned) {
+            mostMistakenIsLearned = false;
+            updateLearnedStatusSingleUseCase.execute(mostMistakenWord, false);
             binding.trainFinishedUnlearn.setText("Learn");
         } else {
-            mostMistakenWord.setIsLearned("true");
-            updateLearnedStatusSingleUseCase.execute(mostMistakenWord, "true");
+            mostMistakenIsLearned = true;
+            updateLearnedStatusSingleUseCase.execute(mostMistakenWord, true);
             binding.trainFinishedUnlearn.setText("Unlearn");
         }
     }

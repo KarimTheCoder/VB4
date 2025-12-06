@@ -1,6 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.practice;
 
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +16,6 @@ public class PracticeUiState {
 
     // New fields for ViewModel communication
     public int lastAnswerStatus = 0; // 0: None, 1: Correct, 2: Wrong
-    public List<Word> currentOptions = new ArrayList<>();
-    public Word currentWord;
+    public List<VocabularyWord> currentOptions = new ArrayList<>();
+    public VocabularyWord currentWord;
 }

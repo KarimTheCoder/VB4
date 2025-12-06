@@ -6,10 +6,11 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.dao.WordProgre
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.entity.SessionWordEntity
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.entity.WordProgressEntity
 import com.fortitude.shamsulkarim.ieltsfordory.data_old.FavLearnedState
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.LearningRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.model.JustLearnedSessionData
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepository
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularySource
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -73,27 +74,29 @@ class RoomLearningRepository(
         return sb.toString()
     }
 
-    override fun fetchSessionWords(level: String, wordsPerSession: Int): List<Word> {
+    override fun fetchSessionWords(level: String, wordsPerSession: Int): List<VocabularyWord> {
         val words = getAllUnlearnedWords(level)
         val limit = wordsPerSession.coerceAtMost(words.size)
         return words.take(limit)
     }
 
-    override fun getAllUnlearnedWords(level: String): List<Word> {
+    override fun getAllUnlearnedWords(level: String): List<VocabularyWord> {
         return vocabularyRepository.getUnlearnedWords(level)
     }
 
-    override fun updateLearnedStatus(words: List<Word>) = runBlocking {
+
+
+    override fun updateLearnedStatus(words: List<VocabularyWord>) = runBlocking {
         words.forEach { word ->
-            val source = word.vocabularyType?.uppercase() ?: return@forEach
-            val wordId = word.position
+            val source = word.source.name.uppercase()
+            val wordId = word.id
             
             ensureProgressExists(source, wordId)
             wordProgressDao.updateLearned(source, wordId, true)
         }
     }
 
-    override fun updateJustLearnedStatus(level: String, words: List<Word>, mostMistakenIndex: Int) = runBlocking {
+    override fun updateJustLearnedStatus(level: String, words: List<VocabularyWord>, mostMistakenIndex: Int) = runBlocking {
         // Clear existing session words for all levels
         sessionWordDao.clearAll()
 
@@ -103,19 +106,19 @@ class RoomLearningRepository(
         val entities = words.mapIndexed { index, word ->
             SessionWordEntity(
                 id = index + 1,
-                wordDatabasePos = word.position.toString(),
-                word = word.word ?: "",
-                translation = word.translation ?: "",
-                secondTranslation = word.extra,
-                pronunciation = word.pronun,
+                wordDatabasePos = word.id.toString(),
+                word = word.word,
+                translation = word.translation,
+                secondTranslation = word.translationSecondLang,
+                pronunciation = word.pronunciation,
                 grammar = word.grammar,
                 example1 = word.example1,
                 example2 = word.example2,
                 example3 = word.example3,
-                vocabularyType = word.vocabularyType,
+                vocabularyType = word.source.name,
                 level = levelString,
                 isLearned = true,
-                isFavorite = word.isFavorite?.equals("true", ignoreCase = true) == true,
+                isFavorite = word.isFavorite,
                 isMostMistaken = index == mostMistakenIndex
             )
         }
@@ -123,45 +126,53 @@ class RoomLearningRepository(
         sessionWordDao.insertAll(entities)
     }
 
-    override fun updateFavoriteStatus(word: Word, newStatus: String) = runBlocking {
-        val source = word.vocabularyType?.uppercase() ?: return@runBlocking
-        val wordId = word.position
-        val isFavorite = newStatus.equals("true", ignoreCase = true)
+    override fun updateFavoriteStatus(word: VocabularyWord, newStatus: Boolean) = runBlocking {
+        val source = word.source.name.uppercase()
+        val wordId = word.id
         
         ensureProgressExists(source, wordId)
-        wordProgressDao.updateFavorite(source, wordId, isFavorite)
+        wordProgressDao.updateFavorite(source, wordId, newStatus)
     }
 
-    override fun updateLearnedStatus(word: Word, newStatus: String) = runBlocking {
-        val source = word.vocabularyType?.uppercase() ?: return@runBlocking
-        val wordId = word.position
-        val isLearned = newStatus.equals("true", ignoreCase = true)
+    override fun updateLearnedStatus(word: VocabularyWord, newStatus: Boolean) = runBlocking {
+        val source = word.source.name.uppercase()
+        val wordId = word.id
         
         ensureProgressExists(source, wordId)
-        wordProgressDao.updateLearned(source, wordId, isLearned)
+        wordProgressDao.updateLearned(source, wordId, newStatus)
     }
 
     override fun getJustLearnedSessionData(level: String): JustLearnedSessionData = runBlocking {
         val levelString = normalizeLevel(level)
         val sessionWords = sessionWordDao.getByLevel(levelString)
         
-        val learnedWords = mutableListOf<Word>()
-        var mostMistakenWord: Word? = null
+        val learnedWords = mutableListOf<VocabularyWord>()
+        var mostMistakenWord: VocabularyWord? = null
         
         sessionWords.forEach { entity ->
-            val word = Word(
-                entity.word,
-                entity.translation,
-                entity.secondTranslation ?: "",
-                entity.pronunciation ?: "",
-                entity.grammar ?: "",
-                entity.example1 ?: "",
-                entity.example2 ?: "",
-                entity.example3 ?: "",
-                entity.vocabularyType ?: "",
-                entity.wordDatabasePos.toIntOrNull() ?: 0,
-                if (entity.isLearned) "True" else "False",
-                if (entity.isFavorite) "True" else "False"
+            val source = try {
+                VocabularySource.valueOf(entity.vocabularyType?.uppercase() ?: "IELTS")
+            } catch (e: IllegalArgumentException) {
+                VocabularySource.IELTS
+            }
+            
+            val word = VocabularyWord(
+                id = entity.wordDatabasePos.toIntOrNull() ?: 0,
+                word = entity.word,
+                translation = entity.translation,
+                wordSecondLang = null,
+                translationSecondLang = entity.secondTranslation,
+                pronunciation = entity.pronunciation,
+                grammar = entity.grammar,
+                example1 = entity.example1,
+                example2 = entity.example2,
+                example3 = entity.example3,
+                example1SecondLang = null,
+                example2SecondLang = null,
+                example3SecondLang = null,
+                source = source,
+                isLearned = entity.isLearned,
+                isFavorite = entity.isFavorite
             )
             
             if (entity.isMostMistaken) {

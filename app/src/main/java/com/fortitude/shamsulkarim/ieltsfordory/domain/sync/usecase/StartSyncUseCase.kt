@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import com.fortitude.shamsulkarim.ieltsfordory.R
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.AddChildEventListenerUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularySource
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.UpdateFavoriteStateUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.UpdateLearnStateUseCase
 import com.google.firebase.database.ChildEventListener
@@ -98,15 +99,31 @@ class StartSyncUseCase(
         }
 
         fun syncSQL() {
-            syncFavorites(savedBeginnerFav) { id, state -> updateFavoriteStateUseCase.execute("IELTS", id, state) }
-            syncFavorites(savedIntermediateFav) { id, state -> updateFavoriteStateUseCase.execute("TOEFL", id, state) }
-            syncFavorites(savedAdvanceFav) { id, state -> updateFavoriteStateUseCase.execute("SAT", id, state) }
-            syncFavorites(savedGreFav) { id, state -> updateFavoriteStateUseCase.execute("GRE", id, state) }
+            syncFavorites(savedBeginnerFav) { id, state -> 
+                updateFavoriteStateUseCase.execute(VocabularySource.IELTS, id.toInt(), state.equals("True", true)) 
+            }
+            syncFavorites(savedIntermediateFav) { id, state -> 
+                updateFavoriteStateUseCase.execute(VocabularySource.TOEFL, id.toInt(), state.equals("True", true)) 
+            }
+            syncFavorites(savedAdvanceFav) { id, state -> 
+                updateFavoriteStateUseCase.execute(VocabularySource.SAT, id.toInt(), state.equals("True", true)) 
+            }
+            syncFavorites(savedGreFav) { id, state -> 
+                updateFavoriteStateUseCase.execute(VocabularySource.GRE, id.toInt(), state.equals("True", true)) 
+            }
 
-            syncLearned(savedIeltsLearned) { id, state -> updateLearnStateUseCase.execute("IELTS", id, state) }
-            syncLearned(savedToeflLearned) { id, state -> updateLearnStateUseCase.execute("TOEFL", id, state) }
-            syncLearned(savedSatLearned) { id, state -> updateLearnStateUseCase.execute("SAT", id, state) }
-            syncLearned(savedGreLearned) { id, state -> updateLearnStateUseCase.execute("GRE", id, state) }
+            syncLearned(savedIeltsLearned) { id, state -> 
+                updateLearnStateUseCase.execute(VocabularySource.IELTS, id.toInt(), state.equals("True", true)) 
+            }
+            syncLearned(savedToeflLearned) { id, state -> 
+                updateLearnStateUseCase.execute(VocabularySource.TOEFL, id.toInt(), state.equals("True", true)) 
+            }
+            syncLearned(savedSatLearned) { id, state -> 
+                updateLearnStateUseCase.execute(VocabularySource.SAT, id.toInt(), state.equals("True", true)) 
+            }
+            syncLearned(savedGreLearned) { id, state -> 
+                updateLearnStateUseCase.execute(VocabularySource.GRE, id.toInt(), state.equals("True", true)) 
+            }
         }
 
         fun resetAndSync(arrayResId: Int, spKey: String, newDataList: List<Int>, action: (String, String) -> Unit) {
@@ -125,17 +142,17 @@ class StartSyncUseCase(
                 when {
                     key.equals("advanceFavCount", true) -> {
                         resetAndSync(R.array.SAT_words, "advance", newDataList) { id, state ->
-                            updateFavoriteStateUseCase.execute("SAT", id, state)
+                            updateFavoriteStateUseCase.execute(VocabularySource.SAT, id.toInt(), state.equals("True", true))
                         }
                     }
                     key.equals("intermediateFavCount", true) -> {
                         resetAndSync(R.array.TOEFL_words, "intermediate", newDataList) { id, state ->
-                            updateFavoriteStateUseCase.execute("TOEFL", id, state)
+                            updateFavoriteStateUseCase.execute(VocabularySource.TOEFL, id.toInt(), state.equals("True", true))
                         }
                     }
                     key.equals("beginnerFavCount", true) -> {
                         resetAndSync(R.array.TOEFL_words, "beginner", newDataList) { id, state ->
-                            updateFavoriteStateUseCase.execute("IELTS", id, state)
+                            updateFavoriteStateUseCase.execute(VocabularySource.IELTS, id.toInt(), state.equals("True", true))
                         }
                     }
                 }

@@ -11,8 +11,8 @@ import android.widget.Filterable;
 import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.models.Word;
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.prefs.AppPreferences;
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord;
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.model.AudioData;
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase;
@@ -34,7 +34,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
     public String audioPath = null;
     public File localFile = null;
     private final List<Boolean> isFav = new ArrayList<>();
-    public List<Word> words, filterList;
+    public List<VocabularyWord> words, filterList;
     private CustomFilterFavorite filter;
     private final Context context;
 
@@ -46,7 +46,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
     private final IsConnectedUseCase isConnectedUseCase;
     private final AdapterCallback adapterCallback;
 
-    public FavoriteRecyclerViewAdapter(Context context, List<Word> words, AdapterCallback adapterCallback) {
+    public FavoriteRecyclerViewAdapter(Context context, List<VocabularyWord> words, AdapterCallback adapterCallback) {
         try {
             this.adapterCallback = adapterCallback;
         } catch (ClassCastException e) {
@@ -81,14 +81,16 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
     }
 
     public void onBindViewHolder(@NotNull WordViewHolder holder, int position) {
-        Word word = words.get(position);
+        VocabularyWord word = words.get(position);
         holder.binding.favoriteFavorite.setIconResource(R.drawable.ic_favorite_icon_active);
         holder.binding.favoriteCardTranslation.setText(word.getTranslation());
-        holder.binding.favoriteCardWord.setText(word.getPronun());
-        holder.binding.favoriteCardGrammar.setText(word.getGrammar());
-        holder.binding.favoriteCardExample1.setText(word.getExample1());
-        holder.binding.favoriteCardExample2.setText(word.getExample2());
-        holder.binding.favoriteCardExample3.setText(word.getExample3());
+        String pronunciation = word.getPronunciation() != null ? word.getPronunciation() : "";
+        holder.binding.favoriteCardWord.setText(pronunciation);
+        String grammar = word.getGrammar() != null ? word.getGrammar() : "";
+        holder.binding.favoriteCardGrammar.setText(grammar);
+        holder.binding.favoriteCardExample1.setText(word.getExample1() != null ? word.getExample1() : "");
+        holder.binding.favoriteCardExample2.setText(word.getExample2() != null ? word.getExample2() : "");
+        holder.binding.favoriteCardExample3.setText(word.getExample3() != null ? word.getExample3() : "");
     }
 
     public void onDestroy() {
@@ -152,7 +154,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
         @Override
         public void onClick(View view) {
-            Word word = words.get(getBindingAdapterPosition());
+            VocabularyWord word = words.get(getBindingAdapterPosition());
             if (view == binding.favoriteSpeaker) {
                 String wordName = words.get(getBindingAdapterPosition()).getWord().toLowerCase();
                 if (isConnectedUseCase.execute()) {
@@ -167,19 +169,19 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
                 }
             }
             if (view.getId() == R.id.favorite_favorite) {
-                if (word.isFavorite.equalsIgnoreCase("True")) {
+                if (word.isFavorite()) {
                     if (favoriteCount > 0) {
                         favoriteCount--;
                         prefs.setFavoriteCountProfile(favoriteCount);
                     }
-                    updateFavoriteStatusUseCase.execute(word, "False");
+                    updateFavoriteStatusUseCase.execute(word, false);
                 } else {
                     favoriteCount++;
                     prefs.setFavoriteCountProfile(favoriteCount);
                     isFav.set(getBindingAdapterPosition(), true);
                     binding.favoriteFavorite.setIconResource(R.drawable.ic_favorite_icon_active);
                     binding.favoriteFavorite.setTag(null);
-                    updateFavoriteStatusUseCase.execute(word, "True");
+                    updateFavoriteStatusUseCase.execute(word, true);
                 }
                 words.remove(getBindingAdapterPosition());
                 isFav.remove(getBindingAdapterPosition());
