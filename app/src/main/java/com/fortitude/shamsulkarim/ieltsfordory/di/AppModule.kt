@@ -49,6 +49,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignInUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignOutUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.GetCurrentUserUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.IsUserAuthenticatedUseCase
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
@@ -125,5 +126,42 @@ val appModule = module {
     factory { SignOutUseCase(get()) }
     factory { GetCurrentUserUseCase(get()) }
     factory { IsUserAuthenticatedUseCase(get()) }
+
+    // ========== ViewModels ==========
+    viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.main.MainViewModel(
+            get(), get(), get(), get(), get()
+        )
+    }
+    viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.home.HomeViewModel(
+            get(), get(), 
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+        )
+    }
+    viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.words.AllWordsViewModel(
+            get(), get(), get(), get(), get(), get(),
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+        )
+    }
+    viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.learned.LearnedViewModel(
+            get(), get(), get(), get(), get(), get(),
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+        )
+    }
+    viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.favorites.FavoriteViewModel(
+            get(), get(), get(), get(), get(), get(),
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+        )
+    }
+    viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.profile.ProfileViewModel(
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get()),
+            get()
+        )
+    }
 }
 
