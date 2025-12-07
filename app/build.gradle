@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.compose'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
@@ -51,6 +52,7 @@ plugins {
     buildFeatures {
         viewBinding true
         buildConfig true
+        compose true
     }
 
     compileOptions {
@@ -65,7 +67,8 @@ plugins {
     lint {
         abortOnError false
     }
-}
+      buildToolsVersion '36.0.0'
+  }
 
 // Enable kapt error type correction for future Hilt integration
 kapt {
@@ -127,6 +130,15 @@ dependencies {
 
     // JitPack AAR artifact
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
+
+    // Jetpack Compose
+    implementation platform(libs.compose.bom)
+    implementation libs.bundles.compose
+
+    // Compose Debug Tooling
+    debugImplementation libs.compose.ui.tooling
+    debugImplementation libs.compose.ui.test.manifest
+    androidTestImplementation libs.compose.ui.test.junit4
 }
 
 // Google Services plugin applied via plugins DSL

@@ -11,7 +11,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.TtsRepository
 import java.util.Locale
 import java.util.UUID
 
-class AndroidTtsRepository(private val context: Context) : TtsRepository, TextToSpeech.OnInitListener {
+class  AndroidTtsRepository(private val context: Context) : TtsRepository, TextToSpeech.OnInitListener {
     private val audioManager: AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     private var tts: TextToSpeech = TextToSpeech(context.applicationContext, this)
     @Volatile private var ready: Boolean = false
