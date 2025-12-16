@@ -22,7 +22,7 @@
         android:fullBackupContent="@xml/backup_descriptor">
         <activity android:name=".ui.initial.StartTrial" />
         <activity
-            android:name=".ui.train.PretrainActivity"
+            android:name=".ui.screens.pretrain.PretrainActivity"
             android:theme="@style/Pretrain.Theme"
             />
 
@@ -34,10 +34,10 @@
         <activity android:name=".ui.practice.Practice"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".ui.train.NewTrain"
+        <activity android:name=".ui.screens.train.NewTrain"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".ui.train.TrainFinishedActivity"
+        <activity android:name=".ui.screens.trainfinished.TrainFinishedActivity"
             android:theme="@style/Main.Theme"
             />
         <activity android:name=".ui.practice.PracticeFinished"

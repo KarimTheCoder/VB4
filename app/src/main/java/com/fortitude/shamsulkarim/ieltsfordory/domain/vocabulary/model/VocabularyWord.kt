@@ -46,3 +46,5 @@ data class VocabularyWord(
      */
     fun withLearned(learned: Boolean): VocabularyWord = copy(isLearned = learned)
 }
+
+

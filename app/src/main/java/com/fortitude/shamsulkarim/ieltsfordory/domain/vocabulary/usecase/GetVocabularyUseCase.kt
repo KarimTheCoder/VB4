@@ -8,3 +8,5 @@ class GetVocabularyUseCase(private val repository: VocabularyRepository) {
 }
 
 
+
+

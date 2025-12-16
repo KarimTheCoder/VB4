@@ -6,3 +6,5 @@ class GetTotalCountUseCase(private val repository: VocabularyRepository) {
     fun execute(level: String) = repository.getTotalCount(level)
 }
 
+
+

@@ -6,3 +6,5 @@ class GetAllUnlearnedWordsUseCase(private val repository: LearningRepository) {
     fun execute(level: String) = repository.getAllUnlearnedWords(level)
 }
 
+
+

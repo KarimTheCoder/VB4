@@ -40,3 +40,5 @@ interface SessionWordDao {
     @Query("UPDATE session_words SET is_learned = :isLearned WHERE id = :id")
     suspend fun updateLearned(id: Int, isLearned: Boolean)
 }
+
+

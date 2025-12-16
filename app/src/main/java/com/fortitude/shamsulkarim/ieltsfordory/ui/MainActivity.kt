@@ -18,8 +18,8 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.usecase.IsCon
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.AddChildEventListenerUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.UpdateUserDataUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.GetFavLearnedStateUseCase
-import com.fortitude.shamsulkarim.ieltsfordory.ui.compose.navigation.AppNavigation
-import com.fortitude.shamsulkarim.ieltsfordory.ui.compose.theme.VocabularyTheme
+import com.fortitude.shamsulkarim.ieltsfordory.ui.navigation.AppNavigation
+import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 import org.koin.android.ext.android.inject
 
 /**
@@ -162,3 +162,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
+

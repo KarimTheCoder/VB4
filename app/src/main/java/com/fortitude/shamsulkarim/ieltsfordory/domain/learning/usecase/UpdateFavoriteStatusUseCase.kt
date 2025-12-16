@@ -7,3 +7,5 @@ class UpdateFavoriteStatusUseCase(private val repository: LearningRepository) {
     fun execute(word: VocabularyWord, newStatus: Boolean) = repository.updateFavoriteStatus(word, newStatus)
 }
 
+
+

@@ -134,34 +134,56 @@ val appModule = module {
         )
     }
     viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.home.HomeViewModel(
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.home.HomeViewModel(
             get(), get(), 
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
         )
     }
     viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.words.AllWordsViewModel(
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.AllWordsViewModel(
             get(), get(), get(), get(), get(), get(),
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
         )
     }
     viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.learned.LearnedViewModel(
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learned.LearnedViewModel(
             get(), get(), get(), get(), get(), get(),
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
         )
     }
     viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.favorites.FavoriteViewModel(
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.favorites.FavoriteViewModel(
             get(), get(), get(), get(), get(), get(),
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
         )
     }
     viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.profile.ProfileViewModel(
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.profile.ProfileViewModel(
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get()),
             get()
         )
     }
+    viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.pretrain.PretrainViewModel(
+            get(), get(),
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+        )
+    }
+    viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.settings.SettingsComposeViewModel(
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+        )
+    }
+    viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.trainfinished.TrainFinishedViewModel(
+            get(), get(), get(),
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+        )
+    }
+    viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.train.NewTrainViewModel(get())
+    }
 }
+
+
 

@@ -15,3 +15,5 @@ interface LearningRepository {
     fun getJustLearnedSessionData(level: String): JustLearnedSessionData
 }
 
+
+

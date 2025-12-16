@@ -7,3 +7,5 @@ class SignInUseCase(private val repository: AuthRepository) {
     fun execute(activity: Activity, callback: AuthRepository.AuthCallback) = repository.signIn(activity, callback)
 }
 
+
+

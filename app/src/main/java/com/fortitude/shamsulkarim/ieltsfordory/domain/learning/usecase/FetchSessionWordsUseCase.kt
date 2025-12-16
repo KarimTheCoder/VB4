@@ -6,3 +6,5 @@ class FetchSessionWordsUseCase(private val repository: LearningRepository) {
     fun execute(level: String, wordsPerSession: Int) = repository.fetchSessionWords(level, wordsPerSession)
 }
 
+
+

@@ -38,3 +38,5 @@ data class SessionWord(
      */
     fun markAsMostMistaken(): SessionWord = copy(isMostMistaken = true)
 }
+
+

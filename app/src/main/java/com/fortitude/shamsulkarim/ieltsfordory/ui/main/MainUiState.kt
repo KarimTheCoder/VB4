@@ -10,3 +10,5 @@ data class MainUiState(
     val isSyncing: Boolean = false,
     val syncError: String? = null
 )
+
+

@@ -58,3 +58,5 @@ interface WordProgressDao {
     @Query("DELETE FROM word_progress WHERE source = :source")
     suspend fun deleteBySource(source: String)
 }
+
+

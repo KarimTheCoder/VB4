@@ -6,3 +6,5 @@ class IsUserAuthenticatedUseCase(private val repository: AuthRepository) {
     fun execute() = repository.isUserAuthenticated()
 }
 
+
+

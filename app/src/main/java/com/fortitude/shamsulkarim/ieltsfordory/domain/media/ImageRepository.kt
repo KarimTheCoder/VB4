@@ -11,3 +11,5 @@ interface ImageRepository {
     fun downloadImage(wordName: String, quality: String, callback: Callback)
 }
 
+
+

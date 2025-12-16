@@ -6,3 +6,5 @@ class IsConnectedUseCase(private val repository: ConnectivityRepository) {
     fun execute(): Boolean = repository.isConnected()
 }
 
+
+

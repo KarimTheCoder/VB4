@@ -6,3 +6,5 @@ class GetLearnedCountUseCase(private val repository: VocabularyRepository) {
     fun execute(level: String) = repository.getLearnedCount(level)
 }
 
+
+

@@ -96,3 +96,5 @@ abstract class VocabularyDatabase : RoomDatabase() {
     }
 }
 
+
+

@@ -6,3 +6,5 @@ class GetJustLearnedSessionDataUseCase(private val repository: LearningRepositor
     fun execute(level: String) = repository.getJustLearnedSessionData(level)
 }
 
+
+

@@ -326,3 +326,5 @@ sealed class MigrationResult {
     data class Success(val wordsMigrated: Int, val sessionsMigrated: Int) : MigrationResult()
     data class Failed(val error: String) : MigrationResult()
 }
+
+

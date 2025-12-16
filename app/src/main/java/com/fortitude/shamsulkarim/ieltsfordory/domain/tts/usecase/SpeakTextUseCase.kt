@@ -6,3 +6,5 @@ class SpeakTextUseCase(private val repository: TtsRepository) {
     fun execute(text: String, flush: Boolean) = repository.speak(text, flush)
 }
 
+
+

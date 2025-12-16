@@ -8,3 +8,5 @@ class GetFavoriteWordsUseCase(private val repository: VocabularyRepository) {
 }
 
 
+
+

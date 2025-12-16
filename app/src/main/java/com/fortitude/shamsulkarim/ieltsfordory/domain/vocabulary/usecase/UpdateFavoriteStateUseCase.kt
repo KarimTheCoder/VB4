@@ -9,3 +9,5 @@ class UpdateFavoriteStateUseCase(private val repository: VocabularyRepository) {
 }
 
 
+
+

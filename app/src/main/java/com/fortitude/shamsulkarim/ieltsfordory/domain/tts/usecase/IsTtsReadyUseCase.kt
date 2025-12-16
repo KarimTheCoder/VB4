@@ -6,3 +6,5 @@ class IsTtsReadyUseCase(private val repository: TtsRepository) {
     fun execute(): Boolean = repository.isReady()
 }
 
+
+
