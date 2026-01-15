@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.plugin.compose'
+    id 'org.jetbrains.kotlin.plugin.serialization'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
@@ -110,6 +111,7 @@ dependencies {
     implementation libs.kotlin.stdlib
     implementation libs.kotlinx.coroutines.core
     implementation libs.kotlinx.coroutines.android
+    implementation libs.kotlinx.serialization.json
 
     // Dependency Injection
     implementation libs.koin.android

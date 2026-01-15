@@ -75,6 +75,7 @@ import org.koin.androidx.compose.koinViewModel
 fun LearnedScreen(
     viewModel: LearnedViewModel = koinViewModel(),
     onNavigateToPretrain: () -> Unit = {},
+    bottomBar: @Composable () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -99,6 +100,7 @@ fun LearnedScreen(
     }
 
     Scaffold(
+        bottomBar = bottomBar,
         floatingActionButton = {
             if (uiState.showPracticeFab) {
                 AnimatedVisibility(

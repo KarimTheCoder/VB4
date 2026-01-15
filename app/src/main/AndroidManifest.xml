@@ -34,10 +34,10 @@
         <activity android:name=".ui.practice.Practice"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".ui.screens.train.NewTrain"
+        <activity android:name=".data_old.NewTrain"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".ui.screens.trainfinished.TrainFinishedActivity"
+        <activity android:name=".data_old.train_finished.TrainFinishedActivity"
             android:theme="@style/Main.Theme"
             />
         <activity android:name=".ui.practice.PracticeFinished"

@@ -39,7 +39,29 @@ data class WordProgressEntity(
     val isBlacklisted: Boolean = false,
 
     @ColumnInfo(name = "is_skipped")
-    val isSkipped: Boolean = false
+    val isSkipped: Boolean = false,
+
+    // ===== NEW FIELDS for Word Selection Algorithm =====
+    
+    /** How many times the user answered incorrectly for this word */
+    @ColumnInfo(name = "mistake_count")
+    val mistakeCount: Int = 0,
+
+    /** How many times the user answered correctly for this word */
+    @ColumnInfo(name = "correct_count")
+    val correctCount: Int = 0,
+
+    /** Timestamp (millis) when this word was last shown to the user */
+    @ColumnInfo(name = "last_seen_date")
+    val lastSeenDate: Long? = null,
+
+    /** Timestamp (millis) when this word should be reviewed next (spaced repetition) */
+    @ColumnInfo(name = "next_review_date")
+    val nextReviewDate: Long? = null,
+
+    /** Familiarity score from 0.0 (unknown) to 1.0 (mastered) */
+    @ColumnInfo(name = "familiarity_score")
+    val familiarityScore: Float = 0f
 ) {
     /**
      * Converts this entity to the domain model.
@@ -51,7 +73,12 @@ data class WordProgressEntity(
             isFavorite = isFavorite,
             isLearned = isLearned,
             isBlacklisted = isBlacklisted,
-            isSkipped = isSkipped
+            isSkipped = isSkipped,
+            mistakeCount = mistakeCount,
+            correctCount = correctCount,
+            lastSeenDate = lastSeenDate,
+            nextReviewDate = nextReviewDate,
+            familiarityScore = familiarityScore
         )
     }
 
@@ -66,7 +93,12 @@ data class WordProgressEntity(
                 isFavorite = domain.isFavorite,
                 isLearned = domain.isLearned,
                 isBlacklisted = domain.isBlacklisted,
-                isSkipped = domain.isSkipped
+                isSkipped = domain.isSkipped,
+                mistakeCount = domain.mistakeCount,
+                correctCount = domain.correctCount,
+                lastSeenDate = domain.lastSeenDate,
+                nextReviewDate = domain.nextReviewDate,
+                familiarityScore = domain.familiarityScore
             )
         }
 
@@ -80,7 +112,12 @@ data class WordProgressEntity(
                 isFavorite = false,
                 isLearned = false,
                 isBlacklisted = false,
-                isSkipped = false
+                isSkipped = false,
+                mistakeCount = 0,
+                correctCount = 0,
+                lastSeenDate = null,
+                nextReviewDate = null,
+                familiarityScore = 0f
             )
         }
     }

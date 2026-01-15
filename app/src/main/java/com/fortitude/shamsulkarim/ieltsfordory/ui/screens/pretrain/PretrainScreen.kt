@@ -45,12 +45,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.BeginnerPrimary
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.Cyan200
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.Purple500
-import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.train.NewTrain
-import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.pretrain.PretrainViewModel
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.NewTrain
 import org.koin.androidx.compose.koinViewModel
 
 /**

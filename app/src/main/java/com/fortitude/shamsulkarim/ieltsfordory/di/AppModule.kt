@@ -1,6 +1,5 @@
 package com.fortitude.shamsulkarim.ieltsfordory.di
 
-import androidx.room.Room
 import com.fortitude.shamsulkarim.ieltsfordory.data.media.firebase.FirebaseAudioRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.media.firebase.FirebaseImageRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.firebase.FirebaseDatabaseRepository
@@ -11,6 +10,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.vocabulary.room.RoomVocabula
 import com.fortitude.shamsulkarim.ieltsfordory.data.connectivity.AndroidConnectivityRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.tts.AndroidTtsRepository
 import com.fortitude.shamsulkarim.ieltsfordory.data.auth.FirebaseAuthRepository
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.ImageRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.usecase.DownloadAudioUseCase
@@ -20,6 +20,8 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.UpdateUse
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.AddChildEventListenerUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.RemoveChildEventListenerUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.LearningRepository
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.SessionResultRepository
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.SessionWordsRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.GetFavLearnedStateUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.FetchSessionWordsUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.GetAllUnlearnedWordsUseCase
@@ -28,6 +30,8 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateJus
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateLearnedStatusSingleUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.GetJustLearnedSessionDataUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.ProcessSessionResultsUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.SelectSessionWordsUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetVocabularyUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetFavoriteWordsUseCase
@@ -49,17 +53,17 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignInUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignOutUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.GetCurrentUserUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.IsUserAuthenticatedUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.TrainViewModel
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.home.HomeViewModel
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.train_finished.TrainFinishedViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
     // ========== Room Database ==========
+    // Using getInstance() to include all migrations defined in VocabularyDatabase
     single {
-        Room.databaseBuilder(
-            get(),
-            VocabularyDatabase::class.java,
-            "vocabulary_db"
-        ).build()
+        VocabularyDatabase.getInstance(get())
     }
 
     // Room DAOs
@@ -81,6 +85,10 @@ val appModule = module {
     single<TtsRepository> { AndroidTtsRepository(get()) }
     single<ConnectivityRepository> { AndroidConnectivityRepository(get()) }
     single<AuthRepository> { FirebaseAuthRepository(get()) }
+    
+    // Session management repositories (singletons for passing data between screens)
+    single { SessionWordsRepository() }
+    single { SessionResultRepository() }
 
     // ========== Use Cases ==========
     // Media
@@ -101,6 +109,10 @@ val appModule = module {
     factory { UpdateFavoriteStatusUseCase(get()) }
     factory { UpdateLearnedStatusSingleUseCase(get()) }
     factory { GetJustLearnedSessionDataUseCase(get()) }
+    
+    // Word Selection Algorithm
+    factory { SelectSessionWordsUseCase(get(), get()) }
+    factory { ProcessSessionResultsUseCase(get()) }
     
     // Vocabulary
     factory { GetVocabularyUseCase(get()) }
@@ -133,10 +145,12 @@ val appModule = module {
             get(), get(), get(), get(), get()
         )
     }
-    viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.home.HomeViewModel(
-            get(), get(), 
-            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+    viewModel {
+        HomeViewModel(
+            AppPreferences.get(get()),
+            get(),  // SelectSessionWordsUseCase
+            get(),  // LearningRepository
+            get()   // SessionWordsRepository
         )
     }
     viewModel { 
@@ -158,9 +172,30 @@ val appModule = module {
         )
     }
     viewModel { 
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.UnifiedWordsViewModel(
+            get(), get(), get(), get(), get(), get(), get(), get(),
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+        )
+    }
+    viewModel { 
         com.fortitude.shamsulkarim.ieltsfordory.ui.screens.profile.ProfileViewModel(
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get()),
             get()
+        )
+    }
+    viewModel {
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.session.SessionViewModel(
+            get(),  // SessionWordsRepository
+            get(),  // SessionResultRepository
+            get(),  // LearningRepository
+            get(),  // ProcessSessionResultsUseCase
+            get()   // VocabularyRepository
+        )
+    }
+    viewModel {
+        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.result.ResultViewModel(
+            get(),  // SessionResultRepository
+            get()   // SessionWordsRepository
         )
     }
     viewModel { 
@@ -174,14 +209,14 @@ val appModule = module {
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
         )
     }
-    viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.trainfinished.TrainFinishedViewModel(
+    viewModel {
+        TrainFinishedViewModel(
             get(), get(), get(),
-            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+            AppPreferences.get(get())
         )
     }
-    viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.train.NewTrainViewModel(get())
+    viewModel {
+        TrainViewModel(get())
     }
 }
 

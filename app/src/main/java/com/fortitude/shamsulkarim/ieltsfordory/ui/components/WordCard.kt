@@ -1,5 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -50,9 +51,11 @@ fun WordCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().border(
+            width = 1.dp,
+            color = Color.Gray.copy(alpha = 0.2f),
+            shape = RoundedCornerShape(8.dp)),
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
         )

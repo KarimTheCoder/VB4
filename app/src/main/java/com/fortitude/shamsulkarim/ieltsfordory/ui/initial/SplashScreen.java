@@ -13,8 +13,6 @@ import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
-
-import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig;
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences;
 import com.fortitude.shamsulkarim.ieltsfordory.ui.MainActivity;
@@ -59,12 +57,7 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void navigateToNextScreen() {
-        if (BuildConfig.FLAVOR.equalsIgnoreCase("pro")) {
-            startActivity(new Intent(this, MainActivity.class));
-        } else {
-            startActivity(new Intent(this, StartTrial.class));
-        }
-        finish();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     private void initialize() {

@@ -107,6 +107,28 @@ class RoomVocabularyRepository(
         words
     }
 
+    override fun getAllUnlearnedWords(): List<VocabularyWord> = runBlocking {
+        val words = mutableListOf<VocabularyWord>()
+        
+        SOURCES.forEach { source ->
+            val arrays = wordArrays[source] ?: return@forEach
+            if (!arrays.isActive) return@forEach
+            
+            val progressMap = getProgressMap(source)
+            
+            // Iterate through ALL words (no level filtering)
+            for (i in 0 until arrays.words.size) {
+                val progress = progressMap[i]
+                if (progress == null || !progress.isLearned) {
+                    val level = determineLevelForIndex(source, i)
+                    words.add(createVocabularyWord(source, i, level, arrays, progress))
+                }
+            }
+        }
+        
+        words
+    }
+
     override fun getLearnedCount(level: String): Int = runBlocking {
         var count = 0
         
@@ -253,6 +275,39 @@ class RoomVocabularyRepository(
         }
     }
 
+    override fun getRandomWords(limit: Int, excludeIds: Set<Int>): List<VocabularyWord> = runBlocking {
+        val selectedWords = mutableListOf<VocabularyWord>()
+        val selectedIds = mutableSetOf<Int>()
+        selectedIds.addAll(excludeIds)
+        
+        var attempts = 0
+        val maxAttempts = limit * 20 // Safer limit to prevent infinite loops
+        
+        while (selectedWords.size < limit && attempts < maxAttempts) {
+            attempts++
+            val source = SOURCES.random()
+            val arrays = wordArrays[source] ?: continue
+            val totalWords = arrays.words.size
+            if (totalWords == 0) continue
+            
+            val index = (0 until totalWords).random()
+            val wordId = arrays.position.getOrNull(index) ?: index
+            
+            if (wordId !in selectedIds) {
+                // Check if we can use this word
+                val level = determineLevelForIndex(source, index)
+                
+                // Fetch progress (needed for createVocabularyWord)
+                val progress = wordProgressDao.getBySourceAndWordId(source, wordId)
+                
+                selectedWords.add(createVocabularyWord(source, index, level, arrays, progress))
+                selectedIds.add(wordId)
+            }
+        }
+        
+        selectedWords
+    }
+
     private fun getPercentage(percentage: Int, total: Int): Int {
         return (percentage / 100.0 * total).toInt()
     }
@@ -280,6 +335,7 @@ class RoomVocabularyRepository(
             level = level,
             isFavorite = progress?.isFavorite == true,
             isLearned = progress?.isLearned == true,
+            familiarityScore = progress?.familiarityScore?.toDouble() ?: 0.0,
             wordSecondLang = if (useSecondLanguage) arrays.wordsSL.getOrNull(index) else null,
             translationSecondLang = if (useSecondLanguage) arrays.translationsSL.getOrNull(index) else null,
             example1SecondLang = if (useSecondLanguage) arrays.example1SL.getOrNull(index) else null,

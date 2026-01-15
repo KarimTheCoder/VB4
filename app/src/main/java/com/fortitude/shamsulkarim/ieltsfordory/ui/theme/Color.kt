@@ -38,3 +38,12 @@ val DarkSurface = Color(0xFF1E1E1E)
 val DarkCard = Color(0xFF2C2C2C)
 
 
+val PrimaryBlue = Color(0xFF4052B5)
+val Background = Color(0xFFFFFFFF)
+
+
+val LightBlueBackground = Color(0xFFE8EBFA)
+val ProgressBlue = Color(0xFF4052B5)
+val ProgressPink = Color(0xFFE91E63)
+val ProgressGreen = Color(0xFF4CAF50)
+val ProgressTrack = Color(0xFFE0E0FF)

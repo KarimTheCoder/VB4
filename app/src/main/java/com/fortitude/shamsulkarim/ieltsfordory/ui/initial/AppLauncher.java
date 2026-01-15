@@ -40,14 +40,7 @@ public class AppLauncher extends AppCompatActivity {
         AppPreferences prefs = AppPreferences.get(this);
         applyTheme(prefs);
 
-        // Navigate directly based on user status (no legacy DB check needed)
-        if (BuildConfig.FLAVOR.equalsIgnoreCase("pro") || prefs.isPremium()) {
-            startActivity(new Intent(this, MainActivity.class));
-        } else if (!prefs.contains(AppPreferences.KEY_TRIAL_END_DATE)) {
-            startActivity(new Intent(this, StartTrial.class));
-        } else {
-            startActivity(new Intent(this, MainActivity.class));
-        }
+        startActivity(new Intent(this, MainActivity.class));
 
         finish();
     }

@@ -23,6 +23,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -44,6 +45,8 @@ import com.fortitude.shamsulkarim.ieltsfordory.R
 import com.fortitude.shamsulkarim.ieltsfordory.ui.components.WordCard
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.BeginnerSecondary
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.AllWordsViewModel
+import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
+import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -54,6 +57,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun AllWordsScreen(
     viewModel: AllWordsViewModel = koinViewModel(),
+    bottomBar: @Composable () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -86,7 +90,11 @@ fun AllWordsScreen(
         )
     }
 
-    Column(modifier = modifier.fillMaxSize()) {
+    Scaffold(
+        modifier = modifier,
+        bottomBar = bottomBar
+    ) { paddingValues ->
+        Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
         // Top bar with title
         TopAppBar(
             title = {
@@ -223,8 +231,14 @@ fun AllWordsScreen(
                 }
             }
         }
+        }
     }
 }
 
-
-
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun AllWordsScreenPreview() {
+    VocabularyTheme {
+        AllWordsScreen()
+    }
+}

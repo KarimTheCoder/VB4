@@ -1,6 +1,7 @@
 package com.fortitude.shamsulkarim.ieltsfordory.data.learning.room
 
 import android.content.Context
+import android.util.Log
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.dao.SessionWordDao
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.dao.WordProgressDao
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.entity.SessionWordEntity
@@ -28,6 +29,7 @@ class RoomLearningRepository(
 ) : LearningRepository {
 
     companion object {
+        private const val TAG = "LearningRepo"
         private val SOURCES = listOf("IELTS", "TOEFL", "SAT", "GRE")
     }
 
@@ -200,6 +202,68 @@ class RoomLearningRepository(
             level.equals("intermediate", true) -> "INTERMEDIATE"
             else -> "ADVANCED"
         }
+    }
+
+    // ===== NEW IMPLEMENTATIONS for Word Selection Algorithm =====
+
+    override suspend fun recordCorrectAnswer(word: VocabularyWord) {
+        val source = word.source.name.uppercase()
+        Log.d(TAG, "Recording correct answer for word: ${word.word} (id=${word.id}, source=$source)")
+        
+        ensureProgressExists(source, word.id)
+        wordProgressDao.incrementCorrectCount(source, word.id)
+        wordProgressDao.updateLastSeen(source, word.id, System.currentTimeMillis())
+        
+        Log.d(TAG, "Correct answer recorded successfully")
+    }
+
+    override suspend fun recordMistake(word: VocabularyWord) {
+        val source = word.source.name.uppercase()
+        Log.d(TAG, "Recording mistake for word: ${word.word} (id=${word.id}, source=$source)")
+        
+        ensureProgressExists(source, word.id)
+        wordProgressDao.incrementMistakeCount(source, word.id)
+        wordProgressDao.updateLastSeen(source, word.id, System.currentTimeMillis())
+        
+        Log.d(TAG, "Mistake recorded successfully")
+    }
+
+    override suspend fun updateFamiliarityScore(word: VocabularyWord, score: Float) {
+        val source = word.source.name.uppercase()
+        val clampedScore = score.coerceIn(0f, 1f)
+        Log.d(TAG, "Updating familiarity score for word: ${word.word} to $clampedScore")
+        
+        ensureProgressExists(source, word.id)
+        wordProgressDao.updateFamiliarity(source, word.id, clampedScore, System.currentTimeMillis())
+        
+        Log.d(TAG, "Familiarity score updated successfully")
+    }
+
+    override suspend fun skipWord(word: VocabularyWord) {
+        val source = word.source.name.uppercase()
+        Log.d(TAG, "Skipping word: ${word.word} (id=${word.id}, source=$source)")
+        
+        ensureProgressExists(source, word.id)
+        wordProgressDao.updateSkipped(source, word.id, true)
+        
+        Log.i(TAG, "Word '${word.word}' marked as skipped")
+    }
+
+    override suspend fun updateLastSeen(word: VocabularyWord) {
+        val source = word.source.name.uppercase()
+        val timestamp = System.currentTimeMillis()
+        Log.d(TAG, "Updating last seen for word: ${word.word} to $timestamp")
+        
+        ensureProgressExists(source, word.id)
+        wordProgressDao.updateLastSeen(source, word.id, timestamp)
+    }
+
+    override suspend fun updateNextReviewDate(word: VocabularyWord, nextReviewDate: Long) {
+        val source = word.source.name.uppercase()
+        Log.d(TAG, "Updating next review date for word: ${word.word} to $nextReviewDate")
+        
+        ensureProgressExists(source, word.id)
+        wordProgressDao.updateNextReviewDate(source, word.id, nextReviewDate)
     }
 }
 

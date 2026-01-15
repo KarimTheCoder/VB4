@@ -12,10 +12,19 @@ interface VocabularyRepository {
     fun getFavoriteWords(): List<VocabularyWord>
     fun getLearnedWords(level: String): List<VocabularyWord>
     fun getUnlearnedWords(level: String): List<VocabularyWord>
+    
+    /** Get ALL unlearned words from all sources (no level filtering) */
+    fun getAllUnlearnedWords(): List<VocabularyWord>
+    
     fun getLearnedCount(level: String): Int
     fun getTotalCount(level: String): Int
     fun updateFavorite(source: VocabularySource, wordId: Int, isFavorite: Boolean)
     fun updateLearnState(source: VocabularySource, wordId: Int, isLearned: Boolean)
+    
+    /**
+     * Get random words to use as distractors.
+     */
+    fun getRandomWords(limit: Int, excludeIds: Set<Int>): List<VocabularyWord>
 }
 
 

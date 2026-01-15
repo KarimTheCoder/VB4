@@ -1,152 +1,368 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.home.HomeScreen
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.result.ResultScreen
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.session.SessionScreen
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.pretrain.PretrainScreen
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.profile.ProfileScreen
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.TrainScreen
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.home.HomeViewModel
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.UnifiedWordsScreen
+import org.koin.androidx.compose.koinViewModel
 
-/**
- * Main navigation host containing all screens with bottom navigation.
- */
+private const val ANIMATION_DURATION = 300
+
 @Composable
 fun AppNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
-    
-    // Hide bottom nav on non-main screens like Pretrain
-    val showBottomNav = currentRoute in Screen.bottomNavItems.map { it.route }
-
-    Scaffold(
-        bottomBar = {
-            if (showBottomNav) {
-                BottomNavigationBar(navController = navController)
-            }
-        }
-    ) { innerPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = Screen.Home.route,
-            modifier = modifier.padding(innerPadding)
-        ) {
-            composable(Screen.Home.route) {
-                com.fortitude.shamsulkarim.ieltsfordory.ui.screens.home.HomeScreen(
-                    onNavigateToPretrain = {
-                        navController.navigate(Screen.Pretrain.route)
-                    }
-                )
-            }
-            composable(Screen.Words.route) {
-                com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.AllWordsScreen()
-            }
-            composable(Screen.Learned.route) {
-                com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learned.LearnedScreen(
-                    onNavigateToPretrain = {
-                        navController.navigate(Screen.Pretrain.route)
-                    }
-                )
-            }
-            composable(Screen.Favorite.route) {
-                com.fortitude.shamsulkarim.ieltsfordory.ui.screens.favorites.FavoriteScreen()
-            }
-            composable(Screen.Profile.route) {
-                com.fortitude.shamsulkarim.ieltsfordory.ui.screens.profile.ProfileScreen()
-            }
-            composable(Screen.Pretrain.route) {
-                com.fortitude.shamsulkarim.ieltsfordory.ui.screens.pretrain.PretrainScreen(
-                    onNavigateBack = { navController.popBackStack() }
-                )
-            }
-        }
+    // Default bottomBar (for Words and Profile screens)
+    val bottomBar: @Composable () -> Unit = {
+        BottomNavigationBar(navController = navController)
     }
-}
 
-/**
- * Bottom navigation bar with Material3 styling.
- */
-@Composable
-fun BottomNavigationBar(
-    navController: NavHostController,
-    modifier: Modifier = Modifier
-) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-
-    NavigationBar(
-        modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.onSurface
+    NavHost(
+        navController = navController,
+        startDestination = HomeRoute,
+        modifier = modifier
     ) {
-        Screen.bottomNavItems.forEach { screen ->
-            val selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
 
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        imageVector = screen.icon,
-                        contentDescription = screen.title
+        composable<HomeRoute>(
+            enterTransition = { fadeIn(animationSpec = tween(ANIMATION_DURATION)) },
+            exitTransition = { fadeOut(animationSpec = tween(ANIMATION_DURATION)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(ANIMATION_DURATION)) },
+            popExitTransition = { fadeOut(animationSpec = tween(ANIMATION_DURATION)) }
+        ) {
+            val homeViewModel: HomeViewModel = koinViewModel()
+            val uiState by homeViewModel.uiState.collectAsState()
+            
+            HomeScreen(
+                viewModel = homeViewModel,
+                bottomBar = {
+                    BottomNavigationBar(
+                        navController = navController,
+                        isLoading = uiState.isLoading,
+                        onStartClick = {
+                            if (homeViewModel.prepareSession()) {
+                                navController.navigate(SessionRoute)
+                            }
+                        }
                     )
                 },
-                label = { Text(text = screen.title) },
-                selected = selected,
-                onClick = {
-                    navController.navigate(screen.route) {
-                        // Pop up to the start destination of the graph to
-                        // avoid building up a large stack of destinations
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        // Avoid multiple copies of the same destination
-                        launchSingleTop = true
-                        // Restore state when reselecting a previously selected item
-                        restoreState = true
+                onStartClick = {
+                    if (homeViewModel.prepareSession()) {
+                        navController.navigate(SessionRoute)
                     }
-                },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    indicatorColor = MaterialTheme.colorScheme.primaryContainer
+                }
+            )
+        }
+        composable<WordsRoute>(
+            enterTransition = { fadeIn(animationSpec = tween(ANIMATION_DURATION)) },
+            exitTransition = { fadeOut(animationSpec = tween(ANIMATION_DURATION)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(ANIMATION_DURATION)) },
+            popExitTransition = { fadeOut(animationSpec = tween(ANIMATION_DURATION)) }
+        ) {
+            UnifiedWordsScreen(
+                bottomBar = bottomBar,
+                onNavigateToPretrain = {
+                    navController.navigate(PretrainRoute)
+                }
+            )
+        }
+        composable<ProfileRoute>(
+            enterTransition = { fadeIn(animationSpec = tween(ANIMATION_DURATION)) },
+            exitTransition = { fadeOut(animationSpec = tween(ANIMATION_DURATION)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(ANIMATION_DURATION)) },
+            popExitTransition = { fadeOut(animationSpec = tween(ANIMATION_DURATION)) }
+        ) {
+            ProfileScreen(
+                bottomBar = bottomBar
+            )
+        }
+
+        composable<PretrainRoute>(
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(ANIMATION_DURATION)
                 )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            }
+        ) {
+            PretrainScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+        composable<TrainRoute>(
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            }
+        ) {
+            TrainScreen(
+                onNavigateHome = { navController.popBackStack() },
+                onTrainingComplete = { navController.popBackStack() }
+            )
+        }
+
+        composable<SessionRoute>(
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            }
+        ) {
+            SessionScreen(
+                onBack = { navController.popBackStack() },
+                onNavigateToResult = { navController.navigate(ResultRoute) }
+            )
+        }
+
+        composable<ResultRoute>(
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(ANIMATION_DURATION)
+                )
+            }
+        ) {
+            ResultScreen(
+                onHomeClick = {
+                    navController.popBackStack(HomeRoute, inclusive = false)
+                },
+                onNewSessionClick = {
+                    navController.popBackStack(HomeRoute, inclusive = false)
+                    navController.navigate(SessionRoute)
+                }
             )
         }
     }
 }
 
-/**
- * Temporary placeholder screen for unimplemented destinations.
- */
 @Composable
-private fun PlaceholderScreen(name: String) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+fun BottomNavigationBar(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+    isLoading: Boolean = false,
+    onStartClick: () -> Unit = {}
+) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+    val isOnHomeScreen = currentDestination?.hasRoute(HomeRoute::class) == true
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .navigationBarsPadding()
+            .padding(horizontal = 24.dp, vertical = 12.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = "$name Screen",
-            style = MaterialTheme.typography.headlineMedium
-        )
+        bottomNavItems.forEach { item ->
+            val selected = currentDestination?.hasRoute(item.route::class) == true
+            val isHome = item.route == HomeRoute
+
+            if (isHome) {
+                // Home button with blue pill background
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(32.dp))
+                        .background(MaterialTheme.colorScheme.primary)
+                        .clickable {
+                            if (isOnHomeScreen && !isLoading) {
+                                // On home screen and loaded -> start session
+                                onStartClick()
+                            } else if (!isOnHomeScreen) {
+                                // Not on home screen -> navigate to home
+                                navController.navigate(item.route) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
+                        }
+                        .padding(horizontal = 48.dp, vertical = 16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    when {
+                        isOnHomeScreen && isLoading -> {
+                            // Loading state: show circular progress
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(24.dp),
+                                color = Color.White,
+                                strokeWidth = 2.dp
+                            )
+                        }
+                        isOnHomeScreen && !isLoading -> {
+                            // Loaded state: show "Start" text
+                            Text(
+                                text = "Start",
+                                color = Color.White,
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        else -> {
+                            // Not on home screen: show home icon
+                            Icon(
+                                imageVector = item.unselectedIcon,
+                                contentDescription = item.title,
+                                tint = Color.White,
+                                modifier = Modifier.size(28.dp)
+                            )
+                        }
+                    }
+                }
+            } else {
+                // Words and Profile with icon + label
+                Column(
+                    modifier = Modifier
+                        .clickable(
+                            indication = null,
+                            interactionSource = remember { MutableInteractionSource() }
+                        ) {
+                            navController.navigate(item.route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
+                        contentDescription = item.title,
+                        tint = if (selected) MaterialTheme.colorScheme.primary else Color.Black,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = item.title,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = if (selected) MaterialTheme.colorScheme.primary else Color.Black
+                    )
+                }
+            }
+        }
     }
 }
-
 

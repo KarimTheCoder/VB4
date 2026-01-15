@@ -17,6 +17,7 @@ data class VocabularyWord(
     val level: String = "beginner", // "beginner", "intermediate", "advanced"
     val isFavorite: Boolean = false,
     val isLearned: Boolean = false,
+    val familiarityScore: Double = 0.0,
     // Second language support
     val wordSecondLang: String? = null,
     val translationSecondLang: String? = null,

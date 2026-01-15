@@ -7,8 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.pretrain.PretrainScreen
-import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.trainfinished.TrainFinishedActivity
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 
 /**

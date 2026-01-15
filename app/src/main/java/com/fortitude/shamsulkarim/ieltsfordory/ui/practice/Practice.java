@@ -37,7 +37,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.SpeakTextUseCa
 import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.ShutdownTtsUseCase;
 import org.koin.java.KoinJavaComponent;
 
-import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.train.NewTrainRecyclerView;
+import com.fortitude.shamsulkarim.ieltsfordory.data_old.NewTrainRecyclerView;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;

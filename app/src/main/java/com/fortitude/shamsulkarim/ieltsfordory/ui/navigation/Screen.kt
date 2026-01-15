@@ -1,70 +1,76 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.ui.graphics.vector.ImageVector
+import kotlinx.serialization.Serializable
 
 /**
- * Sealed class representing all navigation destinations in the app.
- * 
- * @param route The unique route identifier for navigation
- * @param title Display title for the screen
- * @param icon Icon to show in bottom navigation
+ * Type-safe navigation routes using @Serializable objects.
+ * This approach is recommended for Navigation Compose 2.8+
  */
-sealed class Screen(
-    val route: String,
+
+// ========== Route Definitions ==========
+
+@Serializable
+object HomeRoute
+
+@Serializable
+object WordsRoute
+
+@Serializable
+object ProfileRoute
+
+@Serializable
+object PretrainRoute
+
+@Serializable
+object TrainRoute
+
+@Serializable
+object SessionRoute
+
+@Serializable
+object ResultRoute
+
+// ========== Bottom Navigation Items ==========
+
+/**
+ * Represents a bottom navigation item with display properties.
+ * Uses filled icons when selected, outlined when not (Material Design guideline).
+ */
+data class BottomNavItem<T : Any>(
+    val route: T,
     val title: String,
-    val icon: ImageVector
-) {
-    data object Home : Screen(
-        route = "home",
-        title = "Home",
-        icon = Icons.Default.Home
-    )
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector
+)
 
-    data object Words : Screen(
-        route = "words",
+/**
+ * Bottom navigation items in display order.
+ */
+val bottomNavItems: List<BottomNavItem<Any>> = listOf(
+    BottomNavItem(
+        route = WordsRoute,
         title = "Words",
-        icon = Icons.Default.MenuBook
-    )
-
-    data object Learned : Screen(
-        route = "learned",
-        title = "Learned",
-        icon = Icons.Default.School
-    )
-
-    data object Favorite : Screen(
-        route = "favorite",
-        title = "Favorite",
-        icon = Icons.Default.Favorite
-    )
-
-    data object Profile : Screen(
-        route = "profile",
+        selectedIcon = Icons.AutoMirrored.Filled.MenuBook,
+        unselectedIcon = Icons.AutoMirrored.Outlined.MenuBook
+    ),
+    BottomNavItem(
+        route = HomeRoute,
+        title = "Home",
+        selectedIcon = Icons.Filled.Home,
+        unselectedIcon = Icons.Outlined.Home
+    ),
+    BottomNavItem(
+        route = ProfileRoute,
         title = "Profile",
-        icon = Icons.Default.Person
+        selectedIcon = Icons.Filled.Person,
+        unselectedIcon = Icons.Outlined.Person
     )
-
-    /**
-     * Pretrain screen - not shown in bottom nav, accessed from Home screen.
-     */
-    data object Pretrain : Screen(
-        route = "pretrain",
-        title = "Start Training",
-        icon = Icons.Default.School // Not used in bottom nav
-    )
-
-    companion object {
-        /**
-         * List of all bottom navigation items in display order.
-         */
-        val bottomNavItems = listOf(Home, Words, Learned, Favorite, Profile)
-    }
-}
-
-
+)

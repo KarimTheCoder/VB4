@@ -61,6 +61,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun FavoriteScreen(
     viewModel: FavoriteViewModel = koinViewModel(),
+    bottomBar: @Composable () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -99,6 +100,7 @@ fun FavoriteScreen(
     }
 
     Scaffold(
+        bottomBar = bottomBar,
         floatingActionButton = {
             if (uiState.words.isNotEmpty()) {
                 AnimatedVisibility(

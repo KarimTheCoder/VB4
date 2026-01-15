@@ -12,12 +12,12 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple500,
+    primary = PrimaryBlue,
     primaryContainer = Purple700,
     secondary = Cyan200,
     secondaryContainer = Cyan200,
     tertiary = BeginnerSecondary,
-    background = BackgroundPrimary,
+    background = Background,
     surface = BackgroundPrimary,
     surfaceVariant = BackgroundSecondary,
     onPrimary = TextPrimaryWhite,
@@ -31,7 +31,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple500,
+    primary = PrimaryBlue,
     primaryContainer = Purple700,
     secondary = Cyan200,
     secondaryContainer = Cyan200,
@@ -60,7 +60,7 @@ fun VocabularyTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
+            window.statusBarColor = colorScheme.surface.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }

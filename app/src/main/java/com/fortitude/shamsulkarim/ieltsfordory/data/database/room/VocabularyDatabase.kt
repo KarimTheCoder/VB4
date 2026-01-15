@@ -22,14 +22,14 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.entity.WordPro
  * 
  * Migration Strategy:
  * - Version 1: Initial Room database (migrated from legacy SQLite)
- * - Future versions: Add migrations to MIGRATIONS array
+ * - Version 2: Added word selection algorithm fields (mistake_count, correct_count, etc.)
  */
 @Database(
     entities = [
         WordProgressEntity::class,
         SessionWordEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class VocabularyDatabase : RoomDatabase() {
@@ -78,20 +78,44 @@ abstract class VocabularyDatabase : RoomDatabase() {
         }
 
         /**
-         * Array of all migrations.
-         * Add new migrations here when schema changes.
-         * 
-         * Example for future migration from version 1 to 2:
-         * private val MIGRATION_1_2 = object : Migration(1, 2) {
-         *     override fun migrate(database: SupportSQLiteDatabase) {
-         *         database.execSQL("ALTER TABLE word_progress ADD COLUMN new_column TEXT")
-         *     }
-         * }
+         * Migration from version 1 to 2.
+         * Adds fields for the Word Selection Algorithm:
+         * - mistake_count: How many times user answered incorrectly
+         * - correct_count: How many times user answered correctly
+         * - last_seen_date: Timestamp for spaced repetition
+         * - next_review_date: When word should be shown again
+         * - familiarity_score: Mastery level (0.0 to 1.0)
          */
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                Log.i(TAG, "Starting migration from v1 to v2")
+                
+                try {
+                    db.execSQL("ALTER TABLE word_progress ADD COLUMN mistake_count INTEGER NOT NULL DEFAULT 0")
+                    Log.d(TAG, "Added column: mistake_count")
+                    
+                    db.execSQL("ALTER TABLE word_progress ADD COLUMN correct_count INTEGER NOT NULL DEFAULT 0")
+                    Log.d(TAG, "Added column: correct_count")
+                    
+                    db.execSQL("ALTER TABLE word_progress ADD COLUMN last_seen_date INTEGER DEFAULT NULL")
+                    Log.d(TAG, "Added column: last_seen_date")
+                    
+                    db.execSQL("ALTER TABLE word_progress ADD COLUMN next_review_date INTEGER DEFAULT NULL")
+                    Log.d(TAG, "Added column: next_review_date")
+                    
+                    db.execSQL("ALTER TABLE word_progress ADD COLUMN familiarity_score REAL NOT NULL DEFAULT 0.0")
+                    Log.d(TAG, "Added column: familiarity_score")
+                    
+                    Log.i(TAG, "Migration v1→v2 completed successfully")
+                } catch (e: Exception) {
+                    Log.e(TAG, "Migration v1→v2 failed", e)
+                    throw e
+                }
+            }
+        }
+
         private val MIGRATIONS: Array<Migration> = arrayOf(
-            // Add migrations here as needed, e.g.:
-            // MIGRATION_1_2,
-            // MIGRATION_2_3,
+            MIGRATION_1_2
         )
     }
 }

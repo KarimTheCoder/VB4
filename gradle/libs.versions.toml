@@ -25,6 +25,7 @@ credentials = "1.5.0"
 googleid = "1.1.1"
 billing = "8.1.0"
 kotlin = "2.2.21"
+kotlinx-serialization = "1.7.3"
 coroutines = "1.10.2"
 koin = "4.1.1"
 room = "2.8.4"
@@ -70,6 +71,7 @@ androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-espresso-core" }
 
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 
