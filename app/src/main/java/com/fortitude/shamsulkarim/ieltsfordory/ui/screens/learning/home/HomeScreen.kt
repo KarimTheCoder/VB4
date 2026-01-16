@@ -143,41 +143,7 @@ fun HomeScreenContent(
             containerColor = Color.White,
             bottomBar = bottomBar,
             topBar = {
-//                CenterAlignedTopAppBar(
-//                    title = {
-//                        Text(
-//                            text = "Home",
-//                            fontSize = 20.sp,
-//                            fontWeight = FontWeight.SemiBold,
-//                            color = MaterialTheme.colorScheme.onBackground
-//                        )
-//                    },
-//                    navigationIcon = {
-//                        IconButton(onClick = {
-//                            scope.launch { drawerState.open() }
-//                        }) {
-//                            Icon(
-//                                imageVector = Icons.Default.Menu,
-//                                contentDescription = "Menu",
-//                                tint = MaterialTheme.colorScheme.onBackground,
-//                                modifier = Modifier.size(28.dp)
-//                            )
-//                        }
-//                    },
-//                    actions = {
-//                        IconButton(onClick = onProfileClick) {
-//                            Icon(
-//                                imageVector = Icons.Default.AccountCircle,
-//                                contentDescription = "Profile",
-//                                tint = MaterialTheme.colorScheme.onBackground,
-//                                modifier = Modifier.size(28.dp)
-//                            )
-//                        }
-//                    },
-//                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-//                        containerColor = Color.White
-//                    )
-//                )
+//   
             }
         ) { paddingValues ->
             Column(
