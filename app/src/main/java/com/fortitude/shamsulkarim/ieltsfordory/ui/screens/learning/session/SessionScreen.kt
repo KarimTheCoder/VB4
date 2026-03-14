@@ -57,17 +57,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.LocalExtendedColors
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
-
-// Colors matching the design
-private val PrimaryBlue = Color(0xFF4052B5)
-private val LightBlue = Color(0xFFE8EBFA)
-private val StatusPink = Color(0xFFFF6B8A)
-private val CardBorderColor = Color(0xFFE0E4F8)
-private val ProgressTrackColor = Color(0xFFE8EBFA)
-private val ProgressActiveColor = Color(0xFF4052B5)
-private val ProgressIndicatorColor = Color(0xFF4052B5)
-private val ExampleIconColor = Color(0xFF4052B5)
 
 @Composable
 fun SessionScreen(
@@ -115,7 +106,7 @@ fun SessionScreenContent(
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp)
-                .background(Color.White)
+                .background(MaterialTheme.colorScheme.background)
 
         ) {
             Spacer(modifier = Modifier.height(16.dp))
@@ -205,12 +196,12 @@ fun SessionScreenContent(
                             .height(52.dp),
                         shape = RoundedCornerShape(26.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = PrimaryBlue
+                            containerColor = MaterialTheme.colorScheme.primary
                         )
                     ) {
                         Text(
                             text = "Next",
-                            color = Color.White,
+                            color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium
                         )
@@ -240,13 +231,6 @@ fun QuizContent(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Session Stats Header
-        SessionStatsHeader(
-            masteredCount = masteredCount,
-            totalWords = totalWords,
-            currentStreak = currentStreak,
-            accuracy = accuracy
-        )
         
         Spacer(modifier = Modifier.height(12.dp))
         
@@ -256,8 +240,8 @@ fun QuizContent(
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            border = androidx.compose.foundation.BorderStroke(2.dp, CardBorderColor)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            border = androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f))
         ) {
             Column(
                 modifier = Modifier.fillMaxWidth().padding(24.dp),
@@ -275,13 +259,13 @@ fun QuizContent(
                     text = word.word,
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "select the correct meaning",
                     fontSize = 14.sp,
-                    color = StatusPink,
+                    color = LocalExtendedColors.current.statusPink,
                     fontWeight = FontWeight.Medium
                 )
             }
@@ -299,10 +283,10 @@ fun QuizContent(
                 val isCorrect = index == correctOptionIndex
                 
                 val (borderColor, containerColor, textColor) = when {
-                    isAnswerRevealed && isCorrect -> Triple(Color(0xFF4CAF50), Color(0xFFE8F5E9), Color.Black)
-                    isAnswerRevealed && isSelected && !isCorrect -> Triple(StatusPink, Color(0xFFFFEBEE), Color.Black)
-                    isSelected -> Triple(PrimaryBlue, LightBlue, PrimaryBlue)
-                    else -> Triple(CardBorderColor, Color.White, Color.Black)
+                    isAnswerRevealed && isCorrect -> Triple(LocalExtendedColors.current.statusGreen, LocalExtendedColors.current.statusGreenLight, MaterialTheme.colorScheme.onSurface)
+                    isAnswerRevealed && isSelected && !isCorrect -> Triple(LocalExtendedColors.current.statusPink, LocalExtendedColors.current.statusPinkLight, MaterialTheme.colorScheme.onSurface)
+                    isSelected -> Triple(MaterialTheme.colorScheme.primary, LocalExtendedColors.current.lightBlue, MaterialTheme.colorScheme.primary)
+                    else -> Triple(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f), MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.onSurface)
                 }
                 
                 Card(
@@ -335,14 +319,14 @@ fun QuizContent(
                                  Icon(
                                      imageVector = Icons.Default.Check,
                                      contentDescription = null,
-                                     tint = Color.White,
+                                     tint = MaterialTheme.colorScheme.onPrimary,
                                      modifier = Modifier.size(16.dp)
                                  )
                              } else if (isAnswerRevealed && isSelected && !isCorrect) {
                                  Icon(
                                      imageVector = Icons.Default.Close,
                                      contentDescription = null,
-                                     tint = Color.White,
+                                     tint = MaterialTheme.colorScheme.onPrimary,
                                      modifier = Modifier.size(16.dp)
                                  )
                              }
@@ -379,14 +363,14 @@ fun QuizContent(
                 .height(52.dp),
             shape = RoundedCornerShape(26.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = if (isAnswerRevealed && selectedOptionIndex == correctOptionIndex) Color(0xFF4CAF50) 
-                                 else if (isAnswerRevealed) StatusPink 
-                                 else PrimaryBlue
+                containerColor = if (isAnswerRevealed && selectedOptionIndex == correctOptionIndex) LocalExtendedColors.current.statusGreen 
+                                 else if (isAnswerRevealed) LocalExtendedColors.current.statusPink 
+                                 else MaterialTheme.colorScheme.primary
             )
         ) {
             Text(
                 text = if (isAnswerRevealed) "Next" else "Check Answer",
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -417,54 +401,11 @@ fun MasteryDotsIndicator(
                     .padding(horizontal = 2.dp)
                     .clip(CircleShape)
                     .background(
-                        if (isFilled) Color(0xFF4CAF50)  // Green for filled
-                        else Color(0xFFE0E0E0)           // Gray for empty
+                        if (isFilled) LocalExtendedColors.current.statusGreen  // Green for filled
+                        else LocalExtendedColors.current.neutralGray           // Gray for empty
                     )
             )
         }
-    }
-}
-
-/**
- * Session stats header showing mastered count, streak, and accuracy.
- */
-@Composable
-fun SessionStatsHeader(
-    masteredCount: Int,
-    totalWords: Int,
-    currentStreak: Int,
-    accuracy: Float,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        // Mastered count
-        StatChip(
-            label = "$masteredCount/$totalWords",
-            icon = "✓",
-            color = Color(0xFF4CAF50)
-        )
-        
-        // Streak
-        StatChip(
-            label = "$currentStreak",
-            icon = "🔥",
-            color = if (currentStreak >= 3) Color(0xFFFF9800) else Color.Gray
-        )
-        
-        // Accuracy
-        StatChip(
-            label = "${(accuracy * 100).toInt()}%",
-            icon = "📊",
-            color = when {
-                accuracy >= 0.8f -> Color(0xFF4CAF50)
-                accuracy >= 0.5f -> Color(0xFFFF9800)
-                else -> StatusPink
-            }
-        )
     }
 }
 
@@ -525,8 +466,8 @@ private fun SessionProgressBar(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(4.dp)),
-            color = if (isQuizPhase) Color(0xFF4CAF50) else ProgressActiveColor,  // Green in quiz phase
-            trackColor = ProgressTrackColor,
+            color = if (isQuizPhase) LocalExtendedColors.current.statusGreen else MaterialTheme.colorScheme.primary,  // Green in quiz phase
+            trackColor = LocalExtendedColors.current.progressTrack,
             strokeCap = StrokeCap.Round
         )
 
@@ -536,8 +477,8 @@ private fun SessionProgressBar(
                 .align(Alignment.CenterEnd)
                 .size(12.dp)
                 .clip(CircleShape)
-                .background(if (isQuizPhase) Color(0xFF4CAF50) else PrimaryBlue)
-                .border(2.dp, Color.White, CircleShape)
+                .background(if (isQuizPhase) LocalExtendedColors.current.statusGreen else MaterialTheme.colorScheme.primary)
+                .border(2.dp, MaterialTheme.colorScheme.surface, CircleShape)
         )
     }
 }
@@ -551,9 +492,9 @@ private fun WordCard(
 ) {
     Card(
         modifier = modifier
-            .border(2.dp, CardBorderColor, RoundedCornerShape(16.dp)),
+            .border(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f), RoundedCornerShape(16.dp)),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Row(
@@ -568,7 +509,7 @@ private fun WordCard(
                 text = word,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Row(
@@ -580,7 +521,7 @@ private fun WordCard(
                     text = status.displayText,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
-                    color = StatusPink
+                    color = LocalExtendedColors.current.statusPink
                 )
 
                 // Circular progress indicator
@@ -591,13 +532,13 @@ private fun WordCard(
                     CircularProgressIndicator(
                         progress = { 1f },
                         modifier = Modifier.size(40.dp),
-                        color = ProgressTrackColor,
+                        color = LocalExtendedColors.current.progressTrack,
                         strokeWidth = 4.dp
                     )
                     CircularProgressIndicator(
                         progress = { progress },
                         modifier = Modifier.size(40.dp),
-                        color = ProgressIndicatorColor,
+                        color = MaterialTheme.colorScheme.primary,
                         strokeWidth = 4.dp,
                         strokeCap = StrokeCap.Round
                     )
@@ -618,9 +559,9 @@ private fun ExplanationCard(
 ) {
     Card(
         modifier = modifier
-            .border(1.dp, CardBorderColor, RoundedCornerShape(16.dp)),
+            .border(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f), RoundedCornerShape(16.dp)),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(
@@ -638,13 +579,13 @@ private fun ExplanationCard(
                     modifier = Modifier
                         .size(32.dp)
                         .clip(CircleShape)
-                        .background(LightBlue),
+                        .background(LocalExtendedColors.current.lightBlue),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         imageVector = Icons.Default.LightMode,
                         contentDescription = null,
-                        tint = ExampleIconColor,
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(18.dp)
                     )
                 }
@@ -655,7 +596,7 @@ private fun ExplanationCard(
                     text = meaning,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
-                    color = Color.Black,
+                    color = MaterialTheme.colorScheme.onSurface,
                     lineHeight = 24.sp,
                     modifier = Modifier.weight(1f)
                 )
@@ -673,13 +614,13 @@ private fun ExplanationCard(
                     modifier = Modifier
                         .size(32.dp)
                         .clip(CircleShape)
-                        .background(LightBlue),
+                        .background(LocalExtendedColors.current.lightBlue),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         imageVector = Icons.Default.List,
                         contentDescription = null,
-                        tint = ExampleIconColor,
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(18.dp)
                     )
                 }
@@ -694,7 +635,7 @@ private fun ExplanationCard(
                         Text(
                             text = example,
                             fontSize = 14.sp,
-                            color = Color.DarkGray,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             lineHeight = 20.sp
                         )
                     }
@@ -702,7 +643,7 @@ private fun ExplanationCard(
             }
 
             Spacer(modifier = Modifier.height(16.dp))
-            HorizontalDivider(color = CardBorderColor)
+            HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f))
             Spacer(modifier = Modifier.height(12.dp))
 
             // Actions row
@@ -715,7 +656,7 @@ private fun ExplanationCard(
                 Text(
                     text = "Report a mistake",
                     fontSize = 14.sp,
-                    color = PrimaryBlue,
+                    color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.clickable { onReportMistake() }
                 )
 
@@ -729,7 +670,7 @@ private fun ExplanationCard(
                     Icon(
                         imageVector = if (isFavorite) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
                         contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
-                        tint = PrimaryBlue
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
             }
@@ -745,9 +686,9 @@ private fun NotesCard(
 ) {
     Card(
         modifier = modifier
-            .border(1.dp, CardBorderColor, RoundedCornerShape(16.dp)),
+            .border(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f), RoundedCornerShape(16.dp)),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         OutlinedTextField(
@@ -760,7 +701,7 @@ private fun NotesCard(
             placeholder = {
                 Text(
                     text = "Add your notes here...",
-                    color = Color.Gray
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
@@ -785,7 +726,7 @@ private fun NextButton(
             .height(52.dp),
         shape = RoundedCornerShape(26.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = PrimaryBlue
+            containerColor = MaterialTheme.colorScheme.primary
         ),
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = 4.dp
@@ -794,13 +735,13 @@ private fun NextButton(
         Icon(
             imageVector = Icons.Default.KeyboardArrowRight,
             contentDescription = null,
-            tint = Color.White,
+            tint = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier.size(20.dp)
         )
         Spacer(modifier = Modifier.width(4.dp))
         Text(
             text = "Next",
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onPrimary,
             fontSize = 16.sp,
             fontWeight = FontWeight.SemiBold
         )

@@ -44,7 +44,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -53,11 +52,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
-
-private val PrimaryBlue = Color(0xFF4052B5)
-private val GradeCircleTrack = Color(0xFFE8EBFA)
-private val GradeCircleProgress = Color(0xFF4052B5)
-private val StatusLabelGreen = Color(0xFF4CAF50)
 
 
 @Composable
@@ -87,7 +81,7 @@ fun ResultScreenContent(
         modifier = Modifier
             .fillMaxSize()
             .systemBarsPadding(),
-        containerColor = Color.White
+        containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -99,7 +93,7 @@ fun ResultScreenContent(
                 text = "Result",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp),
@@ -169,13 +163,13 @@ private fun GradeSection(
                 text = title,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = message,
                 fontSize = 14.sp,
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 lineHeight = 20.sp
             )
         }
@@ -191,14 +185,14 @@ private fun GradeSection(
             CircularProgressIndicator(
                 progress = { 1f },
                 modifier = Modifier.size(100.dp),
-                color = GradeCircleTrack,
+                color = MaterialTheme.colorScheme.surfaceVariant,
                 strokeWidth = 8.dp
             )
             // Progress
             CircularProgressIndicator(
                 progress = { progress },
                 modifier = Modifier.size(100.dp),
-                color = GradeCircleProgress,
+                color = MaterialTheme.colorScheme.primary,
                 strokeWidth = 8.dp,
                 strokeCap = StrokeCap.Round
             )
@@ -210,12 +204,12 @@ private fun GradeSection(
                     text = grade,
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     text = "Grade",
                     fontSize = 12.sp,
-                    color = Color.Gray
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -233,12 +227,12 @@ private fun WordResultCard(
             .fillMaxWidth()
             .border(
                 width = 2.dp,
-                color = Color.Gray.copy(alpha = 0.2f),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
                 shape = RoundedCornerShape(16.dp)
             )
             .clickable { onToggleExpanded() },
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(
@@ -257,7 +251,7 @@ private fun WordResultCard(
                     text = wordResult.word,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 // Status label if present
@@ -265,7 +259,7 @@ private fun WordResultCard(
                     Text(
                         text = label,
                         fontSize = 12.sp,
-                        color = StatusLabelGreen,
+                        color = com.fortitude.shamsulkarim.ieltsfordory.ui.theme.ProgressGreen,
                         fontWeight = FontWeight.Medium
                     )
                 }
@@ -277,7 +271,7 @@ private fun WordResultCard(
             Text(
                 text = wordResult.meaning,
                 fontSize = 14.sp,
-                color = Color.DarkGray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 lineHeight = 20.sp
             )
         }
@@ -302,7 +296,7 @@ private fun BottomButtons(
                 .height(52.dp),
             shape = RoundedCornerShape(26.dp),
             colors = ButtonDefaults.outlinedButtonColors(
-                contentColor = Color.Black
+                contentColor = MaterialTheme.colorScheme.onSurface
             )
         ) {
             Icon(
@@ -326,19 +320,19 @@ private fun BottomButtons(
                 .height(52.dp),
             shape = RoundedCornerShape(26.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = PrimaryBlue
+                containerColor = MaterialTheme.colorScheme.primary
             )
         ) {
             Icon(
                 imageVector = Icons.Default.PlayArrow,
                 contentDescription = null,
-                tint = Color.White,
+                tint = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.size(20.dp)
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
                 text = "New session",
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium
             )
