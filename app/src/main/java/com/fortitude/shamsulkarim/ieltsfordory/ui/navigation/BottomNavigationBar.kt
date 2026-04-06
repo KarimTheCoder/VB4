@@ -1,5 +1,7 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.navigation
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -32,6 +34,8 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
+private const val NAV_ANIM_DURATION = 300
+
 @Composable
 fun BottomNavigationBar(
     navController: NavHostController,
@@ -56,92 +60,125 @@ fun BottomNavigationBar(
             val isHome = item.route == HomeRoute
 
             if (isHome) {
-                // Home button with blue pill background
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(32.dp))
-                        .background(if (isOnHomeScreen) MaterialTheme.colorScheme.primary else Color.LightGray)
-                        .clickable {
-                            if (isOnHomeScreen && !isLoading) {
-                                // On home screen and loaded -> start session
-                                onStartClick()
-                            } else if (!isOnHomeScreen) {
-                                // Not on home screen -> navigate to home
-                                navController.navigate(item.route) {
-                                    popUpTo(navController.graph.findStartDestination().id) {
-                                        saveState = true
-                                    }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            }
-                        }
-                        .padding(horizontal = 48.dp, vertical = 16.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    when {
-                        isOnHomeScreen && isLoading -> {
-                            // Loading state: show circular progress
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(24.dp),
-                                color = Color.White,
-                                strokeWidth = 2.dp
-                            )
-                        }
-                        isOnHomeScreen && !isLoading -> {
-                            // Loaded state: show "Start" text
-                            Text(
-                                text = "Start",
-                                color = Color.White,
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                        else -> {
-                            // Not on home screen: show home icon
-                            Icon(
-                                imageVector = item.unselectedIcon,
-                                contentDescription = item.title,
-                                tint = Color.White,
-                                modifier = Modifier.size(28.dp)
-                            )
-                        }
-                    }
-                }
+                HomeNavItem(
+                    item = item,
+                    isOnHomeScreen = isOnHomeScreen,
+                    isLoading = isLoading,
+                    onStartClick = onStartClick,
+                    navController = navController
+                )
             } else {
-                // Words and Profile with icon + label
-                Column(
-                    modifier = Modifier
-                        .clickable(
-                            indication = null,
-                            interactionSource = remember { MutableInteractionSource() }
-                        ) {
-                            navController.navigate(item.route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        }
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Icon(
-                        imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
-                        contentDescription = item.title,
-                        tint = if (selected) MaterialTheme.colorScheme.primary else Color.Black,
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = item.title,
-                        style = MaterialTheme.typography.labelSmall,
-                        color = if (selected) MaterialTheme.colorScheme.primary else Color.Black
-                    )
-                }
+                RegularNavItem(
+                    item = item,
+                    selected = selected,
+                    navController = navController
+                )
             }
         }
     }
 }
 
+@Composable
+private fun HomeNavItem(
+    item: BottomNavItem<Any>,
+    isOnHomeScreen: Boolean,
+    isLoading: Boolean,
+    onStartClick: () -> Unit,
+    navController: NavHostController
+) {
+    val background by animateColorAsState(
+        targetValue = if (isOnHomeScreen) MaterialTheme.colorScheme.primary else Color.LightGray,
+        animationSpec = tween(NAV_ANIM_DURATION),
+        label = "homeBackground"
+    )
+    val interactionSource = remember { MutableInteractionSource() }
+
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(32.dp))
+            .background(background)
+            .clickable(indication = null, interactionSource = interactionSource) {
+                if (isOnHomeScreen && !isLoading) {
+                    onStartClick()
+                } else if (!isOnHomeScreen) {
+                    navController.navigate(item.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            }
+            .padding(horizontal = 48.dp, vertical = 16.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        when {
+            isOnHomeScreen && isLoading -> {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(24.dp),
+                    color = Color.White,
+                    strokeWidth = 2.dp
+                )
+            }
+            isOnHomeScreen -> {
+                Text(
+                    text = "Start",
+                    color = Color.White,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            else -> {
+                Icon(
+                    imageVector = item.unselectedIcon,
+                    contentDescription = item.title,
+                    tint = Color.White,
+                    modifier = Modifier.size(28.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun RegularNavItem(
+    item: BottomNavItem<Any>,
+    selected: Boolean,
+    navController: NavHostController
+) {
+    val tintColor by animateColorAsState(
+        targetValue = if (selected) MaterialTheme.colorScheme.primary else Color.Black,
+        animationSpec = tween(NAV_ANIM_DURATION),
+        label = "tint_${item.title}"
+    )
+    val interactionSource = remember { MutableInteractionSource() }
+
+    Column(
+        modifier = Modifier
+            .clickable(indication = null, interactionSource = interactionSource) {
+                navController.navigate(item.route) {
+                    popUpTo(navController.graph.findStartDestination().id) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
+            contentDescription = item.title,
+            tint = tintColor,
+            modifier = Modifier.size(24.dp)
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(
+            text = item.title,
+            style = MaterialTheme.typography.labelSmall,
+            color = tintColor
+        )
+    }
+}
