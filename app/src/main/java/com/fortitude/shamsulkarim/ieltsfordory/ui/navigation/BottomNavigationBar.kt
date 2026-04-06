@@ -48,7 +48,7 @@ fun BottomNavigationBar(
     val isOnHomeScreen = currentDestination?.hasRoute(HomeRoute::class) == true
 
     Row(
-        modifier = modifier
+        modifier = modifier.background(MaterialTheme.colorScheme.primary.copy(alpha = 0.05f))
             .fillMaxWidth()
             .navigationBarsPadding()
             .padding(horizontal = 24.dp, vertical = 12.dp),
@@ -153,10 +153,17 @@ private fun RegularNavItem(
         animationSpec = tween(NAV_ANIM_DURATION),
         label = "tint_${item.title}"
     )
+    val backgroundColor by animateColorAsState(
+        targetValue = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) else Color.Transparent,
+        animationSpec = tween(NAV_ANIM_DURATION),
+        label = "bg_${item.title}"
+    )
     val interactionSource = remember { MutableInteractionSource() }
 
     Column(
         modifier = Modifier
+            .clip(RoundedCornerShape(12.dp))
+            .background(backgroundColor)
             .clickable(indication = null, interactionSource = interactionSource) {
                 navController.navigate(item.route) {
                     popUpTo(navController.graph.findStartDestination().id) {
