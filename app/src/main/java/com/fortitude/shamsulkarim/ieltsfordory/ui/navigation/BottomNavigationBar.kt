@@ -110,6 +110,7 @@ private fun HomeNavItem(
                     }
                 }
             }
+            .height(56.dp)
             .padding(horizontal = 48.dp, vertical = 16.dp),
         contentAlignment = Alignment.Center
     ) {
@@ -126,7 +127,7 @@ private fun HomeNavItem(
                     text = "Start",
                     color = Color.White,
                     style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
                 )
             }
             else -> {
