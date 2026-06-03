@@ -1,6 +1,7 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.navigation
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -111,7 +112,8 @@ private fun HomeNavItem(
                 }
             }
             .height(56.dp)
-            .padding(horizontal = 48.dp, vertical = 16.dp),
+            .padding(horizontal = 48.dp, vertical = 16.dp)
+            .animateContentSize(animationSpec = tween()),
         contentAlignment = Alignment.Center
     ) {
         when {
