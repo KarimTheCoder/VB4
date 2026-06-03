@@ -54,8 +54,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.settings.SettingsComposeViewModel
+import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -73,7 +75,6 @@ fun SettingsScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
-    val scrollState = rememberScrollState()
 
     // Handle toast messages
     LaunchedEffect(uiState.toastMessage) {
@@ -90,6 +91,77 @@ fun SettingsScreen(
             viewModel.clearError()
         }
     }
+
+    val wordsPerSessionPosition = remember(uiState.wordsPerSession) {
+        viewModel.valueToPosition(uiState.wordsPerSession)
+    }
+    val repetitionsPerSessionPosition = remember(uiState.repetitionsPerSession) {
+        viewModel.valueToPosition(uiState.repetitionsPerSession)
+    }
+    val canUseDarkMode = remember(uiState) {
+        viewModel.canUseDarkMode()
+    }
+
+    SettingsScreenContent(
+        uiState = uiState,
+        wordsPerSessionPosition = wordsPerSessionPosition,
+        repetitionsPerSessionPosition = repetitionsPerSessionPosition,
+        canUseDarkMode = canUseDarkMode,
+        onNavigateBack = onNavigateBack,
+        onSignInClick = onSignInClick,
+        onSignOutClick = onSignOutClick,
+        onSoundCheckedChange = { viewModel.setSound(it) },
+        onPronunciationCheckedChange = { viewModel.setPronunciation(it) },
+        onWordsPerSessionSelect = { viewModel.setWordsPerSession(it) },
+        onRepetitionsPerSessionSelect = { viewModel.setRepetitionsPerSession(it) },
+        onIeltsActiveChange = { viewModel.setIeltsActive(it) },
+        onToeflActiveChange = { viewModel.setToeflActive(it) },
+        onSatActiveChange = { viewModel.setSatActive(it) },
+        onGreActiveChange = { viewModel.setGreActive(it) },
+        onToggleSpanish = { viewModel.toggleSpanish() },
+        onDarkModeSelect = { index ->
+            viewModel.setDarkMode(index)
+            when (index) {
+                0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+        },
+        onShowUpgradeToast = {
+            Toast.makeText(
+                context,
+                "Please upgrade to enjoy dark mode feature",
+                Toast.LENGTH_SHORT
+            ).show()
+        },
+        modifier = modifier
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SettingsScreenContent(
+    uiState: SettingsComposeUiState,
+    wordsPerSessionPosition: Int,
+    repetitionsPerSessionPosition: Int,
+    canUseDarkMode: Boolean,
+    onNavigateBack: () -> Unit,
+    onSignInClick: () -> Unit,
+    onSignOutClick: () -> Unit,
+    onSoundCheckedChange: (Boolean) -> Unit,
+    onPronunciationCheckedChange: (Boolean) -> Unit,
+    onWordsPerSessionSelect: (Int) -> Unit,
+    onRepetitionsPerSessionSelect: (Int) -> Unit,
+    onIeltsActiveChange: (Boolean) -> Unit,
+    onToeflActiveChange: (Boolean) -> Unit,
+    onSatActiveChange: (Boolean) -> Unit,
+    onGreActiveChange: (Boolean) -> Unit,
+    onToggleSpanish: () -> Unit,
+    onDarkModeSelect: (Int) -> Unit,
+    onShowUpgradeToast: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val scrollState = rememberScrollState()
 
     Scaffold(
         topBar = {
@@ -179,13 +251,13 @@ fun SettingsScreen(
                     title = "Sound Effects",
                     subtitle = "Play sounds during training",
                     checked = uiState.soundEnabled,
-                    onCheckedChange = { viewModel.setSound(it) }
+                    onCheckedChange = onSoundCheckedChange
                 )
                 SettingsToggleRow(
                     title = "Voice Pronunciation",
                     subtitle = "Download and play word pronunciations",
                     checked = uiState.pronunciationEnabled,
-                    onCheckedChange = { viewModel.setPronunciation(it) }
+                    onCheckedChange = onPronunciationCheckedChange
                 )
             }
 
@@ -194,14 +266,14 @@ fun SettingsScreen(
                 SettingsDropdownRow(
                     title = "Words per Session",
                     options = listOf("25", "20", "15", "10", "5", "4", "3"),
-                    selectedIndex = viewModel.valueToPosition(uiState.wordsPerSession),
-                    onSelect = { viewModel.setWordsPerSession(it) }
+                    selectedIndex = wordsPerSessionPosition,
+                    onSelect = onWordsPerSessionSelect
                 )
                 SettingsDropdownRow(
                     title = "Repetitions per Session",
                     options = listOf("25", "20", "15", "10", "5", "4", "3"),
-                    selectedIndex = viewModel.valueToPosition(uiState.repetitionsPerSession),
-                    onSelect = { viewModel.setRepetitionsPerSession(it) }
+                    selectedIndex = repetitionsPerSessionPosition,
+                    onSelect = onRepetitionsPerSessionSelect
                 )
             }
 
@@ -217,16 +289,16 @@ fun SettingsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    FilterChip("IELTS", uiState.ieltsActive) { viewModel.setIeltsActive(it) }
-                    FilterChip("TOEFL", uiState.toeflActive) { viewModel.setToeflActive(it) }
+                    FilterChip("IELTS", uiState.ieltsActive, onIeltsActiveChange)
+                    FilterChip("TOEFL", uiState.toeflActive, onToeflActiveChange)
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    FilterChip("SAT", uiState.satActive) { viewModel.setSatActive(it) }
-                    FilterChip("GRE", uiState.greActive) { viewModel.setGreActive(it) }
+                    FilterChip("SAT", uiState.satActive, onSatActiveChange)
+                    FilterChip("GRE", uiState.greActive, onGreActiveChange)
                 }
             }
 
@@ -242,7 +314,7 @@ fun SettingsScreen(
                         style = MaterialTheme.typography.bodyLarge
                     )
                     Button(
-                        onClick = { viewModel.toggleSpanish() },
+                        onClick = onToggleSpanish,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (uiState.isSpanishEnabled)
                                 MaterialTheme.colorScheme.primary
@@ -268,19 +340,10 @@ fun SettingsScreen(
                     options = listOf("Light", "Dark", "System"),
                     selectedIndex = uiState.darkModeIndex,
                     onSelect = { index ->
-                        if (viewModel.canUseDarkMode()) {
-                            viewModel.setDarkMode(index)
-                            when (index) {
-                                0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                                1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                                else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                            }
+                        if (canUseDarkMode) {
+                            onDarkModeSelect(index)
                         } else {
-                            Toast.makeText(
-                                context,
-                                "Please upgrade to enjoy dark mode feature",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            onShowUpgradeToast()
                         }
                     }
                 )
@@ -288,6 +351,7 @@ fun SettingsScreen(
 
             // Other Section
             SettingsSection(title = "Other") {
+                val context = LocalContext.current
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -335,6 +399,49 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
         }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun SettingsScreenContentPreview() {
+    VocabularyTheme {
+        SettingsScreenContent(
+            uiState = SettingsComposeUiState(
+                isLoading = false,
+                soundEnabled = true,
+                pronunciationEnabled = false,
+                darkModeIndex = 2,
+                wordsPerSession = 15,
+                repetitionsPerSession = 10,
+                ieltsActive = true,
+                toeflActive = false,
+                satActive = true,
+                greActive = false,
+                isSpanishEnabled = true,
+                isSignedIn = true,
+                userName = "Jane Doe",
+                userEmail = "jane.doe@example.com",
+                showSignInSection = true
+            ),
+            wordsPerSessionPosition = 2,
+            repetitionsPerSessionPosition = 3,
+            canUseDarkMode = true,
+            onNavigateBack = {},
+            onSignInClick = {},
+            onSignOutClick = {},
+            onSoundCheckedChange = {},
+            onPronunciationCheckedChange = {},
+            onWordsPerSessionSelect = {},
+            onRepetitionsPerSessionSelect = {},
+            onIeltsActiveChange = {},
+            onToeflActiveChange = {},
+            onSatActiveChange = {},
+            onGreActiveChange = {},
+            onToggleSpanish = {},
+            onDarkModeSelect = {},
+            onShowUpgradeToast = {}
+        )
     }
 }
 

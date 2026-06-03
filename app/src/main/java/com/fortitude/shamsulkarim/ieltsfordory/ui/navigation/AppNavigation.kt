@@ -26,6 +26,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.result.Result
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.session.SessionScreen
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.pretrain.PretrainScreen
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.profile.ProfileScreen
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.settings.SettingsScreen
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.UnifiedWordsScreen
 import org.koin.androidx.compose.koinViewModel
 
@@ -114,7 +115,42 @@ fun AppNavigation(
                 popEnterTransition = { fadeIn(animationSpec = tween(ANIMATION_DURATION)) },
                 popExitTransition = { fadeOut(animationSpec = tween(ANIMATION_DURATION)) }
             ) {
-                ProfileScreen()
+                ProfileScreen(
+                    onSettingsClick = {
+                        navController.navigate(SettingsRoute)
+                    }
+                )
+            }
+
+            composable<SettingsRoute>(
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(ANIMATION_DURATION)
+                    )
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(ANIMATION_DURATION)
+                    )
+                },
+                popEnterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                        animationSpec = tween(ANIMATION_DURATION)
+                    )
+                },
+                popExitTransition = {
+                    slideOutOfContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                        animationSpec = tween(ANIMATION_DURATION)
+                    )
+                }
+            ) {
+                SettingsScreen(
+                    onNavigateBack = { navController.popBackStack() }
+                )
             }
 
             composable<PretrainRoute>(

@@ -27,6 +27,9 @@ object WordsRoute
 object ProfileRoute
 
 @Serializable
+object SettingsRoute
+
+@Serializable
 object PretrainRoute
 
 @Serializable

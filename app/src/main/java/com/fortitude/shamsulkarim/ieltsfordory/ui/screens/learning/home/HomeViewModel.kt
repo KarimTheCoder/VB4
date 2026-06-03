@@ -34,7 +34,6 @@ class HomeViewModel(
 
     companion object {
         private const val TAG = "HomeVM"
-        private const val WORDS_PER_SESSION = 5
     }
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -49,6 +48,9 @@ class HomeViewModel(
     // Track if we've loaded words at least once
     private var hasLoadedOnce = false
 
+    // Track the last loaded words per session setting
+    private var lastLoadedWordsPerSession = -1
+
     init {
         Log.d(TAG, "HomeViewModel initialized")
         loadProgress()  // Initial load
@@ -60,8 +62,11 @@ class HomeViewModel(
      * Call this from HomeScreen's ON_RESUME lifecycle event.
      */
     fun checkForRefresh() {
-        if (sessionWordsRepository.consumeRefreshRequest()) {
-            Log.i(TAG, "Refresh requested - reloading words")
+        val currentWordsPerSession = appPreferences.wordsPerSession
+        val settingsChanged = lastLoadedWordsPerSession != -1 && lastLoadedWordsPerSession != currentWordsPerSession
+
+        if (sessionWordsRepository.consumeRefreshRequest() || settingsChanged) {
+            Log.i(TAG, "Refresh requested or settings changed - reloading words")
             resetSession()
         } else {
             Log.d(TAG, "No refresh needed, keeping current words")
@@ -82,9 +87,12 @@ class HomeViewModel(
                 val level = "beginner" // todo: there won't be any levels
                 Log.d(TAG, "Selected level: $level")
 
+                val wordsPerSession = appPreferences.wordsPerSession
+                lastLoadedWordsPerSession = wordsPerSession
+
                 val config = WordSelectionConfig(
                     level = level,
-                    wordsPerSession = WORDS_PER_SESSION,
+                    wordsPerSession = wordsPerSession,
                     skipWordIds = skippedWordIds.toList()
                 )
                 Log.d(TAG, "Created config: wordsPerSession=${config.wordsPerSession}, skipCount=${config.skipWordIds.size}")
@@ -96,8 +104,8 @@ class HomeViewModel(
                 
                 val bannerText = when {
                     selectedWords.isEmpty() -> "No more words to learn at this level!"
-                    selectedWords.size < WORDS_PER_SESSION -> "You will learn ${selectedWords.size} new words"
-                    else -> "You will learn $WORDS_PER_SESSION new words, you can skip any words you already know"
+                    selectedWords.size < wordsPerSession -> "You will learn ${selectedWords.size} new words"
+                    else -> "You will learn $wordsPerSession new words, you can skip any words you already know"
                 }
 
                 _uiState.update {

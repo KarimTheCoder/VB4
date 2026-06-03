@@ -40,22 +40,71 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 import org.koin.androidx.compose.koinViewModel
 
 /**
  * Profile screen with settings, notifications, and social links.
  * Replaces ProfileFragment.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
     viewModel: ProfileViewModel = koinViewModel(),
+    onSettingsClick: () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
+
+    ProfileScreenContent(
+        uiState = uiState,
+        onSettingsClick = onSettingsClick,
+        onShareClick = {
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_SUBJECT, "Learn vocabulary using this app")
+                putExtra(Intent.EXTRA_TEXT, viewModel.getShareUrl())
+            }
+            context.startActivity(Intent.createChooser(shareIntent, "Share via"))
+        },
+        onAlarmToggled = { enabled ->
+            viewModel.toggleAlarm(enabled)
+            Toast.makeText(
+                context,
+                "Reminder unavailable for now",
+                Toast.LENGTH_SHORT
+            ).show()
+        },
+        onAlarmTimeClicked = {
+            viewModel.showTimePicker()
+        },
+        onTimePickerConfirmed = { hour, minute ->
+            viewModel.setAlarmTime(hour, minute)
+        },
+        onTimePickerDismissed = {
+            viewModel.hideTimePicker()
+        },
+        bottomBar = bottomBar,
+        modifier = modifier
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProfileScreenContent(
+    uiState: ProfileUiState,
+    onSettingsClick: () -> Unit,
+    onShareClick: () -> Unit,
+    onAlarmToggled: (Boolean) -> Unit,
+    onAlarmTimeClicked: () -> Unit,
+    onTimePickerConfirmed: (Int, Int) -> Unit,
+    onTimePickerDismissed: () -> Unit,
+    bottomBar: @Composable () -> Unit = {},
+    modifier: Modifier = Modifier
+) {
     val scrollState = rememberScrollState()
 
     Scaffold(
@@ -70,21 +119,13 @@ fun ProfileScreen(
                     )
                 },
                 actions = {
-                    IconButton(onClick = {
-                    }) {
+                    IconButton(onClick = onSettingsClick) {
                         Icon(
                             imageVector = Icons.Default.Settings,
                             contentDescription = "Settings"
                         )
                     }
-                    IconButton(onClick = {
-                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                            type = "text/plain"
-                            putExtra(Intent.EXTRA_SUBJECT, "Learn vocabulary using this app")
-                            putExtra(Intent.EXTRA_TEXT, viewModel.getShareUrl())
-                        }
-                        context.startActivity(Intent.createChooser(shareIntent, "Share via"))
-                    }) {
+                    IconButton(onClick = onShareClick) {
                         Icon(
                             imageVector = Icons.Default.Share,
                             contentDescription = "Share"
@@ -132,14 +173,7 @@ fun ProfileScreen(
                         )
                         Switch(
                             checked = uiState.alarmEnabled,
-                            onCheckedChange = { enabled ->
-                                viewModel.toggleAlarm(enabled)
-                                Toast.makeText(
-                                    context,
-                                    "Reminder unavailable for now",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
+                            onCheckedChange = onAlarmToggled
                         )
                     }
 
@@ -150,7 +184,7 @@ fun ProfileScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable(enabled = uiState.alarmEnabled) {
-                                viewModel.showTimePicker()
+                                onAlarmTimeClicked()
                             }
                             .padding(vertical = 8.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -188,18 +222,36 @@ fun ProfileScreen(
             }
         }
     }
-    
+
     // Time Picker Dialog
     if (uiState.showTimePicker) {
         TimePickerDialog(
             initialHour = uiState.alarmHour,
             initialMinute = uiState.alarmMinute,
-            onConfirm = { hour, minute ->
-                viewModel.setAlarmTime(hour, minute)
-            },
-            onDismiss = {
-                viewModel.hideTimePicker()
-            }
+            onConfirm = onTimePickerConfirmed,
+            onDismiss = onTimePickerDismissed
+        )
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun ProfileScreenContentPreview() {
+    VocabularyTheme {
+        ProfileScreenContent(
+            uiState = ProfileUiState(
+                alarmEnabled = true,
+                alarmHour = 18,
+                alarmMinute = 0,
+                formattedAlarmTime = "06:00 PM",
+                showTimePicker = false
+            ),
+            onSettingsClick = {},
+            onShareClick = {},
+            onAlarmToggled = {},
+            onAlarmTimeClicked = {},
+            onTimePickerConfirmed = { _, _ -> },
+            onTimePickerDismissed = {}
         )
     }
 }
