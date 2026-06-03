@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig
 import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.LocalData
+import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.NotificationScheduler
+import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.AlarmReceiver
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,7 +31,7 @@ data class ProfileUiState(
  */
 class ProfileViewModel(
     private val appPreferences: AppPreferences,
-    context: Context
+    private val context: Context
 ) : ViewModel() {
 
     private val localData = LocalData(context)
@@ -69,13 +71,15 @@ class ProfileViewModel(
         }
     }
 
-    /**
-     * Toggle alarm reminder status.
-     */
     fun toggleAlarm(enabled: Boolean) {
         localData.setReminderStatus(enabled)
         _uiState.update { it.copy(alarmEnabled = enabled) }
-        // Note: Actual notification scheduling is currently disabled in the original code
+        
+        if (enabled) {
+            NotificationScheduler.setReminder(context, AlarmReceiver::class.java, _uiState.value.alarmHour, _uiState.value.alarmMinute)
+        } else {
+            NotificationScheduler.cancelReminder(context, AlarmReceiver::class.java)
+        }
     }
 
     /**
@@ -94,9 +98,6 @@ class ProfileViewModel(
         _uiState.update { it.copy(showTimePicker = false) }
     }
 
-    /**
-     * Set alarm time.
-     */
     fun setAlarmTime(hour: Int, minute: Int) {
         localData.set_hour(hour)
         localData.set_min(minute)
@@ -109,7 +110,10 @@ class ProfileViewModel(
                 showTimePicker = false
             )
         }
-        // Note: Actual notification scheduling will be added when feature is re-enabled
+        
+        if (_uiState.value.alarmEnabled) {
+            NotificationScheduler.setReminder(context, AlarmReceiver::class.java, hour, minute)
+        }
     }
 
     /**

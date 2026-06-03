@@ -1,7 +1,12 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.screens.profile
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -42,6 +47,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 import org.koin.androidx.compose.koinViewModel
 
@@ -59,6 +65,17 @@ fun ProfileScreen(
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
+    val notificationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGranted ->
+            if (isGranted) {
+                viewModel.toggleAlarm(true)
+            } else {
+                Toast.makeText(context, "Notification permission is required for reminders", Toast.LENGTH_SHORT).show()
+            }
+        }
+    )
+
     ProfileScreenContent(
         uiState = uiState,
         onSettingsClick = onSettingsClick,
@@ -71,12 +88,19 @@ fun ProfileScreen(
             context.startActivity(Intent.createChooser(shareIntent, "Share via"))
         },
         onAlarmToggled = { enabled ->
-            viewModel.toggleAlarm(enabled)
-            Toast.makeText(
-                context,
-                "Reminder unavailable for now",
-                Toast.LENGTH_SHORT
-            ).show()
+            if (enabled) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                        viewModel.toggleAlarm(true)
+                    } else {
+                        notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    }
+                } else {
+                    viewModel.toggleAlarm(true)
+                }
+            } else {
+                viewModel.toggleAlarm(false)
+            }
         },
         onAlarmTimeClicked = {
             viewModel.showTimePicker()

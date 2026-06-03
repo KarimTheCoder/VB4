@@ -12,6 +12,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
+import android.app.NotificationChannel;
+import android.os.Build;
 
 import com.fortitude.shamsulkarim.ieltsfordory.R;
 
@@ -53,7 +55,7 @@ public class NotificationScheduler {
 
 
         Intent intent1 = new Intent(context, cls);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, DAILY_REMINDER_REQUEST_CODE, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, DAILY_REMINDER_REQUEST_CODE, intent1, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         AlarmManager am = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         am.setInexactRepeating(AlarmManager.RTC_WAKEUP, setcalendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
@@ -71,7 +73,7 @@ public class NotificationScheduler {
                 PackageManager.DONT_KILL_APP);
 
         Intent intent1 = new Intent(context, cls);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, DAILY_REMINDER_REQUEST_CODE, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, DAILY_REMINDER_REQUEST_CODE, intent1, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         AlarmManager am = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         am.cancel(pendingIntent);
         pendingIntent.cancel();
@@ -88,7 +90,7 @@ public class NotificationScheduler {
         stackBuilder.addParentStack(cls);
         stackBuilder.addNextIntent(notificationIntent);
 
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(DAILY_REMINDER_REQUEST_CODE, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(DAILY_REMINDER_REQUEST_CODE, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,TAG);
                // NotificationCompat.Builder(context);
@@ -103,6 +105,18 @@ public class NotificationScheduler {
                 .setContentIntent(pendingIntent).build();
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    TAG,
+                    "Daily Reminders",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel.setDescription("Reminders for vocabulary practice");
+            channel.enableLights(true);
+            channel.setLightColor(context.getColor(R.color.colorPrimary));
+            channel.enableVibration(true);
+            notificationManager.createNotificationChannel(channel);
+        }
         notificationManager.notify(DAILY_REMINDER_REQUEST_CODE, notification);
 
     }
