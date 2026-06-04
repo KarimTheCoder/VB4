@@ -214,6 +214,10 @@ class SettingsComposeViewModel(
         _uiState.update { it.copy(toastMessage = null) }
     }
 
+    fun showToast(message: String) {
+        _uiState.update { it.copy(toastMessage = message) }
+    }
+
     fun clearError() {
         _uiState.update { it.copy(errorMessage = null) }
     }

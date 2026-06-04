@@ -4,10 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,51 +25,44 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.settings.SettingsComposeViewModel
+import com.fortitude.shamsulkarim.ieltsfordory.R
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 import org.koin.androidx.compose.koinViewModel
+import androidx.core.net.toUri
 
-/**
- * Settings screen with all app configuration options.
- * Replaces SettingActivity.
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     viewModel: SettingsComposeViewModel = koinViewModel(),
+    modifier: Modifier = Modifier,
     onNavigateBack: () -> Unit = {},
     onSignInClick: () -> Unit = {},
     onSignOutClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
@@ -101,12 +92,12 @@ fun SettingsScreen(
     val canUseDarkMode = remember(uiState) {
         viewModel.canUseDarkMode()
     }
+    val upgradeToastMessage = stringResource(id = R.string.settings_upgrade_dark_mode)
 
     SettingsScreenContent(
         uiState = uiState,
         wordsPerSessionPosition = wordsPerSessionPosition,
         repetitionsPerSessionPosition = repetitionsPerSessionPosition,
-        canUseDarkMode = canUseDarkMode,
         onNavigateBack = onNavigateBack,
         onSignInClick = onSignInClick,
         onSignOutClick = onSignOutClick,
@@ -120,19 +111,19 @@ fun SettingsScreen(
         onGreActiveChange = { viewModel.setGreActive(it) },
         onToggleSpanish = { viewModel.toggleSpanish() },
         onDarkModeSelect = { index ->
-            viewModel.setDarkMode(index)
-            when (index) {
-                0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            if (canUseDarkMode) {
+                viewModel.setDarkMode(index)
+                when (index) {
+                    0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                }
+            } else {
+                viewModel.showToast(upgradeToastMessage)
             }
         },
-        onShowUpgradeToast = {
-            Toast.makeText(
-                context,
-                "Please upgrade to enjoy dark mode feature",
-                Toast.LENGTH_SHORT
-            ).show()
+        onRestorePurchasesClick = {
+            viewModel.showToast(context.getString(R.string.settings_restore_unavailable))
         },
         modifier = modifier
     )
@@ -144,7 +135,6 @@ fun SettingsScreenContent(
     uiState: SettingsComposeUiState,
     wordsPerSessionPosition: Int,
     repetitionsPerSessionPosition: Int,
-    canUseDarkMode: Boolean,
     onNavigateBack: () -> Unit,
     onSignInClick: () -> Unit,
     onSignOutClick: () -> Unit,
@@ -158,7 +148,7 @@ fun SettingsScreenContent(
     onGreActiveChange: (Boolean) -> Unit,
     onToggleSpanish: () -> Unit,
     onDarkModeSelect: (Int) -> Unit,
-    onShowUpgradeToast: () -> Unit,
+    onRestorePurchasesClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
@@ -168,7 +158,7 @@ fun SettingsScreenContent(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Settings",
+                        text = stringResource(id = R.string.settings),
                         style = MaterialTheme.typography.titleLarge
                     )
                 },
@@ -176,7 +166,7 @@ fun SettingsScreenContent(
                     IconButton(onClick = onNavigateBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(id = R.string.settings_back)
                         )
                     }
                 },
@@ -196,7 +186,7 @@ fun SettingsScreenContent(
         ) {
             // User Account Section
             if (uiState.showSignInSection) {
-                SettingsSection(title = "Account") {
+                SettingsSection(title = stringResource(id = R.string.settings_account)) {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
@@ -237,7 +227,10 @@ fun SettingsScreenContent(
                                         if (uiState.isSignedIn) onSignOutClick() else onSignInClick()
                                     }
                                 ) {
-                                    Text(if (uiState.isSignedIn) "Sign Out" else "Sign In")
+                                    Text(
+                                        if (uiState.isSignedIn) stringResource(id = R.string.settings_sign_out)
+                                        else stringResource(id = R.string.sign_in)
+                                    )
                                 }
                             }
                         }
@@ -246,41 +239,42 @@ fun SettingsScreenContent(
             }
 
             // Sound & Pronunciation Section
-            SettingsSection(title = "Audio") {
+            SettingsSection(title = stringResource(id = R.string.settings_audio)) {
                 SettingsToggleRow(
-                    title = "Sound Effects",
-                    subtitle = "Play sounds during training",
+                    title = stringResource(id = R.string.settings_sound_effects),
+                    subtitle = stringResource(id = R.string.settings_sound_effects_desc),
                     checked = uiState.soundEnabled,
                     onCheckedChange = onSoundCheckedChange
                 )
                 SettingsToggleRow(
-                    title = "Voice Pronunciation",
-                    subtitle = "Download and play word pronunciations",
+                    title = stringResource(id = R.string.settings_voice_pronunciation),
+                    subtitle = stringResource(id = R.string.settings_voice_pronunciation_desc),
                     checked = uiState.pronunciationEnabled,
                     onCheckedChange = onPronunciationCheckedChange
                 )
             }
 
             // Training Options Section
-            SettingsSection(title = "Training") {
+            SettingsSection(title = stringResource(id = R.string.settings_training)) {
+                val sessionOptions = stringArrayResource(id = R.array.settings_session_options).toList()
                 SettingsDropdownRow(
-                    title = "Words per Session",
-                    options = listOf("25", "20", "15", "10", "5", "4", "3"),
+                    title = stringResource(id = R.string.settings_words_per_session),
+                    options = sessionOptions,
                     selectedIndex = wordsPerSessionPosition,
                     onSelect = onWordsPerSessionSelect
                 )
                 SettingsDropdownRow(
-                    title = "Repetitions per Session",
-                    options = listOf("25", "20", "15", "10", "5", "4", "3"),
+                    title = stringResource(id = R.string.settings_repetitions_per_session),
+                    options = sessionOptions,
                     selectedIndex = repetitionsPerSessionPosition,
                     onSelect = onRepetitionsPerSessionSelect
                 )
             }
 
             // Vocabulary Filters Section
-            SettingsSection(title = "Vocabulary Filters") {
+            SettingsSection(title = stringResource(id = R.string.settings_vocabulary_filters)) {
                 Text(
-                    text = "Select word categories to include in training:",
+                    text = stringResource(id = R.string.settings_select_categories),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -303,14 +297,14 @@ fun SettingsScreenContent(
             }
 
             // Language Section
-            SettingsSection(title = "Language") {
+            SettingsSection(title = stringResource(id = R.string.settings_language)) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Spanish Translations",
+                        text = stringResource(id = R.string.settings_spanish_translations),
                         style = MaterialTheme.typography.bodyLarge
                     )
                     Button(
@@ -323,7 +317,7 @@ fun SettingsScreenContent(
                         )
                     ) {
                         Text(
-                            text = if (uiState.isSpanishEnabled) "Español" else "English",
+                            text = if (uiState.isSpanishEnabled) stringResource(id = R.string.settings_espanol) else stringResource(id = R.string.settings_english),
                             color = if (uiState.isSpanishEnabled)
                                 Color.White
                             else
@@ -334,23 +328,18 @@ fun SettingsScreenContent(
             }
 
             // Theme Section
-            SettingsSection(title = "Appearance") {
+            SettingsSection(title = stringResource(id = R.string.settings_appearance)) {
+                val themeOptions = stringArrayResource(id = R.array.settings_theme_options).toList()
                 SettingsDropdownRow(
-                    title = "Theme",
-                    options = listOf("Light", "Dark", "System"),
+                    title = stringResource(id = R.string.settings_theme),
+                    options = themeOptions,
                     selectedIndex = uiState.darkModeIndex,
-                    onSelect = { index ->
-                        if (canUseDarkMode) {
-                            onDarkModeSelect(index)
-                        } else {
-                            onShowUpgradeToast()
-                        }
-                    }
+                    onSelect = onDarkModeSelect
                 )
             }
 
             // Other Section
-            SettingsSection(title = "Other") {
+            SettingsSection(title = stringResource(id = R.string.settings_other)) {
                 val context = LocalContext.current
                 Card(
                     modifier = Modifier
@@ -358,7 +347,7 @@ fun SettingsScreenContent(
                         .clickable {
                             val intent = Intent(
                                 Intent.ACTION_VIEW,
-                                Uri.parse(SettingsComposeViewModel.PRIVACY_POLICY_URL)
+                                SettingsComposeViewModel.PRIVACY_POLICY_URL.toUri()
                             )
                             context.startActivity(intent)
                         },
@@ -368,7 +357,7 @@ fun SettingsScreenContent(
                     )
                 ) {
                     Text(
-                        text = "Privacy Policy",
+                        text = stringResource(id = R.string.settings_privacy_policy),
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(16.dp)
                     )
@@ -380,9 +369,7 @@ fun SettingsScreenContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
-                            Toast
-                                .makeText(context, "Restore is unavailable", Toast.LENGTH_SHORT)
-                                .show()
+                            onRestorePurchasesClick()
                         },
                     shape = RoundedCornerShape(12.dp),
                     colors = CardDefaults.cardColors(
@@ -390,7 +377,7 @@ fun SettingsScreenContent(
                     )
                 ) {
                     Text(
-                        text = "Restore Purchases",
+                        text = stringResource(id = R.string.settings_restore_purchases),
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(16.dp)
                     )
@@ -426,7 +413,6 @@ private fun SettingsScreenContentPreview() {
             ),
             wordsPerSessionPosition = 2,
             repetitionsPerSessionPosition = 3,
-            canUseDarkMode = true,
             onNavigateBack = {},
             onSignInClick = {},
             onSignOutClick = {},
@@ -440,124 +426,7 @@ private fun SettingsScreenContentPreview() {
             onGreActiveChange = {},
             onToggleSpanish = {},
             onDarkModeSelect = {},
-            onShowUpgradeToast = {}
+            onRestorePurchasesClick = {}
         )
     }
 }
-
-@Composable
-private fun SettingsSection(
-    title: String,
-    content: @Composable () -> Unit
-) {
-    Column {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.primary,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
-            )
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                content()
-            }
-        }
-    }
-}
-
-@Composable
-private fun SettingsToggleRow(
-    title: String,
-    subtitle: String,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(text = title, style = MaterialTheme.typography.bodyLarge)
-            Text(
-                text = subtitle,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-        Switch(checked = checked, onCheckedChange = onCheckedChange)
-    }
-}
-
-@Composable
-private fun SettingsDropdownRow(
-    title: String,
-    options: List<String>,
-    selectedIndex: Int,
-    onSelect: (Int) -> Unit
-) {
-    var expanded by remember { mutableStateOf(false) }
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(text = title, style = MaterialTheme.typography.bodyLarge)
-        Box {
-            TextButton(onClick = { expanded = true }) {
-                Text(
-                    text = options.getOrElse(selectedIndex) { options.first() },
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-            DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                options.forEachIndexed { index, option ->
-                    DropdownMenuItem(
-                        text = { Text(option) },
-                        onClick = {
-                            onSelect(index)
-                            expanded = false
-                        }
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun FilterChip(
-    label: String,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .clickable { onCheckedChange(!checked) }
-            .background(
-                color = if (checked) MaterialTheme.colorScheme.primaryContainer
-                else MaterialTheme.colorScheme.surface,
-                shape = RoundedCornerShape(8.dp)
-            )
-            .padding(horizontal = 12.dp, vertical = 8.dp)
-    ) {
-        Checkbox(checked = checked, onCheckedChange = onCheckedChange)
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(text = label, style = MaterialTheme.typography.bodyMedium)
-    }
-}
-
-

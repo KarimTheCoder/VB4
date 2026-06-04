@@ -86,4 +86,46 @@
 
     <string name="client_id">576057269160-rrmbgscigibr5gjen64ebqr0kijpf7ci.apps.googleusercontent.com</string>
     <string name="loading_text">We are preparing the app...</string>
+    <!-- Settings Screen -->
+    <string name="settings_account">Account</string>
+    <string name="settings_sign_out">Sign Out</string>
+    <string name="settings_audio">Audio</string>
+    <string name="settings_sound_effects">Sound Effects</string>
+    <string name="settings_sound_effects_desc">Play sounds during training</string>
+    <string name="settings_voice_pronunciation">Voice Pronunciation</string>
+    <string name="settings_voice_pronunciation_desc">Download and play word pronunciations</string>
+    <string name="settings_training">Training</string>
+    <string name="settings_words_per_session">Words per Session</string>
+    <string name="settings_repetitions_per_session">Repetitions per Session</string>
+    <string name="settings_vocabulary_filters">Vocabulary Filters</string>
+    <string name="settings_select_categories">Select word categories to include in training:</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_spanish_translations">Spanish Translations</string>
+    <string name="settings_espanol">Español</string>
+    <string name="settings_english">English</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_other">Other</string>
+    <string name="settings_privacy_policy">Privacy Policy</string>
+    <string name="settings_restore_purchases">Restore Purchases</string>
+    <string name="settings_upgrade_dark_mode">Please upgrade to enjoy dark mode feature</string>
+    <string name="settings_restore_unavailable">Restore is unavailable</string>
+    <string name="settings_back">Back</string>
+    <string name="settings_light">Light</string>
+    <string name="settings_dark">Dark</string>
+    <string name="settings_system">System</string>
+    <string-array name="settings_theme_options">
+        <item>@string/settings_light</item>
+        <item>@string/settings_dark</item>
+        <item>@string/settings_system</item>
+    </string-array>
+    <string-array name="settings_session_options">
+        <item>25</item>
+        <item>20</item>
+        <item>15</item>
+        <item>10</item>
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+    </string-array>
 </resources>
