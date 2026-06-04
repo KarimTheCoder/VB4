@@ -2,36 +2,30 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.screens.profile
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig
 import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
+import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepository
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.LocalData
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.NotificationScheduler
 import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.AlarmReceiver
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
-/**
- * UI state for ProfileScreen
- */
-data class ProfileUiState(
-    val alarmEnabled: Boolean = false,
-    val alarmHour: Int = 18,
-    val alarmMinute: Int = 0,
-    val formattedAlarmTime: String = "06:00 PM",
-    val showTimePicker: Boolean = false
-)
 
 /**
  * ViewModel for ProfileScreen handling alarm settings and social links.
  */
 class ProfileViewModel(
     private val appPreferences: AppPreferences,
-    private val context: Context
+    private val context: Context,
+    private val vocabularyRepository: VocabularyRepository
 ) : ViewModel() {
 
     private val localData = LocalData(context)
@@ -42,6 +36,42 @@ class ProfileViewModel(
     init {
         loadAlarmSettings()
         initializeDefaultSettings()
+        loadLearningStats()
+        initializeContactUsInfo()
+    }
+
+    private fun initializeContactUsInfo() {
+        val appName = context.applicationInfo.loadLabel(context.packageManager).toString()
+        _uiState.update { current ->
+            current.copy(
+                contactUsEmail = BUG_REPORT_EMAIL,
+                contactUsSubject = "$appName Support",
+                contactUsBody = "App Name: $appName\nVersion: ${BuildConfig.VERSION_NAME}\nVersion Code: ${BuildConfig.VERSION_CODE}\n\n[Write your message here]"
+            )
+        }
+    }
+
+    private fun loadLearningStats() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val levels = listOf("beginner", "intermediate", "advanced")
+            var total = 0
+            var learned = 0
+            
+            levels.forEach { level ->
+                total += vocabularyRepository.getTotalCount(level)
+                learned += vocabularyRepository.getLearnedCount(level)
+            }
+            
+            val left = total - learned
+            
+            _uiState.update { current ->
+                current.copy(
+                    totalWords = total,
+                    learnedWords = learned,
+                    wordsLeftToLearn = left
+                )
+            }
+        }
     }
 
     private fun loadAlarmSettings() {

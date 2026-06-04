@@ -180,6 +180,7 @@ val appModule = module {
     viewModel { 
         com.fortitude.shamsulkarim.ieltsfordory.ui.screens.profile.ProfileViewModel(
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get()),
+            get(),
             get()
         )
     }

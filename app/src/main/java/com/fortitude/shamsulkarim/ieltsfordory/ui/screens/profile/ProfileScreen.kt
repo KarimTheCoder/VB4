@@ -7,6 +7,7 @@ import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,10 +19,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccessTime
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
@@ -45,9 +48,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import com.fortitude.shamsulkarim.ieltsfordory.R
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 import org.koin.androidx.compose.koinViewModel
 
@@ -87,6 +93,23 @@ fun ProfileScreen(
             }
             context.startActivity(Intent.createChooser(shareIntent, "Share via"))
         },
+        onContactUsClick = {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = android.net.Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(uiState.contactUsEmail))
+                putExtra(Intent.EXTRA_SUBJECT, uiState.contactUsSubject)
+                putExtra(Intent.EXTRA_TEXT, uiState.contactUsBody)
+            }
+            context.startActivity(Intent.createChooser(intent, "Send Email"))
+        },
+        onFacebookClick = {
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(ProfileViewModel.FACEBOOK_URL))
+            context.startActivity(intent)
+        },
+        onInstagramClick = {
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(ProfileViewModel.INSTAGRAM_URL))
+            context.startActivity(intent)
+        },
         onAlarmToggled = { enabled ->
             if (enabled) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -122,6 +145,9 @@ fun ProfileScreenContent(
     uiState: ProfileUiState,
     onSettingsClick: () -> Unit,
     onShareClick: () -> Unit,
+    onContactUsClick: () -> Unit,
+    onFacebookClick: () -> Unit,
+    onInstagramClick: () -> Unit,
     onAlarmToggled: (Boolean) -> Unit,
     onAlarmTimeClicked: () -> Unit,
     onTimePickerConfirmed: (Int, Int) -> Unit,
@@ -148,13 +174,7 @@ fun ProfileScreenContent(
                             imageVector = Icons.Default.Settings,
                             contentDescription = "Settings"
                         )
-                    }
-                    IconButton(onClick = onShareClick) {
-                        Icon(
-                            imageVector = Icons.Default.Share,
-                            contentDescription = "Share"
-                        )
-                    }
+                    } 
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
@@ -170,6 +190,13 @@ fun ProfileScreenContent(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            // Learning Stats Section
+            LearningStatsSection(
+                totalWords = uiState.totalWords,
+                learnedWords = uiState.learnedWords,
+                wordsLeftToLearn = uiState.wordsLeftToLearn
+            )
+
             // Notification Reminder Section
             Text(
                 text = "Reminders",
@@ -178,6 +205,10 @@ fun ProfileScreenContent(
             )
 
             Card(
+
+
+
+
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
                 colors = CardDefaults.cardColors(
@@ -244,6 +275,109 @@ fun ProfileScreenContent(
                     }
                 }
             }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Card(
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable { onShareClick() },
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Share,
+                            contentDescription = "Share",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Share",
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                }
+
+                Card(
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable { onContactUsClick() },
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Email,
+                            contentDescription = "Contact Us",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Contact Us",
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                }
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(
+                    onClick = onFacebookClick,
+                    modifier = Modifier.background(
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = CircleShape
+                    )
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_facebook),
+                        contentDescription = "Facebook",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                IconButton(
+                    onClick = onInstagramClick,
+                    modifier = Modifier.background(
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = CircleShape
+                    )
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_instagram),
+                        contentDescription = "Instagram",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
         }
     }
 
@@ -272,6 +406,9 @@ private fun ProfileScreenContentPreview() {
             ),
             onSettingsClick = {},
             onShareClick = {},
+            onContactUsClick = {},
+            onFacebookClick = {},
+            onInstagramClick = {},
             onAlarmToggled = {},
             onAlarmTimeClicked = {},
             onTimePickerConfirmed = { _, _ -> },
@@ -311,6 +448,62 @@ private fun TimePickerDialog(
             TimePicker(state = timePickerState)
         }
     )
+}
+
+@Composable
+fun LearningStatsSection(
+    totalWords: Int,
+    learnedWords: Int,
+    wordsLeftToLearn: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(
+            text = "Learning Stats",
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
+            )
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                StatItem(label = "Total Words", value = totalWords.toString())
+                StatItem(label = "Learned", value = learnedWords.toString(), valueColor = MaterialTheme.colorScheme.primary)
+                StatItem(label = "Left to Learn", value = wordsLeftToLearn.toString())
+            }
+        }
+    }
+}
+
+@Composable
+private fun StatItem(
+    label: String,
+    value: String,
+    valueColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = value,
+            style = MaterialTheme.typography.headlineMedium,
+            color = valueColor,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
 }
 
 
