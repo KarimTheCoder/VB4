@@ -18,5 +18,6 @@ data class WordItem(
     val id: String = "",
     val text: String,
     val progress: Float,
-    val progressColor: Color
+    val progressColor: Color,
+    val type: String = "New"
 )

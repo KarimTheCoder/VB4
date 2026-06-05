@@ -23,7 +23,8 @@ data class VocabularyWord(
     val translationSecondLang: String? = null,
     val example1SecondLang: String? = null,
     val example2SecondLang: String? = null,
-    val example3SecondLang: String? = null
+    val example3SecondLang: String? = null,
+    val sessionType: String? = null
 ) {
     /**
      * Returns all non-null examples as a list.

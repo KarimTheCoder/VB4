@@ -59,7 +59,11 @@ class SelectSessionWordsUseCase(
         val scoredWords = availableWords.map { word ->
             val progress = wordProgressDao.getBySourceAndWordId(word.source.name, word.id)
             val score = calculatePriorityScore(word, progress)
-            ScoredWord(word, score)
+            val updatedWord = word.copy(
+                sessionType = determineType(progress),
+                familiarityScore = progress?.familiarityScore?.toDouble() ?: 0.0
+            )
+            ScoredWord(updatedWord, score)
         }
 
         // Step 4: Sort by score (highest first) and take requested count
@@ -76,6 +80,19 @@ class SelectSessionWordsUseCase(
         }
 
         return selectedWords
+    }
+
+    /**
+     * Determines the display type of the word (New, Due, Mistaken, Learning) based on its progress.
+     */
+    private fun determineType(progress: WordProgressEntity?): String {
+        if (progress == null) return "New"
+        val currentTime = System.currentTimeMillis()
+        if (progress.nextReviewDate != null && currentTime >= progress.nextReviewDate) {
+            return "Due"
+        }
+        if (progress.mistakeCount > 0) return "Mistaken"
+        return "Learning"
     }
 
     /**
@@ -96,7 +113,8 @@ class SelectSessionWordsUseCase(
         score += mistakeBonus
 
         // Factor 2: Correct count (more correct = lower priority)
-        val correctPenalty = progress.correctCount * 2f
+        // Capped at 20 penalty to ensure highly practiced words aren't permanently buried
+        val correctPenalty = (progress.correctCount * 2f).coerceAtMost(20f)
         score -= correctPenalty
 
         // Factor 3: Familiarity score (higher familiarity = lower priority)
@@ -116,8 +134,11 @@ class SelectSessionWordsUseCase(
             if (currentTime >= nextReview) {
                 // DUE: High priority bonus
                 val daysOverdue = (currentTime - nextReview) / (1000 * 60 * 60 * 24)
-                score += 80f + (daysOverdue * 5f) // Big bonus to prioritize due words over new words (which are 100)
-                Log.d(TAG, "Word due for review (+${80 + daysOverdue * 5})")
+                // Bonus of 100+ ensures that a due word (even with max penalties: -20 correct, -20 familiarity)
+                // still maintains a score > 100 to beat out New Words.
+                val dueBonus = 100f + (daysOverdue * 5f)
+                score += dueBonus 
+                Log.d(TAG, "Word due for review (+$dueBonus)")
             } else {
                 // NOT DUE: Penalty
                 score -= 200f // Strong penalty to avoid reviewing too soon

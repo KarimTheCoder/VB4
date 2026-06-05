@@ -237,14 +237,15 @@ class HomeViewModel(
             else -> ProgressBlue
         }
 
-        // Progress is 0 for new words, could be based on familiarity later
-        val progress = if (isLearned) 1.0f else 0.0f
+        // Progress is based on familiarity score
+        val progress = familiarityScore.toFloat()
 
         return WordItem(
             id = id.toString(),
             text = word,
             progress = progress,
-            progressColor = progressColor
+            progressColor = progressColor,
+            type = sessionType ?: "New"
         )
     }
 }

@@ -30,6 +30,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -143,7 +144,7 @@ fun HomeScreenContent(
             containerColor = Color.White,
             bottomBar = bottomBar,
             topBar = {
-//   
+
             }
         ) { paddingValues ->
             Column(
@@ -250,6 +251,7 @@ private fun AnimatedWordCard(
         text = word.text,
         progress = word.progress,
         progressColor = word.progressColor,
+        type = word.type,
         onSkipClick = onSkipClick,
         modifier = Modifier
             .graphicsLayer {
@@ -289,6 +291,7 @@ private fun WordCard(
     text: String,
     progress: Float,
     progressColor: Color,
+    type: String,
     onSkipClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -311,6 +314,17 @@ private fun WordCard(
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Circular Progress
+           CircularProgressIndicator(
+                progress = progress,
+                color = progressColor,
+                strokeWidth = 3.dp,
+               trackColor = Color.LightGray,
+                modifier = Modifier.size(24.dp)
+            )
+            
+            Spacer(modifier = Modifier.width(12.dp))
+
             // Word text
             Text(
                 text = text,
@@ -319,14 +333,25 @@ private fun WordCard(
                 modifier = Modifier.weight(1f)
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(8.dp))
 
-            // Progress bar with dot
-            ProgressBarWithDot(
-                progress = progress,
-                progressColor = progressColor,
-                modifier = Modifier.width(60.dp)
-            )
+            // Type Label
+            androidx.compose.material3.Surface(
+                color = when(type) {
+                    "Due" -> Color(0xFFFFE0B2) // Light Orange
+                    "Mistaken" -> Color(0xFFFFCDD2) // Light Red
+                    "New" -> Color(0xFFE3F2FD) // Light Blue
+                    else -> Color.LightGray
+                },
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text(
+                    text = type,
+                    fontSize = 11.sp,
+                    color = Color.DarkGray,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                )
+            }
 
             Spacer(modifier = Modifier.width(8.dp))
 
@@ -345,44 +370,7 @@ private fun WordCard(
     }
 }
 
-@Composable
-private fun ProgressBarWithDot(
-    progress: Float,
-    progressColor: Color,
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier.height(8.dp),
-        contentAlignment = Alignment.CenterStart
-    ) {
-        // Track background
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(6.dp)
-                .clip(RoundedCornerShape(3.dp))
-                .background(ProgressTrack)
-        )
 
-        // Progress fill
-        Box(
-            modifier = Modifier
-                .fillMaxWidth(progress)
-                .height(6.dp)
-                .clip(RoundedCornerShape(3.dp))
-                .background(progressColor)
-        )
-
-        // End dot
-        Box(
-            modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .size(8.dp)
-                .clip(CircleShape)
-                .background(progressColor.copy(alpha = 0.6f))
-        )
-    }
-}
 
 
 
@@ -394,26 +382,30 @@ private fun HomeScreenContentPreview() {
             id = "1",
             text = "It's raining cat's and dog's",
             progress = 1.0f,
-            progressColor = ProgressBlue
+            progressColor = ProgressBlue,
+            type = "Due"
         ),
-        WordItem(id = "2", text = "Bite the bullet", progress = 0.7f, progressColor = ProgressBlue),
+        WordItem(id = "2", text = "Bite the bullet", progress = 0.7f, progressColor = ProgressBlue, type = "Learning"),
         WordItem(
             id = "3",
             text = "The ball is in your court",
             progress = 0.4f,
-            progressColor = ProgressBlue
+            progressColor = ProgressBlue,
+            type = "New"
         ),
         WordItem(
             id = "4",
             text = "Hit the nail on the head",
             progress = 0.2f,
-            progressColor = ProgressPink
+            progressColor = ProgressPink,
+            type = "Mistaken"
         ),
         WordItem(
             id = "5",
             text = "Let the cat out of the bag",
             progress = 1.0f,
-            progressColor = ProgressGreen
+            progressColor = ProgressGreen,
+            type = "Learning"
         )
     )
     VocabularyTheme {
