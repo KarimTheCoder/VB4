@@ -12,8 +12,7 @@ public final class AppPreferences {
 
     public static final String KEY_DARK_MODE = "DarkMode";
     public static final String KEY_TRIAL_END_DATE = "trial_end_date";
-    public static final String KEY_PURCHASE = "purchase";
-    public static final String KEY_PREMIUM = "premium";
+
     public static final String KEY_HOME = "home";
     public static final String KEY_HOME_FRAGMENT_TRIAL_END = "home_fragment_trail_end";
     public static final String KEY_WORDS_PER_SESSION = "wordsPerSession";
@@ -213,9 +212,6 @@ public final class AppPreferences {
         setBool(KEY_IS_GRE_ACTIVE, v);
     }
 
-    public boolean isPremium() {
-        return sp.contains(KEY_PURCHASE) || sp.contains(KEY_PREMIUM);
-    }
 
     public boolean isTrialActive() {
         if (!sp.contains(KEY_TRIAL_END_DATE))

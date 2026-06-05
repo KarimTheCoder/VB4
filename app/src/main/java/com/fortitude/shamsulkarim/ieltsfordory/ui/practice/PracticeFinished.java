@@ -67,22 +67,9 @@ public class PracticeFinished extends AppCompatActivity {
     }
 
     private void rateApp() {
-        if (BuildConfig.FLAVOR.equalsIgnoreCase("free")) {
-            Uri appUrl = Uri
-                    .parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
-            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-            startActivity(rateApp);
-        } else if (BuildConfig.FLAVOR.equalsIgnoreCase("huawei")) {
-            Uri appUrl = Uri.parse(
-                    "https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895");
-            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-            startActivity(rateApp);
-        } else {
-            Uri appUrl = Uri
-                    .parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro");
-            Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
-            startActivity(rateApp);
-        }
+        Uri appUrl = Uri.parse("https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder");
+        Intent rateApp = new Intent(Intent.ACTION_VIEW, appUrl);
+        startActivity(rateApp);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class StartTrial extends AppCompatActivity {
 
         uiInitialization();
         codeInitialization();
-        goHomeWhenPremium();
+
     }
 
     private void initializeTrialMode() {
@@ -55,12 +55,6 @@ public class StartTrial extends AppCompatActivity {
         });
     }
 
-    private void goHomeWhenPremium() {
-        if (prefs.isPremium()) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }
-    }
 
     @Override
     protected void onDestroy() {

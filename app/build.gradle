@@ -27,26 +27,7 @@ plugins {
         }
     }
 
-    flavorDimensions "version"
-    productFlavors {
 
-        free{
-            applicationId 'com.fortitude.apps.vocabularybuilder'
-        }
-        pro{
-            applicationId 'com.fortitude.apps.vocabularybuilderPro'
-            versionNameSuffix " pro"
-
-        }
-        huawei{
-            applicationId 'com.fortitude.apps.vocabularybuilder'
-            versionNameSuffix " H+"
-        }
-        huaweiPro{
-            applicationId 'com.fortitude.apps.vocabularybuilderPro'
-            versionNameSuffix " H+ PRO"
-        }
-    }
 
     namespace 'com.fortitude.shamsulkarim.ieltsfordory'
 
@@ -103,9 +84,8 @@ dependencies {
     implementation platform(libs.firebase.bom)
     implementation libs.bundles.firebase
 
-    // Google Play + Billing
+    // Google Play
     implementation libs.google.play.services.auth
-    implementation libs.billing
 
     // Kotlin + Coroutines
     implementation libs.kotlin.stdlib

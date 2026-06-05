@@ -323,7 +323,7 @@ class NewTrainRecyclerView(
             try {
                 EmailIntentBuilder.from(ctx)
                     .to("fortitudedevs@gmail.com")
-                    .subject("Mistake found! APP: VB4 FL: ${BuildConfig.FLAVOR} VC: ${BuildConfig.VERSION_CODE} VN: ${BuildConfig.VERSION_NAME}")
+                    .subject("Mistake found! APP: VB4 VC: ${BuildConfig.VERSION_CODE} VN: ${BuildConfig.VERSION_NAME}")
                     .body(buildString {
                         appendLine("Word: ${word.word}")
                         appendLine("Definition: ${word.translation}")

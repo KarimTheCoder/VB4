@@ -67,10 +67,7 @@ class TrainViewModel(application: Application) : AndroidViewModel(application) {
         val wordsPerSession = sp.getInt("wordsPerSession", 5)
         val repeatPerSession = sp.getInt("repeatationPerSession", 5)
 
-        // Increment noshowads counter
-        val noshowads = sp.getInt("noshowads", 0) + 1
-        sp.edit().putInt("noshowads", noshowads).apply()
-        
+
         // Initialize state with preferences
         _uiState.update { current ->
             current.copy(
@@ -424,9 +421,6 @@ class TrainViewModel(application: Application) : AndroidViewModel(application) {
         return "ended"
     }
 
-    fun getIsAdShow(): Boolean {
-        return !sp.contains("premium") && checkTrialStatus().equals("ended", ignoreCase = true)
-    }
 
     override fun onCleared() {
         super.onCleared()

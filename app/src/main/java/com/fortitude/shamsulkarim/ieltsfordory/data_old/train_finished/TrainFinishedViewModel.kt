@@ -55,14 +55,7 @@ class TrainFinishedViewModel(
         val learnedWords = sessionData.learnedWords
         val mostMistaken = sessionData.mostMistakenWord
 
-        val rateAppUrl = when {
-            BuildConfig.FLAVOR.equals("free", ignoreCase = true) -> 
-                "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder"
-            BuildConfig.FLAVOR.equals("huawei", ignoreCase = true) -> 
-                "https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895"
-            else -> 
-                "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro"
-        }
+        val rateAppUrl = "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder"
 
         _uiState.update { current ->
             current.copy(

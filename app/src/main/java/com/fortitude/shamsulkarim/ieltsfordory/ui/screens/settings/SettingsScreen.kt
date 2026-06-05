@@ -107,9 +107,6 @@ fun SettingsScreen(
         onDarkModeSelect = { index ->
             viewModel.setDarkMode(index)
         },
-        onRestorePurchasesClick = {
-            viewModel.showToast(context.getString(R.string.settings_restore_unavailable))
-        },
         modifier = modifier
     )
 }
@@ -133,7 +130,6 @@ fun SettingsScreenContent(
     onGreActiveChange: (Boolean) -> Unit,
     onToggleSpanish: () -> Unit,
     onDarkModeSelect: (Int) -> Unit,
-    onRestorePurchasesClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
@@ -347,26 +343,6 @@ fun SettingsScreenContent(
                         modifier = Modifier.padding(16.dp)
                     )
                 }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            onRestorePurchasesClick()
-                        },
-                    shape = RoundedCornerShape(12.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant
-                    )
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.settings_restore_purchases),
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
             }
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -410,8 +386,7 @@ private fun SettingsScreenContentPreview() {
             onSatActiveChange = {},
             onGreActiveChange = {},
             onToggleSpanish = {},
-            onDarkModeSelect = {},
-            onRestorePurchasesClick = {}
+            onDarkModeSelect = {}
         )
     }
 }

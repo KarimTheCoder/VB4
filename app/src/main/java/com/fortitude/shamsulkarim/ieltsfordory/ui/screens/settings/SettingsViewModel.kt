@@ -28,7 +28,6 @@ data class SettingsComposeUiState(
     val greActive: Boolean = true,
     val isSpanishEnabled: Boolean = false,
     val isTrialActive: Boolean = false,
-    val isPremium: Boolean = false,
     // Sign-in state
     val isSignedIn: Boolean = false,
     val userName: String = "Doggo",
@@ -37,7 +36,6 @@ data class SettingsComposeUiState(
     val showSyncDialog: Boolean = false,
     val errorMessage: String? = null,
     val toastMessage: String? = null,
-    // Huawei flavor hides sign-in
     val showSignInSection: Boolean = true
 )
 
@@ -73,8 +71,6 @@ class SettingsComposeViewModel(
         val isSpanish = (appPreferences.getString("secondlanguage", "english") ?: "english")
             .equals("spanish", ignoreCase = true)
         val isTrialActive = appPreferences.isTrialActive()
-        val isPremium = appPreferences.isPremium()
-        val showSignIn = !BuildConfig.FLAVOR.equals("huawei", ignoreCase = true)
 
         // Sync sign-in state with Firebase (source of truth) rather than just prefs
         val firebaseUser = authRepository.getCurrentUser()
@@ -103,11 +99,10 @@ class SettingsComposeViewModel(
                 greActive = gre,
                 isSpanishEnabled = isSpanish,
                 isTrialActive = isTrialActive,
-                isPremium = isPremium,
                 isSignedIn = isSignedIn,
                 userName = userName,
                 userEmail = userEmail,
-                showSignInSection = showSignIn
+                showSignInSection = true
             )
         }
     }

@@ -98,7 +98,6 @@ class MainActivity : ComponentActivity() {
             sp.edit().apply {
                 putBoolean("soundState", true)
                 putInt("totalCorrects", 0)
-                putInt("noshowads", 0)
                 apply()
             }
         }

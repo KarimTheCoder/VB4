@@ -150,35 +150,21 @@ class ProfileViewModel(
      * Get the Play Store or App Gallery URL for rating.
      */
     fun getRateAppUrl(): String {
-        return when {
-            BuildConfig.FLAVOR.equals("free", ignoreCase = true) ->
-                "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder"
-            BuildConfig.FLAVOR.equals("huawei", ignoreCase = true) ->
-                "https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895"
-            else ->
-                "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro"
-        }
+        return "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder"
     }
 
     /**
      * Get share text for sharing the app.
      */
     fun getShareUrl(): String {
-        return when {
-            BuildConfig.FLAVOR.equals("free", ignoreCase = true) ->
-                "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder"
-            BuildConfig.FLAVOR.equals("huawei", ignoreCase = true) ->
-                "https://appgallery.cloud.huawei.com/ag/n/app/C102022895?locale=en_GB&source=appshare&subsource=C102022895"
-            else ->
-                "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilderPro"
-        }
+        return "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder"
     }
 
     /**
      * Get bug report email subject.
      */
     fun getBugReportSubject(): String {
-        return "VB4 - FL: ${BuildConfig.FLAVOR} VN: ${BuildConfig.VERSION_NAME} VC: ${BuildConfig.VERSION_CODE}"
+        return "VB4 - VN: ${BuildConfig.VERSION_NAME} VC: ${BuildConfig.VERSION_CODE}"
     }
 
     private fun formatTime(hour: Int, minute: Int): String {

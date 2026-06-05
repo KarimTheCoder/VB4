@@ -97,7 +97,6 @@ class MainViewModel(
             sp.edit()
                 .putBoolean("soundState", true)
                 .putInt("totalCorrects", 0)
-                .putInt("noshowads", 0)
                 .apply()
         }
     }

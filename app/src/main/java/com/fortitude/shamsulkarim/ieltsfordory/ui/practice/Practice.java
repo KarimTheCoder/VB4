@@ -201,7 +201,6 @@ public class Practice extends AppCompatActivity
         if (viewModel.getTotalCycle() == (viewModel.getFiveWordSize() * viewModel.getRepeatPerSession())) {
             new Handler().postDelayed(() -> {
                 hideViews();
-                binding.spinAdLoading.setVisibility(View.VISIBLE);
                 startActivity(new Intent(getApplicationContext(), PracticeFinished.class));
                 finish();
             }, 200L);
@@ -291,7 +290,6 @@ public class Practice extends AppCompatActivity
 
         Sprite threeBounce = new ThreeBounce();
         binding.spinKit.setIndeterminateDrawable(threeBounce);
-        binding.spinAdLoading.setVisibility(View.GONE);
 
         int maxProgress = 5 + (5 * 5); // Approximate, should get from ViewModel if possible
         binding.progress1.setMax(maxProgress);
@@ -417,17 +415,7 @@ public class Practice extends AppCompatActivity
         binding.wordCard.setVisibility(View.INVISIBLE);
     }
 
-    private boolean getIsAdShow() {
-        boolean isAdShow = false;
-        String trialStatus = checkTrialStatus();
 
-        if (!prefs.contains(AppPreferences.KEY_PREMIUM)) {
-            if (trialStatus.equalsIgnoreCase("ended")) {
-                isAdShow = true;
-            }
-        }
-        return isAdShow;
-    }
 
     @Override
     public void onMethodCallback(String word) {

@@ -22,7 +22,6 @@ data class PretrainUiState(
     val progressText: String = "0/0",
     val isSpanishEnabled: Boolean = false,
     val isTooEasyEnabled: Boolean = true,
-    val showPurchaseCard: Boolean = false,
     val isLoading: Boolean = true
 )
 
@@ -60,9 +59,6 @@ class PretrainViewModel(
         val isToeflActive = appPreferences.isTOEFLActive()
         val isTooEasyEnabled = !isIeltsActive && !isToeflActive
         
-        // Show purchase card for free version only and if not premium
-        val showPurchaseCard = !BuildConfig.FLAVOR.equals("pro", ignoreCase = true) 
-            && !appPreferences.isPremium()
 
         _uiState.update { current ->
             current.copy(
@@ -74,7 +70,6 @@ class PretrainViewModel(
                 progressText = "$learnedCount/$totalCount",
                 isSpanishEnabled = isSpanishEnabled,
                 isTooEasyEnabled = isTooEasyEnabled,
-                showPurchaseCard = showPurchaseCard,
                 isLoading = false
             )
         }
