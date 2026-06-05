@@ -50,7 +50,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.R
 import com.fortitude.shamsulkarim.ieltsfordory.ui.components.WordCard
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.BeginnerSecondary
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.favorites.FavoriteViewModel
-import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.Practice
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -100,38 +99,7 @@ fun FavoriteScreen(
     }
 
     Scaffold(
-        bottomBar = bottomBar,
-        floatingActionButton = {
-            if (uiState.words.isNotEmpty()) {
-                AnimatedVisibility(
-                    visible = isFabVisible,
-                    enter = slideInVertically(initialOffsetY = { it * 2 }),
-                    exit = slideOutVertically(targetOffsetY = { it * 2 })
-                ) {
-                    FloatingActionButton(
-                        onClick = {
-                            if (uiState.canStartPractice) {
-                                viewModel.startPractice()
-                                context.startActivity(Intent(context, Practice::class.java))
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "At least five words needed",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
-                        },
-                        containerColor = MaterialTheme.colorScheme.primary
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.PlayArrow,
-                            contentDescription = "Practice favorites",
-                            tint = Color.White
-                        )
-                    }
-                }
-            }
-        }
+        bottomBar = bottomBar
     ) { paddingValues ->
         Column(
             modifier = modifier

@@ -49,7 +49,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
-import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.Practice
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.components.EmptyStateContent
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.components.SearchTopBar
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.components.WordList
@@ -82,37 +81,6 @@ fun UnifiedWordsScreen(
                 query = uiState.searchQuery,
                 onQueryChange = viewModel::updateSearchQuery
             )
-        },
-        floatingActionButton = {
-            if (uiState.showPracticeFab) {
-                AnimatedVisibility(
-                    visible = isFabVisible,
-                    enter = slideInVertically(initialOffsetY = { it * 2 }),
-                    exit = slideOutVertically(targetOffsetY = { it * 2 })
-                ) {
-                    FloatingActionButton(
-                        onClick = {
-                            if (uiState.canStartPractice) {
-                                viewModel.startPractice()
-                                context.startActivity(Intent(context, Practice::class.java))
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "At least 5 words needed",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        },
-                        containerColor = MaterialTheme.colorScheme.primary
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.PlayArrow,
-                            contentDescription = "Practice",
-                            tint = Color.White
-                        )
-                    }
-                }
-            }
         }
     ) { paddingValues ->
         Column(

@@ -63,7 +63,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.ui.components.WordCard
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.Purple500
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.Cyan200
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learned.LearnedViewModel
-import com.fortitude.shamsulkarim.ieltsfordory.ui.practice.Practice
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -100,38 +99,7 @@ fun LearnedScreen(
     }
 
     Scaffold(
-        bottomBar = bottomBar,
-        floatingActionButton = {
-            if (uiState.showPracticeFab) {
-                AnimatedVisibility(
-                    visible = isFabVisible,
-                    enter = slideInVertically(initialOffsetY = { it * 2 }),
-                    exit = slideOutVertically(targetOffsetY = { it * 2 })
-                ) {
-                    FloatingActionButton(
-                        onClick = {
-                            if (uiState.canStartPractice) {
-                                viewModel.startPractice(uiState.selectedLevel)
-                                context.startActivity(Intent(context, Practice::class.java))
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "There must be at least five words",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        },
-                        containerColor = MaterialTheme.colorScheme.primary
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.PlayArrow,
-                            contentDescription = "Practice",
-                            tint = Color.White
-                        )
-                    }
-                }
-            }
-        }
+        bottomBar = bottomBar
     ) { paddingValues ->
         Column(
             modifier = modifier

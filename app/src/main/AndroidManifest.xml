@@ -31,16 +31,10 @@
         <activity android:name=".ui.MainActivity"
             android:theme="@style/Main.Theme"
             />
-        <activity android:name=".ui.practice.Practice"
-            android:theme="@style/Main.Theme"
-            />
         <activity android:name=".data_old.NewTrain"
             android:theme="@style/Main.Theme"
             />
         <activity android:name=".data_old.train_finished.TrainFinishedActivity"
-            android:theme="@style/Main.Theme"
-            />
-        <activity android:name=".ui.practice.PracticeFinished"
             android:theme="@style/Main.Theme"
             />
         <activity android:name=".ui.settings.SettingActivity"
