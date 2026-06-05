@@ -282,10 +282,7 @@ class SettingsComposeViewModel(
         }
     }
 
-    fun canUseDarkMode(): Boolean {
-        val state = _uiState.value
-        return state.isPremium || state.isTrialActive || !BuildConfig.FLAVOR.equals("free", ignoreCase = true)
-    }
+
 
     companion object {
         const val PRIVACY_POLICY_URL = "https://banglish1.wixsite.com/vbprivacypolicy"

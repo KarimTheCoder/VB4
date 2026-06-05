@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -88,10 +87,6 @@ fun SettingsScreen(
     val repetitionsPerSessionPosition = remember(uiState.repetitionsPerSession) {
         viewModel.valueToPosition(uiState.repetitionsPerSession)
     }
-    val canUseDarkMode = remember(uiState) {
-        viewModel.canUseDarkMode()
-    }
-    val upgradeToastMessage = stringResource(id = R.string.settings_upgrade_dark_mode)
 
     SettingsScreenContent(
         uiState = uiState,
@@ -110,16 +105,7 @@ fun SettingsScreen(
         onGreActiveChange = { viewModel.setGreActive(it) },
         onToggleSpanish = { viewModel.toggleSpanish() },
         onDarkModeSelect = { index ->
-            if (canUseDarkMode) {
-                viewModel.setDarkMode(index)
-                when (index) {
-                    0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                }
-            } else {
-                viewModel.showToast(upgradeToastMessage)
-            }
+            viewModel.setDarkMode(index)
         },
         onRestorePurchasesClick = {
             viewModel.showToast(context.getString(R.string.settings_restore_unavailable))

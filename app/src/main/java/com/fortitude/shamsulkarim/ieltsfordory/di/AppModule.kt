@@ -85,6 +85,7 @@ val appModule = module {
     single<TtsRepository> { AndroidTtsRepository(get()) }
     single<ConnectivityRepository> { AndroidConnectivityRepository(get()) }
     single<AuthRepository> { FirebaseAuthRepository(get()) }
+    single { com.fortitude.shamsulkarim.ieltsfordory.data.preferences.ThemeRepository(get()) }
     
     // Session management repositories (singletons for passing data between screens)
     single { SessionWordsRepository() }

@@ -21,6 +21,10 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.GetFavLea
 import com.fortitude.shamsulkarim.ieltsfordory.ui.navigation.AppNavigation
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 import org.koin.android.ext.android.inject
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.ThemeRepository
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.foundation.isSystemInDarkTheme
 
 /**
  * Main Activity using Jetpack Compose.
@@ -35,6 +39,7 @@ class MainActivity : ComponentActivity() {
     private val updateUserDataUseCase: UpdateUserDataUseCase by inject()
     private val getFavLearnedStateUseCase: GetFavLearnedStateUseCase by inject()
     private val addChildEventListenerUseCase: AddChildEventListenerUseCase by inject()
+    private val themeRepository: ThemeRepository by inject()
 
     private lateinit var syncManager: FirebaseSyncManager
     private var toast: Toast? = null
@@ -67,7 +72,15 @@ class MainActivity : ComponentActivity() {
 
         // Set Compose content
         setContent {
-            VocabularyTheme {
+            val themeMode by themeRepository.themeMode.collectAsState(initial = 0)
+            val isSystemDark = isSystemInDarkTheme()
+            val isDarkTheme = when (themeMode) {
+                0 -> false // Light
+                1 -> true  // Dark
+                else -> isSystemDark // System
+            }
+
+            VocabularyTheme(darkTheme = isDarkTheme) {
                 AppNavigation(
                     modifier = Modifier.fillMaxSize()
                 )
