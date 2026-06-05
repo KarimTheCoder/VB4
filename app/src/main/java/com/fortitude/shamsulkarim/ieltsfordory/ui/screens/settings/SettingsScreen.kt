@@ -1,5 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.screens.settings
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
@@ -60,12 +61,10 @@ fun SettingsScreen(
     viewModel: SettingsComposeViewModel = koinViewModel(),
     modifier: Modifier = Modifier,
     onNavigateBack: () -> Unit = {},
-    onSignInClick: () -> Unit = {},
-    onSignOutClick: () -> Unit = {},
-
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
+    val activity = context as Activity
 
     // Handle toast messages
     LaunchedEffect(uiState.toastMessage) {
@@ -99,8 +98,8 @@ fun SettingsScreen(
         wordsPerSessionPosition = wordsPerSessionPosition,
         repetitionsPerSessionPosition = repetitionsPerSessionPosition,
         onNavigateBack = onNavigateBack,
-        onSignInClick = onSignInClick,
-        onSignOutClick = onSignOutClick,
+        onSignInClick = { viewModel.signIn(activity) },
+        onSignOutClick = { viewModel.signOut() },
         onSoundCheckedChange = { viewModel.setSound(it) },
         onPronunciationCheckedChange = { viewModel.setPronunciation(it) },
         onWordsPerSessionSelect = { viewModel.setWordsPerSession(it) },

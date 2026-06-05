@@ -1,8 +1,11 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.screens.settings
 
+import android.app.Activity
 import androidx.lifecycle.ViewModel
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig
 import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
+import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.AuthRepository
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,7 +45,8 @@ data class SettingsComposeUiState(
  * Compose ViewModel for SettingsScreen using StateFlow.
  */
 class SettingsComposeViewModel(
-    private val appPreferences: AppPreferences
+    private val appPreferences: AppPreferences,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SettingsComposeUiState())
@@ -70,9 +74,19 @@ class SettingsComposeViewModel(
             .equals("spanish", ignoreCase = true)
         val isTrialActive = appPreferences.isTrialActive()
         val isPremium = appPreferences.isPremium()
-        val isSignedIn = appPreferences.isSignedIn()
-        val userName = if (isSignedIn) appPreferences.getUserName() ?: "User" else "Doggo"
         val showSignIn = !BuildConfig.FLAVOR.equals("huawei", ignoreCase = true)
+
+        // Sync sign-in state with Firebase (source of truth) rather than just prefs
+        val firebaseUser = authRepository.getCurrentUser()
+        val isSignedIn = firebaseUser != null
+        val userName = firebaseUser?.displayName ?: "Doggo"
+        val userEmail = firebaseUser?.email ?: "Sign in to sync your progress"
+
+        // Keep prefs in sync with actual Firebase state
+        appPreferences.setSignedIn(isSignedIn)
+        if (isSignedIn) {
+            appPreferences.setUserName(userName)
+        }
 
         _uiState.update { current ->
             current.copy(
@@ -92,10 +106,59 @@ class SettingsComposeViewModel(
                 isPremium = isPremium,
                 isSignedIn = isSignedIn,
                 userName = userName,
+                userEmail = userEmail,
                 showSignInSection = showSignIn
             )
         }
     }
+
+    // ========== Auth ==========
+
+    fun signIn(activity: Activity) {
+        _uiState.update { it.copy(isSignInInProgress = true) }
+
+        authRepository.signIn(activity, object : AuthRepository.AuthCallback {
+            override fun onSuccess(user: FirebaseUser) {
+                val name = user.displayName ?: "User"
+                val email = user.email ?: ""
+                appPreferences.setSignedIn(true)
+                appPreferences.setUserName(name)
+                _uiState.update { current ->
+                    current.copy(
+                        isSignedIn = true,
+                        userName = name,
+                        userEmail = email,
+                        isSignInInProgress = false,
+                        toastMessage = "Successfully signed in"
+                    )
+                }
+            }
+
+            override fun onFailure(e: Exception) {
+                _uiState.update { current ->
+                    current.copy(
+                        isSignInInProgress = false,
+                        toastMessage = "Sign-in failed: ${e.localizedMessage}"
+                    )
+                }
+            }
+        })
+    }
+
+    fun signOut() {
+        authRepository.signOut()
+        appPreferences.setSignedIn(false)
+        _uiState.update { current ->
+            current.copy(
+                isSignedIn = false,
+                userName = "Doggo",
+                userEmail = "Sign in to sync your progress",
+                toastMessage = "Sign-out complete!"
+            )
+        }
+    }
+
+    // ========== Settings ==========
 
     fun setSound(enabled: Boolean) {
         appPreferences.setBool("soundState", enabled)
@@ -171,44 +234,7 @@ class SettingsComposeViewModel(
         _uiState.update { it.copy(isSpanishEnabled = newValue) }
     }
 
-    fun onSignInStarted() {
-        _uiState.update { it.copy(isSignInInProgress = true) }
-    }
-
-    fun onSignInSuccess(name: String, email: String) {
-        appPreferences.setSignedIn(true)
-        appPreferences.setUserName(name)
-        _uiState.update { current ->
-            current.copy(
-                isSignedIn = true,
-                userName = name,
-                userEmail = email,
-                isSignInInProgress = false,
-                toastMessage = "Successfully signed in"
-            )
-        }
-    }
-
-    fun onSignInFailed(error: String) {
-        _uiState.update { current ->
-            current.copy(
-                isSignInInProgress = false,
-                toastMessage = "Sign-in failed: $error"
-            )
-        }
-    }
-
-    fun onSignOut() {
-        appPreferences.setSignedIn(false)
-        _uiState.update { current ->
-            current.copy(
-                isSignedIn = false,
-                userName = "Doggo",
-                userEmail = "Sign in to sync your progress",
-                toastMessage = "Sign-out complete!"
-            )
-        }
-    }
+    // ========== Toast / Error ==========
 
     fun clearToast() {
         _uiState.update { it.copy(toastMessage = null) }
@@ -225,6 +251,8 @@ class SettingsComposeViewModel(
     private fun showError(message: String) {
         _uiState.update { it.copy(errorMessage = message) }
     }
+
+    // ========== Helpers ==========
 
     private fun ensureAtLeastOne(i: Boolean, t: Boolean, s: Boolean, g: Boolean): Boolean {
         return i || t || s || g
@@ -263,5 +291,3 @@ class SettingsComposeViewModel(
         const val PRIVACY_POLICY_URL = "https://banglish1.wixsite.com/vbprivacypolicy"
     }
 }
-
-

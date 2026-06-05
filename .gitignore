@@ -26,3 +26,5 @@ local.properties
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/runConfigurations.xml
 /.idea/vcs.xml
+/compile_log.txt
+/compile_log_utf8.txt

@@ -207,7 +207,8 @@ val appModule = module {
     }
     viewModel { 
         com.fortitude.shamsulkarim.ieltsfordory.ui.screens.settings.SettingsComposeViewModel(
-            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get()),
+            get()  // AuthRepository
         )
     }
     viewModel {
