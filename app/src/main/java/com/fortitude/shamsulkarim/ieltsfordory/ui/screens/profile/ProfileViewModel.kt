@@ -4,11 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig
-import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.UserPreferencesRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepository
-import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.LocalData
-import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.NotificationScheduler
-import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.AlarmReceiver
+import com.fortitude.shamsulkarim.ieltsfordory.utility.notification.ReminderScheduler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,22 +18,20 @@ import java.util.Date
 import java.util.Locale
 
 /**
- * ViewModel for ProfileScreen handling alarm settings and social links.
+ * ViewModel for ProfileScreen handling reminder configuration, learning stats, and social links.
+ * Backed by Jetpack DataStore and AndroidX WorkManager.
  */
 class ProfileViewModel(
-    private val appPreferences: AppPreferences,
+    private val userPreferencesRepository: UserPreferencesRepository,
     private val context: Context,
     private val vocabularyRepository: VocabularyRepository
 ) : ViewModel() {
 
-    private val localData = LocalData(context)
-    
     private val _uiState = MutableStateFlow(ProfileUiState())
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
 
     init {
-        loadAlarmSettings()
-        initializeDefaultSettings()
+        observeAlarmSettings()
         loadLearningStats()
         initializeContactUsInfo()
     }
@@ -56,14 +52,14 @@ class ProfileViewModel(
             val levels = listOf("beginner", "intermediate", "advanced")
             var total = 0
             var learned = 0
-            
+
             levels.forEach { level ->
                 total += vocabularyRepository.getTotalCount(level)
                 learned += vocabularyRepository.getLearnedCount(level)
             }
-            
+
             val left = total - learned
-            
+
             _uiState.update { current ->
                 current.copy(
                     totalWords = total,
@@ -74,41 +70,45 @@ class ProfileViewModel(
         }
     }
 
-    private fun loadAlarmSettings() {
-        val hour = localData.get_hour()
-        val minute = localData.get_min()
-        val enabled = localData.reminderStatus
-
-        _uiState.update { current ->
-            current.copy(
-                alarmEnabled = enabled,
-                alarmHour = hour,
-                alarmMinute = minute,
-                formattedAlarmTime = formatTime(hour, minute)
-            )
+    private fun observeAlarmSettings() {
+        viewModelScope.launch {
+            userPreferencesRepository.reminderStatusFlow.collect { enabled ->
+                _uiState.update { it.copy(alarmEnabled = enabled) }
+            }
         }
-    }
-
-    private fun initializeDefaultSettings() {
-        // Initialize words per session if not set
-        if (!appPreferences.contains(AppPreferences.KEY_WORDS_PER_SESSION)) {
-            appPreferences.setWordsPerSession(5)
+        viewModelScope.launch {
+            userPreferencesRepository.reminderHourFlow.collect { hour ->
+                _uiState.update { current ->
+                    current.copy(
+                        alarmHour = hour,
+                        formattedAlarmTime = formatTime(hour, current.alarmMinute)
+                    )
+                }
+            }
         }
-        
-        // Initialize repetition per session if not set
-        if (!appPreferences.contains(AppPreferences.KEY_REPEATATION_PER_SESSION)) {
-            appPreferences.setRepeatationPerSession(5)
+        viewModelScope.launch {
+            userPreferencesRepository.reminderMinuteFlow.collect { minute ->
+                _uiState.update { current ->
+                    current.copy(
+                        alarmMinute = minute,
+                        formattedAlarmTime = formatTime(current.alarmHour, minute)
+                    )
+                }
+            }
         }
     }
 
     fun toggleAlarm(enabled: Boolean) {
-        localData.setReminderStatus(enabled)
-        _uiState.update { it.copy(alarmEnabled = enabled) }
-        
-        if (enabled) {
-            NotificationScheduler.setReminder(context, AlarmReceiver::class.java, _uiState.value.alarmHour, _uiState.value.alarmMinute)
-        } else {
-            NotificationScheduler.cancelReminder(context, AlarmReceiver::class.java)
+        viewModelScope.launch {
+            val hour = _uiState.value.alarmHour
+            val minute = _uiState.value.alarmMinute
+            userPreferencesRepository.setReminderSettings(enabled, hour, minute)
+
+            if (enabled) {
+                ReminderScheduler.scheduleReminder(context, hour, minute)
+            } else {
+                ReminderScheduler.cancelReminder(context)
+            }
         }
     }
 
@@ -129,35 +129,29 @@ class ProfileViewModel(
     }
 
     fun setAlarmTime(hour: Int, minute: Int) {
-        localData.set_hour(hour)
-        localData.set_min(minute)
-        
-        _uiState.update { current ->
-            current.copy(
-                alarmHour = hour,
-                alarmMinute = minute,
-                formattedAlarmTime = formatTime(hour, minute),
-                showTimePicker = false
-            )
-        }
-        
-        if (_uiState.value.alarmEnabled) {
-            NotificationScheduler.setReminder(context, AlarmReceiver::class.java, hour, minute)
+        viewModelScope.launch {
+            val enabled = _uiState.value.alarmEnabled
+            userPreferencesRepository.setReminderSettings(enabled, hour, minute)
+            _uiState.update { it.copy(showTimePicker = false) }
+
+            if (enabled) {
+                ReminderScheduler.scheduleReminder(context, hour, minute)
+            }
         }
     }
 
     /**
-     * Get the Play Store or App Gallery URL for rating.
+     * Get the Play Store URL for rating.
      */
     fun getRateAppUrl(): String {
-        return "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder"
+        return "https://play.google.com/store/apps/details?id=${context.packageName}"
     }
 
     /**
      * Get share text for sharing the app.
      */
     fun getShareUrl(): String {
-        return "https://play.google.com/store/apps/details?id=com.fortitude.apps.vocabularybuilder"
+        return "https://play.google.com/store/apps/details?id=${context.packageName}"
     }
 
     /**
@@ -184,5 +178,3 @@ class ProfileViewModel(
         const val BUG_REPORT_EMAIL = "fortitudedevs@gmail.com"
     }
 }
-
-

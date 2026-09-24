@@ -7,16 +7,7 @@ constraintlayout = "2.2.1"
 google-play-services-auth = "21.4.0"
 firebase-bom = "34.6.0"
 firebase-ui-auth = "9.1.1"
-akexorcist-roundcornerprogressbar = "2.0.3"
-gordonwong-material-sheet-fab = "1.2.1"
-kyleduo-switchbutton = "2.1.0"
-cketti-email-intent-builder = "2.0.0"
-github-zurche-plain-pie = "v0.2.4"
-github-arimorty-floatingsearchview = "2.1.1"
-github-ybq-android-spinkit = "1.2.0"
-switch-button = "0.0.3"
 tracing = "1.3.0"
-zcweng-switch-button = "0.0.3"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.3.0"
 androidx-espresso-core = "3.7.0"
@@ -29,6 +20,7 @@ kotlinx-serialization = "1.7.3"
 coroutines = "1.10.2"
 koin = "4.1.1"
 room = "2.8.4"
+work = "2.10.0"
 
 # Jetpack Compose
 compose-bom = "2024.12.01"
@@ -54,17 +46,11 @@ firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-ui-auth = { group = "com.firebaseui", name = "firebase-ui-auth", version.ref = "firebase-ui-auth" }
 
-akexorcist-roundcornerprogressbar = { group = "com.akexorcist", name = "RoundCornerProgressBar", version.ref = "akexorcist-roundcornerprogressbar" }
-gordonwong-material-sheet-fab = { group = "com.gordonwong", name = "material-sheet-fab", version.ref = "gordonwong-material-sheet-fab" }
-kyleduo-switchbutton = { group = "com.kyleduo.switchbutton", name = "library", version.ref = "kyleduo-switchbutton" }
-cketti-email-intent-builder = { group = "de.cketti.mailto", name = "email-intent-builder", version.ref = "cketti-email-intent-builder" }
-github-zurche-plain-pie = { group = "com.github.zurche", name = "plain-pie", version.ref = "github-zurche-plain-pie" }
-github-arimorty-floatingsearchview = { group = "com.github.arimorty", name = "floatingsearchview", version.ref = "github-arimorty-floatingsearchview" }
-github-ybq-android-spinkit = { group = "com.github.ybq", name = "Android-SpinKit", version.ref = "github-ybq-android-spinkit" }
 
 androidx-tracing = { group = "androidx.tracing", name = "tracing", version.ref = "tracing" }
 
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx-datastore-preferences" }
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
@@ -74,6 +60,7 @@ kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", versio
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 
 androidx-credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
 androidx-credentials-play-services-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentials" }

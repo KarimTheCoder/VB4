@@ -211,6 +211,41 @@ class HomeViewModel(
     }
 
     /**
+     * Start a fresh session with new words and invoke callback when ready.
+     */
+    fun startNewSession(onReady: () -> Unit) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+            val wordsPerSession = appPreferences.wordsPerSession
+            lastLoadedWordsPerSession = wordsPerSession
+            val config = WordSelectionConfig(
+                level = "beginner",
+                wordsPerSession = wordsPerSession,
+                skipWordIds = emptyList()
+            )
+            try {
+                val newWords = selectSessionWordsUseCase(config)
+                if (newWords.isNotEmpty()) {
+                    selectedWords = newWords
+                    sessionWordsRepository.setSessionWords(newWords)
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            words = newWords.map { w -> w.toWordItem() }
+                        )
+                    }
+                    onReady()
+                } else {
+                    _uiState.update { it.copy(isLoading = false) }
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to start new session", e)
+                _uiState.update { it.copy(isLoading = false) }
+            }
+        }
+    }
+
+    /**
      * Reset skipped words for a new session.
      */
     fun resetSession() {

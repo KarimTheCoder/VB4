@@ -10,8 +10,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.FavLearnedState
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.sync.FirebaseSyncManager
+import com.fortitude.shamsulkarim.ieltsfordory.data.sync.FavLearnedState
+import com.fortitude.shamsulkarim.ieltsfordory.data.sync.FirebaseSyncManager
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.GetCurrentUserUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.IsUserAuthenticatedUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.usecase.IsConnectedUseCase
@@ -25,6 +25,10 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.ThemeRepository
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Main Activity using Jetpack Compose.
@@ -40,8 +44,8 @@ class MainActivity : ComponentActivity() {
     private val getFavLearnedStateUseCase: GetFavLearnedStateUseCase by inject()
     private val addChildEventListenerUseCase: AddChildEventListenerUseCase by inject()
     private val themeRepository: ThemeRepository by inject()
+    private val syncManager: FirebaseSyncManager by inject()
 
-    private lateinit var syncManager: FirebaseSyncManager
     private var toast: Toast? = null
     private var lastBackPressTime: Long = 0
     private var isConnected: Boolean = false
@@ -60,9 +64,6 @@ class MainActivity : ComponentActivity() {
 
         // Initialize default SharedPreferences if needed
         initializeDefaultPreferences()
-
-        // Initialize Firebase sync manager
-        syncManager = FirebaseSyncManager(this, addChildEventListenerUseCase)
 
         // Start Firebase auto-sync if authenticated and connected
         startFirebaseSync()
@@ -120,24 +121,26 @@ class MainActivity : ComponentActivity() {
     }
 
     /**
-     * Upload user data to Firebase.
+     * Upload user data to Firebase on background coroutine.
      */
     private fun updateFirebase() {
-        val sp = getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE)
-        val userName = sp.getString("userName", "Boo") ?: "Boo"
+        lifecycleScope.launch(Dispatchers.IO) {
+            val sp = getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE)
+            val userName = sp.getString("userName", "Boo") ?: "Boo"
 
-        // Get aggregated state from LearningProgressRepository
-        val favLearnedState: FavLearnedState = getFavLearnedStateUseCase.execute(userName)
-
-        // Upload to Firebase
-        try {
-            if (isUserAuthenticatedUseCase.execute()) {
-                getCurrentUserUseCase.execute()?.let { user ->
-                    updateUserDataUseCase.execute(user.uid, favLearnedState, null)
+            try {
+                // Get aggregated state from LearningProgressRepository (non-blocking)
+                val favLearnedState: FavLearnedState = getFavLearnedStateUseCase.execute(userName)
+                if (isUserAuthenticatedUseCase.execute()) {
+                    getCurrentUserUseCase.execute()?.let { user ->
+                        updateUserDataUseCase.execute(user.uid, favLearnedState, null)
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@MainActivity, "Update failure", Toast.LENGTH_SHORT).show()
                 }
             }
-        } catch (e: Exception) {
-            Toast.makeText(this, "Update failure", Toast.LENGTH_SHORT).show()
         }
     }
 

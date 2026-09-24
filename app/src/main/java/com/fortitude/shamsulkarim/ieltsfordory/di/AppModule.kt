@@ -53,9 +53,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignInUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.SignOutUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.GetCurrentUserUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.auth.usecase.IsUserAuthenticatedUseCase
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.TrainViewModel
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.home.HomeViewModel
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.train_finished.TrainFinishedViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -85,7 +83,9 @@ val appModule = module {
     single<TtsRepository> { AndroidTtsRepository(get()) }
     single<ConnectivityRepository> { AndroidConnectivityRepository(get()) }
     single<AuthRepository> { FirebaseAuthRepository(get()) }
+    single { com.fortitude.shamsulkarim.ieltsfordory.data.preferences.UserPreferencesRepository(get()) }
     single { com.fortitude.shamsulkarim.ieltsfordory.data.preferences.ThemeRepository(get()) }
+    single { com.fortitude.shamsulkarim.ieltsfordory.data.sync.FirebaseSyncManager(get(), get(), get(), get()) }
     
     // Session management repositories (singletons for passing data between screens)
     single { SessionWordsRepository() }
@@ -155,24 +155,6 @@ val appModule = module {
         )
     }
     viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.AllWordsViewModel(
-            get(), get(), get(), get(), get(), get(),
-            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
-        )
-    }
-    viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learned.LearnedViewModel(
-            get(), get(), get(), get(), get(), get(),
-            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
-        )
-    }
-    viewModel { 
-        com.fortitude.shamsulkarim.ieltsfordory.ui.screens.favorites.FavoriteViewModel(
-            get(), get(), get(), get(), get(), get(),
-            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
-        )
-    }
-    viewModel { 
         com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.UnifiedWordsViewModel(
             get(), get(), get(), get(), get(), get(), get(), get(),
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
@@ -180,7 +162,7 @@ val appModule = module {
     }
     viewModel { 
         com.fortitude.shamsulkarim.ieltsfordory.ui.screens.profile.ProfileViewModel(
-            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get()),
+            get(),
             get(),
             get()
         )
@@ -191,7 +173,11 @@ val appModule = module {
             get(),  // SessionResultRepository
             get(),  // LearningRepository
             get(),  // ProcessSessionResultsUseCase
-            get()   // VocabularyRepository
+            get(),  // VocabularyRepository
+            get(),  // UpdateFavoriteStatusUseCase
+            get(),  // SpeakTextUseCase
+            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get()),
+            get()   // SelectSessionWordsUseCase
         )
     }
     viewModel {
@@ -211,15 +197,6 @@ val appModule = module {
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get()),
             get()  // AuthRepository
         )
-    }
-    viewModel {
-        TrainFinishedViewModel(
-            get(), get(), get(),
-            AppPreferences.get(get())
-        )
-    }
-    viewModel {
-        TrainViewModel(get())
     }
 }
 

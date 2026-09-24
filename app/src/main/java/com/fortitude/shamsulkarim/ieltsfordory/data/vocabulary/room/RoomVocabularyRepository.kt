@@ -8,7 +8,8 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.entity.WordPro
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularySource
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Room-backed implementation of VocabularyRepository.
@@ -33,7 +34,7 @@ class RoomVocabularyRepository(
         loadWordArrays()
     }
 
-    override fun getVocabulary(level: String): List<VocabularyWord> = runBlocking {
+    override suspend fun getVocabulary(level: String): List<VocabularyWord> = withContext(Dispatchers.IO) {
         val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
@@ -50,7 +51,7 @@ class RoomVocabularyRepository(
         words
     }
 
-    override fun getFavoriteWords(): List<VocabularyWord> = runBlocking {
+    override suspend fun getFavoriteWords(): List<VocabularyWord> = withContext(Dispatchers.IO) {
         val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
@@ -68,7 +69,7 @@ class RoomVocabularyRepository(
         words
     }
 
-    override fun getLearnedWords(level: String): List<VocabularyWord> = runBlocking {
+    override suspend fun getLearnedWords(level: String): List<VocabularyWord> = withContext(Dispatchers.IO) {
         val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
@@ -88,7 +89,7 @@ class RoomVocabularyRepository(
         words
     }
 
-    override fun getUnlearnedWords(level: String): List<VocabularyWord> = runBlocking {
+    override suspend fun getUnlearnedWords(level: String): List<VocabularyWord> = withContext(Dispatchers.IO) {
         val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
@@ -107,7 +108,7 @@ class RoomVocabularyRepository(
         words
     }
 
-    override fun getAllUnlearnedWords(): List<VocabularyWord> = runBlocking {
+    override suspend fun getAllUnlearnedWords(): List<VocabularyWord> = withContext(Dispatchers.IO) {
         val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
@@ -129,7 +130,7 @@ class RoomVocabularyRepository(
         words
     }
 
-    override fun getLearnedCount(level: String): Int = runBlocking {
+    override suspend fun getLearnedCount(level: String): Int = withContext(Dispatchers.IO) {
         var count = 0
         
         SOURCES.forEach { source ->
@@ -143,7 +144,7 @@ class RoomVocabularyRepository(
         count
     }
 
-    override fun getTotalCount(level: String): Int {
+    override suspend fun getTotalCount(level: String): Int = withContext(Dispatchers.IO) {
         var count = 0
         
         SOURCES.forEach { source ->
@@ -152,16 +153,16 @@ class RoomVocabularyRepository(
             count += (endIndex - startIndex)
         }
         
-        return count
+        count
     }
 
-    override fun updateFavorite(source: VocabularySource, wordId: Int, isFavorite: Boolean) = runBlocking {
+    override suspend fun updateFavorite(source: VocabularySource, wordId: Int, isFavorite: Boolean) = withContext(Dispatchers.IO) {
         val sourceStr = source.name
         ensureProgressExists(sourceStr, wordId)
         wordProgressDao.updateFavorite(sourceStr, wordId, isFavorite)
     }
 
-    override fun updateLearnState(source: VocabularySource, wordId: Int, isLearned: Boolean) = runBlocking {
+    override suspend fun updateLearnState(source: VocabularySource, wordId: Int, isLearned: Boolean) = withContext(Dispatchers.IO) {
         val sourceStr = source.name
         ensureProgressExists(sourceStr, wordId)
         wordProgressDao.updateLearned(sourceStr, wordId, isLearned)
@@ -275,7 +276,7 @@ class RoomVocabularyRepository(
         }
     }
 
-    override fun getRandomWords(limit: Int, excludeIds: Set<Int>): List<VocabularyWord> = runBlocking {
+    override suspend fun getRandomWords(limit: Int, excludeIds: Set<Int>): List<VocabularyWord> = withContext(Dispatchers.IO) {
         val selectedWords = mutableListOf<VocabularyWord>()
         val selectedIds = mutableSetOf<Int>()
         selectedIds.addAll(excludeIds)

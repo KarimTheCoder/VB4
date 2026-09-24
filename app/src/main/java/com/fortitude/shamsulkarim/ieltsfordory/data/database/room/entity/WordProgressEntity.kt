@@ -63,7 +63,7 @@ data class WordProgressEntity(
     @ColumnInfo(name = "familiarity_score")
     val familiarityScore: Float = 0f
 ) {
-    /**
+    /*
      * Converts this entity to the domain model.
      */
     fun toDomain(): WordProgress {

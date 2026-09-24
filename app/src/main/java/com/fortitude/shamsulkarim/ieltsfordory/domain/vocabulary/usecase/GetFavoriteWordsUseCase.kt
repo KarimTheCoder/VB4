@@ -4,9 +4,5 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepos
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
 
 class GetFavoriteWordsUseCase(private val repository: VocabularyRepository) {
-    fun execute(): List<VocabularyWord> = repository.getFavoriteWords()
+    suspend fun execute(): List<VocabularyWord> = repository.getFavoriteWords()
 }
-
-
-
-

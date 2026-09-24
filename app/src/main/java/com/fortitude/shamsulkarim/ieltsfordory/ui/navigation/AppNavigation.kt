@@ -19,7 +19,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.TrainScreen
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.home.HomeScreen
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.home.HomeViewModel
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.result.ResultScreen
@@ -180,39 +179,12 @@ fun AppNavigation(
                 }
             ) {
                 PretrainScreen(
-                    onNavigateBack = { navController.popBackStack() }
-                )
-            }
-
-            composable<TrainRoute>(
-                enterTransition = {
-                    slideIntoContainer(
-                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                        animationSpec = tween(ANIMATION_DURATION)
-                    )
-                },
-                exitTransition = {
-                    slideOutOfContainer(
-                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                        animationSpec = tween(ANIMATION_DURATION)
-                    )
-                },
-                popEnterTransition = {
-                    slideIntoContainer(
-                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                        animationSpec = tween(ANIMATION_DURATION)
-                    )
-                },
-                popExitTransition = {
-                    slideOutOfContainer(
-                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                        animationSpec = tween(ANIMATION_DURATION)
-                    )
-                }
-            ) {
-                TrainScreen(
-                    onNavigateHome = { navController.popBackStack() },
-                    onTrainingComplete = { navController.popBackStack() }
+                    onNavigateBack = { navController.popBackStack() },
+                    onStartTraining = {
+                        if (homeViewModel.prepareSession()) {
+                            navController.navigate(SessionRoute)
+                        }
+                    }
                 )
             }
 
@@ -279,8 +251,10 @@ fun AppNavigation(
                         navController.popBackStack(HomeRoute, inclusive = false)
                     },
                     onNewSessionClick = {
-                        navController.popBackStack(HomeRoute, inclusive = false)
-                        navController.navigate(SessionRoute)
+                        homeViewModel.startNewSession {
+                            navController.popBackStack(HomeRoute, inclusive = false)
+                            navController.navigate(SessionRoute)
+                        }
                     }
                 )
             }

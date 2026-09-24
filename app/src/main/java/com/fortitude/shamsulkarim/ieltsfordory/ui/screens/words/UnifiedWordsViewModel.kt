@@ -2,6 +2,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words
 
 import android.media.MediaPlayer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
 import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.usecase.IsConnectedUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase
@@ -14,10 +15,12 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.Vocabular
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetFavoriteWordsUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetLearnedWordsUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetVocabularyUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 enum class WordTab(val title: String) {
     ALL("All Words"),
@@ -102,24 +105,26 @@ class UnifiedWordsViewModel(
     }
 
     private fun loadAllData() {
-        val levelName = getLevelName()
-        
-        val allWords = getVocabularyUseCase.execute(levelName)
-        val learnedWords = getLearnedWordsUseCase.execute(levelName)
-        val favoriteWords = getFavoriteWordsUseCase.execute()
-        
-        _uiState.update { current ->
-            current.copy(
-                allWords = allWords,
-                learnedWords = learnedWords,
-                favoriteWords = favoriteWords,
-                filteredAllWords = allWords,
-                filteredLearnedWords = learnedWords,
-                filteredFavoriteWords = favoriteWords,
-                isLoading = false,
-                canStartLearnedPractice = learnedWords.size >= 5,
-                canStartFavoritePractice = favoriteWords.size >= 5
-            )
+        viewModelScope.launch(Dispatchers.IO) {
+            val levelName = getLevelName()
+            
+            val allWords = getVocabularyUseCase.execute(levelName)
+            val learnedWords = getLearnedWordsUseCase.execute(levelName)
+            val favoriteWords = getFavoriteWordsUseCase.execute()
+            
+            _uiState.update { current ->
+                current.copy(
+                    allWords = allWords,
+                    learnedWords = learnedWords,
+                    favoriteWords = favoriteWords,
+                    filteredAllWords = allWords,
+                    filteredLearnedWords = learnedWords,
+                    filteredFavoriteWords = favoriteWords,
+                    isLoading = false,
+                    canStartLearnedPractice = learnedWords.size >= 5,
+                    canStartFavoritePractice = favoriteWords.size >= 5
+                )
+            }
         }
     }
     
@@ -159,7 +164,9 @@ class UnifiedWordsViewModel(
 
     fun toggleFavorite(word: VocabularyWord) {
         val newFavoriteState = !word.isFavorite
-        updateFavoriteStatusUseCase.execute(word, newFavoriteState)
+        viewModelScope.launch(Dispatchers.IO) {
+            updateFavoriteStatusUseCase.execute(word, newFavoriteState)
+        }
         
         _uiState.update { current ->
             val updateWord = { w: VocabularyWord ->

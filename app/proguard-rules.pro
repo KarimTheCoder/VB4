@@ -9,9 +9,18 @@
 
 # Add any project specific keep options here:
 
-# Keep Screen sealed class and its subclasses for navigation
--keep class com.fortitude.shamsulkarim.ieltsfordory.ui.navigation.Screen { *; }
--keep class com.fortitude.shamsulkarim.ieltsfordory.ui.navigation.Screen$* { *; }
+# Keep Kotlinx Serialization navigation routes
+-keepattributes *Annotation*
+-keepclassmembers class * {
+    *** Companion;
+}
+-keepclasseswithmembers class * {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# Keep Room entities and database
+-keep class * extends androidx.room.RoomDatabase
+-keep @androidx.room.Entity class *
 
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface

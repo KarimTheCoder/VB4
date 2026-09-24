@@ -21,6 +21,7 @@ data class WordResult(
     val id: String = "",
     val word: String = "",
     val meaning: String = "",
+    val progress: Float = 0f,
     val status: WordResultStatus = WordResultStatus.CORRECT,
     val statusLabel: String? = null,
     val feedbackMessage: String? = null,

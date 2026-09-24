@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.HorizontalDivider
@@ -43,7 +43,7 @@ private val PrimaryBlue = Color(0xFF4052B5)
     // URLs for social links
     val facebookUrl = "https://www.facebook.com/AAALanguageApp"
     val instagramUrl = "https://www.instagram.com/aaalanguageapp"
-    val rateAppUrl = "https://play.google.com/store/apps/details?id=com.fortitude.shamsulkarim.ieltsfordory"
+    val rateAppUrl = "https://play.google.com/store/apps/details?id=${context.packageName}"
 
     ModalDrawerSheet {
         // Header
@@ -54,7 +54,7 @@ private val PrimaryBlue = Color(0xFF4052B5)
                 .padding(24.dp)
         ) {
             Icon(
-                imageVector = Icons.Default.MenuBook,
+                imageVector = Icons.AutoMirrored.Filled.MenuBook,
                 contentDescription = null,
                 tint = Color.White,
                 modifier = Modifier.size(48.dp)

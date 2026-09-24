@@ -11,22 +11,34 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.WordQuizResult
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.ProcessSessionResultsUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.model.WordSelectionConfig
+import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.SelectSessionWordsUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.SpeakTextUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * ViewModel for the learning session screen.
  * Loads words from SessionWordsRepository and manages the learning/quiz flow.
+ * Resilient against Android process death with automatic word recovery.
  */
 class SessionViewModel(
     private val sessionWordsRepository: SessionWordsRepository,
     private val sessionResultRepository: SessionResultRepository,
     private val learningRepository: LearningRepository,
     private val processSessionResultsUseCase: ProcessSessionResultsUseCase,
-    private val vocabularyRepository: VocabularyRepository
+    private val vocabularyRepository: VocabularyRepository,
+    private val updateFavoriteStatusUseCase: UpdateFavoriteStatusUseCase,
+    private val speakTextUseCase: SpeakTextUseCase,
+    private val appPreferences: AppPreferences,
+    private val selectSessionWordsUseCase: SelectSessionWordsUseCase? = null
 ) : ViewModel() {
 
     // ... existing companion object ...
@@ -56,19 +68,59 @@ class SessionViewModel(
     }
 
     private fun loadSession() {
-        vocabularyWords = sessionWordsRepository.getSessionWords()
+        val words = sessionWordsRepository.getSessionWords()
         
-        if (vocabularyWords.isEmpty()) {
-            Log.w(TAG, "No session words available!")
-            _uiState.update { 
-                it.copy(
-                    isLoading = false,
-                    error = "No words available for this session"
-                )
+        if (words.isNotEmpty()) {
+            setupWords(words)
+        } else {
+            // Process death recovery: reload words using selectSessionWordsUseCase
+            if (selectSessionWordsUseCase != null) {
+                viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        val reloadedWords = selectSessionWordsUseCase(
+                            WordSelectionConfig(
+                                level = "beginner",
+                                wordsPerSession = appPreferences.wordsPerSession,
+                                skipWordIds = emptyList()
+                            )
+                        )
+                        if (reloadedWords.isNotEmpty()) {
+                            sessionWordsRepository.setSessionWords(reloadedWords)
+                            withContext(Dispatchers.Main) {
+                                setupWords(reloadedWords)
+                            }
+                        } else {
+                            _uiState.update { 
+                                it.copy(
+                                    isLoading = false,
+                                    error = "No words available for this session"
+                                )
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Error reloading session words after process recreation", e)
+                        _uiState.update { 
+                            it.copy(
+                                isLoading = false,
+                                error = "Failed to load session words"
+                            )
+                        }
+                    }
+                }
+            } else {
+                Log.w(TAG, "No session words available!")
+                _uiState.update { 
+                    it.copy(
+                        isLoading = false,
+                        error = "No words available for this session"
+                    )
+                }
             }
-            return
         }
+    }
 
+    private fun setupWords(words: List<VocabularyWord>) {
+        vocabularyWords = words
         Log.i(TAG, "Loaded ${vocabularyWords.size} words for session")
         
         // Convert to SessionWords and build ID mapping
@@ -88,6 +140,7 @@ class SessionViewModel(
                 phase = SessionPhase.LEARNING
             )
         }
+        autoPlayPronunciationIfNeeded()
     }
 
     /**
@@ -112,6 +165,7 @@ class SessionViewModel(
                     )
                 }
                 Log.d(TAG, "Learning: Moved to word ${nextIndex + 1}/${words.size}")
+                autoPlayPronunciationIfNeeded()
             } else {
                 // End of learning phase -> start quiz
                 startQuizPhase()
@@ -385,18 +439,41 @@ class SessionViewModel(
     }
 
     /**
-     * Toggle favorite status for the current word.
+     * Toggle favorite status for the current word and persist to database.
      */
     fun onToggleFavorite() {
+        val currentWord = _uiState.value.currentWord
+        val newFavoriteState = !currentWord.isFavorite
         _uiState.update { currentState ->
             currentState.copy(
                 currentWord = currentState.currentWord.copy(
-                    isFavorite = !currentState.currentWord.isFavorite
+                    isFavorite = newFavoriteState
                 )
             )
         }
         
-        // TODO: Persist favorite change to database
+        val vocab = wordIdToVocab[currentWord.id]
+        if (vocab != null) {
+            viewModelScope.launch {
+                updateFavoriteStatusUseCase.execute(vocab, newFavoriteState)
+            }
+        }
+    }
+
+    /**
+     * Pronounce the current word using TTS.
+     */
+    fun speakCurrentWord() {
+        val word = _uiState.value.currentWord.word
+        if (word.isNotBlank()) {
+            speakTextUseCase.execute(word, true)
+        }
+    }
+
+    private fun autoPlayPronunciationIfNeeded() {
+        if (appPreferences.pronunState) {
+            speakCurrentWord()
+        }
     }
 
     /**

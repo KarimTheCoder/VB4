@@ -1,5 +1,9 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.session
 
+import android.content.Intent
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.net.toUri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -67,6 +71,7 @@ fun SessionScreen(
     onNavigateToResult: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     // Navigate to result when session is complete
     LaunchedEffect(uiState.isSessionComplete) {
@@ -81,8 +86,23 @@ fun SessionScreen(
         onKnowIt = viewModel::recordCorrectAnswer,
         onNeedPractice = viewModel::recordMistake,
         onToggleFavorite = viewModel::onToggleFavorite,
+        onSpeakClick = viewModel::speakCurrentWord,
         onNotesChanged = viewModel::onNotesChanged,
-        onReportMistake = { /* TODO */ },
+        onReportMistake = {
+            val word = uiState.currentWord
+            val subject = "Vocabulary Builder - Report Word Issue: ${word.word}"
+            val body = "Word: ${word.word}\nMeaning: ${word.meaning}\n\nPlease describe the issue below:\n"
+            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = "mailto:fortitudedevs@gmail.com".toUri()
+                putExtra(Intent.EXTRA_SUBJECT, subject)
+                putExtra(Intent.EXTRA_TEXT, body)
+            }
+            try {
+                context.startActivity(Intent.createChooser(emailIntent, "Report Mistake via Email"))
+            } catch (e: Exception) {
+                android.widget.Toast.makeText(context, "No email app found to send report", android.widget.Toast.LENGTH_SHORT).show()
+            }
+        },
         onOptionSelected = viewModel::onOptionSelected,
         onCheckAnswer = viewModel::checkAnswer
     )
@@ -95,6 +115,7 @@ fun SessionScreenContent(
     onKnowIt: () -> Unit = {},           // User knows this word
     onNeedPractice: () -> Unit = {},      // User needs more practice
     onToggleFavorite: () -> Unit = {},
+    onSpeakClick: () -> Unit = {},
     onNotesChanged: (String) -> Unit = {},
     onReportMistake: () -> Unit = {},
     onOptionSelected: (Int) -> Unit = {},
@@ -134,6 +155,7 @@ fun SessionScreenContent(
                     onOptionSelected = onOptionSelected,
                     onCheckAnswer = onCheckAnswer,
                     onNextClick = onNextClick,
+                    onSpeakClick = onSpeakClick,
                     // Session stats for mastery UI
                     masteredCount = uiState.masteredCount,
                     totalWords = uiState.totalWords,
@@ -152,8 +174,9 @@ fun SessionScreenContent(
                     // Word Card
                     WordCard(
                         word = uiState.currentWord.word,
-                        status = uiState.currentWord.status,
-                        progress = uiState.currentWord.familiarityProgress,
+                        isFavorite = uiState.currentWord.isFavorite,
+                        onSpeakClick = onSpeakClick,
+                        onToggleFavorite = onToggleFavorite,
                         modifier = Modifier.fillMaxWidth()
                     )
 
@@ -163,20 +186,23 @@ fun SessionScreenContent(
                     ExplanationCard(
                         meaning = uiState.currentWord.meaning,
                         examples = uiState.currentWord.examples,
-                        isFavorite = uiState.currentWord.isFavorite,
-                        onToggleFavorite = onToggleFavorite,
-                        onReportMistake = onReportMistake,
                         modifier = Modifier.fillMaxWidth()
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Notes Card
-                    NotesCard(
-                        notes = uiState.userNotes,
-                        onNotesChanged = onNotesChanged,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        // Report a mistake
+                        Text(
+                            text = "Report a mistake",
+                            fontSize = 14.sp,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.clickable { onReportMistake() }
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(24.dp))
                 }
@@ -222,52 +248,51 @@ fun QuizContent(
     onOptionSelected: (Int) -> Unit,
     onCheckAnswer: () -> Unit,
     onNextClick: () -> Unit,
+    onSpeakClick: () -> Unit = {},
     // Session stats for mastery UI
     masteredCount: Int = 0,
     totalWords: Int = 0,
-    currentStreak: Int = 0,
+    currentStreak: Int =  0,
     accuracy: Float = 0f
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        
-        Spacer(modifier = Modifier.height(12.dp))
-        
-        // Question Card with Mastery Dots
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
+                .padding(bottom = 8.dp),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             border = androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f))
         ) {
-            Column(
-                modifier = Modifier.fillMaxWidth().padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 20.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                // Mastery Dots Indicator
-                MasteryDotsIndicator(
-                    correctCount = word.correctCount,
-                    requiredCorrect = word.requiredCorrect
-                )
-                
-                Spacer(modifier = Modifier.height(12.dp))
-                
                 Text(
                     text = word.word,
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.weight(1f)
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "select the correct meaning",
-                    fontSize = 14.sp,
-                    color = LocalExtendedColors.current.statusPink,
-                    fontWeight = FontWeight.Medium
-                )
+
+                IconButton(
+                    onClick = onSpeakClick,
+                    modifier = Modifier.size(36.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+                        contentDescription = "Pronounce word",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
             }
         }
         
@@ -378,36 +403,7 @@ fun QuizContent(
     }
 }
 
-/**
- * Mastery dots indicator showing progress toward mastering a word.
- * Shows filled dots for correct answers, empty for remaining.
- */
-@Composable
-fun MasteryDotsIndicator(
-    correctCount: Int,
-    requiredCorrect: Int = 3,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        repeat(requiredCorrect) { index ->
-            val isFilled = index < correctCount
-            Box(
-                modifier = Modifier
-                    .size(12.dp)
-                    .padding(horizontal = 2.dp)
-                    .clip(CircleShape)
-                    .background(
-                        if (isFilled) LocalExtendedColors.current.statusGreen  // Green for filled
-                        else LocalExtendedColors.current.neutralGray           // Gray for empty
-                    )
-            )
-        }
-    }
-}
+
 
 /**
  * Individual stat chip for the stats header.
@@ -486,8 +482,9 @@ private fun SessionProgressBar(
 @Composable
 private fun WordCard(
     word: String,
-    status: LearningStatus,
-    progress: Float,
+    isFavorite: Boolean,
+    onSpeakClick: () -> Unit,
+    onToggleFavorite: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -500,7 +497,7 @@ private fun WordCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(horizontal = 20.dp, vertical = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -509,38 +506,37 @@ private fun WordCard(
                 text = word,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.weight(1f)
             )
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                // Status text
-                Text(
-                    text = status.displayText,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = LocalExtendedColors.current.statusPink
-                )
-
-                // Circular progress indicator
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.size(40.dp)
+                // Speaker icon button
+                IconButton(
+                    onClick = onSpeakClick,
+                    modifier = Modifier.size(36.dp)
                 ) {
-                    CircularProgressIndicator(
-                        progress = { 1f },
-                        modifier = Modifier.size(40.dp),
-                        color = LocalExtendedColors.current.progressTrack,
-                        strokeWidth = 4.dp
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+                        contentDescription = "Pronounce word",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
                     )
-                    CircularProgressIndicator(
-                        progress = { progress },
-                        modifier = Modifier.size(40.dp),
-                        color = MaterialTheme.colorScheme.primary,
-                        strokeWidth = 4.dp,
-                        strokeCap = StrokeCap.Round
+                }
+
+                // Bookmark icon button
+                IconButton(
+                    onClick = onToggleFavorite,
+                    modifier = Modifier.size(36.dp)
+                ) {
+                    Icon(
+                        imageVector = if (isFavorite) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
+                        contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
+                        tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(24.dp)
                     )
                 }
             }
@@ -552,9 +548,6 @@ private fun WordCard(
 private fun ExplanationCard(
     meaning: String,
     examples: List<String>,
-    isFavorite: Boolean,
-    onToggleFavorite: () -> Unit,
-    onReportMistake: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -642,77 +635,11 @@ private fun ExplanationCard(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-            HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f))
-            Spacer(modifier = Modifier.height(12.dp))
 
-            // Actions row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // Report a mistake
-                Text(
-                    text = "Report a mistake",
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.clickable { onReportMistake() }
-                )
-
-                Spacer(modifier = Modifier.width(16.dp))
-
-                // Bookmark icon
-                IconButton(
-                    onClick = onToggleFavorite,
-                    modifier = Modifier.size(24.dp)
-                ) {
-                    Icon(
-                        imageVector = if (isFavorite) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
-                        contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-            }
         }
     }
 }
 
-@Composable
-private fun NotesCard(
-    notes: String,
-    onNotesChanged: (String) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .border(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f), RoundedCornerShape(16.dp)),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
-        OutlinedTextField(
-            value = notes,
-            onValueChange = onNotesChanged,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(180.dp)
-                .padding(4.dp),
-            placeholder = {
-                Text(
-                    text = "Add your notes here...",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            },
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.Transparent,
-                unfocusedBorderColor = Color.Transparent,
-                focusedContainerColor = Color.Transparent,
-                unfocusedContainerColor = Color.Transparent
-            )
-        )
-    }
-}
 
 @Composable
 private fun NextButton(
@@ -771,6 +698,43 @@ private fun SessionScreenContentPreview() {
                     isFavorite = false
                 ),
                 userNotes = ""
+            )
+        )
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun QuizScreenContentPreview() {
+    VocabularyTheme {
+        SessionScreenContent(
+            uiState = SessionUiState(
+                isLoading = false,
+                currentWordIndex = 0,
+                totalWords = 5,
+                phase = SessionPhase.QUIZZING,
+                currentWord = SessionWord(
+                    id = "1",
+                    word = "Get out",
+                    status = LearningStatus.FAMILIARIZING,
+                    familiarityProgress = 0.25f,
+                    meaning = "It can simply mean to leave a place. For example, \"It's time to get out of here.\"",
+                    correctCount = 1,
+                    requiredCorrect = 3
+                ),
+                quizOptions = listOf(
+                    "To enter a building quickly",
+                    "To leave a place",
+                    "To understand something",
+                    "To buy a ticket"
+                ),
+                correctOptionIndex = 1,
+                selectedOptionIndex = null,
+                isAnswerRevealed = false,
+                totalQuestions = 5,
+                correctAnswers = 3,
+                currentStreak = 2,
+                masteredCount = 1
             )
         )
     }

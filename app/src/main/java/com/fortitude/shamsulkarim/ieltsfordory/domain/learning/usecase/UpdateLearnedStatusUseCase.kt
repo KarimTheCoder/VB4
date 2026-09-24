@@ -4,9 +4,5 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.Vocabular
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.LearningRepository
 
 class UpdateLearnedStatusUseCase(private val repository: LearningRepository) {
-    fun execute(words: List<VocabularyWord>) = repository.updateLearnedStatus(words)
+    suspend fun execute(words: List<VocabularyWord>) = repository.updateLearnedStatus(words)
 }
-
-
-
-

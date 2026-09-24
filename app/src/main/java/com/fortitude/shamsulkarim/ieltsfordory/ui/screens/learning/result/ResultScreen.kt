@@ -244,7 +244,7 @@ private fun WordResultCard(
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Top
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 // Word
                 Text(
@@ -254,14 +254,37 @@ private fun WordResultCard(
                     color = MaterialTheme.colorScheme.onSurface
                 )
 
-                // Status label if present
-                wordResult.statusLabel?.let { label ->
-                    Text(
-                        text = label,
-                        fontSize = 12.sp,
-                        color = com.fortitude.shamsulkarim.ieltsfordory.ui.theme.ProgressGreen,
-                        fontWeight = FontWeight.Medium
-                    )
+                // Status and Progress
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // Status label if present
+                    wordResult.statusLabel?.let { label ->
+                        Text(
+                            text = label,
+                            fontSize = 12.sp,
+                            color = wordResult.status.borderColor,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+
+                    // Progress indicator
+                    Box(contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator(
+                            progress = { 1f },
+                            modifier = Modifier.size(24.dp),
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                            strokeWidth = 3.dp
+                        )
+                        CircularProgressIndicator(
+                            progress = { wordResult.progress },
+                            modifier = Modifier.size(24.dp),
+                            color = wordResult.status.borderColor,
+                            strokeWidth = 3.dp,
+                            strokeCap = StrokeCap.Round
+                        )
+                    }
                 }
             }
 
@@ -356,6 +379,7 @@ private fun ResultScreenContentPreview() {
                         id = "1",
                         word = "Get out",
                         meaning = "It can simply mean to leave a place. For example, \"It's time to get out of here.\"",
+                        progress = 0.8f,
                         status = WordResultStatus.CORRECT,
                         statusLabel = "Most mistaken word",
                         isExpanded = false,
@@ -368,6 +392,7 @@ private fun ResultScreenContentPreview() {
                         id = "2",
                         word = "Inside out",
                         meaning = "It can simply mean to leave a place. For example, \"It's time to get out of here.\"",
+                        progress = 0.2f,
                         status = WordResultStatus.MISTAKEN,
                         isExpanded = true,
                         feedbackMessage = "You are answering too fast and not reviewing the idiom enough.",

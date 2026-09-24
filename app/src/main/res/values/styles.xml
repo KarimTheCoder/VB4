@@ -237,14 +237,4 @@
 
     </style>
 
-    // Switch Style
-
-    <style name="primary_switchStyle">
-        <item name="sb_checked_color">@color/colorPrimary</item>
-        <item name="sb_uncheckcircle_color">@color/colorPrimary</item>
-        <item name="sb_uncheck_color">@color/colorPrimary</item>
-
-
-    </style>
-
 </resources>

@@ -33,9 +33,6 @@ object SettingsRoute
 object PretrainRoute
 
 @Serializable
-object TrainRoute
-
-@Serializable
 object SessionRoute
 
 @Serializable

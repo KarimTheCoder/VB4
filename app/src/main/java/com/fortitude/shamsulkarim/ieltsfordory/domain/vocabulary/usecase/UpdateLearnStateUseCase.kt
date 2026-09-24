@@ -4,10 +4,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepos
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularySource
 
 class UpdateLearnStateUseCase(private val repository: VocabularyRepository) {
-    fun execute(source: VocabularySource, wordId: Int, isLearned: Boolean) = 
+    suspend fun execute(source: VocabularySource, wordId: Int, isLearned: Boolean) = 
         repository.updateLearnState(source, wordId, isLearned)
 }
-
-
-
-

@@ -8,13 +8,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.fortitude.shamsulkarim.ieltsfordory.R
 
-// San Francisco Font Family
-val SanFrancisco = FontFamily(
-    Font(R.font.sanf_thin, FontWeight.Light),
-    Font(R.font.sanf_regular, FontWeight.Normal),
-    Font(R.font.sanfrancisco_medium, FontWeight.Medium),
-    Font(R.font.sanf_bold, FontWeight.Bold)
+// Plus Jakarta Sans - Modern Geometric Font Family (OFL)
+val PlusJakartaSans = FontFamily(
+    Font(R.font.plus_jakarta_sans, FontWeight.Light),
+    Font(R.font.plus_jakarta_sans, FontWeight.Normal),
+    Font(R.font.plus_jakarta_sans, FontWeight.Medium),
+    Font(R.font.plus_jakarta_sans, FontWeight.SemiBold),
+    Font(R.font.plus_jakarta_sans, FontWeight.Bold)
 )
+
+// Backward compatibility alias
+val SanFrancisco = PlusJakartaSans
 
 // Product Font Family
 val ProductFont = FontFamily(

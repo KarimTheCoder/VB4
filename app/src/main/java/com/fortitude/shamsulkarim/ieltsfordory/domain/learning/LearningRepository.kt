@@ -1,20 +1,24 @@
 package com.fortitude.shamsulkarim.ieltsfordory.domain.learning
 
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.FavLearnedState
+import com.fortitude.shamsulkarim.ieltsfordory.data.sync.FavLearnedState
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.model.JustLearnedSessionData
 
+/**
+ * Repository interface for user learning progress, session history, and SRS metadata.
+ * Uses non-blocking Kotlin coroutines.
+ */
 interface LearningRepository {
-    fun getFavLearnedState(userName: String): FavLearnedState
-    fun fetchSessionWords(level: String, wordsPerSession: Int): List<VocabularyWord>
-    fun getAllUnlearnedWords(level: String): List<VocabularyWord>
-    fun updateLearnedStatus(words: List<VocabularyWord>)
-    fun updateJustLearnedStatus(level: String, words: List<VocabularyWord>, mostMistakenIndex: Int)
-    fun updateFavoriteStatus(word: VocabularyWord, newStatus: Boolean)
-    fun updateLearnedStatus(word: VocabularyWord, newStatus: Boolean)
-    fun getJustLearnedSessionData(level: String): JustLearnedSessionData
+    suspend fun getFavLearnedState(userName: String): FavLearnedState
+    suspend fun fetchSessionWords(level: String, wordsPerSession: Int): List<VocabularyWord>
+    suspend fun getAllUnlearnedWords(level: String): List<VocabularyWord>
+    suspend fun updateLearnedStatus(words: List<VocabularyWord>)
+    suspend fun updateJustLearnedStatus(level: String, words: List<VocabularyWord>, mostMistakenIndex: Int)
+    suspend fun updateFavoriteStatus(word: VocabularyWord, newStatus: Boolean)
+    suspend fun updateLearnedStatus(word: VocabularyWord, newStatus: Boolean)
+    suspend fun getJustLearnedSessionData(level: String): JustLearnedSessionData
 
-    // ===== NEW METHODS for Word Selection Algorithm =====
+    // ===== Spaced Repetition & Word Selection Methods =====
 
     /**
      * Record a correct answer for a word (increments correct_count).
@@ -46,6 +50,3 @@ interface LearningRepository {
      */
     suspend fun updateNextReviewDate(word: VocabularyWord, nextReviewDate: Long)
 }
-
-
-

@@ -6,13 +6,14 @@ import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.dao.SessionWor
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.dao.WordProgressDao
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.entity.SessionWordEntity
 import com.fortitude.shamsulkarim.ieltsfordory.data.database.room.entity.WordProgressEntity
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.FavLearnedState
+import com.fortitude.shamsulkarim.ieltsfordory.data.sync.FavLearnedState
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.LearningRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.model.JustLearnedSessionData
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularySource
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Room-backed implementation of LearningRepository.
@@ -33,7 +34,7 @@ class RoomLearningRepository(
         private val SOURCES = listOf("IELTS", "TOEFL", "SAT", "GRE")
     }
 
-    override fun getFavLearnedState(userName: String): FavLearnedState = runBlocking {
+    override suspend fun getFavLearnedState(userName: String): FavLearnedState = withContext(Dispatchers.IO) {
         val iFav = buildStateString("IELTS", true)
         val iLearned = buildStateString("IELTS", false)
         val tFav = buildStateString("TOEFL", true)
@@ -76,19 +77,17 @@ class RoomLearningRepository(
         return sb.toString()
     }
 
-    override fun fetchSessionWords(level: String, wordsPerSession: Int): List<VocabularyWord> {
+    override suspend fun fetchSessionWords(level: String, wordsPerSession: Int): List<VocabularyWord> = withContext(Dispatchers.IO) {
         val words = getAllUnlearnedWords(level)
         val limit = wordsPerSession.coerceAtMost(words.size)
-        return words.take(limit)
+        words.take(limit)
     }
 
-    override fun getAllUnlearnedWords(level: String): List<VocabularyWord> {
-        return vocabularyRepository.getUnlearnedWords(level)
+    override suspend fun getAllUnlearnedWords(level: String): List<VocabularyWord> = withContext(Dispatchers.IO) {
+        vocabularyRepository.getUnlearnedWords(level)
     }
 
-
-
-    override fun updateLearnedStatus(words: List<VocabularyWord>) = runBlocking {
+    override suspend fun updateLearnedStatus(words: List<VocabularyWord>) = withContext(Dispatchers.IO) {
         words.forEach { word ->
             val source = word.source.name.uppercase()
             val wordId = word.id
@@ -98,7 +97,7 @@ class RoomLearningRepository(
         }
     }
 
-    override fun updateJustLearnedStatus(level: String, words: List<VocabularyWord>, mostMistakenIndex: Int) = runBlocking {
+    override suspend fun updateJustLearnedStatus(level: String, words: List<VocabularyWord>, mostMistakenIndex: Int) = withContext(Dispatchers.IO) {
         // Clear existing session words for all levels
         sessionWordDao.clearAll()
 
@@ -128,7 +127,7 @@ class RoomLearningRepository(
         sessionWordDao.insertAll(entities)
     }
 
-    override fun updateFavoriteStatus(word: VocabularyWord, newStatus: Boolean) = runBlocking {
+    override suspend fun updateFavoriteStatus(word: VocabularyWord, newStatus: Boolean) = withContext(Dispatchers.IO) {
         val source = word.source.name.uppercase()
         val wordId = word.id
         
@@ -136,7 +135,7 @@ class RoomLearningRepository(
         wordProgressDao.updateFavorite(source, wordId, newStatus)
     }
 
-    override fun updateLearnedStatus(word: VocabularyWord, newStatus: Boolean) = runBlocking {
+    override suspend fun updateLearnedStatus(word: VocabularyWord, newStatus: Boolean) = withContext(Dispatchers.IO) {
         val source = word.source.name.uppercase()
         val wordId = word.id
         
@@ -144,7 +143,7 @@ class RoomLearningRepository(
         wordProgressDao.updateLearned(source, wordId, newStatus)
     }
 
-    override fun getJustLearnedSessionData(level: String): JustLearnedSessionData = runBlocking {
+    override suspend fun getJustLearnedSessionData(level: String): JustLearnedSessionData = withContext(Dispatchers.IO) {
         val levelString = normalizeLevel(level)
         val sessionWords = sessionWordDao.getByLevel(levelString)
         

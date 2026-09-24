@@ -4,10 +4,6 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepos
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularySource
 
 class UpdateFavoriteStateUseCase(private val repository: VocabularyRepository) {
-    fun execute(source: VocabularySource, wordId: Int, isFavorite: Boolean) = 
+    suspend fun execute(source: VocabularySource, wordId: Int, isFavorite: Boolean) = 
         repository.updateFavorite(source, wordId, isFavorite)
 }
-
-
-
-

@@ -88,7 +88,7 @@ private fun HomeNavItem(
     navController: NavHostController
 ) {
     val background by animateColorAsState(
-        targetValue = if (isOnHomeScreen) MaterialTheme.colorScheme.primary else Color.LightGray,
+        targetValue = if (isOnHomeScreen) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
         animationSpec = tween(NAV_ANIM_DURATION),
         label = "homeBackground"
     )
@@ -151,7 +151,7 @@ private fun RegularNavItem(
     navController: NavHostController
 ) {
     val tintColor by animateColorAsState(
-        targetValue = if (selected) MaterialTheme.colorScheme.primary else Color.Black,
+        targetValue = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
         animationSpec = tween(NAV_ANIM_DURATION),
         label = "tint_${item.title}"
     )

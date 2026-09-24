@@ -48,7 +48,6 @@ import androidx.compose.ui.unit.dp
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.BeginnerPrimary
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.Cyan200
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.Purple500
-import com.fortitude.shamsulkarim.ieltsfordory.data_old.NewTrain
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -60,6 +59,7 @@ import org.koin.androidx.compose.koinViewModel
 fun PretrainScreen(
     viewModel: PretrainViewModel = koinViewModel(),
     onNavigateBack: (() -> Unit)? = null,
+    onStartTraining: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -257,11 +257,7 @@ fun PretrainScreen(
 
             // Start Training Button
             Button(
-                onClick = {
-                    context.startActivity(Intent(context, NewTrain::class.java))
-                    // Finish the current activity if this is a standalone screen
-                    (context as? android.app.Activity)?.finish()
-                },
+                onClick = onStartTraining,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),

@@ -1,14 +1,17 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.screens.pretrain
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig
 import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetLearnedCountUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetTotalCountUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 /**
  * UI state for PretrainScreen
@@ -48,30 +51,31 @@ class PretrainViewModel(
         val level = appPreferences.getLevel() ?: "beginner"
         val levelDisplayName = getLevelDisplayName(level)
         
-        val learnedCount = getLearnedCountUseCase.execute(level)
-        val totalCount = getTotalCountUseCase.execute(level)
-        val progressPercentage = if (totalCount > 0) learnedCount.toFloat() / totalCount else 0f
-        
         val secondLanguage = appPreferences.getSecondLanguage() ?: "english"
         val isSpanishEnabled = secondLanguage.equals("spanish", ignoreCase = true)
         
         val isIeltsActive = appPreferences.isIELTSActive()
         val isToeflActive = appPreferences.isTOEFLActive()
         val isTooEasyEnabled = !isIeltsActive && !isToeflActive
-        
 
-        _uiState.update { current ->
-            current.copy(
-                level = level,
-                levelDisplayName = levelDisplayName,
-                learnedCount = learnedCount,
-                totalCount = totalCount,
-                progressPercentage = progressPercentage,
-                progressText = "$learnedCount/$totalCount",
-                isSpanishEnabled = isSpanishEnabled,
-                isTooEasyEnabled = isTooEasyEnabled,
-                isLoading = false
-            )
+        viewModelScope.launch(Dispatchers.IO) {
+            val learnedCount = getLearnedCountUseCase.execute(level)
+            val totalCount = getTotalCountUseCase.execute(level)
+            val progressPercentage = if (totalCount > 0) learnedCount.toFloat() / totalCount else 0f
+
+            _uiState.update { current ->
+                current.copy(
+                    level = level,
+                    levelDisplayName = levelDisplayName,
+                    learnedCount = learnedCount,
+                    totalCount = totalCount,
+                    progressPercentage = progressPercentage,
+                    progressText = "$learnedCount/$totalCount",
+                    isSpanishEnabled = isSpanishEnabled,
+                    isTooEasyEnabled = isTooEasyEnabled,
+                    isLoading = false
+                )
+            }
         }
     }
 
@@ -117,17 +121,19 @@ class PretrainViewModel(
      */
     fun refreshProgress() {
         val level = _uiState.value.level
-        val learnedCount = getLearnedCountUseCase.execute(level)
-        val totalCount = getTotalCountUseCase.execute(level)
-        val progressPercentage = if (totalCount > 0) learnedCount.toFloat() / totalCount else 0f
+        viewModelScope.launch(Dispatchers.IO) {
+            val learnedCount = getLearnedCountUseCase.execute(level)
+            val totalCount = getTotalCountUseCase.execute(level)
+            val progressPercentage = if (totalCount > 0) learnedCount.toFloat() / totalCount else 0f
 
-        _uiState.update { current ->
-            current.copy(
-                learnedCount = learnedCount,
-                totalCount = totalCount,
-                progressPercentage = progressPercentage,
-                progressText = "$learnedCount/$totalCount"
-            )
+            _uiState.update { current ->
+                current.copy(
+                    learnedCount = learnedCount,
+                    totalCount = totalCount,
+                    progressPercentage = progressPercentage,
+                    progressText = "$learnedCount/$totalCount"
+                )
+            }
         }
     }
 }

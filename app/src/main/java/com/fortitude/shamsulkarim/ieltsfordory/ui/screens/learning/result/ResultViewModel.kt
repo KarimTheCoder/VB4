@@ -50,10 +50,19 @@ class ResultViewModel(
     }
 
     private fun WordQuizResult.toWordResult(): WordResult {
+        // Calculate the new familiarity score to reflect accurate post-session progress
+        val currentScore = word.familiarityScore
+        val newScore = if (wasCorrect) {
+            (currentScore + 0.1).coerceAtMost(1.0)
+        } else {
+            (currentScore - 0.2).coerceAtLeast(0.0)
+        }
+
         return WordResult(
             id = word.id.toString(),
             word = word.word,
             meaning = word.translation,
+            progress = newScore.toFloat(),
             status = if (wasCorrect) WordResultStatus.CORRECT else WordResultStatus.MISTAKEN,
             statusLabel = if (!wasCorrect) "Needs practice" else null,
             isExpanded = !wasCorrect, // Auto-expand mistakes

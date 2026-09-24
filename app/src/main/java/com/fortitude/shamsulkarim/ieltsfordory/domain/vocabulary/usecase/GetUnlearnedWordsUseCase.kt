@@ -4,9 +4,5 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepos
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
 
 class GetUnlearnedWordsUseCase(private val repository: VocabularyRepository) {
-    fun execute(level: String): List<VocabularyWord> = repository.getUnlearnedWords(level)
+    suspend fun execute(level: String): List<VocabularyWord> = repository.getUnlearnedWords(level)
 }
-
-
-
-

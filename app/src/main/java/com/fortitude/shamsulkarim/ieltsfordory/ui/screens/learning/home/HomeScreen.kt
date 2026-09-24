@@ -141,10 +141,35 @@ fun HomeScreenContent(
     ) {
         Scaffold(
             modifier = modifier,
-            containerColor = Color.White,
+            containerColor = MaterialTheme.colorScheme.background,
             bottomBar = bottomBar,
             topBar = {
-
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(
+                            text = "Essential Vocabulary",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(
+                            onClick = {
+                                scope.launch { drawerState.open() }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Menu,
+                                contentDescription = "Open navigation menu",
+                                tint = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    )
+                )
             }
         ) { paddingValues ->
             Column(
