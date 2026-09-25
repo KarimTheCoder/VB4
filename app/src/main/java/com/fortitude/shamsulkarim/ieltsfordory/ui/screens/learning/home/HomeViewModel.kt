@@ -136,18 +136,11 @@ class HomeViewModel(
                 Log.i(TAG, "Received ${selectedWords.size} words from algorithm")
 
                 val wordItems = selectedWords.map { word -> word.toWordItem() }
-                
-                val bannerText = when {
-                    selectedWords.isEmpty() -> "No more words to learn at this level!"
-                    selectedWords.size < wordsPerSession -> "You will learn ${selectedWords.size} new words"
-                    else -> "You will learn $wordsPerSession new words, you can skip any words you already know"
-                }
 
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        words = wordItems,
-                        infoBannerText = bannerText
+                        words = wordItems
                     )
                 }
                 Log.d(TAG, "Updated UI state with ${wordItems.size} word items")
@@ -157,8 +150,7 @@ class HomeViewModel(
                 e.printStackTrace()  // Also print full stack trace
                 _uiState.update { 
                     it.copy(
-                        isLoading = false,
-                        infoBannerText = "Error: ${e.message ?: "Unknown error"}"
+                        isLoading = false
                     )
                 }
             }
@@ -169,60 +161,6 @@ class HomeViewModel(
      * Handle skip button click - removes word from session and replaces with a new one.
      * Only the skipped word is replaced; other words stay in their positions.
      */
-    fun onSkipWord(wordId: String) {
-        val wordIdInt = wordId.toIntOrNull() ?: return
-        Log.d(TAG, "onSkipWord() called for wordId: $wordIdInt")
-
-        // Find the word to skip and its position
-        val wordIndex = selectedWords.indexOfFirst { it.id == wordIdInt }
-        if (wordIndex == -1) {
-            Log.w(TAG, "Word with id $wordIdInt not found in selected words")
-            return
-        }
-
-        val wordToSkip = selectedWords[wordIndex]
-        skippedWordIds.add(wordIdInt)
-        Log.d(TAG, "Added to skipped list, total skipped: ${skippedWordIds.size}")
-
-        // Mark as skipped in database
-        viewModelScope.launch {
-            try {
-                learningRepository.skipWord(wordToSkip)
-                Log.i(TAG, "Word '${wordToSkip.word}' marked as skipped in database")
-
-                // Fetch ONE replacement word
-                val level = "beginner" // todo: there won't be any levels
-                val allCurrentIds = selectedWords.map { it.id }
-                
-                val config = WordSelectionConfig(
-                    level = level,
-                    wordsPerSession = 1,  // Just get one replacement
-                    skipWordIds = skippedWordIds + allCurrentIds  // Exclude all current + skipped
-                )
-                
-                val replacementWords = selectSessionWordsUseCase(config)
-                
-                // Update the list: swap skipped word with replacement (or remove if no replacement)
-                val newSelectedWords = selectedWords.toMutableList()
-                if (replacementWords.isNotEmpty()) {
-                    newSelectedWords[wordIndex] = replacementWords.first()
-                    Log.i(TAG, "Replaced '${wordToSkip.word}' with '${replacementWords.first().word}'")
-                } else {
-                    newSelectedWords.removeAt(wordIndex)
-                    Log.w(TAG, "No replacement found, removed '${wordToSkip.word}'")
-                }
-                selectedWords = newSelectedWords
-
-                // Update UI
-                _uiState.update {
-                    it.copy(words = selectedWords.map { word -> word.toWordItem() })
-                }
-
-            } catch (e: Exception) {
-                Log.e(TAG, "Failed to skip word $wordIdInt", e)
-            }
-        }
-    }
 
     /**
      * Get the list of selected vocabulary words for starting a session.

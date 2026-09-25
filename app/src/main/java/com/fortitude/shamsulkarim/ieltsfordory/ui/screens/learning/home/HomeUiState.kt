@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.Color
  */
 data class HomeUiState(
     val isLoading: Boolean = true,
-    val infoBannerText: String = "You will learn 3 new words, you can skip any words you already know",
     val words: List<WordItem> = emptyList(),
     val dailyProgress: DailyGoalProgress = DailyGoalProgress()
 )

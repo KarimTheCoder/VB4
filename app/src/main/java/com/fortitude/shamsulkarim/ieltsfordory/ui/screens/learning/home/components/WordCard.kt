@@ -43,7 +43,6 @@ import kotlin.math.roundToInt
 @Composable
 fun AnimatedWordCard(
     word: WordItem,
-    onSkipClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     // Track if this is a new appearance
@@ -77,8 +76,8 @@ fun AnimatedWordCard(
     WordCard(
         text = word.text,
         progress = word.progress,
+        progressColor = word.progressColor,
         type = word.type,
-        onSkipClick = onSkipClick,
         modifier = modifier
             .graphicsLayer {
                 scaleX = scale
@@ -93,8 +92,8 @@ fun AnimatedWordCard(
 fun WordCard(
     text: String,
     progress: Float,
+    progressColor: Color = Color(0xFF53D496),
     type: String,
-    onSkipClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val completedSteps = (progress * 3).roundToInt().coerceIn(0, 3)
@@ -105,123 +104,91 @@ fun WordCard(
             .border(
                 width = 1.dp,
                 color = Color(0xFFE8EBFA),
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(100.dp)
             ),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(100.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         )
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp)
+                .padding(horizontal = 24.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // Top Row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = text,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF1E293B),
-                    modifier = Modifier.weight(1f)
-                )
+            // Left: Word text
+            Text(
+                text = text,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF1E293B),
+                modifier = Modifier.weight(1f)
+            )
 
-                // Progress Pill
-                Surface(
-                    color = Color.White,
-                    shape = RoundedCornerShape(16.dp),
-                    border = BorderStroke(1.dp, Color(0xFFE8EBFA)),
+            // Middle: Type Label (Badge)
+            val bgColor = when(type.uppercase()) {
+                "DUE", "REVIEW" -> Color(0xFFFFF0EC)
+                "MISTAKEN" -> Color(0xFFFFEBEE)
+                "NEW", "NEW WORD" -> Color(0xFFF0F4FF)
+                else -> Color(0xFFF1F5F9)
+            }
+            val fgColor = when(type.uppercase()) {
+                "DUE", "REVIEW" -> Color(0xFFD84315)
+                "MISTAKEN" -> Color(0xFFC62828)
+                "NEW", "NEW WORD" -> Color(0xFF1E88E5)
+                else -> Color(0xFF475569)
+            }
+
+            Surface(
+                color = bgColor,
+                shape = RoundedCornerShape(16.dp),
+                modifier = Modifier.padding(horizontal = 8.dp)
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        // 3 Dots
-                        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            for (i in 1..3) {
-                                val isActive = i <= completedSteps
-                                Box(
-                                    modifier = Modifier
-                                        .size(6.dp)
-                                        .background(
-                                            color = if (isActive) Color(0xFFD0D7F5) else Color(0xFFF1F5F9),
-                                            shape = CircleShape
-                                        )
-                                )
-                            }
-                        }
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = "$completedSteps/3",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF0F172A)
-                        )
-                    }
+                    Text(
+                        text = type.uppercase(),
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = fgColor,
+                        letterSpacing = 0.5.sp
+                    )
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            HorizontalDivider(
-                color = Color(0xFFF1F5F9),
-                thickness = 1.dp
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Bottom Row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+            // Right: Progress Pill
+            Surface(
+                color = Color.White,
+                shape = RoundedCornerShape(100.dp),
+                border = BorderStroke(1.dp, Color(0xFFE8EBFA)),
             ) {
-                // Type Label
-                val bgColor = when(type) {
-                    "Due" -> Color(0xFFFFF0EC)
-                    "Mistaken" -> Color(0xFFFFEBEE)
-                    "New" -> Color(0xFFF0F4FF)
-                    else -> Color(0xFFF1F5F9)
-                }
-                val fgColor = when(type) {
-                    "Due" -> Color(0xFFD84315)
-                    "Mistaken" -> Color(0xFFC62828)
-                    "New" -> Color(0xFF1E88E5)
-                    else -> Color(0xFF475569)
-                }
-
-                Surface(
-                    color = bgColor,
-                    shape = RoundedCornerShape(16.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = type.uppercase(),
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = fgColor,
-                            letterSpacing = 0.5.sp
-                        )
-                    }
-                }
-
-                // Skip button
                 Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.clickable { onSkipClick() }
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
+                    // 3 Dots
+                    Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        for (i in 1..3) {
+                            val isActive = i <= completedSteps
+                            Box(
+                                modifier = Modifier
+                                    .size(6.dp)
+                                    .background(
+                                        color = if (isActive) progressColor else Color(0xFFE2E8F0),
+                                        shape = CircleShape
+                                    )
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "Skip",
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color(0xFF64748B)
+                        text = "$completedSteps/3",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF0F172A)
                     )
                 }
             }
