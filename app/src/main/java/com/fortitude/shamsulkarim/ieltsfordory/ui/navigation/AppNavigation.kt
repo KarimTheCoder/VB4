@@ -69,6 +69,7 @@ fun AppNavigation(
                 BottomNavigationBar(
                     navController = navController,
                     isLoading = uiState.isLoading,
+                    dailyProgress = uiState.dailyProgress,
                     onStartClick = {
                         if (homeViewModel.prepareSession()) {
                             navController.navigate(SessionRoute)
