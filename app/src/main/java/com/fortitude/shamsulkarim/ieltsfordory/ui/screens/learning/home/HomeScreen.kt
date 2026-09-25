@@ -25,6 +25,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayArrow
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.home.components.AnimatedWordCard
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.home.components.HomeTitle
+import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.home.components.StreakIndicator
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -112,6 +116,7 @@ fun HomeScreenContent(
     modifier: Modifier = Modifier,
     words: List<WordItem> = emptyList(),
     infoBannerText: String = "You will learn 3 new words, you can skip any words you already know",
+    streakDays: Int = 5,
     isLoading: Boolean = false,
     onMenuClick: () -> Unit = {},
     onProfileClick: () -> Unit = {},
@@ -137,14 +142,9 @@ fun HomeScreenContent(
             containerColor = MaterialTheme.colorScheme.background,
             bottomBar = bottomBar,
             topBar = {
-                CenterAlignedTopAppBar(
+                TopAppBar(
                     title = {
-                        Text(
-                            text = "Essential Vocabulary",
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
+                        HomeTitle()
                     },
                     navigationIcon = {
                         IconButton(
@@ -159,7 +159,13 @@ fun HomeScreenContent(
                             )
                         }
                     },
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    actions = {
+                        StreakIndicator(
+                            streakDays = streakDays,
+                            modifier = Modifier.padding(end = 16.dp)
+                        )
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.surface
                     )
                 )
@@ -228,58 +234,6 @@ fun HomeScreenContent(
 }
 
 
-/**
- * Animated wrapper for WordCard with subtle entrance animation.
- * Cards fade in with a gentle slide and slight scale effect.
- */
-@Composable
-private fun AnimatedWordCard(
-    word: WordItem,
-    onSkipClick: () -> Unit
-) {
-    // Track if this is a new appearance
-    var isVisible by remember { mutableStateOf(false) }
-    
-    LaunchedEffect(word.id) {
-        isVisible = true
-    }
-    
-    // Subtle scale animation (no bounce, smooth ease)
-    val scale by animateFloatAsState(
-        targetValue = if (isVisible) 1f else 0.95f,
-        animationSpec = tween(durationMillis = 250, easing = androidx.compose.animation.core.FastOutSlowInEasing),
-        label = "scale"
-    )
-    
-    // Gentle horizontal slide
-    val offsetX by animateFloatAsState(
-        targetValue = if (isVisible) 0f else 20f,
-        animationSpec = tween(durationMillis = 200, easing = androidx.compose.animation.core.FastOutSlowInEasing),
-        label = "offsetX"
-    )
-    
-    // Smooth fade in
-    val alpha by animateFloatAsState(
-        targetValue = if (isVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 200),
-        label = "alpha"
-    )
-    
-    WordCard(
-        text = word.text,
-        progress = word.progress,
-        progressColor = word.progressColor,
-        type = word.type,
-        onSkipClick = onSkipClick,
-        modifier = Modifier
-            .graphicsLayer {
-                scaleX = scale
-                scaleY = scale
-                translationX = offsetX
-                this.alpha = alpha
-            }
-    )
-}
 
 @Composable
 private fun InfoBanner(
@@ -303,94 +257,6 @@ private fun InfoBanner(
         )
     }
 }
-
-@Composable
-private fun WordCard(
-    text: String,
-    progress: Float,
-    progressColor: Color,
-    type: String,
-    onSkipClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .border(
-                width = 1.dp,
-                color = Color.Gray.copy(alpha = 0.2f),
-                shape = RoundedCornerShape(8.dp)
-            ),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        )
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Circular Progress
-           CircularProgressIndicator(
-                progress = progress,
-                color = progressColor,
-                strokeWidth = 3.dp,
-               trackColor = Color.LightGray,
-                modifier = Modifier.size(24.dp)
-            )
-            
-            Spacer(modifier = Modifier.width(12.dp))
-
-            // Word text
-            Text(
-                text = text,
-                style = MaterialTheme.typography.bodyMedium,
-                color = Color.Black,
-                modifier = Modifier.weight(1f)
-            )
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            // Type Label
-            androidx.compose.material3.Surface(
-                color = when(type) {
-                    "Due" -> Color(0xFFFFE0B2) // Light Orange
-                    "Mistaken" -> Color(0xFFFFCDD2) // Light Red
-                    "New" -> Color(0xFFE3F2FD) // Light Blue
-                    else -> Color.LightGray
-                },
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Text(
-                    text = type,
-                    fontSize = 11.sp,
-                    color = Color.DarkGray,
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                )
-            }
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            // Skip button
-            TextButton(
-                onClick = onSkipClick
-            ) {
-                Text(
-                    text = "Skip",
-                    color = MaterialTheme.colorScheme.primary,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium
-                )
-            }
-        }
-    }
-}
-
-
-
-
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable

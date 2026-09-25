@@ -8,7 +8,22 @@ import androidx.compose.ui.graphics.Color
 data class HomeUiState(
     val isLoading: Boolean = true,
     val infoBannerText: String = "You will learn 3 new words, you can skip any words you already know",
-    val words: List<WordItem> = emptyList()
+    val words: List<WordItem> = emptyList(),
+    val dailyProgress: DailyGoalProgress = DailyGoalProgress()
+)
+
+/**
+ * Represents the daily learning goals and progress for the dashboard.
+ */
+data class DailyGoalProgress(
+    val totalWordsTarget: Int = 25,
+    val totalWordsLearned: Int = 17, // 68%
+    val newWordsLearned: Int = 1,
+    val newWordsTarget: Int = 3,
+    val learnWordsLearned: Int = 2,
+    val learnWordsTarget: Int = 3,
+    val reviewWordsLearned: Int = 3,
+    val reviewWordsTarget: Int = 3
 )
 
 /**
