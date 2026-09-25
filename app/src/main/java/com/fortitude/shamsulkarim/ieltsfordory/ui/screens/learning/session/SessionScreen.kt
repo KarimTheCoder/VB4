@@ -38,6 +38,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -186,6 +187,7 @@ fun SessionScreenContent(
                     ExplanationCard(
                         meaning = uiState.currentWord.meaning,
                         examples = uiState.currentWord.examples,
+                        secondTranslation = uiState.currentWord.secondTranslation,
                         modifier = Modifier.fillMaxWidth()
                     )
 
@@ -274,13 +276,23 @@ fun QuizContent(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = word.word,
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.weight(1f)
-                )
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = word.word,
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    if (word.requiredCorrect > 1) {
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(
+                            text = "Mastery: ${word.correctCount}/${word.requiredCorrect}",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
 
                 IconButton(
                     onClick = onSpeakClick,
@@ -548,6 +560,7 @@ private fun WordCard(
 private fun ExplanationCard(
     meaning: String,
     examples: List<String>,
+    secondTranslation: String? = null,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -585,14 +598,42 @@ private fun ExplanationCard(
 
                 Spacer(modifier = Modifier.width(12.dp))
 
-                Text(
-                    text = meaning,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    lineHeight = 24.sp,
-                    modifier = Modifier.weight(1f)
-                )
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = meaning,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        lineHeight = 24.sp
+                    )
+
+                    if (!secondTranslation.isNullOrBlank()) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Surface(
+                                shape = RoundedCornerShape(4.dp),
+                                color = MaterialTheme.colorScheme.primaryContainer
+                            ) {
+                                Text(
+                                    text = "ES",
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp)
+                                )
+                            }
+                            Text(
+                                text = secondTranslation,
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Normal,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                }
             }
 
             Spacer(modifier = Modifier.height(20.dp))

@@ -52,7 +52,8 @@ data class SessionWord(
     // Mastery tracking for quiz phase
     val correctCount: Int = 0,           // Current correct streak for this word
     val requiredCorrect: Int = 3,        // Required correct answers to master
-    val isMastered: Boolean = false      // True when correctCount >= requiredCorrect
+    val isMastered: Boolean = false,     // True when correctCount >= requiredCorrect
+    val secondTranslation: String? = null
 )
 
 /**

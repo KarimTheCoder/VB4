@@ -4,14 +4,23 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -20,7 +29,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -32,14 +43,18 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -54,16 +69,65 @@ import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 import org.koin.androidx.compose.koinViewModel
 import androidx.core.net.toUri
 
+private const val ANIMATION_DURATION = 300
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     viewModel: SettingsComposeViewModel = koinViewModel(),
     modifier: Modifier = Modifier,
     onNavigateBack: () -> Unit = {},
+    onSaveAndNavigateHome: () -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
     val activity = context as Activity
+
+    var showDiscardDialog by remember { mutableStateOf(false) }
+
+    // Intercept hardware / system gesture back press
+    BackHandler(enabled = uiState.hasUnsavedChanges) {
+        showDiscardDialog = true
+    }
+
+    if (showDiscardDialog) {
+        AlertDialog(
+            onDismissRequest = { showDiscardDialog = false },
+            title = {
+                Text(
+                    text = stringResource(id = R.string.settings_discard_title),
+                    style = MaterialTheme.typography.titleLarge
+                )
+            },
+            text = {
+                Text(
+                    text = stringResource(id = R.string.settings_discard_message),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showDiscardDialog = false
+                        viewModel.discardChanges()
+                        onNavigateBack()
+                    }
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.settings_discard_confirm),
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { showDiscardDialog = false }
+                ) {
+                    Text(text = stringResource(id = R.string.settings_discard_dismiss))
+                }
+            }
+        )
+    }
 
     // Handle toast messages
     LaunchedEffect(uiState.toastMessage) {
@@ -92,7 +156,18 @@ fun SettingsScreen(
         uiState = uiState,
         wordsPerSessionPosition = wordsPerSessionPosition,
         repetitionsPerSessionPosition = repetitionsPerSessionPosition,
-        onNavigateBack = onNavigateBack,
+        onNavigateBack = {
+            if (uiState.hasUnsavedChanges) {
+                showDiscardDialog = true
+            } else {
+                onNavigateBack()
+            }
+        },
+        onSaveClick = {
+            viewModel.saveSettings {
+                onSaveAndNavigateHome()
+            }
+        },
         onSignInClick = { viewModel.signIn(activity) },
         onSignOutClick = { viewModel.signOut() },
         onSoundCheckedChange = { viewModel.setSound(it) },
@@ -118,6 +193,7 @@ fun SettingsScreenContent(
     wordsPerSessionPosition: Int,
     repetitionsPerSessionPosition: Int,
     onNavigateBack: () -> Unit,
+    onSaveClick: () -> Unit,
     onSignInClick: () -> Unit,
     onSignOutClick: () -> Unit,
     onSoundCheckedChange: (Boolean) -> Unit,
@@ -155,6 +231,57 @@ fun SettingsScreenContent(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
             )
+        },
+        bottomBar = {
+            AnimatedVisibility(
+                visible = uiState.hasUnsavedChanges,
+                enter = slideInVertically(
+                    initialOffsetY = { fullHeight -> fullHeight },
+                    animationSpec = tween(ANIMATION_DURATION)
+                ) + fadeIn(animationSpec = tween(ANIMATION_DURATION)),
+                exit = slideOutVertically(
+                    targetOffsetY = { fullHeight -> fullHeight },
+                    animationSpec = tween(ANIMATION_DURATION)
+                ) + fadeOut(animationSpec = tween(ANIMATION_DURATION))
+            ) {
+                Surface(
+                    color = MaterialTheme.colorScheme.surface,
+                    tonalElevation = 3.dp,
+                    shadowElevation = 8.dp,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .navigationBarsPadding()
+                            .padding(horizontal = 16.dp, vertical = 12.dp)
+                    ) {
+                        Button(
+                            onClick = onSaveClick,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(52.dp),
+                            shape = RoundedCornerShape(12.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = MaterialTheme.colorScheme.primary,
+                                contentColor = MaterialTheme.colorScheme.onPrimary
+                            )
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Check,
+                                contentDescription = null,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(id = R.string.settings_save_changes),
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
+                    }
+                }
+            }
         }
     ) { paddingValues ->
         Column(
@@ -375,6 +502,7 @@ private fun SettingsScreenContentPreview() {
             wordsPerSessionPosition = 2,
             repetitionsPerSessionPosition = 3,
             onNavigateBack = {},
+            onSaveClick = {},
             onSignInClick = {},
             onSignOutClick = {},
             onSoundCheckedChange = {},

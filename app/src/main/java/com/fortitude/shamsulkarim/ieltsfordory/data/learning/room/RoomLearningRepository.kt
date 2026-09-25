@@ -58,13 +58,19 @@ class RoomLearningRepository(
     }
 
     private suspend fun buildStateString(source: String, isFavorite: Boolean): String {
+        val arrayResId = when (source.uppercase()) {
+            "IELTS" -> com.fortitude.shamsulkarim.ieltsfordory.R.array.IELTS_words
+            "TOEFL" -> com.fortitude.shamsulkarim.ieltsfordory.R.array.TOEFL_words
+            "SAT" -> com.fortitude.shamsulkarim.ieltsfordory.R.array.SAT_words
+            "GRE" -> com.fortitude.shamsulkarim.ieltsfordory.R.array.GRE_words
+            else -> return ""
+        }
+        val totalWords = context.resources.getStringArray(arrayResId).size
         val allProgress = wordProgressDao.getBySource(source)
         val progressMap = allProgress.associateBy { it.wordId }
-        
-        val maxWordId = allProgress.maxOfOrNull { it.wordId } ?: 0
         val sb = StringBuilder()
         
-        for (i in 0..maxWordId) {
+        for (i in 0 until totalWords) {
             val progress = progressMap[i]
             val value = if (isFavorite) {
                 progress?.isFavorite == true

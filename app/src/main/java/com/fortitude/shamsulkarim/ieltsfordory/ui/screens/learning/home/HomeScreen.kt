@@ -61,8 +61,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.home.components.NavigationDrawerContent
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.LightBlueBackground
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.PrimaryBlue
@@ -82,19 +81,13 @@ fun HomeScreen(
     bottomBar: @Composable () -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
-
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_RESUME) {
-                // Only refresh if requested (e.g., after completing a session from ResultScreen)
-                viewModel.checkForRefresh()
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
-        }
+    LaunchedEffect(Unit) {
+        viewModel.checkForRefresh()
+    }
+    LifecycleResumeEffect(Unit) {
+        // Refresh if requested (e.g., after completing a session or changing settings)
+        viewModel.checkForRefresh()
+        onPauseOrDispose { }
     }
 
     HomeScreenContent(

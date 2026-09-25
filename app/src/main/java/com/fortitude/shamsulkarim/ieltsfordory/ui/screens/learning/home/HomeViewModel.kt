@@ -4,15 +4,17 @@ import android.util.Log
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.LearningRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.SessionWordsRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.model.WordSelectionConfig
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.UserPreferencesRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.SelectSessionWordsUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -26,7 +28,7 @@ private val ProgressGreen = Color(0xFF4CAF50)  // High familiarity / mastered
  * Uses the word selection algorithm to fetch and display words for the learning session.
  */
 class HomeViewModel(
-    private val appPreferences: AppPreferences,
+    private val userPreferencesRepository: UserPreferencesRepository,
     private val selectSessionWordsUseCase: SelectSessionWordsUseCase,
     private val learningRepository: LearningRepository,
     private val sessionWordsRepository: SessionWordsRepository
@@ -38,6 +40,12 @@ class HomeViewModel(
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+    
+    private val currentWordsPerSessionState = userPreferencesRepository.wordsPerSessionFlow
+        .stateIn(viewModelScope, SharingStarted.Eagerly, 5)
+        
+    private val currentRepetitionPerSessionState = userPreferencesRepository.repetitionPerSessionFlow
+        .stateIn(viewModelScope, SharingStarted.Eagerly, 5)
 
     // Track words skipped in current session (reset when session starts)
     private val skippedWordIds = mutableListOf<Int>()
@@ -48,28 +56,50 @@ class HomeViewModel(
     // Track if we've loaded words at least once
     private var hasLoadedOnce = false
 
-    // Track the last loaded words per session setting
+    // Track the last loaded words per session setting, repetitions, filters, and second language
     private var lastLoadedWordsPerSession = -1
+    private var lastLoadedRepeatationPerSession = -1
+    private var lastLoadedFilterState = ""
+    private var lastLoadedSecondLang = ""
+
+    private suspend fun getFilterState(): String {
+        return "${userPreferencesRepository.getIsIeltsActive()}_${userPreferencesRepository.getIsToeflActive()}_${userPreferencesRepository.getIsSatActive()}_${userPreferencesRepository.getIsGreActive()}"
+    }
 
     init {
         Log.d(TAG, "HomeViewModel initialized")
         loadProgress()  // Initial load
         markHomeVisited()
+
+        viewModelScope.launch {
+            sessionWordsRepository.refreshTrigger.collect {
+                Log.i(TAG, "refreshTrigger received from SessionWordsRepository - resetting session")
+                resetSession()
+            }
+        }
     }
     
     /**
-     * Check if a refresh was requested (e.g., from ResultScreen after session completion).
+     * Check if a refresh was requested (e.g., from ResultScreen after session completion or Settings change).
      * Call this from HomeScreen's ON_RESUME lifecycle event.
      */
     fun checkForRefresh() {
-        val currentWordsPerSession = appPreferences.wordsPerSession
-        val settingsChanged = lastLoadedWordsPerSession != -1 && lastLoadedWordsPerSession != currentWordsPerSession
+        viewModelScope.launch {
+            val currentWordsPerSession = currentWordsPerSessionState.value
+            val currentRepeatationPerSession = currentRepetitionPerSessionState.value
+            val currentFilterState = getFilterState()
+            val currentSecondLang = userPreferencesRepository.getSecondLanguage()
+            val settingsChanged = (lastLoadedWordsPerSession != -1 && lastLoadedWordsPerSession != currentWordsPerSession) ||
+                                  (lastLoadedRepeatationPerSession != -1 && lastLoadedRepeatationPerSession != currentRepeatationPerSession) ||
+                                  (lastLoadedFilterState.isNotEmpty() && lastLoadedFilterState != currentFilterState) ||
+                                  (lastLoadedSecondLang.isNotEmpty() && lastLoadedSecondLang != currentSecondLang)
 
-        if (sessionWordsRepository.consumeRefreshRequest() || settingsChanged) {
-            Log.i(TAG, "Refresh requested or settings changed - reloading words")
-            resetSession()
-        } else {
-            Log.d(TAG, "No refresh needed, keeping current words")
+            if (sessionWordsRepository.consumeRefreshRequest() || settingsChanged) {
+                Log.i(TAG, "Refresh requested or settings changed - reloading words")
+                resetSession()
+            } else {
+                Log.d(TAG, "No refresh needed, keeping current words")
+            }
         }
     }
 
@@ -87,8 +117,13 @@ class HomeViewModel(
                 val level = "beginner" // todo: there won't be any levels
                 Log.d(TAG, "Selected level: $level")
 
-                val wordsPerSession = appPreferences.wordsPerSession
+                val wordsPerSession = userPreferencesRepository.getWordsPerSession()
+                val repeatationPerSession = userPreferencesRepository.getRepetitionPerSession()
+                val secondLanguage = userPreferencesRepository.getSecondLanguage()
                 lastLoadedWordsPerSession = wordsPerSession
+                lastLoadedRepeatationPerSession = repeatationPerSession
+                lastLoadedFilterState = getFilterState()
+                lastLoadedSecondLang = secondLanguage
 
                 val config = WordSelectionConfig(
                     level = level,
@@ -200,8 +235,20 @@ class HomeViewModel(
      * Returns true if session is ready (has words), false otherwise.
      */
     fun prepareSession(): Boolean {
-        if (selectedWords.isEmpty()) {
-            Log.w(TAG, "Cannot prepare session: no words selected")
+        var isReady = false
+        // Need to run this synchronously if possible, or assume settings mismatch handled elsewhere.
+        // Actually this is called when clicking "Start".
+        // A better approach is to not do suspend here and rely on the last loaded state
+        // because settings changes should trigger checkForRefresh.
+        
+        val currentWordsPerSession = currentWordsPerSessionState.value
+        val currentRepeatationPerSession = currentRepetitionPerSessionState.value
+        
+        // Settings changed will be mostly detected by checkForRefresh.
+        // For prepareSession, just checking word count is usually enough.
+        if (selectedWords.isEmpty() || selectedWords.size != currentWordsPerSession) {
+            Log.w(TAG, "Settings mismatch or no words selected - resetting session before preparing")
+            resetSession()
             return false
         }
         
@@ -216,8 +263,11 @@ class HomeViewModel(
     fun startNewSession(onReady: () -> Unit) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            val wordsPerSession = appPreferences.wordsPerSession
+            val wordsPerSession = userPreferencesRepository.getWordsPerSession()
+            val repeatationPerSession = userPreferencesRepository.getRepetitionPerSession()
             lastLoadedWordsPerSession = wordsPerSession
+            lastLoadedRepeatationPerSession = repeatationPerSession
+            lastLoadedFilterState = getFilterState()
             val config = WordSelectionConfig(
                 level = "beginner",
                 wordsPerSession = wordsPerSession,
@@ -251,13 +301,16 @@ class HomeViewModel(
     fun resetSession() {
         Log.d(TAG, "Resetting session, clearing ${skippedWordIds.size} skipped words")
         skippedWordIds.clear()
+        sessionWordsRepository.clearSession()
         loadProgress()
     }
 
     private fun markHomeVisited() {
-        if (!appPreferences.isHomeVisited()) {
-            appPreferences.setHomeVisited(true)
-            Log.d(TAG, "Marked home as visited")
+        viewModelScope.launch {
+            if (!userPreferencesRepository.isHomeVisited()) {
+                userPreferencesRepository.setHomeVisited(true)
+                Log.d(TAG, "Marked home as visited")
+            }
         }
     }
 

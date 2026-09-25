@@ -22,6 +22,7 @@ import com.fortitude.shamsulkarim.ieltsfordory.ui.navigation.AppNavigation
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 import org.koin.android.ext.android.inject
 import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.ThemeRepository
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.UserPreferencesRepository
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -44,6 +45,7 @@ class MainActivity : ComponentActivity() {
     private val getFavLearnedStateUseCase: GetFavLearnedStateUseCase by inject()
     private val addChildEventListenerUseCase: AddChildEventListenerUseCase by inject()
     private val themeRepository: ThemeRepository by inject()
+    private val userPreferencesRepository: UserPreferencesRepository by inject()
     private val syncManager: FirebaseSyncManager by inject()
 
     private var toast: Toast? = null
@@ -61,9 +63,6 @@ class MainActivity : ComponentActivity() {
 
         // Check connectivity
         isConnected = isConnectedUseCase.execute()
-
-        // Initialize default SharedPreferences if needed
-        initializeDefaultPreferences()
 
         // Start Firebase auto-sync if authenticated and connected
         startFirebaseSync()
@@ -90,25 +89,10 @@ class MainActivity : ComponentActivity() {
     }
 
     /**
-     * Initialize default SharedPreferences values if not already set.
-     */
-    private fun initializeDefaultPreferences() {
-        val sp = getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE)
-        
-        if (!sp.contains("soundState")) {
-            sp.edit().apply {
-                putBoolean("soundState", true)
-                putInt("totalCorrects", 0)
-                apply()
-            }
-        }
-    }
-
-    /**
      * Start Firebase sync if user is authenticated and connected.
      */
     private fun startFirebaseSync() {
-        if (isUserAuthenticatedUseCase.execute() && isConnected) {
+        if (isUserAuthenticatedUseCase.execute() && isConnectedUseCase.execute()) {
             try {
                 val currentUser = getCurrentUserUseCase.execute()
                 currentUser?.let { user ->
@@ -125,8 +109,7 @@ class MainActivity : ComponentActivity() {
      */
     private fun updateFirebase() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val sp = getSharedPreferences("com.example.shamsulkarim.vocabulary", Context.MODE_PRIVATE)
-            val userName = sp.getString("userName", "Boo") ?: "Boo"
+            val userName = userPreferencesRepository.getUserName()
 
             try {
                 // Get aggregated state from LearningProgressRepository (non-blocking)
@@ -168,11 +151,16 @@ class MainActivity : ComponentActivity() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        startFirebaseSync()
+    }
+
     override fun onStop() {
         super.onStop()
         
         // Sync data to Firebase when leaving the app
-        if (isUserAuthenticatedUseCase.execute() && isConnected) {
+        if (isUserAuthenticatedUseCase.execute() && isConnectedUseCase.execute()) {
             updateFirebase()
         }
     }

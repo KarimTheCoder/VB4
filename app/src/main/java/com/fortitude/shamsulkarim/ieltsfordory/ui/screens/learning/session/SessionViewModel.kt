@@ -11,15 +11,18 @@ import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.WordQuizResult
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.ProcessSessionResultsUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.VocabularyRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
-import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.UserPreferencesRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.model.WordSelectionConfig
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.SelectSessionWordsUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.tts.usecase.SpeakTextUseCase
+import com.fortitude.shamsulkarim.ieltsfordory.utility.audio.SoundEffectPlayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -37,16 +40,26 @@ class SessionViewModel(
     private val vocabularyRepository: VocabularyRepository,
     private val updateFavoriteStatusUseCase: UpdateFavoriteStatusUseCase,
     private val speakTextUseCase: SpeakTextUseCase,
-    private val appPreferences: AppPreferences,
-    private val selectSessionWordsUseCase: SelectSessionWordsUseCase? = null
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val selectSessionWordsUseCase: SelectSessionWordsUseCase? = null,
+    private val soundEffectPlayer: SoundEffectPlayer? = null
 ) : ViewModel() {
-
-    // ... existing companion object ...
 
     companion object {
         private const val TAG = "SessionVM"
-        private const val REQUIRED_CORRECT = 1  // Required correct answers to master a word
     }
+
+    private val repetitionPerSessionState = userPreferencesRepository.repetitionPerSessionFlow
+        .stateIn(viewModelScope, SharingStarted.Eagerly, 5)
+
+    private val soundState = userPreferencesRepository.soundStateFlow
+        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
+    private val pronunState = userPreferencesRepository.pronunStateFlow
+        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
+    val requiredCorrect: Int
+        get() = maxOf(1, repetitionPerSessionState.value)
 
     private val _uiState = MutableStateFlow(SessionUiState())
     val uiState: StateFlow<SessionUiState> = _uiState.asStateFlow()
@@ -80,7 +93,7 @@ class SessionViewModel(
                         val reloadedWords = selectSessionWordsUseCase(
                             WordSelectionConfig(
                                 level = "beginner",
-                                wordsPerSession = appPreferences.wordsPerSession,
+                                wordsPerSession = userPreferencesRepository.getWordsPerSession(),
                                 skipWordIds = emptyList()
                             )
                         )
@@ -197,7 +210,7 @@ class SessionViewModel(
         }
         
         generateQuizForWord(nextWord)
-        Log.d(TAG, "Quiz: Showing word '${nextWord.word}' (${nextWord.correctCount}/$REQUIRED_CORRECT)")
+        Log.d(TAG, "Quiz: Showing word '${nextWord.word}' (${nextWord.correctCount}/$requiredCorrect)")
     }
     
     private fun startQuizPhase() {
@@ -248,7 +261,7 @@ class SessionViewModel(
                     isAnswerRevealed = false
                 )
             }
-            Log.d(TAG, "Quiz generated for '${sessionWord.word}' (${sessionWord.correctCount}/$REQUIRED_CORRECT)")
+            Log.d(TAG, "Quiz generated for '${sessionWord.word}' (${sessionWord.correctCount}/$requiredCorrect)")
         }
     }
     
@@ -327,8 +340,12 @@ class SessionViewModel(
         bestStreak: Int
     ) {
         val newCorrectCount = currentWord.correctCount + 1
-        val isMastered = newCorrectCount >= REQUIRED_CORRECT
+        val isMastered = newCorrectCount >= requiredCorrect
         
+        if (soundState.value) {
+            soundEffectPlayer?.playCorrect()
+        }
+
         // Update the word in queue
         val queueIndex = wordQueue.indexOfFirst { it.id == currentWord.id }
         if (queueIndex >= 0) {
@@ -350,7 +367,7 @@ class SessionViewModel(
                 val updatedWord = currentWord.copy(correctCount = newCorrectCount)
                 wordQueue.removeAt(queueIndex)
                 wordQueue.add(updatedWord)
-                Log.d(TAG, "CORRECT: '${currentWord.word}' (${newCorrectCount}/$REQUIRED_CORRECT)")
+                Log.d(TAG, "CORRECT: '${currentWord.word}' (${newCorrectCount}/$requiredCorrect)")
             }
         }
         
@@ -379,13 +396,17 @@ class SessionViewModel(
         streak: Int,
         bestStreak: Int
     ) {
+        if (soundState.value) {
+            soundEffectPlayer?.playIncorrect()
+        }
+
         // Reset correctCount and move to back of queue
         val queueIndex = wordQueue.indexOfFirst { it.id == currentWord.id }
         if (queueIndex >= 0) {
             val resetWord = currentWord.copy(correctCount = 0)
             wordQueue.removeAt(queueIndex)
             wordQueue.add(resetWord)
-            Log.d(TAG, "MISTAKE: '${currentWord.word}' - reset to 0/$REQUIRED_CORRECT")
+            Log.d(TAG, "MISTAKE: '${currentWord.word}' - reset to 0/$requiredCorrect")
         }
         
         // Record in database
@@ -471,7 +492,7 @@ class SessionViewModel(
     }
 
     private fun autoPlayPronunciationIfNeeded() {
-        if (appPreferences.pronunState) {
+        if (pronunState.value) {
             speakCurrentWord()
         }
     }
@@ -516,6 +537,10 @@ class SessionViewModel(
         
         // Store for ResultScreen
         sessionResultRepository.setResult(result)
+
+        if (soundState.value) {
+            soundEffectPlayer?.playSessionComplete()
+        }
         
         // Process results (update DB: familiarity, review dates)
         viewModelScope.launch {
@@ -553,7 +578,14 @@ class SessionViewModel(
                 example2?.takeIf { it.isNotEmpty() },
                 example3?.takeIf { it.isNotEmpty() }
             ),
-            isFavorite = isFavorite
+            isFavorite = isFavorite,
+            requiredCorrect = requiredCorrect,
+            secondTranslation = translationSecondLang
         )
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        soundEffectPlayer?.release()
     }
 }

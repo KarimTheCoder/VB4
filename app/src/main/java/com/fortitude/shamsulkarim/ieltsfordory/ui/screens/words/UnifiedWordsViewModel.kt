@@ -3,7 +3,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words
 import android.media.MediaPlayer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.UserPreferencesRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.connectivity.usecase.IsConnectedUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.learning.usecase.UpdateFavoriteStatusUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.media.AudioRepository
@@ -92,20 +92,32 @@ class UnifiedWordsViewModel(
     private val isConnectedUseCase: IsConnectedUseCase,
     private val isTtsReadyUseCase: IsTtsReadyUseCase,
     private val speakTextUseCase: SpeakTextUseCase,
-    private val appPreferences: AppPreferences
+    private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UnifiedWordsUiState())
     val uiState: StateFlow<UnifiedWordsUiState> = _uiState.asStateFlow()
     
     private var mediaPlayer: MediaPlayer? = null
+    private var lastLoadedFilterState = ""
+    private var lastLoadedSecondLang = ""
+
+    private suspend fun getFilterState(): String {
+        return "${userPreferencesRepository.getIsIeltsActive()}_${userPreferencesRepository.getIsToeflActive()}_${userPreferencesRepository.getIsSatActive()}_${userPreferencesRepository.getIsGreActive()}"
+    }
 
     init {
         loadAllData()
     }
 
+    fun refreshIfNeeded() {
+        loadAllData()
+    }
+
     private fun loadAllData() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
+            lastLoadedFilterState = getFilterState()
+            lastLoadedSecondLang = userPreferencesRepository.getSecondLanguage()
             val levelName = getLevelName()
             
             val allWords = getVocabularyUseCase.execute(levelName)
@@ -117,9 +129,9 @@ class UnifiedWordsViewModel(
                     allWords = allWords,
                     learnedWords = learnedWords,
                     favoriteWords = favoriteWords,
-                    filteredAllWords = allWords,
-                    filteredLearnedWords = learnedWords,
-                    filteredFavoriteWords = favoriteWords,
+                    filteredAllWords = filterWords(allWords, current.searchQuery),
+                    filteredLearnedWords = filterWords(learnedWords, current.searchQuery),
+                    filteredFavoriteWords = filterWords(favoriteWords, current.searchQuery),
                     isLoading = false,
                     canStartLearnedPractice = learnedWords.size >= 5,
                     canStartFavoritePractice = favoriteWords.size >= 5
@@ -128,8 +140,8 @@ class UnifiedWordsViewModel(
         }
     }
     
-    private fun getLevelName(): String {
-        val levelIndex = appPreferences.getPrevWordSelection()
+    private suspend fun getLevelName(): String {
+        val levelIndex = userPreferencesRepository.getPrevWordSelection()
         return when (levelIndex) {
             0 -> "beginner"
             1 -> "intermediate"
@@ -164,7 +176,7 @@ class UnifiedWordsViewModel(
 
     fun toggleFavorite(word: VocabularyWord) {
         val newFavoriteState = !word.isFavorite
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             updateFavoriteStatusUseCase.execute(word, newFavoriteState)
         }
         
@@ -193,35 +205,39 @@ class UnifiedWordsViewModel(
         }
         
         // Update favorite count in preferences
-        val currentCount = appPreferences.getFavoriteCountProfile()
-        if (newFavoriteState) {
-            appPreferences.setFavoriteCountProfile(currentCount + 1)
-        } else if (currentCount > 0) {
-            appPreferences.setFavoriteCountProfile(currentCount - 1)
+        viewModelScope.launch {
+            val currentCount = userPreferencesRepository.getFavoriteCountProfile()
+            if (newFavoriteState) {
+                userPreferencesRepository.setFavoriteCountProfile(currentCount + 1)
+            } else if (currentCount > 0) {
+                userPreferencesRepository.setFavoriteCountProfile(currentCount - 1)
+            }
         }
     }
 
     fun speakWord(word: VocabularyWord) {
-        val wordName = word.word.lowercase()
-        val useVoicePronunciation = appPreferences.getPronunState()
-        val isConnected = isConnectedUseCase.execute()
+        viewModelScope.launch {
+            val wordName = word.word.lowercase()
+            val useVoicePronunciation = userPreferencesRepository.getPronunState()
+            val isConnected = isConnectedUseCase.execute()
 
-        if (isConnected && useVoicePronunciation) {
-            _uiState.update { it.copy(loadingAudioForWord = word.word) }
-            
-            downloadAudioUseCase.execute(wordName, object : AudioRepository.Callback {
-                override fun onSuccess(data: AudioData) {
-                    _uiState.update { it.copy(loadingAudioForWord = null) }
-                    playAudio(data.localPath)
-                }
+            if (isConnected && useVoicePronunciation) {
+                _uiState.update { it.copy(loadingAudioForWord = word.word) }
+                
+                downloadAudioUseCase.execute(wordName, object : AudioRepository.Callback {
+                    override fun onSuccess(data: AudioData) {
+                        _uiState.update { it.copy(loadingAudioForWord = null) }
+                        playAudio(data.localPath)
+                    }
 
-                override fun onError(e: Exception) {
-                    _uiState.update { it.copy(loadingAudioForWord = null) }
-                    speakWithTts(wordName)
-                }
-            })
-        } else {
-            speakWithTts(wordName)
+                    override fun onError(e: Exception) {
+                        _uiState.update { it.copy(loadingAudioForWord = null) }
+                        speakWithTts(wordName)
+                    }
+                })
+            } else {
+                speakWithTts(wordName)
+            }
         }
     }
     
@@ -241,15 +257,17 @@ class UnifiedWordsViewModel(
     }
 
     fun startPractice() {
-        when (_uiState.value.selectedTab) {
-            WordTab.LEARNED -> {
-                appPreferences.setPracticeMode("learned")
-                appPreferences.setLevel(getLevelName())
+        viewModelScope.launch {
+            when (_uiState.value.selectedTab) {
+                WordTab.LEARNED -> {
+                    userPreferencesRepository.setPracticeMode("learned")
+                    userPreferencesRepository.setSelectedLevel(getLevelName())
+                }
+                WordTab.FAVORITES -> {
+                    userPreferencesRepository.setPracticeMode("favorite")
+                }
+                else -> { /* No practice for All Words tab */ }
             }
-            WordTab.FAVORITES -> {
-                appPreferences.setPracticeMode("favorite")
-            }
-            else -> { /* No practice for All Words tab */ }
         }
     }
 

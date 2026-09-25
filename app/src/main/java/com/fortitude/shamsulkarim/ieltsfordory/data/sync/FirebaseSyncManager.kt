@@ -3,7 +3,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.data.sync
 import android.content.Context
 import android.content.SharedPreferences
 import com.fortitude.shamsulkarim.ieltsfordory.R
-import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.UserPreferencesRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.database.usecase.AddChildEventListenerUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularySource
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.UpdateFavoriteStateUseCase
@@ -17,19 +17,23 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+interface SyncManager {
+    fun startSync(userId: String, callback: FirebaseSyncManager.SyncCallback?)
+}
+
 /**
  * Kotlin implementation of FirebaseSyncManager.
  * Synchronizes local Room database with remote Firebase Realtime Database
  * using background Coroutines.
  */
-class FirebaseSyncManager(
+open class FirebaseSyncManager(
     private val context: Context,
     private val addChildEventListenerUseCase: AddChildEventListenerUseCase,
     private val updateFavoriteStateUseCase: UpdateFavoriteStateUseCase,
-    private val updateLearnStateUseCase: UpdateLearnStateUseCase
-) {
-    private val sp: SharedPreferences = context.getSharedPreferences(AppPreferences.NAME, Context.MODE_PRIVATE)
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private val updateLearnStateUseCase: UpdateLearnStateUseCase,
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+) : SyncManager {
 
     private var savedBeginnerFav: List<Int>? = null
     private var savedAdvanceFav: List<Int>? = null
@@ -56,29 +60,27 @@ class FirebaseSyncManager(
         fun onSyncError(e: Exception)
     }
 
-    fun startSync(userId: String, callback: SyncCallback?) {
+    override fun startSync(userId: String, callback: SyncCallback?) {
         addChildEventListenerUseCase.execute(userId, object : ChildEventListener {
-            private var i = 0
-            private val strData = arrayOfNulls<String>(9)
             private val data = HashMap<String, String>()
             private var askOnce = false
 
             override fun onChildAdded(dataSnapshot: DataSnapshot, s: String?) {
-                if (dataSnapshot.exists() && i == 8 && !askOnce) {
-                    askOnce = true
-                    callback?.onCloudDataFound { performInitialSync(callback) }
-                }
-
                 val state = dataSnapshot.getValue(String::class.java)
-                strData[i] = state
                 dataSnapshot.key?.let { key ->
                     state?.let { data[key] = it }
                 }
 
-                if (strData[8] != null) {
-                    parseData(strData.filterNotNull().toTypedArray())
+                parseData(data)
+
+                if (data.size >= 8 && !askOnce) {
+                    askOnce = true
+                    if (callback != null) {
+                        callback.onCloudDataFound { performInitialSync(callback) }
+                    } else {
+                        performInitialSync(null)
+                    }
                 }
-                i++
             }
 
             override fun onChildChanged(dataSnapshot: DataSnapshot, s: String?) {
@@ -86,17 +88,10 @@ class FirebaseSyncManager(
                 val key = dataSnapshot.key ?: return
 
                 scope.launch {
-                    if (key.equals("advanceFavCount", ignoreCase = true) ||
-                        key.equals("intermediateFavCount", ignoreCase = true) ||
-                        key.equals("beginnerFavCount", ignoreCase = true)
-                    ) {
+                    if (isFavKey(key)) {
                         syncDatabasesIfFavDataChanged(value, key)
-                    }
-                    if (key.equals("advanceLearnedCount", ignoreCase = true) ||
-                        key.equals("intermediateLearnedCount", ignoreCase = true) ||
-                        key.equals("beginnerLearnedCount", ignoreCase = true)
-                    ) {
-                        syncSPIfLearnedDataChanged(value, key)
+                    } else if (isLearnedKey(key)) {
+                        syncDatabasesIfLearnedDataChanged(value, key)
                     }
                 }
             }
@@ -110,17 +105,22 @@ class FirebaseSyncManager(
         })
     }
 
-    private fun parseData(strData: Array<String>) {
-        if (strData.size < 9) return
-        greFavorite = strData[0]
-        greLearned = strData[1]
-        beginnerFavorite = strData[2]
-        beginnerLearned = strData[3]
-        sp.edit().putString(AppPreferences.KEY_USER_NAME, strData[4]).apply()
-        advanceFavorite = strData[5]
-        advanceLearned = strData[6]
-        intermediateFavorite = strData[7]
-        intermediateLearned = strData[8]
+    open fun parseData(data: Map<String, String>) {
+        greFavorite = data["greFavCount"] ?: data["greFavorite"]
+        greLearned = data["greLearnedCount"] ?: data["greLearned"]
+        beginnerFavorite = data["ieltsFavCount"] ?: data["beginnerFavCount"] ?: data["beginnerFavorite"]
+        beginnerLearned = data["ieltsLearnedCount"] ?: data["beginnerLearnedCount"] ?: data["beginnerLearned"]
+        advanceFavorite = data["satFavCount"] ?: data["advanceFavCount"] ?: data["advanceFavorite"]
+        advanceLearned = data["satLearnedCount"] ?: data["advanceLearnedCount"] ?: data["advanceLearned"]
+        intermediateFavorite = data["toeflFavCount"] ?: data["intermediateFavCount"] ?: data["intermediateFavorite"]
+        intermediateLearned = data["toeflLearnedCount"] ?: data["intermediateLearnedCount"] ?: data["intermediateLearned"]
+
+        val userName = data["name"] ?: data["userName"]
+        if (!userName.isNullOrBlank()) {
+            scope.launch {
+                userPreferencesRepository.setUserName(userName)
+            }
+        }
     }
 
     private fun performInitialSync(callback: SyncCallback?) {
@@ -149,7 +149,7 @@ class FirebaseSyncManager(
     private suspend fun syncFavorites(list: List<Int>?, action: suspend (Int, Boolean) -> Unit) {
         if (list != null && list.isNotEmpty()) {
             for (i in list.indices) {
-                action(i + 1, list[i] == 1)
+                action(i, list[i] == 1)
             }
         }
     }
@@ -157,7 +157,7 @@ class FirebaseSyncManager(
     private suspend fun syncLearned(list: List<Int>?, action: suspend (Int, Boolean) -> Unit) {
         if (list != null && list.isNotEmpty()) {
             for (i in list.indices) {
-                action(i + 1, list[i] == 1)
+                action(i, list[i] == 1)
             }
         }
     }
@@ -174,7 +174,7 @@ class FirebaseSyncManager(
         savedGreLearned = builderToNums(greLearned ?: "")
     }
 
-    private fun builderToNums(string: String): List<Int> {
+    open fun builderToNums(string: String): List<Int> {
         val backToNums = mutableListOf<Int>()
         var i = 0
         while (i < string.length) {
@@ -189,57 +189,63 @@ class FirebaseSyncManager(
         return backToNums
     }
 
+    private fun isFavKey(key: String): Boolean {
+        return key.equals("advanceFavCount", ignoreCase = true) ||
+               key.equals("intermediateFavCount", ignoreCase = true) ||
+               key.equals("beginnerFavCount", ignoreCase = true) ||
+               key.equals("ieltsFavCount", ignoreCase = true) ||
+               key.equals("toeflFavCount", ignoreCase = true) ||
+               key.equals("satFavCount", ignoreCase = true) ||
+               key.equals("greFavCount", ignoreCase = true)
+    }
+
+    private fun isLearnedKey(key: String): Boolean {
+        return key.equals("advanceLearnedCount", ignoreCase = true) ||
+               key.equals("intermediateLearnedCount", ignoreCase = true) ||
+               key.equals("beginnerLearnedCount", ignoreCase = true) ||
+               key.equals("ieltsLearnedCount", ignoreCase = true) ||
+               key.equals("toeflLearnedCount", ignoreCase = true) ||
+               key.equals("satLearnedCount", ignoreCase = true) ||
+               key.equals("greLearnedCount", ignoreCase = true)
+    }
+
     private suspend fun syncDatabasesIfFavDataChanged(newData: String, key: String) {
         val newDataList = builderToNums(newData)
         if (newDataList.isNotEmpty()) {
             when {
-                key.equals("advanceFavCount", ignoreCase = true) -> {
-                    resetAndSync(R.array.SAT_words, "advance", newDataList) { id, state ->
-                        updateFavoriteStateUseCase.execute(VocabularySource.SAT, id, state)
-                    }
+                key.equals("ieltsFavCount", ignoreCase = true) || key.equals("beginnerFavCount", ignoreCase = true) -> {
+                    syncFavorites(newDataList) { id, state -> updateFavoriteStateUseCase.execute(VocabularySource.IELTS, id, state) }
                 }
-                key.equals("intermediateFavCount", ignoreCase = true) -> {
-                    resetAndSync(R.array.TOEFL_words, "intermediate", newDataList) { id, state ->
-                        updateFavoriteStateUseCase.execute(VocabularySource.TOEFL, id, state)
-                    }
+                key.equals("toeflFavCount", ignoreCase = true) || key.equals("intermediateFavCount", ignoreCase = true) -> {
+                    syncFavorites(newDataList) { id, state -> updateFavoriteStateUseCase.execute(VocabularySource.TOEFL, id, state) }
                 }
-                key.equals("beginnerFavCount", ignoreCase = true) -> {
-                    resetAndSync(R.array.TOEFL_words, "beginner", newDataList) { id, state ->
-                        updateFavoriteStateUseCase.execute(VocabularySource.IELTS, id, state)
-                    }
+                key.equals("satFavCount", ignoreCase = true) || key.equals("advanceFavCount", ignoreCase = true) -> {
+                    syncFavorites(newDataList) { id, state -> updateFavoriteStateUseCase.execute(VocabularySource.SAT, id, state) }
+                }
+                key.equals("greFavCount", ignoreCase = true) -> {
+                    syncFavorites(newDataList) { id, state -> updateFavoriteStateUseCase.execute(VocabularySource.GRE, id, state) }
                 }
             }
         }
     }
 
-    private suspend fun resetAndSync(
-        arrayResId: Int,
-        spKey: String,
-        newDataList: List<Int>,
-        action: suspend (Int, Boolean) -> Unit
-    ) {
-        val size = sp.getInt(spKey, context.resources.getStringArray(arrayResId).size)
-        for (i in 0 until size) {
-            action(i + 1, false)
-        }
-        for (k in newDataList.indices) {
-            action(newDataList[k] + 1, true)
-        }
-    }
-
-    private fun syncSPIfLearnedDataChanged(data: String, key: String) {
-        val firebaseSaved = data.toIntOrNull() ?: return
-        when {
-            key.equals("advanceLearnedCount", ignoreCase = true) -> updateSPIfHigher("advance", firebaseSaved)
-            key.equals("intermediateLearnedCount", ignoreCase = true) -> updateSPIfHigher("intermediate", firebaseSaved)
-            key.equals("beginnerLearnedCount", ignoreCase = true) -> updateSPIfHigher("beginner", firebaseSaved)
-        }
-    }
-
-    private fun updateSPIfHigher(key: String, firebaseValue: Int) {
-        val localValue = sp.getInt(key, 0)
-        if (firebaseValue > localValue) {
-            sp.edit().putInt(key, firebaseValue).apply()
+    private suspend fun syncDatabasesIfLearnedDataChanged(newData: String, key: String) {
+        val newDataList = builderToNums(newData)
+        if (newDataList.isNotEmpty()) {
+            when {
+                key.equals("ieltsLearnedCount", ignoreCase = true) || key.equals("beginnerLearnedCount", ignoreCase = true) -> {
+                    syncLearned(newDataList) { id, state -> updateLearnStateUseCase.execute(VocabularySource.IELTS, id, state) }
+                }
+                key.equals("toeflLearnedCount", ignoreCase = true) || key.equals("intermediateLearnedCount", ignoreCase = true) -> {
+                    syncLearned(newDataList) { id, state -> updateLearnStateUseCase.execute(VocabularySource.TOEFL, id, state) }
+                }
+                key.equals("satLearnedCount", ignoreCase = true) || key.equals("advanceLearnedCount", ignoreCase = true) -> {
+                    syncLearned(newDataList) { id, state -> updateLearnStateUseCase.execute(VocabularySource.SAT, id, state) }
+                }
+                key.equals("greLearnedCount", ignoreCase = true) -> {
+                    syncLearned(newDataList) { id, state -> updateLearnStateUseCase.execute(VocabularySource.GRE, id, state) }
+                }
+            }
         }
     }
 }

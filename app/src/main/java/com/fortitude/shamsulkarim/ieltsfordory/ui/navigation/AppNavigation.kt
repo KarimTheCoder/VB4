@@ -148,7 +148,11 @@ fun AppNavigation(
                 }
             ) {
                 SettingsScreen(
-                    onNavigateBack = { navController.popBackStack() }
+                    onNavigateBack = { navController.popBackStack() },
+                    onSaveAndNavigateHome = {
+                        homeViewModel.resetSession()
+                        navController.popBackStack(HomeRoute, inclusive = false)
+                    }
                 )
             }
 

@@ -1,6 +1,9 @@
 package com.fortitude.shamsulkarim.ieltsfordory.domain.learning
 
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 
 /**
  * Repository for storing and retrieving session words between screens.
@@ -15,6 +18,9 @@ class SessionWordsRepository {
     
     // Flag to signal HomeScreen should refresh words (set after completing a session)
     private var _shouldRefreshHome: Boolean = false
+    
+    private val _refreshTrigger = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    val refreshTrigger: SharedFlow<Unit> = _refreshTrigger.asSharedFlow()
     
     /**
      * Store words selected for the learning session.
@@ -48,6 +54,7 @@ class SessionWordsRepository {
      */
     fun requestHomeRefresh() {
         _shouldRefreshHome = true
+        _refreshTrigger.tryEmit(Unit)
     }
     
     /**

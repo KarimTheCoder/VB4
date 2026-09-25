@@ -84,33 +84,6 @@ class MainViewModel(
         }
     }
 
-    /**
-     * Initialize default SharedPreferences if not already set.
-     * This preserves the legacy behavior from MainActivity.
-     */
-    fun initializeDefaultPreferences(context: Context) {
-        val sp = context.getSharedPreferences(
-            "com.example.shamsulkarim.vocabulary", 
-            Context.MODE_PRIVATE
-        )
-        if (!sp.contains("soundState")) {
-            sp.edit()
-                .putBoolean("soundState", true)
-                .putInt("totalCorrects", 0)
-                .apply()
-        }
-    }
-
-    /**
-     * Get the username from SharedPreferences.
-     */
-    fun getUserName(context: Context): String {
-        val sp = context.getSharedPreferences(
-            "com.example.shamsulkarim.vocabulary",
-            Context.MODE_PRIVATE
-        )
-        return sp.getString("userName", "Boo") ?: "Boo"
-    }
 }
 
 

@@ -85,7 +85,9 @@ val appModule = module {
     single<AuthRepository> { FirebaseAuthRepository(get()) }
     single { com.fortitude.shamsulkarim.ieltsfordory.data.preferences.UserPreferencesRepository(get()) }
     single { com.fortitude.shamsulkarim.ieltsfordory.data.preferences.ThemeRepository(get()) }
-    single { com.fortitude.shamsulkarim.ieltsfordory.data.sync.FirebaseSyncManager(get(), get(), get(), get()) }
+    single { com.fortitude.shamsulkarim.ieltsfordory.data.sync.FirebaseSyncManager(get(), get(), get(), get(), get()) }
+    single<com.fortitude.shamsulkarim.ieltsfordory.data.sync.SyncManager> { get<com.fortitude.shamsulkarim.ieltsfordory.data.sync.FirebaseSyncManager>() }
+    single { com.fortitude.shamsulkarim.ieltsfordory.utility.audio.SoundEffectPlayer(get()) }
     
     // Session management repositories (singletons for passing data between screens)
     single { SessionWordsRepository() }
@@ -148,7 +150,7 @@ val appModule = module {
     }
     viewModel {
         HomeViewModel(
-            AppPreferences.get(get()),
+            get(),  // UserPreferencesRepository
             get(),  // SelectSessionWordsUseCase
             get(),  // LearningRepository
             get()   // SessionWordsRepository
@@ -157,7 +159,7 @@ val appModule = module {
     viewModel { 
         com.fortitude.shamsulkarim.ieltsfordory.ui.screens.words.UnifiedWordsViewModel(
             get(), get(), get(), get(), get(), get(), get(), get(),
-            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+            get() // UserPreferencesRepository
         )
     }
     viewModel { 
@@ -176,8 +178,9 @@ val appModule = module {
             get(),  // VocabularyRepository
             get(),  // UpdateFavoriteStatusUseCase
             get(),  // SpeakTextUseCase
-            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get()),
-            get()   // SelectSessionWordsUseCase
+            get(),  // UserPreferencesRepository
+            get(),  // SelectSessionWordsUseCase
+            get()   // SoundEffectPlayer
         )
     }
     viewModel {
@@ -189,13 +192,16 @@ val appModule = module {
     viewModel { 
         com.fortitude.shamsulkarim.ieltsfordory.ui.screens.pretrain.PretrainViewModel(
             get(), get(),
-            com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get())
+            get() // UserPreferencesRepository
         )
     }
     viewModel { 
         com.fortitude.shamsulkarim.ieltsfordory.ui.screens.settings.SettingsComposeViewModel(
             com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences.get(get()),
-            get()  // AuthRepository
+            get(),  // AuthRepository
+            get(),  // UserPreferencesRepository
+            get(),  // FirebaseSyncManager
+            get()   // SessionWordsRepository
         )
     }
 }

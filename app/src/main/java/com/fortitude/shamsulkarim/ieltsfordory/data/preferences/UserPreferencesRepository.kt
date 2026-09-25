@@ -35,9 +35,9 @@ private val Context.userDataStore: DataStore<Preferences> by preferencesDataStor
  *
  * Automatically migrates existing SharedPreferences keys upon first initialization.
  */
-class UserPreferencesRepository(private val context: Context) {
+open class UserPreferencesRepository(private val context: Context) {
 
-    private val dataStore = context.userDataStore
+    private val dataStore by lazy { context.userDataStore }
 
     companion object {
         // Theme
@@ -62,6 +62,8 @@ class UserPreferencesRepository(private val context: Context) {
         val KEY_TRIAL_END_DATE = longPreferencesKey(AppPreferences.KEY_TRIAL_END_DATE)
         val KEY_HOME_VISITED = booleanPreferencesKey(AppPreferences.KEY_HOME)
         val KEY_HOME_FRAGMENT_TRIAL_END = booleanPreferencesKey(AppPreferences.KEY_HOME_FRAGMENT_TRIAL_END)
+        val KEY_PREV_SELECTION = intPreferencesKey(AppPreferences.KEY_PREV_SELECTION)
+        val KEY_FAVORITE_COUNT_PROFILE = intPreferencesKey(AppPreferences.KEY_FAVORITE_COUNT_PROFILE)
 
         // Reminders (migrated from RemindMePref & AppPreferences)
         val KEY_REMINDER_STATUS = booleanPreferencesKey("reminderStatus")
@@ -74,6 +76,7 @@ class UserPreferencesRepository(private val context: Context) {
         val KEY_IS_TOEFL_ACTIVE = booleanPreferencesKey(AppPreferences.KEY_IS_TOEFL_ACTIVE)
         val KEY_IS_SAT_ACTIVE = booleanPreferencesKey(AppPreferences.KEY_IS_SAT_ACTIVE)
         val KEY_IS_GRE_ACTIVE = booleanPreferencesKey(AppPreferences.KEY_IS_GRE_ACTIVE)
+        val KEY_SECOND_LANGUAGE = stringPreferencesKey(AppPreferences.KEY_SECOND_LANGUAGE)
     }
 
     private val preferencesFlow: Flow<Preferences> = dataStore.data
@@ -139,9 +142,45 @@ class UserPreferencesRepository(private val context: Context) {
         prefs[KEY_DEFAULT_ALARM] ?: false
     }
 
+    val isIeltsActiveFlow: Flow<Boolean> = preferencesFlow.map { prefs ->
+        prefs[KEY_IS_IELTS_ACTIVE] ?: true
+    }
+
+    val isToeflActiveFlow: Flow<Boolean> = preferencesFlow.map { prefs ->
+        prefs[KEY_IS_TOEFL_ACTIVE] ?: true
+    }
+
+    val isSatActiveFlow: Flow<Boolean> = preferencesFlow.map { prefs ->
+        prefs[KEY_IS_SAT_ACTIVE] ?: true
+    }
+
+    val isGreActiveFlow: Flow<Boolean> = preferencesFlow.map { prefs ->
+        prefs[KEY_IS_GRE_ACTIVE] ?: true
+    }
+
+    val secondLanguageFlow: Flow<String> = preferencesFlow.map { prefs ->
+        prefs[KEY_SECOND_LANGUAGE] ?: "english"
+    }
+
+    val prevWordSelectionFlow: Flow<Int> = preferencesFlow.map { prefs ->
+        prefs[KEY_PREV_SELECTION] ?: 0
+    }
+
+    val favoriteCountProfileFlow: Flow<Int> = preferencesFlow.map { prefs ->
+        prefs[KEY_FAVORITE_COUNT_PROFILE] ?: 0
+    }
+
+    val trialEndDateFlow: Flow<Long> = preferencesFlow.map { prefs ->
+        prefs[KEY_TRIAL_END_DATE] ?: 0L
+    }
+
+    val homeVisitedFlow: Flow<Boolean> = preferencesFlow.map { prefs ->
+        prefs[KEY_HOME_VISITED] ?: false
+    }
+
     // --- Suspend Mutation Methods ---
 
-    suspend fun setDarkMode(mode: Int) {
+    open suspend fun setDarkMode(mode: Int) {
         dataStore.edit { prefs ->
             prefs[KEY_DARK_MODE] = mode
         }
@@ -153,13 +192,13 @@ class UserPreferencesRepository(private val context: Context) {
         }
     }
 
-    suspend fun setWordsPerSession(words: Int) {
+    open suspend fun setWordsPerSession(words: Int) {
         dataStore.edit { prefs ->
             prefs[KEY_WORDS_PER_SESSION] = words
         }
     }
 
-    suspend fun setRepetitionPerSession(repetition: Int) {
+    open suspend fun setRepetitionPerSession(repetition: Int) {
         dataStore.edit { prefs ->
             prefs[KEY_REPEATATION_PER_SESSION] = repetition
         }
@@ -234,6 +273,39 @@ class UserPreferencesRepository(private val context: Context) {
         }
     }
 
+    suspend fun setFilters(ielts: Boolean, toefl: Boolean, sat: Boolean, gre: Boolean) {
+        dataStore.edit { prefs ->
+            prefs[KEY_IS_IELTS_ACTIVE] = ielts
+            prefs[KEY_IS_TOEFL_ACTIVE] = toefl
+            prefs[KEY_IS_SAT_ACTIVE] = sat
+            prefs[KEY_IS_GRE_ACTIVE] = gre
+        }
+    }
+
+    suspend fun setSecondLanguage(lang: String) {
+        dataStore.edit { prefs ->
+            prefs[KEY_SECOND_LANGUAGE] = lang
+        }
+    }
+
+    suspend fun setPrevWordSelection(selection: Int) {
+        dataStore.edit { prefs ->
+            prefs[KEY_PREV_SELECTION] = selection
+        }
+    }
+
+    suspend fun setFavoriteCountProfile(count: Int) {
+        dataStore.edit { prefs ->
+            prefs[KEY_FAVORITE_COUNT_PROFILE] = count
+        }
+    }
+
+    suspend fun setHomeVisited(visited: Boolean) {
+        dataStore.edit { prefs ->
+            prefs[KEY_HOME_VISITED] = visited
+        }
+    }
+
     // Direct snapshot access when required in suspend blocks
     suspend fun getUserName(): String = userNameFlow.first()
     suspend fun getDarkMode(): Int = darkModeFlow.first()
@@ -241,6 +313,20 @@ class UserPreferencesRepository(private val context: Context) {
     suspend fun getRepetitionPerSession(): Int = repetitionPerSessionFlow.first()
     suspend fun getSoundState(): Boolean = soundStateFlow.first()
     suspend fun getPronunState(): Boolean = pronunStateFlow.first()
+    suspend fun getImageQuality(): Int = imageQualityFlow.first()
     suspend fun getTotalCorrects(): Int = totalCorrectsFlow.first()
     suspend fun getSelectedLevel(): String = selectedLevelFlow.first()
+    suspend fun getIsIeltsActive(): Boolean = isIeltsActiveFlow.first()
+    suspend fun getIsToeflActive(): Boolean = isToeflActiveFlow.first()
+    suspend fun getIsSatActive(): Boolean = isSatActiveFlow.first()
+    suspend fun getIsGreActive(): Boolean = isGreActiveFlow.first()
+    suspend fun getSecondLanguage(): String = secondLanguageFlow.first()
+    suspend fun getPrevWordSelection(): Int = prevWordSelectionFlow.first()
+    suspend fun getFavoriteCountProfile(): Int = favoriteCountProfileFlow.first()
+    suspend fun isHomeVisited(): Boolean = homeVisitedFlow.first()
+    suspend fun isTrialActive(): Boolean {
+        val endDate = trialEndDateFlow.first()
+        if (endDate == 0L) return false
+        return System.currentTimeMillis() < endDate
+    }
 }

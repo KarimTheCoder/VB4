@@ -65,6 +65,12 @@ fun UnifiedWordsScreen(
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
     val listState = rememberLazyListState()
+    val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
+
+    androidx.lifecycle.compose.LifecycleResumeEffect(Unit) {
+        viewModel.refreshIfNeeded()
+        onPauseOrDispose { }
+    }
 
     val isFabVisible by remember {
         derivedStateOf {

@@ -47,8 +47,12 @@ class ProfileViewModel(
         }
     }
 
+    fun refreshStats() {
+        loadLearningStats()
+    }
+
     private fun loadLearningStats() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             val levels = listOf("beginner", "intermediate", "advanced")
             var total = 0
             var learned = 0

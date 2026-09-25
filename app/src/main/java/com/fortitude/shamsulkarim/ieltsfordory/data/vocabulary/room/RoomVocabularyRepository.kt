@@ -55,6 +55,7 @@ class RoomVocabularyRepository(
         val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
+            if (!isSourceActive(source)) return@forEach
             val arrays = wordArrays[source] ?: return@forEach
             val favorites = wordProgressDao.getFavorites(source)
             
@@ -112,8 +113,8 @@ class RoomVocabularyRepository(
         val words = mutableListOf<VocabularyWord>()
         
         SOURCES.forEach { source ->
+            if (!isSourceActive(source)) return@forEach
             val arrays = wordArrays[source] ?: return@forEach
-            if (!arrays.isActive) return@forEach
             
             val progressMap = getProgressMap(source)
             
@@ -248,9 +249,19 @@ class RoomVocabularyRepository(
         return wordProgressDao.getBySource(source).associateBy { it.wordId }
     }
 
+    private fun isSourceActive(source: String): Boolean {
+        return when (source) {
+            "IELTS" -> prefs.getBoolean("isIELTSActive", true)
+            "TOEFL" -> prefs.getBoolean("isTOEFLActive", true)
+            "SAT" -> prefs.getBoolean("isSATActive", true)
+            "GRE" -> prefs.getBoolean("isGREActive", true)
+            else -> true
+        }
+    }
+
     private fun getLevelRange(source: String, level: String): Pair<Int, Int> {
         val arrays = wordArrays[source] ?: return Pair(0, 0)
-        if (!arrays.isActive) return Pair(0, 0)
+        if (!isSourceActive(source)) return Pair(0, 0)
 
         val totalSize = arrays.words.size
         val beginnerEnd = getPercentage(30, totalSize)
@@ -284,15 +295,18 @@ class RoomVocabularyRepository(
         var attempts = 0
         val maxAttempts = limit * 20 // Safer limit to prevent infinite loops
         
+        val activeSources = SOURCES.filter { isSourceActive(it) }
+        val sourcesToUse = if (activeSources.isNotEmpty()) activeSources else SOURCES
+        
         while (selectedWords.size < limit && attempts < maxAttempts) {
             attempts++
-            val source = SOURCES.random()
+            val source = sourcesToUse.random()
             val arrays = wordArrays[source] ?: continue
             val totalWords = arrays.words.size
             if (totalWords == 0) continue
             
             val index = (0 until totalWords).random()
-            val wordId = arrays.position.getOrNull(index) ?: index
+            val wordId = index
             
             if (wordId !in selectedIds) {
                 // Check if we can use this word
@@ -324,7 +338,7 @@ class RoomVocabularyRepository(
         val useSecondLanguage = !secondLanguage.equals("english", ignoreCase = true)
 
         return VocabularyWord(
-            id = arrays.position.getOrNull(index) ?: index,
+            id = index,
             word = arrays.words.getOrNull(index) ?: "",
             translation = arrays.translations.getOrNull(index) ?: "",
             pronunciation = arrays.pronunciation.getOrNull(index),

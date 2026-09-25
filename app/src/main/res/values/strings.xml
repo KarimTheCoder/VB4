@@ -114,6 +114,12 @@
     <string name="settings_light">Light</string>
     <string name="settings_dark">Dark</string>
     <string name="settings_system">System</string>
+    <string name="settings_save_changes">Save Changes</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="settings_discard_title">Discard changes?</string>
+    <string name="settings_discard_message">You have unsaved changes. Are you sure you want to discard them?</string>
+    <string name="settings_discard_confirm">Discard</string>
+    <string name="settings_discard_dismiss">Keep Editing</string>
     <string-array name="settings_theme_options">
         <item>@string/settings_light</item>
         <item>@string/settings_dark</item>

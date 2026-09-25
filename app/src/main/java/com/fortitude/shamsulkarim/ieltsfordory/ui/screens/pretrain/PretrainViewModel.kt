@@ -3,7 +3,7 @@ package com.fortitude.shamsulkarim.ieltsfordory.ui.screens.pretrain
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fortitude.shamsulkarim.ieltsfordory.BuildConfig
-import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.AppPreferences
+import com.fortitude.shamsulkarim.ieltsfordory.data.preferences.UserPreferencesRepository
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetLearnedCountUseCase
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.usecase.GetTotalCountUseCase
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +34,7 @@ data class PretrainUiState(
 class PretrainViewModel(
     private val getLearnedCountUseCase: GetLearnedCountUseCase,
     private val getTotalCountUseCase: GetTotalCountUseCase,
-    private val appPreferences: AppPreferences
+    private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PretrainUiState())
@@ -48,17 +48,17 @@ class PretrainViewModel(
      * Load initial training state from preferences.
      */
     fun loadTrainingState() {
-        val level = appPreferences.getLevel() ?: "beginner"
-        val levelDisplayName = getLevelDisplayName(level)
-        
-        val secondLanguage = appPreferences.getSecondLanguage() ?: "english"
-        val isSpanishEnabled = secondLanguage.equals("spanish", ignoreCase = true)
-        
-        val isIeltsActive = appPreferences.isIELTSActive()
-        val isToeflActive = appPreferences.isTOEFLActive()
-        val isTooEasyEnabled = !isIeltsActive && !isToeflActive
-
         viewModelScope.launch(Dispatchers.IO) {
+            val level = userPreferencesRepository.getSelectedLevel()
+            val levelDisplayName = getLevelDisplayName(level)
+            
+            val secondLanguage = userPreferencesRepository.getSecondLanguage()
+            val isSpanishEnabled = secondLanguage.equals("spanish", ignoreCase = true)
+            
+            val isIeltsActive = userPreferencesRepository.getIsIeltsActive()
+            val isToeflActive = userPreferencesRepository.getIsToeflActive()
+            val isTooEasyEnabled = !isIeltsActive && !isToeflActive
+
             val learnedCount = getLearnedCountUseCase.execute(level)
             val totalCount = getTotalCountUseCase.execute(level)
             val progressPercentage = if (totalCount > 0) learnedCount.toFloat() / totalCount else 0f
@@ -84,7 +84,9 @@ class PretrainViewModel(
      */
     fun toggleSpanishMode(enabled: Boolean) {
         val newLanguage = if (enabled) "spanish" else "english"
-        appPreferences.setSecondLanguage(newLanguage)
+        viewModelScope.launch {
+            userPreferencesRepository.setSecondLanguage(newLanguage)
+        }
         
         _uiState.update { it.copy(isSpanishEnabled = enabled) }
     }
@@ -93,12 +95,12 @@ class PretrainViewModel(
      * Toggle "Too Easy" mode (excludes IELTS/TOEFL words when enabled).
      */
     fun toggleTooEasyMode(enabled: Boolean) {
-        if (enabled) {
-            appPreferences.setIELTSActive(false)
-            appPreferences.setTOEFLActive(false)
-        } else {
-            appPreferences.setIELTSActive(true)
-            appPreferences.setTOEFLActive(true)
+        viewModelScope.launch {
+            if (enabled) {
+                userPreferencesRepository.setFilters(ielts = false, toefl = false, sat = userPreferencesRepository.getIsSatActive(), gre = userPreferencesRepository.getIsGreActive())
+            } else {
+                userPreferencesRepository.setFilters(ielts = true, toefl = true, sat = userPreferencesRepository.getIsSatActive(), gre = userPreferencesRepository.getIsGreActive())
+            }
         }
         
         _uiState.update { it.copy(isTooEasyEnabled = enabled) }

@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.fortitude.shamsulkarim.ieltsfordory.domain.vocabulary.model.VocabularyWord
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.Green
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.Red
@@ -137,6 +138,35 @@ fun WordCard(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
+
+            // Spanish translation if available
+            word.translationSecondLang?.takeIf { it.isNotBlank() }?.let { spanish ->
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    androidx.compose.material3.Surface(
+                        shape = RoundedCornerShape(4.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer
+                    ) {
+                        Text(
+                            text = "ES",
+                            fontSize = 10.sp,
+                            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.padding(horizontal = 4.dp, vertical = 1.dp)
+                        )
+                    }
+                    Text(
+                        text = spanish,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
 
             // Grammar (if available)
             word.grammar?.takeIf { it.isNotBlank() }?.let { grammar ->

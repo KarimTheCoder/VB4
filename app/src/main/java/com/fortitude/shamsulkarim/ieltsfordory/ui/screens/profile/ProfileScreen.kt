@@ -82,6 +82,11 @@ fun ProfileScreen(
         }
     )
 
+    androidx.lifecycle.compose.LifecycleResumeEffect(Unit) {
+        viewModel.refreshStats()
+        onPauseOrDispose { }
+    }
+
     ProfileScreenContent(
         uiState = uiState,
         onSettingsClick = onSettingsClick,
