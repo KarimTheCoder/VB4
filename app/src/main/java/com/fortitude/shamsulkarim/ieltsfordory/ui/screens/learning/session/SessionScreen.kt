@@ -1,9 +1,6 @@
 package com.fortitude.shamsulkarim.ieltsfordory.ui.screens.learning.session
 
 import android.content.Intent
-import androidx.compose.material.icons.automirrored.filled.VolumeUp
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.net.toUri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -24,29 +21,28 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.Bookmark
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Surface
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -55,13 +51,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.core.net.toUri
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.LocalExtendedColors
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 
@@ -83,6 +80,7 @@ fun SessionScreen(
 
     SessionScreenContent(
         uiState = uiState,
+        onBack = onBack,
         onNextClick = viewModel::onNextWord,
         onKnowIt = viewModel::recordCorrectAnswer,
         onNeedPractice = viewModel::recordMistake,
@@ -109,9 +107,11 @@ fun SessionScreen(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SessionScreenContent(
     uiState: SessionUiState,
+    onBack: () -> Unit = {},
     onNextClick: () -> Unit = {},
     onKnowIt: () -> Unit = {},           // User knows this word
     onNeedPractice: () -> Unit = {},      // User needs more practice
@@ -122,7 +122,47 @@ fun SessionScreenContent(
     onOptionSelected: (Int) -> Unit = {},
     onCheckAnswer: () -> Unit = {}
 ) {
-    Scaffold(modifier = Modifier.fillMaxSize().systemBarsPadding()) { innerPadding ->
+    Scaffold(
+        modifier = Modifier.fillMaxSize().systemBarsPadding(),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = if (uiState.phase == SessionPhase.QUIZZING) "Quizzing" else "Learning",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        SessionProgressBar(
+                            currentIndex = if (uiState.phase == SessionPhase.QUIZZING) 
+                                uiState.correctAnswers else uiState.currentWordIndex,
+                            totalWords = if (uiState.phase == SessionPhase.QUIZZING)
+                                uiState.totalWords * 3 else uiState.totalWords,
+                            isQuizPhase = uiState.phase == SessionPhase.QUIZZING,
+                            modifier = Modifier.width(160.dp)
+                        )
+                    }
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "Close session",
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
+            )
+        }
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -132,19 +172,6 @@ fun SessionScreenContent(
 
         ) {
             Spacer(modifier = Modifier.height(16.dp))
-
-            // Progress Bar - shows different progress based on phase
-            // In quiz: progress = correctAnswers / (totalWords * 3) since each word needs 3 correct
-            SessionProgressBar(
-                currentIndex = if (uiState.phase == SessionPhase.QUIZZING) 
-                    uiState.correctAnswers else uiState.currentWordIndex,
-                totalWords = if (uiState.phase == SessionPhase.QUIZZING)
-                    uiState.totalWords * 3 else uiState.totalWords,  // 3 correct per word needed
-                isQuizPhase = uiState.phase == SessionPhase.QUIZZING,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
 
             if (uiState.phase == SessionPhase.QUIZZING) {
                 QuizContent(
@@ -157,6 +184,7 @@ fun SessionScreenContent(
                     onCheckAnswer = onCheckAnswer,
                     onNextClick = onNextClick,
                     onSpeakClick = onSpeakClick,
+                    onToggleFavorite = onToggleFavorite,
                     // Session stats for mastery UI
                     masteredCount = uiState.masteredCount,
                     totalWords = uiState.totalWords,
@@ -174,8 +202,7 @@ fun SessionScreenContent(
                 ) {
                     // Word Card
                     WordCard(
-                        word = uiState.currentWord.word,
-                        isFavorite = uiState.currentWord.isFavorite,
+                        word = uiState.currentWord,
                         onSpeakClick = onSpeakClick,
                         onToggleFavorite = onToggleFavorite,
                         modifier = Modifier.fillMaxWidth()
@@ -185,6 +212,7 @@ fun SessionScreenContent(
 
                     // Explanation Card
                     ExplanationCard(
+                        targetWord = uiState.currentWord.word,
                         meaning = uiState.currentWord.meaning,
                         examples = uiState.currentWord.examples,
                         secondTranslation = uiState.currentWord.secondTranslation,
@@ -251,6 +279,7 @@ fun QuizContent(
     onCheckAnswer: () -> Unit,
     onNextClick: () -> Unit,
     onSpeakClick: () -> Unit = {},
+    onToggleFavorite: () -> Unit = {},
     // Session stats for mastery UI
     masteredCount: Int = 0,
     totalWords: Int = 0,
@@ -261,55 +290,36 @@ fun QuizContent(
         modifier = Modifier.fillMaxSize()
     ) {
 
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            border = androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f))
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 20.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = word.word,
-                        fontSize = 28.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    if (word.requiredCorrect > 1) {
-                        Spacer(modifier = Modifier.height(2.dp))
-                        Text(
-                            text = "Mastery: ${word.correctCount}/${word.requiredCorrect}",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
-
-                IconButton(
-                    onClick = onSpeakClick,
-                    modifier = Modifier.size(36.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-                        contentDescription = "Pronounce word",
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-            }
-        }
+        WordCard(
+            word = word,
+            onSpeakClick = onSpeakClick,
+            onToggleFavorite = onToggleFavorite,
+            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+        )
         
         Spacer(modifier = Modifier.height(12.dp))
         
+        // Options List Header
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(8.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.primary)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = "SELECT CORRECT DEFINITION",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 1.5.sp,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            )
+        }
+
         // Options List
         Column(
             modifier = Modifier.weight(1f),
@@ -318,32 +328,61 @@ fun QuizContent(
             options.forEachIndexed { index, option ->
                 val isSelected = selectedOptionIndex == index
                 val isCorrect = index == correctOptionIndex
+                val letter = ('A' + index).toString()
                 
                 val (borderColor, containerColor, textColor) = when {
                     isAnswerRevealed && isCorrect -> Triple(LocalExtendedColors.current.statusGreen, LocalExtendedColors.current.statusGreenLight, MaterialTheme.colorScheme.onSurface)
                     isAnswerRevealed && isSelected && !isCorrect -> Triple(LocalExtendedColors.current.statusPink, LocalExtendedColors.current.statusPinkLight, MaterialTheme.colorScheme.onSurface)
                     isSelected -> Triple(MaterialTheme.colorScheme.primary, LocalExtendedColors.current.lightBlue, MaterialTheme.colorScheme.primary)
-                    else -> Triple(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f), MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.onSurface)
+                    else -> Triple(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f), MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.onSurface)
                 }
                 
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable(enabled = !isAnswerRevealed) { onOptionSelected(index) },
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = containerColor),
                     border = androidx.compose.foundation.BorderStroke(2.dp, borderColor)
                 ) {
                     Row(
-                        modifier = Modifier.padding(horizontal = 16.dp),
+                        modifier = Modifier.padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+                        // Letter Circle (Left)
+                        Box(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .clip(CircleShape)
+                                .background(LocalExtendedColors.current.lightBlue),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = letter,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+
+                        // Option Text (Middle)
+                        Text(
+                            text = option,
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 16.dp),
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = textColor,
+                        )
+
+                        // Selection Indicator Circle (Right)
                         Box(
                             modifier = Modifier
                                 .size(24.dp)
                                 .border(
                                     width = 2.dp,
-                                    color = borderColor,
+                                    color = if (isSelected || (isAnswerRevealed && isCorrect)) borderColor else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                                     shape = CircleShape
                                 )
                                 .background(
@@ -368,16 +407,6 @@ fun QuizContent(
                                  )
                              }
                         }
-                        
-
-                        Text(
-                            text = option,
-                            modifier = Modifier.padding(16.dp),
-
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = textColor,
-                        )
                     }
                 }
             }
@@ -478,77 +507,158 @@ private fun SessionProgressBar(
             trackColor = LocalExtendedColors.current.progressTrack,
             strokeCap = StrokeCap.Round
         )
-
-        // Dot indicator at current progress position
-        Box(
-            modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .size(12.dp)
-                .clip(CircleShape)
-                .background(if (isQuizPhase) LocalExtendedColors.current.statusGreen else MaterialTheme.colorScheme.primary)
-                .border(2.dp, MaterialTheme.colorScheme.surface, CircleShape)
-        )
     }
 }
 
 @Composable
 private fun WordCard(
-    word: String,
-    isFavorite: Boolean,
+    word: SessionWord,
     onSpeakClick: () -> Unit,
     onToggleFavorite: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
-            .border(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f), RoundedCornerShape(16.dp)),
-        shape = RoundedCornerShape(16.dp),
+            .border(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f), RoundedCornerShape(32.dp)),
+        shape = RoundedCornerShape(32.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .padding(24.dp)
         ) {
-            // Word text
+            // Top Row: Syllables and Icon Buttons
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // Syllables
+                val syllablesText = word.syllables?.takeIf { it.isNotBlank() } ?: "SYL · LA · BLES"
+                Text(
+                    text = syllablesText.uppercase(),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+                    letterSpacing = 4.sp
+                )
+
+                // Action Buttons
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // Speaker icon button
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clip(CircleShape)
+                            .background(LocalExtendedColors.current.lightBlue)
+                            .clickable { onSpeakClick() },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+                            contentDescription = "Pronounce word",
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+
+                    // Bookmark icon button
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clip(CircleShape)
+                            .background(LocalExtendedColors.current.lightBlue)
+                            .clickable { onToggleFavorite() },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = if (word.isFavorite) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
+                            contentDescription = if (word.isFavorite) "Remove from favorites" else "Add to favorites",
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(0.dp))
+
+            // Main Word
             Text(
-                text = word,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.weight(1f)
+                text = word.word,
+                fontSize = 40.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
             )
 
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Bottom Row: Phonetic and Stage
             Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                // Speaker icon button
-                IconButton(
-                    onClick = onSpeakClick,
-                    modifier = Modifier.size(36.dp)
+                // Phonetic Pill
+                val phoneticText = word.phonetic?.takeIf { it.isNotBlank() } ?: "/placeholder/"
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                        .padding(horizontal = 12.dp, vertical = 6.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-                        contentDescription = "Pronounce word",
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
+                    Text(
+                        text = phoneticText,
+                        fontSize = 14.sp,
+                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                     )
                 }
 
-                // Bookmark icon button
-                IconButton(
-                    onClick = onToggleFavorite,
-                    modifier = Modifier.size(36.dp)
+                // Stage Pill
+                val stageNumber = when (word.status) {
+                    LearningStatus.FAMILIARIZING -> 1
+                    LearningStatus.LEARNING -> 2
+                    LearningStatus.REVIEWING -> 3
+                    LearningStatus.MASTERED -> 3
+                }
+                
+                Row(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(LocalExtendedColors.current.lightBlue)
+                        .padding(horizontal = 12.dp, vertical = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Icon(
-                        imageVector = if (isFavorite) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
-                        contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
-                        tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(24.dp)
+                    // Dots
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(end = 4.dp)
+                    ) {
+                        for (i in 1..3) {
+                            Box(
+                                modifier = Modifier
+                                    .size(6.dp)
+                                    .clip(CircleShape)
+                                    .background(
+                                        if (i == stageNumber) MaterialTheme.colorScheme.primary
+                                        else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
+                                    )
+                            )
+                        }
+                    }
+
+                    Text(
+                        text = "Stage $stageNumber/3",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             }
@@ -558,6 +668,7 @@ private fun WordCard(
 
 @Composable
 private fun ExplanationCard(
+    targetWord: String,
     meaning: String,
     examples: List<String>,
     secondTranslation: String? = null,
@@ -565,118 +676,149 @@ private fun ExplanationCard(
 ) {
     Card(
         modifier = modifier
-            .border(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f), RoundedCornerShape(16.dp)),
-        shape = RoundedCornerShape(16.dp),
+            .border(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f), RoundedCornerShape(32.dp)),
+        shape = RoundedCornerShape(32.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp)
+                .padding(24.dp)
         ) {
-            // Meaning section with icon
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start
-            ) {
-                // Light bulb icon
+            // MEANING HEADER
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
-                        .size(32.dp)
+                        .size(10.dp)
                         .clip(CircleShape)
-                        .background(LocalExtendedColors.current.lightBlue),
-                    contentAlignment = Alignment.Center
+                        .background(LocalExtendedColors.current.lightBlue)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "MEANING",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 1.5.sp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            }
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            // MEANING TEXT
+            Text(
+                text = meaning,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface,
+                lineHeight = 28.sp
+            )
+            
+            // SECOND TRANSLATION (if any)
+            if (!secondTranslation.isNullOrBlank()) {
+                Spacer(modifier = Modifier.height(12.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.LightMode,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(18.dp)
+                    Surface(
+                        shape = RoundedCornerShape(4.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer
+                    ) {
+                        Text(
+                            text = "ES",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                        )
+                    }
+                    Text(
+                        text = secondTranslation,
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
+            }
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            // EXAMPLES HEADER
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .width(4.dp)
+                        .height(14.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                            shape = RoundedCornerShape(2.dp)
+                        )
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "EXAMPLES",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 1.5.sp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            }
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            // EXAMPLES BOX
+            if (examples.isNotEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.03f))
+                        .padding(24.dp)
+                ) {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        examples.forEachIndexed { index, example ->
+                            // Highlight target word in example
+                            val annotatedExample = androidx.compose.ui.text.buildAnnotatedString {
+                                val regex = Regex("(?i)\\b${Regex.escape(targetWord)}\\b")
+                                var lastIndex = 0
+                                regex.findAll(example).forEach { matchResult ->
+                                    append(example.substring(lastIndex, matchResult.range.first))
+                                   withStyle(
+                                        style = androidx.compose.ui.text.SpanStyle(
+                                            background = LocalExtendedColors.current.lightBlue,
+                                            color = MaterialTheme.colorScheme.primary,
+                                            fontWeight = FontWeight.SemiBold
+                                        )
+                                    ) {
+                                        append(matchResult.value)
+                                    }
+                                    lastIndex = matchResult.range.last + 1
+                                }
+                                append(example.substring(lastIndex))
+                            }
 
-                Spacer(modifier = Modifier.width(12.dp))
+                            Text(
+                                text = annotatedExample,
+                                fontSize = 16.sp,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+                                lineHeight = 24.sp
+                            )
 
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = meaning,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        lineHeight = 24.sp
-                    )
-
-                    if (!secondTranslation.isNullOrBlank()) {
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
-                            Surface(
-                                shape = RoundedCornerShape(4.dp),
-                                color = MaterialTheme.colorScheme.primaryContainer
-                            ) {
-                                Text(
-                                    text = "ES",
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp)
+                            // Divider (except after last element)
+                            if (index < examples.lastIndex) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(top = 8.dp)
+                                        .height(1.dp)
+                                        .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
                                 )
                             }
-                            Text(
-                                text = secondTranslation,
-                                fontSize = 15.sp,
-                                fontWeight = FontWeight.Normal,
-                                color = MaterialTheme.colorScheme.primary
-                            )
                         }
                     }
                 }
             }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            // Examples section
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start
-            ) {
-                // List icon
-                Box(
-                    modifier = Modifier
-                        .size(32.dp)
-                        .clip(CircleShape)
-                        .background(LocalExtendedColors.current.lightBlue),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.List,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(18.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(12.dp))
-
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    examples.forEach { example ->
-                        Text(
-                            text = example,
-                            fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            lineHeight = 20.sp
-                        )
-                    }
-                }
-            }
-
-
         }
     }
 }
@@ -736,7 +878,9 @@ private fun SessionScreenContentPreview() {
                         "Get out! You mean to tell me you met the President?",
                         "He managed to get out of the burning building just in time."
                     ),
-                    isFavorite = false
+                    isFavorite = false,
+                    phonetic = "/ˈpɒv.ə.ti/",
+                    syllables = "POV · ER · TY"
                 ),
                 userNotes = ""
             )
@@ -761,7 +905,9 @@ private fun QuizScreenContentPreview() {
                     familiarityProgress = 0.25f,
                     meaning = "It can simply mean to leave a place. For example, \"It's time to get out of here.\"",
                     correctCount = 1,
-                    requiredCorrect = 3
+                    requiredCorrect = 3,
+                    phonetic = "/ˈpɒv.ə.ti/",
+                    syllables = "POV · ER · TY"
                 ),
                 quizOptions = listOf(
                     "To enter a building quickly",
