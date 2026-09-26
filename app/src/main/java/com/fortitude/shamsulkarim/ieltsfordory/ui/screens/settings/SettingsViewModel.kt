@@ -242,16 +242,14 @@ class SettingsComposeViewModel(
         }
     }
 
-    fun setWordsPerSession(position: Int) {
-        val value = mapPositionToValue(position)
+    fun setWordsPerSession(value: Int) {
         _uiState.update { current ->
             val updated = current.copy(wordsPerSession = value)
             updated.copy(hasUnsavedChanges = checkHasChanges(updated))
         }
     }
 
-    fun setRepetitionsPerSession(position: Int) {
-        val value = mapPositionToValue(position)
+    fun setRepetitionsPerSession(value: Int) {
         _uiState.update { current ->
             val updated = current.copy(repetitionsPerSession = value)
             updated.copy(hasUnsavedChanges = checkHasChanges(updated))

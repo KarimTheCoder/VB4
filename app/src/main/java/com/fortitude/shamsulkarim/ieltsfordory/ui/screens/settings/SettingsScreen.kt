@@ -25,13 +25,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Public
+import androidx.compose.material.icons.filled.RecordVoiceOver
+import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.filled.Security
+import androidx.compose.material.icons.filled.Sync
+import androidx.compose.material.icons.filled.Translate
+import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -65,6 +84,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fortitude.shamsulkarim.ieltsfordory.R
+import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.LocalExtendedColors
 import com.fortitude.shamsulkarim.ieltsfordory.ui.theme.VocabularyTheme
 import org.koin.androidx.compose.koinViewModel
 import androidx.core.net.toUri
@@ -145,17 +165,8 @@ fun SettingsScreen(
         }
     }
 
-    val wordsPerSessionPosition = remember(uiState.wordsPerSession) {
-        viewModel.valueToPosition(uiState.wordsPerSession)
-    }
-    val repetitionsPerSessionPosition = remember(uiState.repetitionsPerSession) {
-        viewModel.valueToPosition(uiState.repetitionsPerSession)
-    }
-
     SettingsScreenContent(
         uiState = uiState,
-        wordsPerSessionPosition = wordsPerSessionPosition,
-        repetitionsPerSessionPosition = repetitionsPerSessionPosition,
         onNavigateBack = {
             if (uiState.hasUnsavedChanges) {
                 showDiscardDialog = true
@@ -190,8 +201,6 @@ fun SettingsScreen(
 @Composable
 fun SettingsScreenContent(
     uiState: SettingsComposeUiState,
-    wordsPerSessionPosition: Int,
-    repetitionsPerSessionPosition: Int,
     onNavigateBack: () -> Unit,
     onSaveClick: () -> Unit,
     onSignInClick: () -> Unit,
@@ -211,6 +220,7 @@ fun SettingsScreenContent(
     val scrollState = rememberScrollState()
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
         topBar = {
             TopAppBar(
                 title = {
@@ -228,7 +238,7 @@ fun SettingsScreenContent(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
                 )
             )
         },
@@ -294,51 +304,88 @@ fun SettingsScreenContent(
         ) {
             // User Account Section
             if (uiState.showSignInSection) {
-                SettingsSection(title = stringResource(id = R.string.settings_account)) {
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant
-                        )
+                SettingsSection(title = "") {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Person,
-                                contentDescription = null,
-                                modifier = Modifier.size(48.dp),
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Column(modifier = Modifier.weight(1f)) {
+                        Box(contentAlignment = Alignment.BottomEnd) {
+                            Surface(
+                                shape = CircleShape,
+                                color = LocalExtendedColors.current.lightBlue,
+                                modifier = Modifier.size(56.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Default.Person,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(32.dp),
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                            }
+                            Surface(
+                                shape = CircleShape,
+                                color = Color(0xFF1B8755),
+                                modifier = Modifier.size(20.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Default.Sync,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(12.dp),
+                                        tint = Color.White
+                                    )
+                                }
+                            }
+                        }
+                        
+                        Spacer(modifier = Modifier.width(16.dp))
+                        
+                        Column(modifier = Modifier.weight(1f)) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(
                                     text = uiState.userName,
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold
                                 )
-                                Text(
-                                    text = uiState.userEmail,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                            if (uiState.isSignInInProgress) {
-                                CircularProgressIndicator(modifier = Modifier.size(24.dp))
-                            } else {
-                                OutlinedButton(
-                                    onClick = {
-                                        if (uiState.isSignedIn) onSignOutClick() else onSignInClick()
-                                    }
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Surface(
+                                    shape = RoundedCornerShape(16.dp),
+                                    color = MaterialTheme.colorScheme.surfaceVariant
                                 ) {
                                     Text(
-                                        if (uiState.isSignedIn) stringResource(id = R.string.settings_sign_out)
-                                        else stringResource(id = R.string.sign_in)
+                                        text = if (uiState.isSignedIn) "CLOUD" else "LOCAL",
+                                        style = MaterialTheme.typography.labelSmall,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
                                     )
+                                }
+                            }
+                            Text(
+                                text = if (uiState.isSignedIn) uiState.userEmail else "Cloud backup inactive",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        
+                        if (uiState.isSignInInProgress) {
+                            CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                        } else {
+                            if (uiState.isSignedIn) {
+                                OutlinedButton(
+                                    onClick = onSignOutClick
+                                ) {
+                                    Text(text = stringResource(id = R.string.settings_sign_out))
+                                }
+                            } else {
+                                Button(
+                                    onClick = onSignInClick
+                                ) {
+                                    Text(text = stringResource(id = R.string.sign_in))
                                 }
                             }
                         }
@@ -346,132 +393,334 @@ fun SettingsScreenContent(
                 }
             }
 
-            // Sound & Pronunciation Section
-            SettingsSection(title = stringResource(id = R.string.settings_audio)) {
-                SettingsToggleRow(
-                    title = stringResource(id = R.string.settings_sound_effects),
-                    subtitle = stringResource(id = R.string.settings_sound_effects_desc),
-                    checked = uiState.soundEnabled,
-                    onCheckedChange = onSoundCheckedChange
-                )
-                SettingsToggleRow(
-                    title = stringResource(id = R.string.settings_voice_pronunciation),
-                    subtitle = stringResource(id = R.string.settings_voice_pronunciation_desc),
-                    checked = uiState.pronunciationEnabled,
-                    onCheckedChange = onPronunciationCheckedChange
-                )
-            }
-
             // Training Options Section
-            SettingsSection(title = stringResource(id = R.string.settings_training)) {
-                val sessionOptions = stringArrayResource(id = R.array.settings_session_options).toList()
-                SettingsDropdownRow(
-                    title = stringResource(id = R.string.settings_words_per_session),
-                    options = sessionOptions,
-                    selectedIndex = wordsPerSessionPosition,
-                    onSelect = onWordsPerSessionSelect
-                )
-                SettingsDropdownRow(
-                    title = stringResource(id = R.string.settings_repetitions_per_session),
-                    options = sessionOptions,
-                    selectedIndex = repetitionsPerSessionPosition,
-                    onSelect = onRepetitionsPerSessionSelect
-                )
-            }
+            SettingsSection(title = "STUDY SESSIONS") {
+                Column {
+                    Text(
+                            text = "New Words per Session",
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            val options = listOf(
+                                3 to "Optimal",
+                                5 to "Intense",
+                                8 to "Sprint",
+                                12 to "Marathon"
+                            )
+                            options.forEach { (value, label) ->
+                                val isSelected = uiState.wordsPerSession == value
+                                Surface(
+                                    shape = RoundedCornerShape(16.dp),
+                                    color = if (isSelected) MaterialTheme.colorScheme.primary else LocalExtendedColors.current.lightBlue,
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .padding(horizontal = 4.dp)
+                                        .clickable { onWordsPerSessionSelect(value) }
+                                ) {
+                                    Column(
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        modifier = Modifier.padding(vertical = 12.dp)
+                                    ) {
+                                        Text(
+                                            text = value.toString(),
+                                            style = MaterialTheme.typography.titleMedium,
+                                            fontWeight = FontWeight.Bold,
+                                            color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary
+                                        )
+                                        Text(
+                                            text = label,
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                        
+                        Spacer(modifier = Modifier.height(24.dp))
+                        androidx.compose.material3.Divider(color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f))
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Column {
+                                Text(
+                                    text = "Repetitions",
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                                Text(
+                                    text = "Spaced interval review",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            
+                            Surface(
+                                shape = RoundedCornerShape(50),
+                                color = LocalExtendedColors.current.lightBlue.copy(alpha = 0.5f)
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(horizontal = 4.dp, vertical = 4.dp)
+                                ) {
+                                    Surface(
+                                        shape = CircleShape,
+                                        color = LocalExtendedColors.current.lightBlue,
+                                        modifier = Modifier
+                                            .size(32.dp)
+                                            .clickable(enabled = uiState.repetitionsPerSession > 1) {
+                                                onRepetitionsPerSessionSelect(uiState.repetitionsPerSession - 1)
+                                            }
+                                    ) {
+                                        Box(contentAlignment = Alignment.Center) {
+                                            Text(
+                                                text = "-",
+                                                style = MaterialTheme.typography.titleMedium,
+                                                color = MaterialTheme.colorScheme.primary
+                                            )
+                                        }
+                                    }
+                                    
+                                    Text(
+                                        text = uiState.repetitionsPerSession.toString(),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        modifier = Modifier.padding(horizontal = 16.dp),
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                    
+                                    Surface(
+                                        shape = CircleShape,
+                                        color = LocalExtendedColors.current.lightBlue,
+                                        modifier = Modifier
+                                            .size(32.dp)
+                                            .clickable(enabled = uiState.repetitionsPerSession < 10) {
+                                                onRepetitionsPerSessionSelect(uiState.repetitionsPerSession + 1)
+                                            }
+                                    ) {
+                                        Box(contentAlignment = Alignment.Center) {
+                                            Text(
+                                                text = "+",
+                                                style = MaterialTheme.typography.titleMedium,
+                                                color = MaterialTheme.colorScheme.primary
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
             // Vocabulary Filters Section
-            SettingsSection(title = stringResource(id = R.string.settings_vocabulary_filters)) {
-                Text(
-                    text = stringResource(id = R.string.settings_select_categories),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+            SettingsSection(title = "VOCABULARY FILTERS") {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    VocabularyFilterCard(
+                        title = "IELTS",
+                        subtitle = "Academic & General",
+                        icon = Icons.Default.School,
+                        tagText = "BAND 7.5+",
+                        tagColor = Color(0xFF198754),
+                        checked = uiState.ieltsActive,
+                        onCheckedChange = onIeltsActiveChange,
+                        modifier = Modifier.weight(1f)
+                    )
+                    VocabularyFilterCard(
+                        title = "TOEFL",
+                        subtitle = "iBT Key Lexicon",
+                        icon = Icons.Default.Public,
+                        tagText = "100+ SCOREFOCUS",
+                        tagColor = Color(0xFF198754),
+                        checked = uiState.toeflActive,
+                        onCheckedChange = onToeflActiveChange,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    VocabularyFilterCard(
+                        title = "SAT",
+                        subtitle = "Critical Reading",
+                        icon = Icons.Default.MenuBook,
+                        tagText = "CONTEXT MASTERY",
+                        tagColor = Color(0xFFDC3545),
+                        checked = uiState.satActive,
+                        onCheckedChange = onSatActiveChange,
+                        modifier = Modifier.weight(1f)
+                    )
+                    VocabularyFilterCard(
+                        title = "GRE",
+                        subtitle = "High-Frequency",
+                        icon = Icons.Default.LocationOn,
+                        tagText = "ELITE TIER",
+                        tagColor = MaterialTheme.colorScheme.primary,
+                        checked = uiState.greActive,
+                        onCheckedChange = onGreActiveChange,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
+
+            // Audio & Speech Section
+            SettingsSection(title = "AUDIO & SPEECH") {
+                IconSettingsRow(
+                    title = "Sound Effects",
+                    subtitle = "Haptics & micro-alerts",
+                    icon = Icons.Default.VolumeUp,
+                    rightContent = {
+                        Switch(checked = uiState.soundEnabled, onCheckedChange = onSoundCheckedChange)
+                    }
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    FilterChip("IELTS", uiState.ieltsActive, onIeltsActiveChange)
-                    FilterChip("TOEFL", uiState.toeflActive, onToeflActiveChange)
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    FilterChip("SAT", uiState.satActive, onSatActiveChange)
-                    FilterChip("GRE", uiState.greActive, onGreActiveChange)
-                }
+                
+                androidx.compose.material3.Divider(color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f))
+                
+                IconSettingsRow(
+                    title = "Voice Pronunciation",
+                    subtitle = "IPA phonetic native audio",
+                    icon = Icons.Default.RecordVoiceOver,
+                    rightContent = {
+                        Switch(checked = uiState.pronunciationEnabled, onCheckedChange = onPronunciationCheckedChange)
+                    }
+                )
             }
 
             // Language Section
-            SettingsSection(title = stringResource(id = R.string.settings_language)) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.settings_spanish_translations),
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                    Button(
-                        onClick = onToggleSpanish,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = if (uiState.isSpanishEnabled)
-                                MaterialTheme.colorScheme.primary
-                            else
-                                MaterialTheme.colorScheme.surfaceVariant
-                        )
-                    ) {
-                        Text(
-                            text = if (uiState.isSpanishEnabled) stringResource(id = R.string.settings_espanol) else stringResource(id = R.string.settings_english),
-                            color = if (uiState.isSpanishEnabled)
-                                Color.White
-                            else
-                                MaterialTheme.colorScheme.onSurfaceVariant
-                        )
+            SettingsSection(title = "LANGUAGE & INTERFACE") {
+                val context = LocalContext.current
+                IconSettingsRow(
+                    title = "Translations",
+                    subtitle = "In-card definition aid",
+                    icon = Icons.Default.Translate,
+                    rightContent = {
+                        Surface(
+                            shape = RoundedCornerShape(16.dp),
+                            color = LocalExtendedColors.current.lightBlue,
+                            modifier = Modifier.clickable { onToggleSpanish() }
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = if (uiState.isSpanishEnabled) "Spanish" else "English",
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Icon(
+                                    imageVector = Icons.Default.Sync,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(12.dp),
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
                     }
-                }
-            }
-
-            // Theme Section
-            SettingsSection(title = stringResource(id = R.string.settings_appearance)) {
-                val themeOptions = stringArrayResource(id = R.array.settings_theme_options).toList()
-                SettingsDropdownRow(
-                    title = stringResource(id = R.string.settings_theme),
-                    options = themeOptions,
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                androidx.compose.material3.Divider(color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f))
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                IconSettingsRow(
+                    title = "Theme",
+                    subtitle = "Visual appearance",
+                    icon = Icons.Default.Palette,
+                    rightContent = {}
+                )
+                
+                SegmentedThemeControl(
                     selectedIndex = uiState.darkModeIndex,
                     onSelect = onDarkModeSelect
                 )
             }
 
-            // Other Section
-            SettingsSection(title = stringResource(id = R.string.settings_other)) {
+            // About & Privacy Section
+            SettingsSection(title = "ABOUT & PRIVACY") {
                 val context = LocalContext.current
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            val intent = Intent(
-                                Intent.ACTION_VIEW,
-                                SettingsComposeViewModel.PRIVACY_POLICY_URL.toUri()
-                            )
-                            context.startActivity(intent)
-                        },
-                    shape = RoundedCornerShape(12.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant
-                    )
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.settings_privacy_policy),
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
+                AboutPrivacyRow(
+                    title = "Privacy Policy",
+                    icon = Icons.Default.Security,
+                    rightContent = {
+                        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                    },
+                    onClick = {
+                        val intent = Intent(
+                            Intent.ACTION_VIEW,
+                            SettingsComposeViewModel.PRIVACY_POLICY_URL.toUri()
+                        )
+                        context.startActivity(intent)
+                    }
+                )
+                
+                androidx.compose.material3.Divider(color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f))
+                
+                AboutPrivacyRow(
+                    title = "Terms of Service",
+                    icon = Icons.Default.Description,
+                    rightContent = {
+                        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                    },
+                    onClick = {
+                        Toast.makeText(context, "Terms of Service not available yet", Toast.LENGTH_SHORT).show()
+                    }
+                )
+                
+                androidx.compose.material3.Divider(color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f))
+                
+                AboutPrivacyRow(
+                    title = "Clear Vocabulary Cache",
+                    icon = Icons.Default.Delete,
+                    rightContent = {
+                        Text(
+                            text = "14.2 MB",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    },
+                    onClick = {
+                        Toast.makeText(context, "Vocabulary cache cleared", Toast.LENGTH_SHORT).show()
+                    }
+                )
             }
 
+            Spacer(modifier = Modifier.height(32.dp))
+            
+            // Footer
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.CheckCircle,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "Fortitude Learn",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "VERSION 2.4.0 (BUILD 114) • Vocabulary Builder",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            
             Spacer(modifier = Modifier.height(32.dp))
         }
     }
@@ -499,8 +748,6 @@ private fun SettingsScreenContentPreview() {
                 userEmail = "jane.doe@example.com",
                 showSignInSection = true
             ),
-            wordsPerSessionPosition = 2,
-            repetitionsPerSessionPosition = 3,
             onNavigateBack = {},
             onSaveClick = {},
             onSignInClick = {},
